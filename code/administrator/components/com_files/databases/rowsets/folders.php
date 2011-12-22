@@ -70,21 +70,19 @@ class ComFilesDatabaseRowsetFolders extends ComFilesDatabaseRowsetNodes
 				$node    = null;
 				$parents = $hierarchy;
 
-				$current_path = array();
 				foreach($parents as $parent)
        			{
-       				$current_path[] = $parent;
        				if($node) {
 						$nodes = $node->getChildren();
 					}
 
-       				$node = $nodes->find(implode('/', $current_path));
-
+       				$node = $nodes->find($parent);
 				}
 
 				$node->insertChild($instance);
+        	} else {
+        		$this->insert($instance);	
         	}
-        	else $this->insert($instance);
 		}
 
 		return $this;

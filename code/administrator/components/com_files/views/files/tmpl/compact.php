@@ -21,7 +21,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
-Files.blank_image = 'media://com_files/images/blank.png';
+Files.blank_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAABGdBTUEAALGPC/xhBQAAAAd0SU1FB9MICA0xMTLhM9QAAAADUExURf///6fEG8gAAAABdFJOUwBA5thmAAAACXBIWXMAAAsSAAALEgHS3X78AAAACklEQVQIHWNgAAAAAgABz8g15QAAAABJRU5ErkJggg==';
 
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,

@@ -69,7 +69,11 @@ Files.Grid = new Class({
 			if (e.target.get('tag') == 'input') {
 				e.target.setProperty('checked', !e.target.getProperty('checked'));
 			};
-			var box = e.target.getParent('.files-node-shadow') || (e.target.match('.files-node') ? e.target : e.target.getParent('.files-node'));
+			var box = e.target.getParent('.files-node-shadow');
+			if (!box) {
+				box = e.target.match('.files-node') ? e.target :  e.target.getParent('.files-node');
+			}
+			
 			that.checkNode(box.retrieve('row'));
 		}; 
 		this.container.addEvent('click:relay(div.imgOutline)', fireCheck.bind(this));
@@ -83,8 +87,8 @@ Files.Grid = new Class({
 				e.stop();
 			}
 
-			var path = e.target.getParent('.files-node-shadow').retrieve('path');
-			this.erase(path);
+			var node = e.target.getParent('.files-node').retrieve('row');
+			this.erase(node.path);
 		}.bind(this);
 
 		this.container.addEvent('click:relay(.delete-node)', deleteEvt);		
@@ -231,7 +235,6 @@ Files.Grid = new Class({
 		this.fireEvent('beforeRenderObject', {object: object, position: position});
 
 		object.element = object.render();
-		object.element.store('path', object.path);
 		object.element.store('row', object);		
 
 		if (position == 'last') {
@@ -301,6 +304,7 @@ Files.Grid = new Class({
 		
 		if (!this.options.types || this.options.types.contains(object.type)) {
 			this.renderObject(object, position);
+
 			this.nodes.set(object.path, object);
 
 			this.fireEvent('afterInsertNode', {node: object, position: position});

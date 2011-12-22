@@ -81,7 +81,6 @@ Files.App = new Class({
 			this.cookie = 'com.files.container.'+this.options.container;
 		}
 		
-		//this.setContainerTree();
 		this.setState();
 		this.setHistory();
 		this.setGrid();
@@ -161,7 +160,7 @@ Files.App = new Class({
 		this.fireEvent('afterSetHistory');
 	},
 	/**
-	 * type can be stateless for no state or initial to use replaceState
+	 * type can be 'stateless' for no state or 'initial' to use replaceState
 	 */
 	navigate: function(path, type) {
 		this.fireEvent('beforeNavigate', [path, type]);
@@ -172,8 +171,6 @@ Files.App = new Class({
 			}
 			this.active = path;
 		}
-
-		var is_root = this.active === '/';
 
 		this.grid.reset();
 
@@ -226,51 +223,11 @@ Files.App = new Class({
 				
 				this.setTree();
 
-				this.active = this.options.active || '/';
+				this.active = this.options.active || '';
 				this.options.active = '';
 				this.navigate(this.active, 'initial');
 			}.bind(this)
 		}).send();
-	},
-	setContainerTree: function() {
-		var ContainerTree = new Class({
-			Extends: Files.Tree,
-			addItem: function(item) {
-				/*if (item.id == Files.container.id) {
-					return;
-				}*/
-
-				this.root.insert({
-					text: item.title,
-					data: {
-						id: item.slug,
-						type: 'container'
-					}
-				});
-			}
-		});
-		this.containertree = new ContainerTree({
-			div: 'files-containertree',
-			theme: this.options.tree.theme,
-			mode: 'files',
-			root: {
-				text: 'Other Containers'
-			},
-			onClick: function(node) {
-				if (node.data && node.data.type === 'container') {
-					this.setContainer(node.data.id);return;
-					window.location =  window.location.pathname+this.createRoute({format: 'html', container: node.data.id});
-					return;
-				}
-			}.bind(this)
-		});
-		
-		new Request.JSON({
-			url: this.createRoute({view: 'containers', limit: 0, sort: 'title'}),
-			onSuccess: function(response) {
-				$each(response.items, this.containertree.addItem.bind(this.containertree));
-			}.bind(this)
-		}).get();
 	},
 	setPaginator: function() {
 		this.fireEvent('beforeSetPaginator');
@@ -358,9 +315,9 @@ Files.App = new Class({
 			'onClickFolder': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
-					path = node.retrieve('path');
+					path = node.retrieve('row').path;
 				if (path) {
-					this.navigate('/'+path);
+					this.navigate(path);
 				}
 			}.bind(this),
 			'onClickImage': function(e) {
@@ -416,13 +373,13 @@ Files.App = new Class({
 		$extend(opts, {
 			onClick: function(node) {
 				if (node.id || node.data.url) {
-					that.navigate('/'+ (node && node.id ? node.id : ''));
+					that.navigate(node && node.id ? node.id : '');
 				}
 			},
 			root: {
 				text: Files.container.title,
 				data: {
-					url: '#/'
+					url: '#'
 				}
 			}
 		});

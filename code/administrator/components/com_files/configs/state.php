@@ -2,16 +2,20 @@
 
 class ComFilesConfigState extends KConfigState
 {
- 	public function __set($name, $value)
+	public function get($name, $default = null)
     {
-        if ($name === 'container' && is_string($value)) {
-            $value = KService::get('com://admin/files.model.containers')->slug($value)->getItem();
+    	$result = parent::get($name, $default);
+    	
+        if ($name === 'container' && is_string($result)) {
+            $result = KService::get('com://admin/files.model.containers')->slug($result)->getItem();
 
-	        if (!is_object($value) || $value->isNew()) {
+	        if (!is_object($result) || $result->isNew()) {
 	            throw new KModelException('Invalid container');
 	        }
+	        
+	        $this->_data['container']->value = $result;
         }
         
-    	parent::__set($name, $value);
+        return $result;
   	}
 }

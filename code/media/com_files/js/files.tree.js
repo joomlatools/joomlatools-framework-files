@@ -73,10 +73,14 @@ Files.Tree = new Class({
 		var that = this,
 			root = this.root,
 			insertNode = function(item, parent) {
+				var path = parent.data.path ? parent.data.path+'/' : '';
+				path += item.name;
+
 				var node = parent.insert({
 					text: item.name,
-					id: item.path,
+					id: path,
 					data: {
+						path: path,
 						url: '#/'+item.path,
 						type: 'folder'
 					}
@@ -108,7 +112,7 @@ Files.Tree = new Class({
 	},
 	selectPath: function(path) {
 		if (path) {
-			var node = this.get(path.substr(1));
+			var node = this.get(path);
 			if (node) {
 				this.select(node, true);
 			}

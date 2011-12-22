@@ -36,6 +36,28 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		return empty($this->name) || !$this->_adapter->exists();
 	}
 
+	public function delete()
+	{
+		$context = $this->getCommandContext();
+		$context->result = false;
+
+		if ($this->getCommandChain()->run('before.delete', $context) !== false)
+		{
+			$context->result = $this->_adapter->delete();
+
+			$this->getCommandChain()->run('after.delete', $context);
+        }
+
+		if ($context->result === false) {
+			$this->setStatus(KDatabase::STATUS_FAILED);
+			$this->setStatusMessage($context->getError());
+		} else {
+			$this->setStatus(KDatabase::STATUS_DELETED);
+		}
+
+		return $context->result;
+	}
+
 	public function __get($column)
 	{
 		if ($column == 'fullpath' && !isset($this->_data['fullpath'])) {
@@ -92,6 +114,10 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
     public function toArray()
     {
         $data = parent::toArray();
+        
+        unset($data['_token']);
+        unset($data['action']);
+        unset($data['option']);
         
 		$data['container'] = $this->container->slug;
 		$data['type'] = $this->getIdentifier()->name;

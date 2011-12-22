@@ -25,8 +25,8 @@ class ComFilesModelFiles extends ComFilesModelNodes
         if (!isset($this->_list))
         {
             $state = $this->_state;
-            
-            $files = $this->container->getAdapter('iterator')->getFiles(array(
+
+            $files = $state->container->getAdapter('iterator')->getFiles(array(
         		'path' => $this->_getPath(),
         		'exclude' => array('.svn', '.htaccess', '.git', 'CVS', 'index.html', '.DS_Store', 'Thumbs.db', 'Desktop.ini'),
         		'filter' => array($this, 'iteratorFilter'),

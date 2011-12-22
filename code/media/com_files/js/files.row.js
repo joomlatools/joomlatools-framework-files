@@ -10,8 +10,10 @@ Files.Row = new Class({
 			this[key] = value;
 		}.bind(this));
 
-		this.path = object.path;
-		this.identifier = object.path;
+		if (!this.path) {
+			this.path = (object.folder ? object.folder+'/' : '') + object.name;
+		}
+		this.identifier = this.path;
 	}
 });
 
@@ -27,7 +29,7 @@ Files.File = new Class({
 	},
 	getModifiedDate: function(formatted) {
 		var date = new Date();
-		date.setTime(this.modified_date*1000);
+		date.setTime(this.metadata.modified_date*1000);
 		if (formatted) {
 			return date.getUTCDate()+'/'+date.getUTCMonth()+'/'+date.getUTCFullYear()+' '+date.getUTCHours()+':'+date.getUTCMinutes();
 		} else {
@@ -39,7 +41,7 @@ Files.File = new Class({
 		
 		var that = this,
 			request = new Request.JSON({
-				url: Files.app.createRoute({path: that.path}),
+				url: Files.app.createRoute({view: 'file', folder: that.folder, name: that.name}),
 				method: 'post',
 				data: {
 					'action': 'delete',
@@ -123,11 +125,11 @@ Files.Folder = new Class({
 		
 		var that = this;
 			request = new Request.JSON({
-				url: Files.app.createRoute({view: 'folder', folder: Files.app.getPath()}),
+				url: Files.app.createRoute({view: 'folder', name: that.name, folder: Files.app.getPath()}),
 				method: 'post',
 				data: {
-					'_token': Files.token,
-					'path': that.path
+					'action': 'add',
+					'_token': Files.token
 				},
 				onSuccess: function(response, responseText) {
 					if (typeof success == 'function') {
@@ -156,7 +158,7 @@ Files.Folder = new Class({
 	'delete': function(success, failure) {
 		var that = this;
 			request = new Request.JSON({
-				url: Files.app.createRoute({view: 'folders', path: that.path}),
+				url: Files.app.createRoute({view: 'folder', folder: Files.app.getPath(), name: that.name}),
 				method: 'post',
 				data: {
 					'action': 'delete',

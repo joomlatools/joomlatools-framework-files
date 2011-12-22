@@ -16,7 +16,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
-Files.blank_image = 'media://com_files/images/blank.png';
+Files.blank_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAABGdBTUEAALGPC/xhBQAAAAd0SU1FB9MICA0xMTLhM9QAAAADUExURf///6fEG8gAAAABdFJOUwBA5thmAAAACXBIWXMAAAsSAAALEgHS3X78AAAACklEQVQIHWNgAAAAAgABz8g15QAAAABJRU5ErkJggg==';
 
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
@@ -32,7 +32,7 @@ window.addEvent('domready', function() {
 			},
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($container ? $container->slug : null); ?>,
-			thumbnails: <?= json_encode($container ? $container->getParameters()->thumbnails : true); ?>
+			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
 	options = $extend(options, config);
 	
@@ -43,7 +43,7 @@ window.addEvent('domready', function() {
 		var element = $('files-new-folder-input');
 		var value = element.get('value');
 		if (value.length > 0) {
-			var folder = new Files.Folder({path: value, folder: Files.app.getPath()});
+			var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
 			folder.add(function(response, responseText) {
 				if (response.status === false) {
 					return alert(response.error);

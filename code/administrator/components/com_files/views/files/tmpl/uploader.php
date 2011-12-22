@@ -37,6 +37,7 @@ window.addEvent('domready', function() {
 		flash_swf_url: 'media://com_files/plupload/plupload.flash.swf',
 		urlstream_upload: true, // required for flash
 		multipart_params: {
+			action: 'add',
 			_token: Files.token
 		},
 		headers: {
@@ -64,9 +65,14 @@ window.addEvent('domready', function() {
 
 	uploader.bind('QueueChanged', exposePlupload);
 
-	uploader.bind('BeforeUpload', function(uploader) {
+	uploader.bind('BeforeUpload', function(uploader, file) {
 		// set directory in the request
-		uploader.settings.url = Files.app.createRoute({view: 'file', 'plupload': 1, folder: Files.app.getPath()});
+		uploader.settings.url = Files.app.createRoute({
+			view: 'file', 
+			plupload: 1, 
+			folder: Files.app.getPath(),
+			name: file.name
+		});
 	});
 	
 	uploader.bind('UploadComplete', function(uploader) {
@@ -174,7 +180,11 @@ window.addEvent('domready', function() {
 	});
 	var request = new Request.JSON({
 		url: Files.app.createRoute({view: 'file', folder: Files.app.getPath()}),
-		data: form,
+		data: {
+			action: 'add',
+			_token: Files.token,
+			file: ''
+		},
 		onSuccess: function(json) {
 			if (this.status == 201 && json.status) {
 				var el = json.item;
@@ -199,7 +209,12 @@ window.addEvent('domready', function() {
 	});
 	form.addEvent('submit', function(e) {
 		e.stop();
-		request.options.url = Files.app.createRoute({view: 'file', folder: Files.app.getPath()});
+		request.options.data.file = document.id('remote-url').get('value');
+		request.options.url = Files.app.createRoute({
+			view: 'file', 
+			folder: Files.app.getPath(), 
+			name: document.id('remote-name').get('value')
+		});
 		request.send();
 	});
 	
@@ -233,7 +248,7 @@ window.addEvent('domready', function() {
 		<form action="" method="post" name="remoteForm" id="remoteForm" >
 		    <div class="remote-wrap">
     		    <input type="text" placeholder="<?= @text('Remote URL') ?>" id="remote-url" name="file" size="50" />
-    		    <input type="text" placeholder="<?= @text('File name') ?>" id="remote-name" name="path" />
+    		    <input type="text" placeholder="<?= @text('File name') ?>" id="remote-name" name="name" />
     		</div>
             <input type="submit" class="remote-submit" value="<?= @text('Transfer File'); ?>" disabled />
             <input type="hidden" name="action" value="save" />

@@ -34,10 +34,6 @@ class ComFilesViewFilesHtml extends ComDefaultViewHtml
 		$this->assign('token'   , JUtility::getToken());
 		$this->assign('container', $this->getModel()->getState()->container);
 
-		if (!$this->editor) {
-			$this->assign('editor', '');
-		}
-
 		return parent::display();
 	}
 }

@@ -23,10 +23,10 @@ class ComFilesControllerFile extends ComFilesControllerDefault
 	{
 		parent::__construct($config);
 
-		$this->registerCallback('before.add', array($this, 'beforeAdd'));
+		$this->registerCallback(array('before.add', 'before.edit'), array($this, 'addFile'));
 	}
 
-	public function beforeAdd(KCommandContext $context)
+	public function addFile(KCommandContext $context)
 	{
 		if (empty($context->data->file) && KRequest::has('files.file.tmp_name'))
 		{
