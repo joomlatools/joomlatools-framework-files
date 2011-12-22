@@ -20,6 +20,22 @@
 
 class ComFilesModelNodes extends ComFilesModelDefault
 {
+    public function getItem()
+    {
+        if (!isset($this->_item))
+        {
+            $this->_item = $this->getRow(array(
+                'data' => array(
+            		'container' => $this->_state->container,
+                    'folder' => $this->_state->folder,
+                    'name' => $this->_state->name
+                )
+            ));
+        }
+
+        return parent::getItem();
+    }
+    
     public function getRow(array $options = array())
     {
         $identifier         = clone $this->getIdentifier();
@@ -40,10 +56,6 @@ class ComFilesModelNodes extends ComFilesModelDefault
     protected function _getPath()
     {
         $state = $this->_state;
-
-        if ($state->container->isNew() || !$state->container->path) {
-            throw new KModelException('Invalid container');
-        }
 
         $path = $state->container->path;
 

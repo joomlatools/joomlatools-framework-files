@@ -76,4 +76,9 @@ class ComFilesDatabaseRowConfig extends KDatabaseRowAbstract
 		
 		return $data;
 	}
+	
+	public function __toString()
+	{
+		return json_encode($this->getData());
+	}
 }

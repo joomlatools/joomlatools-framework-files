@@ -21,34 +21,14 @@
 class ComFilesFilterFileExtension extends KFilterFilename
 {
 	protected $_walk = false;
-
-	protected $_config;
-
-	public function __construct(KConfig $config)
-	{
-		parent::__construct($config);
-
-		$this->_config = $config;
-	}
-
-	protected function _initialize(KConfig $config)
-	{
-		$component_config = $this->getService('com://admin/files.model.configs')->getItem();
-
-		$config->append(array(
-			'allowed' => array_map('strtolower', $component_config->upload_extensions)
-		));
-
-		parent::_initialize($config);
-	}
-
+	
 	protected function _validate($context)
 	{
-		$config = $this->_config;
+		$allowed = $context->caller->container->parameters->upload_extensions;
 		$value = $context->caller->extension;
 
-		if (empty($value) || !in_array($value, $config->allowed->toArray())) {
-			$context->setError(JText::_('WARNFILETYPE'));
+		if (empty($value) || !in_array($value, $allowed)) {
+			$context->setError(JText::_('Invalid file extension'));
 			return false;
 		}
 	}

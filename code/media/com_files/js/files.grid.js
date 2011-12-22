@@ -1,4 +1,13 @@
-
+/**
+ * @version     $Id$
+ * @category	Nooku
+ * @package     Nooku_Server
+ * @subpackage  Files
+ * @copyright   Copyright (C) 2011 Timble CVBA and Contributors. (http://www.timble.net).
+ * @license     GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
+ * @link        http://www.nooku.org
+ */
+ 
 if(!Files) var Files = {};
 
 Files.Grid = new Class({
@@ -74,7 +83,7 @@ Files.Grid = new Class({
 				e.stop();
 			}
 
-			var path = e.target.getParent('.files-node').retrieve('path');
+			var path = e.target.getParent('.files-node-shadow').retrieve('path');
 			this.erase(path);
 		}.bind(this);
 
@@ -220,11 +229,10 @@ Files.Grid = new Class({
 		var position = position || 'alphabetical';
 
 		this.fireEvent('beforeRenderObject', {object: object, position: position});
-		
+
 		object.element = object.render();
 		object.element.store('path', object.path);
-		object.element.store('row', object);
-		
+		object.element.store('row', object);		
 
 		if (position == 'last') {
 			this.root.adopt(object.element, 'bottom');

@@ -28,10 +28,10 @@ class ComFilesControllerFile extends ComFilesControllerDefault
 
 	public function beforeAdd(KCommandContext $context)
 	{
-		if (!$context->data->file)
+		if (empty($context->data->file) && KRequest::has('files.file.tmp_name'))
 		{
 			$context->data->file = KRequest::get('files.file.tmp_name', 'raw');
-			$context->data->path = KRequest::get('files.file.name', 'koowa:filter.filename');
+			$context->data->name = KRequest::get('files.file.name', 'raw');
 		}
 	}
 }

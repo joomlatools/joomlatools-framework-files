@@ -20,47 +20,19 @@
 
 class ComFilesModelFiles extends ComFilesModelNodes
 {   
-    public function getItem()
-    {
-        if (!isset($this->_item))
-        {
-            $this->_item = $this->getRow(array(
-                'data' => array(
-            		'container' => $this->_state->container,
-                    'basepath' => $this->_getPath(),
-                    'path' => $this->_state->path
-                )
-            ));
-        }
-
-        return parent::getItem();
-    }
-
     public function getList()
-    {
+    {	
         if (!isset($this->_list))
         {
             $state = $this->_state;
-
-            $files = ComFilesIteratorDirectory::getFiles(array(
+            
+            $files = $this->container->getAdapter('iterator')->getFiles(array(
         		'path' => $this->_getPath(),
         		'exclude' => array('.svn', '.htaccess', '.git', 'CVS', 'index.html', '.DS_Store', 'Thumbs.db', 'Desktop.ini'),
         		'filter' => array($this, 'iteratorFilter'),
         		'map' => array($this, 'iteratorMap')
         	));
             $this->_total = count($files);
-        
-    		$path = $state->path;
-    	    if (!empty($path)) 
-    	    {
-    	        $f = array();
-    	        foreach ((array) $path as $file) {
-                    if (in_array($path, $files)) {
-                        $f[] = $path;
-                    }
-                }
-                $files = $f;
-    	    }
 
             $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_total);
 
@@ -73,8 +45,8 @@ class ComFilesModelFiles extends ComFilesModelNodes
             {
                 $data[] = array(
                 	'container' => $state->container,
-                    'basepath' => $state->container->path,
-                    'path' => $file
+                	'folder' => $state->folder,
+                	'name' => $file
                 );
             }
 
@@ -88,14 +60,17 @@ class ComFilesModelFiles extends ComFilesModelNodes
 
 	public function iteratorMap($file)
 	{
-		$path = str_replace('\\', '/', $file->getPathname());
-		$path = str_replace($this->_state->container->path.'/', '', $path);
-
-		return $path;
+		return $file->getBasename();
 	}
 
 	public function iteratorFilter($file)
 	{
+		if ($this->_state->name) {
+			if (!in_array($file->getFilename(), (array) $this->_state->name)) {
+				return false;
+			}
+		}
+		
 		if ($this->_state->types) {
 			if ((in_array($file->getExtension(), ComFilesDatabaseRowFile::$image_extensions) && !in_array('image', (array) $this->_state->types))
 			|| (!in_array($file->getExtension(), ComFilesDatabaseRowFile::$image_extensions) && !in_array('file', (array) $this->_state->types))

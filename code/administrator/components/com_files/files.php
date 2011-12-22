@@ -19,3 +19,6 @@
  */
 
 echo KService::get('com://admin/files.dispatcher')->dispatch();
+
+/*require_once dirname(__FILE__).'/tests_get.php';
+require_once dirname(__FILE__).'/tests_post.php';*/

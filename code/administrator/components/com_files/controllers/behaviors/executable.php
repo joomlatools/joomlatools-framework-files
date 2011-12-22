@@ -31,7 +31,7 @@ class ComFilesControllerBehaviorExecutable extends ComDefaultControllerBehaviorE
 		$result = true;
 		
 		if (version_compare(JVERSION, '1.6', '<')) {
-    		$minimum = $this->getService('com://admin/files.model.configs')->getItem()->allowed_media_usergroup;
+    		$minimum = $this->getMixer()->getModel()->container->parameters->allowed_media_usergroup;
     		$minimum = isset(self::$_group_map[$minimum]) ? self::$_group_map[$minimum] : 18;
     
     		$result = JFactory::getUser()->get('gid') >= $minimum;
