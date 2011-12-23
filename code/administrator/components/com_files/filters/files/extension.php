@@ -18,16 +18,16 @@
  * @subpackage  Files
  */
 
-class ComFilesFilterFileExtension extends KFilterFilename
+class ComFilesFilterFileExtension extends KFilterAbstract
 {
 	protected $_walk = false;
 	
 	protected function _validate($context)
 	{
-		$allowed = $context->caller->container->parameters->upload_extensions;
+		$allowed = $context->caller->container->parameters->allowed_extensions;
 		$value = $context->caller->extension;
 
-		if (empty($value) || !in_array($value, $allowed)) {
+		if ($allowed && (empty($value) || !in_array($value, $allowed))) {
 			$context->setError(JText::_('Invalid file extension'));
 			return false;
 		}

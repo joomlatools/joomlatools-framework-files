@@ -202,9 +202,9 @@ Files.App = new Class({
 
 				this.active = '';
 				
-				if (Files.container.parameters.upload_extensions) {
+				if (Files.container.parameters.allowed_extensions) {
 					this.uploader.settings.filters = [
-					     {title: 'All Files', extensions: Files.container.parameters.upload_extensions.join(',')}
+					     {title: 'All Files', extensions: Files.container.parameters.allowed_extensions.join(',')}
 	    			];
 				}
 				if (Files.container.parameters.upload_maxsize) {

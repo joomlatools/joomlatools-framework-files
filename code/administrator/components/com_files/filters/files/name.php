@@ -24,10 +24,10 @@ class ComFilesFilterFileName extends KFilterAbstract
 
 	protected function _validate($context)
 	{
-		$value = $this->_sanitize($context->caller->path);
+		$value = $this->_sanitize($context->caller->name);
 
 		if ($value == '') {
-			$context->setError(JText::_('WARNFILENAME'));
+			$context->setError(JText::_('Invalid file name'));
 			return false;
 		}
 	}

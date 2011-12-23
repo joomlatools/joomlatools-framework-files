@@ -57,13 +57,9 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 
 	public function __get($column)
 	{
-		if (in_array($column, array('size', 'extension', 'modified_date'))) {
+		if (in_array($column, array('size', 'extension', 'modified_date', 'mimetype'))) {
 			$metadata = $this->_adapter->getMetadata();
 			return $metadata ? $metadata[$column] : false;
-		}
-
-		if ($column == 'mimetype') {
-			return $this->getService('com://admin/files.mixin.mimetype')->getMimetype($this->fullpath);
 		}
 		
 		if ($column == 'metadata') {

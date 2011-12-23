@@ -118,6 +118,8 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
         unset($data['_token']);
         unset($data['action']);
         unset($data['option']);
+        unset($data['format']);
+        unset($data['view']);
         
 		$data['container'] = $this->container->slug;
 		$data['type'] = $this->getIdentifier()->name;

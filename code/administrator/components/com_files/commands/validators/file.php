@@ -24,7 +24,7 @@ class ComFilesCommandValidatorFile extends KCommand
 	{
 		$row = $context->caller;
 
-		if (is_string($row->file))
+		if (is_string($row->file) && !is_uploaded_file($row->file))
 		{
 			// remote file
 			try {
