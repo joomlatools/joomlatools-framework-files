@@ -81,7 +81,7 @@ Files.Tree = new Class({
 					id: path,
 					data: {
 						path: path,
-						url: '#/'+item.path,
+						url: '#'+item.path,
 						type: 'folder'
 					}
 				});

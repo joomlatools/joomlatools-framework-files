@@ -21,8 +21,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
-Files.blank_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAABGdBTUEAALGPC/xhBQAAAAd0SU1FB9MICA0xMTLhM9QAAAADUExURf///6fEG8gAAAABdFJOUwBA5thmAAAACXBIWXMAAAsSAAALEgHS3X78AAAACklEQVQIHWNgAAAAAgABz8g15QAAAABJRU5ErkJggg==';
-
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
@@ -59,7 +57,9 @@ window.addEvent('domready', function() {
 					text: row.name,
 					id: row.path,
 					data: {
-						url: '#'+row.path
+						path: path,
+						url: '#'+row.path,
+						type: 'folder'
 					}
 				});
 				Files.app.tree.selected.toggle(false, true);

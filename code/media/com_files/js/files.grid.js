@@ -12,7 +12,7 @@ if(!Files) var Files = {};
 
 Files.Grid = new Class({
 	Implements: [Events, Options],
-
+	layout: 'icons',
 	options: {
 		onClickFolder: $empty,
 		onClickFile: $empty,
@@ -222,7 +222,7 @@ Files.Grid = new Class({
 		this.fireEvent('beforeRender');
 		
 		this.container.empty();
-		this.root = new Files.Grid.Root();
+		this.root = new Files.Grid.Root(this.layout);
 		this.root.element.injectInside(this.container);
 
 		this.renew();
@@ -234,7 +234,7 @@ Files.Grid = new Class({
 
 		this.fireEvent('beforeRenderObject', {object: object, position: position});
 
-		object.element = object.render();
+		object.element = object.render(this.layout);
 		object.element.store('row', object);		
 
 		if (position == 'last') {
@@ -355,7 +355,7 @@ Files.Grid = new Class({
 		if (layout) {
 			this.fireEvent('beforeSetLayout', {layout: layout});
 			
-			Files.Template.layout = layout;
+			this.layout = layout;
 			if (this.options.switcher) {
 				this.options.switcher.set('value', layout);
 			}
@@ -381,7 +381,7 @@ Files.Grid = new Class({
 
 		this.options.icon_size = size;
 		
-		if (this.nodes.getKeys().length && Files.Template.layout == 'icons') {	
+		if (this.nodes.getKeys().length && this.layout == 'icons') {	
 			this.container.getElements('.imgTotal').setStyles({
 	            width: size + 'px',
 	            height: (size * 0.75) + 'px'
@@ -396,8 +396,8 @@ Files.Grid = new Class({
 Files.Grid.Root = new Class({
 	Implements: Files.Template,
 	template: 'container',
-	initialize: function() {
-		this.element = this.render();
+	initialize: function(layout) {
+		this.element = this.render(layout);
 	},
 	adopt: function(element, position) {
 		position = position || 'top'; 

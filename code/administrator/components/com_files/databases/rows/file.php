@@ -111,12 +111,12 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 			case 'height':
 				return $height;
 			case 'thumbnail':
-				if ($width < 60 && $height < 60) {
+				if ($width < 200 && $height < 200) {
 					// go down to default case
 				}
 				else {
 					$higher = $width > $height ? $width : $height;
-					$ratio = 60 / $higher;
+					$ratio = 200 / $higher;
 					return array_map('round', array('width' => $ratio*$width, 'height' => $ratio*$height));
 				}
 			default:

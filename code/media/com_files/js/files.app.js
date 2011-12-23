@@ -1,6 +1,8 @@
 
 if(!Files) var Files = {};
 
+Files.blank_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAABGdBTUEAALGPC/xhBQAAAAd0SU1FB9MICA0xMTLhM9QAAAADUExURf///6fEG8gAAAABdFJOUwBA5thmAAAACXBIWXMAAAsSAAALEgHS3X78AAAACklEQVQIHWNgAAAAAgABz8g15QAAAABJRU5ErkJggg==';
+
 Files.App = new Class({
 	Implements: [Events, Options],
 
@@ -71,6 +73,11 @@ Files.App = new Class({
 		    this.addEvent('onUploadFile', function(){
 		        this.setDimensions(true);
 		    }.bind(this));
+		},
+		onAfterNavigate: function(path) {
+			if (path !== undefined) {
+				this.setTitle(this.folder.name || Files.container.title);
+	        }
 		}
 	},
 
@@ -164,18 +171,23 @@ Files.App = new Class({
 	 */
 	navigate: function(path, type) {
 		this.fireEvent('beforeNavigate', [path, type]);
-		if (path) {
+		if (path !== undefined) {
 			if (this.active) {
 				// Reset offset if we are changing folders
 				this.state.set('offset', 0);
 			}
-			this.active = path;
+			this.active = path == '/' ? '' : path;
 		}
 
 		this.grid.reset();
+		
+		var parts = this.active.split('/'),
+			name = parts[parts.length ? parts.length-1 : 0],
+			folder = parts.slice(0, parts.length-1).join('/');
 
 		var that = this;
-		this.folder = new Files.Folder({'path': this.active});
+		// TODo find a way to represent root folder
+		this.folder = new Files.Folder({'folder': folder, 'name': name});
 		this.folder.getChildren(function(resp) {
 			that.response = resp;
 			that.grid.insertRows(resp.items);
@@ -303,7 +315,7 @@ Files.App = new Class({
 		
 		$extend(opts, {
 			'onAfterInsertRows': function() {
-				if (Files.Template.layout == 'icons') {
+				if (this.layout == 'icons') {
 					this.setIconSize(this.options.icon_size);
 				}
 				
@@ -337,7 +349,7 @@ Files.App = new Class({
 				
 				copy.template = 'file_preview';
 
-				SqueezeBox.open(copy.render(false), {
+				SqueezeBox.open(copy.render(), {
 					handler: 'adopt',
 					size: {x: 300, y: 200}
 				});
@@ -407,7 +419,7 @@ Files.App = new Class({
 	
 		var nodes = this.grid.nodes,
 			that = this;
-		if (Files.Template.layout === 'icons' && nodes.getLength()) {
+		if (this.grid.layout === 'icons' && nodes.getLength()) {
 			var url = that.createRoute({
 				view: 'thumbnails',
 				offset: this.state.get('offset'), 

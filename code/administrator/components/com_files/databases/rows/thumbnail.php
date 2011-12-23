@@ -58,7 +58,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 
 		    	$this->setData(array(
 			    	'files_container_id' => $source->container->id,
-					'folder'			 => '/'.$source->relative_folder,
+					'folder'			 => $source->folder,
 					'filename'           => $source->name,
 					'thumbnail'          => $str
 			    ));

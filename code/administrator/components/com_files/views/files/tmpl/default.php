@@ -16,8 +16,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
-Files.blank_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAABGdBTUEAALGPC/xhBQAAAAd0SU1FB9MICA0xMTLhM9QAAAADUExURf///6fEG8gAAAABdFJOUwBA5thmAAAACXBIWXMAAAsSAAALEgHS3X78AAAACklEQVQIHWNgAAAAAgABz8g15QAAAABJRU5ErkJggg==';
-
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
@@ -57,9 +55,12 @@ window.addEvent('domready', function() {
 					text: row.name,
 					id: row.path,
 					data: {
-						url: '#'+row.path
+						path: row.path,
+						url: '#'+row.path,
+						type: 'folder'
 					}
 				});
+				Files.app.tree.selected.toggle(false, true);
 
 				element.getParent('.files-modal').setStyle('display', 'none');
 			});
@@ -87,14 +88,6 @@ window.addEvent('domready', function() {
     };
 
     Files.createModal('files-new-folder-modal', 'files-new-folder-toolbar');
-
-    Files.app.addEvent('afterNavigate', function(path) {
-        if (path) {
-	        var folder = path.split('/');
-	        folder = folder[folder.length-1] || Files.container.title;
-	        this.setTitle(folder);
-        }
-    });
 
     var switchers = $$('.files-layout-switcher'),
     	slider = document.id('files-thumbs-size');
@@ -125,7 +118,7 @@ window.addEvent('domready', function() {
 	}
 	
     switchers.filter(function(el) { 
-        return el.get('data-layout') == Files.Template.layout;
+        return el.get('data-layout') == Files.app.grid.layout;
     }).addClass('active');
 
     switchers.addEvent('click', function(e) {
@@ -136,7 +129,7 @@ window.addEvent('domready', function() {
     	switchers.removeClass('active');
     	this.addClass('active');
     });
-    if (Files.Template.layout != 'icons') {
+    if (Files.app.grid.layout != 'icons') {
     	slider.setStyle('display', 'none');
     }
 });

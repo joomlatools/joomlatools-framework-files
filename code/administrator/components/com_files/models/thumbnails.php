@@ -26,9 +26,19 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 		$this->_state
 			->insert('container', 'com://admin/files.filter.container', null)
 			->insert('folder', 'com://admin/files.filter.path', null)
+			->insert('filename', 'com://admin/files.filter.path', null)
 			->insert('files', 'com://admin/files.filter.path', null)
 			->insert('source', 'raw', null, true)
 			;
+	}
+	
+	protected function _initialize(KConfig $config)
+	{
+		$config->append(array(
+			'state' => new ComFilesConfigState()
+		));
+		
+		parent::_initialize($config);
 	}
 
 	public function getItem()
@@ -49,17 +59,22 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 			$source = $state->source;
 
 			$query->where('tbl.files_container_id', '=', $source->container->id)
-				->where('tbl.folder', '=', '/'.$source->relative_folder)
-				->where('tbl.filename', '=', $source->name)
-				;
+				->where('tbl.filename', '=', $source->name);
+			
+			if ($source->folder) {
+				$query->where('tbl.folder', '=', $source->folder);
+			}
 		}
 		else {
 		    if ($state->container) {
 		        $query->where('tbl.files_container_id', '=', $state->container->id);
 		    }
-		    
 		    if ($state->folder) {
-		        $query->where('tbl.folder', '=', '/'.ltrim($state->folder, '/'));
+		        $query->where('tbl.folder', '=', ltrim($state->folder, '/'));
+		    }
+
+		    if ($state->filename) {
+		        $query->where('tbl.filename', '=', $state->filename);
 		    }
 		}
 

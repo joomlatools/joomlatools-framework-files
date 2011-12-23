@@ -88,7 +88,7 @@ window.addEvent('domready', function() {
 			var cls = Files[item.type.capitalize()];
 			var row = new cls(item);
 			Files.app.grid.insert(row);
-			if (row.type == 'image' && Files.Template.layout == 'icons') {
+			if (row.type == 'image' && Files.app.grid.layout == 'icons') {
 				var image = row.element.getElement('img'); 
 				if (image) {
 					image.set('src', row.image).addClass('loaded').removeClass('loading');
@@ -191,7 +191,7 @@ window.addEvent('domready', function() {
 				var cls = Files[el.type.capitalize()];
 				var row = new cls(el);
 				Files.app.grid.insert(row);
-				if (row.type == 'image' && Files.Template.layout == 'icons') {
+				if (row.type == 'image' && Files.app.grid.layout == 'icons') {
 					row.element.getElement('img').set('src', row.image)
 						.addClass('loaded').removeClass('loading');
 					row.element.getElement('.files-node').addClass('loaded').removeClass('loading');
