@@ -73,7 +73,9 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
     public function toArray()
     {
         $data = parent::toArray();
+        
 		unset($data['_thumbnail_size']);
+		unset($data['source']);
 
         return $data;
     }

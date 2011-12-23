@@ -26,7 +26,7 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 		$this->_state
 			->insert('container', 'com://admin/files.filter.container', null)
 			->insert('folder', 'com://admin/files.filter.path', null)
-			->insert('filename', 'com://admin/files.filter.path', null)
+			->insert('filename', 'com://admin/files.filter.path', null, true, array('container'))
 			->insert('files', 'com://admin/files.filter.path', null)
 			->insert('source', 'raw', null, true)
 			;
@@ -51,6 +51,24 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 
 		return $item;
 	}
+
+	protected function _buildQueryColumns(KDatabaseQuery $query)
+    {
+    	parent::_buildQueryColumns($query);
+    	
+    	if ($this->_state->source instanceof KDatabaseRowInterface || $this->_state->container) {
+    		$query->select('c.slug AS container');
+    	}
+    }
+	
+	protected function _buildQueryJoins(KDatabaseQuery $query)
+    {
+    	parent::_buildQueryJoins($query);
+    	
+    	if ($this->_state->source instanceof KDatabaseRowInterface || $this->_state->container) {
+    		$query->join('LEFT', 'files_containers AS c', 'c.files_container_id = tbl.files_container_id');
+    	}
+    }
 
 	protected function _buildQueryWhere(KDatabaseQuery $query)
     {
@@ -77,22 +95,6 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 		        $query->where('tbl.filename', '=', $state->filename);
 		    }
 		}
-
-     	$states = $state->getData(true);
-
-		/*
-		 * This is here so that parent method won't try to use the source row object when creating the query
-		 */        
-        if(!empty($states))
-        {
-            $states = $this->getTable()->mapColumns($states);
-            foreach($states as $key => $value)
-            {
-                if($key != 'source' && isset($value)) {
-                    $query->where('tbl.'.$key, 'IN', $value);
-                }
-            }
-        }
 
 	}
 }

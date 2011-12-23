@@ -84,6 +84,8 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 
 		if ($this->isImage() && !empty($data['metadata']))
 		{
+			$data['type'] = 'image';
+			
 			$image = array(
 				'thumbnail' => $this->thumbnail,
 				'width' => $this->width,

@@ -416,7 +416,6 @@ Files.App = new Class({
 		}
 		
 		this.setDimensions(true);
-	
 		var nodes = this.grid.nodes,
 			that = this;
 		if (this.grid.layout === 'icons' && nodes.getLength()) {
@@ -434,10 +433,8 @@ Files.App = new Class({
 					
 					that.fireEvent('beforeSetThumbnails', {thumbnails: thumbs, response: response});
 					
-                    
-					
 					nodes.each(function(node) {
-						if (node.type !== 'image') {
+						if (node.filetype !== 'image') {
 							return;
 						}
 						var name = node.name;

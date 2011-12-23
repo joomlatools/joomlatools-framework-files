@@ -89,10 +89,14 @@ window.addEvent('domready', function() {
 			var row = new cls(item);
 			Files.app.grid.insert(row);
 			if (row.type == 'image' && Files.app.grid.layout == 'icons') {
-				var image = row.element.getElement('img'); 
+				var image = row.element.getElement('img');
 				if (image) {
-					image.set('src', row.image).addClass('loaded').removeClass('loading');
-					row.element.getElement('.files-node').addClass('loaded').removeClass('loading');
+					row.getThumbnail(function(response) {
+						if (response.item.thumbnail) {
+							image.set('src', response.item.thumbnail).addClass('loaded').removeClass('loading');
+							row.element.getElement('.files-node').addClass('loaded').removeClass('loading');
+						}	
+					});
 				}
 			}	
 			Files.app.fireEvent('uploadFile', [row]);
@@ -192,9 +196,15 @@ window.addEvent('domready', function() {
 				var row = new cls(el);
 				Files.app.grid.insert(row);
 				if (row.type == 'image' && Files.app.grid.layout == 'icons') {
-					row.element.getElement('img').set('src', row.image)
-						.addClass('loaded').removeClass('loading');
-					row.element.getElement('.files-node').addClass('loaded').removeClass('loading');
+					var image = row.element.getElement('img');
+					if (image) {
+						row.getThumbnail(function(response) {
+							if (response.item.thumbnail) {
+								image.set('src', response.item.thumbnail).addClass('loaded').removeClass('loading');
+								row.element.getElement('.files-node').addClass('loaded').removeClass('loading');
+							}	
+						});
+					}
 				}
 				Files.app.fireEvent('uploadFile', [row]);
 				form.reset();

@@ -86,7 +86,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     	 		data-extension="[%=metadata.extension%]">
     		[% if (Files.app.options.thumbnails) { %]
     		    <div class="spinner"></div>
-    			<img src="[%= client_cache || 'media://com_files/images/blank.png' %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
+    			<img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
     		[% } %]
     		</a>
     	</div>
