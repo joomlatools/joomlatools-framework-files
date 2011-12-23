@@ -29,9 +29,14 @@ class ComFilesFilterFileSize extends KFilterAbstract
 
 		if ($max)
 		{
-			$size = $row->contents ? strlen($row->contents) : $row->size;
+			$size = $row->contents ? strlen($row->contents) : false;
+			if (!$size && is_uploaded_file($row->file)) {
+				$size = filesize($row->file);
+			} elseif ($row->file instanceof SplFileInfo && $row->file->isFile()) {
+				$size = $row->file->getSize();
+			}
 
-			if ($size > $max) {
+			if ($size && $size > $max) {
 				$context->setError(JText::_('File is too big'));
 				return false;
 			}

@@ -25,10 +25,9 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 	protected function _validate($context)
 	{
 		$row = $context->caller;
-		$check_mime = $row->container->parameters->check_mime;
 		$mimetypes = KConfig::unbox($row->container->parameters->allowed_mimetypes);
 
-		if ($check_mime && is_array($mimetypes)) 
+		if (is_array($mimetypes)) 
 		{
 			$mimetype = $row->mimetype;
 			
@@ -41,7 +40,7 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 				}
 			}
 
-			if ($mimetype && !in_array($row->mimetype, $mimetypes)) {
+			if ($mimetype && !in_array($mimetype, $mimetypes)) {
 				$context->setError(JText::_('Invalid Mimetype'));
 				return false;
 			}

@@ -207,9 +207,9 @@ Files.App = new Class({
 					     {title: 'All Files', extensions: Files.container.parameters.allowed_extensions.join(',')}
 	    			];
 				}
-				if (Files.container.parameters.upload_maxsize) {
-					this.uploader.settings.max_file_size = Files.container.parameters.upload_maxsize;
-					document.id('upload-max-size').set('html', new Files.Filesize(Files.container.parameters.upload_maxsize).humanize());
+				if (Files.container.parameters.maximum_size) {
+					this.uploader.settings.max_file_size = Files.container.parameters.maximum_size;
+					document.id('upload-max-size').set('html', new Files.Filesize(Files.container.parameters.maximum_size).humanize());
 				}
 				
 				if (this.options.types !== null) {
