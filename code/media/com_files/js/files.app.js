@@ -18,10 +18,6 @@ Files.App = new Class({
 		active: null,
 		title: 'files-title',
 		state: {
-			data: {
-				limit: 0,
-				offset: 0
-			},
 			defaults: {}
 		},
 		tree: {
@@ -76,7 +72,7 @@ Files.App = new Class({
 		},
 		onAfterNavigate: function(path) {
 			if (path !== undefined) {
-				this.setTitle(this.folder.name || Files.container.title);
+				this.setTitle(this.folder.name || this.container.title);
 	        }
 		}
 	},
@@ -117,10 +113,10 @@ Files.App = new Class({
 	},
 	setState: function() {
 		this.fireEvent('beforeSetState');
-		
+
 		var opts = this.options.state;
 		this.state = new Files.State(opts);
-	
+
 		this.fireEvent('afterSetState');
 	},
 	setHistory: function() {
@@ -134,20 +130,24 @@ Files.App = new Class({
 				
 				var state = History.getState(),
 					old_state = that.state.getData(),
-					new_state = state.data.state,
+					new_state = state.data,
 					state_changed = false;
 				
 				$each(old_state, function(value, key) {
 					if (state_changed === true) {
 						return;
 					} 
-					if (new_state && value !== new_state[key]) {
+					if (new_state && new_state[key] && value !== new_state[key]) {
 						state_changed = true;
 					}
 				});
 
-				if (Files.container && (state_changed || that.active !== state.data.folder)) {
-					that.state.set(state.data.state);
+				if (that.container && (state_changed || that.active !== state.data.folder)) {
+					var set_state = $extend({}, state.data);
+					['option', 'view', 'layout', 'folder', 'container'].each(function(key) {
+						delete set_state[key];
+					});
+					that.state.set(set_state);
 					that.navigate(state.data.folder, 'stateless');
 				}
 			});
@@ -155,9 +155,9 @@ Files.App = new Class({
 				if (type !== 'stateless' && that.history) {
 					var obj = {
 						folder: that.active,
-						container: Files.container ? Files.container.slug : null,
-						state: that.state.getData()
+						container: that.container ? that.container.slug : null
 					};
+					obj = $extend(obj, that.state.getData());
 					var method = type === 'initial' ? 'replaceState' : 'pushState';
 					that.history[method](obj, null, that.getUrl().setData(obj, true).toString());
 				}
@@ -186,7 +186,6 @@ Files.App = new Class({
 			folder = parts.slice(0, parts.length-1).join('/');
 
 		var that = this;
-		// TODo find a way to represent root folder
 		this.folder = new Files.Folder({'folder': folder, 'name': name});
 		this.folder.getChildren(function(resp) {
 			that.response = resp;
@@ -208,20 +207,19 @@ Files.App = new Class({
 				
 				this.fireEvent('beforeSetContainer', {container: item});
 				
-				Files.container = item;
-				Files.path = item.relative_path;
-				Files.baseurl = Files.sitebase + '/' + Files.path;
+				this.container = item;
+				this.baseurl = Files.sitebase + '/' + item.relative_path;
 
 				this.active = '';
 				
-				if (Files.container.parameters.allowed_extensions) {
+				if (this.container.parameters.allowed_extensions) {
 					this.uploader.settings.filters = [
-					     {title: 'All Files', extensions: Files.container.parameters.allowed_extensions.join(',')}
+					     {title: 'All Files', extensions: this.container.parameters.allowed_extensions.join(',')}
 	    			];
 				}
-				if (Files.container.parameters.maximum_size) {
-					this.uploader.settings.max_file_size = Files.container.parameters.maximum_size;
-					document.id('upload-max-size').set('html', new Files.Filesize(Files.container.parameters.maximum_size).humanize());
+				if (this.container.parameters.maximum_size) {
+					this.uploader.settings.max_file_size = this.container.parameters.maximum_size;
+					document.id('upload-max-size').set('html', new Files.Filesize(this.container.parameters.maximum_size).humanize());
 				}
 				
 				if (this.options.types !== null) {
@@ -244,19 +242,6 @@ Files.App = new Class({
 	setPaginator: function() {
 		this.fireEvent('beforeSetPaginator');
 		
-		var key = this.cookie ? this.cookie+'.paginator.state' : null;
-
-		if (key) {
-			var cookie = JSON.decode(Cookie.read(key), true);
-			
-			if (cookie && cookie.limit) {
-				this.state.set('limit', cookie.limit);
-			}
-			if (cookie && cookie.offset) {
-				this.state.set('offset', cookie.offset);
-			}
-		}
-		
 		var opts = this.options.paginator,
 			state = this.state;
 		
@@ -271,10 +256,6 @@ Files.App = new Class({
 			'onChangeLimit': function(limit) {
 				this.state.set('limit', limit);
 				this.state.set('offset', 0);
-				
-				if (key) {
-					Cookie.write(key, JSON.encode({'limit': limit}));
-				}
 				
 				this.navigate();
 			}.bind(this)
@@ -389,7 +370,7 @@ Files.App = new Class({
 				}
 			},
 			root: {
-				text: Files.container.title,
+				text: this.container.title,
 				data: {
 					url: '#'
 				}
@@ -493,8 +474,8 @@ Files.App = new Class({
 	createRoute: function(query) {
 		query = $merge(this.options.router.defaults, query || {});
 
-		if (query.container !== false && !query.container && Files.container) {
-			query.container = Files.container.slug;
+		if (query.container !== false && !query.container && this.container) {
+			query.container = this.container.slug;
 		} else {
 			delete query.container;
 		}

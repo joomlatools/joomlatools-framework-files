@@ -83,7 +83,7 @@ window.addEvent('domready', function() {
 		</td>
 		<td></td>
 		<td align="center">
-			[%=new Files.Filesize(metadata.size).humanize()%]
+			[%=size.humanize()%]
 		</td>
 		<td align="center">
 			[%=getModifiedDate(true)%]
@@ -108,7 +108,7 @@ window.addEvent('domready', function() {
 			[%=metadata.image.width%] x [%=metadata.image.height%]
 		</td>
 		<td align="center">
-			[%=new Files.Filesize(metadata.size).humanize()%]
+			[%=size.humanize()%]
 		</td>
 		<td align="center">
 			[%=getModifiedDate(true)%]

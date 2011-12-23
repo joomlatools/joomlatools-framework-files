@@ -22,7 +22,8 @@ window.addEvent('domready', function() {
 			state: {
 				defaults: {
 					limit: <?= (int) $state->limit; ?>,
-					offset: <?= (int) $state->offset; ?>
+					offset: <?= (int) $state->offset; ?>,
+					types: <?= json_encode($state->types); ?>
 				}
 			},
 			tree: {

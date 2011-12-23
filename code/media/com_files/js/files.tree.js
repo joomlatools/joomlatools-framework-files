@@ -111,7 +111,7 @@ Files.Tree = new Class({
 		}).send();
 	},
 	selectPath: function(path) {
-		if (path) {
+		if (path !== undefined) {
 			var node = this.get(path);
 			if (node) {
 				this.select(node, true);

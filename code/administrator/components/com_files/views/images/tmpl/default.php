@@ -62,7 +62,7 @@ window.addEvent('domready', function() {
 		var target = document.id(e.target).getParent('.files-node');
 		var row = target.retrieve('row');
 		
-		document.id('image-url').set('value', Files.path.replace(/sites\/[^\/]+\//, '')+'/'+row.path);
+		document.id('image-url').set('value', Files.app.container.relative_path.replace(/sites\/[^\/]+\//, '')+'/'+row.path);
 	});
 });
 </script>
