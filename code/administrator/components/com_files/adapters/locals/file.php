@@ -2,32 +2,32 @@
 
 class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract 
 {
+	protected $_metadata;
+	
 	public function getMetadata()
 	{
-		$metadata = false;
-		if ($this->_handle) {
-			$metadata = array(
+		if ($this->_handle && empty($this->_metadata)) {
+			$this->_metadata = array(
 				'extension' => pathinfo($this->_handle->getFilename(), PATHINFO_EXTENSION),
-				'mimetype' => $this->getService('com://admin/files.mixin.mimetype')->getMimetype($this->_path)
+				'mimetype' => $this->getService('com://admin/files.mixin.mimetype')->getMimetype($this->_encoded)
 			);	
 			try {
-				$metadata += array(
+				$this->_metadata += array(
 					'size' => $this->_handle->getSize(),
 					'modified_date' => $this->_handle->getMTime()
 				);
-			} catch (RunTimeException $e) {
-			}
+			} catch (RunTimeException $e) {}
 		}
 
-		return $metadata;
+		return $this->_metadata;
 	}
 
 	public function create()
 	{
 		$result = true;
 
-		if (!is_file($this->_path)) {
-			$result = touch($this->_path);	
+		if (!is_file($this->_encoded)) {
+			$result = touch($this->_encoded);	
 		}
 		
 		return $result;
@@ -37,8 +37,8 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 	{
 		$return = false;
 
-		if (is_file($this->_path)) {
-			$return = unlink($this->_path);
+		if (is_file($this->_encoded)) {
+			$return = unlink($this->_encoded);
 		}
 
 		if ($return) {
@@ -53,7 +53,7 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 		$result = null;
 
 		if ($this->_handle->isReadable()) {
-			$result = file_get_contents($this->_path);
+			$result = file_get_contents($this->_encoded);
 		}
 
 		return $result;
@@ -63,15 +63,15 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 	{
 		$result = false;
 
-		if (is_writable(dirname($this->_path))) 
+		if (is_writable(dirname($this->_encoded))) 
 		{
 			if (is_uploaded_file($data)) {
-				$result = move_uploaded_file($data, $this->_path);
+				$result = move_uploaded_file($data, $this->_encoded);
 			} elseif (is_string($data)) {
-				$result = file_put_contents($this->_path, $data);
+				$result = file_put_contents($this->_encoded, $data);
 			} elseif ($data instanceof SplFileObject) 
 			{
-				$handle = @fopen($this->_path, 'w');
+				$handle = @fopen($this->_encoded, 'w');
 				if ($handle) 
 				{
 					foreach ($data as $line) {
@@ -83,6 +83,7 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 		}
 		
 		if ($result) {
+			unset($this->_metadata);
 			clearstatcache();
 		}
 		
@@ -91,6 +92,6 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 
 	public function exists()
 	{
-		return is_file($this->_path);
+		return is_file($this->_encoded);
 	}
 }

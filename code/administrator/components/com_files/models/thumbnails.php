@@ -78,7 +78,7 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 
 			$query->where('tbl.files_container_id', '=', $source->container->id)
 				->where('tbl.filename', '=', $source->name);
-			
+
 			if ($source->folder) {
 				$query->where('tbl.folder', '=', $source->folder);
 			}

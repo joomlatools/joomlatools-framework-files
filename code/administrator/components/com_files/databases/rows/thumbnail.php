@@ -41,7 +41,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 	{
 		if ($source = $this->source) 
 		{
-			if (is_file($source->fullpath) && $source->isImage()) 
+			if (!$source->isNew()) 
 			{
 				//Load the library
 			    $this->getService('koowa:loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');

@@ -104,7 +104,11 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 
 	public function getImageSize($column)
 	{
-		list($width, $height) = getimagesize($this->fullpath);
+		if ($this->container->adapter !== 'local') {
+			return false;
+			
+		}
+		list($width, $height) = getimagesize($this->_adapter->getEncodedPath());
 
 		switch ($column)
 		{

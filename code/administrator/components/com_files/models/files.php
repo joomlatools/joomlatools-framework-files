@@ -58,26 +58,29 @@ class ComFilesModelFiles extends ComFilesModelNodes
         return parent::getList();
     }
 
-	public function iteratorMap($file)
+	public function iteratorMap($path)
 	{
-		return $file->getBasename();
+		return basename($path);
 	}
 
-	public function iteratorFilter($file)
+	public function iteratorFilter($path)
 	{
+		$filename = basename($path);
+		$extension = pathinfo($filename, PATHINFO_EXTENSION);
+
 		if ($this->_state->name) {
-			if (!in_array($file->getFilename(), (array) $this->_state->name)) {
+			if (!in_array($filename, (array) $this->_state->name)) {
 				return false;
 			}
 		}
 		
 		if ($this->_state->types) {
-			if ((in_array($file->getExtension(), ComFilesDatabaseRowFile::$image_extensions) && !in_array('image', (array) $this->_state->types))
-			|| (!in_array($file->getExtension(), ComFilesDatabaseRowFile::$image_extensions) && !in_array('file', (array) $this->_state->types))
+			if ((in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('image', (array) $this->_state->types))
+			|| (!in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('file', (array) $this->_state->types))
 			) {
 				return false;
 			}
 		}
-		if ($this->_state->search && stripos($file->getFilename(), $this->_state->search) === false) return false;
+		if ($this->_state->search && stripos($filename, $this->_state->search) === false) return false;
 	}
 }

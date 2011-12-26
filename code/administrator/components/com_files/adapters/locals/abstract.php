@@ -1,6 +1,6 @@
 <?php
 
-class ComFilesAdapterLocalAbstract extends KObject
+abstract class ComFilesAdapterLocalAbstract extends KObject
 {
 	/**
 	 * Path to the node 
@@ -27,43 +27,66 @@ class ComFilesAdapterLocalAbstract extends KObject
 
 		parent::_initialize($config);
 	}
-	
-	public static function getInstance(KConfigInterface $config, KServiceInterface $container)
-	{
-        if (!$container->has($config->service_identifier)) 
-        {
-            $instance = new self($config);
-            $container->set($config->service_identifier, $instance);
-        }
-        
-        return $container->get($config->service_identifier);
-	}
 
 	public function setPath($path)
 	{
+		$path = $this->normalize($path);
+		
 		$this->_path = $path;
-		$this->_handle = new SplFileInfo($this->_path);
+		$this->_encoded = $this->encodePath($path);
+
+		$this->_pathinfo = new SplFileInfo($path);
+		$this->_handle = new SplFileInfo($this->_encoded);
 
 		return $this;
+	}
+	
+	public function encodePath($path)
+	{
+		$parts = explode('/', $path);
+		$prepend = '';
+		
+		if (!empty($parts[0])) {
+			// Either C:/ or ~/
+			$prepend = array_shift($parts).'/';
+		}
+		$parts = array_map(array($this, 'encode'), $parts);
+		
+		return $prepend.implode('/', $parts);
 	}
 
 	public function getName()
 	{
-		return $this->normalize($this->_handle->getBasename());
+		return $this->normalize($this->_pathinfo->getBasename());
 	}
 
 	public function getPath()
 	{
-		return $this->normalize($this->_handle->getPathname());
+		return $this->normalize($this->_pathinfo->getPathname());
 	}
 
 	public function getDirname()
 	{
-		return $this->normalize(dirname($this->_handle->getPathname()));
+		return $this->normalize(dirname($this->_pathinfo->getPathname()));
+	}
+	
+	public function getEncodedPath()
+	{
+		return $this->_encoded;
 	}
 
 	public function normalize($string)
 	{
 		return str_replace('\\', '/', $string);
+	}
+	
+	public function encode($string)
+	{
+		return rawurlencode($string);
+	}
+	
+	public function decode($string)
+	{
+		return rawurldecode($string);
 	}
 }

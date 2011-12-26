@@ -4,11 +4,11 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 {
 	public function delete()
 	{
-		if (!file_exists($this->_path)) {
+		if (!file_exists($this->_encoded)) {
 			return true;
 		}
 		
-		$iter = new RecursiveDirectoryIterator($this->_path);
+		$iter = new RecursiveDirectoryIterator($this->_encoded);
 		foreach (new RecursiveIteratorIterator($iter, RecursiveIteratorIterator::CHILD_FIRST) as $f) {
 			if ($f->isDir()) {
 				rmdir($f->getPathname());
@@ -17,15 +17,15 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 			}
 		}
 
-		return rmdir($this->_path);
+		return rmdir($this->_encoded);
 	}
 
 	public function create()
 	{
 		$result = true;
-
-		if (!is_dir($this->_path)) {
-			$result = mkdir($this->_path, 0755, true);	
+		
+		if (!is_dir($this->_encoded)) {
+			$result = mkdir($this->_encoded, 0755, true);	
 		}
 		
 		return $result;
@@ -33,6 +33,6 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 
 	public function exists()
 	{
-		return is_dir($this->_path);
+		return is_dir($this->_encoded);
 	}
 }

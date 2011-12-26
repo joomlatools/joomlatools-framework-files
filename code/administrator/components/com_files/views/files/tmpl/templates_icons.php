@@ -15,7 +15,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <textarea style="display: none" id="file_preview">
 	<ul>
 		<li>
-			<a href="[%=baseurl+'/'+(folder ? folder+'/' : '')+name%]" target="_blank"><?= @text('View'); ?></a>
+			<a href="[%=baseurl+'/'+filepath%]" target="_blank"><?= @text('View'); ?></a>
 		</li>
 		<li class="preview extension-[%=metadata.extension%]">
 			<img src="media://com_files/images/document-64.png" width="64" height="64" alt="[%=name%]" border="0" />

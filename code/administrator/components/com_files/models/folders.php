@@ -72,23 +72,24 @@ class ComFilesModelFolders extends ComFilesModelNodes
 		return parent::getList();
 	}
 
-	public function iteratorMap($folder)
+	public function iteratorMap($path)
 	{
-		$path = str_replace('\\', '/', $folder->getPathname());
+		$path = str_replace('\\', '/', $path);
 		$path = str_replace($this->_state->container->path.'/', '', $path);
 
 		return $path;
 	}
 
-	public function iteratorFilter($folder)
+	public function iteratorFilter($path)
 	{
+		$filename = basename($path);
 		if ($this->_state->name) {
-			if (!in_array($folder->getFilename(), (array) $this->_state->name)) {
+			if (!in_array($filename, (array) $this->_state->name)) {
 				return false;
 			}
 		}
 		
-		if ($this->_state->search && stripos($folder->getBasename(), $this->_state->search) === false) {
+		if ($this->_state->search && stripos($filename, $this->_state->search) === false) {
 			return false;
 		}
 	}

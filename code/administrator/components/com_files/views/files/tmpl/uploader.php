@@ -70,8 +70,7 @@ window.addEvent('domready', function() {
 		uploader.settings.url = Files.app.createRoute({
 			view: 'file', 
 			plupload: 1, 
-			folder: Files.app.getPath(),
-			name: file.name
+			folder: Files.app.getPath()
 		});
 	});
 	

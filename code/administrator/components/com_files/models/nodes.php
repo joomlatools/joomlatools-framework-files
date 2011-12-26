@@ -62,10 +62,6 @@ class ComFilesModelNodes extends ComFilesModelDefault
         if (!empty($state->folder) && $state->folder != '/') {
             $path .= '/'.ltrim($state->folder, '/');
         }
-
-        if (!is_dir($path)) {
-            throw new KModelException('Invalid folder');
-        }
         
         return $path;
     }

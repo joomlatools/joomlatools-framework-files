@@ -20,6 +20,7 @@
 
 class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 {
+	public $adapter = 'local';
 	/**
 	 * A reference to the container configuration
 	 * 

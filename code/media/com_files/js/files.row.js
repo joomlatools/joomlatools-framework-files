@@ -14,6 +14,8 @@ Files.Row = new Class({
 			this.path = (object.folder ? object.folder+'/' : '') + object.name;
 		}
 		this.identifier = this.path;
+		
+		this.filepath = (object.folder ? encodeURIComponent(encodeURIComponent(object.folder))+'/' : '') + encodeURIComponent(encodeURIComponent(object.name));
 	}
 });
 
@@ -86,7 +88,7 @@ Files.Image = new Class({
 	initialize: function(object, options) {
 		this.parent(object, options);
 
-		this.image = this.baseurl+'/'+this.path;
+		this.image = this.baseurl+'/'+this.filepath;
 		
 		this.client_cache = false;
 		if(window.sessionStorage) {

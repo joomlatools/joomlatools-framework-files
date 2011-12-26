@@ -88,7 +88,9 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 	public function setAdapter()
 	{
 		$type = $this->getIdentifier()->name;
-		$this->_adapter = $this->container->getAdapter($type, array('path' => $this->fullpath));
+		$this->_adapter = $this->container->getAdapter($type, array(
+			'path' => $this->container->path.'/'.($this->folder ? $this->folder.'/' : '').$this->name
+		));
 		
 		return $this;
 	}
@@ -106,9 +108,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function getFullpath()
 	{
-		$path = $this->container->path.'/'.($this->folder ? $this->folder.'/' : '').$this->name;
-
-		return $path;
+		return $this->_adapter->getEncodedPath();
 	}
 
     public function toArray()
