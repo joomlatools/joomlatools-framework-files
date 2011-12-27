@@ -21,6 +21,17 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 
 		return $this->_metadata;
 	}
+	
+	public function getImageSize()
+	{
+		$result = @getimagesize($this->_encoded);
+		
+		if ($result) {
+			$result = array_slice($result, 0, 2);
+		}
+		
+		return $result;
+	}
 
 	public function create()
 	{
