@@ -87,8 +87,12 @@ Files.Grid = new Class({
 				e.stop();
 			}
 
-			var node = e.target.getParent('.files-node').retrieve('row');
-			this.erase(node.path);
+			var box = e.target.getParent('.files-node-shadow');
+			if (!box) {
+				box = e.target.match('.files-node') ? e.target :  e.target.getParent('.files-node');
+			}
+
+			this.erase(box.retrieve('row').path);
 		}.bind(this);
 
 		this.container.addEvent('click:relay(.delete-node)', deleteEvt);		

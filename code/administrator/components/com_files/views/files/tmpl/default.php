@@ -143,8 +143,6 @@ window.addEvent('domready', function() {
 	
 	<div id="sidebar">
 		<div id="files-tree"></div>
-		
-		<div id="files-containertree"></div>
 	</div>
 	
 	<div id="files-canvas" class="-koowa-box -koowa-box-vertical -koowa-box-flex">

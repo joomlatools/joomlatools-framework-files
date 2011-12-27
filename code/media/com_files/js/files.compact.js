@@ -32,11 +32,6 @@ Files.Compact.App = new Class({
 		var opts = this.options.grid;
 		var that = this;
 		$extend(opts, {
-			'onClickParent': function(e) {
-				if (that.tree.selected.parent) {
-					that.tree.select(that.tree.selected.parent);
-				}
-			},
 			'onClickImage': function(e) {
 				var target = document.id(e.target).getParent('.files-node');
 				target.getParent().getChildren().removeClass('active');

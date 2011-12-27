@@ -21,6 +21,7 @@ Files.App = new Class({
 			defaults: {}
 		},
 		tree: {
+			enabled: true,
 			div: 'files-tree',
 			theme: ''
 		},
@@ -228,8 +229,6 @@ Files.App = new Class({
 				}
 				
 				this.fireEvent('afterSetContainer', {container: item});
-
-				this.grid.reset();
 				
 				this.setTree();
 
@@ -335,15 +334,6 @@ Files.App = new Class({
 					size: {x: 300, y: 200}
 				});
 			},
-			'onAfterDeleteNode': function(context) {
-				var node = context.node;
-				if (node.type == 'folder') {
-					var item = this.tree.get(node.path);
-					if (item) {
-						item.remove();
-					}
-				}
-			}.bind(this),
 			'onAfterSetLayout': function(context) {
 				var layout = context.layout;
 				if (layout === 'icons' && this.grid && this.options.thumbnails) {
@@ -361,27 +351,41 @@ Files.App = new Class({
 	setTree: function() {
 		this.fireEvent('beforeSetTree');
 		
-		var opts = this.options.tree,
-			that = this;
-		$extend(opts, {
-			onClick: function(node) {
-				if (node.id || node.data.url) {
-					that.navigate(node && node.id ? node.id : '');
+		if (this.options.tree.enabled) {
+			var opts = this.options.tree,
+				that = this;
+			$extend(opts, {
+				onClick: function(node) {
+					if (node.id || node.data.url) {
+						that.navigate(node && node.id ? node.id : '');
+					}
+				},
+				root: {
+					text: this.container.title,
+					data: {
+						url: '#'
+					}
 				}
-			},
-			root: {
-				text: this.container.title,
-				data: {
-					url: '#'
-				}
+			});
+			this.tree = new Files.Tree(opts);
+			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
+			
+			this.addEvent('afterNavigate', function(path) {
+				that.tree.selectPath(path);
+			});
+
+			if (this.grid) {
+				this.grid.addEvent('afterDeleteNode', function(context) {
+					var node = context.node;
+					if (node.type == 'folder') {
+						var item = that.tree.get(node.path);
+						if (item) {
+							item.remove();
+						}
+					}
+				});
 			}
-		});
-		this.tree = new Files.Tree(opts);
-		this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
-		
-		this.addEvent('afterNavigate', function(path) {
-			that.tree.selectPath(path);
-		});
+		}
 
 		this.fireEvent('afterSetTree');
 	},
