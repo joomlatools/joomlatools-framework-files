@@ -19,7 +19,12 @@ class ComFilesAdapterLocalIterator extends KObject
 		$config['path'] = $this->getService('com://admin/files.adapter.local.folder', 
 					array('path' => $config['path']))->getEncodedPath();
 					
-		$results = ComFilesIteratorDirectory::getNodes($config);
+		try {
+			$results = ComFilesIteratorDirectory::getNodes($config);	
+		}
+		catch (Exception $e) {
+			return false;
+		}
 		
 		foreach ($results as &$result) {
 			$result = rawurldecode($result);

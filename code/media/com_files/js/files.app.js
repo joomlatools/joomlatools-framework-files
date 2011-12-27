@@ -189,10 +189,14 @@ Files.App = new Class({
 		var that = this;
 		this.folder = new Files.Folder({'folder': folder, 'name': name});
 		this.folder.getChildren(function(resp) {
-			that.response = resp;
-			that.grid.insertRows(resp.items);
-			
-			that.fireEvent('afterSelect', resp);
+			if (resp.status !== false) {
+				that.response = resp;
+				that.grid.insertRows(resp.items);
+				
+				that.fireEvent('afterSelect', resp);
+			} else {
+				alert(resp.error);
+			}
 
 		}, null, this.state.getData());
 	

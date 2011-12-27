@@ -32,6 +32,9 @@ class ComFilesModelFiles extends ComFilesModelNodes
         		'filter' => array($this, 'iteratorFilter'),
         		'map' => array($this, 'iteratorMap')
         	));
+        	if ($files === false) {
+        		throw new KModelException('Invalid folder');
+        	}
             $this->_total = count($files);
 
             $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_total);

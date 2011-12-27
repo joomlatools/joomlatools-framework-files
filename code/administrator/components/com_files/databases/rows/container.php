@@ -35,7 +35,7 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 		{
 			$result = $this->_data['path'];
 			// Prepend with site root if it is a relative path
-			if (!preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
+			if ($this->adapter === 'local' && !preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
 				$result = JPATH_FILES.'/'.$result;
 			}
 
@@ -96,7 +96,6 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 	
 	public function getAdapter($type, array $config = array())
 	{
-		$adapter = 'local';
-		return $this->getService('com://admin/files.adapter.'.$adapter.'.'.$type, $config);
+		return $this->getService('com://admin/files.adapter.'.$this->adapter.'.'.$type, $config);
 	}
 }
