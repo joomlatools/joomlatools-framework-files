@@ -92,6 +92,9 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 			'path' => $this->container->path.'/'.($this->folder ? $this->folder.'/' : '').$this->name
 		));
 		
+		unset($this->_data['fullpath']);
+		unset($this->_data['metadata']);
+		
 		return $this;
 	}
 	
@@ -108,7 +111,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function getFullpath()
 	{
-		return $this->_adapter->getEncodedPath();
+		return $this->_adapter->getRealPath();
 	}
 
     public function toArray()

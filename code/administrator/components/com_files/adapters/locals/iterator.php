@@ -17,7 +17,7 @@ class ComFilesAdapterLocalIterator extends KObject
 	public function getNodes(array $config = array())
 	{
 		$config['path'] = $this->getService('com://admin/files.adapter.local.folder', 
-					array('path' => $config['path']))->getEncodedPath();
+					array('path' => $config['path']))->getRealPath();
 					
 		try {
 			$results = ComFilesIteratorDirectory::getNodes($config);	

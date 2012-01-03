@@ -15,7 +15,10 @@ Files.Row = new Class({
 		}
 		this.identifier = this.path;
 		
-		this.filepath = (object.folder ? encodeURIComponent(encodeURIComponent(object.folder))+'/' : '') + encodeURIComponent(encodeURIComponent(object.name));
+		this.filepath = (object.folder ? this.encode(object.folder)+'/' : '') + this.encode(object.name);
+	},
+	encode: function(string) {
+		return encodeURIComponent(encodeURIComponent(string)).replace(/%2520/g, ' ');
 	}
 });
 

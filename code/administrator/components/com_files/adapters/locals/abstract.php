@@ -70,7 +70,7 @@ abstract class ComFilesAdapterLocalAbstract extends KObject
 		return $this->normalize(dirname($this->_pathinfo->getPathname()));
 	}
 	
-	public function getEncodedPath()
+	public function getRealPath()
 	{
 		return $this->_encoded;
 	}
@@ -82,11 +82,15 @@ abstract class ComFilesAdapterLocalAbstract extends KObject
 	
 	public function encode($string)
 	{
-		return rawurlencode($string);
+		$string = rawurlencode($string);
+		
+		return str_replace('%20', ' ', $string);
 	}
 	
 	public function decode($string)
 	{
-		return rawurldecode($string);
+		$string = rawurldecode($string);
+		
+		return str_replace(' ', '%20', $string);
 	}
 }
