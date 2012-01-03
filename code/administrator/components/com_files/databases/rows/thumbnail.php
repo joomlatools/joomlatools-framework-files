@@ -36,6 +36,30 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 
         parent::_initialize($config);
     }
+    
+    public function generateThumbnail()
+    {
+    	$source = $this->source;
+    	if ($source && !$source->isNew()) 
+		{
+			//Load the library
+		    $this->getService('koowa:loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
+		
+		    //Create the thumb
+		    $image = PhpThumbFactory::create($source->fullpath)
+			    ->setOptions(array('jpegQuality' => 50))
+			    ->adaptiveResize($this->_thumbnail_size['x'], $this->_thumbnail_size['y']);
+
+		    ob_start();
+		        echo $image->getImageAsString();
+		    $str = ob_get_clean();
+		    $str = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($str));
+
+	    	return $str;
+		}
+		
+		return false;
+    }
 
 	public function save()
 	{
@@ -43,19 +67,8 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 		{
 			if (!$source->isNew()) 
 			{
-				//Load the library
-			    $this->getService('koowa:loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
-			
-			    //Creat the thumb
-			    $image = PhpThumbFactory::create($source->fullpath)
-				    ->setOptions(array('jpegQuality' => 50))
-				    ->adaptiveResize($this->_thumbnail_size['x'], $this->_thumbnail_size['y']);
-
-			    ob_start();
-			        echo $image->getImageAsString();
-			    $str = ob_get_clean();
-			    $str = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($str));
-
+				$str = $this->generateThumbnail();
+				
 		    	$this->setData(array(
 			    	'files_container_id' => $source->container->id,
 					'folder'			 => $source->folder,

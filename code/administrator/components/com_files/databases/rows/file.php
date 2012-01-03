@@ -29,7 +29,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		$this->registerCallback(array('after.save'), array($this, 'saveThumbnail'));
 		$this->registerCallback(array('after.delete'), array($this, 'deleteThumbnail'));
 	}
-
+	
 	public function save()
 	{
 		$context = $this->getCommandContext();
@@ -63,7 +63,17 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		}
 		
 		if ($column == 'metadata') {
-			return $this->_adapter->getMetadata();
+			$metadata = $this->_adapter->getMetadata();
+			if ($this->isImage() && !empty($metadata))
+			{
+				$image = array(
+					'thumbnail' => $this->thumbnail,
+					'width' => $this->width,
+					'height' => $this->height
+				);
+				$metadata['image'] = $image;
+			}
+			return $metadata;
 		}
 
 		if (in_array($column, array('width', 'height', 'thumbnail')) && $this->isImage()) {
@@ -82,16 +92,8 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		
 		$data['metadata'] = $this->metadata;
 
-		if ($this->isImage() && !empty($data['metadata']))
-		{
+		if ($this->isImage()) {
 			$data['type'] = 'image';
-			
-			$image = array(
-				'thumbnail' => $this->thumbnail,
-				'width' => $this->width,
-				'height' => $this->height
-			);
-			$data['metadata']['image'] = $image;
 		}
 
         return $data;

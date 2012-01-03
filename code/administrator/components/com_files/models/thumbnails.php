@@ -25,7 +25,7 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 
 		$this->_state
 			->insert('container', 'com://admin/files.filter.container', null)
-			->insert('folder', 'com://admin/files.filter.path', null)
+			->insert('folder', 'com://admin/files.filter.path')
 			->insert('filename', 'com://admin/files.filter.path', null, true, array('container'))
 			->insert('files', 'com://admin/files.filter.path', null)
 			->insert('source', 'raw', null, true)
@@ -87,8 +87,9 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 		    if ($state->container) {
 		        $query->where('tbl.files_container_id', '=', $state->container->id);
 		    }
-		    if ($state->folder) {
-		        $query->where('tbl.folder', '=', ltrim($state->folder, '/'));
+		    
+		    if ($state->folder !== false) {
+		    	$query->where('tbl.folder', '=', ltrim($state->folder, '/'));	
 		    }
 
 		    if ($state->filename) {
