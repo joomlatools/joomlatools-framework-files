@@ -224,7 +224,10 @@ Files.App = new Class({
 				}
 				if (this.container.parameters.maximum_size) {
 					this.uploader.settings.max_file_size = this.container.parameters.maximum_size;
-					document.id('upload-max-size').set('html', new Files.Filesize(this.container.parameters.maximum_size).humanize());
+					var max_size = document.id('upload-max-size');
+					if (max_size) {
+						max_size.set('html', new Files.Filesize(this.container.parameters.maximum_size).humanize());
+					}
 				}
 				
 				if (this.options.types !== null) {
