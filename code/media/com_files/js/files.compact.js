@@ -33,30 +33,34 @@ Files.Compact.App = new Class({
 		var that = this;
 		$extend(opts, {
 			'onClickImage': function(e) {
-				var target = document.id(e.target).getParent('.files-node');
-				target.getParent().getChildren().removeClass('active');
-				target.addClass('active');
-				var row = target.retrieve('row');
+				var target = document.id(e.target),
+				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
+				
+				node.getParent().getChildren().removeClass('active');
+				node.addClass('active');
+				var row = node.retrieve('row');
 				var copy = $extend({}, row);
 				copy.template = 'details_image';
 
 				that.preview.empty();
 
-				copy.render().inject(that.preview);
+				copy.render('compact').inject(that.preview);
 
 				that.preview.getElement('img').set('src', copy.image);
 			},
 			'onClickFile': function(e) {
-				var target = document.id(e.target).getParent('.files-node');
-				target.getParent().getChildren().removeClass('active');
-				target.addClass('active');
-				var row = target.retrieve('row');
+				var target = document.id(e.target),
+			   		node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
+			
+				node.getParent().getChildren().removeClass('active');
+				node.addClass('active');
+				var row = node.retrieve('row');
 				var copy = $extend({}, row);
 				copy.template = 'details_file';
-
+	
 				that.preview.empty();
 
-				copy.render().inject(that.preview);
+				copy.render('compact').inject(that.preview);
 			}
 		});
 		this.grid = new Files.Grid(this.options.grid.element, opts);
