@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- $Id$ -->
-<install type="component" version="1.5.0">
+<install type="component" version="1.5.0" method="upgrade">
+	<identifier>com:files</identifier>
 	<name>Files</name>
-	<author>Nooku Project</author>
-	<creationDate>June 2011</creationDate>
-	<copyright>Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net)</copyright>
-	<license>http://www.gnu.org/licenses/gpl.html GNU/GPL v3</license>
-	<authorEmail>info@nooku.org</authorEmail>
-	<authorUrl>www.nooku.org</authorUrl>
-	<version>12.1</version>
-	<description>This component provides file management</description>
+ 	<author>Joomlatools</author>
+    <creationDate>December 2011</creationDate>
+    <copyright>Copyright (C) 2011 Joomlatools</copyright>
+    <license>GNU GPLv3 - http://www.gnu.org/licenses/gpl.html</license>
+    <authorEmail>info@joomlatools.eu</authorEmail>
+    <authorUrl>www.joomlatools.eu</authorUrl>
+	<version>1.0.0</version>
+	<description></description>
+	
+	<install>
+		<sql>
+			<file driver="mysql" charset="utf8">install/install.sql</file>
+		</sql>
+	</install>
+	<uninstall>
+		<sql>
+			<file driver="mysql" charset="utf8">install/uninstall.sql</file>
+		</sql>
+	</uninstall>
+	
+    <media folder="media">
+        <folder>com_files</folder>
+    </media>
+    
+	<administration>
+		<files folder="admin">
+			<filename>config.xml</filename>
+			<filename>index.html</filename>
+			<filename>dispatcher.php</filename>
+			
+			<folder>adapters</folder>
+			<folder>commands</folder>
+			<folder>configs</folder>
+			<folder>controllers</folder>
+			<folder>databases</folder>
+			<folder>filters</folder>
+			<folder>helpers</folder>
+			<folder>install</folder>
+			<folder>iterators</folder>
+			<folder>mixins</folder>
+			<folder>models</folder>
+			<folder>templates</folder>
+			<folder>views</folder>
+		</files>
+	</administration>
 </install>
