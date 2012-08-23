@@ -42,6 +42,6 @@ class ComFilesTemplateHelperFilesize extends KTemplateHelperAbstract
 			$size = KInflector::singularize($size);
 		}
 
-		return sprintf($format, $result, JText::_($size));
+		return sprintf($format, $result, KText::_($size));
 	}
 }

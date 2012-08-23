@@ -24,7 +24,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
 			'name' => '',
 			'visible' => true,
 			'link' => '',
-			'link_text' => JText::_('Select'),
+			'link_text' => KText::_('Select'),
 			'link_selector' => 'modal'
 		))->append(array(
 			'value' => $config->name

@@ -25,7 +25,7 @@ class ComFilesFilterFileName extends KFilterAbstract
 		$value = $this->_sanitize($context->caller->name);
 
 		if ($value == '') {
-			$context->setError(JText::_('Invalid file name'));
+			$context->setError(KText::_('Invalid file name'));
 			return false;
 		}
 	}
