@@ -26,7 +26,7 @@ class ComFilesFilterFileExtension extends KFilterAbstract
 		$value = $context->caller->extension;
 
 		if (is_array($allowed) && (empty($value) || !in_array(strtolower($value), $allowed))) {
-			$context->setError(KText::_('Invalid file extension'));
+			$context->setError(JText::_('Invalid file extension'));
 			return false;
 		}
 	}

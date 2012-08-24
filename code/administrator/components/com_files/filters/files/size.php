@@ -35,7 +35,7 @@ class ComFilesFilterFileSize extends KFilterAbstract
 			}
 
 			if ($size && $size > $max) {
-				$context->setError(KText::_('File is too big'));
+				$context->setError(JText::_('File is too big'));
 				return false;
 			}
 		}

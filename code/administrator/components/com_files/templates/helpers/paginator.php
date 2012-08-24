@@ -28,8 +28,8 @@ class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
         $html .= '<div class="pagination" id="files-paginator">';
         $html .= '<div class="limit">'.$this->limit($config->toArray()).'</div>';
         $html .=  $this->_pages();
-        $html .= '<div class="limit"> '.KText::_('Page').' <span class="page-current">1</span>';
-        $html .= ' '.KText::_('of').' <span class="page-total">1</span></div>';
+        $html .= '<div class="limit"> '.JText::_('Page').' <span class="page-current">1</span>';
+        $html .= ' '.JText::_('of').' <span class="page-total">1</span></div>';
         $html .= '</div>';
         $html .= '</div>';
 
@@ -49,11 +49,11 @@ class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
     {
     	$tpl = '<div class="button2-%s"><div class="%s"><a href="#">%s</a></div></div>';
 
-    	$html = sprintf($tpl, 'right', 'start', KText::_('First'));
-    	$html .= sprintf($tpl, 'right', 'prev', KText::_('Prev'));
+    	$html = sprintf($tpl, 'right', 'start', JText::_('First'));
+    	$html .= sprintf($tpl, 'right', 'prev', JText::_('Prev'));
     	$html .= '<div class="button2-left"><div class="page"></div></div>';
-    	$html .= sprintf($tpl, 'left', 'next', KText::_('Next'));
-    	$html .= sprintf($tpl, 'left', 'end', KText::_('Last'));
+    	$html .= sprintf($tpl, 'left', 'next', JText::_('Next'));
+    	$html .= sprintf($tpl, 'left', 'end', JText::_('Last'));
 
         return $html;
     }

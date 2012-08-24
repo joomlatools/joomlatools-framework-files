@@ -25,12 +25,12 @@ class ComFilesFilterFolderName extends KFilterAbstract
 		$value = $context->caller->name;
 
 		if (strpos($value, '/') !== false) {
-			$context->setError(KText::_('Folder names cannot contain slashes'));
+			$context->setError(JText::_('Folder names cannot contain slashes'));
 			return false;
 		}
 
 		if ($this->_sanitize($value) == '') {
-			$context->setError(KText::_('Invalid folder name'));
+			$context->setError(JText::_('Invalid folder name'));
 			return false;
 		}
 	}
