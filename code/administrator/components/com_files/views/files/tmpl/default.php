@@ -150,7 +150,7 @@ window.addEvent('domready', function() {
 </script>
 
 
-<div id="files-app" class="-koowa-box -koowa-box-flex">
+<div id="files-app">
 	<?= @template('templates_icons'); ?>
 	<?= @template('templates_details'); ?>
 
@@ -158,7 +158,7 @@ window.addEvent('domready', function() {
 		<div id="files-tree"></div>
 	</div>
 
-	<div id="files-canvas" class="-koowa-box -koowa-box-vertical -koowa-box-flex">
+	<div id="files-canvas">
 	    <div class="path" style="height: 24px;">
 	        <div class="files-toolbar-controls">
 	        	<button id="files-show-uploader"><?= @text('Upload'); ?></button>
@@ -175,7 +175,7 @@ window.addEvent('domready', function() {
 				</button>
 			</div>
 		</div>
-		<div class="view -koowa-box-scroll -koowa-box-flex">
+		<div class="view">
 			<div id="files-grid"></div>
 		</div>
 		<?= @helper('paginator.pagination') ?>
