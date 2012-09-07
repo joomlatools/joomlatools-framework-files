@@ -47,8 +47,17 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 
 		    //Create the thumb
 		    $image = PhpThumbFactory::create($source->fullpath)
-			    ->setOptions(array('jpegQuality' => 50))
-			    ->adaptiveResize($this->_thumbnail_size['x'], $this->_thumbnail_size['y']);
+			    ->setOptions(array('jpegQuality' => 50));
+
+			if ($this->_thumbnail_size['x'] && $this->_thumbnail_size['y']) {
+				// Resize then crop to the provided resolution.
+				$image->adaptiveResize($this->_thumbnail_size['x'], $this->_thumbnail_size['y']);
+			} else {
+				$width = isset($this->_thumbnail_size['x'])?$this->_thumbnail_size['x']:0;
+				$height = isset($this->_thumbnail_size['y'])?$this->_thumbnail_size['y']:0;
+				// PhpThumb will calculate the missing side while preserving the aspect ratio.
+				$image->resize($width, $height);
+			}
 
 		    ob_start();
 		    	echo $image->getImageAsString();
