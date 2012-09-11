@@ -76,7 +76,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 		{
 			if (!$source->isNew())
 			{
-				$str = $this->generateThumbnail();
+				$str = $source->thumbnail_string ? $source->thumbnail_string : $this->generateThumbnail();
 
 		    	$this->setData(array(
 			    	'files_container_id' => $source->container->id,
