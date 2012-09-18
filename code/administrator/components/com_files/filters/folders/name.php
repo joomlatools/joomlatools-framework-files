@@ -23,14 +23,15 @@ class ComFilesFilterFolderName extends KFilterAbstract
 	protected function _validate($context)
 	{
 		$value = $context->caller->name;
+		$translator = $this->getService('translator')->getTranslator($this->getIdentifier());
 
 		if (strpos($value, '/') !== false) {
-			$context->setError(JText::_('Folder names cannot contain slashes'));
+			$context->setError($translator->translate('Folder names cannot contain slashes'));
 			return false;
 		}
 
 		if ($this->_sanitize($value) == '') {
-			$context->setError(JText::_('Invalid folder name'));
+			$context->setError($translator->translate('Invalid folder name'));
 			return false;
 		}
 	}
