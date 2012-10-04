@@ -39,7 +39,8 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 			}
 
 			if ($mimetype && !in_array($mimetype, $mimetypes)) {
-				$context->setError(JText::_('Invalid Mimetype'));
+		        $translator = $this->getService('translator')->getTranslator($this->getIdentifier());
+				$context->setError($translator->translate('Invalid Mimetype'));
 				return false;
 			}
 		}
