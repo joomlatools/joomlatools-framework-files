@@ -49,11 +49,11 @@ class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
     {
     	$tpl = '<div class="button2-%s"><div class="%s"><a href="#">%s</a></div></div>';
 
-    	$html = sprintf($tpl, 'right', 'start', $this->translate('First'));
+    	$html = sprintf($tpl, 'right', 'start', $this->translate('Start'));
     	$html .= sprintf($tpl, 'right', 'prev', $this->translate('Prev'));
     	$html .= '<div class="button2-left"><div class="page"></div></div>';
     	$html .= sprintf($tpl, 'left', 'next', $this->translate('Next'));
-    	$html .= sprintf($tpl, 'left', 'end', $this->translate('Last'));
+    	$html .= sprintf($tpl, 'left', 'end', $this->translate('End'));
 
         return $html;
     }
