@@ -26,6 +26,7 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 			->insert('folder', 'com://admin/files.filter.path')
 			->insert('filename', 'com://admin/files.filter.path', null, true, array('container'))
 			->insert('files', 'com://admin/files.filter.path', null)
+			->insert('paths', 'com://admin/files.filter.path', null)
 			->insert('source', 'raw', null, true)
 			
 			->insert('types', 'cmd', '')
@@ -92,10 +93,10 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 		        $query->where('tbl.files_container_id', '=', $state->container->id);
 		    }
 
-		    if ($state->folder !== false) {
+		    if ($state->folder !== false && $state->folder !== null) {
 		    	$query->where('tbl.folder', '=', ltrim($state->folder, '/'));
 		    }
-		    
+
 		    // Need this for BC
 		    if (!empty($state->files)) {
 		    	$query->where('tbl.filename', 'IN', $state->files);
@@ -103,6 +104,24 @@ class ComFilesModelThumbnails extends ComDefaultModelDefault
 		    
 		    if ($state->filename) {
 		        $query->where('tbl.filename', 'IN', $state->filename);
+		    }
+
+		    if ($state->paths) {
+		        $conditions = array();
+		        foreach ((array)$state->paths as $path) {
+		            $file = basename($path);
+		            $folder = dirname($path);
+		            if ($folder === '.') {
+		                $folder = '';
+		            }
+		            $conditions[] = sprintf('(tbl.filename = \'%s\' AND tbl.folder = \'%s\')', $file, $folder);
+		        }
+		        
+		        $query->where('1 = 1');
+		        $query->where[] = array(
+		            'property' => '',
+		            'condition' => 'AND ('.implode(' OR ', $conditions).')'
+		        );
 		    }
 		}
 		
