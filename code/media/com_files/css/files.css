@@ -1027,3 +1027,13 @@ ul#files-tree-html ul li a {
 	visibility: visible!important;
 }
 /* @end */
+
+/* @group Breadcrumbs */
+#files-app .breadcrumb{padding:8px 15px;margin:0 0 18px;list-style:none;background-color:#f5f5f5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}#files-app .breadcrumb li{display:inline-block;*display:inline;*zoom:1;text-shadow:0 1px 0 #ffffff;}
+#files-app .breadcrumb .divider{padding:0 5px;color:#ccc;}
+#files-app .breadcrumb .active{color:#999999;}
+#files-app .breadcrumb-resizable{overflow:hidden;margin:0;padding:2.5px 0px;}#files-app .breadcrumb-resizable li{overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;-o-user-select:none;user-select:none;cursor:pointer;}#files-app .breadcrumb-resizable li.active{cursor:default;}
+#files-app .breadcrumb-resizable li span{padding:0 2px 0 0;}
+#files-app .breadcrumb-resizable li.overflow-ellipsis{text-overflow:ellipsis;}
+#files-app .breadcrumb-resizable li:active{color:#999999;}
+/* @end */

@@ -15,9 +15,122 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
+//Preloading breadcrumbs icon
+(new Image).src = "media://com_files/images/arrow.png";
+
 window.addEvent('domready', function() {
+    var updatePathway = function(list, pathway, buffer, width, offset){
+
+        var index = width - offset, sizes = buffer[index] || buffer.max, last = list.getChildren().length - 1;
+
+        list.getChildren().each(function(folder, index, siblings){
+            if(index > 0 && index < last) {
+                folder.setStyle('width', sizes[index].value);
+                if(sizes[index].value <= 48) {
+                    folder.removeClass('overflow-ellipsis');
+                } else {
+                    folder.addClass('overflow-ellipsis');
+                }
+            }
+        });
+
+    };
+
 	var config = <?= json_encode($state->config); ?>,
 		options = {
+            title: false,
+            onAfterSetTitle: function(data){
+                document.id('files-title').getParent().setStyle('position', 'relative');
+                var self = this, pathway = document.id('files-title'), offset = 0;
+                pathway.setStyles({
+                    'overflow': 'visible',
+                    'text-overflow': 'ellipsis',
+                    'white-space': 'nowrap',
+                    bottom: 0,
+                    top: 0,
+                    left: pathway.getPrevious().getSize().x + 18,
+                    right: pathway.getNext().getSize().x + 18,
+                    'position': 'absolute'
+                });
+                pathway.empty();
+                var list = new Element('ul', {'class': 'breadcrumb breadcrumb-resizable'}), wrap = function(title, path, icon){
+                    result = new Element('li', {
+                        text: title,
+                        title: title,
+                        events: {
+                            click: function(){
+                                self.navigate(path);
+                            }
+                        }
+                    });
+                    if(icon) {
+                        result.grab(new Element('span', {'class': 'divider', html: '<img src="media://com_files/images/arrow.png" width=8 height=19 />'}), 'top');
+                    }
+                    return result;
+                };
+                var root = wrap(' '+this.container.title, '', false).grab(new Element('i', {'class': 'icon-hdd'}), 'top');
+                list.adopt(root);
+                var folders = this.getPath().split('/'), path = '';
+                folders.each(function(title){
+                    if(title.trim()) {
+                        path += path ? '/'+title : title;
+                        list.adopt(wrap(title, path, true));
+                    }
+                });
+                list.getLast().addClass('active');
+
+                pathway.setStyle('visibility', 'hidden');
+                pathway.adopt(list);
+
+                //Whenever the path changes, the buffer used in the resize handler is outdated, so have to be reattached
+                if(this.pathway) {
+                    window.removeEvent('resize', this.pathway);
+
+                    this.pathway = false;
+                }
+
+                if(list.getChildren().length > 2) {
+
+                    var widths = {}, ceil = 0, offset = list.getFirst().getSize().x + list.getLast().getSize().x;
+                    list.getChildren().each(function(item, i){
+                        if(item.match(':first-child') || item.match(':last-child')) return;
+                        var x = item.getSize().x;
+                        widths[i] = {key: i, value: x};
+                        ceil += x;
+                    });
+
+                    //Create resize buffer
+                    var buffer = {}, queue = ceil;
+                    buffer[ceil] = buffer.max = widths;
+                    while(queue > 0) {
+                        --queue;
+
+                        var max = {key: null, value: 0}, sizelist = {};
+                        for (var key in widths){
+                            if (widths.hasOwnProperty(key)) {
+                                var item = widths[key];
+                                if(item.value > max.value) max = item;
+                                sizelist[key] = {key: item.key, value: item.value};
+                            }
+                        }
+                        --sizelist[max.key].value;
+
+                        buffer[queue] = sizelist;
+                        widths = sizelist;
+                    }
+
+                    updatePathway(list, pathway, buffer, pathway.getSize().x, offset);
+                    pathway.setStyle('visibility', 'visible');
+
+                    this.pathway = function(){
+                        updatePathway(list, pathway, buffer, pathway.getSize().x, offset)
+                    };
+                    window.addEvent('resize', this.pathway);
+
+                } else {
+                    pathway.setStyle('visibility', 'visible');
+                }
+            },
 			state: {
 				defaults: {
 					limit: <?= (int) $state->limit; ?>,
@@ -38,7 +151,7 @@ window.addEvent('domready', function() {
 
 	//@TODO hide the uploader in a modal, make it pretty
 	var tmp = new Element('div', {style: 'display:none'}).inject(document.body);
-	$('files-upload').inject(tmp);
+	$('files-upload').inject(tmp).setStyle('visibility', '');
 	$('files-show-uploader').addEvent('click', function(e){
 		e.stop();
 
@@ -86,14 +199,13 @@ window.addEvent('domready', function() {
 	});
 
     Files.createModal = function(container, button){
-        var modal = $(container);
-        modal.setStyle('display', 'none');
-        document.body.grab(modal);
+        var modal = $(container), tmp = new Element('div', {style: 'display:none'}).inject(document.body);
+        tmp.grab(modal);
     	$(button).addEvent('click', function(e) {
     		e.stop();
 
     		var handleClose = function(){
-					modal.setStyle('display', 'none').inject(document.body);
+					modal.inject(tmp);
 
 					SqueezeBox.removeEvent('close', handleClose);
 				},
@@ -109,7 +221,7 @@ window.addEvent('domready', function() {
 
 			SqueezeBox.addEvent('close', handleClose);
 			SqueezeBox.addEvent('open', handleOpen);
-			SqueezeBox.open(modal.setStyle('display', 'block'), {
+			SqueezeBox.open(modal.setStyle('display', ''), {
 				handler: 'adopt',
 				size: {x: sizes.x, y: sizes.y}
 			});
