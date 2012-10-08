@@ -151,7 +151,7 @@ window.addEvent('domready', function() {
 
 	//@TODO hide the uploader in a modal, make it pretty
 	var tmp = new Element('div', {style: 'display:none'}).inject(document.body);
-	$('files-upload').inject(tmp).setStyle('visibility', '');
+	$('files-upload').inject(tmp);
 	$('files-show-uploader').addEvent('click', function(e){
 		e.stop();
 
@@ -199,15 +199,17 @@ window.addEvent('domready', function() {
 	});
 
     Files.createModal = function(container, button){
-        var modal = $(container), tmp = new Element('div', {style: 'display:none'}).inject(document.body);
-        tmp.grab(modal);
-    	$(button).addEvent('click', function(e) {
+        var modal = $(container);
+        modal.setStyle('display', 'none');
+        document.body.grab(modal);
+        $(button).addEvent('click', function(e) {
     		e.stop();
 
     		var handleClose = function(){
-					modal.inject(tmp);
+                    modal.setStyle('display', 'none').inject(document.body);
 
-					SqueezeBox.removeEvent('close', handleClose);
+
+                    SqueezeBox.removeEvent('close', handleClose);
 				},
 				handleOpen = function(){
 					var focus = modal.getElement('input.focus');
