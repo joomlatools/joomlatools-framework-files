@@ -26,6 +26,24 @@
 }
 #files-tree{border-right:1px solid #dddddd;}
 
+#files-pathway {
+	 overflow: visible; 
+	 text-overflow: ellipsis; 
+	 white-space: nowrap; 
+	 bottom: 0; 
+	 top: 0; 
+	 position: absolute
+}
+
+#files-pathway .divider {
+	background: url(../images/arrow.png) no-repeat 5px 0;
+	width: 8px;
+	height: 19px;
+	display: inline-block;
+	line-height: 19px;
+vertical-align: text-top;
+}
+
 #element-box #files-canvas {
     float:none;
     margin-left:260px;
