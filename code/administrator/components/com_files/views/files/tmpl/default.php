@@ -170,6 +170,8 @@ window.addEvent('domready', function() {
 			    <button id="files-new-folder-toolbar"><?= @text('New Folder'); ?></button>
 			    <button id="files-batch-delete"><?= @text('Delete'); ?></button>
 			</div>
+			<div id="files-pathway">
+			</div>
 			<div class="files-layout-controls">
 				<button class="files-layout-switcher files-layout-switcher-icons" data-layout="icons" title="<?= @text('Show files as icons'); ?>">
 					<?= @text('Icons'); ?>
