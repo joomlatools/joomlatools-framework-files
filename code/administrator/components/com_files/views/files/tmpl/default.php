@@ -15,9 +15,13 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
+//Preloading breadcrumbs icon
+(new Image).src = "media://com_files/images/arrow.png";
+
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
+            title: false,
 			state: {
 				defaults: {
 					limit: <?= (int) $state->limit; ?>,
@@ -89,13 +93,14 @@ window.addEvent('domready', function() {
         var modal = $(container);
         modal.setStyle('display', 'none');
         document.body.grab(modal);
-    	$(button).addEvent('click', function(e) {
+        $(button).addEvent('click', function(e) {
     		e.stop();
 
     		var handleClose = function(){
-					modal.setStyle('display', 'none').inject(document.body);
+                    modal.setStyle('display', 'none').inject(document.body);
 
-					SqueezeBox.removeEvent('close', handleClose);
+
+                    SqueezeBox.removeEvent('close', handleClose);
 				},
 				handleOpen = function(){
 					var focus = modal.getElement('input.focus');
@@ -109,7 +114,7 @@ window.addEvent('domready', function() {
 
 			SqueezeBox.addEvent('close', handleClose);
 			SqueezeBox.addEvent('open', handleOpen);
-			SqueezeBox.open(modal.setStyle('display', 'block'), {
+			SqueezeBox.open(modal.setStyle('display', ''), {
 				handler: 'adopt',
 				size: {x: sizes.x, y: sizes.y}
 			});
@@ -165,7 +170,8 @@ window.addEvent('domready', function() {
 			    <button id="files-new-folder-toolbar"><?= @text('New Folder'); ?></button>
 			    <button id="files-batch-delete"><?= @text('Delete'); ?></button>
 			</div>
-			<h3 id="files-title"></h3>
+			<div id="files-pathway">
+			</div>
 			<div class="files-layout-controls">
 				<button class="files-layout-switcher files-layout-switcher-icons" data-layout="icons" title="<?= @text('Show files as icons'); ?>">
 					<?= @text('Icons'); ?>
