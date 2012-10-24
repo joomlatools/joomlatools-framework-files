@@ -25,6 +25,9 @@ Files.App = new Class({
 		container: null,
 		active: null,
 		title: 'files-title',
+		pathway: {
+			element: 'files-pathway'
+		},
 		state: {
 			defaults: {}
 		},
@@ -75,10 +78,11 @@ Files.App = new Class({
 		this.setOptions(options);
 
 		if (this.options.persistent && this.options.container) {
-			var container = typeof this.options.contianer === 'string' ? this.options.container : this.options.container.slug;
+			var container = typeof this.options.container === 'string' ? this.options.container : this.options.container.slug;
 			this.cookie = 'com.files.container.'+container;
 		}
 
+		this.setPathway();
 		this.setState();
 		this.setHistory();
 		this.setGrid();
@@ -110,6 +114,13 @@ Files.App = new Class({
 	},
 	setState: function() {
 		this.fireEvent('beforeSetState');
+		
+		if (this.cookie) {
+            var limit = Cookie.read(this.cookie+'.state.limit');
+            if (limit) {
+                this.options.state.defaults.limit = limit;
+            }
+        }
 
 		var opts = this.options.state;
 		this.state = new Files.State(opts);
@@ -295,6 +306,10 @@ Files.App = new Class({
 				this.navigate();
 			}.bind(this),
 			'onChangeLimit': function(limit) {
+				if (this.cookie) {
+                	Cookie.write(this.cookie+'.state.limit', limit);
+            	}
+				
 				this.state.set('limit', limit);
 				this.state.set('offset', 0);
 
@@ -468,6 +483,45 @@ Files.App = new Class({
             this._cached_grid_width = this.grid.root.element.getSize().x;
         }
     },
+    setPathway: function() {
+    	this.fireEvent('beforeSetPathway');
+
+		var opts = this.options.pathway;
+
+		this.pathway = new Files.Pathway(opts.element, opts);
+
+		var that = this,
+			pathway = this.pathway;
+		that.addEvent('afterSetTitle', function(title) {
+			if (!pathway.element) {
+				return;
+			}
+		    pathway.list.empty();
+		
+		    pathway.element.setStyle('visibility', 'hidden');
+		    
+			var root = pathway.wrap(' '+that.container.title, '', false, that).grab(new Element('i', {'class': 'icon-hdd'}), 'top'),
+		        path = '';
+		    
+			pathway.list.adopt(root);
+
+	        var folders = that.getPath().split('/');
+	        
+		    folders.each(function(title){
+		        if(title.trim()) {
+		            path += path ? '/'+title : title;
+		            pathway.list.adopt(pathway.wrap(title, path, true, that));
+		        }
+		    });
+		    
+		    pathway.list.getLast().addClass('active');
+		
+		    pathway.element.setStyle('visibility', 'visible');
+
+		});
+
+		this.fireEvent('afterSetPathway');
+	},
 	setTitle: function(title) {
 		this.fireEvent('beforeSetTitle', {title: title});
 
