@@ -79,6 +79,8 @@ window.addEvent('domready', function() {
 			uploader.refresh();
 			if(SqueezeBox.isOpen) SqueezeBox.resize({y: $('files-upload').measure(function(){return this.getSize().y;})}, true);
 			uploader.unbind('QueueChanged', exposePlupload);
+            //@TODO investigate better event name convention
+            window.fireEvent('QueueChanged');
 		};
 
 		window.addEvent('refresh', function(){
