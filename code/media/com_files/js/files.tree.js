@@ -92,6 +92,9 @@ Files.Tree = new Class({
 						type: 'folder'
 					}
 				});
+
+                node.div.main.setAttribute('title', node.div.text.innerText);
+
 				if (item.children) {
 					$each(item.children, function(item) {
 						insertNode(item, node);
