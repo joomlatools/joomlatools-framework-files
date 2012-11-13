@@ -114,7 +114,7 @@ Files.Tree = new Class({
 				if (Files.app && Files.app.active) {
 					that.selectPath(Files.app.active);
 				}
-
+                that.onAdopt(that.options.div, that.root);
 			}
 		}).send();
 	},
