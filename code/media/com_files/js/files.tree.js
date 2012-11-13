@@ -79,7 +79,6 @@ Files.Tree = new Class({
 	},
 	fromUrl: function(url) {
 		var that = this,
-			root = this.root,
 			insertNode = function(item, parent) {
 				var path = parent.data.path ? parent.data.path+'/' : '';
 				path += item.name;
