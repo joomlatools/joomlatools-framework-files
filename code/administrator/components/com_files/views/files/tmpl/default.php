@@ -194,6 +194,8 @@ window.addEvent('domready', function() {
 <div>
 	<div id="files-new-folder-modal" class="files-modal" style="display: none">
 	<form>
+        <h3><?= @text('Create a new folder in:') ?></h3>
+        <h3 class="upload-files-to"></h3>
 		<input class="inputbox focus" type="text" id="files-new-folder-input" size="40" placeholder="<?= @text('Enter a folder name') ?>" />
 		<button id="files-new-folder-create" disabled><?= @text('Create'); ?></button>
 	</form>
