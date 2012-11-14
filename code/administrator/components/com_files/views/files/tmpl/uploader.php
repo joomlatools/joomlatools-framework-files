@@ -18,10 +18,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 jQuery.noConflict();
 
 window.addEvent('domready', function() {
-	Files.app.addEvent('afterNavigate', function(path, type) {
-		document.id('upload-files-to').set('text', "'"+(path || <?= json_encode('root folder') ?>)+"'");
-	});
-
 	var element = jQuery('#files-upload-multi');
 
 	plupload.addI18n({'Add files': Files._('Select files from your computer')});

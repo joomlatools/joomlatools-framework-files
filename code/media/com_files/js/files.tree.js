@@ -79,7 +79,6 @@ Files.Tree = new Class({
 	},
 	fromUrl: function(url) {
 		var that = this,
-			root = this.root,
 			insertNode = function(item, parent) {
 				var path = parent.data.path ? parent.data.path+'/' : '';
 				path += item.name;
@@ -93,6 +92,9 @@ Files.Tree = new Class({
 						type: 'folder'
 					}
 				});
+
+                node.div.main.setAttribute('title', node.div.text.innerText);
+
 				if (item.children) {
 					$each(item.children, function(item) {
 						insertNode(item, node);
@@ -114,7 +116,7 @@ Files.Tree = new Class({
 				if (Files.app && Files.app.active) {
 					that.selectPath(Files.app.active);
 				}
-
+                that.onAdopt(that.options.div, that.root);
 			}
 		}).send();
 	},
