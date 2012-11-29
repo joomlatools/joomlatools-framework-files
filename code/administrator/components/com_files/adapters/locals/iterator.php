@@ -34,9 +34,6 @@ class ComFilesAdapterLocalIterator extends KObject
 			return false;
 		}
 
-		foreach ($results as &$result) {
-			$result = rawurldecode($result);
-		}
 		return $results;
 	}
 }
