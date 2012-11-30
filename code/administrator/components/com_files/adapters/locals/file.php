@@ -17,7 +17,7 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 		if ($this->_handle && empty($this->_metadata)) {
 			$this->_metadata = array(
 				'extension' => strtolower(pathinfo($this->_handle->getFilename(), PATHINFO_EXTENSION)),
-				'mimetype' => $this->getService('com://admin/files.mixin.mimetype')->getMimetype($this->_encoded)
+				'mimetype' => $this->getService('com://admin/files.mixin.mimetype')->getMimetype($this->_path)
 			);
 			try {
 				$this->_metadata += array(
@@ -32,7 +32,7 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 
 	public function getImageSize()
 	{
-		$result = @getimagesize($this->_encoded);
+		$result = @getimagesize($this->_path);
 
 		if ($result) {
 			$result = array_slice($result, 0, 2);
@@ -44,15 +44,14 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 	public function move($target)
 	{
 		$result = false;
-		$encoded = $this->encodePath($target);
-		$dir = dirname($encoded);
+		$dir = dirname($target);
 
 		if (!is_dir($dir)) {
 			$result = mkdir($dir, 0755, true);
 		}
 
 		if (is_dir($dir) && is_writable($dir)) {
-			$result = rename($this->_encoded, $encoded);
+			$result = rename($this->_path, $target);
 		}
 
 		if ($result) {
@@ -66,15 +65,14 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 	public function copy($target)
 	{
 		$result = false;
-		$encoded = $this->encodePath($target);
-		$dir = dirname($encoded);
+		$dir = dirname($target);
 
 		if (!is_dir($dir)) {
 			$result = mkdir($dir, 0755, true);
 		}
 
 		if (is_dir($dir) && is_writable($dir)) {
-			$result = copy($this->_encoded, $encoded);
+			$result = copy($this->_path, $target);
 		}
 
 		if ($result) {
@@ -90,8 +88,8 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 	{
 		$result = true;
 
-		if (!is_file($this->_encoded)) {
-			$result = touch($this->_encoded);
+		if (!is_file($this->_path)) {
+			$result = touch($this->_path);
 		}
 
 		return $result;
@@ -101,8 +99,8 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 	{
 		$return = false;
 
-		if (is_file($this->_encoded)) {
-			$return = unlink($this->_encoded);
+		if (is_file($this->_path)) {
+			$return = unlink($this->_path);
 		}
 
 		if ($return) {
@@ -117,7 +115,7 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 		$result = null;
 
 		if ($this->_handle->isReadable()) {
-			$result = file_get_contents($this->_encoded);
+			$result = file_get_contents($this->_path);
 		}
 
 		return $result;
@@ -127,15 +125,15 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 	{
 		$result = false;
 
-		if (is_writable(dirname($this->_encoded)))
+		if (is_writable(dirname($this->_path)))
 		{
 			if (is_uploaded_file($data)) {
-				$result = move_uploaded_file($data, $this->_encoded);
+				$result = move_uploaded_file($data, $this->_path);
 			} elseif (is_string($data)) {
-				$result = file_put_contents($this->_encoded, $data);
+				$result = file_put_contents($this->_path, $data);
 			} elseif ($data instanceof SplFileObject)
 			{
-				$handle = @fopen($this->_encoded, 'w');
+				$handle = @fopen($this->_path, 'w');
 				if ($handle)
 				{
 					foreach ($data as $line) {
@@ -156,6 +154,6 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 
 	public function exists()
 	{
-		return is_file($this->_encoded);
+		return is_file($this->_path);
 	}
 }
