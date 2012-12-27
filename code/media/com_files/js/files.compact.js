@@ -39,7 +39,7 @@ Files.Compact.App = new Class({
 	setGrid: function() {
 		var opts = this.options.grid;
 		var that = this;
-		$extend(opts, {
+		Files.$extend(opts, {
 			'onClickImage': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
@@ -47,7 +47,7 @@ Files.Compact.App = new Class({
 				node.getParent().getChildren().removeClass('active');
 				node.addClass('active');
 				var row = node.retrieve('row');
-				var copy = $extend({}, row);
+				var copy = Files.$extend({}, row);
 				copy.template = 'details_image';
 
 				that.preview.empty();
@@ -63,7 +63,7 @@ Files.Compact.App = new Class({
 				node.getParent().getChildren().removeClass('active');
 				node.addClass('active');
 				var row = node.retrieve('row');
-				var copy = $extend({}, row);
+				var copy = Files.$extend({}, row);
 				copy.template = 'details_file';
 
 				that.preview.empty();

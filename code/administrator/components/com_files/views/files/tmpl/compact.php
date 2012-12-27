@@ -36,7 +36,7 @@ window.addEvent('domready', function() {
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($state->container ? $state->container->slug : null); ?>
 		};
-	options = $extend(options, config);
+	options = Files.$extend(options, config);
 
 	Files.app = new Files.Compact.App(options);
 

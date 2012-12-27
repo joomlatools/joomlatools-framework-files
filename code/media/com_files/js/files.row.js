@@ -14,7 +14,7 @@ Files.Row = new Class({
 	initialize: function(object, options) {
 		this.setOptions(options);
 
-		$each(object, function(value, key) {
+		Files.$each(object, function(value, key) {
 			this[key] = value;
 		}.bind(this));
 
@@ -168,7 +168,7 @@ Files.Folder = new Class({
 				folder: path
 			};
 		if (extra_vars) {
-			url = $extend(url, extra_vars);
+			url = Files.$extend(url, extra_vars);
 		}
 		
 		var url = url_builder ? url_builder(url) : Files.app.createRoute(url);

@@ -118,7 +118,7 @@ Files.Paginator = new Class({
 			values.page_total = 1;
 			values.page_current = 1;
 		} else {
-			$each(data, function(value, key) {
+			Files.$each(data, function(value, key) {
 				values[key] = value;
 			});
 

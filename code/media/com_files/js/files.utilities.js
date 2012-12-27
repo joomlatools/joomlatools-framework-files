@@ -15,6 +15,43 @@ if (!Files._) {
 	};
 }
 
+Files.$extend = function(original, extended){
+	var call = typeof $extend === 'undefined' ? Object.append : $extend; 
+	
+	return call(original, extended);
+};
+
+Files.$each = function(iterable, fn, bind){
+	if (typeof $each !== 'undefined') {
+		$each(iterable, fn, bind);
+		
+		return;
+	}
+	
+	var type = typeOf(iterable);
+	((type == 'arguments' || type == 'collection' || type == 'array' || type == 'elements') ? Array : Object).each(iterable, fn, bind);
+};
+
+Files.$type = function(object){
+	if (typeof $type !== 'undefined') {
+		return $type(object);
+	}
+	
+	var type = typeOf(object);
+	if (type == 'elements') return 'array';
+	return (type == 'null') ? false : type;
+};
+
+Files.$merge = function(){
+	if (typeof $merge !== 'undefined') {
+		return $merge(arguments);
+	}
+	
+	var args = Array.slice(arguments);
+	args.unshift({});
+	return Object.merge.apply(null, args);
+};
+
 Files.Filesize = new Class({
 	Implements: Options,
 	options: {
@@ -47,7 +84,7 @@ Files.FileTypes.map = {
 Files.getFileType = function(extension) {
 	var type = 'document';
 	extension = extension.toLowerCase();
-	$each(Files.FileTypes.map, function(value, key) {
+	Files.$each(Files.FileTypes.map, function(value, key) {
 		if (value.contains(extension)) {
 			type = key;
 		}

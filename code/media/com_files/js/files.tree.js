@@ -49,7 +49,7 @@ Files.Tree = new Class({
 	 * We need to duplicate this because in the latest Mootree noClick argument is removed.
 	 */
 	select: function(node, noClick) {
-		if (!$chk(noClick)) {
+		if (!noClick) {
 			this.onClick(node); node.onClick(); // fire click events
 		}
 		if (this.selected === node) return; // already selected
@@ -96,7 +96,7 @@ Files.Tree = new Class({
                 node.div.main.setAttribute('title', node.div.text.innerText);
 
 				if (item.children) {
-					$each(item.children, function(item) {
+					Files.$each(item.children, function(item) {
 						insertNode(item, node);
 					});
 				}
@@ -109,7 +109,7 @@ Files.Tree = new Class({
 			method: 'get',
 			onSuccess: function(response) {
 				if (response.total) {
-					$each(response.items, function(item) {
+					Files.$each(response.items, function(item) {
 						insertNode(item, that.root);
 					});
 				}

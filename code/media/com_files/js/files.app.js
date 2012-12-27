@@ -142,7 +142,7 @@ Files.App = new Class({
 					new_state = state.data,
 					state_changed = false;
 
-				$each(old_state, function(value, key) {
+				Files.$each(old_state, function(value, key) {
 					if (state_changed === true) {
 						return;
 					}
@@ -152,7 +152,7 @@ Files.App = new Class({
 				});
 
 				if (that.container && (state_changed || that.active !== state.data.folder)) {
-					var set_state = $extend({}, state.data);
+					var set_state = Files.$extend({}, state.data);
 					['option', 'view', 'layout', 'folder', 'container'].each(function(key) {
 						delete set_state[key];
 					});
@@ -166,7 +166,7 @@ Files.App = new Class({
 						folder: that.active,
 						container: that.container ? that.container.slug : null
 					};
-					obj = $extend(obj, that.state.getData());
+					obj = Files.$extend(obj, that.state.getData());
 					var method = type === 'initial' ? 'replaceState' : 'pushState';
 					var url = that.getUrl().setData(obj, true).set('fragment', '').toString()
 					that.history[method](obj, null, url);
@@ -204,7 +204,7 @@ Files.App = new Class({
 			}.bind(this),
 			success = function(resp) {
 				if (resp.status !== false) {
-					$each(resp.items, function(item) {
+					Files.$each(resp.items, function(item) {
 						if (!item.baseurl) {
 							item.baseurl = that.baseurl;
 						}
@@ -298,7 +298,7 @@ Files.App = new Class({
 		var opts = this.options.paginator,
 			state = this.state;
 
-		$extend(opts, {
+		Files.$extend(opts, {
 			'state' : state,
 			'onClickPage': function(el) {
 				this.state.set('limit', el.get('data-limit'));
@@ -343,7 +343,7 @@ Files.App = new Class({
 			opts.layout = Cookie.read(key);
 		}
 
-		$extend(opts, {
+		Files.$extend(opts, {
 			'onClickFolder': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
@@ -365,7 +365,7 @@ Files.App = new Class({
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
 					row = node.retrieve('row'),
-					copy = $extend({}, row),
+					copy = Files.$extend({}, row),
 					trash = new Element('div', {style: 'display: none'}).inject(document.body);
 
 				copy.template = 'file_preview';
@@ -393,7 +393,7 @@ Files.App = new Class({
 		if (this.options.tree.enabled) {
 			var opts = this.options.tree,
 				that = this;
-			$extend(opts, {
+			Files.$extend(opts, {
 				onClick: function(node) {
 					if (node.id || node.data.url) {
 						that.navigate(node && node.id ? node.id : '');
@@ -535,7 +535,7 @@ Files.App = new Class({
 		this.fireEvent('afterSetTitle', {title: title});
 	},
 	createRoute: function(query) {
-		query = $merge(this.options.router.defaults, query || {});
+		query = Files.$merge(this.options.router.defaults, query || {});
 
 		if (query.container !== false && !query.container && this.container) {
 			query.container = this.container.slug;

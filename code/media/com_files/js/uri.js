@@ -10,7 +10,7 @@ description: Methods for dealing with URI query strings.
 license: MIT-style license
 
 authors:
-  - Sebastian MarkbŒge, Aaron Newton, Lennart Pilon, Valerio Proietti
+  - Sebastian Markbï¿½ge, Aaron Newton, Lennart Pilon, Valerio Proietti
 
 requires:
   - Core/Array
@@ -71,7 +71,7 @@ description: Provides methods useful in managing the window location and uris.
 license: MIT-style license
 
 authors:
-  - Sebastian MarkbŒge
+  - Sebastian Markbï¿½ge
   - Aaron Newton
 
 requires:

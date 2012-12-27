@@ -36,7 +36,7 @@ window.addEvent('domready', function() {
 			container: <?= json_encode($container ? $container->slug : null); ?>,
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
-	options = $extend(options, config);
+	options = Files.$extend(options, config);
 
 	Files.app = new Files.App(options);
 

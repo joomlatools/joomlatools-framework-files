@@ -44,7 +44,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <script>
 
 if (SqueezeBox.open === undefined) {
-	SqueezeBox = $extend(SqueezeBox, {
+	SqueezeBox = Files.$extend(SqueezeBox, {
 		open: function(subject, options) {
 			this.initialize();
 

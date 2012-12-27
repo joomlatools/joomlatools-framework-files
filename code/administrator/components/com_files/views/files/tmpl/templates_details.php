@@ -16,7 +16,7 @@ window.addEvent('domready', function() {
 			grid = Files.app.grid,
 			nodes = grid.nodes;
 
-		$each(nodes, function(node) {
+		Files.$each(nodes, function(node) {
 			if (value && !node.checked) {
 				grid.checkNode(node);
 			} else if (!value && node.checked) {
