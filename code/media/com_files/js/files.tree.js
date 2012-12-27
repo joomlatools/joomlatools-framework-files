@@ -16,8 +16,8 @@ Files.Tree = new Class({
 		mode: 'folders',
 		title: '',
 		grid: true,
-		onClick: $empty,
-		onAdopt: $empty,
+		onClick: function (){},
+		onAdopt: function (){},
 		adopt: null,
 		root: {
 			open: true
