@@ -42,29 +42,34 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
     	$source = $this->source;
     	if ($source && !$source->isNew())
 		{
-			//Load the library
-		    $this->getService('koowa:loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
-
-		    //Create the thumb
-		    $image = PhpThumbFactory::create($source->fullpath)
-			    ->setOptions(array('jpegQuality' => 50));
-
-			if ($this->_thumbnail_size['x'] && $this->_thumbnail_size['y']) {
-				// Resize then crop to the provided resolution.
-				$image->adaptiveResize($this->_thumbnail_size['x'], $this->_thumbnail_size['y']);
-			} else {
-				$width = isset($this->_thumbnail_size['x'])?$this->_thumbnail_size['x']:0;
-				$height = isset($this->_thumbnail_size['y'])?$this->_thumbnail_size['y']:0;
-				// PhpThumb will calculate the missing side while preserving the aspect ratio.
-				$image->resize($width, $height);
+			try {
+				//Load the library
+				$this->getService('koowa:loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
+				
+				//Create the thumb
+				$image = PhpThumbFactory::create($source->fullpath)
+					->setOptions(array('jpegQuality' => 50));
+				
+				if ($this->_thumbnail_size['x'] && $this->_thumbnail_size['y']) {
+					// Resize then crop to the provided resolution.
+					$image->adaptiveResize($this->_thumbnail_size['x'], $this->_thumbnail_size['y']);
+				} else {
+					$width = isset($this->_thumbnail_size['x'])?$this->_thumbnail_size['x']:0;
+					$height = isset($this->_thumbnail_size['y'])?$this->_thumbnail_size['y']:0;
+					// PhpThumb will calculate the missing side while preserving the aspect ratio.
+					$image->resize($width, $height);
+				}
+				
+				ob_start();
+				echo $image->getImageAsString();
+				$str = ob_get_clean();
+				$str = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($str));
+				
+				return $str;
 			}
-
-		    ob_start();
-		    	echo $image->getImageAsString();
-		    $str = ob_get_clean();
-		    $str = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($str));
-
-	    	return $str;
+			catch (Exception $e) {
+				return false;
+			}
 		}
 
 		return false;
