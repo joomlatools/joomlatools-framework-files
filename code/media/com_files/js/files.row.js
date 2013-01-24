@@ -39,12 +39,10 @@ Files.Row = new Class({
 		return parts.join('/');
 	},
 	encode: function(string) {
-		return encodeURIComponent(encodeURIComponent(string)).replace(/%2520/g, ' ');
+		return string;
 	},
 	realpath: function(string) {
-		string = encodeURIComponent((string + '').toString());
-		return encodeURIComponent(string).replace(/!/g, '%2521').replace(/'/g, '%2527').replace(/\(/g, '%2528').
-	    	replace(/\)/g, '%2529').replace(/\*/g, '%252A').replace(/%2520/g, ' ');
+		return string;
 	}
 });
 

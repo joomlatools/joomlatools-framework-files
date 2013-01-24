@@ -34,7 +34,7 @@ class ComFilesViewFilesHtml extends ComDefaultViewHtml
 	    }
 	     
 		$this->assign('sitebase', trim(JURI::root(), '/'));
-		$this->assign('token'   , JUtility::getToken());
+		$this->assign('token'   , version_compare(JVERSION, '3.0', 'ge') ? JSession::getFormToken() : JUtility::getToken());
 		$this->assign('container', $this->getModel()->getState()->container);
 
 		return parent::display();

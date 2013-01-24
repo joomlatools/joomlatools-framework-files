@@ -23,7 +23,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <!--<h4 class="preview-section">general</h4>-->
     	<ul>
     		<li>
-    		    <span class="label">size</span>
+    		    <span class="label"><?= @text('size'); ?></span>
     			[%=size.humanize()%]
     		</li>
     		<!--<li>
@@ -31,7 +31,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     			[%path%]
     		</li>-->
     		<li>
-    		    <span class="label">modified</span>
+    		    <span class="label"><?= @text('modified'); ?></span>
     			[%=getModifiedDate(true)%]
     		</li>
     	</ul>
