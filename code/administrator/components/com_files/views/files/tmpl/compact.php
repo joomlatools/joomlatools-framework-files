@@ -121,10 +121,20 @@ window.addEvent('domready', function() {
 <script>
 /* Modal fixes that applies when this view is loaded within an iframe in a modal view */
 window.addEvent('domready', function(){
-	if(window.parent && window.parent != window && window.parent.SqueezeBox) {
-		var modal = window.parent.SqueezeBox, heightfix = modal.size.y;
+    if(window.parent && window.parent != window && window.parent.SqueezeBox) {
+        var modal = window.parent.SqueezeBox;
 
-		document.id('files-compact').getParents().setStyles({padding: 0, margin: 0, overflow: 'hidden'});
-	}
+        document.id('files-compact').getParents().setStyles({padding: 0, margin: 0, overflow: 'hidden'});
+
+        //Height fixes for parent modal
+        var fixHeight = function(){
+            var newHeight = document.id('files-compact').measure(function(){return this.getSize().y;});
+            window.parent.document.id('sbox-content').getElement('iframe').set('height', newHeight);
+            modal.fx.win.start({height: newHeight});
+        };
+        document.getElements('#tabs-pane_insert dt, .upload-buttons li').addEvent('click', fixHeight);
+        fixHeight();
+        window.addEvent('QueueChanged', fixHeight);
+    }
 });
 </script>

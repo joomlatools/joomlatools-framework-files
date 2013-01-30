@@ -18,10 +18,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 jQuery.noConflict();
 
 window.addEvent('domready', function() {
-	Files.app.addEvent('afterNavigate', function(path, type) {
-		document.id('upload-files-to').set('text', "'"+(path || <?= json_encode('root folder') ?>)+"'");
-	});
-
 	var element = jQuery('#files-upload-multi');
 
 	plupload.addI18n({'Add files': Files._('Select files from your computer')});
@@ -79,6 +75,8 @@ window.addEvent('domready', function() {
 			uploader.refresh();
 			if(SqueezeBox.isOpen) SqueezeBox.resize({y: $('files-upload').measure(function(){return this.getSize().y;})}, true);
 			uploader.unbind('QueueChanged', exposePlupload);
+            //@TODO investigate better event name convention
+            window.fireEvent('QueueChanged');
 		};
 
 		window.addEvent('refresh', function(){
@@ -332,7 +330,9 @@ window.addEvent('domready', function() {
 <div id="files-upload" style="clear: both" class="uploader-files-empty">
 	<div style="text-align: center;">
 		<h3 style=" float: none">
-			<?= sprintf(@text('Upload files to %s'), '<span id="upload-files-to"></span>') ?>
+            <?= @text('Upload files to %folder%', array(
+                '%folder%' => '<span id="upload-files-to"></span>'
+            )) ?>
 		</h3>
 	</div>
 	<div class="clr"></div>
@@ -342,8 +342,9 @@ window.addEvent('domready', function() {
 			<li><a class="upload-form-toggle target-computer active" href="#computer"><?= @text('Computer'); ?></a></li>
 			<li><a class="upload-form-toggle target-web" href="#web"><?= @text('Web'); ?></a></li>
 			<li id="upload-max">
-				<?= @text('Each file should be smaller than'); ?>
-				<span id="upload-max-size"></span>
+				<?= @text('Each file should be smaller than %size%', array(
+				    '%size%' => '<span id="upload-max-size"></span>' 
+				)); ?>
 			</li>
 		</ul>
 	</div>

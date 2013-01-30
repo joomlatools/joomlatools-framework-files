@@ -70,6 +70,7 @@ Files.App = new Class({
 		onAfterNavigate: function(path) {
 			if (path !== undefined) {
 				this.setTitle(this.folder.name || this.container.title);
+                jQuery('#upload-files-to, .upload-files-to').text(this.container.title+(path ? '/'+path : ''));
 	        }
 		}
 	},

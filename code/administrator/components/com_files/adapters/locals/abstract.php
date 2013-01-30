@@ -41,66 +41,35 @@ abstract class ComFilesAdapterLocalAbstract extends KObject
 		$path = $this->normalize($path);
 
 		$this->_path = $path;
-		$this->_encoded = $this->encodePath($path);
-
-		$this->_pathinfo = new SplFileInfo($path);
-		$this->_handle = new SplFileInfo($this->_encoded);
+		$this->_handle = new SplFileInfo($path);
 
 		unset($this->_metadata);
 
 		return $this;
 	}
 
-	public function encodePath($path)
-	{
-		$parts = explode('/', $path);
-		$prepend = '';
-
-		if (!empty($parts[0])) {
-			// Either C:/ or ~/
-			$prepend = array_shift($parts).'/';
-		}
-		$parts = array_map(array($this, 'encode'), $parts);
-
-		return $prepend.implode('/', $parts);
-	}
-
 	public function getName()
 	{
-		return $this->normalize($this->_pathinfo->getBasename());
+		return $this->normalize($this->_handle->getBasename());
 	}
 
 	public function getPath()
 	{
-		return $this->normalize($this->_pathinfo->getPathname());
+		return $this->normalize($this->_handle->getPathname());
 	}
 
 	public function getDirname()
 	{
-		return $this->normalize(dirname($this->_pathinfo->getPathname()));
+		return $this->normalize(dirname($this->_handle->getPathname()));
 	}
 
 	public function getRealPath()
 	{
-		return $this->_encoded;
+		return $this->_path;
 	}
 
 	public function normalize($string)
 	{
 		return str_replace('\\', '/', $string);
-	}
-
-	public function encode($string)
-	{
-		$string = rawurlencode($string);
-
-		return str_replace('%20', ' ', $string);
-	}
-
-	public function decode($string)
-	{
-		$string = rawurldecode($string);
-
-		return str_replace(' ', '%20', $string);
 	}
 }

@@ -22,7 +22,8 @@ class ComFilesCommandValidatorNode extends KCommand
 		$row = $context->caller;
 
 		if (!$row->isNew() && !$row->overwrite) {
-			$context->setError(JText::_('Resource already exists and overwrite switch is not present.'));
+		    $translator = $this->getService('translator')->getTranslator($this->getIdentifier());
+			$context->setError($translator->translate('Resource already exists and overwrite switch is not present.'));
 			return false;
 		}
 
@@ -31,15 +32,16 @@ class ComFilesCommandValidatorNode extends KCommand
 
 	protected function _databaseBeforeCopy(KCommandContext $context)
 	{
-		$row = $context->caller;
+		$row        = $context->caller;
+		$translator = $this->getService('translator')->getTranslator($this->getIdentifier());
 
 		if (!array_intersect(array('destination_folder', 'destination_name'), $row->getModified())) {
-			$context->setError(JText::_('Please supply a destination.'));
+			$context->setError($translator->translate('Please supply a destination.'));
 			return false;
 		}
 
 		if ($row->fullpath === $row->destination_fullpath) {
-			$context->setError(JText::_('Source and destination are the same.'));
+			$context->setError($translator->translate('Source and destination are the same.'));
 			return false;
 		}
 
@@ -51,7 +53,7 @@ class ComFilesCommandValidatorNode extends KCommand
 		if ($exists)
 		{
 			if (!$row->overwrite) {
-				$context->setError(JText::_('Destination resource already exists.'));
+				$context->setError($translator->translate('Destination resource already exists.'));
 				return false;
 			} else {
 				$row->overwritten = true;
