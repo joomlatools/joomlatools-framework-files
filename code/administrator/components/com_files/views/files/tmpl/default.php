@@ -15,9 +15,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
-//Preloading breadcrumbs icon
-(new Image).src = "media://com_files/images/arrow.png";
-
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
@@ -33,14 +30,14 @@ window.addEvent('domready', function() {
 				theme: 'media://com_files/images/mootree.png'
 			},
 			types: <?= json_encode($state->types); ?>,
-			container: <?= json_encode($container ? $container->slug : null); ?>,
+			container: <?= json_encode($container ? $container->slug : 'files-files'); ?>,
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
 	options = $extend(options, config);
 
 	Files.app = new Files.App(options);
 
-	//@TODO hide the uploader in a modal, make it pretty
+	//@TODO hide the uploader in a modal, make code pretty
 	var tmp = new Element('div', {style: 'display:none'}).inject(document.body);
 	$('files-upload').inject(tmp);
 	$('files-show-uploader').addEvent('click', function(e){
