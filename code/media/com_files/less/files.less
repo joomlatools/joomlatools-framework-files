@@ -1,9 +1,7 @@
 /* Contains all css related to using com_files, do not namespace this file as it has its own namespace */
 
-/* We are using btn mixins from bootstrap */
-@import '../../../libraries/bootstrap/less/variables.less';
-@import '../../../libraries/bootstrap/less/mixins.less';
-@import '../../../administrator/templates/default/less/variables.less';
+@import 'variables.less';
+@import 'mixins.less';
 
 .linear-gradient (@from: hsla(0, 0%, 100%, 0.5), @to: hsla(0, 0%, 0%, 0.5)) {
 
@@ -47,6 +45,17 @@
   background-repeat: no-repeat;
 }
 
+/* Joomla Specific Styling */
+#element-box {
+    margin-top: 0;
+}
+#element-box #files-sidebar {
+    float:left;
+    width:260px;
+    background-color: #f7f7f7;
+    border: 1px solid #e0e0e0;
+    border-right: none;
+}
 /* @group from docman _admin.less */
 #files-sidebar {
     .sidebar-inner {

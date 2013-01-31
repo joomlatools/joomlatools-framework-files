@@ -156,7 +156,7 @@ window.addEvent('domready', function() {
 	<?= @template('templates_icons'); ?>
 	<?= @template('templates_details'); ?>
 
-	<div id="sidebar">
+	<div id="files-sidebar">
 		<div id="files-tree"></div>
 	</div>
 
