@@ -15,9 +15,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
-//Preloading breadcrumbs icon
-(new Image).src = "media://com_files/images/arrow.png";
-
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
@@ -33,27 +30,27 @@ window.addEvent('domready', function() {
 				theme: 'media://com_files/images/mootree.png'
 			},
 			types: <?= json_encode($state->types); ?>,
-			container: <?= json_encode($container ? $container->slug : null); ?>,
+			container: <?= json_encode($container ? $container->slug : 'files-files'); ?>,
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
 	options = $extend(options, config);
 
 	Files.app = new Files.App(options);
 
-	//@TODO hide the uploader in a modal, make it pretty
+	//@TODO hide the uploader in a modal, make code pretty
 	var tmp = new Element('div', {style: 'display:none'}).inject(document.body);
-	$('files-upload').inject(tmp);
+	$('files-upload').getParent().inject(tmp).setStyle('visibility', '');
 	$('files-show-uploader').addEvent('click', function(e){
 		e.stop();
 
 		var handleClose = function(){
-			$('files-upload').inject(tmp);
+			$('files-upload').getParent().inject(tmp);
 			SqueezeBox.removeEvent('close', handleClose);
 		};
 		SqueezeBox.addEvent('close', handleClose);
-		SqueezeBox.open($('files-upload'), {
+		SqueezeBox.open($('files-upload').getParent(), {
 			handler: 'adopt',
-			size: {x: 700, y: $('files-upload').measure(function(){return this.getSize().y;})}
+			size: {x: 700, y: $('files-upload').getParent().measure(function(){return this.getSize().y;})}
 		});
 	});
 
@@ -90,15 +87,13 @@ window.addEvent('domready', function() {
 	});
 
     Files.createModal = function(container, button){
-        var modal = $(container);
-        modal.setStyle('display', 'none');
-        document.body.grab(modal);
+        var modal = $(container), tmp = new Element('div', {style: 'display:none'}).inject(document.body);
+        tmp.grab(modal);
         $(button).addEvent('click', function(e) {
     		e.stop();
 
     		var handleClose = function(){
-                    modal.setStyle('display', 'none').inject(document.body);
-
+                    modal.inject(tmp);
 
                     SqueezeBox.removeEvent('close', handleClose);
 				},
@@ -159,32 +154,38 @@ window.addEvent('domready', function() {
 	<?= @template('templates_icons'); ?>
 	<?= @template('templates_details'); ?>
 
-	<div id="sidebar">
+	<div id="files-sidebar">
 		<div id="files-tree"></div>
 	</div>
 
 	<div id="files-canvas">
 	    <div class="path" style="height: 24px;">
-	        <div class="files-toolbar-controls">
-	        	<button id="files-show-uploader"><?= @text('Upload'); ?></button>
-			    <button id="files-new-folder-toolbar"><?= @text('New Folder'); ?></button>
-			    <button id="files-batch-delete"><?= @text('Delete'); ?></button>
+	        <div class="files-toolbar-controls btn-group">
+	        	<button id="files-show-uploader" class="btn btn-mini"><?= @text('Upload'); ?></button>
+			    <button id="files-new-folder-toolbar" class="btn btn-mini"><?= @text('New Folder'); ?></button>
+			    <button id="files-batch-delete" class="btn btn-mini" disabled><?= @text('Delete'); ?></button>
 			</div>
 			<div id="files-pathway">
 			</div>
-			<div class="files-layout-controls">
-				<button class="files-layout-switcher files-layout-switcher-icons" data-layout="icons" title="<?= @text('Show files as icons'); ?>">
-					<?= @text('Icons'); ?>
+			<div class="files-layout-controls btn-group">
+				<button class="btn files-layout-switcher" data-layout="icons" title="<?= @text('Show files as icons'); ?>">
+                    <i class="icon-th"></i>
 				</button>
-				<button class="files-layout-switcher files-layout-switcher-details" data-layout="details" title="<?= @text('Show files in a list'); ?>">
-					<?= @text('Details'); ?>
+				<button class="btn files-layout-switcher" data-layout="details" title="<?= @text('Show files in a list'); ?>">
+                    <i class="icon-list"></i>
 				</button>
 			</div>
 		</div>
 		<div class="view">
 			<div id="files-grid"></div>
 		</div>
-		<?= @helper('paginator.pagination') ?>
+        <table class="table table-pagination">
+            <tfoot>
+            <tr><td>
+                <?= @helper('paginator.pagination') ?>
+            </td></tr>
+            </tfoot>
+        </table>
 
 		<?= @template('uploader');?>
 	</div>
@@ -192,12 +193,19 @@ window.addEvent('domready', function() {
 </div>
 
 <div>
-	<div id="files-new-folder-modal" class="files-modal" style="display: none">
-	<form>
-        <h3><?= @text('Create a new folder in:') ?></h3>
-        <h3 class="upload-files-to"></h3>
-		<input class="inputbox focus" type="text" id="files-new-folder-input" size="40" placeholder="<?= @text('Enter a folder name') ?>" />
-		<button id="files-new-folder-create" disabled><?= @text('Create'); ?></button>
-	</form>
+	<div id="files-new-folder-modal" style="display: none">
+        <div>
+            <form class="files-modal well">
+                <div style="text-align: center;">
+                    <h3 style=" float: none">
+                        <?= str_replace('%folder%', '<span class="upload-files-to"></span>', @text('Create a new folder in %folder%')) ?>
+                    </h3>
+                </div>
+                <div class="input-append">
+                    <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= @text('Enter a folder name') ?>" />
+                    <button id="files-new-folder-create" class="btn btn-primary" disabled><?= @text('Create'); ?></button>
+                </div>
+            </form>
+        </div>
 	</div>
 </div>
