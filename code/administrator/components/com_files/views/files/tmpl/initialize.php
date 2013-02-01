@@ -27,7 +27,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <script src="media://com_files/js/ejs/ejs.js" />
 
-<script src="media://lib_koowa/js/koowa.js" />
+<?= @helper('behavior.koowa'); ?>
 <script src="media://system/js/mootree.js" />
 <script src="media://com_files/js/spin.min.js" />
 
