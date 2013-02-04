@@ -36,7 +36,7 @@ Files.State = new Class({
 		return this;
 	},
 	set: function(key, value) {
-		if ($type(key) == 'object') {
+		if (Files.utils.typeOf(key) == 'object') {
             Files.utils.append(this.data, key);
 		} else {
 			this.data[key] = value;

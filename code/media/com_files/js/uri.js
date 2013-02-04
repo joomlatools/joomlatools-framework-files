@@ -10,7 +10,7 @@ description: Methods for dealing with URI query strings.
 license: MIT-style license
 
 authors:
-  - Sebastian MarkbŒge, Aaron Newton, Lennart Pilon, Valerio Proietti
+  - Sebastian Markbï¿½ge, Aaron Newton, Lennart Pilon, Valerio Proietti
 
 requires:
   - Core/Array
@@ -39,7 +39,7 @@ String.implement({
 				var current = obj[key];
 				if(i < keys.length - 1)
 					obj = obj[key] = current || {};
-				else if($type(current) == 'array')
+				else if(Files.utils.typeOf(current) == 'array')
 					current.push(value);
 				else
 					obj[key] = $defined(current) ? [current, value] : value;
@@ -71,7 +71,7 @@ description: Provides methods useful in managing the window location and uris.
 license: MIT-style license
 
 authors:
-  - Sebastian MarkbŒge
+  - Sebastian Markbï¿½ge
   - Aaron Newton
 
 requires:

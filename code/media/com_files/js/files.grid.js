@@ -249,7 +249,7 @@ Files.Grid = new Class({
 
 		this.container.empty();
 		this.root = new Files.Grid.Root(this.layout);
-		this.root.element.injectInside(this.container);
+		this.container.adopt(this.root.element);
 
 		this.renew();
 

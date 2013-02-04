@@ -21,6 +21,10 @@ if (!Files.utils) {
         append: function(a,b){
             if(window.$extend) return $extend(a,b);
             else return Object.append(a,b);
+        },
+        typeOf: function(subject) {
+            if(window.$type) return $type(subject);
+            else return typeOf(subject);
         }
     };
 }
