@@ -20,11 +20,11 @@ Files.State = new Class({
 		this.setOptions(options);
 
 		if (this.options.data) {
-			$extend(this.data, this.options.data);
+            Files.utils.append(this.data, this.options.data);
 		}
 		if (this.options.defaults) {
-			$extend(this.defaults, this.options.defaults);
-			$extend(this.data, this.defaults);
+            Files.utils.append(this.defaults, this.options.defaults);
+            Files.utils.append(this.data, this.defaults);
 		}
 	},
 	getData: function() {
@@ -37,7 +37,7 @@ Files.State = new Class({
 	},
 	set: function(key, value) {
 		if ($type(key) == 'object') {
-			$extend(this.data, key);
+            Files.utils.append(this.data, key);
 		} else {
 			this.data[key] = value;
 		}

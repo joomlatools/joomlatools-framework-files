@@ -15,6 +15,16 @@ if (!Files._) {
 	};
 }
 
+// Legacy for Joomla 1.5
+if (!Files.utils) {
+    Files.utils = {
+        append: function(a,b){
+            if(window.$extend) return $extend(a,b);
+            else return Object.append(a,b);
+        }
+    };
+}
+
 Files.Filesize = new Class({
 	Implements: Options,
 	options: {

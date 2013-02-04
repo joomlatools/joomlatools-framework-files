@@ -152,7 +152,7 @@ Files.App = new Class({
 				});
 
 				if (that.container && (state_changed || that.active !== state.data.folder)) {
-					var set_state = $extend({}, state.data);
+					var set_state = Files.utils.append({}, state.data);
 					['option', 'view', 'layout', 'folder', 'container'].each(function(key) {
 						delete set_state[key];
 					});
@@ -166,7 +166,7 @@ Files.App = new Class({
 						folder: that.active,
 						container: that.container ? that.container.slug : null
 					};
-					obj = $extend(obj, that.state.getData());
+					obj = Files.utils.append(obj, that.state.getData());
 					var method = type === 'initial' ? 'replaceState' : 'pushState';
 					var url = that.getUrl().setData(obj, true).set('fragment', '').toString()
 					that.history[method](obj, null, url);
@@ -298,7 +298,7 @@ Files.App = new Class({
 		var opts = this.options.paginator,
 			state = this.state;
 
-		$extend(opts, {
+        Files.utils.append(opts, {
 			'state' : state,
 			'onClickPage': function(el) {
 				this.state.set('limit', el.get('data-limit'));
@@ -343,7 +343,7 @@ Files.App = new Class({
 			opts.layout = Cookie.read(key);
 		}
 
-		$extend(opts, {
+        Files.utils.append(opts, {
 			'onClickFolder': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
@@ -365,7 +365,7 @@ Files.App = new Class({
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
 					row = node.retrieve('row'),
-					copy = $extend({}, row),
+					copy = Files.utils.append({}, row),
 					trash = new Element('div', {style: 'display: none'}).inject(document.body);
 
 				copy.template = 'file_preview';
@@ -393,7 +393,7 @@ Files.App = new Class({
 		if (this.options.tree.enabled) {
 			var opts = this.options.tree,
 				that = this;
-			$extend(opts, {
+            Files.utils.append(opts, {
 				onClick: function(node) {
 					if (node.id || node.data.url) {
 						that.navigate(node && node.id ? node.id : '');

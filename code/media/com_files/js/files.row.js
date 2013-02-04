@@ -168,7 +168,7 @@ Files.Folder = new Class({
 				folder: path
 			};
 		if (extra_vars) {
-			url = $extend(url, extra_vars);
+			url = Files.utils.append(url, extra_vars);
 		}
 		
 		var url = url_builder ? url_builder(url) : Files.app.createRoute(url);
