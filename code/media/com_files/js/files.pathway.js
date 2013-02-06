@@ -75,7 +75,7 @@
                 }
                 return result;
             };
-            var root = wrap(app, ' '+app.container.title, '', false).getElement('span').grab(new Element('i', {'class': 'icon-hdd'}), 'top').getParent();
+            var root = wrap(app, ' '+app.container.title, '', false).getElement('span').grab(new Element('i', {'class': 'icon-database icon-hdd'}), 'top').getParent();
             list.adopt(root);
             var folders = app.getPath().split('/'), path = '';
             folders.each(function(title){

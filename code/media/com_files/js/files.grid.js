@@ -454,6 +454,8 @@ Files.Grid.Root = new Class({
 		if (this.element.get('tag') == 'table') {
 			parent = this.element.getElement('tbody');
 		}
+        //Legacy
+        if (!element.injectInside) element.injectInside = element.inject;
 		element.injectInside(parent, position);
 	}
 });
