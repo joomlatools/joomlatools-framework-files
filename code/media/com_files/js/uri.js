@@ -53,7 +53,7 @@ String.implement({
 			var index = val.indexOf('='),
 			key = index < 0 ? '' : val.substr(0, index),
 			value = val.substr(index + 1);
-			return method ? method.run([key, value]) : $chk(value);
+			return method ? method.run([key, value]) : !!(value||value===0);
 		}).join('&');
 	}
 
