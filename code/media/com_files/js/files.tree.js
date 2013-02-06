@@ -49,7 +49,7 @@ Files.Tree = new Class({
 	 * We need to duplicate this because in the latest Mootree noClick argument is removed.
 	 */
 	select: function(node, noClick) {
-		if (!$chk(noClick)) {
+		if (!noClick) {
 			this.onClick(node); node.onClick(); // fire click events
 		}
 		if (this.selected === node) return; // already selected

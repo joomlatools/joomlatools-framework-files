@@ -504,7 +504,7 @@ Files.App = new Class({
 		this.fireEvent('afterSetTitle', {title: title});
 	},
 	createRoute: function(query) {
-		query = $merge(this.options.router.defaults, query || {});
+		query = Files.utils.merge(this.options.router.defaults, query || {});
 
 		if (query.container !== false && !query.container && this.container) {
 			query.container = this.container.slug;

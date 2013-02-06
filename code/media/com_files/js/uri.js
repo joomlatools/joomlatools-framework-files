@@ -177,7 +177,7 @@ var URI = new Class({
 
 	getData: function(key, part){
 		var qs = this.get(part || 'query');
-		if (!$chk(qs)) return key ? null : {};
+		if (!qs) return key ? null : {};
 		var obj = qs.parseQueryString();
 		return key ? obj[key] : obj;
 	},
@@ -188,7 +188,7 @@ var URI = new Class({
 			data[arguments[0]] = arguments[1];
 			values = data;
 		} else if (merge) {
-			values = $merge(this.getData(), values);
+			values = Files.utils.merge(this.getData(), values);
 		}
 		return this.set(part || 'query', Hash.toQueryString(values));
 	},

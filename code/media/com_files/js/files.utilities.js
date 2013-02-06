@@ -25,6 +25,10 @@ if (!Files.utils) {
         typeOf: function(subject) {
             if(window.$type) return $type(subject);
             else return typeOf(subject);
+        },
+        merge: function(a,b){
+            if(window.$merge) return $merge(a,b);
+            else return Object.merge(a,b);
         }
     };
 }
