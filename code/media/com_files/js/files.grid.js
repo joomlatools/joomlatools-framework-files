@@ -152,10 +152,10 @@ Files.Grid = new Class({
 					});
 
 				var message = Files._("You selected following folders and files to be deleted. Are you sure?");
-				$each(folders, function(folder) {
+                Files.utils.each(folders, function(folder) {
 					message += '\n'+folder;
 				});
-				$each(files, function(file) {
+                Files.utils.each(files, function(file) {
 					message += '\n'+file;
 				});
 
@@ -342,7 +342,7 @@ Files.Grid = new Class({
 	insertRows: function(rows) {
 		this.fireEvent('beforeInsertRows', {rows: rows});
 
-		$each(rows, function(row) {
+        Files.utils.each(rows, function(row) {
 			var cls = Files[row.type.capitalize()];
 			var item = new cls(row);
 			this.insert(item, 'last');

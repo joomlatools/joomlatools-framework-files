@@ -14,7 +14,7 @@ Files.Row = new Class({
 	initialize: function(object, options) {
 		this.setOptions(options);
 
-		$each(object, function(value, key) {
+        Files.utils.each(object, function(value, key) {
 			this[key] = value;
 		}.bind(this));
 

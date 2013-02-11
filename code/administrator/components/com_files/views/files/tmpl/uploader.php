@@ -224,7 +224,7 @@ window.addEvent('domready', function() {
 	});
 
 	uploader.bind('StateChanged', function(uploader) {
-		$each(failed, function(error, id) {
+		Files.utils.each(failed, function(error, id) {
 			icon = jQuery('#' + id).attr('class', 'plupload_failed').find('a').css('display', 'block');
 			if (error) {
 				icon.attr('title', error);

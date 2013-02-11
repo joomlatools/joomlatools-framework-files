@@ -142,7 +142,7 @@ Files.App = new Class({
 					new_state = state.data,
 					state_changed = false;
 
-				$each(old_state, function(value, key) {
+				Files.utils.each(old_state, function(value, key) {
 					if (state_changed === true) {
 						return;
 					}
@@ -204,7 +204,7 @@ Files.App = new Class({
 			}.bind(this),
 			success = function(resp) {
 				if (resp.status !== false) {
-					$each(resp.items, function(item) {
+                    Files.utils.each(resp.items, function(item) {
 						if (!item.baseurl) {
 							item.baseurl = that.baseurl;
 						}

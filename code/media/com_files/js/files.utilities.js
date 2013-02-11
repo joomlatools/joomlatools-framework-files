@@ -29,6 +29,10 @@ if (!Files.utils) {
         merge: function(a,b){
             if(window.$merge) return $merge(a,b);
             else return Object.merge(a,b);
+        },
+        each: function(a,b,c){
+            if(window.$each) return $each(a,b,c);
+            else return Object.each(a,b,c);
         }
     };
 }
@@ -65,7 +69,7 @@ Files.FileTypes.map = {
 Files.getFileType = function(extension) {
 	var type = 'document';
 	extension = extension.toLowerCase();
-	$each(Files.FileTypes.map, function(value, key) {
+    Files.utils.each(Files.FileTypes.map, function(value, key) {
 		if (value.contains(extension)) {
 			type = key;
 		}
