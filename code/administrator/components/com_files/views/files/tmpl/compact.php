@@ -23,6 +23,7 @@ Files.token = '<?= $token; ?>';
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
+            pathway: false,
 			state: {
 				defaults: {
 					limit: 0,

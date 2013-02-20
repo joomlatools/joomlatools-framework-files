@@ -83,7 +83,9 @@ Files.App = new Class({
 			this.cookie = 'com.files.container.'+container;
 		}
 
-		this.setPathway();
+		if(this.options.pathway) {
+            this.setPathway();
+        }
 		this.setState();
 		this.setHistory();
 		this.setGrid();
