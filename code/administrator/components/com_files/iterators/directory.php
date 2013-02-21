@@ -63,8 +63,9 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 		));
 
 		$exclude = KConfig::unbox($config->exclude);
-		$filter = KConfig::unbox($config->filter);
-		$map = KConfig::unbox($config->map);
+		$filter  = KConfig::unbox($config->filter);
+		$map     = KConfig::unbox($config->map);
+		$sort    = $config->sort ? $config->sort : 'name';
 		$recurse = $config->recurse;
 
 		$results = array();
