@@ -28,7 +28,10 @@ if (!Files.utils) {
         },
         merge: function(a,b){
             if(window.$merge) return $merge(a,b);
-            else return Object.merge(a,b);
+            else {
+                var i=Array.slice(arguments);i.unshift({});
+                return Object.merge.apply(null,i);
+            }
         },
         each: function(a,b,c){
             if(window.$each) return $each(a,b,c);
