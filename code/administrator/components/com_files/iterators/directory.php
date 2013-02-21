@@ -120,6 +120,9 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 		if ($config->sort === 'modified_on') {
 			uasort($results, array('self', '_sortByDate'));
 		}
+		elseif ($config->sort === 'name') {
+			uasort($results, array('self', '_sortByName'));
+		}
 		
 		if ($config->return_raw === true) {
 			return $results;
@@ -144,6 +147,9 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 	{
 		return strcmp($file1['modified'], $file2['modified']);
 	}
+	
+	public static function _sortByName($file1, $file2)
+	{
+		return strcmp($file1['path'], $file2['path']);
+	}
 }
-
-
