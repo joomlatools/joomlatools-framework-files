@@ -151,6 +151,6 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 	
 	public static function _sortByName($file1, $file2)
 	{
-		return strcmp($file1['path'], $file2['path']);
+		return strcmp(strtolower($file1['path']), strtolower($file2['path']));
 	}
 }
