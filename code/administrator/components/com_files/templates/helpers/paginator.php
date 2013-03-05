@@ -45,7 +45,7 @@ class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
      * @param   araay   An array of page data
      * @return  string  Html
      */
-    protected function _pages()
+    protected function _pages($pages = null)
     {
     	$tpl = '<div class="button2-%s"><div class="%s"><a href="#">%s</a></div></div>';
 
