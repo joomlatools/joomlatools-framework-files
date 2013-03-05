@@ -8,7 +8,7 @@
  * @link        http://www.nooku.org
  */
 
-class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
+class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
 {
     /**
      * Render item pagination

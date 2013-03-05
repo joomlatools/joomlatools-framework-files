@@ -15,7 +15,7 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesControllerBehaviorExecutable extends ComDefaultControllerBehaviorExecutable
+class ComFilesControllerBehaviorExecutable extends ComKoowaControllerBehaviorExecutable
 {
 	protected static $_group_map = array(
 		4 => 18,

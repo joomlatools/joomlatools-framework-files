@@ -6,7 +6,7 @@
  * @link        http://www.joomlatools.com
  */
 
-class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCacheable
+class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCacheable
 {
 	protected $_cache; 
 	
