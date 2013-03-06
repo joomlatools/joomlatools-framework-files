@@ -17,7 +17,7 @@
  * @subpackage  Files
  */
 
-class ComFilesViewFilesHtml extends ComDefaultViewHtml
+class ComFilesViewFilesHtml extends ComKoowaViewHtml
 {
 	protected function _initialize(KConfig $config)
 	{
