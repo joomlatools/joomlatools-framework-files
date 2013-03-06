@@ -17,7 +17,7 @@
  */
 class ComFilesModelContainers extends ComKoowaModelDefault
 {
-	protected function _buildQueryWhere(KDatabaseQuerySelect $query)
+	protected function _buildQueryWhere(KDatabaseQueryInterface $query)
 	{
 		parent::_buildQueryWhere($query);
 
