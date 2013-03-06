@@ -8,7 +8,7 @@
  * @link        http://www.nooku.org
  */
 
-class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
+class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
 {
     /**
      * Render item pagination
@@ -45,7 +45,7 @@ class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
      * @param   araay   An array of page data
      * @return  string  Html
      */
-    protected function _pages()
+    protected function _pages($pages = null)
     {
     	$tpl = '<div class="button2-%s"><div class="%s"><a href="#">%s</a></div></div>';
 
