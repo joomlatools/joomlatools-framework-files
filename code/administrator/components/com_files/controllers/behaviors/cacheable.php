@@ -28,6 +28,11 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 
 		parent::_initialize($config);
 	}
+
+    protected function _getConfig($key) {
+        $config = JFactory::getConfig();
+        return version_compare(JVERSION, '3.0', 'ge') ? $config->get($key) : $config->getValue($key);
+    }
 	
 	protected function _getCache()
 	{
@@ -35,17 +40,15 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 		{
 			jimport('joomla.cache.cache');
 			
-			$app = JFactory::getApplication();
-			
 			$options = array(
 				'caching' 		=> true, 
 				'defaultgroup'  => $this->_getGroup(),
 				'lifetime' 		=> 60*24*180,
-				'cachebase' 	=> $app->getCfg('cache_path'),
-				'language' 		=> $app->getCfg('language'),
-				'storage'		=> $app->getCfg('cache_handler', 'file')
+				'cachebase' 	=> $this->_getConfig('config.cache_path'),
+				'language' 		=> $this->_getConfig('config.language'),
+				'storage'		=> $this->_getConfig('config.cache_handler', 'file')
 			);
-			
+
 			// 2.5 does this itself
 			if (version_compare(JVERSION, '1.6', '<')) {
 				$options['lifetime'] *= 60;
