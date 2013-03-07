@@ -101,13 +101,17 @@ Files.Paginator = new Class({
 		page.set('data-limit', limit);
 		page.set('data-offset', data.offset);
 
-		var method = data.offset == this.values.offset ? 'addClass' : 'removeClass';
-        console.log(page);
-        var wrap = page;
-        if(page.getParent() !== this.elements.page_container) {
-            wrap = page.getParent();
+		var method = data.offset == this.values.offset ? 'addClass' : 'removeClass',
+            wrap = page;
+        if(wrap.getParent() !== this.elements.page_container && wrap.getParent() !== this.element && !wrap.getParent().match('ul')) {
+            wrap = wrap.getParent();
+
+            if(wrap.getParent() !== this.elements.page_container && wrap.getParent() !== this.element && !wrap.getParent().match('ul')) {
+                wrap = wrap.getParent();
+            }
         }
-		page.getParent().getParent()[method]('off disabled');
+        console.warn(this.elements.page_container);
+		wrap[method]('off disabled');
 		page.set('data-enabled', (data.offset != this.values.offset)-0);
 
 		this.fireEvent('afterSetPageData', {page: page, data: data});
