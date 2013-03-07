@@ -15,8 +15,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <?= @helper('behavior.modal'); ?>
 
-<?= @helper('com://admin/extman.template.helper.behavior.bootstrap'); ?>
-<?= @helper('com://admin/extman.template.helper.behavior.jquery'); ?>
+<?= @helper('bootstrap.load'); ?>
+<?= @helper('behavior.jquery'); ?>
 
 <style src="media://com_files/css/files.css" />
 
