@@ -55,56 +55,55 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 		return $item;
 	}
 
-	protected function _buildQueryColumns(KDatabaseQueryInterface $query)
+	protected function _buildQueryColumns(KDatabaseQuery $query)
     {
     	parent::_buildQueryColumns($query);
 
     	if ($this->_state->source instanceof KDatabaseRowInterface || $this->_state->container) {
-    		$query->columns(array('container' => 'c.slug'));
+    		$query->select('c.slug AS container');
     	}
     }
 
-	protected function _buildQueryJoins(KDatabaseQueryInterface $query)
+	protected function _buildQueryJoins(KDatabaseQuery $query)
     {
     	parent::_buildQueryJoins($query);
 
     	if ($this->_state->source instanceof KDatabaseRowInterface || $this->_state->container) {
-    		$query->join(array('c' => 'files_containers'), 'c.files_container_id = tbl.files_container_id');
+    		$query->join('LEFT', 'files_containers AS c', 'c.files_container_id = tbl.files_container_id');
     	}
     }
 
-	protected function _buildQueryWhere(KDatabaseQueryInterface $query)
+	protected function _buildQueryWhere(KDatabaseQuery $query)
     {
         $state = $this->_state;
 		if ($state->source instanceof KDatabaseRowInterface)
 		{
 			$source = $state->source;
 
-			$query->where('tbl.files_container_id = :container_id')
-				->where('tbl.filename = :filename')
-				->bind(array('container_id' => $source->container->id, 'filename' => $source->name));
+			$query->where('tbl.files_container_id', '=', $source->container->id)
+				->where('tbl.filename', '=', $source->name);
 
 			if ($source->folder) {
-				$query->where('tbl.folder = :folder')->bind(array('folder' => $source->folder));
+				$query->where('tbl.folder', '=', $source->folder);
 			}
 		}
 		else
 		{
 		    if ($state->container) {
-		        $query->where('tbl.files_container_id = :container_id')->bind(array('container_id' => $state->container->id));
+		        $query->where('tbl.files_container_id', '=', $state->container->id);
 		    }
 
-		    if ($state->folder !== false) {
-		    	$query->where('tbl.folder = :folder')->bind(array('folder' => ltrim($state->folder, '/')));
+		    if ($state->folder !== false && $state->folder !== null) {
+		    	$query->where('tbl.folder', '=', ltrim($state->folder, '/'));
 		    }
 
 		    // Need this for BC
 		    if (!empty($state->files)) {
-		    	$query->where('tbl.filename IN :files')->bind(array('files' => (array) $state->files));
+		    	$query->where('tbl.filename', 'IN', $state->files);
 		    }
 		    
 		    if ($state->filename) {
-		        $query->where('tbl.filename IN :filename')->bind(array('filename' => (array) $state->filename));
+		        $query->where('tbl.filename', 'IN', $state->filename);
 		    }
 
 		    if ($state->paths) {
@@ -115,16 +114,20 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 		            if ($folder === '.') {
 		                $folder = '';
 		            }
-		            
-		            $query->where("(tbl.filename = :filename$i AND tbl.folder = :folder$i)", 'OR')
-		            	->bind(array('filename'.$i => $file, 'folder'.$i => $folder));
+		            $conditions[] = sprintf('(tbl.filename = \'%s\' AND tbl.folder = \'%s\')', $file, $folder);
 		        }
+		        
+		        $query->where('1 = 1');
+		        $query->where[] = array(
+		            'property' => '',
+		            'condition' => 'AND ('.implode(' OR ', $conditions).')'
+		        );
 		    }
 		}
 		
 	}
 	
-	protected function _buildQueryOrder(KDatabaseQueryInterface $query)
+	protected function _buildQueryOrder(KDatabaseQuery $query)
 	{
 		$sort       = $this->_state->sort;
 		$direction  = strtoupper($this->_state->direction);
