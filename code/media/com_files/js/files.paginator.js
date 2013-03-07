@@ -29,8 +29,8 @@ Files.Paginator = new Class({
 
 		this.element = element;
 		this.elements = {
-			page_total: element.getElement('span.page-total'),
-			page_current: element.getElement('span.page-current'),
+			page_total: element.getElement('.page-total'),
+			page_current: element.getElement('.page-current'),
 			page_start: element.getElement('.start a'),
 			page_next: element.getElement('.next a'),
 			page_prev: element.getElement('.prev a'),
