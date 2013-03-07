@@ -110,7 +110,6 @@ Files.Paginator = new Class({
                 wrap = wrap.getParent();
             }
         }
-        console.warn(this.elements.page_container);
 		wrap[method]('off disabled');
 		page.set('data-enabled', (data.offset != this.values.offset)-0);
 
