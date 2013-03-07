@@ -96,7 +96,7 @@ Files.Tree = new Class({
                 node.div.main.setAttribute('title', node.div.text.innerText);
 
 				if (item.children) {
-					Files.$each(item.children, function(item) {
+                    Files.utils.each(item.children, function(item) {
 						insertNode(item, node);
 					});
 				}
@@ -109,7 +109,7 @@ Files.Tree = new Class({
 			method: 'get',
 			onSuccess: function(response) {
 				if (response.total) {
-					Files.$each(response.items, function(item) {
+                    Files.utils.each(response.items, function(item) {
 						insertNode(item, that.root);
 					});
 				}

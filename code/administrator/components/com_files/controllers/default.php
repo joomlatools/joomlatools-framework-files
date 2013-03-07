@@ -16,7 +16,7 @@
  * @subpackage  Files
  */
 
-class ComFilesControllerDefault extends ComDefaultControllerDefault
+class ComFilesControllerDefault extends ComKoowaControllerDefault
 {
 	protected function _initialize(KConfig $config)
 	{

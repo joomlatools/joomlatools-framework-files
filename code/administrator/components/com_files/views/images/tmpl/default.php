@@ -33,7 +33,7 @@ window.addEvent('domready', function() {
 
 		var str = '<img src="'+src+'" ';
 		var parts = [];
-		Files.$each(attrs, function(value, key) {
+		Files.utils.each(attrs, function(value, key) {
 			parts.push(key+'="'+value+'"');
 		});
 		str += parts.join(' ')+' />';

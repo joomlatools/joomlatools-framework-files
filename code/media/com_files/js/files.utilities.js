@@ -15,42 +15,30 @@ if (!Files._) {
 	};
 }
 
-Files.$extend = function(original, extended){
-	var call = typeof $extend === 'undefined' ? Object.append : $extend; 
-	
-	return call(original, extended);
-};
-
-Files.$each = function(iterable, fn, bind){
-	if (typeof $each !== 'undefined') {
-		$each(iterable, fn, bind);
-		
-		return;
-	}
-	
-	var type = typeOf(iterable);
-	((type == 'arguments' || type == 'collection' || type == 'array' || type == 'elements') ? Array : Object).each(iterable, fn, bind);
-};
-
-Files.$type = function(object){
-	if (typeof $type !== 'undefined') {
-		return $type(object);
-	}
-	
-	var type = typeOf(object);
-	if (type == 'elements') return 'array';
-	return (type == 'null') ? false : type;
-};
-
-Files.$merge = function(){
-	if (typeof $merge !== 'undefined') {
-		return $merge(arguments);
-	}
-	
-	var args = Array.slice(arguments);
-	args.unshift({});
-	return Object.merge.apply(null, args);
-};
+// Legacy for Joomla 1.5
+if (!Files.utils) {
+    Files.utils = {
+        append: function(a,b){
+            if(window.$extend) return $extend(a,b);
+            else return Object.append(a,b);
+        },
+        typeOf: function(subject) {
+            if(window.$type) return $type(subject);
+            else return typeOf(subject);
+        },
+        merge: function(a,b){
+            if(window.$merge) return $merge(a,b);
+            else {
+                var i=Array.slice(arguments);i.unshift({});
+                return Object.merge.apply(null,i);
+            }
+        },
+        each: function(a,b,c){
+            if(window.$each) return $each(a,b,c);
+            else return Object.each(a,b,c);
+        }
+    };
+}
 
 Files.Filesize = new Class({
 	Implements: Options,
@@ -84,7 +72,7 @@ Files.FileTypes.map = {
 Files.getFileType = function(extension) {
 	var type = 'document';
 	extension = extension.toLowerCase();
-	Files.$each(Files.FileTypes.map, function(value, key) {
+    Files.utils.each(Files.FileTypes.map, function(value, key) {
 		if (value.contains(extension)) {
 			type = key;
 		}

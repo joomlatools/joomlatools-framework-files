@@ -15,14 +15,14 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesModelContainers extends ComDefaultModelDefault
+class ComFilesModelContainers extends ComKoowaModelDefault
 {
-	protected function _buildQueryWhere(KDatabaseQuery $query)
+	protected function _buildQueryWhere(KDatabaseQueryInterface $query)
 	{
 		parent::_buildQueryWhere($query);
 
 		if ($this->_state->search) {
-            $query->where('tbl.title', 'LIKE', '%'.$this->_state->search.'%');
+            $query->where('tbl.title LIKE :search')->bind(array('search' =>  '%'.$this->_state->search.'%'));
         }
 	}
 }

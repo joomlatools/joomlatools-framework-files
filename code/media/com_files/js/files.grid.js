@@ -150,15 +150,27 @@ Files.Grid = new Class({
 							return true;
 						}
 					});
+				
+				var message = '';
+				// special case for single deletes
+				if (file_count+folder_count === 1) {
+					message = Files._('You are deleting %item%. Are you sure?');
+					message = message.replace('%item%', folder_count ? folders[0] : files[0]);
+				} else {
+					var count   = file_count+folder_count,
+					message = Files._('You are deleting %items%. Are you sure?'),
+					items   = Files._('%count% files and folders');
 
-				var message = Files._("You selected following folders and files to be deleted. Are you sure?");
-				Files.$each(folders, function(folder) {
-					message += '\n'+folder;
-				});
-				Files.$each(files, function(file) {
-					message += '\n'+file;
-				});
-
+					if (!folder_count && file_count) {
+						items = Files._('%count% files');
+					} else if (folder_count && !file_count) {
+						items = Files._('%count% folders');
+					}
+					
+					items   = items.replace('%count%', count);
+					message = message.replace('%items%', items);
+				}
+				
 				if (!checkboxes.length || !confirm(message)) {
 					return false;
 				}
@@ -249,7 +261,7 @@ Files.Grid = new Class({
 
 		this.container.empty();
 		this.root = new Files.Grid.Root(this.layout);
-		this.root.element.inject(this.container);
+		this.container.adopt(this.root.element);
 
 		this.renew();
 
@@ -342,7 +354,7 @@ Files.Grid = new Class({
 	insertRows: function(rows) {
 		this.fireEvent('beforeInsertRows', {rows: rows});
 
-		Files.$each(rows, function(row) {
+        Files.utils.each(rows, function(row) {
 			var cls = Files[row.type.capitalize()];
 			var item = new cls(row);
 			this.insert(item, 'last');
@@ -454,6 +466,8 @@ Files.Grid.Root = new Class({
 		if (this.element.get('tag') == 'table') {
 			parent = this.element.getElement('tbody');
 		}
-		element.inject(parent, position);
+        //Legacy
+        if (!element.injectInside) element.injectInside = element.inject;
+		element.injectInside(parent, position);
 	}
 });

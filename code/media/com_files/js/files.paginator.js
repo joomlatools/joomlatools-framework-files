@@ -29,13 +29,13 @@ Files.Paginator = new Class({
 
 		this.element = element;
 		this.elements = {
-			page_total: element.getElement('span.page-total'),
-			page_current: element.getElement('span.page-current'),
-			page_start: element.getElement('div.start a'),
-			page_next: element.getElement('div.next a'),
-			page_prev: element.getElement('div.prev a'),
-			page_end: element.getElement('div.end a'),
-			page_container: element.getElement('div.page'),
+			page_total: element.getElement('.page-total'),
+			page_current: element.getElement('.page-current'),
+			page_start: element.getElement('.start a'),
+			page_next: element.getElement('.next a'),
+			page_prev: element.getElement('.prev a'),
+			page_end: element.getElement('.end a'),
+			page_container: element.getElement('.page'),
 			pages: {},
 			limit_box: element.getElement('select')
 		};
@@ -101,8 +101,16 @@ Files.Paginator = new Class({
 		page.set('data-limit', limit);
 		page.set('data-offset', data.offset);
 
-		var method = data.offset == this.values.offset ? 'addClass' : 'removeClass';
-		page.getParent().getParent()[method]('off');
+		var method = data.offset == this.values.offset ? 'addClass' : 'removeClass',
+            wrap = page;
+        if(wrap.getParent() !== this.elements.page_container && wrap.getParent() !== this.element && !wrap.getParent().match('ul')) {
+            wrap = wrap.getParent();
+
+            if(wrap.getParent() !== this.elements.page_container && wrap.getParent() !== this.element && !wrap.getParent().match('ul')) {
+                wrap = wrap.getParent();
+            }
+        }
+		wrap[method]('off disabled');
 		page.set('data-enabled', (data.offset != this.values.offset)-0);
 
 		this.fireEvent('afterSetPageData', {page: page, data: data});
@@ -118,7 +126,7 @@ Files.Paginator = new Class({
 			values.page_total = 1;
 			values.page_current = 1;
 		} else {
-			Files.$each(data, function(value, key) {
+            Files.utils.each(data, function(value, key) {
 				values[key] = value;
 			});
 
