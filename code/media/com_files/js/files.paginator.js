@@ -31,11 +31,11 @@ Files.Paginator = new Class({
 		this.elements = {
 			page_total: element.getElement('span.page-total'),
 			page_current: element.getElement('span.page-current'),
-			page_start: element.getElement('div.start a'),
-			page_next: element.getElement('div.next a'),
-			page_prev: element.getElement('div.prev a'),
-			page_end: element.getElement('div.end a'),
-			page_container: element.getElement('div.page'),
+			page_start: element.getElement('.start a'),
+			page_next: element.getElement('.next a'),
+			page_prev: element.getElement('.prev a'),
+			page_end: element.getElement('.end a'),
+			page_container: element.getElement('.page'),
 			pages: {},
 			limit_box: element.getElement('select')
 		};
