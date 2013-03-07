@@ -102,7 +102,12 @@ Files.Paginator = new Class({
 		page.set('data-offset', data.offset);
 
 		var method = data.offset == this.values.offset ? 'addClass' : 'removeClass';
-		page.getParent().getParent()[method]('off');
+        console.log(page);
+        var wrap = page;
+        if(page.getParent() !== this.elements.page_container) {
+            wrap = page.getParent();
+        }
+		page.getParent().getParent()[method]('off disabled');
 		page.set('data-enabled', (data.offset != this.values.offset)-0);
 
 		this.fireEvent('afterSetPageData', {page: page, data: data});
