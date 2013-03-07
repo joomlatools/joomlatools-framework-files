@@ -15,7 +15,7 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesModelThumbnails extends ComKoowaModelDefault
+class ComFilesModelThumbnails extends ComDefaultModelDefault
 {
 	public function __construct(KConfig $config)
 	{

@@ -15,7 +15,7 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesControllerToolbarDefault extends ComKoowaControllerToolbarDefault
+class ComFilesControllerToolbarDefault extends ComDefaultControllerToolbarDefault
 {
 	public function getCommands()
 	{

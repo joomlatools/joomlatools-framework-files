@@ -26,11 +26,7 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperTranslator
             'keys' => array(
                 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB',
                 'An error occurred during request',
-            	'You are deleting %item%. Are you sure?',
-                'You are deleting %items%. Are you sure?',
-            	'%count% files and folders',
-            	'%count% folders',
-            	'%count% files',
+                'You selected following folders and files to be deleted. Are you sure?',
                 'All Files',
                 'An error occurred with status code: ',
                 'An error occurred: ',

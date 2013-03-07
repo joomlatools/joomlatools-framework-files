@@ -15,7 +15,7 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesModelContainers extends ComKoowaModelDefault
+class ComFilesModelContainers extends ComDefaultModelDefault
 {
 	protected function _buildQueryWhere(KDatabaseQuery $query)
 	{

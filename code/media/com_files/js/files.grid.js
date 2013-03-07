@@ -150,27 +150,15 @@ Files.Grid = new Class({
 							return true;
 						}
 					});
-				
-				var message = '';
-				// special case for single deletes
-				if (file_count+folder_count === 1) {
-					message = Files._('You are deleting %item%. Are you sure?');
-					message = message.replace('%item%', folder_count ? folders[0] : files[0]);
-				} else {
-					var count   = file_count+folder_count,
-					message = Files._('You are deleting %items%. Are you sure?'),
-					items   = Files._('%count% files and folders');
 
-					if (!folder_count && file_count) {
-						items = Files._('%count% files');
-					} else if (folder_count && !file_count) {
-						items = Files._('%count% folders');
-					}
-					
-					items   = items.replace('%count%', count);
-					message = message.replace('%items%', items);
-				}
-				
+				var message = Files._("You selected following folders and files to be deleted. Are you sure?");
+                Files.utils.each(folders, function(folder) {
+					message += '\n'+folder;
+				});
+                Files.utils.each(files, function(file) {
+					message += '\n'+file;
+				});
+
 				if (!checkboxes.length || !confirm(message)) {
 					return false;
 				}

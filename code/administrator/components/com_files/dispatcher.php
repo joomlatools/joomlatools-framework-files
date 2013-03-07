@@ -16,7 +16,7 @@
  * @subpackage  Files
  */
 
-class ComFilesDispatcher extends ComKoowaDispatcher
+class ComFilesDispatcher extends ComDefaultDispatcher
 {
     /**
      * Overloaded execute function to handle exceptions in JSON requests

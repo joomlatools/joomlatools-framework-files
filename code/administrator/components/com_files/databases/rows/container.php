@@ -34,7 +34,7 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 			$result = $this->_data['path'];
 			// Prepend with site root if it is a relative path
 			if ($this->adapter === 'local' && !preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
-				$result = JPATH_ROOT.'/'.$result;
+				$result = JPATH_FILES.'/'.$result;
 			}
 
 			$result = rtrim(str_replace('\\', '/', $result), '\\');

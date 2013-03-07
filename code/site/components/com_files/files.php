@@ -1,6 +1,6 @@
 <?php
 /**
- * @version     $Id: node.php 1204 2011-11-03 20:01:52Z ercanozkaya $
+ * @version     $Id$
  * @package     Nooku_Components
  * @subpackage  Files
  * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
@@ -9,12 +9,13 @@
  */
 
 /**
- * Container Controller Class
+ * Dispatcher Class
  *
  * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesControllerContainer extends ComDefaultControllerDefault
-{
-}
+
+defined('KOOWA') or die;
+
+echo KService::get('com://admin/files.dispatcher')->dispatch();

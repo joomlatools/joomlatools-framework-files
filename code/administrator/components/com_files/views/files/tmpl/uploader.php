@@ -171,7 +171,7 @@ window.addEvent('domready', function() {
     if(uploader.features.dragdrop) {
         uploader.bind('QueueChanged', exposePlupload);
     } else {
-        document.id('files-upload').setStyle('position', '').addClass('uploader-files-queued').removeClass('uploader-files-empty');
+        document.id('files-upload').setStyle('position', 'auto').addClass('uploader-files-queued').removeClass('uploader-files-empty');
         if(document.id('files-upload-multi_browse')) {
             document.id('files-upload-multi_browse').set('text', 'Add files');
         }
