@@ -1,0 +1,28 @@
+/* Global overrides are in this file */
+
+/* @group _files.less */
+
+/* @NOTE this fixes ugly scrollbars in animations */
+#sbox-content {
+    overflow: hidden;
+}
+/* @NOTE default border-radius is horrendous */
+#sbox-window {
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+
+    .well {
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+    }
+}
+
+/* @NOTE the following code makes sure that the flash adapter of plupload does not break when the modal is closed */
+.uploader-flash-container object, .uploader-flash-container embed {
+    display: block !important;
+    visibility: visible!important;
+}
+
+/* @end */

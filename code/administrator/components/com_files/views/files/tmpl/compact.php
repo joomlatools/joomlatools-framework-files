@@ -89,7 +89,7 @@ window.addEvent('domready', function() {
 
 <?= @template('com://admin/files.view.files.templates_compact');?>
 
-<div id="files-compact">
+<div id="files-compact" class="com_files">
 	<?=	@helper('tabs.startPane', array('id' => 'pane_insert')); ?>
 	<?= @helper('tabs.startPanel', array('title' => 'Insert')); ?>
 		<div id="insert">
