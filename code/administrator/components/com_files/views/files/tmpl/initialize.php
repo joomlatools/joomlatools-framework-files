@@ -33,8 +33,6 @@ defined('KOOWA') or die( 'Restricted access' );
 <?= @helper('com://admin/extman.template.helper.behavior.jquery'); ?>
 
 <!--
-<style src="media://com_files/css/files.css" />
-
 <? if (version_compare(JVERSION, '1.7.0', '<')):
 jimport('joomla.environment.browser');
 ?>
