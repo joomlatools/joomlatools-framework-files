@@ -1,5 +1,36 @@
 /* Contains all css related to using com_files, do not namespace this file as it has its own namespace */
 
+/* Joomla Specific Styling */
+#element-box {
+    margin-top: 0;
+}
+#element-box #files-sidebar {
+    float:left;
+    width:260px;
+}
+#element-box #files-canvas {
+    float:none;
+    margin-left:260px;
+    border-left:1px solid #dddddd;
+}
+#files-container {
+    min-height: 218px;
+}
+
+#files-canvas .path {
+    padding: 10px;
+    background-color: #F7F7F7;
+    border-bottom: 1px solid #E1E1E1;
+    font-size: 12px;
+}
+
+#files-canvas .view {
+    display: block;
+    margin: 0;
+    padding: 0;
+    background-color: #FFF;
+}
+
 /* @group from docman _admin.less */
 #files-sidebar {
     .sidebar-inner {
@@ -49,6 +80,10 @@
                 img {
                     height: auto!important;
                     width: 32px;
+                    max-width: 100%;
+                    height: auto;
+                    vertical-align: middle;
+                    border: 0;
                 }
             }
             td:nth-child(3) {
@@ -100,7 +135,7 @@
             background-color: @grayLighter;
             #gradient > .vertical(#f7f7f7, #F2F2F2);
             height: 24px;
-            overflow: visible;
+            overflow: hidden;
             padding: 0;
 
             #files-pathway {
@@ -121,6 +156,27 @@
                     height: 18px;
                     padding: 0 6px;
                     background: url(../../../com_files/images/arrow.png) no-repeat 0 0;
+                }
+            }
+
+            .files-toolbar-controls {
+                float: left;
+                padding: 1px 0px 2px 1px;
+                button {
+                    font-size: 12px;
+                    line-height: 20px;
+                    padding: 0px 10px;
+                //border-top: none;
+                //border-bottom: none;
+                //.border-radius(0);
+                    margin: 0;
+
+                    &:first-child {
+                    //border-left: none;
+                    }
+                    & + .btn {
+                        margin-left: -1px;
+                    }
                 }
             }
 
