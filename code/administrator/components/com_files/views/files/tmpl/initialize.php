@@ -1,36 +1,14 @@
 <?php
 /**
- * @version     $Id$
  * @package     Nooku_Components
  * @subpackage  Files
  * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
  * @license     GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link        http://www.nooku.org
  */
-defined('KOOWA') or die( 'Restricted access' ); ?>
+defined('KOOWA') or die( 'Restricted access' );
 
-<?= @helper('behavior.mootools'); ?>
-<?= @helper('behavior.keepalive'); ?>
-<?= @helper('behavior.tooltip'); ?>
-
-<?= @helper('behavior.modal'); ?>
-
-<?= @helper('com://admin/extman.template.helper.behavior.bootstrap'); ?>
-<?= @helper('com://admin/extman.template.helper.behavior.jquery'); ?>
-
-<style src="media://com_files/css/files.css" />
-
-<? if (version_compare(JVERSION, '1.7.0', '<')): ?>
-<script src="media://com_files/js/delegation.js" />
-<script src="media://com_files/js/uri.js" />
-<? endif; ?>
-<script src="media://com_files/js/history/history.js" />
-<script src="media://com_files/js/history/history.html4.js" />
-
-<script src="media://com_files/js/ejs/ejs.js" />
-
-<script src="media://lib_koowa/js/koowa.js" />
-<script src="media://system/js/mootree.js" />
+/* DEBUG FILES:
 <script src="media://com_files/js/spin.min.js" />
 
 <script src="media://com_files/js/files.utilities.js" />
@@ -43,8 +21,42 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <script src="media://com_files/js/files.pathway.js" />
 
 <script src="media://com_files/js/files.app.js" />
-<script>
+*/
+?>
 
+<?= @helper('behavior.mootools'); ?>
+<?= @helper('behavior.keepalive'); ?>
+<?= @helper('behavior.tooltip'); ?>
+<?= @helper('behavior.modal'); ?>
+
+<?= @helper('com://admin/extman.template.helper.behavior.bootstrap'); ?>
+<?= @helper('com://admin/extman.template.helper.behavior.jquery'); ?>
+
+<!--
+<style src="media://com_files/css/files.css" />
+
+<? if (version_compare(JVERSION, '1.7.0', '<')):
+jimport('joomla.environment.browser');
+?>
+<script src="media://com_files/js/delegation.js" />
+<script src="media://com_files/js/uri.js" />
+<? endif; ?>
+
+<script src="media://com_files/js/history/history.js" />
+<? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
+<script src="media://com_files/js/history/history.html4.js" />
+<? endif; ?>
+
+<script src="media://com_files/js/ejs/ejs.js" />
+
+<script src="media://lib_koowa/js/koowa.js" />
+<script src="media://system/js/mootree.js" />
+
+<script src="media://com_files/js/files.min.js" />
+-->
+<? if (version_compare(JVERSION, '1.6.0', '<')): ?>
+<!--
+<script>
 if (SqueezeBox.open === undefined) {
 	SqueezeBox = Files.utils.append(SqueezeBox, {
 		open: function(subject, options) {
@@ -77,7 +89,6 @@ if (SqueezeBox.open === undefined) {
 		}
 	});
 }
-
 /* Joomla! 1.5 fix */
 if(!SqueezeBox.handlers.clone) {
 	SqueezeBox.handlers.adopt = function(a){return a;}
@@ -88,3 +99,5 @@ window.addEvent('domready', function(){
 	}
 });
 </script>
+-->
+<? endif; ?>
