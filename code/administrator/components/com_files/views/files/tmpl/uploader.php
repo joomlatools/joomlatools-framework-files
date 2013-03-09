@@ -1,6 +1,5 @@
 <?php
 /**
- * @version     $Id$
  * @package     Nooku_Components
  * @subpackage  Files
  * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
@@ -9,9 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<style src="media://com_files/plupload/jquery.plupload.queue/css/jquery.plupload.queue.css" />
-
-<script src="media://com_files/plupload/jquery-1.6.4.min.js" />
+<?= @helper('com://admin/extman.template.helper.behavior.jquery'); ?>
 <script src="media://com_files/plupload/plupload.core.html5.flash.queue.js" />
 
 <script>
@@ -71,17 +68,17 @@ window.addEvent('domready', function() {
 				document.id('files-upload-multi_browse').set('text', 'Add files');
 			}
 			uploader.refresh();
-			if(SqueezeBox.isOpen) SqueezeBox.resize({y: $('files-upload').measure(function(){return this.getSize().y;})}, true);
+			if(SqueezeBox.isOpen) SqueezeBox.resize({y: document.id('files-upload').measure(function(){return this.getSize().y;})}, true);
 			uploader.unbind('QueueChanged', exposePlupload);
             //@TODO investigate better event name convention
             window.fireEvent('QueueChanged');
 		};
 
-		window.addEvent('refresh', function(){
-			uploader.refresh();
-		});
+    window.addEvent('refresh', function(){
+        uploader.refresh();
+    });
 
-	if(uploader.features.dragdrop) {
+    if(uploader.features.dragdrop) {
 		document.id('files-upload').addClass('uploader-droppable');
 
         var cancel= function(e) {
@@ -224,7 +221,7 @@ window.addEvent('domready', function() {
 	});
 
 	uploader.bind('StateChanged', function(uploader) {
-		Files.utils.each(failed, function(error, id) {
+        Files.utils.each(failed, function(error, id) {
 			icon = jQuery('#' + id).attr('class', 'plupload_failed').find('a').css('display', 'block');
 			if (error) {
 				icon.attr('title', error);
@@ -280,9 +277,9 @@ window.addEvent('domready', function() {
 					uploader.bind('QueueChanged', exposePlupload);
 				}
 			}
-		} else {
+        } else {
             document.id('remote-url').focus();
-		}
+        }
         SqueezeBox.fx.win.set({height: document.id('files-upload').measure(function(){return this.getSize().y;})});
 		window.fireEvent('refresh');
 	};
@@ -351,40 +348,40 @@ window.addEvent('domready', function() {
                 return false;
             }
         },
-         validateUrl = function() {
-             if (validateInput.call(this)) {
-			if (Files.app.container.parameters.maximum_size) {
-				validate.setOptions({url: Files.app.createRoute({view: 'proxy', url: this.value})}).get();
-			}
-			else {
-				submit.addClass('btn-primary');
-			}
+        validateUrl = function() {
+            if (validateInput.call(this)) {
+                if (Files.app.container.parameters.maximum_size) {
+                    validate.setOptions({url: Files.app.createRoute({view: 'proxy', url: this.value})}).get();
+                }
+                else {
+                    submit.addClass('btn-primary');
+                }
 
-			if(!filename.get('value') || filename.get('value') == default_filename) {
-				default_filename = new URI(this.value).get('file');
-				filename.set('value', default_filename);
-			}
-		} else {
-			submit.set('value', submit_default).removeClass('btn-primary');
-			setRemoteWrapMargin();
-		}
-         };
- 	input.addEvent('focus', function(){
- 		this.set('placeholder', this.get('title')).removeClass('success');
-	});
-	input.addEvent('blur', validateUrl);
+                if(!filename.get('value') || filename.get('value') == default_filename) {
+                    default_filename = new URI(this.value).get('file');
+                    filename.set('value', default_filename);
+                }
+            } else {
+                submit.set('value', submit_default).removeClass('btn-primary');
+                setRemoteWrapMargin();
+            }
+        };
+    input.addEvent('focus', function(){
+        this.set('placeholder', this.get('title')).removeClass('success');
+    });
+    input.addEvent('blur', validateUrl);
 
 
-    	input.addEvent('change', validateInput);
-    	if(window.addEventListener) {
-    		input.addEventListener('input', validateInput);
+    input.addEvent('change', validateInput);
+    if(window.addEventListener) {
+        input.addEventListener('input', validateInput);
         input.addEventListener('paste', function(){
             // this.value isn't updated with the value yet, so we delay our callback until it is
             validateUrl.delay(0, this);
         });
-    	} else {
-    		input.addEvent('keyup', validateInput);
-    	}
+    } else {
+        input.addEvent('keyup', validateInput);
+    }
 
 	var request = new Request.JSON({
 		url: Files.app.createRoute({view: 'file', folder: Files.app.getPath()}),
@@ -449,17 +446,16 @@ window.addEvent('domready', function() {
 });
 </script>
 
-<div style="visibility: hidden">
+<div class="com_files" style="visibility: hidden">
     <div id="files-upload" style="clear: both" class="uploader-files-empty well">
-	<div style="text-align: center;">
-		<h3 style=" float: none">
+        <div style="text-align: center;">
+            <h3 style=" float: none">
                 <?= @text('Upload files to %folder%', array(
                     '%folder%' => '<span id="upload-files-to"></span>'
                 )) ?>
             </h3>
         </div>
-        <div class="clr"></div>
-        <div id="files-upload-controls">
+        <div id="files-upload-controls" class="clearfix">
             <ul class="upload-buttons">
                 <li><?= @text('Upload from:') ?></li>
                 <li><a class="upload-form-toggle target-computer active" href="#computer"><?= @text('Computer'); ?></a></li>
@@ -471,10 +467,9 @@ window.addEvent('domready', function() {
                 </li>
             </ul>
         </div>
-        <div class="clr"></div>
         <div id="files-uploader-computer" class="upload-form">
 
-		<div style="clear: both"></div>
+            <div style="clear: both"></div>
             <div class="dropzone">
                 <h2><?= @text('Drag files here') ?></h2>
             </div>
@@ -482,7 +477,6 @@ window.addEvent('domready', function() {
             <div id="files-upload-multi"></div>
 
         </div>
-        <div class="clr"></div>
         <div id="files-uploader-web" class="upload-form" style="display: none">
             <form action="" method="post" name="remoteForm" id="remoteForm" >
                 <div class="remote-wrap">
