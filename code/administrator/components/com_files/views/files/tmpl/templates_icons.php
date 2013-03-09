@@ -1,6 +1,5 @@
 <?php
 /**
- * @version     $Id$
  * @package     Nooku_Components
  * @subpackage  Files
  * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
@@ -8,8 +7,6 @@
  * @link        http://www.nooku.org
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
-
-<style src="media://com_files/css/files-layout-icons.css" />
 
 <textarea style="display: none" id="file_preview">
     <div class="files-preview">
@@ -26,7 +23,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     		    <span class="label"><?= @text('size'); ?></span>
     			[%=size.humanize()%]
     		</li>
-    		<!--<li>
+            <!--<li>
     		    <span class="label">where</span>
     			[%path%]
     		</li>-->
