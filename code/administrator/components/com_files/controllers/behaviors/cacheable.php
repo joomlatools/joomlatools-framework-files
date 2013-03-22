@@ -8,33 +8,63 @@
 
 class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCacheable
 {
-	protected $_cache; 
-	
-	protected $_group_prefix;
-	
-	public function __construct(KConfig $config) 
+    /**
+     * Cache object
+     *
+     * @var JCache
+     */
+    protected $_cache;
+
+    /**
+     * Cache group
+     *
+     * @var string
+     */
+    protected $_group = '';
+
+    /**
+     * Constructor
+     *
+     * @param KConfig $config An optional KConfig object with configuration options.
+     */
+    public function __construct(KConfig $config)
 	{
 		parent::__construct($config);
 		
-		$this->_group_prefix = $config->group_prefix;
+		$this->_group = $config->group;
 	}
-	
-	protected function _initialize(KConfig $config)
+
+    /**
+     * @param KConfig $config
+     */
+    protected function _initialize(KConfig $config)
 	{
 		$config->append(array(
 			'priority' => KCommand::PRIORITY_LOWEST,
-			'group_prefix' => 'com_files.'
+			'group' => 'com_files'
 		));
 
 		parent::_initialize($config);
 	}
 
-    protected function _getConfig($key) {
-        $config = JFactory::getConfig();
-        return version_compare(JVERSION, '3.0', 'ge') ? $config->get($key) : $config->getValue($key);
+    /**
+     * Get configuration value from the application
+     *
+     * @param      $key
+     * @param null $default
+     *
+     * @return mixed
+     */
+    protected function _getConfig($key, $default = null) {
+        return JFactory::getApplication()->getCfg($key, $default);
     }
-	
-	protected function _getCache()
+
+    /**
+     * Create a JCache instance
+     *
+     * @return JCache
+     */
+    protected function _getCache()
 	{
 		if (!$this->_cache) 
 		{
@@ -44,9 +74,9 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
 				'caching' 		=> true, 
 				'defaultgroup'  => $this->_getGroup(),
 				'lifetime' 		=> 60*24*180,
-				'cachebase' 	=> $this->_getConfig('config.cache_path'),
-				'language' 		=> $this->_getConfig('config.language'),
-				'storage'		=> $this->_getConfig('config.cache_handler', 'file')
+				'cachebase' 	=> $this->_getConfig('cache_path'),
+				'language' 		=> $this->_getConfig('language'),
+				'storage'		=> $this->_getConfig('cache_handler', 'file')
 			);
 
 			// 2.5 does this itself
@@ -59,17 +89,29 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
 		
 		return $this->_cache;
 	}
-	
-	protected function _setOutput(KCommandContext $context)
-	{
-		if ($this->getRequest()->revalidate_cache) {
-			return;
-		}
 
+    /**
+     * Clears group cache
+     *
+     * @return boolean
+     */
+    protected function _cleanCache()
+    {
+        return $this->_getCache()->clean($this->_getGroup());
+    }
+
+    /**
+     * Set the event output from the cache
+     *
+     * @param KCommandContext $context
+     */
+    protected function _setOutput(KCommandContext $context)
+	{
 		$cache  = $this->_getCache();
 		$key    = $this->_getKey();
+        $data   = $cache->get($key);
 
-		if($data = $cache->get($key))
+		if ($data)
 		{
 			$data = unserialize($data);
 	
@@ -82,55 +124,94 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
 	/**
 	 * Store the unrendered view data in the cache
 	 *
-	 * @param   KCommandContext	A command context object
+	 * @param   KCommandContext $context	A command context object
 	 * @return 	void
 	 */
 	protected function _storeOutput(KCommandContext $context)
 	{
-		if(empty($this->_output))
+		if (empty($this->_output))
 		{
 			$cache  = $this->_getCache();
 			$key    = $this->_getKey();
 			
 			$data  = array();
 			$data['component'] = $context->result;
-	
+
 			$cache->store(serialize($data), $key);
 		}
 	}
-	
-	protected function _beforeGet(KCommandContext $context)
+
+    /**
+     * Sets the output for JSON requests from cache if possible
+     *
+     * Also cleans cache if revalidate_cache property is set in request
+     *
+     * @param KCommandContext $context
+     */
+    protected function _beforeGet(KCommandContext $context)
 	{
-		if ($this->getView()->getFormat() === 'json') {
-			return $this->_setOutput($context);
+		if ($this->getView()->getFormat() === 'json')
+        {
+            if ($this->getRequest()->revalidate_cache) {
+                $this->_cleanCache();
+            }
+            else {
+                $this->_setOutput($context);
+            }
 		}
 	}
-	
-	protected function _afterGet(KCommandContext $context)
+
+    /**
+     * Stores the cache output for JSON requests
+     *
+     * @param KCommandContext $context
+     */
+    protected function _afterGet(KCommandContext $context)
 	{
 		if ($this->getView()->getFormat() === 'json') {
-			return $this->_storeOutput($context);
+			$this->_storeOutput($context);
 		}
 	}
-	
-	protected function _beforeRead(KCommandContext $context)
+
+    /**
+     * Overrridden to not run caching on read actions
+     *
+     * @param KCommandContext $context
+     */
+    protected function _beforeRead(KCommandContext $context)
 	{
 	}
-	
+
+    /**
+     * Overrridden to not run caching on read actions
+     *
+     * @param KCommandContext $context
+     */
 	protected function _afterRead(KCommandContext $context)
 	{
 	}
-		
-	protected function _getGroup()
-	{
-		$namespace = $this->_group_prefix.($this->getModel()->folder ? md5($this->getModel()->folder) : 'root');
 
-		return $namespace;
-	}
-	
-	protected function _getKey()
+    /**
+     * Returns cache group name
+     *
+     * @return string
+     */
+    protected function _getGroup()
 	{
-	    $view  = $this->getView();
+		return $this->_group;
+	}
+
+    /**
+     * Returns cache key
+     *
+     * Converts empty strings to null in state data before creating the key
+     *
+     * Keys are formatted as: folder:md5(state)
+     *
+     * @return string
+     */
+    protected function _getKey()
+	{
 	    $state = $this->getModel()->getState()->toArray();
 	    
 	    // Empty strings get sent in the URL for dispatched requests 
@@ -141,7 +222,8 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
 			}
 	    }
 
-	    $key = $view->getName().'-'.$view->getLayout().'-'.$view->getFormat().':'.md5(http_build_query($state));
+	    $key = $this->getModel()->folder.':'.md5(http_build_query($state));
+
 	    return $key;
 	}
 }
