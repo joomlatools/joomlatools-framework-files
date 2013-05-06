@@ -71,19 +71,28 @@ Files.Paginator = new Class({
 		els.page_container.empty();
 		var i = 1;
 		while (i <= values.page_total) {
+            var el = null;
 
 			if (i == values.page_current) {
-				var el = new Element('span', {text: i});
-			} else {
-				var el = new Element('a', {
+				el = new Element('span', {text: i});
+			} else if (i < 3 || Math.abs(i-values.page_total) < 2 || Math.abs(i-(values.page_current)) < 2) {
+                // Add a page link for the first and last two pages or a page around the current one
+				el = new Element('a', {
 					href: '#',
 					text: i,
 					'data-limit': values.limit,
 					'data-offset': (i-1)*values.limit
 				});
-			}
-			els.pages[i] = el;
-			el.inject(els.page_container);
+			} else if (Math.abs(i-values.page_current) < 3) {
+                // Add an ellipsis for the gaps
+                el = new Element('span', {html: '&hellip;'});
+            }
+
+            if (el) {
+                els.pages[i] = el;
+                el.inject(els.page_container);
+            }
+
 			i++;
 		}
 

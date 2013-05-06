@@ -314,7 +314,17 @@ Files.App = new Class({
             	}
 				
 				this.state.set('limit', limit);
-				this.state.set('offset', 0);
+
+                // Recalculate offset
+                var total = Files.app.paginator.values.total,
+                    offset = Files.app.paginator.values.offset;
+
+                if (total) {
+                    var page_count = Math.ceil(total/limit);
+                    offset = (page_count-1)*limit;
+                }
+
+				this.state.set('offset', offset);
 
 				this.navigate();
 			}.bind(this)
