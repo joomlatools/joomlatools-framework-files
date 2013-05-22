@@ -367,7 +367,8 @@ Files.App = new Class({
 			'onClickImage': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
-					img = node.retrieve('row').image;
+                    row = node.retrieve('row'),
+                    img = that.createRoute({view: 'file', format: 'raw', name: row.name, folder: row.folder});
 
 				if (img) {
 					SqueezeBox.open(img, {handler: 'image'});

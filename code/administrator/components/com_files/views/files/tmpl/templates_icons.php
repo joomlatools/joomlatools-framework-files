@@ -14,7 +14,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             <img src="media://com_files/images/document-64.png" width="64" height="64" alt="[%=name%]" border="0" />
         </div>
         <div class="details">
-            <a href="[%=baseurl+'/'+filepath%]" target="_blank"><?= @text('View'); ?></a>
+            [% var view_path = Files.app.createRoute({view: 'file', format: 'raw', name: name, folder: folder}); %]
+            <a href="[%=view_path%]" target="_blank"><?= @text('View'); ?></a>
             <h3 class="name" title="[%=name%]">[%=name%]</h3>
         </div>
         <!--<h4 class="preview-section">general</h4>-->
