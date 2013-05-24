@@ -117,12 +117,22 @@ Files.App = new Class({
 	},
 	setState: function() {
 		this.fireEvent('beforeSetState');
-		
+
 		if (this.cookie) {
-            var limit = Cookie.read(this.cookie+'.state.limit');
-            if (limit) {
-                this.options.state.defaults.limit = limit;
+            var state = Cookie.read(this.cookie+'.state'),
+                obj   = JSON.decode(state, true);
+
+            if (obj) {
+                if (!this.getUrl().getData('folder')) {
+                    this.options.active = obj.folder;
+                }
+
+                delete obj.folder;
+
+                this.options.state.defaults = Files.utils.merge(this.options.state.defaults, obj);
+
             }
+
         }
 
 		var opts = this.options.state;
@@ -229,6 +239,12 @@ Files.App = new Class({
 			this.folder.getChildren(success, null, this.state.getData(), url_builder);
 		}
 
+        if (this.cookie) {
+            var data = this.state.data;
+            data.folder = this.active;
+            Cookie.write(this.cookie+'.state', JSON.encode(data));
+        }
+
 		this.fireEvent('afterNavigate', [path, type]);
 	},
 
@@ -309,10 +325,6 @@ Files.App = new Class({
 				this.navigate();
 			}.bind(this),
 			'onChangeLimit': function(limit) {
-				if (this.cookie) {
-                	Cookie.write(this.cookie+'.state.limit', limit);
-            	}
-				
 				this.state.set('limit', limit);
 
                 // Recalculate offset
@@ -367,7 +379,8 @@ Files.App = new Class({
 			'onClickImage': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
-					img = node.retrieve('row').image;
+                    row = node.retrieve('row'),
+                    img = that.createRoute({view: 'file', format: 'raw', name: row.name, folder: row.folder});
 
 				if (img) {
 					SqueezeBox.open(img, {handler: 'image'});
