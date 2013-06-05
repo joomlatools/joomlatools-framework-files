@@ -240,7 +240,7 @@ Files.App = new Class({
 		}
 
         if (this.cookie) {
-            var data = this.state.data;
+            var data = jQuery.extend(true, {}, this.state.data);
             data.folder = this.active;
             Cookie.write(this.cookie+'.state', JSON.encode(data));
         }
