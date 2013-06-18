@@ -28,7 +28,6 @@
     
 	<administration>
 		<files folder="admin">
-			<filename>config.xml</filename>
 			<filename>dispatcher.php</filename>
 			
 			<folder>adapters</folder>

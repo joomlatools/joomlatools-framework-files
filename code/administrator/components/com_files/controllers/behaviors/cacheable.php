@@ -23,6 +23,13 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
     protected $_group = '';
 
     /**
+     * If true, behavior only clears the cache after add/edit/delets and do not store new data
+     *
+     * @var boolean
+     */
+    protected $_only_clear = false;
+
+    /**
      * Constructor
      *
      * @param KConfig $config An optional KConfig object with configuration options.
@@ -32,6 +39,8 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
 		parent::__construct($config);
 		
 		$this->_group = $config->group;
+
+        $this->_only_clear = $config->only_clear;
 	}
 
     /**
@@ -41,7 +50,8 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
 	{
 		$config->append(array(
 			'priority' => KCommand::PRIORITY_LOWEST,
-			'group' => 'com_files'
+			'group' => 'com_files',
+            'only_clear' => false // If true, behavior only clears the cache after add/edit/delets and do not store new data
 		));
 
 		parent::_initialize($config);
@@ -150,7 +160,7 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
      */
     protected function _beforeGet(KCommandContext $context)
 	{
-		if ($this->getView()->getFormat() === 'json')
+		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false)
         {
             if ($this->getRequest()->revalidate_cache) {
                 $this->_cleanCache();
@@ -168,7 +178,7 @@ class ComFilesControllerBehaviorCacheable extends ComDefaultControllerBehaviorCa
      */
     protected function _afterGet(KCommandContext $context)
 	{
-		if ($this->getView()->getFormat() === 'json') {
+		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false) {
 			$this->_storeOutput($context);
 		}
 	}
