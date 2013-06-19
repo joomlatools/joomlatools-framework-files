@@ -19,6 +19,9 @@ Files.App = new Class({
 	title: '',
 	cookie: null,
 	options: {
+        cookie: {
+            path: '/'
+        },
 		persistent: true,
 		thumbnails: true,
 		types: null,
@@ -242,7 +245,7 @@ Files.App = new Class({
         if (this.cookie) {
             var data = jQuery.extend(true, {}, this.state.data);
             data.folder = this.active;
-            Cookie.write(this.cookie+'.state', JSON.encode(data));
+            Cookie.write(this.cookie+'.state', JSON.encode(data), this.options.cookie);
         }
 
 		this.fireEvent('afterNavigate', [path, type]);
@@ -404,7 +407,7 @@ Files.App = new Class({
 			},
 			'onAfterSetLayout': function(context) {
 				if (key) {
-					Cookie.write(key, context.layout);
+					Cookie.write(key, context.layout, this.options.cookie);
 				}
 			}.bind(this)
 		});
