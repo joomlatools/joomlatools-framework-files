@@ -9,31 +9,43 @@
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="file_preview">
-    <div class="files-preview">
-        <div class="preview extension-[%=metadata.extension%]">
-            <img src="media://com_files/images/document-64.png" width="64" height="64" alt="[%=name%]" border="0" />
-        </div>
-        <div class="details">
-            [% var view_path = Files.app.createRoute({view: 'file', format: 'raw', name: name, folder: folder}); %]
-            <a href="[%=view_path%]" target="_blank"><?= @text('View'); ?></a>
-            <h3 class="name" title="[%=name%]">[%=name%]</h3>
-        </div>
-        <!--<h4 class="preview-section">general</h4>-->
-    	<ul>
-    		<li>
-    		    <span class="label"><?= @text('size'); ?></span>
-    			[%=size.humanize()%]
-    		</li>
-            <!--<li>
-    		    <span class="label">where</span>
-    			[%path%]
-    		</li>-->
-    		<li>
-    		    <span class="label"><?= @text('modified'); ?></span>
-    			[%=getModifiedDate(true)%]
-    		</li>
-    	</ul>
+<div>
+<div class="preview extension-[%=metadata.extension%]">
+    [% var view_path = Files.app.createRoute({view: 'file', format: 'raw', name: name, folder: folder}); %]
+    <img src="media://com_files/images/document-64.png" width="64" height="64" alt="[%=name%]" border="0" />
+
+    <div class="btn-toolbar">
+        [% if (typeof image !== 'undefined') { %]
+        <a class="btn btn-mini" href="[%=view_path%]" target="_blank">
+            <i class="icon-eye-open"></i> <?= @text('View'); ?>
+        </a>
+        [% } else { %]
+        <a class="btn btn-mini" href="[%=view_path%]" target="_blank" download="[%=name%]">
+            <i class="icon-download"></i> <?= @text('Download'); ?>
+        </a>
+        [% } %]
     </div>
+</div>
+<hr />
+<div class="details">
+    <table class="table table-condensed parameters">
+        <tbody>
+        <tr>
+            <td class="detail-label"><?= @text('Name'); ?></td>
+            <td>[%=name%]</td>
+        </tr>
+        <tr>
+            <td class="detail-label"><?= @text('Size'); ?></td>
+            <td>[%=size.humanize()%]</td>
+        </tr>
+        <tr>
+            <td class="detail-label"><?= @text('Modified'); ?></td>
+            <td>[%=getModifiedDate(true)%]</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
 </textarea>
 
 <textarea style="display: none" id="icons_container">
