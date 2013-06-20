@@ -183,9 +183,6 @@ body {
 #insert #files-tree-container {
 	width: 200px;
 }
-#insert #files-grid {
-	width: 304px!important;
-}
 
 #insert #files-tree-container,
 #insert #files-grid
