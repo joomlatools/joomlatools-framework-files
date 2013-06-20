@@ -8,7 +8,7 @@
     <license>GNU GPLv3 - http://www.gnu.org/licenses/gpl.html</license>
     <authorEmail>info@joomlatools.eu</authorEmail>
     <authorUrl>www.joomlatools.com</authorUrl>
-	<version>1.0.3</version>
+	<version>1.0.4</version>
 	<description></description>
 	
 	<install>
@@ -29,6 +29,7 @@
 	<administration>
 		<files folder="admin">
 			<filename>dispatcher.php</filename>
+            <filename>version.php</filename>
 			
 			<folder>adapters</folder>
 			<folder>commands</folder>
