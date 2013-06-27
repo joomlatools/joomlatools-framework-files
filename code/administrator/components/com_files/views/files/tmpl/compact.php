@@ -23,6 +23,9 @@ Files.token = '<?= $token; ?>';
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
+            cookie: {
+                path: '<?=$this->getView()->baseurl?>'
+            },
             pathway: false,
 			state: {
 				defaults: {
@@ -131,7 +134,9 @@ window.addEvent('domready', function(){
         var fixHeight = function(){
             var newHeight = document.id('files-compact').measure(function(){return this.getSize().y;});
             window.parent.document.id('sbox-content').getElement('iframe').set('height', newHeight);
-            modal.fx.win.set({height: newHeight});
+
+            var win = modal.fx.win ? modal.fx.win : modal.fx.window;
+            win.set({height: newHeight});
         };
         document.getElements('#tabs-pane_insert dt, .upload-buttons li').addEvent('click', fixHeight);
         fixHeight();

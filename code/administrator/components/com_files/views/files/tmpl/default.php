@@ -17,6 +17,9 @@ Files.token = '<?= $token; ?>';
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
+            cookie: {
+                path: '<?=$this->getView()->baseurl?>'
+            },
             title: false,
 			state: {
 				defaults: {

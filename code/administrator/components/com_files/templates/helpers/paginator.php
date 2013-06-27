@@ -24,7 +24,12 @@ class ComFilesTemplateHelperPaginator extends ComDefaultTemplateHelperPaginator
         ));
 
         $current_of_total = $this->translate('JLIB_HTML_PAGE_CURRENT_OF_TOTAL');
-        if($current_of_total == 'JLIB_HTML_PAGE_CURRENT_OF_TOTAL') $current_of_total = 'Page %s of %s';
+        if($current_of_total == 'JLIB_HTML_PAGE_CURRENT_OF_TOTAL'
+            // Awful fix for Joomla language debug adding ?? before the string
+            || strpos(substr($current_of_total, 2), 'JLIB_HTML_PAGE_CURRENT_OF_TOTAL') !== false
+        ) {
+            $current_of_total = 'Page %s of %s';
+        }
 
         $html  = '<div class="container" id="files-paginator-container">';
         if(version_compare(JVERSION, '3.0', '>=')) {
