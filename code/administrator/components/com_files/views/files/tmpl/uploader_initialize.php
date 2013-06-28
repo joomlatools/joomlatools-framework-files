@@ -86,7 +86,12 @@ window.addEvent('domready', function() {
             e.stopPropagation();
             e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
         }, dragover = function(e){
+
+            e.preventDefault();// required by FF + Safari
+            e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
+            console.log(jQuery(this));
             //jQuery(this).addClass('dragover'); //This breaks safaris drag and drop, still unknown why
+
         }, dragleave = function(e){
             jQuery(this).removeClass('dragover');
         }
@@ -134,7 +139,7 @@ window.addEvent('domready', function() {
         dropzone.bind('dragover', dragover);
         dropzone.bind('dragleave', dragleave);
         dropzone.bind('dragenter', cancel);
-        dropzone.bind('dragover', cancel);
+        //dropzone.bind('dragover', cancel);
 
         //Prevent file drops from duplicating due to double drop events
         jQuery('#files-upload-multi_filelist').bind('drop', function(event){
@@ -147,7 +152,7 @@ window.addEvent('domready', function() {
         files_canvas.bind('dragover', dragover); //Using dragenter caused inconsistent behavior
         files_canvas.bind('dragleave', dragleave);
         files_canvas.bind('dragenter', cancel);
-        files_canvas.bind('dragover', cancel);
+        //files_canvas.bind('dragover', cancel);
         files_canvas.bind('drop', function(event){
             event.preventDefault();
             jQuery(this).removeClass('dragover');
@@ -158,7 +163,7 @@ window.addEvent('domready', function() {
                 addSelectedFiles(dataTransfer.files);
 
                 //@TODO the click handler is written in mootools, so we use mootools here
-                document.id('files-show-uploader').fireEvent('click', new Event);
+                document.id('files-show-uploader').fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
             }
         });
     } else {
