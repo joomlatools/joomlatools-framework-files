@@ -94,16 +94,17 @@ window.addEvent('domready', function() {
             focusring.css({
                 display: 'none',
                 position: 'absolute',
+                backgroundColor: 'hsla(0, 0%, 100%, 0.75)',
                 top: 0,
                 left: 0,
                 bottom: 0,
                 right: 0,
-                zIndex: 9999999,
+                zIndex: 65555,
                 borderStyle: 'solid',
                 borderWidth: '5px',
                 opacity: 0,
                 transition: 'opacity 300ms',
-                //paddingTop: 10,
+                paddingTop: 10,
                 textAlign: 'center'
             });
             container.append(focusring);
@@ -129,6 +130,9 @@ window.addEvent('domready', function() {
                     focusring.css('display', 'block');
                     setTimeout(function(){
                         focusring.css('opacity', 1);
+                        if(!jQuery('#files-upload').is(':visible')) {
+                            jQuery('#files-canvas').addClass('dropzone-droppable');
+                        }
                     }, 1);
 
                 }
@@ -138,6 +142,7 @@ window.addEvent('domready', function() {
                 clearTimeout(timer);
                 timer = setTimeout(function(){
                     jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                    jQuery('#files-canvas').removeClass('dropzone-droppable');
                 }, 300);
             };
         }, createDragleaveHandler = function(container){

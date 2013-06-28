@@ -390,6 +390,23 @@ li.plupload_droptext {
 /* @end */
 
 /* @group plupload.css */
+/* For drag and drop */
+#files-canvas {
+    .transition(outline 300ms);
+    outline-color: transparent;
+    outline-width: 2px;
+    outline-style: solid;
+    position: relative;
+
+    &.dropzone-droppable {
+        //@TODO implement mixin for @infoColor
+        outline-color: hsla(120, 100%, 25%, 0.5);
+        z-index: 65556;
+        .transition(none 0);
+    }
+}
+
+
 #uploads .upload {
     padding: 4px;
 }
