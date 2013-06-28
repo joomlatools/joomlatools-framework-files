@@ -176,55 +176,12 @@ window.addEvent('domready', function() {
             }
         }
 
-        /* @TODO this is replaced by new code
-        // Attach drop handler and grab files
-        var dropzone = jQuery('#files-uploader-computer');
-        dropzone.bind('drop', function(event){
-            event.preventDefault();
-            jQuery(this).removeClass('dragover');
-            var dataTransfer = event.originalEvent.dataTransfer;
-
-            // Add dropped files
-            if (dataTransfer && dataTransfer.files) {
-                addSelectedFiles(dataTransfer.files);
-            }
-        });
-
-
-        dropzone.bind('dragover', createDragoverHandler(dropzone));
-        dropzone.bind('dragleave', createDragleaveHandler(dropzone));
-        dropzone.bind('dragenter', cancel);
-        //dropzone.bind('dragover', cancel);
-
-        //*/
-
         //Prevent file drops from duplicating due to double drop events
         jQuery('#files-upload-multi_filelist').bind('drop', function(event){
             event.stopPropagation();
             //@TODO implement the rest of the drop code from handler, to remove focusring
             jQuery(document.body).removeClass('dropzone-dragover');
         });
-
-        /* @TODO this is replaced by new code
-        // Make the file list a dropzone
-        var files_canvas = jQuery('#files-canvas');
-        files_canvas.bind('dragover', createDragoverHandler(files_canvas)); //Using dragenter caused inconsistent behavior
-        files_canvas.bind('dragleave', createDragleaveHandler(files_canvas));
-        files_canvas.bind('dragenter', cancel);
-        files_canvas.bind('drop', function(event){
-            event.preventDefault();
-            jQuery(this).removeClass('dragover');
-            var dataTransfer = event.originalEvent.dataTransfer;
-
-            // Add dropped files
-            if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
-                addSelectedFiles(dataTransfer.files);
-
-                //@TODO the click handler is written in mootools, so we use mootools here
-                document.id('files-show-uploader').fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
-            }
-        });
-        //*/
 
         // Make the document body a dropzone
         var files_canvas = jQuery('#files-canvas'), body = jQuery(document.body);
@@ -250,8 +207,6 @@ window.addEvent('domready', function() {
             jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
         });
 
-        //jQuery('body').bind('dragover', createDragoverHandler(files_canvas)); //Using dragenter caused inconsistent behavior
-        //jQuery('body').bind('dragleave', createDragleaveHandler(files_canvas));
     } else {
         document.id('files-upload').addClass('uploader-nodroppable');
     }
