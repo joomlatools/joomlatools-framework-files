@@ -86,7 +86,10 @@ window.addEvent('domready', function() {
             e.stopPropagation();
             e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
         }, createDragoverHandler = function(container){
-            container.addClass('droppable');
+
+            //Create hilite + label
+            container.append('<div class="dropzone-focusring success"></div>');
+
             return function(e){
 
                 e.preventDefault();// required by FF + Safari
@@ -178,8 +181,8 @@ window.addEvent('domready', function() {
 
         // Make the document body a dropzone
         var files_canvas = jQuery('#files-canvas'), body = jQuery(document.body);
-        body.bind('dragover', createDragoverHandler(files_canvas)); //Using dragenter caused inconsistent behavior
-        body.bind('dragleave', createDragleaveHandler(files_canvas));
+        body.bind('dragover', createDragoverHandler(body)); //Using dragenter caused inconsistent behavior
+        body.bind('dragleave', createDragleaveHandler(body));
         body.bind('dragenter', cancel);
         body.bind('drop', function(event){
             event.preventDefault();
