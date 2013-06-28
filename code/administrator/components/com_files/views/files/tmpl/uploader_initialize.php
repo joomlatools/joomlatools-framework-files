@@ -85,15 +85,17 @@ window.addEvent('domready', function() {
             e.preventDefault();// required by FF + Safari
             e.stopPropagation();
             e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
-        }, dragover = function(e){
+        }, createDragoverHandler = function(container){
+            return function(e){
 
-            e.preventDefault();// required by FF + Safari
-            e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
-            console.log(jQuery(this));
-            //jQuery(this).addClass('dragover'); //This breaks safaris drag and drop, still unknown why
-
-        }, dragleave = function(e){
-            jQuery(this).removeClass('dragover');
+                e.preventDefault();// required by FF + Safari
+                e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
+                container.addClass('dragover'); //This breaks safaris drag and drop, still unknown why
+            };
+        }, createDragleaveHandler = function(container){
+            return function(e){
+                jQuery(this).removeClass('dragover');
+            };
         }
 
         function addSelectedFiles(native_files) {
@@ -136,8 +138,8 @@ window.addEvent('domready', function() {
             }
         });
 
-        dropzone.bind('dragover', dragover);
-        dropzone.bind('dragleave', dragleave);
+        dropzone.bind('dragover', createDragoverHandler(dropzone));
+        dropzone.bind('dragleave', createDragleaveHandler(dropzone));
         dropzone.bind('dragenter', cancel);
         //dropzone.bind('dragover', cancel);
 
@@ -149,8 +151,8 @@ window.addEvent('domready', function() {
 
         // Make the file list a dropzone
         var files_canvas = jQuery('#files-canvas');
-        files_canvas.bind('dragover', dragover); //Using dragenter caused inconsistent behavior
-        files_canvas.bind('dragleave', dragleave);
+        files_canvas.bind('dragover', createDragoverHandler(files_canvas)); //Using dragenter caused inconsistent behavior
+        files_canvas.bind('dragleave', createDragleaveHandler(files_canvas));
         files_canvas.bind('dragenter', cancel);
         //files_canvas.bind('dragover', cancel);
         files_canvas.bind('drop', function(event){
@@ -166,6 +168,8 @@ window.addEvent('domready', function() {
                 document.id('files-show-uploader').fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
             }
         });
+
+        jQuery('body').bind('dragover');
     } else {
         document.id('files-upload').addClass('uploader-nodroppable');
     }
