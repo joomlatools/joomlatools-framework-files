@@ -89,7 +89,7 @@ window.addEvent('domready', function() {
 
             //Create hilite + label
             var focusring = jQuery('<div class="dropzone-focusring"></div>'),
-                label = jQuery('<div class="alert alert-success">'+Files._('Drop your file(s) to upload to {{folder}}')+'</div>');
+                label = jQuery('<div class="alert alert-success">'+Files._('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
 
             focusring.css({
                 display: 'none',
@@ -125,6 +125,7 @@ window.addEvent('domready', function() {
                 e.preventDefault();// required by FF + Safari
                 e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
                 if(focusring.css('display') == 'none') {
+                    label.text(Files._('Drop your file(s) to upload to \'{{folder}}\'').replace('{{folder}}', Files.app.title));
                     focusring.css('display', 'block');
                     setTimeout(function(){
                         focusring.css('opacity', 1);
@@ -133,8 +134,6 @@ window.addEvent('domready', function() {
                 }
                 //container.addClass('dropzone-dragover'); //This breaks safaris drag and drop, still unknown why
 
-                console.log('dragover');
-
                 //This is a failsafe measure
                 clearTimeout(timer);
                 timer = setTimeout(function(){
@@ -142,12 +141,10 @@ window.addEvent('domready', function() {
                 }, 300);
             };
         }, createDragleaveHandler = function(container){
-            console.log(container);
             return function(e){
                 //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
                 //container.removeClass('dropzone-dragover');
                 //jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
-                //console.log('dragleave');
             };
         }
 
@@ -250,7 +247,6 @@ window.addEvent('domready', function() {
             }
         });
         body.bind('dragend', function(event){
-            console.log('dragend');
             jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
         });
 
