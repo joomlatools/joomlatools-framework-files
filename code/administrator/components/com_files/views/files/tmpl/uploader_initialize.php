@@ -81,7 +81,7 @@ window.addEvent('domready', function() {
     if(uploader.features.dragdrop) {
         document.id('files-upload').addClass('uploader-droppable');
 
-        var cancel= function(e) {
+        var timer, cancel= function(e) {
             e.preventDefault();// required by FF + Safari
             e.stopPropagation();
             e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
@@ -92,6 +92,7 @@ window.addEvent('domready', function() {
                 label = jQuery('<div class="alert alert-success">'+Files._('Drop your file(s) to upload to {{folder}}')+'</div>');
 
             focusring.css({
+                display: 'none',
                 position: 'absolute',
                 top: 0,
                 left: 0,
@@ -102,7 +103,7 @@ window.addEvent('domready', function() {
                 borderWidth: '5px',
                 opacity: 0,
                 transition: 'opacity 300ms',
-                paddingTop: 10,
+                //paddingTop: 10,
                 textAlign: 'center'
             });
             container.append(focusring);
@@ -112,6 +113,10 @@ window.addEvent('domready', function() {
             ['border-radius', 'color', 'background', 'border'].forEach(function(prop){
                 label.css(prop, label.css(prop));
             });
+            label.css({
+                display: 'inline-block',
+                margin: '0 auto'
+            });
             focusring.append(label);
             focusring.css('border-color', label.css('color')); //border-color too bright
 
@@ -119,13 +124,30 @@ window.addEvent('domready', function() {
 
                 e.preventDefault();// required by FF + Safari
                 e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
-                focusring.css('display', '').css('opacity', 1);
+                if(focusring.css('display') == 'none') {
+                    focusring.css('display', 'block');
+                    setTimeout(function(){
+                        focusring.css('opacity', 1);
+                    }, 1);
+
+                }
                 //container.addClass('dropzone-dragover'); //This breaks safaris drag and drop, still unknown why
+
+                console.log('dragover');
+
+                //This is a failsafe measure
+                clearTimeout(timer);
+                timer = setTimeout(function(){
+                    jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                }, 300);
             };
         }, createDragleaveHandler = function(container){
+            console.log(container);
             return function(e){
+                //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
                 //container.removeClass('dropzone-dragover');
-                jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                //jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                //console.log('dragleave');
             };
         }
 
@@ -226,6 +248,10 @@ window.addEvent('domready', function() {
                     document.id('files-show-uploader').fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
                 }
             }
+        });
+        body.bind('dragend', function(event){
+            console.log('dragend');
+            jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
         });
 
         //jQuery('body').bind('dragover', createDragoverHandler(files_canvas)); //Using dragenter caused inconsistent behavior
