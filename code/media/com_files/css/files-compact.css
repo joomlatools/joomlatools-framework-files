@@ -163,7 +163,6 @@ body {
 	border-top: 1px solid #E1E1E1;
 	padding: 4px;
 	text-align: right;
-	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -182,9 +181,6 @@ body {
 
 #insert #files-tree-container {
 	width: 200px;
-}
-#insert #files-grid {
-	width: 304px!important;
 }
 
 #insert #files-tree-container,

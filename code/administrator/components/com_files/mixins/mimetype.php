@@ -73,10 +73,9 @@ class ComFilesMixinMimetype extends KObject
 		}
 
 		// special case: empty text files
-		if ($mimetype == 'application/x-empty') {
+		if ($mimetype == 'application/x-empty' || $mimetype === 'inode/x-empty') {
 			$mimetype = 'text/plain';
 		}
-
 		
 		return $mimetype;
 	}

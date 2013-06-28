@@ -14,7 +14,7 @@ Files.Row = new Class({
 	initialize: function(object, options) {
 		this.setOptions(options);
 
-		$each(object, function(value, key) {
+        Files.utils.each(object, function(value, key) {
 			this[key] = value;
 		}.bind(this));
 
@@ -65,7 +65,7 @@ Files.File = new Class({
 		var date = new Date();
 		date.setTime(this.metadata.modified_date*1000);
 		if (formatted) {
-			return date.getUTCDate()+'/'+date.getUTCMonth()+'/'+date.getUTCFullYear()+' '+date.getUTCHours()+':'+date.getUTCMinutes();
+			return date.toLocaleString();
 		} else {
 			return date;
 		}
@@ -168,7 +168,7 @@ Files.Folder = new Class({
 				folder: path
 			};
 		if (extra_vars) {
-			url = $extend(url, extra_vars);
+			url = Files.utils.append(url, extra_vars);
 		}
 		
 		var url = url_builder ? url_builder(url) : Files.app.createRoute(url);

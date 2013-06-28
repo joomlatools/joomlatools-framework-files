@@ -1,6 +1,5 @@
 <?php
 /**
- * @version     $Id$
  * @package     Nooku_Components
  * @subpackage  Files
  * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
@@ -18,6 +17,9 @@ Files.token = '<?= $token; ?>';
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
+            cookie: {
+                path: '<?=$this->getView()->baseurl?>'
+            },
             title: false,
 			state: {
 				defaults: {
@@ -33,26 +35,31 @@ window.addEvent('domready', function() {
 			container: <?= json_encode($container ? $container->slug : 'files-files'); ?>,
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
-	options = $extend(options, config);
+	options = Files.utils.append(options, config);
 
 	Files.app = new Files.App(options);
 
-	//@TODO hide the uploader in a modal, make code pretty
+	//@TODO hide the uploader in a modal, make it pretty
 	var tmp = new Element('div', {style: 'display:none'}).inject(document.body);
-	$('files-upload').getParent().inject(tmp).setStyle('visibility', '');
-	$('files-show-uploader').addEvent('click', function(e){
-		e.stop();
+    $('files-upload').getParent().inject(tmp).setStyle('visibility', '');
+    $('files-show-uploader').addEvent('click', function(e){
+        e.stop();
 
-		var handleClose = function(){
-			$('files-upload').getParent().inject(tmp);
-			SqueezeBox.removeEvent('close', handleClose);
-		};
-		SqueezeBox.addEvent('close', handleClose);
-		SqueezeBox.open($('files-upload').getParent(), {
-			handler: 'adopt',
-			size: {x: 700, y: $('files-upload').getParent().measure(function(){return this.getSize().y;})}
-		});
-	});
+        var handleClose = function(){
+            $('files-upload').getParent().inject(tmp);
+            SqueezeBox.removeEvent('close', handleClose);
+        };
+        SqueezeBox.addEvent('close', handleClose);
+        SqueezeBox.open($('files-upload').getParent(), {
+            handler: 'adopt',
+            size: {x: 700, y: $('files-upload').getParent().measure(function(){
+                this.setStyle('width', 700);
+                var height = this.getSize().y;
+                this.setStyle('width', '');
+                return height;
+            })}
+        });
+    });
 
 	$('files-new-folder-modal').getElement('form').addEvent('submit', function(e){
 		e.stop();
@@ -150,26 +157,26 @@ window.addEvent('domready', function() {
 </script>
 
 
-<div id="files-app">
+<div id="files-app" class="com_files">
 	<?= @template('templates_icons'); ?>
 	<?= @template('templates_details'); ?>
 
 	<div id="files-sidebar">
+        <h3><?= @text('Folders'); ?></h3>
 		<div id="files-tree"></div>
 	</div>
 
 	<div id="files-canvas">
 	    <div class="path" style="height: 24px;">
-	        <div class="files-toolbar-controls btn-group">
-	        	<button id="files-show-uploader" class="btn btn-mini"><?= @text('Upload'); ?></button>
-			    <button id="files-new-folder-toolbar" class="btn btn-mini"><?= @text('New Folder'); ?></button>
-			    <button id="files-batch-delete" class="btn btn-mini" disabled><?= @text('Delete'); ?></button>
+            <div class="files-toolbar-controls btn-group">
+                <button id="files-show-uploader" class="btn btn-mini"><?= @text('Upload'); ?></button>
+                <button id="files-new-folder-toolbar" class="btn btn-mini"><?= @text('New Folder'); ?></button>
+                <button id="files-batch-delete" class="btn btn-mini" disabled><?= @text('Delete'); ?></button>
 			</div>
-			<div id="files-pathway">
-			</div>
-			<div class="files-layout-controls btn-group">
+            <div id="files-pathway"></div>
+			<div class="files-layout-controls btn-group" data-toggle="buttons-radio">
 				<button class="btn files-layout-switcher" data-layout="icons" title="<?= @text('Show files as icons'); ?>">
-                    <i class="icon-th"></i>
+                    <i class="icon-th icon-grid-view-2"></i>
 				</button>
 				<button class="btn files-layout-switcher" data-layout="details" title="<?= @text('Show files in a list'); ?>">
                     <i class="icon-list"></i>
@@ -179,7 +186,7 @@ window.addEvent('domready', function() {
 		<div class="view">
 			<div id="files-grid"></div>
 		</div>
-        <table class="table table-pagination">
+        <table class="table">
             <tfoot>
             <tr><td>
                 <?= @helper('paginator.pagination') ?>
@@ -193,8 +200,8 @@ window.addEvent('domready', function() {
 </div>
 
 <div>
-	<div id="files-new-folder-modal" style="display: none">
-        <div>
+    <div id="files-new-folder-modal" style="display: none">
+        <div class="com_files">
             <form class="files-modal well">
                 <div style="text-align: center;">
                     <h3 style=" float: none">

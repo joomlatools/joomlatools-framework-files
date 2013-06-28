@@ -23,6 +23,10 @@ Files.token = '<?= $token; ?>';
 window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
+            cookie: {
+                path: '<?=$this->getView()->baseurl?>'
+            },
+            pathway: false,
 			state: {
 				defaults: {
 					limit: 0,
@@ -36,7 +40,7 @@ window.addEvent('domready', function() {
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($state->container ? $state->container->slug : null); ?>
 		};
-	options = $extend(options, config);
+	options = Files.utils.append(options, config);
 
 	Files.app = new Files.Compact.App(options);
 
@@ -88,7 +92,7 @@ window.addEvent('domready', function() {
 
 <?= @template('com://admin/files.view.files.templates_compact');?>
 
-<div id="files-compact">
+<div id="files-compact" class="com_files">
 	<?=	@helper('tabs.startPane', array('id' => 'pane_insert')); ?>
 	<?= @helper('tabs.startPanel', array('title' => 'Insert')); ?>
 		<div id="insert">
@@ -130,7 +134,9 @@ window.addEvent('domready', function(){
         var fixHeight = function(){
             var newHeight = document.id('files-compact').measure(function(){return this.getSize().y;});
             window.parent.document.id('sbox-content').getElement('iframe').set('height', newHeight);
-            modal.fx.win.set({height: newHeight});
+
+            var win = modal.fx.win ? modal.fx.win : modal.fx.window;
+            win.set({height: newHeight});
         };
         document.getElements('#tabs-pane_insert dt, .upload-buttons li').addEvent('click', fixHeight);
         fixHeight();

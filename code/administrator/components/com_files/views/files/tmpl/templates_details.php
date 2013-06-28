@@ -1,6 +1,5 @@
 <?php
 /**
- * @version     $Id$
  * @package     Nooku_Components
  * @subpackage  Files
  * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
@@ -16,7 +15,7 @@ window.addEvent('domready', function() {
 			grid = Files.app.grid,
 			nodes = grid.nodes;
 
-		$each(nodes, function(node) {
+		Files.utils.each(nodes, function(node) {
 			if (value && !node.checked) {
 				grid.checkNode(node);
 			} else if (!value && node.checked) {
@@ -51,8 +50,8 @@ window.addEvent('domready', function() {
                 </th>
                 <th width="32"></th>
 				<th><?= @text('Name'); ?></th>
-				<th><?= @text('Size'); ?></th>
-				<th><?= @text('Last Modified'); ?></th>
+                <th><?= @text('Size'); ?></th>
+                <th><?= @text('Last Modified'); ?></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -106,9 +105,9 @@ window.addEvent('domready', function() {
 		</td>
 		<td>
             [% if (typeof thumbnail === 'string') { %]
-            <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
+                <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
             [% } else { %]
-            <img src="media://com_files/images/image-16.png" height="24px" alt="[%=name%]" border="0" />
+                <img src="media://com_files/images/image-16.png" height="24px" alt="[%=name%]" border="0" />
             [% } %]
 		</td>
 		<td>
