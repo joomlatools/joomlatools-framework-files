@@ -163,8 +163,6 @@
 .com_files .plupload_clear,.com_files .plupload_clearer{clear:both;}
 .com_files .plupload_clearer,.com_files .plupload_progress_bar{display:block;font-size:0;line-height:0;}
 .com_files li.plupload_droptext{background:transparent;text-align:center;vertical-align:middle;border:0;line-height:165px;}
-.com_files .droppable{-webkit-transition:all 1s;-moz-transition:all 1s;-o-transition:all 1s;transition:all 1s;-webkit-transform:scale(1.1);-moz-transform:scale(1.1);-ms-transform:scale(1.1);-o-transform:scale(1.1);transform:scale(1.1);border:5px green solid;}
-.com_files .dragover{opacity:0.5;}
 .com_files #uploads .upload{padding:4px;}
 .com_files #files-upload{padding:0;margin:0;overflow:hidden;}.com_files #files-upload h3{padding:15px 0 0 15px;margin:0 !important;display:block;float:left;font-size:18px;}
 .com_files #files-upload-controls .upload-buttons{padding:0;list-style:none;float:left;margin:10px 0 0 20px;}.com_files #files-upload-controls .upload-buttons li{display:inline;font-size:12px;}.com_files #files-upload-controls .upload-buttons li:first-child{padding-right:5px;}

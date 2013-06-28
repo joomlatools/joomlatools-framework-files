@@ -88,17 +88,44 @@ window.addEvent('domready', function() {
         }, createDragoverHandler = function(container){
 
             //Create hilite + label
-            container.append('<div class="dropzone-focusring success"></div>');
+            var focusring = jQuery('<div class="dropzone-focusring"></div>'),
+                label = jQuery('<div class="alert alert-success">'+Files._('Drop your file(s) to upload to {{folder}}')+'</div>');
+
+            focusring.css({
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                zIndex: 9999999,
+                borderStyle: 'solid',
+                borderWidth: '5px',
+                opacity: 0,
+                transition: 'opacity 300ms',
+                paddingTop: 10,
+                textAlign: 'center'
+            });
+            container.append(focusring);
+
+            //To inherit styling
+            jQuery('#files-upload').append(label);
+            ['border-radius', 'color', 'background', 'border'].forEach(function(prop){
+                label.css(prop, label.css(prop));
+            });
+            focusring.append(label);
+            focusring.css('border-color', label.css('color')); //border-color too bright
 
             return function(e){
 
                 e.preventDefault();// required by FF + Safari
                 e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
-                container.addClass('dragover'); //This breaks safaris drag and drop, still unknown why
+                focusring.css('display', '').css('opacity', 1);
+                //container.addClass('dropzone-dragover'); //This breaks safaris drag and drop, still unknown why
             };
         }, createDragleaveHandler = function(container){
             return function(e){
-                container.removeClass('dragover');
+                //container.removeClass('dropzone-dragover');
+                jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
             };
         }
 
@@ -155,7 +182,8 @@ window.addEvent('domready', function() {
         //Prevent file drops from duplicating due to double drop events
         jQuery('#files-upload-multi_filelist').bind('drop', function(event){
             event.stopPropagation();
-            jQuery('#files-uploader-computer').removeClass('dragover');
+            //@TODO implement the rest of the drop code from handler, to remove focusring
+            jQuery(document.body).removeClass('dropzone-dragover');
         });
 
         /* @TODO this is replaced by new code
