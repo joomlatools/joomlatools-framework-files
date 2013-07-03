@@ -95,11 +95,8 @@ class ComFilesMixinMimetype extends KObject
 		if (!class_exists('finfo')) {
 			return ComFilesMixinMimetype::NOT_AVAILABLE;
 		}
-		
-		// PHP updated libmagic to v5 in 5.3.11 which broke the old mimetype formats
-		// Use the system wide magic file for these versions
-		$database = version_compare(phpversion(), '5.3.11', '>=') ? null : dirname(__FILE__).'/mimetypes/magic';
-		$finfo    = @new finfo(FILEINFO_MIME, $database);
+
+		$finfo = @new finfo(FILEINFO_MIME);
 		
 		if (empty($finfo)) {
 		    return ComFilesMixinMimetype::NOT_AVAILABLE;
