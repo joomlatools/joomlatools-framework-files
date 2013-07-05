@@ -63,9 +63,8 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 		));
 
 		$exclude = KConfig::unbox($config->exclude);
-		$filter  = KConfig::unbox($config->filter);
-		$map     = KConfig::unbox($config->map);
-		$sort    = $config->sort ? $config->sort : 'name';
+		$filter = KConfig::unbox($config->filter);
+		$map = KConfig::unbox($config->map);
 		$recurse = $config->recurse;
 
 		$results = array();
@@ -118,11 +117,8 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 			}
 		}
 		
-		if ($sort === 'modified_on') {
+		if ($config->sort === 'modified_on') {
 			uasort($results, array('self', '_sortByDate'));
-		}
-		elseif ($sort === 'name') {
-			uasort($results, array('self', '_sortByName'));
 		}
 		
 		if ($config->return_raw === true) {
@@ -148,9 +144,6 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 	{
 		return strcmp($file1['modified'], $file2['modified']);
 	}
-	
-	public static function _sortByName($file1, $file2)
-	{
-		return strcmp($file1['path'], $file2['path']);
-	}
 }
+
+

@@ -19,6 +19,9 @@ Files.App = new Class({
 	title: '',
 	cookie: null,
 	options: {
+        cookie: {
+            path: '/'
+        },
 		persistent: true,
 		thumbnails: true,
 		types: null,
@@ -83,7 +86,9 @@ Files.App = new Class({
 			this.cookie = 'com.files.container.'+container;
 		}
 
-		this.setPathway();
+		if(this.options.pathway) {
+            this.setPathway();
+        }
 		this.setState();
 		this.setHistory();
 		this.setGrid();
@@ -115,12 +120,22 @@ Files.App = new Class({
 	},
 	setState: function() {
 		this.fireEvent('beforeSetState');
-		
+
 		if (this.cookie) {
-            var limit = Cookie.read(this.cookie+'.state.limit');
-            if (limit) {
-                this.options.state.defaults.limit = limit;
+            var state = Cookie.read(this.cookie+'.state'),
+                obj   = JSON.decode(state, true);
+
+            if (obj) {
+                if (!this.getUrl().getData('folder')) {
+                    this.options.active = obj.folder;
+                }
+
+                delete obj.folder;
+
+                this.options.state.defaults = Files.utils.merge(this.options.state.defaults, obj);
+
             }
+
         }
 
 		var opts = this.options.state;
@@ -142,7 +157,7 @@ Files.App = new Class({
 					new_state = state.data,
 					state_changed = false;
 
-				$each(old_state, function(value, key) {
+				Files.utils.each(old_state, function(value, key) {
 					if (state_changed === true) {
 						return;
 					}
@@ -152,7 +167,7 @@ Files.App = new Class({
 				});
 
 				if (that.container && (state_changed || that.active !== state.data.folder)) {
-					var set_state = $extend({}, state.data);
+					var set_state = Files.utils.append({}, state.data);
 					['option', 'view', 'layout', 'folder', 'container'].each(function(key) {
 						delete set_state[key];
 					});
@@ -166,7 +181,7 @@ Files.App = new Class({
 						folder: that.active,
 						container: that.container ? that.container.slug : null
 					};
-					obj = $extend(obj, that.state.getData());
+					obj = Files.utils.append(obj, that.state.getData());
 					var method = type === 'initial' ? 'replaceState' : 'pushState';
 					var url = that.getUrl().setData(obj, true).set('fragment', '').toString()
 					that.history[method](obj, null, url);
@@ -204,7 +219,7 @@ Files.App = new Class({
 			}.bind(this),
 			success = function(resp) {
 				if (resp.status !== false) {
-					$each(resp.items, function(item) {
+                    Files.utils.each(resp.items, function(item) {
 						if (!item.baseurl) {
 							item.baseurl = that.baseurl;
 						}
@@ -226,6 +241,12 @@ Files.App = new Class({
 		} else {
 			this.folder.getChildren(success, null, this.state.getData(), url_builder);
 		}
+
+        if (this.cookie) {
+            var data = jQuery.extend(true, {}, this.state.data);
+            data.folder = this.active;
+            Cookie.write(this.cookie+'.state', JSON.encode(data), this.options.cookie);
+        }
 
 		this.fireEvent('afterNavigate', [path, type]);
 	},
@@ -298,7 +319,7 @@ Files.App = new Class({
 		var opts = this.options.paginator,
 			state = this.state;
 
-		$extend(opts, {
+        Files.utils.append(opts, {
 			'state' : state,
 			'onClickPage': function(el) {
 				this.state.set('limit', el.get('data-limit'));
@@ -307,12 +328,18 @@ Files.App = new Class({
 				this.navigate();
 			}.bind(this),
 			'onChangeLimit': function(limit) {
-				if (this.cookie) {
-                	Cookie.write(this.cookie+'.state.limit', limit);
-            	}
-				
 				this.state.set('limit', limit);
-				this.state.set('offset', 0);
+
+                // Recalculate offset
+                var total = Files.app.paginator.values.total,
+                    offset = Files.app.paginator.values.offset;
+
+                if (total) {
+                    var page_count = Math.ceil(total/limit);
+                    offset = (page_count-1)*limit;
+                }
+
+				this.state.set('offset', offset);
 
 				this.navigate();
 			}.bind(this)
@@ -343,7 +370,7 @@ Files.App = new Class({
 			opts.layout = Cookie.read(key);
 		}
 
-		$extend(opts, {
+        Files.utils.append(opts, {
 			'onClickFolder': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
@@ -355,7 +382,8 @@ Files.App = new Class({
 			'onClickImage': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
-					img = node.retrieve('row').image;
+                    row = node.retrieve('row'),
+                    img = that.createRoute({view: 'file', format: 'raw', name: row.name, folder: row.folder});
 
 				if (img) {
 					SqueezeBox.open(img, {handler: 'image'});
@@ -365,7 +393,7 @@ Files.App = new Class({
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
 					row = node.retrieve('row'),
-					copy = $extend({}, row),
+					copy = Files.utils.append({}, row),
 					trash = new Element('div', {style: 'display: none'}).inject(document.body);
 
 				copy.template = 'file_preview';
@@ -379,7 +407,7 @@ Files.App = new Class({
 			},
 			'onAfterSetLayout': function(context) {
 				if (key) {
-					Cookie.write(key, context.layout);
+					Cookie.write(key, context.layout, this.options.cookie);
 				}
 			}.bind(this)
 		});
@@ -393,7 +421,7 @@ Files.App = new Class({
 		if (this.options.tree.enabled) {
 			var opts = this.options.tree,
 				that = this;
-			$extend(opts, {
+            Files.utils.append(opts, {
 				onClick: function(node) {
 					if (node.id || node.data.url) {
 						that.navigate(node && node.id ? node.id : '');
@@ -487,39 +515,8 @@ Files.App = new Class({
     setPathway: function() {
     	this.fireEvent('beforeSetPathway');
 
-		var opts = this.options.pathway;
-
-		this.pathway = new Files.Pathway(opts.element, opts);
-
-		var that = this,
-			pathway = this.pathway;
-		that.addEvent('afterSetTitle', function(title) {
-			if (!pathway.element) {
-				return;
-			}
-		    pathway.list.empty();
-		
-		    pathway.element.setStyle('visibility', 'hidden');
-		    
-			var root = pathway.wrap(' '+that.container.title, '', false, that).grab(new Element('i', {'class': 'icon-hdd'}), 'top'),
-		        path = '';
-		    
-			pathway.list.adopt(root);
-
-	        var folders = that.getPath().split('/');
-	        
-		    folders.each(function(title){
-		        if(title.trim()) {
-		            path += path ? '/'+title : title;
-		            pathway.list.adopt(pathway.wrap(title, path, true, that));
-		        }
-		    });
-		    
-		    pathway.list.getLast().addClass('active');
-		
-		    pathway.element.setStyle('visibility', 'visible');
-
-		});
+        var pathway = new Files.Pathway(this.options.pathway);
+        this.addEvent('afterSetTitle', pathway.setPath.bind(pathway, this));
 
 		this.fireEvent('afterSetPathway');
 	},
@@ -535,7 +532,7 @@ Files.App = new Class({
 		this.fireEvent('afterSetTitle', {title: title});
 	},
 	createRoute: function(query) {
-		query = $merge(this.options.router.defaults, query || {});
+		query = Files.utils.merge(this.options.router.defaults, query || {});
 
 		if (query.container !== false && !query.container && this.container) {
 			query.container = this.container.slug;

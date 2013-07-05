@@ -12,6 +12,11 @@ body {
 	font-family: Helvetica, Arial, sans-serif;
 }
 
+.com_files {
+    background: none;
+    border: none;
+}
+
 #files-compact {
 	width: 730px; /* Mozilla needs this */
 	overflow: hidden;
@@ -45,16 +50,24 @@ body {
 }
 #insert .properties label {
 	display: block;
-	margin-top: 10px;
+	margin-top: 5px;
 	padding-left: 5px;
+    margin-bottom: 0;
 }
 #insert .properties input[type=text] {
-	width: 98%;
+	width: 160px;
+    padding: 1px;
+}
+#insert .properties select {
+    width: auto;
 }
 
 #insert-modal-cancel,
 .insert-or {
 	font-size: 13px;
+}
+#image-form {
+    overflow: auto;
 }
 
 #insert-modal-cancel,
@@ -101,9 +114,10 @@ body {
     padding: 5px;
 }
 #files-new-folder-input {
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     border-right: none 0px transparent;
+    width: auto;
 }
 
 #files-new-folder-create {
@@ -149,7 +163,6 @@ body {
 	border-top: 1px solid #E1E1E1;
 	padding: 4px;
 	text-align: right;
-	position: absolute;
 	left: 0;
 	right: 0;
 	bottom: 0;
@@ -169,9 +182,6 @@ body {
 #insert #files-tree-container {
 	width: 200px;
 }
-#insert #files-grid {
-	width: 304px;
-}
 
 #insert #files-tree-container,
 #insert #files-grid
@@ -189,6 +199,7 @@ body {
 #insert #details,
 #insert #files-preview {
 	width: 200px;
+    margin-bottom: 0!important;
 }
 #insert #files-preview {
 	background: white;
