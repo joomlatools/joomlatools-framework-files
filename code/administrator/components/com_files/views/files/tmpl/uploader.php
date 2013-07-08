@@ -450,8 +450,8 @@ window.addEvent('domready', function() {
     <div id="files-upload" style="clear: both" class="uploader-files-empty well">
         <div style="text-align: center;">
             <h3 style=" float: none">
-                <?= @text('Upload files to %folder%', array(
-                    '%folder%' => '<span id="upload-files-to"></span>'
+                <?= @text('Upload files to {folder}', array(
+                    'folder' => '<span id="upload-files-to"></span>'
                 )) ?>
             </h3>
         </div>
@@ -461,8 +461,8 @@ window.addEvent('domready', function() {
                 <li><a class="upload-form-toggle target-computer active" href="#computer"><?= @text('Computer'); ?></a></li>
                 <li><a class="upload-form-toggle target-web" href="#web"><?= @text('Web'); ?></a></li>
                 <li id="upload-max">
-                    <?= @text('Each file should be smaller than %size%', array(
-                        '%size%' => '<span id="upload-max-size"></span>'
+                    <?= @text('Each file should be smaller than {size}', array(
+                        'size' => '<span id="upload-max-size"></span>'
                     )); ?>
                 </li>
             </ul>
