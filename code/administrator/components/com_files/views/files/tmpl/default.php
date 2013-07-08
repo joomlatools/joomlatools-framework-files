@@ -205,7 +205,7 @@ window.addEvent('domready', function() {
             <form class="files-modal well">
                 <div style="text-align: center;">
                     <h3 style=" float: none">
-                        <?= str_replace('{folder}', '<span class="upload-files-to"></span>', @text('Create a new folder in {folder}')) ?>
+                        <?= str_replace('%folder%', '<span class="upload-files-to"></span>', @text('Create a new folder in %folder%')) ?>
                     </h3>
                 </div>
                 <div class="input-append">

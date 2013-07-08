@@ -154,21 +154,21 @@ Files.Grid = new Class({
 				var message = '';
 				// special case for single deletes
 				if (file_count+folder_count === 1) {
-					message = Files._('You are deleting {item}. Are you sure?');
-					message = message.replace('{item}', folder_count ? folders[0] : files[0]);
+					message = Files._('You are deleting %item%. Are you sure?');
+					message = message.replace('%item%', folder_count ? folders[0] : files[0]);
 				} else {
 					var count   = file_count+folder_count,
-					message = Files._('You are deleting {items}. Are you sure?'),
-					items   = Files._('{count} files and folders');
+					message = Files._('You are deleting %items%. Are you sure?'),
+					items   = Files._('%count% files and folders');
 
 					if (!folder_count && file_count) {
-						items = Files._('{count} files');
+						items = Files._('%count% files');
 					} else if (folder_count && !file_count) {
-						items = Files._('{count} folders');
+						items = Files._('%count% folders');
 					}
 					
-					items   = items.replace('{count}', count);
-					message = message.replace('{items}', items);
+					items   = items.replace('%count%', count);
+					message = message.replace('%items%', items);
 				}
 				
 				if (!checkboxes.length || !confirm(message)) {
