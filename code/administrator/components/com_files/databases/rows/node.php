@@ -210,4 +210,9 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
         return $data;
     }
+
+    public function count()
+    {
+        return (int) !$this->isNew();
+    }
 }
