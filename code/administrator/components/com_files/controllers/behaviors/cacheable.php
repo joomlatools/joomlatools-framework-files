@@ -88,11 +88,6 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 				'language' 		=> $this->_getConfig('language'),
 				'storage'		=> $this->_getConfig('cache_handler', 'file')
 			);
-
-			// 2.5 does this itself
-			if (version_compare(JVERSION, '1.6', '<')) {
-				$options['lifetime'] *= 60;
-			}
 			
 			$this->_cache = JCache::getInstance('output', $options);
 		}
