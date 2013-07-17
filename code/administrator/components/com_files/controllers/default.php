@@ -22,9 +22,6 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	{
 		$config->append(array(
 			'persistable' => false,
-			'request' => array(
-				'container' => 'files-files'
-			),
 			'limit' => array('max' => 1000)
 		));
 

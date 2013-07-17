@@ -32,7 +32,7 @@ window.addEvent('domready', function() {
 				theme: 'media://com_files/images/mootree.png'
 			},
 			types: <?= json_encode($state->types); ?>,
-			container: <?= json_encode($container ? $container->slug : 'files-files'); ?>,
+			container: <?= json_encode($container ? $container->slug : null); ?>,
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
 	options = Files.utils.append(options, config);
