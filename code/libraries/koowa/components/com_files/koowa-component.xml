@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <koowa-component>
-	<identifier>kcom:files</identifier>
+	<identifier>com:files</identifier>
 	<name>files</name>
 	<version>1.0.4</version>
 </koowa-component>
