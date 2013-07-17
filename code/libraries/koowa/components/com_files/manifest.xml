@@ -22,28 +22,7 @@
 		</sql>
 	</uninstall>
 	
-    <media folder="media">
+    <media folder="media/koowa">
         <folder>com_files</folder>
     </media>
-    
-	<administration>
-		<files folder="admin">
-			<filename>dispatcher.php</filename>
-            <filename>version.php</filename>
-			
-			<folder>adapters</folder>
-			<folder>commands</folder>
-			<folder>configs</folder>
-			<folder>controllers</folder>
-			<folder>databases</folder>
-			<folder>filters</folder>
-			<folder>helpers</folder>
-			<folder>install</folder>
-			<folder>iterators</folder>
-			<folder>mixins</folder>
-			<folder>models</folder>
-			<folder>templates</folder>
-			<folder>views</folder>
-		</files>
-	</administration>
 </install>
