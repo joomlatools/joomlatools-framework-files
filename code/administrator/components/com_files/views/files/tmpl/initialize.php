@@ -39,7 +39,7 @@ defined('KOOWA') or die( 'Restricted access' );
 
 <script src="media://com_files/js/ejs/ejs.js" />
 
-<script src="media://lib_koowa/js/koowa.js" />
+<script src="media://koowa/library/js/koowa.js" />
 <script src="media://system/js/mootree.js" />
 
 <script src="media://com_files/js/files.min.js" />
