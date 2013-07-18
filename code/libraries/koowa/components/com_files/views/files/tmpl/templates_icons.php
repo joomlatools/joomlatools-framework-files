@@ -12,7 +12,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <div>
 <div class="preview extension-[%=metadata.extension%]">
     [% var view_path = Files.app.createRoute({view: 'file', format: 'raw', name: name, folder: folder}); %]
-    <img src="media://com_files/images/document-64.png" width="64" height="64" alt="[%=name%]" border="0" />
+    <img src="media://koowa/com_files/images/document-64.png" width="64" height="64" alt="[%=name%]" border="0" />
 
     <div class="btn-toolbar">
         [% if (typeof image !== 'undefined') { %]

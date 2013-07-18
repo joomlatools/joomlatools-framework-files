@@ -9,18 +9,18 @@
 defined('KOOWA') or die( 'Restricted access' );
 
 /* DEBUG FILES:
-<script src="media://com_files/js/spin.min.js" />
+<script src="media://koowa/com_files/js/spin.min.js" />
 
-<script src="media://com_files/js/files.utilities.js" />
-<script src="media://com_files/js/files.state.js" />
-<script src="media://com_files/js/files.template.js" />
-<script src="media://com_files/js/files.grid.js" />
-<script src="media://com_files/js/files.tree.js" />
-<script src="media://com_files/js/files.row.js" />
-<script src="media://com_files/js/files.paginator.js" />
-<script src="media://com_files/js/files.pathway.js" />
+<script src="media://koowa/com_files/js/files.utilities.js" />
+<script src="media://koowa/com_files/js/files.state.js" />
+<script src="media://koowa/com_files/js/files.template.js" />
+<script src="media://koowa/com_files/js/files.grid.js" />
+<script src="media://koowa/com_files/js/files.tree.js" />
+<script src="media://koowa/com_files/js/files.row.js" />
+<script src="media://koowa/com_files/js/files.paginator.js" />
+<script src="media://koowa/com_files/js/files.pathway.js" />
 
-<script src="media://com_files/js/files.app.js" />
+<script src="media://koowa/com_files/js/files.app.js" />
 */
 ?>
 
@@ -32,14 +32,14 @@ defined('KOOWA') or die( 'Restricted access' );
 <?= @helper('bootstrap.load'); ?>
 <?= @helper('behavior.jquery'); ?>
 
-<script src="media://com_files/js/history/history.js" />
+<script src="media://koowa/com_files/js/history/history.js" />
 <? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
-<script src="media://com_files/js/history/history.html4.js" />
+<script src="media://koowa/com_files/js/history/history.html4.js" />
 <? endif; ?>
 
-<script src="media://com_files/js/ejs/ejs.js" />
+<script src="media://koowa/com_files/js/ejs/ejs.js" />
 
 <script src="media://koowa/library/js/koowa.js" />
 <script src="media://system/js/mootree.js" />
 
-<script src="media://com_files/js/files.min.js" />
+<script src="media://koowa/com_files/js/files.min.js" />

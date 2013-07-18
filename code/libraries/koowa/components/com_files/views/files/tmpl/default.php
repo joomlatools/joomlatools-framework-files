@@ -29,7 +29,7 @@ window.addEvent('domready', function() {
 				}
 			},
 			tree: {
-				theme: 'media://com_files/images/mootree.png'
+				theme: 'media://koowa/com_files/images/mootree.png'
 			},
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($container ? $container->slug : null); ?>,

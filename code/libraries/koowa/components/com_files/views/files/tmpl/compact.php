@@ -11,10 +11,10 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <?= @template('com://admin/files.views.files.initialize'); ?>
 
-<script src="media://com_files/js/files.compact.js" />
+<script src="media://koowa/com_files/js/files.compact.js" />
 
-<style src="media://com_files/css/files.css" />
-<style src="media://com_files/css/files-compact.css" />
+<style src="media://koowa/com_files/css/files.css" />
+<style src="media://koowa/com_files/css/files-compact.css" />
 
 <script>
 Files.sitebase = '<?= $sitebase; ?>';
@@ -35,7 +35,7 @@ window.addEvent('domready', function() {
 			},
 			editor: <?= json_encode($state->editor); ?>,
 			tree: {
-				theme: 'media://com_files/images/mootree.png'
+				theme: 'media://koowa/com_files/images/mootree.png'
 			},
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($state->container ? $state->container->slug : null); ?>

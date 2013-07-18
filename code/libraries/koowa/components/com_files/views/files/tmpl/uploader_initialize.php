@@ -9,7 +9,7 @@
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <?= @helper('com://admin/extman.template.helper.behavior.jquery'); ?>
-<script src="media://com_files/plupload/plupload.core.html5.flash.queue.js" />
+<script src="media://koowa/com_files/plupload/plupload.core.html5.flash.queue.js" />
 
 <script>
 jQuery.noConflict();
@@ -30,7 +30,7 @@ window.addEvent('domready', function() {
         dragdrop: true,
         rename: true,
         url: '', // this is added on the go in BeforeUpload event
-        flash_swf_url: 'media://com_files/plupload/plupload.flash.swf',
+        flash_swf_url: 'media://koowa/com_files/plupload/plupload.flash.swf',
         urlstream_upload: true, // required for flash
         multipart_params: {
             action: 'add',
