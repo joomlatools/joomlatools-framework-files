@@ -25,6 +25,7 @@ defined('KOOWA') or die( 'Restricted access' );
 ?>
 
 <?= @helper('behavior.mootools'); ?>
+<?= @helper('behavior.koowa'); ?>
 <?= @helper('behavior.keepalive'); ?>
 <?= @helper('behavior.tooltip'); ?>
 <?= @helper('behavior.modal'); ?>
@@ -39,7 +40,6 @@ defined('KOOWA') or die( 'Restricted access' );
 
 <script src="media://koowa/com_files/js/ejs/ejs.js" />
 
-<script src="media://koowa/com_koowa/js/koowa.js" />
 <script src="media://system/js/mootree.js" />
 
 <script src="media://koowa/com_files/js/files.min.js" />
