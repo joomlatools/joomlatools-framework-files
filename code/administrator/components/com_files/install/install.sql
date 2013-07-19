@@ -16,6 +16,6 @@ CREATE TABLE IF NOT EXISTS `#__files_thumbnails` (
   `files_container_id` varchar(255) NOT NULL,
   `folder` varchar(255) NOT NULL,
   `filename` varchar(255) NOT NULL,
-  `thumbnail` text NOT NULL,
+  `thumbnail` mediumtext NOT NULL,
   PRIMARY KEY (`files_thumbnail_id`)
 ) DEFAULT CHARSET=utf8;

@@ -3,12 +3,12 @@
 	<identifier>com:files</identifier>
 	<name>Files</name>
  	<author>Joomlatools</author>
-    <creationDate>December 2011</creationDate>
-    <copyright>Copyright (C) 2011 Joomlatools</copyright>
+    <creationDate>June 2013</creationDate>
+    <copyright>Copyright (C) 2011 - 2013 Timble CVBA (http://www.timble.net)</copyright>
     <license>GNU GPLv3 - http://www.gnu.org/licenses/gpl.html</license>
-    <authorEmail>info@joomlatools.eu</authorEmail>
-    <authorUrl>www.joomlatools.eu</authorUrl>
-	<version>1.0.2</version>
+    <authorEmail>support@joomlatools.com</authorEmail>
+    <authorUrl>www.joomlatools.com</authorUrl>
+	<version>1.0.4</version>
 	<description></description>
 	
 	<install>
@@ -28,9 +28,8 @@
     
 	<administration>
 		<files folder="admin">
-			<filename>config.xml</filename>
-			<filename>index.html</filename>
 			<filename>dispatcher.php</filename>
+            <filename>version.php</filename>
 			
 			<folder>adapters</folder>
 			<folder>commands</folder>

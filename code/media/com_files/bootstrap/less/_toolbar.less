@@ -1,0 +1,151 @@
+
+/* This is copy paste code, which is why it's not LESS yet. :) */
+
+.toolbar-list a.disabled, .toolbar-list .unauthorized span {
+	color: gray;
+	font-weight: normal;
+}
+
+.toolbar-list .disabled span, .toolbar-list .unauthorized span {
+	background-position: bottom;
+}
+
+
+/* -- TOOLBAR STYLES ----------------------------- */
+
+/* Page titles */
+div.pagetitle {
+	padding-left: 60px;
+	background-repeat: no-repeat;
+	margin-left: 10px;
+}
+
+div.pagetitle h2 {
+	line-height: 48px;
+	font-size: 2em;
+	font-weight: bold;
+	color: #146295;
+	margin: 0;
+	padding: 0;
+}
+
+div.pagetitle span {
+	color: #666;
+}
+
+/* Modal header */
+div.configuration {
+	font-size: 1.364em;
+	font-weight: bold;
+	color: #146295;
+	padding-left: 30px;
+	margin-left: 10px;
+	padding-top: 4px;
+	background: url(../images/menu/icon-16-config.png) 0 6px no-repeat;
+}
+
+/* Main toolbars */
+div.toolbar-list {
+	float: right;
+	text-align: right;
+	padding: 0;
+}
+
+div.toolbar-list ul {
+	margin: 0;
+	padding: 0;
+}
+
+div.toolbar-list li {
+	padding: 1px 1px 3px 4px;
+	text-align: center;
+	color: #666;
+	height: 48px;
+	list-style: none;
+	float: left;
+}
+
+div.toolbar-list li.spacer {
+	width: 10px;
+}
+
+div.toolbar-list li.divider {
+	border-right: 1px solid #c7c7c7;
+	width: 2px;
+}
+
+div.toolbar-list span {
+	float: none;
+	width: 32px;
+	height: 32px;
+	margin: 0 auto;
+	display: block;
+}
+
+div.toolbar-list li a {
+	display: block;
+	float: left;
+	white-space: nowrap;
+	border: 1px solid #F4F4F4;
+	padding: 1px 5px;
+	cursor: pointer;
+}
+
+div.toolbar-list li a:hover,
+div.toolbar-list li a:focus,
+div.toolbar-list li a:active {
+	border-left: 1px solid #eee;
+	border-top: 1px solid #eee;
+	border-right: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	text-decoration: none;
+	color: #0B55C4;
+}
+
+.toolbar-inactive {	background-position: 0 32px; }
+
+
+/* -- TOOLBAR ICON STYLES ----------------------------- */
+.frontend-toolbar {
+	.icon-32-send						{	background-image: url(../../../../administrator/images/toolbar/icon-32-send.png);	}
+	.icon-32-delete						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-delete.png);	}
+	.icon-32-help						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-help.png);	}
+	.icon-32-cancel						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-cancel.png);	}
+	.icon-32-checkin					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-checkin.png);	}
+	.icon-32-options					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-config.png);	}
+	.icon-32-apply						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-apply.png);	}
+	.icon-32-back						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-back.png);	}
+	.icon-32-export						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-export.png);	}
+	.icon-32-forward					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-forward.png);	}
+	.icon-32-save						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-save.png);	}
+	.icon-32-edit						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-edit.png);	}
+	.icon-32-copy						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-copy.png);	}
+	.icon-32-move						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-move.png);	}
+	.icon-32-new						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-new.png);	}
+	.icon-32-upload						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-upload.png);	}
+	.icon-32-assign						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-publish.png);	}
+	.icon-32-html						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-html.png);	}
+	.icon-32-css						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-css.png);	}
+	.icon-32-menus						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-menu.png);	}
+	.icon-32-publish					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-publish.png);	}
+	.icon-32-unblock					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-unblock.png);	}
+	.icon-32-unpublish					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-unpublish.png);	}
+	.icon-32-restore					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-revert.png);	}
+	.icon-32-trash						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-trash.png);	}
+	.icon-32-archive					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-archive.png);	}
+	.icon-32-unarchive					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-unarchive.png);	}
+	.icon-32-preview					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-preview.png);	}
+	.icon-32-default					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-default.png);	}
+	.icon-32-refresh					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-refresh.png);	}
+	.icon-32-save-new					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-save-new.png);	}
+	.icon-32-save-copy					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-save-copy.png);	}
+	.icon-32-error						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-error.png);	}
+	.icon-32-new-style					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-new-style.png);	}
+	.icon-32-delete-style				{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-delete-style.png);	}
+	.icon-32-purge						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-purge.png);	}
+	.icon-32-remove						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-remove.png);	}
+	.icon-32-featured					{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-featured.png);	}
+	.icon-32-stats						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-stats.png);	}
+	.icon-32-print						{	background-image: url(../../../../administrator/templates/bluestork/images/toolbar/icon-32-print.png);	}
+}
+

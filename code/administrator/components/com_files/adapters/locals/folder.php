@@ -13,27 +13,26 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 	public function move($target)
 	{
 		$result = false;
-		$encoded = $this->encodePath($target);
-		$dir = dirname($encoded);
+		$dir = dirname($target);
 
-		if (!is_dir($encoded)) {
-			$result = mkdir($encoded, 0755, true);
+		if (!is_dir($target)) {
+			$result = mkdir($target, 0755, true);
 		}
 
-		if (is_dir($encoded))
+		if (is_dir($target))
 		{
 			$result = true; // needed for empty directories
-			$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->_encoded), RecursiveIteratorIterator::SELF_FIRST);
+			$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->_path), RecursiveIteratorIterator::SELF_FIRST);
 			foreach ($iterator as $f)
 			{
 				if ($f->isDir())
 				{
-					$path = $encoded.'/'.$iterator->getSubPathName();
+					$path = $target.'/'.$iterator->getSubPathName();
 					if (!is_dir($path)) {
 						$result = mkdir($path);
 					}
 				}
-				else $result = copy($f, $encoded.'/'.$iterator->getSubPathName());
+				else $result = copy($f, $target.'/'.$iterator->getSubPathName());
 
 				if ($result === false) {
 					break;
@@ -53,26 +52,25 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 	public function copy($target)
 	{
 		$result = false;
-		$encoded = $this->encodePath($target);
-		$dir = dirname($encoded);
+		$dir = dirname($target);
 
-		if (!is_dir($encoded)) {
-			$result = mkdir($encoded, 0755, true);
+		if (!is_dir($target)) {
+			$result = mkdir($target, 0755, true);
 		}
 
-		if (is_dir($encoded))
+		if (is_dir($target))
 		{
 			$result = true; // needed for empty directories
-			$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->_encoded), RecursiveIteratorIterator::SELF_FIRST);
+			$iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($this->_path), RecursiveIteratorIterator::SELF_FIRST);
 			foreach ($iterator as $f)
 			{
 				if ($f->isDir()) {
-					$path = $encoded.'/'.$iterator->getSubPathName();
+					$path = $target.'/'.$iterator->getSubPathName();
 					if (!is_dir($path)) {
 						$result = mkdir($path);
 					}
 				} else {
-					$result = copy($f, $encoded.'/'.$iterator->getSubPathName());
+					$result = copy($f, $target.'/'.$iterator->getSubPathName());
 				}
 
 				if ($result === false) {
@@ -90,11 +88,11 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 
 	public function delete()
 	{
-		if (!file_exists($this->_encoded)) {
+		if (!file_exists($this->_path)) {
 			return true;
 		}
 
-		$iter = new RecursiveDirectoryIterator($this->_encoded);
+		$iter = new RecursiveDirectoryIterator($this->_path);
 		foreach (new RecursiveIteratorIterator($iter, RecursiveIteratorIterator::CHILD_FIRST) as $f) 
 		{
 			if ($f->isDir()) {
@@ -104,15 +102,15 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 			}
 		}
 
-		return rmdir($this->_encoded);
+		return rmdir($this->_path);
 	}
 
 	public function create()
 	{
 		$result = true;
 
-		if (!is_dir($this->_encoded)) {
-			$result = mkdir($this->_encoded, 0755, true);
+		if (!is_dir($this->_path)) {
+			$result = mkdir($this->_path, 0755, true);
 		}
 
 		return $result;
@@ -120,6 +118,6 @@ class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
 
 	public function exists()
 	{
-		return is_dir($this->_encoded);
+		return is_dir($this->_path);
 	}
 }

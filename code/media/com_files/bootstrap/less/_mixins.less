@@ -1,0 +1,70 @@
+// Custom mixins
+
+//Set a base color first, this will then be turned into a semi-transparent color used in gradients that blend with the background
+@rowBackgroundColor: hsl(0, 0%, 95%);
+@rowBackgroundColorHSLA: darken(fade(@rowBackgroundColor, 100-lightness(@rowBackgroundColor)), lightness(@rowBackgroundColor));
+
+.linear-gradient (@from: hsla(0, 0%, 100%, 0.5), @to: hsla(0, 0%, 0%, 0.5)) {
+
+    @fromAlphaFromFloat: ~`Math.round(parseFloat("@{from}".split(',')[3])*255)`;
+    @fromAlphaToHex: ~`(parseInt("@{fromAlphaFromFloat}", 10) > 255 ? 255 : (parseInt("@{fromAlphaFromFloat}", 10) < 0 ? 0 : parseInt("@{fromAlphaFromFloat}", 10))).toString(16).toUpperCase()`;
+    @fromAlpha: ~`"@{from}".length != 7 ? ("@{fromAlphaToHex}".length === 1 ? '0' + "@{fromAlphaToHex}" : "@{fromAlphaToHex}") : ''`;
+    @fromOpaqueToHex: fadein(@from, 100%);
+    @fromOpaque: ~`"@{fromOpaqueToHex}".replace("#", "").toUpperCase()`;
+
+    @toAlphaFromFloat: ~`Math.round(parseFloat("@{to}".split(',')[3])*255)`;
+    @toAlphaToHex: ~`(parseInt("@{toAlphaFromFloat}", 10) > 255 ? 255 : (parseInt("@{toAlphaFromFloat}", 10) < 0 ? 0 : parseInt("@{toAlphaFromFloat}", 10))).toString(16).toUpperCase()`;
+    @toAlpha: ~`"@{to}".length != 7 ? ("@{toAlphaToHex}".length === 1 ? '0' + "@{toAlphaToHex}" : "@{toAlphaToHex}") : ''`;
+    @toOpaqueToHex: fadein(@to, 100%);
+    @toOpaque: ~`"@{toOpaqueToHex}".replace("#", "").toUpperCase()`;
+
+    background-image: -moz-linear-gradient(top, @from, @to); // FF 3.6+
+    background-image: -ms-linear-gradient(top, @from, @to); // IE10
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@from), to(@to)); // Safari 4+, Chrome 2+
+    background-image: -webkit-linear-gradient(top, @from, @to); // Safari 5.1+, Chrome 10+
+    background-image: -o-linear-gradient(top, @from, @to); // Opera 11.10
+    background-image: linear-gradient(top, @from, @to); // The standard
+    filter: ~"progid:DXImageTransform.Microsoft.gradient(startColorstr='#@{fromAlpha}@{fromOpaque}', endColorstr='#@{toAlpha}@{toOpaque}')";
+}
+
+.radial-elliptical-gradient(@innerColor, @centerColor, @outerColor: false, @fallbackColor: whiteSmoke, @canvasColor: white) when (iscolor(@outerColor)) {
+    background-color: @fallbackColor;
+    background: @canvasColor -webkit-radial-gradient(ellipse closest-corner, @innerColor, @centerColor, @outerColor);
+    background: @canvasColor -moz-radial-gradient(ellipse closest-corner, @innerColor, @centerColor, @outerColor);
+    background: @canvasColor -o-radial-gradient(ellipse closest-corner, @innerColor, @centerColor, @outerColor);
+    background: @canvasColor -ms-radial-gradient(ellipse closest-corner, @innerColor, @centerColor, @outerColor);
+    background: @canvasColor radial-gradient(ellipse closest-corner, @innerColor, @centerColor, @outerColor);
+    background-repeat: no-repeat;
+}
+.radial-elliptical-gradient(@innerColor, @outerColor, @fallbackColor: whiteSmoke, @canvasColor: white) when (iscolor(@outerColor)) {
+    background-color: @fallbackColor;
+    background: @canvasColor -webkit-radial-gradient(ellipse closest-corner, @innerColor, @outerColor);
+    background: @canvasColor -moz-radial-gradient(ellipse closest-corner, @innerColor, @outerColor);
+    background: @canvasColor -o-radial-gradient(ellipse closest-corner, @innerColor, @outerColor);
+    background: @canvasColor -ms-radial-gradient(ellipse closest-corner, @innerColor, @outerColor);
+    background: @canvasColor radial-gradient(ellipse closest-corner, @innerColor, @outerColor);
+    background-repeat: no-repeat;
+}
+
+/* @group experimental CSS4 stuff */
+/* CSS filter experiment that automatically hue rotate blue icons to match other color schemes */
+.hue-rotate-icon(@hue: 211) {
+    @rotate: (@hue - hue(@linkColor)) * -1;
+    @saturate: saturation(@linkColor);
+    -webkit-filter: hue-rotate(~`"@{rotate}deg"`) ~`"saturate(@{saturate})"`;
+}
+/* @end */
+
+// Gradients, for extreme cases (like Beez5 with the "#main a:hover" selectors destroying background styling)
+#forcegradient {
+    .vertical(@startColor: #555, @endColor: #333) {
+        background-color: mix(@startColor, @endColor, 60%)!important;
+        background-image: -moz-linear-gradient(top, @startColor, @endColor)!important; // FF 3.6+
+        background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor))!important; // Safari 4+, Chrome 2+
+        background-image: -webkit-linear-gradient(top, @startColor, @endColor)!important; // Safari 5.1+, Chrome 10+
+        background-image: -o-linear-gradient(top, @startColor, @endColor)!important; // Opera 11.10
+        background-image: linear-gradient(to bottom, @startColor, @endColor)!important; // Standard, IE10
+        background-repeat: repeat-x!important;
+        filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+    }
+}

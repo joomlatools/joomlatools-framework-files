@@ -164,8 +164,12 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 	public function saveThumbnail(KCommandContext $context = null)
 	{
 		$result = null;
-		if ($this->isImage() && $this->container->getParameters()->thumbnails)
-		{
+		$available_extensions = array('jpg', 'jpeg', 'gif', 'png');
+		
+		if ($this->isImage() 
+			&& $this->container->getParameters()->thumbnails
+			&& in_array(strtolower($this->extension), $available_extensions)
+		) {
 			$parameters = $this->container->getParameters();
 			$thumbnails_size = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
 			$thumb = $this->getService('com://admin/files.database.row.thumbnail', array('thumbnail_size' => $thumbnails_size));

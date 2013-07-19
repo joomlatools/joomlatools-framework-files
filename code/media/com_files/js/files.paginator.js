@@ -29,13 +29,13 @@ Files.Paginator = new Class({
 
 		this.element = element;
 		this.elements = {
-			page_total: element.getElement('span.page-total'),
-			page_current: element.getElement('span.page-current'),
-			page_start: element.getElement('div.start a'),
-			page_next: element.getElement('div.next a'),
-			page_prev: element.getElement('div.prev a'),
-			page_end: element.getElement('div.end a'),
-			page_container: element.getElement('div.page'),
+			page_total: element.getElement('.page-total'),
+			page_current: element.getElement('.page-current'),
+			page_start: element.getElement('.start a'),
+			page_next: element.getElement('.next a'),
+			page_prev: element.getElement('.prev a'),
+			page_end: element.getElement('.end a'),
+			page_container: element.getElement('.page'),
 			pages: {},
 			limit_box: element.getElement('select')
 		};
@@ -71,19 +71,28 @@ Files.Paginator = new Class({
 		els.page_container.empty();
 		var i = 1;
 		while (i <= values.page_total) {
+            var el = null;
 
 			if (i == values.page_current) {
-				var el = new Element('span', {text: i});
-			} else {
-				var el = new Element('a', {
+				el = new Element('span', {text: i});
+			} else if (i < 3 || Math.abs(i-values.page_total) < 2 || Math.abs(i-(values.page_current)) < 2) {
+                // Add a page link for the first and last two pages or a page around the current one
+				el = new Element('a', {
 					href: '#',
 					text: i,
 					'data-limit': values.limit,
 					'data-offset': (i-1)*values.limit
 				});
-			}
-			els.pages[i] = el;
-			el.inject(els.page_container);
+			} else if (Math.abs(i-values.page_current) < 3) {
+                // Add an ellipsis for the gaps
+                el = new Element('span', {html: '&hellip;'});
+            }
+
+            if (el) {
+                els.pages[i] = el;
+                el.inject(els.page_container);
+            }
+
 			i++;
 		}
 
@@ -101,8 +110,16 @@ Files.Paginator = new Class({
 		page.set('data-limit', limit);
 		page.set('data-offset', data.offset);
 
-		var method = data.offset == this.values.offset ? 'addClass' : 'removeClass';
-		page.getParent().getParent()[method]('off');
+		var method = data.offset == this.values.offset ? 'addClass' : 'removeClass',
+            wrap = page;
+        if(wrap.getParent() !== this.elements.page_container && wrap.getParent() !== this.element && !wrap.getParent().match('ul')) {
+            wrap = wrap.getParent();
+
+            if(wrap.getParent() !== this.elements.page_container && wrap.getParent() !== this.element && !wrap.getParent().match('ul')) {
+                wrap = wrap.getParent();
+            }
+        }
+		wrap[method]('off disabled');
 		page.set('data-enabled', (data.offset != this.values.offset)-0);
 
 		this.fireEvent('afterSetPageData', {page: page, data: data});
@@ -118,7 +135,7 @@ Files.Paginator = new Class({
 			values.page_total = 1;
 			values.page_current = 1;
 		} else {
-			$each(data, function(value, key) {
+            Files.utils.each(data, function(value, key) {
 				values[key] = value;
 			});
 
