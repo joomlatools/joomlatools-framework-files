@@ -25,8 +25,7 @@ class ComFilesFilterFileName extends KFilterAbstract
 		$value = $this->_sanitize($context->caller->name);
 
 		if ($value == '') {
-		    $translator = $this->getService('translator')->getTranslator($this->getIdentifier());
-			$context->setError($translator->translate('Invalid file name'));
+			$context->setError($this->getService('translator')->translate('Invalid file name'));
 			return false;
 		}
 	}

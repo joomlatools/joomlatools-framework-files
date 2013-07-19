@@ -39,8 +39,7 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 			}
 
 			if ($mimetype && !in_array($mimetype, $mimetypes)) {
-		        $translator = $this->getService('translator')->getTranslator($this->getIdentifier());
-				$context->setError($translator->translate('Invalid Mimetype'));
+				$context->setError($this->getService('translator')->translate('Invalid Mimetype'));
 				return false;
 			}
 		}

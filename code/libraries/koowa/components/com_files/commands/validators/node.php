@@ -21,8 +21,9 @@ class ComFilesCommandValidatorNode extends KCommand
 	{
 		$row = $context->caller;
 
-		if (!$row->isNew() && !$row->overwrite) {
-		    $translator = $this->getService('translator')->getTranslator($this->getIdentifier());
+		if (!$row->isNew() && !$row->overwrite)
+        {
+		    $translator = $this->getService('translator');
 			$context->setError($translator->translate('Resource already exists and overwrite switch is not present.'));
 			return false;
 		}
@@ -33,7 +34,7 @@ class ComFilesCommandValidatorNode extends KCommand
 	protected function _databaseBeforeCopy(KCommandContext $context)
 	{
 		$row        = $context->caller;
-		$translator = $this->getService('translator')->getTranslator($this->getIdentifier());
+		$translator = $this->getService('translator');
 
 		if (!array_intersect(array('destination_folder', 'destination_name'), $row->getModified())) {
 			$context->setError($translator->translate('Please supply a destination.'));
