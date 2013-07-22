@@ -17,7 +17,7 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesTemplateHelperTranslator extends KTemplateHelperTranslator
+class ComFilesTemplateHelperTranslator extends KTemplateHelperAbstract
 {
     public function javascript($config = array())
     {
