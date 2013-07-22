@@ -29,9 +29,6 @@ class ComFilesDispatcher extends ComKoowaDispatcher
         catch (KControllerException $e) {
             $this->_handleException($e);
         }
-        catch (KModelException $e) {
-            $this->_handleException($e);
-        }
     }
 
     protected function _handleException(Exception $e) 

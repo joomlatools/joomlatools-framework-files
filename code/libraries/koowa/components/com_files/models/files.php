@@ -32,7 +32,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
             	'sort'    => $state->sort
         	));
         	if ($files === false) {
-        		throw new KModelException('Invalid folder');
+        		throw new UnexpectedValueException('Invalid folder');
         	}
 
             $this->_total = count($files);

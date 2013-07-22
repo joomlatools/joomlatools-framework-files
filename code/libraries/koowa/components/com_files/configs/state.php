@@ -31,7 +31,7 @@ class ComFilesConfigState extends KConfigState
             $result = KService::get('com://admin/files.model.containers')->slug($result)->getItem();
 
 	        if (!is_object($result) || $result->isNew()) {
-	            throw new KModelException('Invalid container');
+	            throw new UnexpectedValueException('Invalid container');
 	        }
 
 	        $this->_data['container']->value = $result;
