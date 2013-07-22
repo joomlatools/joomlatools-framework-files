@@ -15,4 +15,4 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesDatabaseRowUrlAdapterException extends ComFilesDatabaseRowUrlException {}
+class ComFilesDatabaseExceptionRemoteAdapterError extends Exception {}
