@@ -20,7 +20,7 @@ class ComFilesViewFileRaw extends KViewFile
         }
 
         if (!file_exists($this->path)) {
-            throw new KViewException($this->getService('translator')->translate('File not found'));
+            throw new RuntimeException($this->getService('translator')->translate('File not found'));
         }
 
         return parent::display();

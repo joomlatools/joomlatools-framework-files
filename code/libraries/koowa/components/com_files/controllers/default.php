@@ -56,14 +56,14 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 			if($data->copy() === false)
 			{
 				$error = $data->getStatusMessage();
-				$context->setError(new KControllerException(
+				$context->setError(new KControllerExceptionActionFailed(
 				   $error ? $error : 'Copy Action Failed', KHttpResponse::INTERNAL_SERVER_ERROR
 				));
 
 			}
 			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
-		else $context->setError(new KControllerException('Resource Not Found', KHttpResponse::NOT_FOUND));
+		else $context->setError(new KControllerExceptionNotFound('Resource Not Found', KHttpResponse::NOT_FOUND));
 
 		return $data;
 	}
@@ -80,14 +80,14 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 			if($data->move() === false)
 			{
 				$error = $data->getStatusMessage();
-				$context->setError(new KControllerException(
+				$context->setError(new KControllerExceptionActionFailed(
 				   $error ? $error : 'Move Action Failed', KHttpResponse::INTERNAL_SERVER_ERROR
 				));
 
 			}
 			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
-		else $context->setError(new KControllerException('Resource Not Found', KHttpResponse::NOT_FOUND));
+		else $context->setError(new KControllerExceptionNotFound('Resource Not Found', KHttpResponse::NOT_FOUND));
 
 		return $data;
 	}

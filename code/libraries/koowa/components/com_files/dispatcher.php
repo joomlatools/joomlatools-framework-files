@@ -26,7 +26,7 @@ class ComFilesDispatcher extends ComKoowaDispatcher
         try {
             return parent::execute($action, $context);
         }
-        catch (KControllerException $e) {
+        catch (Exception $e) {
             $this->_handleException($e);
         }
     }

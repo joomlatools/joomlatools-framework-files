@@ -24,15 +24,10 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 		if (is_string($row->file) && !is_uploaded_file($row->file))
 		{
 			// remote file
-			try {
-				$file = $this->getService('com://admin/files.database.row.url');
-				$file->setData(array('file' => $row->file));
-				$file->load();
-				$row->contents = $file->contents;
-
-			} catch (ComFilesDatabaseRowUrlException $e) {
-				throw new KControllerException($e->getMessage(), $e->getCode());
-			}
+            $file = $this->getService('com://admin/files.database.row.url');
+            $file->setData(array('file' => $row->file));
+            $file->load();
+            $row->contents = $file->contents;
 
 			if (empty($row->name))
 			{
