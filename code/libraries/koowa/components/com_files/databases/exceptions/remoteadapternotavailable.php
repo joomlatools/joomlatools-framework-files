@@ -15,4 +15,4 @@
  * @package     Nooku_Components
  * @subpackage  Files
  */
-class ComFilesExceptionRemoteAdapterNotAvailable extends Exception {}
+class ComFilesDatabaseExceptionRemoteAdapterNotAvailable extends Exception {}
