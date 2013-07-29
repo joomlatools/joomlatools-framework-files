@@ -1,0 +1,624 @@
+// Overrides for default backend template
+fieldset label {
+	float: none;
+	clear: none;
+	margin: 0;
+}
+input, textarea {
+    &, &:focus {
+        background-color: white;
+    }
+}
+table {
+	a, a:link, a:visited {
+        color: #025A8D; //darken(@linkColor, 20%);
+	}
+	a:hover {
+		color: @linkColorHover;
+	}
+}
+/* To avoid ugly white borders due to background images expecting a white background */
+.pagination-legacy {
+    .button2-right div,
+    .button2-left div,
+    .button2-right,
+    .button2-left,
+    a {
+        border-radius: 5px;
+    }
+
+    .button2-right div {
+        border-radius: 5px;
+    }
+
+    .limit select {
+        vertical-align: 1%;
+        font-size: inherit;
+    }
+}
+.pagination-toolbar {
+    a {
+        color: @linkColor;
+    }
+    //J!3.0 pagination fix
+    .page span {
+        line-height: 26px;
+        cursor: default;
+    }
+    .disabled {
+        .opacity(100);
+
+        a {
+            color: #999;
+            background-color: white;
+        }
+    }
+    .limit {
+        float: left;
+        height: 22px;
+        line-height: 26px;
+        margin: 0 10px;
+
+        &.pull-right {
+            float: right;
+        }
+    }
+}
+
+/* fixing a width problem */
+#files-paginator-container {
+    width: auto;
+}
+
+///* Missioncontrol pagination styling */
+#mc-component & .pagination {
+    div.limit {
+        float: left;
+        height: 22px;
+        margin: 0 5px;
+        color: hsl(0, 0%, 40%);
+        text-shadow: 1px 1px 0 white;
+        font-size: 12px;
+        line-height: 20px;
+
+        select {
+            height: 1.8em;
+            margin-top: 0.1em;
+            font-size: 1em;
+        }
+    }
+
+    .button2-left,
+    .button2-right {
+        float: left;
+        margin-left: 5px;
+        margin-right: 10px;
+        font-size: 12px;
+        margin-left: 2px;
+        margin-right: 0px;
+
+        a,
+        span,
+        .page {
+            display: block;
+            float: left;
+            cursor: pointer;
+            height: auto;
+            padding: 3px 8px;
+            background: hsl(0, 0%, 36%);
+            color: white;
+            font-size: 12px;
+            line-height: 13px;
+            border-radius: 4px;
+        }
+
+        &.off {
+            opacity: 0.5;
+
+            a {
+                cursor: default;
+                text-decoration: none;
+            }
+        }
+
+        .page {
+            padding: 0 7px;
+            cursor: default;
+
+            a,
+            span {
+                background: none;
+                padding: 3px 7px;
+                margin: 0;
+            }
+
+            span {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+
+form {
+	margin-bottom: 0; // Bootstrap override
+}
+
+.table td {
+	vertical-align: middle; // Bootstrap override
+	
+	// Override select boxes in tables
+	select {
+		width: auto;
+		line-height: 20px;
+		height: 20px;
+		margin: 0;
+        padding: 0;
+	}
+}
+
+#files-app {
+	background-color: #FFF;
+	border: 1px solid darken(#F4F4F4, 10%);
+	.border-radius(2px);
+	.clearfix();
+}
+
+.spacing {
+	padding: 20px;
+}
+
+.document-form {
+    background-color: @grayLighter;
+    border: 1px solid darken(@grayLighter, 10%);
+    padding: 10px;
+    .border-radius(5px);
+}
+
+.form-actions {
+	margin: 0;
+}
+
+.help-info {
+	height: @baseLineHeight;
+	padding: 4px;
+	margin-bottom: 9px;
+	font-size: @baseFontSize;
+	line-height: @baseLineHeight;
+	color: @gray;
+	
+	display: inline-block;
+	.ie7-inline-block();
+	margin-bottom: 0;
+}
+
+.table {
+	margin-top: 0px;
+	margin-bottom: 0px; // Bootstap override
+    color: #616161;
+
+    th, td {
+        white-space: nowrap;
+    }
+
+	thead {
+		background-color: @grayLighter;
+		
+		th {
+			padding: 4px 8px;
+        }
+		
+		td {
+			background-color: lighten(@grayLighter, 3%);
+		}
+	}
+	
+	tbody {
+        &.selected-single tr.selected td {
+			border-top-color: spin(@btnPrimaryBackground, 5%);
+			#gradient > .vertical(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+            .box-shadow(hsla(0, 0%, 100%, 0.2) 0 1px 0 inset);
+            text-shadow: hsla(0, 0%, 0%, 0.2) 0 -1px 0;
+        }
+        &.selected-multiple tr.selected td {
+            background: @btnPrimaryBackground;
+        }
+
+		tr {
+			td {
+                a {
+                    font-size: 1.1em;
+                }
+				small {
+                    display: block;
+                    margin-top: -2px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+				}
+			}
+
+            &.selected td, &.selected td a, &.selected td small, &.selected td span {
+                color: white!important;
+            }
+		}
+	}
+	
+	tfoot td {
+		background-color: @grayLighter;
+        text-align: center;
+
+        .pagination {
+            display: inline-block;
+            padding: 0;
+            margin: 0 auto;
+        }
+	}
+}
+
+#documents-sidebar {
+	.sidebar-inner {
+		border-right: 1px solid @tableBorder;
+	}
+	
+	h3 {
+		background-color: @grayLighter;
+		padding: 3px 8px;
+		line-height: 18px;
+		border-bottom: 1px solid @tableBorder;
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #666;
+        text-shadow: white 0 1px 0;
+        margin: 0;
+	}
+
+    .documents-filters {
+        overflow: hidden;
+        border-top: solid @tableBorder 1px;
+        background-color: @formActionsBackground;
+
+        h4 {
+            font-size: 12px;
+            padding: 10px 10px 10px 10px;
+            margin: 0 0 0 0;
+        }
+        .controls {
+            padding: 5px 10px;
+        }
+        > .controls {
+            border-right: 1px solid white;
+        }
+
+        label, input, select {
+            font-size: 11px;
+        }
+        input, select {
+            padding: 2px;
+        }
+        select {
+            height: 24px;
+        }
+        label {
+            margin-bottom: 0px;
+            height: 11px;
+            padding: 0 2px;
+        }
+        #search_date_img {
+            padding: 2px 5px;
+        }
+
+        #day_range {
+            width: auto;
+        }
+        #search_date {
+            width: 64px; 
+        }
+    }
+
+}
+
+ul.sidebar-nav {
+	margin: 0;
+	padding: 0;
+
+	li {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		line-height: 12px;
+	}
+	
+	li a {
+		display: block;
+		padding: 6px 0 6px 10px;
+		color: #444;
+		border-top: 1px solid #F9F9F9;
+		
+		
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	
+	li a:hover,
+	li.active ul li a:hover {
+		color: #444;
+		border-top-color: lighten(@btnPrimaryBackground, 20%);
+		#gradient > .vertical(lighten(@btnPrimaryBackground, 25%), lighten(@btnPrimaryBackground, 15%));
+		text-decoration: none;
+	}
+	
+	li.active a,
+	li.active a:hover {
+		color: #FFF;
+		border-top-color: spin(@btnPrimaryBackground, 5%);
+		#gradient > .vertical(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+		.box-shadow(hsla(0, 0%, 100%, 0.2) 0 1px 0 inset);
+		text-shadow: hsla(0, 0%, 0%, 0.2) 0 -1px 0;
+	}
+	
+	li ul li a {
+		padding-left: 32px;
+	}
+	
+	li.active ul li a {
+		background: none;
+		color: #444;
+		border-top-color: #F9F9F9;
+	}
+}
+
+/* @group Scope Bar */
+.scopebar {
+    height: 18px;
+
+    padding: 3px 10px 3px;
+    #gradient > .vertical(#F2F2F2, #E9E9E9);
+    border-bottom: 1px solid #DBDBDB;
+
+    .scopebar-group {
+        display: block;
+        float: left;
+        border-right: 1px solid #BBB;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-right: 10px;
+        margin-right: 10px;
+        position: relative;
+        z-index: 1; //For the search part to not make links unclickable
+
+        &.last {
+            border-right: 0 none;
+            margin-right: 0;
+        }
+
+        a {
+            margin: 0 2px;
+            padding: 2px 7px;
+            font-weight: bold;
+            color: #363636;
+            text-transform: capitalize;
+            text-shadow: hsla(0, 0%, 100%, 0.75) 0 1px 0;
+        }
+
+        a:hover,
+        a.active {
+            text-decoration: none;
+            background: #A0A0A0;
+            color: #FFF;
+            .border-radius(10px);
+            text-shadow: hsla(0, 0%, 0%, 0.35) 0 1px 0;
+        }
+
+        a.active,
+        a:hover:active {
+            .box-shadow(~"inset hsla(0, 0%, 20%, 0.8) 0px 1px 2px, white 0 1px 0");
+        }
+
+        a:hover:active {
+            background: gray;
+        }
+    }
+
+    .scopebar-search {
+        margin-left: 25px;
+        text-align: right;
+        position: relative;
+
+        label {
+            position: absolute;
+            right: 213px;
+            top: 2px;
+            opacity: 0.75;
+        }
+        input {
+            max-width: 250px;
+            padding: 1px;
+            padding-left: 17px;
+            font-size: 11px;
+            height: 15px;
+        }
+
+        button {
+            display: none;
+        }
+    }
+}
+/* @end */
+
+///* @group Tags styling */
+.tagsinput .tag {
+    margin: 2px;
+    position: relative;
+    padding-right: 18px;
+    color: @textColor;
+    .user-select(none);
+
+    @closeBtnColor: mix(@textColor, @btnBorder, 20%);
+
+    .remove-tag {
+        display: block;
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        bottom: 3px;
+        margin: 0px;
+        padding: 2px;
+        font-size: 16px;
+        line-height: 10px;
+        text-shadow: none;
+        font-weight: normal;
+        color: @closeBtnColor;
+        .border-radius(2px);
+        background-color: transparent;
+    }
+
+    &:hover .remove-tag {
+        color: white;
+        background-color: @closeBtnColor;
+        .transition(background-color .1s linear);
+    }
+    &:active .remove-tag {
+        color: white;
+        background-color: darken(@closeBtnColor, 10%);
+    }
+}
+///* @end */
+
+///* @group Modal styling for file details */
+&.modal-inspector {
+    max-width: 400px;
+
+    hr {
+        border-top-color: lighten(@textColor, 60%);
+        //@TODO make mixin of mask css
+        -webkit-mask-box-image: -webkit-linear-gradient(left,transparent,black,black,transparent);
+        margin: 10px 0 0;
+    }
+    hr.last {
+        margin: 0 0 10px;
+    }
+
+    .preview {
+        text-align: center;
+        padding: 10px 10px 0;
+    }
+    .parameters {
+        border: none;
+
+        tr, td {
+            border: none;
+            color: @textColor;
+        }
+        .detail-label {
+            text-align: right;
+            color: lighten(@textColor, 30%);
+        }
+    }
+    .documents {
+        thead, thead tr, thead tr td {
+            background: none;
+        }
+    }
+    h3 {
+        font-size: 12px;
+        color: lighten(@textColor, 15%);
+        margin: 0;
+        line-height: 27px;
+    }
+}
+///* @end */
+
+///* @group DOClink */
+.doclink {
+    .menuitem .mooTree_img {
+        background-position-x: -270px!important;
+    }
+    .menuitem.closed .mooTree_img {
+        background-position-x: -252px!important;
+    }
+
+    @selected: @blueDark;
+    @borderTop: lighten(@selected, 15%);
+    @selectedGradientEnd: @selected;
+    @selectedGradientStart: lighten(@selectedGradientEnd, 20%);
+
+    @focusSelected: spin(lighten(desaturate(@selected, 60%), 20%), 5);
+    @borderFocusTop: lighten(@focusSelected, 15%);
+    @selectedFocusGradientEnd: @focusSelected;
+    @selectedFocusGradientStart: lighten(@selectedFocusGradientEnd, 20%);
+
+    .mooTree_selected,
+    .mooTree_selected:hover{
+        border-top-color: @borderFocusTop;
+        #gradient > .vertical(@selectedFocusGradientStart, @selectedFocusGradientEnd);
+
+    }
+    .focus {
+        .mooTree_selected,
+        .mooTree_selected:hover{
+            border-top-color: @borderTop;
+            #gradient > .vertical(@selectedGradientStart, @selectedGradientEnd);
+
+        }
+    }
+
+    tr.selected td {
+        border-top-color: lighten(@blueDark, 15%);
+        #gradient > .vertical(lighten(@blueDark, 20%), @blueDark);
+        .box-shadow(hsla(0, 0%, 100%, 0.2) 0 1px 0 inset);
+        text-shadow: hsla(0, 0%, 0%, 0.2) 0 -1px 0;
+    }
+}
+///* @end */
+
+///* @group Breadcrumb customization */
+.breadcrumb-resizable {
+    overflow: hidden;
+    margin: 0;
+    padding: 2.5px 0px;
+    line-height: 18px;
+
+    li {
+        max-height: 23px;
+        display: inline-block;
+        overflow: hidden;
+        .user-select(none);
+        cursor: pointer;
+        padding: 0;
+
+        span {
+            display: inline-block;
+            overflow: visible;
+            vertical-align: top;
+            padding: 0 2px;
+        }
+
+        //For later
+        //-webkit-mask: -webkit-linear-gradient(right, rgba(0, 0, 0, 0), black 10px);
+
+        &.active {
+            cursor: default;
+        }
+
+        span.divider {
+            padding: 0 2px 0 0;
+        }
+
+        &.overflow-ellipsis {
+            text-overflow: ellipsis;
+        }
+
+        &:active {
+            color: @grayLight;
+        }
+
+        &:first-child span {
+            padding-left: 0px;
+        }
+        &:last-child span {
+            padding-right: 0px;
+        }
+  }
+}
+///* @end */
