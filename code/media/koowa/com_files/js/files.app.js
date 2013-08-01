@@ -349,9 +349,9 @@ Files.App = new Class({
 		var that = this;
 		that.addEvent('afterSelect', function(response) {
 			that.paginator.setData({
-				limit: response.limit,
-				offset: response.offset,
-				total: response.total
+				limit: response.items.limit,
+				offset: response.items.offset,
+				total: response.items.total
 			});
 			that.paginator.setValues();
 		});
