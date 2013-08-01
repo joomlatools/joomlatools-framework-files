@@ -209,7 +209,7 @@ Files.App = new Class({
 		var parts = this.active.split('/'),
 			name = parts[parts.length ? parts.length-1 : 0],
 			folder = parts.slice(0, parts.length-1).join('/'),
-			that = this
+			that = this,
 			url_builder = function(url) {
 				if (revalidate_cache) {
 					url['revalidate_cache'] = 1;
@@ -218,13 +218,13 @@ Files.App = new Class({
 			}.bind(this),
 			success = function(resp) {
 				if (resp.status !== false) {
-                    Files.utils.each(resp.items, function(item) {
+                    Files.utils.each(resp.items.data, function(item) {
 						if (!item.baseurl) {
 							item.baseurl = that.baseurl;
 						}
 					});
 					that.response = resp;
-					that.grid.insertRows(resp.items);
+					that.grid.insertRows(resp.items.data);
 
 					that.fireEvent('afterSelect', resp);
 				} else {

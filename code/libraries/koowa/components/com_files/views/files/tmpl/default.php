@@ -73,7 +73,7 @@ window.addEvent('domready', function() {
 				}
 				element.set('value', '');
 				$('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
-				var el = response.item;
+				var el = response.data;
 				var cls = Files[el.type.capitalize()];
 				var row = new cls(el);
 				Files.app.grid.insert(row);
