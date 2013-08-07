@@ -245,7 +245,7 @@ window.addEvent('domready', function() {
     uploader.bind('FileUploaded', function(uploader, file, response) {
         var json = JSON.decode(response.response, true) || {};
         if (json.status) {
-            var item = json.item;
+            var item = json.data;
             var cls = Files[item.type.capitalize()];
             var row = new cls(item);
             Files.app.grid.insert(row);
@@ -446,7 +446,7 @@ window.addEvent('domready', function() {
         },
         onSuccess: function(json) {
             if (this.status == 201 && json.status) {
-                var el = json.item;
+                var el = json.data;
                 var cls = Files[el.type.capitalize()];
                 var row = new cls(el);
                 Files.app.grid.insert(row);
