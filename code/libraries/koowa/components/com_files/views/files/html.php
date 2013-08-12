@@ -8,14 +8,11 @@
  */
 
 /**
- * Files Html View Class
+ * Files Html View
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @category	Nooku
- * @package     Nooku_Server
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
-
 class ComFilesViewFilesHtml extends ComKoowaViewHtml
 {
 	protected function _initialize(KConfig $config)

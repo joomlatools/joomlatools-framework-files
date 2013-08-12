@@ -8,13 +8,11 @@
  */
 
 /**
- * File Database Row Class
+ * File Database Row
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
-
 class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 {
 	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp');

@@ -8,11 +8,10 @@
  */
 
 /**
- * Attach thumbnais to the rows if they are available
+ * Thumbnailable Controller Behavior
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
 class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstract
 {

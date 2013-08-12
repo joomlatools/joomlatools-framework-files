@@ -7,6 +7,12 @@
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
 
+/**
+ * Iterator Local Adapter
+ *
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
+ */
 class ComFilesAdapterLocalIterator extends KObject
 {
 	public function getFiles(array $config = array())

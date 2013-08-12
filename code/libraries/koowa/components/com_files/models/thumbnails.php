@@ -8,11 +8,10 @@
  */
 
 /**
- * Thumbnails Model Class
+ * Thumbnails Model
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
 class ComFilesModelThumbnails extends ComKoowaModelDefault
 {
@@ -31,7 +30,6 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 			->insert('types', 'cmd', '')
 			->insert('config'   , 'json', '')
 			;
-
 	}
 
 	protected function _initialize(KConfig $config)

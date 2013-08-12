@@ -8,13 +8,11 @@
  */
 
 /**
- * Folders Database Rowset Class
+ * Folders Database Rowset
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
-
 class ComFilesDatabaseRowsetFolders extends ComFilesDatabaseRowsetNodes
 {
     /**

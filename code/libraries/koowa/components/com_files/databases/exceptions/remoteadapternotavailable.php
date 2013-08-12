@@ -8,7 +8,7 @@
  */
 
 /**
- * Specialized exception for remote file adapters
+ * Remote Adapter Not Available Database Exception
  *
  * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
  * @package     Nooku_Components

@@ -8,11 +8,10 @@
  */
 
 /**
- * File Validator Command Class
+ * File Validator Command
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
 class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 {

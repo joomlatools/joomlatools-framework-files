@@ -7,6 +7,12 @@
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
 
+/**
+ * File Local Adapter
+ *
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
+ */
 class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 {
 	protected $_metadata;

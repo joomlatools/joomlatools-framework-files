@@ -8,11 +8,10 @@
  */
 
 /**
- * Filter class for validating containers
+ * Container Filter
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
 class ComFilesFilterContainer extends KFilterAbstract
 {
@@ -21,9 +20,8 @@ class ComFilesFilterContainer extends KFilterAbstract
     protected function _validate($data)
     {
         if (is_string($data)) {
-            return $this->getService('koowa:filter.cmd')->validate($value);
-        }
-        else if (is_object($data)) {
+            return $this->getService('koowa:filter.cmd')->validate($data);
+        } else if (is_object($data)) {
             return true;
         }
 
@@ -34,8 +32,7 @@ class ComFilesFilterContainer extends KFilterAbstract
     {
         if (is_string($data)) {
             return $this->getService('koowa:filter.cmd')->sanitize($data);
-        }
-        else if (is_object($data)) {
+        } else if (is_object($data)) {
             return $data;
         }
 

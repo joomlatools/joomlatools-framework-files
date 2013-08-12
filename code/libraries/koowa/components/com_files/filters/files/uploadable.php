@@ -7,13 +7,11 @@
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
 /**
- * File Uploadble Filter Class
+ * File Uploadble Filter
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
-
 class ComFilesFilterFileUploadable extends KFilterAbstract
 {
 	protected $_walk = false;

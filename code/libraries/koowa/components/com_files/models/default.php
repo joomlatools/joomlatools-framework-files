@@ -8,13 +8,11 @@
  */
 
 /**
- * Default Model Class
+ * Default Model
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
-  * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
-
 class ComFilesModelDefault extends KModelAbstract
 {
 	public function __construct(KConfig $config)

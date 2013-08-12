@@ -7,6 +7,12 @@
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
 
+/**
+ * Raw File View
+ *
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
+ */
 class ComFilesViewFileRaw extends KViewFile
 {
     public function display()

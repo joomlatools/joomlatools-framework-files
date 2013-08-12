@@ -8,16 +8,14 @@
  */
 
 /**
- * Custom directory iterator with additional filters and callbacks.
+ * Directory Iterator
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
 class ComFilesIteratorDirectory extends DirectoryIterator
 {
     /**
-     *
      * Method to get files in a folder
      *
      * @param array $config
@@ -29,7 +27,6 @@ class ComFilesIteratorDirectory extends DirectoryIterator
     }
 
     /**
-     *
      * Method to get child folders of a folder
      *
      * @param array $config
@@ -41,7 +38,6 @@ class ComFilesIteratorDirectory extends DirectoryIterator
     }
 
     /**
-     *
      * Method to read child nodes of a folder
      *
      * @param array $config

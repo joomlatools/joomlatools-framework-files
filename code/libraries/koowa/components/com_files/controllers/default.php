@@ -8,13 +8,11 @@
  */
 
 /**
- * Node Controller Class
+ * Default Controller
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
-
 class ComFilesControllerDefault extends ComKoowaControllerDefault
 {
 	protected function _initialize(KConfig $config)

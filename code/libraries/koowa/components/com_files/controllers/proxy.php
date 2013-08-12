@@ -8,13 +8,13 @@
  */
 
 /**
- * Proxy Controller Class
+ * Proxy Controller
  *
- * Used to perform cross origin HEAD request calls on resources to see if they exist, and if exists then also pass the Content-length header
+ * Used to perform cross origin HEAD request calls on resources to see if they exist, and if exists then also pass the
+ * Content-length header
  *
- * @author      Stian Didriksen <http://nooku.assembla.com/profile/stiandidriksen>
-  * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Stian Didriksen <https://github.com/stipsan>
+ * @package Koowa\Component\Files
  */
  class ComFilesControllerProxy extends ComFilesControllerDefault
 {
