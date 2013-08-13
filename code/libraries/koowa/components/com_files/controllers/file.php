@@ -19,7 +19,8 @@ class ComFilesControllerFile extends ComFilesControllerDefault
 	{
 		parent::__construct($config);
 
-		$this->registerCallback(array('before.add', 'before.edit'), array($this, 'addFile'));
+		$this->registerCallback('before.add'  , array($this, 'addFile'));
+        $this->registerCallback('before.edit' , array($this, 'addFile'));
 	}
 	
 	protected function _initialize(KConfig $config)
