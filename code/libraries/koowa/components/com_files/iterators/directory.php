@@ -1,23 +1,21 @@
 <?php
 /**
- * @package     Nooku_Components
- * @subpackage  Files
- * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
- * @license     GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
- * @link        http://www.nooku.org
+ * Koowa Framework - http://developer.joomlatools.com/koowa
+ *
+ * @copyright	Copyright (C) 2011 - 2013 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
+ * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
 
 /**
- * Custom directory iterator with additional filters and callbacks.
+ * Directory Iterator
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
 class ComFilesIteratorDirectory extends DirectoryIterator
 {
     /**
-     *
      * Method to get files in a folder
      *
      * @param array $config
@@ -29,7 +27,6 @@ class ComFilesIteratorDirectory extends DirectoryIterator
     }
 
     /**
-     *
      * Method to get child folders of a folder
      *
      * @param array $config
@@ -41,7 +38,6 @@ class ComFilesIteratorDirectory extends DirectoryIterator
     }
 
     /**
-     *
      * Method to read child nodes of a folder
      *
      * @param array $config

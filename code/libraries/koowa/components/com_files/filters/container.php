@@ -1,18 +1,17 @@
 <?php
 /**
- * @package     Nooku_Components
- * @subpackage  Files
- * @copyright   Copyright (C) 2011 - 2012 Timble CVBA and Contributors. (http://www.timble.net).
- * @license     GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
- * @link        http://www.nooku.org
+ * Koowa Framework - http://developer.joomlatools.com/koowa
+ *
+ * @copyright	Copyright (C) 2011 - 2013 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
+ * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
 
 /**
- * Filter class for validating containers
+ * Container Filter
  *
- * @author      Ercan Ozkaya <http://nooku.assembla.com/profile/ercanozkaya>
- * @package     Nooku_Components
- * @subpackage  Files
+ * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @package Koowa\Component\Files
  */
 class ComFilesFilterContainer extends KFilterAbstract
 {
@@ -21,9 +20,8 @@ class ComFilesFilterContainer extends KFilterAbstract
     protected function _validate($data)
     {
         if (is_string($data)) {
-            return $this->getService('koowa:filter.cmd')->validate($value);
-        }
-        else if (is_object($data)) {
+            return $this->getService('koowa:filter.cmd')->validate($data);
+        } else if (is_object($data)) {
             return true;
         }
 
@@ -34,8 +32,7 @@ class ComFilesFilterContainer extends KFilterAbstract
     {
         if (is_string($data)) {
             return $this->getService('koowa:filter.cmd')->sanitize($data);
-        }
-        else if (is_object($data)) {
+        } else if (is_object($data)) {
             return $data;
         }
 
