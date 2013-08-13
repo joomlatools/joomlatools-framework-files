@@ -41,7 +41,7 @@ class ComFilesModelDefault extends KModelAbstract
 	protected function _initialize(KConfig $config)
 	{
 		$config->append(array(
-			'state' => new ComFilesConfigState()
+			'state' => new ComFilesModelState()
 		));
 
 		parent::_initialize($config);
