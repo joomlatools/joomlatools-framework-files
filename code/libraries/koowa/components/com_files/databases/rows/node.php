@@ -21,7 +21,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 	{
 		parent::__construct($config);
 
-		$this->mixin(new KMixinCommandchain($config->append(array('mixer' => $this))));
+		$this->mixin(new KCommandMixin($config->append(array('mixer' => $this))));
 
 		if ($config->validator !== false)
 		{
