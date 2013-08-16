@@ -42,7 +42,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 		{
 			try {
 				//Load the library
-				$this->getService('koowa:loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
+				$this->getService('koowa:class.loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
 				
 				//Create the thumb
 				$image = PhpThumbFactory::create($source->fullpath)

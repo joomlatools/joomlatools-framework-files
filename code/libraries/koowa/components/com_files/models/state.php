@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesConfigState extends KConfigState
+class ComFilesModelState extends KModelState
 {
 	/**
 	 * Needed to make sure form filter does not add config to the form action
