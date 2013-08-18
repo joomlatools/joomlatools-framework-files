@@ -35,7 +35,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
     {
         $identifier         = clone $this->getIdentifier();
         $identifier->path   = array('database', 'row');
-        $identifier->name   = KInflector::singularize($this->getIdentifier()->name);
+        $identifier->name   = KStringInflector::singularize($this->getIdentifier()->name);
 
         return $this->getService($identifier, $options);
     }

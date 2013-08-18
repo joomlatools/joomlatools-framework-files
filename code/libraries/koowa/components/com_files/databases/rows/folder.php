@@ -113,7 +113,7 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 		{
 			$identifier         = clone $this->getIdentifier();
 			$identifier->path   = array('database', 'rowset');
-			$identifier->name   = KInflector::pluralize($this->getIdentifier()->name);
+			$identifier->name   = KStringInflector::pluralize($this->getIdentifier()->name);
 
 			//The row default options
 			$options  = array(

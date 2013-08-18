@@ -36,7 +36,7 @@ class ComFilesTemplateHelperFilesize extends KTemplateHelperAbstract
 		}
 
 		if ($result == 1) {
-			$size = KInflector::singularize($size);
+			$size = KStringInflector::singularize($size);
 		}
 
 		return sprintf($format, $result, $this->translate($size));
