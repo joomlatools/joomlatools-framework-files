@@ -17,14 +17,14 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 {
     protected $_thumbnail_size;
 
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
-		$this->setThumbnailSize(KConfig::unbox($config->thumbnail_size));
+		$this->setThumbnailSize(KObjectConfig::unbox($config->thumbnail_size));
 	}
 
-    protected function _initialize(KConfig $config)
+    protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
             'thumbnail_size' => array('x' => 200, 'y' => 150)

@@ -15,7 +15,7 @@
  */
 class ComFilesModelDefault extends KModelAbstract
 {
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
@@ -38,7 +38,7 @@ class ComFilesModelDefault extends KModelAbstract
 			;
 	}
 
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
 			'state' => new ComFilesModelState()

@@ -15,7 +15,7 @@
  */
 class ComFilesViewFilesHtml extends ComKoowaViewHtml
 {
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		$config->auto_assign = false;
 

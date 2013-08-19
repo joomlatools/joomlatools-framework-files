@@ -17,7 +17,7 @@ class ComFilesFilterFolderUploadable extends KFilterAbstract
 {
 	protected $_walk = false;
 
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 

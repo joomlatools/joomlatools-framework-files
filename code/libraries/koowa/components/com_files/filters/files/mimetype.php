@@ -20,7 +20,7 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 	protected function _validate($context)
 	{
 		$row = $context->caller;
-		$mimetypes = KConfig::unbox($row->container->parameters->allowed_mimetypes);
+		$mimetypes = KObjectConfig::unbox($row->container->parameters->allowed_mimetypes);
 
 		if (is_array($mimetypes))
 		{

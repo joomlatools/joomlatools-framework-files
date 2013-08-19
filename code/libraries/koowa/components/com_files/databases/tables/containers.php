@@ -15,7 +15,7 @@
  */
 class ComFilesDatabaseTableContainers extends KDatabaseTableDefault
 {
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		$behavior = $this->getService('koowa:database.behavior.sluggable', array('columns' => array('id', 'title')));
 
