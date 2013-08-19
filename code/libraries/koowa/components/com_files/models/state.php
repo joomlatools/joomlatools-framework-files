@@ -33,7 +33,7 @@ class ComFilesModelState extends KModelState
 
         if ($name === 'container' && is_string($result))
         {
-            $result = KObjectManager::get('com://admin/files.model.containers')->slug($result)->getItem();
+            $result = KObjectManager::getObject('com://admin/files.model.containers')->slug($result)->getItem();
 
 	        if (!is_object($result) || $result->isNew()) {
 	            throw new UnexpectedValueException('Invalid container');
