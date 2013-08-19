@@ -22,13 +22,13 @@ class ComFilesFilterFileName extends KFilterAbstract
 		$value = $this->_sanitize($context->caller->name);
 
 		if ($value == '') {
-			$context->setError($this->getService('translator')->translate('Invalid file name'));
+			$context->setError($this->getObject('translator')->translate('Invalid file name'));
 			return false;
 		}
 	}
 
 	protected function _sanitize($value)
 	{
-		return $this->getService('com://admin/files.filter.path')->sanitize($value);
+		return $this->getObject('com://admin/files.filter.path')->sanitize($value);
 	}
 }

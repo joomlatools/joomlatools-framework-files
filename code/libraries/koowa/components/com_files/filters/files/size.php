@@ -32,7 +32,7 @@ class ComFilesFilterFileSize extends KFilterAbstract
 			}
 
 			if ($size && $size > $max) {
-				$context->setError($this->getService('translator')->translate('File is too big'));
+				$context->setError($this->getObject('translator')->translate('File is too big'));
 				return false;
 			}
 		}

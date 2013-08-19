@@ -29,7 +29,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 				$config->validator = 'com://admin/files.command.validator.'.$this->getIdentifier()->name;
 			}
 
-			$this->getCommandChain()->enqueue($this->getService($config->validator));
+			$this->getCommandChain()->enqueue($this->getObject($config->validator));
 		}
 	}
 

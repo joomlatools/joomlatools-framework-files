@@ -22,7 +22,7 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 		if (is_string($row->file) && !is_uploaded_file($row->file))
 		{
 			// remote file
-            $file = $this->getService('com://admin/files.database.row.url');
+            $file = $this->getObject('com://admin/files.database.row.url');
             $file->setData(array('file' => $row->file));
 
             if (!$file->load()) {
@@ -33,7 +33,7 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 
 			if (empty($row->name))
 			{
-				$uri = $this->getService('koowa:http.url', array('url' => $row->file));
+				$uri = $this->getObject('koowa:http.url', array('url' => $row->file));
 	        	$path = $uri->toString(KHttpUrl::PATH | KHttpUrl::FORMAT);
 	        	if (strpos($path, '/') !== false) {
 	        		$path = basename($path);
@@ -43,7 +43,7 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 			}
 		}
 
-		return parent::_databaseBeforeSave($context) && $this->getService('com://admin/files.filter.file.uploadable')->validate($context);
+		return parent::_databaseBeforeSave($context) && $this->getObject('com://admin/files.filter.file.uploadable')->validate($context);
 
 	}
 }

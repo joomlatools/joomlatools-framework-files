@@ -61,7 +61,7 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 	public function getParameters()
 	{
 		if (empty($this->_parameters)) {
-			$this->_parameters = $this->getService('com://admin/files.database.row.config')
+			$this->_parameters = $this->getObject('com://admin/files.database.row.config')
 				->setData(json_decode($this->_data['parameters'], true));
 		}
 
@@ -92,6 +92,6 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 
 	public function getAdapter($type, array $config = array())
 	{
-		return $this->getService('com://admin/files.adapter.'.$this->adapter.'.'.$type, $config);
+		return $this->getObject('com://admin/files.adapter.'.$this->adapter.'.'.$type, $config);
 	}
 }

@@ -31,12 +31,12 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 					$info = getimagesize($row->file);
 					$mimetype = $info ? $info['mime'] : false;
 				} elseif ($row->file instanceof SplFileInfo) {
-					$mimetype = $this->getService('com://admin/files.mixin.mimetype')->getMimetype($row->file->getPathname());
+					$mimetype = $this->getObject('com://admin/files.mixin.mimetype')->getMimetype($row->file->getPathname());
 				}
 			}
 
 			if ($mimetype && !in_array($mimetype, $mimetypes)) {
-				$context->setError($this->getService('translator')->translate('Invalid Mimetype'));
+				$context->setError($this->getObject('translator')->translate('Invalid Mimetype'));
 				return false;
 			}
 		}

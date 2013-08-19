@@ -20,11 +20,11 @@ class ComFilesFilterFileUploadable extends KFilterAbstract
 	{
 		parent::__construct($config);
 
-		$this->addFilter($this->getService('com://admin/files.filter.file.name'), KCommand::PRIORITY_HIGH);
+		$this->addFilter($this->getObject('com://admin/files.filter.file.name'), KCommand::PRIORITY_HIGH);
 
-		$this->addFilter($this->getService('com://admin/files.filter.file.extension'));
-		$this->addFilter($this->getService('com://admin/files.filter.file.mimetype'));
-		$this->addFilter($this->getService('com://admin/files.filter.file.size'));
+		$this->addFilter($this->getObject('com://admin/files.filter.file.extension'));
+		$this->addFilter($this->getObject('com://admin/files.filter.file.mimetype'));
+		$this->addFilter($this->getObject('com://admin/files.filter.file.size'));
 	}
 
 	protected function _validate($context)

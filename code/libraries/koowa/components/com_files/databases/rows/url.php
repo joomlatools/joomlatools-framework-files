@@ -116,7 +116,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 			throw new ComFilesExceptionRemoteAdapterNotAvailable('Adapter does not exist');
 		}
 
-		$uri = $this->getService('koowa:http.url', array('url' => $url));
+		$uri = $this->getObject('koowa:http.url', array('url' => $url));
 
 		$scheme = $uri->toString(KHttpUrl::SCHEME);
 		$host   = $uri->toString(KHttpUrl::HOST);
