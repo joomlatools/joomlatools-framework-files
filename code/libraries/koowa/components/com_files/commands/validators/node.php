@@ -60,7 +60,6 @@ class ComFilesCommandValidatorNode extends KCommand
 			}
 		}
 
-
 		return true;
 	}
 

@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesFilterPath extends KFilterAbstract
+class ComFilesFilterPath extends KFilterAbstract implements KFilterTraversable
 {
     protected static $_safepath_pattern = array('#(\.){2,}#', '#^\.#');
 
@@ -25,10 +25,10 @@ class ComFilesFilterPath extends KFilterAbstract
     /**
      * Validate a value
      *
-     * @param	scalar	Value to be validated
+     * @param	scalar	$value Value to be validated
      * @return	bool	True when the variable is valid
      */
-    protected function _validate($value)
+    public function validate($value)
     {
         $value = trim(str_replace('\\', '/', $value));
         $sanitized = $this->sanitize($value);
@@ -38,10 +38,10 @@ class ComFilesFilterPath extends KFilterAbstract
     /**
      * Sanitize a value
      *
-     * @param	mixed	Value to be sanitized
+     * @param	mixed	$value Value to be sanitized
      * @return	string
      */
-    protected function _sanitize($value)
+    public function sanitize($value)
     {
         $value = trim(str_replace('\\', '/', $value));
         $value = preg_replace(self::$_safepath_pattern, '', $value);
@@ -50,6 +50,6 @@ class ComFilesFilterPath extends KFilterAbstract
 
         $value = str_replace(self::$_special_chars, '', $value);
 
-		return $value;
+        return $value;
     }
 }

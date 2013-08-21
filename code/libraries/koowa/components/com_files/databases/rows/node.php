@@ -17,6 +17,8 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 {
 	protected $_adapter;
 
+    protected $_container;
+
 	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
@@ -170,6 +172,23 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 			$this->setAdapter();
 		}
 	}
+
+    public function getContainer()
+    {
+        if(!isset($this->_container))
+        {
+            //Set the container
+            $container = $this->getObject('com:files.model.containers')->slug($this->container)->getRow();
+
+            if (!is_object($container) || $container->isNew()) {
+                throw new UnexpectedValueException('Invalid container');
+            }
+
+            $this->_container = $container;
+        }
+
+        return $this->_container;
+    }
 
 	public function setAdapter()
 	{

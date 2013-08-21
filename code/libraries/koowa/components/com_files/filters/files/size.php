@@ -15,11 +15,8 @@
  */
 class ComFilesFilterFileSize extends KFilterAbstract
 {
-	protected $_walk = false;
-
-	protected function _validate($context)
+    public function validate($row)
 	{
-		$row = $context->caller;
 		$max = $row->container->parameters->maximum_size;
 
 		if ($max)
@@ -32,14 +29,8 @@ class ComFilesFilterFileSize extends KFilterAbstract
 			}
 
 			if ($size && $size > $max) {
-				$context->setError($this->getObject('translator')->translate('File is too big'));
-				return false;
+                return $this->_error($this->getObject('translator')->translate('File is too big'));
 			}
 		}
-	}
-
-	protected function _sanitize($value)
-	{
-		return false;
 	}
 }

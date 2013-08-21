@@ -15,24 +15,20 @@
  */
 class ComFilesFilterFolderName extends KFilterAbstract
 {
-	protected $_walk = false;
-
-	protected function _validate($context)
+	public function validate($row)
 	{
-		$value = $context->caller->name;
+        $value = $row->name;
 
 		if (strpos($value, '/') !== false) {
-			$context->setError($this->getObject('translator')->translate('Folder names cannot contain slashes'));
-			return false;
+            return $this->_error($this->getObject('translator')->translate('Folder names cannot contain slashes'));
 		}
 
 		if ($this->_sanitize($value) == '') {
-			$context->setError($this->getObject('translator')->translate('Invalid folder name'));
-			return false;
+            return $this->_error($this->getObject('translator')->translate('Invalid folder name'));
 		}
 	}
 
-	protected function _sanitize($value)
+	public function sanitize($value)
 	{
 		$value = str_replace('/', '', $value);
 		return $this->getObject('com://admin/files.filter.path')->sanitize($value);
