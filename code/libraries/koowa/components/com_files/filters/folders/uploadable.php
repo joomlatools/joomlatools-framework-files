@@ -13,24 +13,12 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesFilterFolderUploadable extends KFilterAbstract
+class ComFilesFilterFolderUploadable extends KFilterChain
 {
-	protected $_walk = false;
-
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
-		$this->addFilter($this->getService('com://admin/files.filter.folder.name'), KCommand::PRIORITY_HIGH);
-	}
-
-	protected function _validate($context)
-	{
-
-	}
-
-	protected function _sanitize($context)
-	{
-
+		$this->addFilter($this->getObject('com://admin/files.filter.folder.name'), KFilter::PRIORITY_HIGH);
 	}
 }

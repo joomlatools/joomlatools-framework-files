@@ -44,7 +44,7 @@ class ComFilesIteratorDirectory extends DirectoryIterator
      */
     public static function getNodes($config = array())
     {
-        $config = new KConfig($config);
+        $config = new KObjectConfig($config);
         $config->append(array(
             'path' 		=> null, // path to the directory
             'type' 		=> null, // folders or files, null for both
@@ -57,9 +57,9 @@ class ComFilesIteratorDirectory extends DirectoryIterator
             'return_raw'=> false
         ));
 
-        $exclude = KConfig::unbox($config->exclude);
-        $filter  = KConfig::unbox($config->filter);
-        $map     = KConfig::unbox($config->map);
+        $exclude = KObjectConfig::unbox($config->exclude);
+        $filter  = KObjectConfig::unbox($config->filter);
+        $map     = KObjectConfig::unbox($config->map);
         $sort    = $config->sort ? $config->sort : 'name';
         $recurse = $config->recurse;
 

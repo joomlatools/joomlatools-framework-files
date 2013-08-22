@@ -17,7 +17,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
 {
 	public function select($config = array())
 	{
-		$config = new KConfig($config);
+		$config = new KObjectConfig($config);
 		$config->append(array(
 			'name' => '',
 			'visible' => true,

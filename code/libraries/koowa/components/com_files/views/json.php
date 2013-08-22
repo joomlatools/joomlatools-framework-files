@@ -15,7 +15,7 @@
  */
 class ComFilesViewJson extends KViewJson
 {
-    protected function _initialize(KConfig $config)
+    protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
             'list_name' => 'items'

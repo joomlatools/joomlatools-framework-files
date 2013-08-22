@@ -19,7 +19,7 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperAbstract
 {
     public function javascript($config = array())
     {
-        $config = new KConfig($config);
+        $config = new KObjectConfig($config);
         $config->append(array(
             'keys' => array(
                 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB',
@@ -39,7 +39,7 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperAbstract
             )
         ));
         
-        $keys = KConfig::unbox($config->keys);
+        $keys = KObjectConfig::unbox($config->keys);
         
         $map = array();
         foreach ($keys as $key) {

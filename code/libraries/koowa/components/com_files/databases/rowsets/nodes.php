@@ -15,7 +15,7 @@
  */
 class ComFilesDatabaseRowsetNodes extends KDatabaseRowsetAbstract
 {
-    protected function _initialize(KConfig $config)
+    protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
             'identity_column' => 'name'

@@ -17,6 +17,6 @@ class ComFilesCommandValidatorFolder extends ComFilesCommandValidatorNode
 {
 	protected function _databaseBeforeSave(KCommandContext $context)
 	{
-		return parent::_databaseBeforeSave($context) && $this->getService('com://admin/files.filter.folder.uploadable')->validate($context);
+		return parent::_databaseBeforeSave($context) && $this->getObject('com://admin/files.filter.folder.uploadable')->validate($context->caller);
 	}
 }

@@ -15,35 +15,29 @@
  */
 class ComFilesFilterFileMimetype extends KFilterAbstract
 {
-	protected $_walk = false;
-
-	protected function _validate($context)
+    public function validate($row)
 	{
-		$row = $context->caller;
-		$mimetypes = KConfig::unbox($row->container->parameters->allowed_mimetypes);
+		$mimetypes = KObjectConfig::unbox($row->container->parameters->allowed_mimetypes);
 
 		if (is_array($mimetypes))
 		{
 			$mimetype = $row->mimetype;
 
-			if (empty($mimetype)) {
-				if (is_uploaded_file($row->file) && $row->isImage()) {
+			if (empty($mimetype))
+            {
+				if (is_uploaded_file($row->file) && $row->isImage())
+                {
 					$info = getimagesize($row->file);
 					$mimetype = $info ? $info['mime'] : false;
-				} elseif ($row->file instanceof SplFileInfo) {
-					$mimetype = $this->getService('com://admin/files.mixin.mimetype')->getMimetype($row->file->getPathname());
+				}
+                elseif ($row->file instanceof SplFileInfo) {
+					$mimetype = $this->getObject('com://admin/files.mixin.mimetype')->getMimetype($row->file->getPathname());
 				}
 			}
 
 			if ($mimetype && !in_array($mimetype, $mimetypes)) {
-				$context->setError($this->getService('translator')->translate('Invalid Mimetype'));
-				return false;
+				return $this->_error($this->getObject('translator')->translate('Invalid Mimetype'));
 			}
 		}
-	}
-
-	protected function _sanitize($value)
-	{
-		return false;
 	}
 }

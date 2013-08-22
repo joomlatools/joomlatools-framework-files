@@ -17,7 +17,9 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 {
 	protected $_adapter;
 
-	public function __construct(KConfig $config)
+    protected $_container;
+
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
@@ -29,11 +31,11 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 				$config->validator = 'com://admin/files.command.validator.'.$this->getIdentifier()->name;
 			}
 
-			$this->getCommandChain()->enqueue($this->getService($config->validator));
+			$this->getCommandChain()->enqueue($this->getObject($config->validator));
 		}
 	}
 
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
 			'dispatch_events'   => false,
@@ -170,6 +172,23 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 			$this->setAdapter();
 		}
 	}
+
+    public function getContainer()
+    {
+        if(!isset($this->_container))
+        {
+            //Set the container
+            $container = is_object($this->container) ? $this->container : $this->getObject('com:files.model.containers')->slug($this->container)->getItem();
+
+            if (!is_object($container) || $container->isNew()) {
+                throw new UnexpectedValueException('Invalid container');
+            }
+
+            $this->_container = $container;
+        }
+
+        return $this->_container;
+    }
 
 	public function setAdapter()
 	{

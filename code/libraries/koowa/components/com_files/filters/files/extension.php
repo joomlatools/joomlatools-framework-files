@@ -15,21 +15,13 @@
  */
 class ComFilesFilterFileExtension extends KFilterAbstract
 {
-	protected $_walk = false;
-
-	protected function _validate($context)
+    public function validate($row)
 	{
-		$allowed = $context->caller->container->parameters->allowed_extensions;
-		$value = $context->caller->extension;
+        $allowed = $row->getContainer()->parameters->allowed_extensions;
+        $value   = $row->extension;
 
 		if (is_array($allowed) && (empty($value) || !in_array(strtolower($value), $allowed))) {
-			$context->setError($this->getService('translator')->translate('Invalid file extension'));
-			return false;
+            return $this->_error($this->getObject('translator')->translate('Invalid file extension'));
 		}
-	}
-
-	protected function _sanitize($value)
-	{
-		return false;
 	}
 }

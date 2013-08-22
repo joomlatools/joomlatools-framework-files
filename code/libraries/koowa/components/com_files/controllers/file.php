@@ -15,7 +15,7 @@
  */
 class ComFilesControllerFile extends ComFilesControllerDefault
 {
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
@@ -23,7 +23,7 @@ class ComFilesControllerFile extends ComFilesControllerDefault
         $this->registerCallback('before.edit' , array($this, 'addFile'));
 	}
 	
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
 			'behaviors' => array('thumbnailable')

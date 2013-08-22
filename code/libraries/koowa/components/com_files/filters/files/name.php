@@ -15,20 +15,17 @@
  */
 class ComFilesFilterFileName extends KFilterAbstract
 {
-	protected $_walk = false;
-
-	protected function _validate($context)
+    public function validate($row)
 	{
-		$value = $this->_sanitize($context->caller->name);
+        $value = $this->sanitize($row->name);
 
 		if ($value == '') {
-			$context->setError($this->getService('translator')->translate('Invalid file name'));
-			return false;
+            return $this->_error($this->getObject('translator')->translate('Invalid file name'));
 		}
 	}
 
-	protected function _sanitize($value)
+	public function sanitize($value)
 	{
-		return $this->getService('com://admin/files.filter.path')->sanitize($value);
+		return $this->getObject('com://admin/files.filter.path')->sanitize($value);
 	}
 }

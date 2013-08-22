@@ -27,16 +27,16 @@ class ComFilesMixinMimetype extends KObject
 	 */
 	protected $_adapters = array();
 
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
 		if (isset($config->adapters)) {
-			$this->_adapters = KConfig::unbox($config->adapters);
+			$this->_adapters = KObjectConfig::unbox($config->adapters);
 		}
 	}
 
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		if (empty($config->adapters)) {
 			$config->adapters = array('image', 'finfo');

@@ -7,33 +7,21 @@
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
 /**
- * File Uploadble Filter
+ * File Uploadable Filter
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesFilterFileUploadable extends KFilterAbstract
+class ComFilesFilterFileUploadable extends KFilterChain
 {
-	protected $_walk = false;
-
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
-		$this->addFilter($this->getService('com://admin/files.filter.file.name'), KCommand::PRIORITY_HIGH);
+		$this->addFilter($this->getObject('com://admin/files.filter.file.name'), KFilter::PRIORITY_HIGH);
 
-		$this->addFilter($this->getService('com://admin/files.filter.file.extension'));
-		$this->addFilter($this->getService('com://admin/files.filter.file.mimetype'));
-		$this->addFilter($this->getService('com://admin/files.filter.file.size'));
-	}
-
-	protected function _validate($context)
-	{
-
-	}
-
-	protected function _sanitize($context)
-	{
-
+		$this->addFilter($this->getObject('com://admin/files.filter.file.extension'));
+		$this->addFilter($this->getObject('com://admin/files.filter.file.mimetype'));
+		$this->addFilter($this->getObject('com://admin/files.filter.file.size'));
 	}
 }

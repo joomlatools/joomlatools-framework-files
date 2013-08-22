@@ -21,7 +21,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 	 */
 	protected $_adapters = array();
 
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
@@ -30,7 +30,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 		}
 	}
 
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		if (empty($config->adapters)) {
 			$config->adapters = array('curl', 'fsockopen', 'fopen');
@@ -116,7 +116,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 			throw new ComFilesExceptionRemoteAdapterNotAvailable('Adapter does not exist');
 		}
 
-		$uri = $this->getService('koowa:http.url', array('url' => $url));
+		$uri = $this->getObject('koowa:http.url', array('url' => $url));
 
 		$scheme = $uri->toString(KHttpUrl::SCHEME);
 		$host   = $uri->toString(KHttpUrl::HOST);

@@ -15,7 +15,7 @@
  */
 class ComFilesControllerDefault extends ComKoowaControllerDefault
 {
-	protected function _initialize(KConfig $config)
+	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
 			'persistable' => false,
@@ -47,7 +47,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 
 		if(!$data->isNew())
 		{
-			$data->setData(KConfig::unbox($context->data));
+			$data->setData(KObjectConfig::unbox($context->data));
 
 			//Only throw an error if the action explicitly failed.
 			if($data->copy() === false)
@@ -71,7 +71,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 
 		if(!$data->isNew())
 		{
-			$data->setData(KConfig::unbox($context->data));
+			$data->setData(KObjectConfig::unbox($context->data));
 
 			//Only throw an error if the action explicitly failed.
 			if($data->move() === false)
@@ -96,7 +96,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	{
 		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->format == 'html'))
 		{
-            $this->getService('translator')->loadLanguageFiles($this->getIdentifier());
+            $this->getObject('translator')->loadLanguageFiles($this->getIdentifier());
 
 			$result = $this->getView()->display();
 			return $result;

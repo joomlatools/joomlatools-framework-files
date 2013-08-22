@@ -17,7 +17,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 {
 	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp');
 
-	public function __construct(KConfig $config)
+	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
@@ -169,7 +169,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		) {
 			$parameters = $this->container->getParameters();
 			$thumbnails_size = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
-			$thumb = $this->getService('com://admin/files.database.row.thumbnail', array('thumbnail_size' => $thumbnails_size));
+			$thumb = $this->getObject('com://admin/files.database.row.thumbnail', array('thumbnail_size' => $thumbnails_size));
 			$thumb->source = $this;
 
 			$result = $thumb->save();
@@ -180,7 +180,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 
 	public function deleteThumbnail(KCommandContext $context = null)
 	{
-		$thumb = $this->getService('com://admin/files.model.thumbnails')
+		$thumb = $this->getObject('com://admin/files.model.thumbnails')
 			->source($this)
 			->getItem();
 

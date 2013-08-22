@@ -35,9 +35,9 @@ class ComFilesModelNodes extends ComFilesModelDefault
     {
         $identifier         = clone $this->getIdentifier();
         $identifier->path   = array('database', 'row');
-        $identifier->name   = KInflector::singularize($this->getIdentifier()->name);
+        $identifier->name   = KStringInflector::singularize($this->getIdentifier()->name);
 
-        return $this->getService($identifier, $options);
+        return $this->getObject($identifier, $options);
     }
 
     public function getRowset(array $options = array())
@@ -45,7 +45,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
         $identifier         = clone $this->getIdentifier();
         $identifier->path   = array('database', 'rowset');
 
-        return $this->getService($identifier, $options);
+        return $this->getObject($identifier, $options);
     }
 
     protected function _getPath()
@@ -68,7 +68,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 			$state = $this->_state;
 			$type = !empty($state->types) ? (array) $state->types : array();
 
-			$list = $this->getService('com://admin/files.database.rowset.nodes');
+			$list = $this->getObject('com://admin/files.database.rowset.nodes');
 
 			// Special case for limit=0. We set it to -1
 			// so loop goes on till end since limit is a negative value
@@ -78,7 +78,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
 			if (empty($type) || in_array('folder', $type))
 			{
-				$folders_model = $this->getService('com://admin/files.model.folders')->set($state->getData());
+				$folders_model = $this->getObject('com://admin/files.model.folders')->set($state->getData());
 				$folders = $folders_model->getList();
 
 				foreach ($folders as $folder)
@@ -98,7 +98,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 			{
 				$data = $state->getData();
 				$data['offset'] = $offset_left < 0 ? 0 : $offset_left;
-				$files_model = $this->getService('com://admin/files.model.files')->set($data);
+				$files_model = $this->getObject('com://admin/files.model.files')->set($data);
 				$files = $files_model->getList();
 
 				foreach ($files as $file)
