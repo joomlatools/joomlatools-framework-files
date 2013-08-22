@@ -162,23 +162,23 @@ window.addEvent('domready', function() {
 	<?= @template('templates_details'); ?>
 
 	<div id="files-sidebar">
-        <h3><?= @text('Folders'); ?></h3>
+        <h3><?= @translate('Folders'); ?></h3>
 		<div id="files-tree"></div>
 	</div>
 
 	<div id="files-canvas">
 	    <div class="path" style="height: 24px;">
             <div class="files-toolbar-controls btn-group">
-                <button id="files-show-uploader" class="btn btn-mini"><?= @text('Upload'); ?></button>
-                <button id="files-new-folder-toolbar" class="btn btn-mini"><?= @text('New Folder'); ?></button>
-                <button id="files-batch-delete" class="btn btn-mini" disabled><?= @text('Delete'); ?></button>
+                <button id="files-show-uploader" class="btn btn-mini"><?= @translate('Upload'); ?></button>
+                <button id="files-new-folder-toolbar" class="btn btn-mini"><?= @translate('New Folder'); ?></button>
+                <button id="files-batch-delete" class="btn btn-mini" disabled><?= @translate('Delete'); ?></button>
 			</div>
             <div id="files-pathway"></div>
 			<div class="files-layout-controls btn-group" data-toggle="buttons-radio">
-				<button class="btn files-layout-switcher" data-layout="icons" title="<?= @text('Show files as icons'); ?>">
+				<button class="btn files-layout-switcher" data-layout="icons" title="<?= @translate('Show files as icons'); ?>">
                     <i class="icon-th icon-grid-view-2"></i>
 				</button>
-				<button class="btn files-layout-switcher" data-layout="details" title="<?= @text('Show files in a list'); ?>">
+				<button class="btn files-layout-switcher" data-layout="details" title="<?= @translate('Show files in a list'); ?>">
                     <i class="icon-list"></i>
 				</button>
 			</div>
@@ -205,12 +205,12 @@ window.addEvent('domready', function() {
             <form class="files-modal well">
                 <div style="text-align: center;">
                     <h3 style=" float: none">
-                        <?= str_replace('{folder}', '<span class="upload-files-to"></span>', @text('Create a new folder in {folder}')) ?>
+                        <?= str_replace('{folder}', '<span class="upload-files-to"></span>', @translate('Create a new folder in {folder}')) ?>
                     </h3>
                 </div>
                 <div class="input-append">
-                    <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= @text('Enter a folder name') ?>" />
-                    <button id="files-new-folder-create" class="btn btn-primary" disabled><?= @text('Create'); ?></button>
+                    <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= @translate('Enter a folder name') ?>" />
+                    <button id="files-new-folder-create" class="btn btn-primary" disabled><?= @translate('Create'); ?></button>
                 </div>
             </form>
         </div>

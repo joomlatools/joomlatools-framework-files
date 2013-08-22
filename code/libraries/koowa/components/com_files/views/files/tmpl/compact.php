@@ -100,8 +100,8 @@ window.addEvent('domready', function() {
 
 				<div id="files-new-folder-modal" style="margin-top: 16px">
 					<form>
-						<input class="inputbox" type="text" id="files-new-folder-input" placeholder="<?= @text('New Folder...'); ?>" />
-						<button id="files-new-folder-create" disabled><?= @text('Create'); ?></button>
+						<input class="inputbox" type="text" id="files-new-folder-input" placeholder="<?= @translate('New Folder...'); ?>" />
+						<button id="files-new-folder-create" disabled><?= @translate('Create'); ?></button>
 					</form>
 				</div>
 			</div>
@@ -113,7 +113,7 @@ window.addEvent('domready', function() {
 			<div class="clear" style="clear: both"></div>
 		</div>
 	<?= @helper('tabs.endPanel'); ?>
-	<?= @helper('tabs.startPanel', array('title' => @text('Upload'))); ?>
+	<?= @helper('tabs.startPanel', array('title' => @translate('Upload'))); ?>
 
 		<?= @template('com://admin/files.view.files.uploader'); ?>
 

@@ -284,7 +284,7 @@ window.addEvent('domready', function() {
     $$('.plupload_clear').addEvent('click', function(e) {
         e.stop();
 
-        if(confirm(<?= json_encode(@text('Are you sure you want to clear the upload queue? This cannot be undone!')) ?>)) {
+        if(confirm(<?= json_encode(@translate('Are you sure you want to clear the upload queue? This cannot be undone!')) ?>)) {
             // need to work on a clone, otherwise iterator gets confused after elements are removed
             var files = uploader.files.slice(0);
             files.each(function(file) {
