@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @template('com://admin/files.views.files.initialize'); ?>
+<?= @include('com://admin/files.views.files.initialize'); ?>
 
 <script src="media://koowa/com_files/js/files.compact.js" />
 
@@ -89,7 +89,7 @@ window.addEvent('domready', function() {
 });
 </script>
 
-<?= @template('com://admin/files.view.files.templates_compact');?>
+<?= @include('com://admin/files.view.files.templates_compact');?>
 
 <div id="files-compact" class="com_files">
 	<?=	@helper('tabs.startPane', array('id' => 'pane_insert')); ?>
@@ -115,7 +115,7 @@ window.addEvent('domready', function() {
 	<?= @helper('tabs.endPanel'); ?>
 	<?= @helper('tabs.startPanel', array('title' => @translate('Upload'))); ?>
 
-		<?= @template('com://admin/files.view.files.uploader'); ?>
+		<?= @include('com://admin/files.view.files.uploader'); ?>
 
 	<?= @helper('tabs.endPanel'); ?>
 	<?= @helper('tabs.endPane'); ?>
