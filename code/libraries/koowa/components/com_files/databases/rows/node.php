@@ -178,7 +178,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
         if(!isset($this->_container))
         {
             //Set the container
-            $container = $this->getObject('com:files.model.containers')->slug($this->container)->getRow();
+            $container = is_object($this->container) ? $this->container : $this->getObject('com:files.model.containers')->slug($this->container)->getItem();
 
             if (!is_object($container) || $container->isNew()) {
                 throw new UnexpectedValueException('Invalid container');
