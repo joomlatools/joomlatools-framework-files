@@ -52,7 +52,7 @@ window.addEvent('domready', function() {
 			folder.add(function(response, responseText) {
 				element.set('value', '');
 				$('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
-				var el = response.item;
+				var el = response.data;
 				var cls = Files[el.type.capitalize()];
 				var row = new cls(el);
 

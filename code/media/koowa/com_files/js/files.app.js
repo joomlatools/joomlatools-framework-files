@@ -305,7 +305,7 @@ Files.App = new Class({
 				url: this.createRoute({view: 'container', slug: container, container: false}),
 				method: 'get',
 				onSuccess: function(response) {
-					setter(response.item);
+					setter(response.data);
 				}.bind(this)
 			}).send();
 		} else {
