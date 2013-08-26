@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @include('uploader_initialize') ?>
+<?= @import('uploader_initialize') ?>
 
 <div class="com_files" style="visibility: hidden">
     <div id="files-upload" style="clear: both" class="uploader-files-empty well">
