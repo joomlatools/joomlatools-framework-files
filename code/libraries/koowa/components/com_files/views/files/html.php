@@ -29,9 +29,9 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 	        $state->limit = JFactory::getApplication()->getCfg('list_limit');
 	    }
 	     
-		$this->assign('sitebase', trim(JURI::root(), '/'));
-		$this->assign('token'   , JSession::getFormToken());
-		$this->assign('container', $this->getModel()->getState()->container);
+		$this->sitebase  = trim(JURI::root(), '/');
+		$this->token     = JSession::getFormToken();
+		$this->container = $this->getModel()->getState()->container;
 
 		return parent::display();
 	}
