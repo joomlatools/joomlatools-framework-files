@@ -18,7 +18,7 @@ window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
             cookie: {
-                path: '<?=$this->getView()->baseurl?>'
+                path: '<?=KRequest::root()?>'
             },
             title: false,
 			state: {
