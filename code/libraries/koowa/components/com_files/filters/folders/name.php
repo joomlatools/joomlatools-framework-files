@@ -23,7 +23,7 @@ class ComFilesFilterFolderName extends KFilterAbstract
             return $this->_error($this->getObject('translator')->translate('Folder names cannot contain slashes'));
 		}
 
-		if ($this->_sanitize($value) == '') {
+		if ($this->sanitize($value) == '') {
             return $this->_error($this->getObject('translator')->translate('Invalid folder name'));
 		}
 	}
