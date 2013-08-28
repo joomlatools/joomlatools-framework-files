@@ -29,9 +29,7 @@ defined('KOOWA') or die( 'Restricted access' );
 <?= @helper('behavior.keepalive'); ?>
 <?= @helper('behavior.tooltip'); ?>
 <?= @helper('behavior.modal'); ?>
-
 <?= @helper('bootstrap.load'); ?>
-<?= @helper('behavior.jquery'); ?>
 
 <script src="media://koowa/com_files/js/history/history.js" />
 <? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
