@@ -22,13 +22,13 @@ defined('KOOWA') or die( 'Restricted access' );
 
 <script src="media://koowa/com_files/js/files.app.js" />
 */
+JHtml::_('behavior.modal');
 ?>
 
 <?= @helper('behavior.mootools'); ?>
 <?= @helper('behavior.koowa'); ?>
 <?= @helper('behavior.keepalive'); ?>
 <?= @helper('behavior.tooltip'); ?>
-<?= @helper('behavior.modal'); ?>
 <?= @helper('bootstrap.load'); ?>
 
 <script src="media://koowa/com_files/js/history/history.js" />

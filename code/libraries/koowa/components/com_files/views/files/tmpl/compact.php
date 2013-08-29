@@ -125,21 +125,25 @@ window.addEvent('domready', function() {
 /* Modal fixes that applies when this view is loaded within an iframe in a modal view */
 window.addEvent('domready', function(){
     if(window.parent && window.parent != window && window.parent.SqueezeBox) {
-        var modal = window.parent.SqueezeBox;
+        var modal = window.parent.SqueezeBox,
+            sbox = window.parent.document.id('sbox-content'),
+            fixHeight = function(){
+                var newHeight = document.id('files-compact').measure(function(){return this.getSize().y;}),
+                    win = modal.fx.win ? modal.fx.win : modal.fx.window;
+
+                sbox.getElement('iframe').set('height', newHeight);
+                win.set({height: newHeight});
+            };
 
         document.id('files-compact').getParents().setStyles({padding: 0, margin: 0, overflow: 'hidden'});
 
         //Height fixes for parent modal
-        var fixHeight = function(){
-            var newHeight = document.id('files-compact').measure(function(){return this.getSize().y;});
-            window.parent.document.id('sbox-content').getElement('iframe').set('height', newHeight);
-
-            var win = modal.fx.win ? modal.fx.win : modal.fx.window;
-            win.set({height: newHeight});
-        };
         document.getElements('#tabs-pane_insert dt, .upload-buttons li').addEvent('click', fixHeight);
-        fixHeight();
-        window.addEvent('QueueChanged', fixHeight);
+
+        if (sbox && sbox.getElement('iframe')) {
+            fixHeight();
+            window.addEvent('QueueChanged', fixHeight);
+        }
     }
 });
 </script>
