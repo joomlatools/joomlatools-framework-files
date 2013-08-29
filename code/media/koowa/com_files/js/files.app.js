@@ -385,7 +385,12 @@ Files.App = new Class({
                     img = that.createRoute({view: 'file', format: 'raw', name: row.name, folder: row.folder});
 
 				if (img) {
-					SqueezeBox.open(img, {handler: 'image'});
+                    jQuery.magnificPopup.open({
+                        items: {
+                            src: img,
+                            type: 'image'
+                        }
+                    });
 				}
 			},
 			'onClickFile': function(e) {
