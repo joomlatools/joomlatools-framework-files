@@ -120,30 +120,3 @@ window.addEvent('domready', function() {
 	<?= @helper('tabs.endPanel'); ?>
 	<?= @helper('tabs.endPane'); ?>
 </div>
-
-<script>
-/* Modal fixes that applies when this view is loaded within an iframe in a modal view */
-window.addEvent('domready', function(){
-    if(window.parent && window.parent != window && window.parent.SqueezeBox) {
-        var modal = window.parent.SqueezeBox,
-            sbox = window.parent.document.id('sbox-content'),
-            fixHeight = function(){
-                var newHeight = document.id('files-compact').measure(function(){return this.getSize().y;}),
-                    win = modal.fx.win ? modal.fx.win : modal.fx.window;
-
-                sbox.getElement('iframe').set('height', newHeight);
-                win.set({height: newHeight});
-            };
-
-        document.id('files-compact').getParents().setStyles({padding: 0, margin: 0, overflow: 'hidden'});
-
-        //Height fixes for parent modal
-        document.getElements('#tabs-pane_insert dt, .upload-buttons li').addEvent('click', fixHeight);
-
-        if (sbox && sbox.getElement('iframe')) {
-            fixHeight();
-            window.addEvent('QueueChanged', fixHeight);
-        }
-    }
-});
-</script>
