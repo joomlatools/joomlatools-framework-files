@@ -43,46 +43,6 @@ window.addEvent('domready', function() {
 
 	Files.app = new Files.Compact.App(options);
 
-	$('files-new-folder-create').addEvent('click', function(e){
-		e.stop();
-		var element = $('files-new-folder-input');
-		var value = element.get('value');
-		if (value.length > 0) {
-			var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
-			folder.add(function(response, responseText) {
-				element.set('value', '');
-				$('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
-				var el = response.data;
-				var cls = Files[el.type.capitalize()];
-				var row = new cls(el);
-
-				Files.app.tree.selected.insert({
-					text: row.name,
-					id: row.path,
-					data: {
-						path: row.path,
-						url: '#'+row.path,
-						type: 'folder'
-					}
-				});
-				Files.app.tree.selected.toggle(false, true);
-			});
-		};
-	});
-	var validate = function(){
-		if(this.value.trim()) {
-			$('files-new-folder-create').addClass('valid').removeProperty('disabled');
-		} else {
-			$('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
-		}
-	};
-	$('files-new-folder-input').addEvent('change', validate);
-	if(window.addEventListener) {
-		$('files-new-folder-input').addEventListener('input', validate);
-	} else {
-		$('files-new-folder-input').addEvent('keyup', validate);
-	}
-
 	$$('#tabs-pane_insert dt').addEvent('click', function(){
 		setTimeout(function(){window.fireEvent('refresh');}, 300);
 	});
@@ -97,13 +57,6 @@ window.addEvent('domready', function() {
 		<div id="insert">
 			<div id="files-tree-container" style="float: left">
 				<div id="files-tree"></div>
-
-				<div id="files-new-folder-modal" style="margin-top: 16px">
-					<form>
-						<input class="inputbox" type="text" id="files-new-folder-input" placeholder="<?= @translate('New Folder...'); ?>" />
-						<button id="files-new-folder-create" disabled><?= @translate('Create'); ?></button>
-					</form>
-				</div>
 			</div>
 
 			<div id="files-grid" style="float: left"></div>
