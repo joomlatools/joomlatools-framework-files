@@ -9,7 +9,7 @@
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="file_preview">
-<div>
+<div style="position: relative;background-color: white;margin: 20px auto;max-width: 300px;">
 <div class="preview extension-[%=metadata.extension%]">
     [% var view_path = Files.app.createRoute({view: 'file', format: 'raw', name: name, folder: folder}); %]
     <img src="media://koowa/com_files/images/document-64.png" width="64" height="64" alt="[%=name%]" border="0" />

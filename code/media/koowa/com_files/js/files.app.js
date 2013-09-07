@@ -385,24 +385,32 @@ Files.App = new Class({
                     img = that.createRoute({view: 'file', format: 'raw', name: row.name, folder: row.folder});
 
 				if (img) {
-					SqueezeBox.open(img, {handler: 'image'});
+                    jQuery.magnificPopup.open({
+                        items: {
+                            src: img,
+                            type: 'image'
+                        }
+                    });
 				}
 			},
 			'onClickFile': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
 					row = node.retrieve('row'),
-					copy = Files.utils.append({}, row),
-					trash = new Element('div', {style: 'display: none'}).inject(document.body);
+					copy = Files.utils.append({}, row);
 
 				copy.template = 'file_preview';
-				var template = copy.render().inject(trash), size = template.measure(function(){return this.getDimensions();});
 
-				SqueezeBox.open(template, {
-					handler: 'adopt',
-					size: {x: size.x, y: size.y}
-				});
-				trash.dispose();
+                copy = copy.render();
+
+                var element = jQuery(copy);
+                element.addClass('mfp-hide koowa');
+                jQuery.magnificPopup.open({
+                    items: {
+                        src: element,
+                        type: 'inline'
+                    }
+                });
 			},
 			'onAfterSetLayout': function(context) {
 				if (key) {

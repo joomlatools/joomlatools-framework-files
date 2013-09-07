@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @helper('com://admin/extman.template.helper.behavior.jquery'); ?>
+<?= @helper('behavior.jquery'); ?>
 <script src="media://koowa/com_files/plupload/plupload.core.html5.flash.queue.js" />
 
 <script>

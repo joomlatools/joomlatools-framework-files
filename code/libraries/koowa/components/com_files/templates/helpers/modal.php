@@ -17,25 +17,28 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
 {
 	public function select($config = array())
 	{
-		$config = new KObjectConfig($config);
-		$config->append(array(
-			'name' => '',
-			'visible' => true,
-			'link' => '',
-			'link_text' => $this->translate('Select'),
-			'link_selector' => 'modal'
-		))->append(array(
-			'value' => $config->name
-		));
+        $config = new KObjectConfig($config);
+        $config->append(array(
+            'name' => '',
+            'attribs' => array(),
+            'visible' => true,
+            'link' => '',
+            'link_text' => $this->translate('Select'),
+        ))->append(array(
+            'id' => $config->name,
+            'value' => $config->name
+        ));
 
-		$input = '<input name="%1$s" id="%1$s" value="%2$s" %3$s size="40" />';
+        $attribs = $this->buildAttributes($config->attribs);
 
-		$link = '<a class="%s"
-					rel="{\'ajaxOptions\': {\'method\': \'get\'}, \'handler\': \'iframe\', \'size\': {\'x\': 700}}"
-					href="%s">%s</a>';
+        $input = '<input name="%1$s" id="%2$s" value="%3$s" %4$s size="40" %5$s />';
 
-		$html  = sprintf($input, $config->name, $config->value, $config->visible ? 'type="text" readonly' : 'type="hidden"');
-		$html .= sprintf($link, $config->link_selector, $config->link, $config->link_text);
+        $link = '<span class="input-group-btn"><a class="koowa-modal btn mfp-iframe" href="%s">%s</a></span>';
+
+        $html = sprintf($input, $config->name, $config->id, $config->value, $config->visible ? 'type="text" readonly' : 'type="hidden"', $attribs);
+        $html .= sprintf($link, $config->link, $config->link_text);
+
+        $html .= $this->getTemplate()->getHelper('behavior')->modal();
 
 		return $html;
 	}
