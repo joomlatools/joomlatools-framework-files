@@ -82,7 +82,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 	protected function _fetchCurl($url)
 	{
 		if (!function_exists('curl_init')) {
-			throw new ComFilesExceptionRemoteAdapterNotAvailable('Adapter does not exist');
+			throw new ComFilesDatabaseExceptionRemoteAdapterNotAvailable('Adapter does not exist');
 		}
 
 		$ch = curl_init();
@@ -168,7 +168,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 	protected function _fetchFopen($url)
 	{
 		if (!ini_get('allow_url_fopen')) {
-			throw new ComFilesExceptionRemoteAdapterNotAvailable('Adapter does not exist');
+			throw new ComFilesDatabaseExceptionRemoteAdapterNotAvailable('Adapter does not exist');
 		}
 
 		$response = @file_get_contents($url);
