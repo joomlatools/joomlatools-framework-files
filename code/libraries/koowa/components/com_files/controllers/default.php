@@ -28,6 +28,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	public function getRequest()
 	{
 		$request = parent::getRequest();
+
 		// "e_name" is needed to be compatible with com_content of Joomla
 		if ($request->e_name) {
 			$request->editor = $request->e_name;
