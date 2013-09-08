@@ -91,7 +91,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	}
 
 	/**
-	 * Overridden method to be able to use it with both resource and service controllers
+	 * Overridden method to be able to use it with both model and view controllers
 	 */
 	protected function _actionGet(KCommandContext $context)
 	{
