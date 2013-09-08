@@ -23,7 +23,8 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 	{
 		parent::__construct($config);
 
-		$this->mixin(new KCommandMixin($config->append(array('mixer' => $this))));
+        // Mixin the behavior interface
+        $this->mixin('koowa:behavior.mixin', $config);
 
 		if ($config->validator !== false)
 		{
