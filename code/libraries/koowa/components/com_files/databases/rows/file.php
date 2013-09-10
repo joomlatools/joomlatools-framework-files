@@ -76,7 +76,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		}
 
 		if (in_array($column, array('width', 'height', 'thumbnail')) && $this->isImage()) {
-			if ($column == 'thumbnail' && !empty($this->_data['thumbnail'])) {
+			if ($column == 'thumbnail' && isset($this->_data['thumbnail'])) {
 				return $this->_data['thumbnail'];
 			}
 			
