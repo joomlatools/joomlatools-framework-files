@@ -21,22 +21,24 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
         $config->append(array(
             'name' => '',
             'attribs' => array(),
+            'button_attribs' => array(),
             'visible' => true,
             'link' => '',
-            'link_text' => $this->translate('Select'),
+            'link_text' => $this->translate('Select')
         ))->append(array(
             'id' => $config->name,
             'value' => $config->name
         ));
 
         $attribs = $this->buildAttributes($config->attribs);
+        $button_attribs = $this->buildAttributes($config->button_attribs);
 
         $input = '<input name="%1$s" id="%2$s" value="%3$s" %4$s size="40" %5$s />';
 
-        $link = '<span class="input-group-btn"><a class="koowa-modal btn mfp-iframe" href="%s">%s</a></span>';
+        $link = '<span class="input-group-btn"><a class="koowa-modal btn mfp-iframe" %s href="%s">%s</a></span>';
 
         $html = sprintf($input, $config->name, $config->id, $config->value, $config->visible ? 'type="text" readonly' : 'type="hidden"', $attribs);
-        $html .= sprintf($link, $config->link, $config->link_text);
+        $html .= sprintf($link, $button_attribs, $config->link, $config->link_text);
 
         $html .= $this->getTemplate()->getHelper('behavior')->modal();
 
