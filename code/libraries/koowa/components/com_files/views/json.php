@@ -19,7 +19,7 @@ class ComFilesViewJson extends KViewJson
     {
         $output = parent::_renderData();
 
-        if ($this->getModel()->getState()->isUnique())
+        if (!$this->_plural)
         {
             $row    = $this->getModel()->getItem();
             $status = $row->getStatus() !== KDatabase::STATUS_FAILED;

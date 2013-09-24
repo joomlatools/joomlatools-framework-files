@@ -41,4 +41,15 @@ JHtml::_('behavior.modal');
 
 <script src="media://system/js/mootree.js" />
 
-<script src="media://koowa/com_files/js/files.min.js" />
+<script src="media://koowa/com_files/js/spin.min.js" />
+
+<script src="media://koowa/com_files/js/files.utilities.js" />
+<script src="media://koowa/com_files/js/files.state.js" />
+<script src="media://koowa/com_files/js/files.template.js" />
+<script src="media://koowa/com_files/js/files.grid.js" />
+<script src="media://koowa/com_files/js/files.tree.js" />
+<script src="media://koowa/com_files/js/files.row.js" />
+<script src="media://koowa/com_files/js/files.paginator.js" />
+<script src="media://koowa/com_files/js/files.pathway.js" />
+
+<script src="media://koowa/com_files/js/files.app.js" />
