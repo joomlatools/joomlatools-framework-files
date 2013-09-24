@@ -218,13 +218,13 @@ Files.App = new Class({
 			}.bind(this),
 			success = function(resp) {
 				if (resp.status !== false) {
-                    Files.utils.each(resp.items.data, function(item) {
+                    Files.utils.each(resp.entities, function(item) {
 						if (!item.baseurl) {
 							item.baseurl = that.baseurl;
 						}
 					});
 					that.response = resp;
-					that.grid.insertRows(resp.items.data);
+					that.grid.insertRows(resp.entities);
 
 					that.fireEvent('afterSelect', resp);
 				} else {
@@ -305,7 +305,7 @@ Files.App = new Class({
 				url: this.createRoute({view: 'container', slug: container, container: false}),
 				method: 'get',
 				onSuccess: function(response) {
-					setter(response.data);
+					setter(response.entities[0]);
 				}.bind(this)
 			}).send();
 		} else {
@@ -349,9 +349,9 @@ Files.App = new Class({
 		var that = this;
 		that.addEvent('afterSelect', function(response) {
 			that.paginator.setData({
-				limit: response.items.limit,
-				offset: response.items.offset,
-				total: response.items.total
+				limit: response.meta.limit,
+				offset: response.meta.offset,
+				total: response.meta.total
 			});
 			that.paginator.setValues();
 		});
