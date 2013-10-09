@@ -6,7 +6,10 @@
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
-defined('KOOWA') or die( 'Restricted access' ); ?>
+defined('KOOWA') or die( 'Restricted access' );
+
+$multi_selection = isset($multi_selection) ? $multi_selection : true;
+?>
 
 <?= @helper('behavior.jquery'); ?>
 <script src="media://koowa/com_files/plupload/plupload.core.html5.flash.queue.js" />
@@ -27,6 +30,7 @@ window.addEvent('domready', function() {
         runtimes: 'html5,flash',
         container: containershim,
         browse_button: 'pickfiles',
+        multi_selection: <?= json_encode($multi_selection) ?>,
         dragdrop: true,
         rename: true,
         url: '', // this is added on the go in BeforeUpload event
