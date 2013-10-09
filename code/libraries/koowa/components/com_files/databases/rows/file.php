@@ -169,7 +169,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		) {
 			$parameters = $this->container->getParameters();
 			$thumbnails_size = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
-			$thumb = $this->getObject('com://admin/files.database.row.thumbnail', array('thumbnail_size' => $thumbnails_size));
+			$thumb = $this->getObject('com://admin/files.database.row.thumbnail', array('size' => $thumbnails_size));
 			$thumb->source = $this;
 
 			$result = $thumb->save();
