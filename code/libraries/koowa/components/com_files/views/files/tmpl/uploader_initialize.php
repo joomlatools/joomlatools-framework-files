@@ -32,6 +32,7 @@ window.addEvent('domready', function() {
         browse_button: 'pickfiles',
         multi_selection: <?= json_encode($multi_selection) ?>,
         dragdrop: true,
+        unique_names: false,
         rename: true,
         url: '', // this is added on the go in BeforeUpload event
         flash_swf_url: 'media://koowa/com_files/plupload/plupload.flash.swf',
@@ -44,12 +45,6 @@ window.addEvent('domready', function() {
             'X-Requested-With': 'xmlhttprequest'
         },
         preinit: {
-            Init: function(){
-                if(SqueezeBox.isOpen) {
-                    var heightfix = document.id('files-upload').measure(function(){return this.getSize().y;});
-                    if(SqueezeBox.size.y != heightfix) SqueezeBox.fx.win.set({height: heightfix});
-                }
-            },
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
 
@@ -60,9 +55,6 @@ window.addEvent('domready', function() {
         }
     });
     jQuery('#'+containershim).css({'position': '', 'z-index': 1});
-    SqueezeBox.addEvent('open', function(){
-        window.fireEvent('refresh');
-    });
 
     var uploader = element.pluploadQueue(),
     //We only want to run this once
@@ -72,7 +64,6 @@ window.addEvent('domready', function() {
                 document.id('files-upload-multi_browse').set('text', 'Add files');
             }
             uploader.refresh();
-            if(SqueezeBox.isOpen) SqueezeBox.resize({y: document.id('files-upload').measure(function(){return this.getSize().y;})}, true);
             uploader.unbind('QueueChanged', exposePlupload);
             //@TODO investigate better event name convention
             window.fireEvent('QueueChanged');
@@ -335,7 +326,6 @@ window.addEvent('domready', function() {
         } else {
             document.id('remote-url').focus();
         }
-        SqueezeBox.fx.win.set({height: document.id('files-upload').measure(function(){return this.getSize().y;})});
         window.fireEvent('refresh');
     };
 
