@@ -24,11 +24,16 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
             'button_attribs' => array(),
             'visible' => true,
             'link' => '',
-            'link_text' => $this->translate('Select')
+            'link_text' => $this->translate('Select'),
+            'callback' => ''
         ))->append(array(
             'id' => $config->name,
             'value' => $config->name
         ));
+
+        if ($config->callback) {
+            $config->link .= '&callback='.$config->callback;
+        }
 
         $attribs = $this->buildAttributes($config->attribs);
         $button_attribs = $this->buildAttributes($config->button_attribs);
