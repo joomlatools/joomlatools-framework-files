@@ -18,7 +18,8 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
 jQuery.noConflict();
 
 window.addEvent('domready', function() {
-    var element = jQuery('#files-upload-multi'), browse_label = Files._('Choose File');
+    var element = jQuery('#files-upload-multi'),
+        browse_label = Files._('Choose file');
 
     plupload.addI18n({'Add files': browse_label});
 
@@ -60,9 +61,6 @@ window.addEvent('domready', function() {
     //We only want to run this once
         exposePlupload = function(uploader) {
             document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
-            if(document.id('files-upload-multi_browse')) {
-                document.id('files-upload-multi_browse').set('text', 'Add files');
-            }
             uploader.refresh();
             uploader.unbind('QueueChanged', exposePlupload);
             //@TODO investigate better event name convention
@@ -254,9 +252,6 @@ window.addEvent('domready', function() {
         uploader.bind('QueueChanged', exposePlupload);
     } else {
         document.id('files-upload').setStyle('position', '').addClass('uploader-files-queued').removeClass('uploader-files-empty');
-        if(document.id('files-upload-multi_browse')) {
-            document.id('files-upload-multi_browse').set('text', 'Add files');
-        }
         uploader.refresh();
     }
 
