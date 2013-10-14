@@ -43,7 +43,17 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 			}
 		}
 
-		return parent::_databaseBeforeSave($context) && $this->getObject('com://admin/files.filter.file.uploadable')->validate($context->caller);
+        $filter = $this->getObject('com://admin/files.filter.file.uploadable');
+
+        $result = parent::_databaseBeforeSave($context) && $filter->validate($context->caller);
+
+        if (!$result && $filter->getErrors())
+        {
+            $errors = $filter->getErrors();
+            $context->setError(array_shift($errors));
+        }
+
+		return $result;
 
 	}
 }
