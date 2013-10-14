@@ -69,6 +69,45 @@ window.addEvent('domready', function() {
             window.fireEvent('QueueChanged');
         };
 
+    // Single file uploader
+    <? if ($multi_selection === false): ?>
+    /**
+     * Only leave the last file if there are more than one in the queue
+     */
+    var removeExcessFiles = function(uploader) {
+        var count = uploader.files.length;
+
+        if (count > 1) {
+            jQuery.each(uploader.files, function(i, file) {
+                if (i !== count-1) { // Find the last file
+                    uploader.removeFile(file);
+                }
+            });
+        }
+
+        modifying_queue = false;
+    },
+    // These two variables are used to make sure we only trigger below events once
+    initial_add = true,
+    modifying_queue = false;
+
+    uploader.bind('FilesAdded', function(uploader) {
+        if (initial_add === true) {
+            modifying_queue = true;
+            removeExcessFiles(uploader);
+            initial_add = false;
+        }
+    });
+    uploader.bind('QueueChanged', function(uploader) {
+        if (modifying_queue) {
+            return;
+        }
+
+        modifying_queue = true;
+        removeExcessFiles(uploader);
+    });
+    <? endif; ?>
+
     window.addEvent('refresh', function(){
         uploader.refresh();
     });
@@ -146,7 +185,7 @@ window.addEvent('domready', function() {
                 //container.removeClass('dropzone-dragover');
                 //jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
             };
-        }
+        };
 
         function addSelectedFiles(native_files) {
             var file, i, files = [], id, fileNames = {};
