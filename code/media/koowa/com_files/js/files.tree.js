@@ -107,9 +107,9 @@ Files.Tree = new Class({
 			url: url,
 			method: 'get',
 			onSuccess: function(response) {
-				if (response.items.total) {
-                    Files.utils.each(response.items.data, function(item) {
-						insertNode(item.data, that.root);
+				if (response.meta.total) {
+                    Files.utils.each(response.entities, function(item) {
+						insertNode(item, that.root);
 					});
 				}
 				if (Files.app && Files.app.active) {

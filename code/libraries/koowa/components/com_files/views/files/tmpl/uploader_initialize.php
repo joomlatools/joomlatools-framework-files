@@ -6,7 +6,10 @@
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
-defined('KOOWA') or die( 'Restricted access' ); ?>
+defined('KOOWA') or die( 'Restricted access' );
+
+$multi_selection = isset($multi_selection) ? $multi_selection : true;
+?>
 
 <?= @helper('behavior.jquery'); ?>
 <script src="media://koowa/com_files/plupload/plupload.core.html5.flash.queue.js" />
@@ -15,7 +18,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 jQuery.noConflict();
 
 window.addEvent('domready', function() {
-    var element = jQuery('#files-upload-multi'), browse_label = Files._('Choose File');
+    var element = jQuery('#files-upload-multi'),
+        browse_label = Files._('Choose file');
 
     plupload.addI18n({'Add files': browse_label});
 
@@ -27,7 +31,9 @@ window.addEvent('domready', function() {
         runtimes: 'html5,flash',
         container: containershim,
         browse_button: 'pickfiles',
+        multi_selection: <?= json_encode($multi_selection) ?>,
         dragdrop: true,
+        unique_names: false,
         rename: true,
         url: '', // this is added on the go in BeforeUpload event
         flash_swf_url: 'media://koowa/com_files/plupload/plupload.flash.swf',
@@ -40,12 +46,6 @@ window.addEvent('domready', function() {
             'X-Requested-With': 'xmlhttprequest'
         },
         preinit: {
-            Init: function(){
-                if(SqueezeBox.isOpen) {
-                    var heightfix = document.id('files-upload').measure(function(){return this.getSize().y;});
-                    if(SqueezeBox.size.y != heightfix) SqueezeBox.fx.win.set({height: heightfix});
-                }
-            },
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
 
@@ -56,23 +56,55 @@ window.addEvent('domready', function() {
         }
     });
     jQuery('#'+containershim).css({'position': '', 'z-index': 1});
-    SqueezeBox.addEvent('open', function(){
-        window.fireEvent('refresh');
-    });
 
     var uploader = element.pluploadQueue(),
     //We only want to run this once
         exposePlupload = function(uploader) {
             document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
-            if(document.id('files-upload-multi_browse')) {
-                document.id('files-upload-multi_browse').set('text', 'Add files');
-            }
             uploader.refresh();
-            if(SqueezeBox.isOpen) SqueezeBox.resize({y: document.id('files-upload').measure(function(){return this.getSize().y;})}, true);
             uploader.unbind('QueueChanged', exposePlupload);
             //@TODO investigate better event name convention
             window.fireEvent('QueueChanged');
         };
+
+    // Single file uploader
+    <? if ($multi_selection === false): ?>
+    /**
+     * Only leave the last file if there are more than one in the queue
+     */
+    var removeExcessFiles = function(uploader) {
+        var count = uploader.files.length;
+
+        if (count > 1) {
+            jQuery.each(uploader.files, function(i, file) {
+                if (i !== count-1) { // Find the last file
+                    uploader.removeFile(file);
+                }
+            });
+        }
+
+        modifying_queue = false;
+    },
+    // These two variables are used to make sure we only trigger below events once
+    initial_add = true,
+    modifying_queue = false;
+
+    uploader.bind('FilesAdded', function(uploader) {
+        if (initial_add === true) {
+            modifying_queue = true;
+            removeExcessFiles(uploader);
+            initial_add = false;
+        }
+    });
+    uploader.bind('QueueChanged', function(uploader) {
+        if (modifying_queue) {
+            return;
+        }
+
+        modifying_queue = true;
+        removeExcessFiles(uploader);
+    });
+    <? endif; ?>
 
     window.addEvent('refresh', function(){
         uploader.refresh();
@@ -151,7 +183,7 @@ window.addEvent('domready', function() {
                 //container.removeClass('dropzone-dragover');
                 //jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
             };
-        }
+        };
 
         function addSelectedFiles(native_files) {
             var file, i, files = [], id, fileNames = {};
@@ -220,9 +252,6 @@ window.addEvent('domready', function() {
         uploader.bind('QueueChanged', exposePlupload);
     } else {
         document.id('files-upload').setStyle('position', '').addClass('uploader-files-queued').removeClass('uploader-files-empty');
-        if(document.id('files-upload-multi_browse')) {
-            document.id('files-upload-multi_browse').set('text', 'Add files');
-        }
         uploader.refresh();
     }
 
@@ -245,7 +274,7 @@ window.addEvent('domready', function() {
     uploader.bind('FileUploaded', function(uploader, file, response) {
         var json = JSON.decode(response.response, true) || {};
         if (json.status) {
-            var item = json.data;
+            var item = json.entities[0];
             var cls = Files[item.type.capitalize()];
             var row = new cls(item);
             Files.app.grid.insert(row);
@@ -331,7 +360,6 @@ window.addEvent('domready', function() {
         } else {
             document.id('remote-url').focus();
         }
-        SqueezeBox.fx.win.set({height: document.id('files-upload').measure(function(){return this.getSize().y;})});
         window.fireEvent('refresh');
     };
 
@@ -446,7 +474,7 @@ window.addEvent('domready', function() {
         },
         onSuccess: function(json) {
             if (this.status == 201 && json.status) {
-                var el = json.data;
+                var el = json.entities[0];
                 var cls = Files[el.type.capitalize()];
                 var row = new cls(el);
                 Files.app.grid.insert(row);

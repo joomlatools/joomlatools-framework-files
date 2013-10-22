@@ -42,7 +42,6 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
 		foreach ($thumbnails as $thumbnail) 
 		{
-				
 			if ($row = $context->result->find($thumbnail->filename)) {
 				$row->thumbnail = $thumbnail->thumbnail;
 			}
@@ -50,8 +49,8 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 		
 		foreach ($context->result as $row) 
 		{
-			if (!$row->thumbnail) {
-				$row->thumbnail = null;
+			if (!is_string($row->thumbnail)) {
+				$row->thumbnail = false;
 			}
 		}
 	}

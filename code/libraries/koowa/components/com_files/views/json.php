@@ -15,23 +15,20 @@
  */
 class ComFilesViewJson extends KViewJson
 {
-    protected function _initialize(KObjectConfig $config)
+    protected function _renderData()
     {
-        $config->append(array(
-            'list_name' => 'items'
-        ));
+        $output = parent::_renderData();
 
-        parent::_initialize($config);
-    }
+        if (!$this->_plural)
+        {
+            $row    = $this->getModel()->getItem();
+            $status = $row->getStatus() !== KDatabase::STATUS_FAILED;
 
-    protected function _renderItem(KDatabaseRowInterface $row)
-    {
-        $output = parent::_renderItem($row);
-        $status = $row->getStatus() !== KDatabase::STATUS_FAILED;
+            $output['status'] = $status;
 
-        $output['status'] = $status;
-        if ($status === false){
-            $output['error'] = $row->getStatusMessage();
+            if ($status === false){
+                $output['error'] = $row->getStatusMessage();
+            }
         }
 
         return $output;
