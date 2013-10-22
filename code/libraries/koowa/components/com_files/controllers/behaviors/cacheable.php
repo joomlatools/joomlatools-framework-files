@@ -56,7 +56,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'priority' => KCommand::PRIORITY_LOWEST,
+			'priority' => self::PRIORITY_LOWEST,
 			'group' => 'com_files',
             'only_clear' => false // If true, behavior only clears the cache after add/edit/delets and do not store new data
 		));
@@ -228,7 +228,8 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	    
 	    // Empty strings get sent in the URL for dispatched requests 
 	    // so we turn them to null before creating the key
-	    foreach ($state as $key => $value) {
+	    foreach ($state as $key => $value)
+        {
 			if ($value === '') {
 				$state[$key] = null;
 			}
