@@ -19,7 +19,7 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 	{
 		parent::__construct($config);
 
-		$this->_state
+		$this->getState()
 			->insert('container', 'com://admin/files.filter.container', null)
 			->insert('folder', 'com://admin/files.filter.path')
 			->insert('filename', 'com://admin/files.filter.path', null, true, array('container'))
@@ -46,7 +46,7 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 		$item = parent::getItem();
 
 		if ($item) {
-			$item->source = $this->_state->source;
+			$item->source = $this->getState()->source;
 		}
 
 		return $item;
@@ -56,7 +56,7 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
     {
     	parent::_buildQueryColumns($query);
 
-    	if ($this->_state->source instanceof KDatabaseRowInterface || $this->_state->container) {
+    	if ($this->getState()->source instanceof KDatabaseRowInterface || $this->getState()->container) {
     		$query->columns(array('container' => 'c.slug'));
     	}
     }
@@ -65,14 +65,15 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
     {
     	parent::_buildQueryJoins($query);
 
-    	if ($this->_state->source instanceof KDatabaseRowInterface || $this->_state->container) {
+    	if ($this->getState()->source instanceof KDatabaseRowInterface || $this->getState()->container) {
     		$query->join(array('c' => 'files_containers'), 'c.files_container_id = tbl.files_container_id');
     	}
     }
 
 	protected function _buildQueryWhere(KDatabaseQueryInterface $query)
     {
-        $state = $this->_state;
+        $state = $this->getState();
+
 		if ($state->source instanceof KDatabaseRowInterface)
 		{
 			$source = $state->source;
@@ -123,8 +124,8 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 	
 	protected function _buildQueryOrder(KDatabaseQueryInterface $query)
 	{
-		$sort       = $this->_state->sort;
-		$direction  = strtoupper($this->_state->direction);
+		$sort       = $this->getState()->sort;
+		$direction  = strtoupper($this->getState()->direction);
 	
 		if($sort) 
 		{

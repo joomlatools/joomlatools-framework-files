@@ -21,9 +21,9 @@ class ComFilesControllerThumbnail extends ComFilesControllerDefault
         $model = clone $this->getModel();
   
     	// Save state data for later
-        $state_data = $model->getState()->getData();
+        $state_data = $model->getState()->getValues();
         
-        $nodes = $this->getObject('com://admin/files.model.nodes')->set($state_data)->getList();
+        $nodes = $this->getObject('com://admin/files.model.nodes')->setState($state_data)->getList();
         
         if (!$model->getState()->files && !$model->getState()->filename) 
         {
@@ -40,8 +40,8 @@ class ComFilesControllerThumbnail extends ComFilesControllerDefault
         }
 
 		$model->reset()
-		      ->set($state_data)
-		      ->set('files', $needed);
+		      ->setState($state_data)
+		      ->getState->set('files', $needed);
 		
 		$list  = $model->getList();
 		
@@ -67,8 +67,8 @@ class ComFilesControllerThumbnail extends ComFilesControllerDefault
         	if (count($new))
         	{
 				$model->reset()
-				    ->set($state_data)
-				    ->set('files', $new);
+				    ->setState($state_data)
+				    ->getState()->set('files', $new);
 				
 				$additional = $model->getList();
 				

@@ -19,7 +19,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
     {
         if (!isset($this->_list))
         {
-            $state = $this->_state;
+            $state = $this->getState();
 
             $files = $state->container->getAdapter('iterator')->getFiles(array(
         		'path'    => $this->_getPath(),
@@ -34,7 +34,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
 
             $this->_total = count($files);
             
-            if (strtolower($this->_state->direction) == 'desc') {
+            if (strtolower($state->direction) == 'desc') {
             	$files = array_reverse($files);
             }
             
@@ -65,23 +65,27 @@ class ComFilesModelFiles extends ComFilesModelNodes
 
 	public function iteratorFilter($path)
 	{
-		$filename = basename($path);
+        $state     = $this->getState();
+		$filename  = basename($path);
 		$extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-		if ($this->_state->name) {
-			if (!in_array($filename, (array) $this->_state->name)) {
+		if ($state->name) {
+			if (!in_array($filename, (array) $state->name)) {
 				return false;
 			}
 		}
 
-		if ($this->_state->types) 
+		if ($state->types)
         {
-			if ((in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('image', (array) $this->_state->types))
-			|| (!in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('file', (array) $this->_state->types))
+			if ((in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('image', (array) $state->types))
+			|| (!in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('file', (array) $state->types))
 			) {
 				return false;
 			}
 		}
-		if ($this->_state->search && stripos($filename, $this->_state->search) === false) return false;
+
+		if ($state->search && stripos($filename, $state->search) === false) {
+            return false;
+        }
 	}
 }

@@ -19,11 +19,13 @@ class ComFilesModelNodes extends ComFilesModelDefault
     {
         if (!isset($this->_item))
         {
+            $state = $this->getState();
+
             $this->_item = $this->getRow(array(
                 'data' => array(
-            		'container' => $this->_state->container,
-                    'folder' 	=> $this->_state->folder,
-                    'name' 		=> $this->_state->name
+            		'container' => $state->container,
+                    'folder' 	=> $state->folder,
+                    'name' 		=> $state->name
                 )
             ));
         }
@@ -50,7 +52,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
     protected function _getPath()
     {
-        $state = $this->_state;
+        $state = $this->getState();
 
         $path = $state->container->path;
 
@@ -65,7 +67,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 	{
 		if (!isset($this->_list))
 		{
-			$state = $this->_state;
+			$state = $this->getState();
 			$type = !empty($state->types) ? (array) $state->types : array();
 
 			$list = $this->getObject('com://admin/files.database.rowset.nodes');
@@ -78,7 +80,9 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
 			if (empty($type) || in_array('folder', $type))
 			{
-				$folders_model = $this->getObject('com://admin/files.model.folders')->set($state->getData());
+                $folders_model = $this->getObject('com://admin/files.model.folders');
+				$folders_model->setState($state->getValues());
+
 				$folders = $folders_model->getList();
 
 				foreach ($folders as $folder)
@@ -96,9 +100,9 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
 			if ((empty($type) || (in_array('file', $type) || in_array('image', $type))))
 			{
-				$data = $state->getData();
+				$data = $state->getValues();
 				$data['offset'] = $offset_left < 0 ? 0 : $offset_left;
-				$files_model = $this->getObject('com://admin/files.model.files')->set($data);
+				$files_model = $this->getObject('com://admin/files.model.files')->setState($data);
 				$files = $files_model->getList();
 
 				foreach ($files as $file)

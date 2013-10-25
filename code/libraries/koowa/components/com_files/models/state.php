@@ -18,9 +18,9 @@ class ComFilesModelState extends KModelState
 	/**
 	 * Needed to make sure form filter does not add config to the form action
 	 */
-	public function getData($unique = false)
+	public function getValues($unique = false)
 	{
-		$data = parent::getData($unique);
+		$data = parent::getValues($unique);
 		
 		unset($data['config']);
 		
@@ -45,9 +45,10 @@ class ComFilesModelState extends KModelState
         return $result;
   	}
   	
-    public function toArray($values = true)
+    public function toArray()
     {
-    	$array = parent::toArray($values);
+    	$array = parent::toArray();
+
     	if (!empty($array['container']) && $array['container'] instanceof KDatabaseRowInterface) {
     		$array['container'] = $array['container']->slug;
     	}

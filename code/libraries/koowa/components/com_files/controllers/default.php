@@ -115,7 +115,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	{
 	    if($this->isDispatched())
 	    {
-	        $limit = $this->getModel()->get('limit');
+	        $limit = $this->getModel()->getState()->limit;
 
 	        //If limit is empty use default
 	        if(empty($limit) && $limit !== 0) {
@@ -126,8 +126,8 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	        if($limit > $this->_limit->max) {
 	            $limit = $this->_limit->max;
 	        }
-	
-	        $this->limit = $limit;
+
+            $this->getModel()->getState()->limit = $limit;
 	    }
 	
 	    $data = $this->getModel()->getList();
