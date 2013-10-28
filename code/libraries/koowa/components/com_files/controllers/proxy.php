@@ -18,7 +18,7 @@
  */
  class ComFilesControllerProxy extends ComFilesControllerDefault
 {
-	public function _actionGet(KCommandContext $context)
+	public function _actionGet(KCommand $context)
 	{
 		$data = array(
 			'url' => $this->_request->url, 

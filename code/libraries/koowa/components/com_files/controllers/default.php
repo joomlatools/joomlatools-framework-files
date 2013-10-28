@@ -42,7 +42,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 		return $request;
 	}
 
-	protected function _actionCopy(KCommandContext $context)
+	protected function _actionCopy(KCommand $context)
 	{
 		$data = $this->getModel()->getItem();
 
@@ -66,7 +66,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 		return $data;
 	}
 
-	protected function _actionMove(KCommandContext $context)
+	protected function _actionMove(KCommand $context)
 	{
 		$data = $this->getModel()->getItem();
 
@@ -93,7 +93,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	/**
 	 * Overridden method to be able to use it with both model and view controllers
 	 */
-	protected function _actionGet(KCommandContext $context)
+	protected function _actionGet(KCommand $context)
 	{
 		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->query->format == 'html'))
 		{
@@ -109,9 +109,9 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	/**
 	 * Copied to allow 0 as a limit
 	 * 
-	 * @param KCommandContext $context
+	 * @param KCommand $context
 	 */
-	protected function _actionBrowse(KCommandContext $context)
+	protected function _actionBrowse(KCommand $context)
 	{
 	    if($this->isDispatched())
 	    {

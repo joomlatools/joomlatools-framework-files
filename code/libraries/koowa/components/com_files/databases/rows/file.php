@@ -158,7 +158,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		}
 	}
 
-	public function saveThumbnail(KCommandContext $context = null)
+	public function saveThumbnail(KCommand $context = null)
 	{
 		$result = null;
 		$available_extensions = array('jpg', 'jpeg', 'gif', 'png');
@@ -178,7 +178,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		return $result;
 	}
 
-	public function deleteThumbnail(KCommandContext $context = null)
+	public function deleteThumbnail(KCommand $context = null)
 	{
 		$thumb = $this->getObject('com://admin/files.model.thumbnails')
 			->source($this)
