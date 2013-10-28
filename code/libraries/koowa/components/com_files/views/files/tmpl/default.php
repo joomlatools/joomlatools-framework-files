@@ -15,7 +15,7 @@ Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
 window.addEvent('domready', function() {
-	var config = <?= json_encode($state->config); ?>,
+	var config = jQuery.parseJSON(<?= json_encode($state->config); ?>),
 		options = {
             cookie: {
                 path: '<?=KRequest::root()?>'
@@ -36,7 +36,7 @@ window.addEvent('domready', function() {
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
 	options = Files.utils.append(options, config);
-
+console.log(options, config);
 	Files.app = new Files.App(options);
 
 	//@TODO hide the uploader in a modal, make it pretty

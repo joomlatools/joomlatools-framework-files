@@ -20,7 +20,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
      *
      * @var ComFilesDatabaseRowContainer
      */
-    protected $_container;
+    protected static $_container;
 
     /**
      * Reset the cached container object if container changes
@@ -29,7 +29,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
     public function onStateChange($name)
     {
         if ($name === 'container') {
-            unset($this->_container);
+            self::$_container = null;
         }
     }
 
@@ -41,7 +41,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
      */
     public function getContainer()
     {
-        if(!isset($this->_container))
+        if(!isset(self::$_container))
         {
             //Set the container
             $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->getItem();
@@ -50,10 +50,10 @@ class ComFilesModelNodes extends ComFilesModelDefault
                 throw new UnexpectedValueException('Invalid container');
             }
 
-            $this->_container = $container;
+            self::$_container = $container;
         }
 
-        return $this->_container;
+        return self::$_container;
     }
 
     public function getItem()

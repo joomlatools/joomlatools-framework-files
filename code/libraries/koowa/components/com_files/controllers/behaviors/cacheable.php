@@ -235,7 +235,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 			}
 	    }
 
-	    $key = $this->getModel()->folder.':'.md5(http_build_query($state, '', '&'));
+	    $key = $this->getModel()->getState()->folder.':'.md5(http_build_query($state, '', '&'));
 
 	    return $key;
 	}

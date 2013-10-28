@@ -20,7 +20,7 @@ Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
 window.addEvent('domready', function() {
-	var config = <?= json_encode($state->config); ?>,
+	var config = jQuery.parseJSON(<?= json_encode($state->config); ?>),
 		options = {
             cookie: {
                 path: '<?=KRequest::root()?>'
