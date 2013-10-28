@@ -164,7 +164,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false)
         {
-            if ($this->getRequest()->revalidate_cache) {
+            if ($this->getRequest()->query->revalidate_cache) {
                 $this->_cleanCache();
             }
             else {

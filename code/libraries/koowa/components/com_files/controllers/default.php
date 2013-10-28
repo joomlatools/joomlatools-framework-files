@@ -30,13 +30,13 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 		$request = parent::getRequest();
 
 		// "e_name" is needed to be compatible with com_content of Joomla
-		if ($request->e_name) {
-			$request->editor = $request->e_name;
+		if ($request->query->e_name) {
+			$request->query->editor = $request->query->e_name;
 		}
 
 		// "config" state is only used in HMVC requests and passed to the JS application
 		if ($this->isDispatched()) {
-			unset($request->config);
+			unset($request->query->config);
 		}
 		
 		return $request;
@@ -95,7 +95,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	 */
 	protected function _actionGet(KCommandContext $context)
 	{
-		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->format == 'html'))
+		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->query->format == 'html'))
 		{
             $this->getObject('translator')->loadLanguageFiles($this->getIdentifier());
 
