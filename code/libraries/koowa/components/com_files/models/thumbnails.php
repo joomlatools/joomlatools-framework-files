@@ -15,6 +15,47 @@
  */
 class ComFilesModelThumbnails extends ComKoowaModelDefault
 {
+    /**
+     * A container object
+     *
+     * @var ComFilesDatabaseRowContainer
+     */
+    protected $_container;
+
+    /**
+     * Reset the cached container object if container changes
+     * @param string $name
+     */
+    public function onStateChange($name)
+    {
+        if ($name === 'container') {
+            unset($this->_container);
+        }
+    }
+
+    /**
+     * Returns the current container row
+     *
+     * @return ComFilesDatabaseRowContainer
+     * @throws UnexpectedValueException
+     */
+    public function getContainer()
+    {
+        if(!isset($this->_container))
+        {
+            //Set the container
+            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->getItem();
+
+            if (!is_object($container) || $container->isNew()) {
+                throw new UnexpectedValueException('Invalid container');
+            }
+
+            $this->_container = $container;
+        }
+
+        return $this->_container;
+    }
+
 	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
@@ -35,7 +76,7 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'state' => new ComFilesModelState()
+			'state' => 'com:files.model.state'
 		));
 
 		parent::_initialize($config);
@@ -89,7 +130,7 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 		else
 		{
 		    if ($state->container) {
-		        $query->where('tbl.files_container_id = :container_id')->bind(array('container_id' => $state->container->id));
+		        $query->where('tbl.files_container_id = :container_id')->bind(array('container_id' => $this->getContainer()->id));
 		    }
 
 		    if ($state->folder !== false) {

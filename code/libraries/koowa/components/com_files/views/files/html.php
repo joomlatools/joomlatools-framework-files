@@ -31,7 +31,7 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 	     
 		$this->sitebase  = trim(JURI::root(), '/');
 		$this->token     = JSession::getFormToken();
-		$this->container = $this->getModel()->getState()->container;
+		$this->container = $this->getModel()->getContainer();
 
 		return parent::display();
 	}

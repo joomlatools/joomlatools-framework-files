@@ -15,6 +15,47 @@
  */
 class ComFilesModelNodes extends ComFilesModelDefault
 {
+    /**
+     * A container object
+     *
+     * @var ComFilesDatabaseRowContainer
+     */
+    protected $_container;
+
+    /**
+     * Reset the cached container object if container changes
+     * @param string $name
+     */
+    public function onStateChange($name)
+    {
+        if ($name === 'container') {
+            unset($this->_container);
+        }
+    }
+
+    /**
+     * Returns the current container row
+     *
+     * @return ComFilesDatabaseRowContainer
+     * @throws UnexpectedValueException
+     */
+    public function getContainer()
+    {
+        if(!isset($this->_container))
+        {
+            //Set the container
+            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->getItem();
+
+            if (!is_object($container) || $container->isNew()) {
+                throw new UnexpectedValueException('Invalid container');
+            }
+
+            $this->_container = $container;
+        }
+
+        return $this->_container;
+    }
+
     public function getItem()
     {
         if (!isset($this->_item))
@@ -54,7 +95,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
     {
         $state = $this->getState();
 
-        $path = $state->container->path;
+        $path = $this->getContainer()->path;
 
         if (!empty($state->folder) && $state->folder != '/') {
             $path .= '/'.ltrim($state->folder, '/');

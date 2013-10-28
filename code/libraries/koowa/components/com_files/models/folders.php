@@ -28,7 +28,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 		{
 			$state = $this->getState();
 
-			$folders = $state->container->getAdapter('iterator')->getFolders(array(
+			$folders = $this->getContainer()->getAdapter('iterator')->getFolders(array(
 				'path'    => $this->_getPath(),
 				'recurse' => !!$state->tree,
 				'filter'  => array($this, 'iteratorFilter'),
@@ -75,7 +75,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	public function iteratorMap($path)
 	{
 		$path = str_replace('\\', '/', $path);
-		$path = str_replace($this->getState()->container->path.'/', '', $path);
+		$path = str_replace($this->getContainer()->path.'/', '', $path);
 
 		return $path;
 	}

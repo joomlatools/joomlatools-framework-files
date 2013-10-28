@@ -34,14 +34,14 @@ class ComFilesControllerThumbnail extends ComFilesControllerDefault
         			$needed[] = $row->name;
         		}
         	}
-        } 
+        }
         else {
         	$needed = $model->getState()->files ? $model->getState()->files : $model->getState()->filename;
         }
 
 		$model->reset()
 		      ->setState($state_data)
-		      ->getState->set('files', $needed);
+		      ->getState()->set('files', $needed);
 		
 		$list  = $model->getList();
 		

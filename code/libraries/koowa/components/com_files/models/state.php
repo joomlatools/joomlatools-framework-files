@@ -26,33 +26,4 @@ class ComFilesModelState extends KModelState
 		
 		return $data;
 	}
-	
-	public function get($name, $default = null)
-    {
-    	$result = parent::get($name, $default);
-
-        if ($name === 'container' && is_string($result))
-        {
-            $result = KObjectManager::getInstance()->getObject('com://admin/files.model.containers')->slug($result)->getItem();
-
-	        if (!is_object($result) || $result->isNew()) {
-	            throw new UnexpectedValueException('Invalid container');
-	        }
-
-	        $this->_data['container']->value = $result;
-        }
-
-        return $result;
-  	}
-  	
-    public function toArray()
-    {
-    	$array = parent::toArray();
-
-    	if (!empty($array['container']) && $array['container'] instanceof KDatabaseRowInterface) {
-    		$array['container'] = $array['container']->slug;
-    	}
-
-        return $array;
-    }
 }
