@@ -17,7 +17,7 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 {
 	protected function _databaseBeforeSave(KCommand $context)
 	{
-		$row = $context->caller;
+		$row = $context->subject;
 
 		if (is_string($row->file) && !is_uploaded_file($row->file))
 		{
@@ -45,7 +45,7 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 
         $filter = $this->getObject('com://admin/files.filter.file.uploadable');
 
-        $result = parent::_databaseBeforeSave($context) && $filter->validate($context->caller);
+        $result = parent::_databaseBeforeSave($context) && $filter->validate($context->subject);
 
         if (!$result && $filter->getErrors())
         {

@@ -17,7 +17,7 @@ class ComFilesCommandValidatorNode extends KCommandInvokerAbstract
 {
 	protected function _databaseBeforeSave(KCommand $context)
 	{
-		$row = $context->caller;
+		$row = $context->subject;
 
 		if (!$row->isNew() && !$row->overwrite)
         {
@@ -31,7 +31,7 @@ class ComFilesCommandValidatorNode extends KCommandInvokerAbstract
 
 	protected function _databaseBeforeCopy(KCommand $context)
 	{
-		$row        = $context->caller;
+		$row        = $context->subject;
 		$translator = $this->getObject('translator');
 
 		if (!array_intersect(array('destination_folder', 'destination_name'), $row->getModified())) {
