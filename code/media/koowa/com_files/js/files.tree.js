@@ -8,9 +8,7 @@
 
 if(!Files) var Files = {};
 
-Files.Tree = new Class({
-	Extends: MooTreeControl,
-	Implements: [Options],
+Files.Tree = Koowa.Tree.extend({
 	options: {
 		mode: 'folders',
 		title: '',
@@ -27,7 +25,7 @@ Files.Tree = new Class({
 
 		this.onAdopt = this.options.onAdopt;
 
-		this.parent(this.options, this.options.root);
+		//this.parent(this.options, this.options.root);
 
 		if (options.adopt) {
 			this.adopt(options.adopt);
