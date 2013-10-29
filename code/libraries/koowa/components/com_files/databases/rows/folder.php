@@ -31,7 +31,7 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 
 	public function save()
 	{
-		$context = $this->getCommandContext();
+		$context = $this->getContext();
 		$context->result = false;
 
 		$is_new = $this->isNew();

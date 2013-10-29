@@ -54,7 +54,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function copy()
 	{
-		$context = $this->getCommandContext();
+		$context = $this->getContext();
 		$context->result = false;
 
 		if ($this->getCommandChain()->run('before.copy', $context) !== false)
@@ -85,7 +85,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function move()
 	{
-		$context = $this->getCommandContext();
+		$context = $this->getContext();
 		$context->result = false;
 
 		if ($this->getCommandChain()->run('before.move', $context) !== false)
@@ -117,7 +117,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function delete()
 	{
-		$context = $this->getCommandContext();
+		$context = $this->getContext();
 		$context->result = false;
 
 		if ($this->getCommandChain()->run('before.delete', $context) !== false)
