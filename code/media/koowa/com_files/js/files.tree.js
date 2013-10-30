@@ -78,10 +78,7 @@ if(!Files) var Files = {};
                                 insertNode(item, that.root);
                             });
                         }
-                        if (Files.app && Files.app.active) {
-                            that.selectPath(Files.app.active);
-                        }
-                        that.onAdopt(that.options.div, that.root);
+
                     }
                 };
 
@@ -140,7 +137,14 @@ if(!Files) var Files = {};
         },
         fromUrl: function(url) {
 
-            this.tree('loadDataFromUrl', url);
+            var self = this;
+            this.tree('loadDataFromUrl', url, null, function(response){
+                if (Files.app && Files.app.active) {
+                    self.selectPath(Files.app.active);
+                }
+                //@TODO may not be necessary
+                //self.onAdopt(self.options.div, self.root);
+            });
 
         },
         selectPath: function(path) {
