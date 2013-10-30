@@ -49,29 +49,33 @@ if(!Files) var Files = {};
 
                         var data = response.entities,
                             parse = function(item, parent) {
-                                var path = parent.data.path ? parent.data.path+'/' : '';
+                                var path = (parent && parent.path) ? parent.path+'/' : '',
+                                    level = (parent && parent.level >= 0) ? parent.level + 1 : 0;
                                 path += item.name;
 
                                 //Parse attributes
-                                $.extend(item, {
+                                item = $.extend(item, {
                                     text: item.name,
                                     id: path,
                                     path: path,
                                     url: '#'+item.path,
-                                    type: 'folder'
+                                    type: 'folder',
+                                    level: level
                                 });
 
                                 if (item.children) {
-                                    Files.utils.each(item.children, function(item) {
-                                        parse(item);
+                                    var children = [];
+                                    Files.utils.each(item.children, function(child) {
+                                        children.push(parse(child, item));
                                     });
+                                    item.children = children;
                                 }
 
-                                return node;
+                                return item;
                         }
 
                         if (response.meta.total) {
-                            Files.utils.each(data, function(item) {
+                            Files.utils.each(data, function(item, key) {
                                 parse(item);
                             });
                         }
@@ -92,12 +96,12 @@ if(!Files) var Files = {};
         },
 
         /**
-         * Customized parseData method due to nooku json format
+         * Customized parseData method due to using json, in a already nested data format
          * @param json returned data
          * @returns data
          */
         parseData: function(list){
-            console.warn(list);
+
             return this._parseData(list);
         },
 
