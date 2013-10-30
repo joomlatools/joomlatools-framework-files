@@ -31,7 +31,7 @@ JHtml::_('behavior.modal');
 <?= @helper('behavior.tooltip'); ?>
 <?= @helper('behavior.modal'); ?>
 <?= @helper('bootstrap.load'); ?>
-<?= @helper('bootstrap.tree'); ?>
+<?= @helper('behavior.tree'); ?>
 
 <script src="media://koowa/com_files/js/history/history.js" />
 <? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
