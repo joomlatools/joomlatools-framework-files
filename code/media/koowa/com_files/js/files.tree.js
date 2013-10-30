@@ -150,6 +150,8 @@ if(!Files) var Files = {};
 
         },
         selectPath: function(path) {
+
+            this.tree('selectNode', this.tree('getNodeById', path));
             return;
             if (path !== undefined) {
                 var node = this.get(path);
@@ -175,34 +177,44 @@ if(!Files) var Files = {};
                         if(event.node) { // When event.node is null, it's actually a deselect event
                             element = $(event.node.element);
 
-                            //@TODO implement better logic for toggling open and closed styling in onCreateLi
-                            //self.tree('openNode', event.node); // open the selected node, if not open already
-                            element.addClass('active').find('[class^=icon-folder]').addClass('icon-white');
+                            self.tree('openNode', event.node); // open the selected node, if not open already
 
                             //Fire custom select node handler
                             options.onSelectNode(event.node);
-                        }
-
-                        // Removing active styling from previous and deselected nodes
-                        if(event.previous_node || event.deselected_node) {
-                            var deselected = event.previous_node || event.deselected_node;
-                            element = $(deselected.element);
-                            element.removeClass('active').find('[class^=icon-folder]').removeClass('icon-white');
                         }
                     },
                 'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
                     function(event) {
                         var node = event.node,
                             element = $(node.element),
-                            overflow = self.element.closest('.docman_dialog__child__content__box'),
-                            viewport = overflow.height(),
+                            viewport = self.element.height(),
                             offsetTop = element[0].offsetTop,
                             height = element.height(),
                             scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
 
-                        if(scrollTo > overflow.scrollTop()){ //Only scroll if there's overflow
-                            overflow.stop().animate({scrollTop: scrollTo }, 300);
+                        if(scrollTo > self.element.scrollTop()){ //Only scroll if there's overflow
+                            self.element.stop().animate({scrollTop: scrollTo }, 300);
                         }
+                    },
+                'tree.init':
+                    function() {
+                        /**
+                         * Sidebar.js will fire a resize event when it sets the height on load, we want our animated scroll
+                         * to happen after that, but not on future resize events as it would confuse the user experience
+                         */
+
+                        self.element.one('resize', function(){
+                            if(self.tree('getSelectedNode')) {
+                                var node = self.tree('getSelectedNode'),
+                                    element = $(node.element),
+                                    viewport = self.element.height(),
+                                    offsetTop = element[0].offsetTop,
+                                    height = element.height(),
+                                    scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
+
+                                self.element.stop().animate({scrollTop: scrollTo }, 900);
+                            }
+                        });
                     }
             });
 
