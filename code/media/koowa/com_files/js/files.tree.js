@@ -10,140 +10,140 @@ if(!Files) var Files = {};
 
 (function($){
 
-Files.Tree = Koowa.Tree.extend({
-	options: {
-		mode: 'folders',
-		title: '',
-		grid: true,
-		onClick: function (){},
-		onAdopt: function (){},
-		adopt: null,
-		root: {
-			open: true
-		}
-	},
+    Files.Tree = Koowa.Tree.extend({
+        options: {
+            mode: 'folders',
+            title: '',
+            grid: true,
+            onClick: function (){},
+            onAdopt: function (){},
+            adopt: null,
+            root: {
+                open: true
+            }
+        },
 
-    getDefaults: function(){
+        getDefaults: function(){
 
-        var self = this,
-            defaults = {
-                autoOpen: 1, //root.open = true on previous script
-                onAfterInitialize: function(){
-                    this.onAdopt = this.options.onAdopt;
+            var self = this,
+                defaults = {
+                    autoOpen: 1, //root.open = true on previous script
+                    onAfterInitialize: function(){
+                        this.onAdopt = this.options.onAdopt;
 
-                    //this.parent(this.options, this.options.root);
+                        //this.parent(this.options, this.options.root);
 
-                    if (options.adopt) {
-                        this.adopt(options.adopt);
+                        if (options.adopt) {
+                            this.adopt(options.adopt);
+                        }
+
+                        if (this.options.title) {
+                            this.setTitle(this.options.title);
+                        }
                     }
+                };
 
-                    if (this.options.title) {
-                        this.setTitle(this.options.title);
-                    }
+            return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
+        },
+
+        setTitle: function(title) {
+            if (!this.title_element) {
+                this.title_element = new Element('h3').inject(document.id(this.options.div), 'top');
+            }
+            this.title = title;
+            this.title_element.set('text', title);
+        },
+        /**
+         * We need to duplicate this because in the latest Mootree noClick argument is removed.
+         */
+        select: function(node, noClick) {
+            if (!noClick) {
+                this.onClick(node); node.onClick(); // fire click events
+            }
+            if (this.selected === node) return; // already selected
+            if (this.selected) {
+                // deselect previously selected node:
+                this.selected.select(false);
+                this.onSelect(this.selected, false);
+            }
+            // select new node:
+            this.selected = node;
+            node.select(true);
+            this.onSelect(node, true);
+
+            while (true) {
+                if (!node.parent || node.parent.id == null) {
+                    break;
                 }
-            };
+                node.parent.toggle(false, true);
 
-        return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
-    },
+                node = node.parent;
+            }
+        },
+        adopt: function(id, parentNode) {
+            this.parent(id, parentNode);
 
-	setTitle: function(title) {
-		if (!this.title_element) {
-			this.title_element = new Element('h3').inject(document.id(this.options.div), 'top');
-		}
-		this.title = title;
-		this.title_element.set('text', title);
-	},
-	/**
-	 * We need to duplicate this because in the latest Mootree noClick argument is removed.
-	 */
-	select: function(node, noClick) {
-		if (!noClick) {
-			this.onClick(node); node.onClick(); // fire click events
-		}
-		if (this.selected === node) return; // already selected
-		if (this.selected) {
-			// deselect previously selected node:
-			this.selected.select(false);
-			this.onSelect(this.selected, false);
-		}
-		// select new node:
-		this.selected = node;
-		node.select(true);
-		this.onSelect(node, true);
+            this.onAdopt(id, parentNode);
+        },
+        fromUrl: function(url) {
 
-		while (true) {
-			if (!node.parent || node.parent.id == null) {
-				break;
-			}
-			node.parent.toggle(false, true);
-
-			node = node.parent;
-		}
-	},
-	adopt: function(id, parentNode) {
-		this.parent(id, parentNode);
-
-		this.onAdopt(id, parentNode);
-	},
-	fromUrl: function(url) {
-
-        console.log(this.tree('loadDataFromUrl', url));
+            console.log(this.tree('loadDataFromUrl', url));
 
 
-        return;
-		var that = this,
-			insertNode = function(item, parent) {
-				var path = parent.data.path ? parent.data.path+'/' : '';
-				path += item.name;
+            return;
+            var that = this,
+                insertNode = function(item, parent) {
+                    var path = parent.data.path ? parent.data.path+'/' : '';
+                    path += item.name;
 
-				var node = parent.insert({
-					text: item.name,
-					id: path,
-					data: {
-						path: path,
-						url: '#'+item.path,
-						type: 'folder'
-					}
-				});
+                    var node = parent.insert({
+                        text: item.name,
+                        id: path,
+                        data: {
+                            path: path,
+                            url: '#'+item.path,
+                            type: 'folder'
+                        }
+                    });
 
-                node.div.main.setAttribute('title', node.div.text.innerText);
+                    node.div.main.setAttribute('title', node.div.text.innerText);
 
-				if (item.children) {
-                    Files.utils.each(item.children, function(item) {
-						insertNode(item, node);
-					});
-				}
+                    if (item.children) {
+                        Files.utils.each(item.children, function(item) {
+                            insertNode(item, node);
+                        });
+                    }
 
-				return node;
-			};
+                    return node;
+                };
 
-		new Request.JSON({
-			url: url,
-			method: 'get',
-			onSuccess: function(response) {
-				if (response.meta.total) {
-                    Files.utils.each(response.entities, function(item) {
-						insertNode(item, that.root);
-					});
-				}
-				if (Files.app && Files.app.active) {
-					that.selectPath(Files.app.active);
-				}
-                that.onAdopt(that.options.div, that.root);
-			}
-		}).send();
-	},
-	selectPath: function(path) {
-		if (path !== undefined) {
-			var node = this.get(path);
-			if (node) {
-				this.select(node, true);
-			}
-			else {
-				this.select(this.root, true);
-			}
-		}
-	}
-});
+            new Request.JSON({
+                url: url,
+                method: 'get',
+                onSuccess: function(response) {
+                    if (response.meta.total) {
+                        Files.utils.each(response.entities, function(item) {
+                            insertNode(item, that.root);
+                        });
+                    }
+                    if (Files.app && Files.app.active) {
+                        that.selectPath(Files.app.active);
+                    }
+                    that.onAdopt(that.options.div, that.root);
+                }
+            }).send();
+        },
+        selectPath: function(path) {
+            if (path !== undefined) {
+                var node = this.get(path);
+                if (node) {
+                    this.select(node, true);
+                }
+                else {
+                    this.select(this.root, true);
+                }
+            }
+        }
+    });
 
 }(window.jQuery));
