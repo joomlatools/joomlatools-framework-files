@@ -46,39 +46,37 @@ if(!Files) var Files = {};
                         }
                     },
                     dataFilter: function(response){
-                        console.warn('dataFilter', arguments, this);
 
-                        var parse = function(item, parent) {
-                            var path = parent.data.path ? parent.data.path+'/' : '';
-                            path += item.name;
+                        var data = response.entities,
+                            parse = function(item, parent) {
+                                var path = parent.data.path ? parent.data.path+'/' : '';
+                                path += item.name;
 
-                            var node = parent.insert({
-                                text: item.name,
-                                id: path,
-                                data: {
+                                //Parse attributes
+                                $.extend(item, {
+                                    text: item.name,
+                                    id: path,
                                     path: path,
                                     url: '#'+item.path,
                                     type: 'folder'
-                                }
-                            });
-
-                            node.div.main.setAttribute('title', node.div.text.innerText);
-
-                            if (item.children) {
-                                Files.utils.each(item.children, function(item) {
-                                    insertNode(item, node);
                                 });
-                            }
 
-                            return node;
+                                if (item.children) {
+                                    Files.utils.each(item.children, function(item) {
+                                        parse(item);
+                                    });
+                                }
+
+                                return node;
                         }
 
                         if (response.meta.total) {
-                            Files.utils.each(response.entities, function(item) {
-                                insertNode(item, that.root);
+                            Files.utils.each(data, function(item) {
+                                parse(item);
                             });
                         }
 
+                        return data;
                     }
                 };
 
