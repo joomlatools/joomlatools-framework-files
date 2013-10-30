@@ -10,6 +10,10 @@ if(!Files) var Files = {};
 
 (function($){
 
+    /**
+     * Files.Tree is a wrapper for Koowa.Tree, which wraps jqTree
+     * @type extend Koowa.Tree
+     */
     Files.Tree = Koowa.Tree.extend({
         options: {
             mode: 'folders',
@@ -33,13 +37,51 @@ if(!Files) var Files = {};
 
                         //this.parent(this.options, this.options.root);
 
-                        if (options.adopt) {
-                            this.adopt(options.adopt);
+                        if (this.options.adopt) {
+                            this.adopt(this.options.adopt);
                         }
 
                         if (this.options.title) {
                             this.setTitle(this.options.title);
                         }
+                    },
+                    dataFilter: function(response){
+                        console.warn('dataFilter', arguments, this);
+
+                        var parse = function(item, parent) {
+                            var path = parent.data.path ? parent.data.path+'/' : '';
+                            path += item.name;
+
+                            var node = parent.insert({
+                                text: item.name,
+                                id: path,
+                                data: {
+                                    path: path,
+                                    url: '#'+item.path,
+                                    type: 'folder'
+                                }
+                            });
+
+                            node.div.main.setAttribute('title', node.div.text.innerText);
+
+                            if (item.children) {
+                                Files.utils.each(item.children, function(item) {
+                                    insertNode(item, node);
+                                });
+                            }
+
+                            return node;
+                        }
+
+                        if (response.meta.total) {
+                            Files.utils.each(response.entities, function(item) {
+                                insertNode(item, that.root);
+                            });
+                        }
+                        if (Files.app && Files.app.active) {
+                            that.selectPath(Files.app.active);
+                        }
+                        that.onAdopt(that.options.div, that.root);
                     }
                 };
 
@@ -53,6 +95,17 @@ if(!Files) var Files = {};
             this.title = title;
             this.title_element.set('text', title);
         },
+
+        /**
+         * Customized parseData method due to nooku json format
+         * @param json returned data
+         * @returns data
+         */
+        parseData: function(list){
+            console.warn(list);
+            return this._parseData(list);
+        },
+
         /**
          * We need to duplicate this because in the latest Mootree noClick argument is removed.
          */
@@ -87,53 +140,11 @@ if(!Files) var Files = {};
         },
         fromUrl: function(url) {
 
-            console.log(this.tree('loadDataFromUrl', url));
+            this.tree('loadDataFromUrl', url);
 
-
-            return;
-            var that = this,
-                insertNode = function(item, parent) {
-                    var path = parent.data.path ? parent.data.path+'/' : '';
-                    path += item.name;
-
-                    var node = parent.insert({
-                        text: item.name,
-                        id: path,
-                        data: {
-                            path: path,
-                            url: '#'+item.path,
-                            type: 'folder'
-                        }
-                    });
-
-                    node.div.main.setAttribute('title', node.div.text.innerText);
-
-                    if (item.children) {
-                        Files.utils.each(item.children, function(item) {
-                            insertNode(item, node);
-                        });
-                    }
-
-                    return node;
-                };
-
-            new Request.JSON({
-                url: url,
-                method: 'get',
-                onSuccess: function(response) {
-                    if (response.meta.total) {
-                        Files.utils.each(response.entities, function(item) {
-                            insertNode(item, that.root);
-                        });
-                    }
-                    if (Files.app && Files.app.active) {
-                        that.selectPath(Files.app.active);
-                    }
-                    that.onAdopt(that.options.div, that.root);
-                }
-            }).send();
         },
         selectPath: function(path) {
+            return;
             if (path !== undefined) {
                 var node = this.get(path);
                 if (node) {
