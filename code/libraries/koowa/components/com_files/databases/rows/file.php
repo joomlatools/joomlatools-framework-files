@@ -162,12 +162,12 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 	{
 		$result = null;
 		$available_extensions = array('jpg', 'jpeg', 'gif', 'png');
-		
+
 		if ($this->isImage() 
-			&& $this->container->getParameters()->thumbnails
+			&& $this->getContainer()->getParameters()->thumbnails
 			&& in_array(strtolower($this->extension), $available_extensions)
 		) {
-			$parameters = $this->container->getParameters();
+			$parameters = $this->getContainer()->getParameters();
 			$thumbnails_size = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
 			$thumb = $this->getObject('com://admin/files.database.row.thumbnail', array('size' => $thumbnails_size));
 			$thumb->source = $this;

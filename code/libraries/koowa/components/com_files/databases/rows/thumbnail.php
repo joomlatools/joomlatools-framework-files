@@ -84,7 +84,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
             if ($str)
             {
                 $this->setData(array(
-                    'files_container_id' => $source->container->id,
+                    'files_container_id' => $source->getContainer()->id,
                     'folder'             => $source->folder,
                     'filename'           => $source->name,
                     'thumbnail'          => $str
@@ -117,7 +117,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
      *
      * @throws BadMethodCallException If bad formatted size is provided.
      *
-     * @return this.
+     * @return $this.
      */
     public function setSize(array $size)
     {
@@ -195,13 +195,30 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
         if ($limit == '-1') {
             // If memory is not limited, we take our chances ...
             $result = true;
-        } else {
-            $limit = (int) str_ireplace('M', '', $limit);
-            $limit = $limit * pow(1024, 2);
+        }
+        else
+        {
+            $limit = self::convertToBytes($limit);
             $available_memory = $limit - memory_get_usage();
-            if ($source_memory + $thumb_memory < $available_memory) $result = true;
+
+            if ($source_memory + $thumb_memory < $available_memory) {
+                $result = true;
+            }
         }
 
         return $result;
+    }
+
+    public static function convertToBytes($value)
+    {
+        $keys = array('k', 'm', 'g');
+        $last_char = strtolower(substr($value, -1));
+        $value = (int) $value;
+
+        if (in_array($last_char, $keys)) {
+            $value *= pow(1024, array_search($last_char, $keys)+1);
+        }
+
+        return $value;
     }
 }
