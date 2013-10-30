@@ -28,7 +28,7 @@ if(!Files) var Files = {};
 
             var self = this,
                 defaults = {
-                    autoOpen: 1, //root.open = true on previous script
+                    autoOpen: 0, //root.open = true on previous script
                     onAfterInitialize: function(){
                         this.onAdopt = this.options.onAdopt;
 
@@ -100,7 +100,7 @@ if(!Files) var Files = {};
         parseData: function(list){
             return [{
                 label: this.options.root.text,
-                id: -1, //negative 1 used as 0 doesn't work with this.selectNode
+                //id: -1, //negative 1 used as 0 doesn't work with this.selectNode
                 href: '#',
                 children: list
             }];
@@ -151,8 +151,11 @@ if(!Files) var Files = {};
 
         },
         selectPath: function(path) {
-console.warn(path);
-            this.tree('selectNode', this.tree('getNodeById', path));
+            var node = path !== undefined ? this.tree('getNodeById', path) : this.tree('getTree');
+
+            //Calling a private API in order to make the Root node selectable
+            this.element.data('simple_widget_tree')._selectNode(node, true);
+            //this.tree('selectNode', path !== undefined ? this.tree('getNodeById', path) : this.tree('getTree'));
             return;
             if (path !== undefined) {
                 var node = this.get(path);
