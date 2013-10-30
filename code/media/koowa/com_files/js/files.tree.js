@@ -16,9 +16,6 @@ if(!Files) var Files = {};
      */
     Files.Tree = Koowa.Tree.extend({
         options: {
-            mode: 'folders',
-            title: '',
-            grid: true,
             onClick: function (){},
             onAdopt: function (){},
             adopt: null,
@@ -80,7 +77,7 @@ if(!Files) var Files = {};
                             });
                         }
 
-                        return data;
+                        return self.parseData(data);
                     }
                 };
 
@@ -101,8 +98,11 @@ if(!Files) var Files = {};
          * @returns data
          */
         parseData: function(list){
-
-            return this._parseData(list);
+            return [{
+                label: this.options.root.text,
+                id: -1, //negative 1 used as 0 doesn't work with this.selectNode
+                children: list
+            }];
         },
 
         /**
