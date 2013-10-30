@@ -101,6 +101,7 @@ if(!Files) var Files = {};
             return [{
                 label: this.options.root.text,
                 id: -1, //negative 1 used as 0 doesn't work with this.selectNode
+                href: '#',
                 children: list
             }];
         },
@@ -150,7 +151,7 @@ if(!Files) var Files = {};
 
         },
         selectPath: function(path) {
-
+console.warn(path);
             this.tree('selectNode', this.tree('getNodeById', path));
             return;
             if (path !== undefined) {
@@ -193,29 +194,30 @@ if(!Files) var Files = {};
                             scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
 
                         if(scrollTo > self.element.scrollTop()){ //Only scroll if there's overflow
-                            self.element.stop().animate({scrollTop: scrollTo }, 300);
+                            self.element.animate({scrollTop: scrollTo }, 300);
                         }
-                    },
-                'tree.init':
-                    function() {
-                        /**
-                         * Sidebar.js will fire a resize event when it sets the height on load, we want our animated scroll
-                         * to happen after that, but not on future resize events as it would confuse the user experience
-                         */
-
-                        self.element.one('resize', function(){
-                            if(self.tree('getSelectedNode')) {
-                                var node = self.tree('getSelectedNode'),
-                                    element = $(node.element),
-                                    viewport = self.element.height(),
-                                    offsetTop = element[0].offsetTop,
-                                    height = element.height(),
-                                    scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
-
-                                self.element.stop().animate({scrollTop: scrollTo }, 900);
-                            }
-                        });
                     }
+            });
+            this.element.on('tree.select', function(){
+                /**
+                 * Sidebar.js will fire a resize event when it sets the height on load, we want our animated scroll
+                 * to happen after that, but not on future resize events as it would confuse the user experience
+                 */
+
+                self.element.one('resize', function(){
+                    if(self.tree('getSelectedNode')) {
+                        var node = self.tree('getSelectedNode'),
+                            element = $(node.element),
+                            viewport = self.element.height(),
+                            offsetTop = element[0].offsetTop,
+                            height = element.height(),
+                            scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
+
+                        if(scrollTo > self.element.scrollTop()){ //Only scroll if there's overflow
+                            self.element.stop().animate({scrollTop: scrollTo }, 900);
+                        }
+                    }
+                });
             });
 
         }
