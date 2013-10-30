@@ -8,6 +8,8 @@
 
 if(!Files) var Files = {};
 
+(function($){
+
 Files.Tree = Koowa.Tree.extend({
 	options: {
 		mode: 'folders',
@@ -20,21 +22,30 @@ Files.Tree = Koowa.Tree.extend({
 			open: true
 		}
 	},
-	initialize: function(options) {
-		this.setOptions(options);
 
-		this.onAdopt = this.options.onAdopt;
+    getDefaults: function(){
 
-		//this.parent(this.options, this.options.root);
+        var self = this,
+            defaults = {
+                autoOpen: 1, //root.open = true on previous script
+                onAfterInitialize: function(){
+                    this.onAdopt = this.options.onAdopt;
 
-		if (options.adopt) {
-			this.adopt(options.adopt);
-		}
+                    //this.parent(this.options, this.options.root);
 
-		if (this.options.title) {
-			this.setTitle(this.options.title);
-		}
-	},
+                    if (options.adopt) {
+                        this.adopt(options.adopt);
+                    }
+
+                    if (this.options.title) {
+                        this.setTitle(this.options.title);
+                    }
+                }
+            };
+
+        return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
+    },
+
 	setTitle: function(title) {
 		if (!this.title_element) {
 			this.title_element = new Element('h3').inject(document.id(this.options.div), 'top');
@@ -75,6 +86,11 @@ Files.Tree = Koowa.Tree.extend({
 		this.onAdopt(id, parentNode);
 	},
 	fromUrl: function(url) {
+
+        console.log(this.tree('loadDataFromUrl', url));
+
+
+        return;
 		var that = this,
 			insertNode = function(item, parent) {
 				var path = parent.data.path ? parent.data.path+'/' : '';
@@ -129,3 +145,5 @@ Files.Tree = Koowa.Tree.extend({
 		}
 	}
 });
+
+}(window.jQuery));

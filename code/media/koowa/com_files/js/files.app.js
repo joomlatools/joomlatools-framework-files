@@ -35,8 +35,7 @@ Files.App = new Class({
 		},
 		tree: {
 			enabled: true,
-			div: 'files-tree',
-			theme: ''
+			element: '#files-tree',
 		},
 		grid: {
 			element: 'files-grid',
@@ -428,7 +427,8 @@ Files.App = new Class({
 		if (this.options.tree.enabled) {
 			var opts = this.options.tree,
 				that = this;
-            Files.utils.append(opts, {
+
+            opts = jQuery.extend(true, {}, {
 				onClick: function(node) {
 					if (node.id || node.data.url) {
 						that.navigate(node && node.id ? node.id : '');
@@ -440,8 +440,8 @@ Files.App = new Class({
 						url: '#'
 					}
 				}
-			});
-			this.tree = new Files.Tree(opts);
+			}, opts);
+			this.tree = new Files.Tree(jQuery(opts.element), opts);
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
 			this.addEvent('afterNavigate', function(path) {
