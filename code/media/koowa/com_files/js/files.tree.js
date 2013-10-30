@@ -15,20 +15,12 @@ if(!Files) var Files = {};
      * @type extend Koowa.Tree
      */
     Files.Tree = Koowa.Tree.extend({
-        options: {
-            onSelectNode: function (){},
-            onAdopt: function (){},
-            adopt: null,
-            root: {
-                open: true
-            }
-        },
-
         getDefaults: function(){
 
             var self = this,
                 defaults = {
                     autoOpen: 0, //root.open = true on previous script
+                    onSelectNode: function(){},
                     onAfterInitialize: function(){
                         this.onAdopt = this.options.onAdopt;
 
@@ -104,11 +96,6 @@ if(!Files) var Files = {};
                 children: list
             }];
         },
-        adopt: function(id, parentNode) {
-            this.parent(id, parentNode);
-
-            this.onAdopt(id, parentNode);
-        },
         fromUrl: function(url) {
 
             var self = this;
@@ -116,25 +103,18 @@ if(!Files) var Files = {};
                 if (Files.app && Files.app.active) {
                     self.selectPath(Files.app.active);
                 }
-                //@TODO may not be necessary
-                //self.onAdopt(self.options.div, self.root);
             });
 
         },
         selectPath: function(path) {
             var node = this.tree('getNodeById', path);
 
-            console.warn(this.tree('getNodeById', path));
-            if(!path) {
-                this.tree('selectNode', this.tree('getNodeById', path));
-            } else {
-                //Calling a private API in order to make the Root node selectable
-                var tree = this.tree('getTree'), node = tree.children.length ? tree.children[0] : null;
-                this.tree('selectNode', node);
-                //this.element.data('simple_widget_tree')._selectNode(node, true);
+            if(!node) {
+                var tree = this.tree('getTree');
+                node = tree.children.length ? tree.children[0] : null;
             }
 
-            //this.tree('selectNode', path !== undefined ? this.tree('getNodeById', path) : this.tree('getTree'));
+            this.tree('selectNode', node);
         },
 
         attachHandlers: function(){
