@@ -430,7 +430,7 @@ Files.App = new Class({
 
             opts = jQuery.extend(true, {}, {
 				onClick: function(node) {
-					if (node.id || node.data.url) {
+					if (node.id || node.url) {
 						that.navigate(node && node.id ? node.id : '');
 					}
 				},

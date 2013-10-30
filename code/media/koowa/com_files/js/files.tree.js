@@ -16,7 +16,7 @@ if(!Files) var Files = {};
      */
     Files.Tree = Koowa.Tree.extend({
         options: {
-            onClick: function (){},
+            onSelectNode: function (){},
             onAdopt: function (){},
             adopt: null,
             root: {
@@ -160,6 +160,52 @@ if(!Files) var Files = {};
                     this.select(this.root, true);
                 }
             }
+        },
+
+        attachHandlers: function(){
+
+            this._attachHandlers(); // Attach needed events from Koowa.Tree._attachHandlers
+
+            var options = this.options, self = this;
+
+            this.element.bind({
+                'tree.select': // The select event happens when a node is clicked
+                    function(event) {
+                        var element;
+                        if(event.node) { // When event.node is null, it's actually a deselect event
+                            element = $(event.node.element);
+
+                            //@TODO implement better logic for toggling open and closed styling in onCreateLi
+                            //self.tree('openNode', event.node); // open the selected node, if not open already
+                            element.addClass('active').find('[class^=icon-folder]').addClass('icon-white');
+
+                            //Fire custom select node handler
+                            options.onSelectNode(event.node);
+                        }
+
+                        // Removing active styling from previous and deselected nodes
+                        if(event.previous_node || event.deselected_node) {
+                            var deselected = event.previous_node || event.deselected_node;
+                            element = $(deselected.element);
+                            element.removeClass('active').find('[class^=icon-folder]').removeClass('icon-white');
+                        }
+                    },
+                'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
+                    function(event) {
+                        var node = event.node,
+                            element = $(node.element),
+                            overflow = self.element.closest('.docman_dialog__child__content__box'),
+                            viewport = overflow.height(),
+                            offsetTop = element[0].offsetTop,
+                            height = element.height(),
+                            scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
+
+                        if(scrollTo > overflow.scrollTop()){ //Only scroll if there's overflow
+                            overflow.stop().animate({scrollTop: scrollTo }, 300);
+                        }
+                    }
+            });
+
         }
     });
 
