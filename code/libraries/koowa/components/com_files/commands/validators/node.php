@@ -13,11 +13,11 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesCommandValidatorNode extends KCommand
+class ComFilesCommandValidatorNode extends KCommandInvokerAbstract
 {
-	protected function _databaseBeforeSave(KCommandContext $context)
+	protected function _databaseBeforeSave(KCommand $context)
 	{
-		$row = $context->caller;
+		$row = $context->subject;
 
 		if (!$row->isNew() && !$row->overwrite)
         {
@@ -29,9 +29,9 @@ class ComFilesCommandValidatorNode extends KCommand
 		return true;
 	}
 
-	protected function _databaseBeforeCopy(KCommandContext $context)
+	protected function _databaseBeforeCopy(KCommand $context)
 	{
-		$row        = $context->caller;
+		$row        = $context->subject;
 		$translator = $this->getObject('translator');
 
 		if (!array_intersect(array('destination_folder', 'destination_name'), $row->getModified())) {
@@ -63,7 +63,7 @@ class ComFilesCommandValidatorNode extends KCommand
 		return true;
 	}
 
-	protected function _databaseBeforeMove(KCommandContext $context)
+	protected function _databaseBeforeMove(KCommand $context)
 	{
 		return $this->_databaseBeforeCopy($context);
 	}

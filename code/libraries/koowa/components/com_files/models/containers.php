@@ -19,8 +19,10 @@ class ComFilesModelContainers extends ComKoowaModelDefault
 	{
 		parent::_buildQueryWhere($query);
 
-		if ($this->_state->search) {
-            $query->where('tbl.title LIKE :search')->bind(array('search' =>  '%'.$this->_state->search.'%'));
+        $state = $this->getState();
+
+		if ($state->search) {
+            $query->where('tbl.title LIKE :search')->bind(array('search' =>  '%'.$state->search.'%'));
         }
 	}
 }

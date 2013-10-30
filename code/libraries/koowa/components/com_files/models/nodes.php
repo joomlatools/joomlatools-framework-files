@@ -15,15 +15,58 @@
  */
 class ComFilesModelNodes extends ComFilesModelDefault
 {
+    /**
+     * A container object
+     *
+     * @var ComFilesDatabaseRowContainer
+     */
+    protected static $_container;
+
+    /**
+     * Reset the cached container object if container changes
+     * @param string $name
+     */
+    public function onStateChange($name)
+    {
+        if ($name === 'container') {
+            self::$_container = null;
+        }
+    }
+
+    /**
+     * Returns the current container row
+     *
+     * @return ComFilesDatabaseRowContainer
+     * @throws UnexpectedValueException
+     */
+    public function getContainer()
+    {
+        if(!isset(self::$_container))
+        {
+            //Set the container
+            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->getItem();
+
+            if (!is_object($container) || $container->isNew()) {
+                throw new UnexpectedValueException('Invalid container');
+            }
+
+            self::$_container = $container;
+        }
+
+        return self::$_container;
+    }
+
     public function getItem()
     {
         if (!isset($this->_item))
         {
+            $state = $this->getState();
+
             $this->_item = $this->getRow(array(
                 'data' => array(
-            		'container' => $this->_state->container,
-                    'folder' 	=> $this->_state->folder,
-                    'name' 		=> $this->_state->name
+            		'container' => $state->container,
+                    'folder' 	=> $state->folder,
+                    'name' 		=> $state->name
                 )
             ));
         }
@@ -50,9 +93,9 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
     protected function _getPath()
     {
-        $state = $this->_state;
+        $state = $this->getState();
 
-        $path = $state->container->path;
+        $path = $this->getContainer()->path;
 
         if (!empty($state->folder) && $state->folder != '/') {
             $path .= '/'.ltrim($state->folder, '/');
@@ -65,7 +108,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 	{
 		if (!isset($this->_list))
 		{
-			$state = $this->_state;
+			$state = $this->getState();
 			$type = !empty($state->types) ? (array) $state->types : array();
 
 			$list = $this->getObject('com://admin/files.database.rowset.nodes');
@@ -78,7 +121,9 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
 			if (empty($type) || in_array('folder', $type))
 			{
-				$folders_model = $this->getObject('com://admin/files.model.folders')->set($state->getData());
+                $folders_model = $this->getObject('com://admin/files.model.folders');
+				$folders_model->setState($state->getValues());
+
 				$folders = $folders_model->getList();
 
 				foreach ($folders as $folder)
@@ -96,9 +141,9 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
 			if ((empty($type) || (in_array('file', $type) || in_array('image', $type))))
 			{
-				$data = $state->getData();
+				$data = $state->getValues();
 				$data['offset'] = $offset_left < 0 ? 0 : $offset_left;
-				$files_model = $this->getObject('com://admin/files.model.files')->set($data);
+				$files_model = $this->getObject('com://admin/files.model.files')->setState($data);
 				$files = $files_model->getList();
 
 				foreach ($files as $file)

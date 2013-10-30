@@ -54,7 +54,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function copy()
 	{
-		$context = $this->getCommandContext();
+		$context = $this->getContext();
 		$context->result = false;
 
 		if ($this->getCommandChain()->run('before.copy', $context) !== false)
@@ -85,7 +85,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function move()
 	{
-		$context = $this->getCommandContext();
+		$context = $this->getContext();
 		$context->result = false;
 
 		if ($this->getCommandChain()->run('before.move', $context) !== false)
@@ -117,7 +117,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
 	public function delete()
 	{
-		$context = $this->getCommandContext();
+		$context = $this->getContext();
 		$context->result = false;
 
 		if ($this->getCommandChain()->run('before.delete', $context) !== false)
@@ -154,7 +154,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		}
 
 		if ($column == 'destination_fullpath') {
-			return $this->container->path.'/'.$this->destination_path;
+			return $this->getContainer()->path.'/'.$this->destination_path;
 		}
 
 		if ($column == 'adapter') {
@@ -194,8 +194,8 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 	public function setAdapter()
 	{
 		$type = $this->getIdentifier()->name;
-		$this->_adapter = $this->container->getAdapter($type, array(
-			'path' => $this->container->path.'/'.($this->folder ? $this->folder.'/' : '').$this->name
+		$this->_adapter = $this->getContainer()->getAdapter($type, array(
+			'path' => $this->getContainer()->path.'/'.($this->folder ? $this->folder.'/' : '').$this->name
 		));
 
 		unset($this->_data['fullpath']);
@@ -230,7 +230,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
         unset($data['format']);
         unset($data['view']);
 
-		$data['container'] = $this->container->slug;
+		$data['container'] = $this->getContainer()->slug;
 		$data['type'] = $this->getIdentifier()->name;
 
         return $data;

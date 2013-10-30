@@ -15,9 +15,9 @@
  */
 class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 {
-	protected function _databaseBeforeSave(KCommandContext $context)
+	protected function _databaseBeforeSave(KCommand $context)
 	{
-		$row = $context->caller;
+		$row = $context->subject;
 
 		if (is_string($row->file) && !is_uploaded_file($row->file))
 		{
@@ -43,7 +43,17 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 			}
 		}
 
-		return parent::_databaseBeforeSave($context) && $this->getObject('com://admin/files.filter.file.uploadable')->validate($context->caller);
+        $filter = $this->getObject('com://admin/files.filter.file.uploadable');
+
+        $result = parent::_databaseBeforeSave($context) && $filter->validate($context->subject);
+
+        if (!$result && $filter->getErrors())
+        {
+            $errors = $filter->getErrors();
+            $context->setError(array_shift($errors));
+        }
+
+		return $result;
 
 	}
 }

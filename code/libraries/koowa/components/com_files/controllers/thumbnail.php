@@ -15,15 +15,15 @@
  */
 class ComFilesControllerThumbnail extends ComFilesControllerDefault
 {
-    protected function _actionBrowse(KCommandContext $context)
+    protected function _actionBrowse(KCommand $context)
     { 
     	// Clone to make cacheable work since we change model states
         $model = clone $this->getModel();
   
     	// Save state data for later
-        $state_data = $model->getState()->getData();
+        $state_data = $model->getState()->getValues();
         
-        $nodes = $this->getObject('com://admin/files.model.nodes')->set($state_data)->getList();
+        $nodes = $this->getObject('com://admin/files.model.nodes')->setState($state_data)->getList();
         
         if (!$model->getState()->files && !$model->getState()->filename) 
         {
@@ -34,14 +34,14 @@ class ComFilesControllerThumbnail extends ComFilesControllerDefault
         			$needed[] = $row->name;
         		}
         	}
-        } 
+        }
         else {
         	$needed = $model->getState()->files ? $model->getState()->files : $model->getState()->filename;
         }
 
 		$model->reset()
-		      ->set($state_data)
-		      ->set('files', $needed);
+		      ->setState($state_data)
+		      ->getState()->set('files', $needed);
 		
 		$list  = $model->getList();
 		
@@ -67,8 +67,8 @@ class ComFilesControllerThumbnail extends ComFilesControllerDefault
         	if (count($new))
         	{
 				$model->reset()
-				    ->set($state_data)
-				    ->set('files', $new);
+				    ->setState($state_data)
+				    ->getState()->set('files', $new);
 				
 				$additional = $model->getList();
 				

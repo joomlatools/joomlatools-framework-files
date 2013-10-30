@@ -56,7 +56,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'priority' => KCommand::PRIORITY_LOWEST,
+			'priority' => self::PRIORITY_LOWEST,
 			'group' => 'com_files',
             'only_clear' => false // If true, behavior only clears the cache after add/edit/delets and do not store new data
 		));
@@ -115,9 +115,9 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     /**
      * Set the event output from the cache
      *
-     * @param KCommandContext $context
+     * @param KCommand $context
      */
-    protected function _setOutput(KCommandContext $context)
+    protected function _setOutput(KCommand $context)
 	{
 		$cache  = $this->_getCache();
 		$key    = $this->_getKey();
@@ -136,10 +136,10 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	/**
 	 * Store the unrendered view data in the cache
 	 *
-	 * @param   KCommandContext $context	A command context object
+	 * @param   KCommand $context	A command context object
 	 * @return 	void
 	 */
-	protected function _storeOutput(KCommandContext $context)
+	protected function _storeOutput(KCommand $context)
 	{
 		if (empty($this->_output))
 		{
@@ -158,13 +158,13 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      *
      * Also cleans cache if revalidate_cache property is set in request
      *
-     * @param KCommandContext $context
+     * @param KCommand $context
      */
-    protected function _beforeGet(KCommandContext $context)
+    protected function _beforeGet(KCommand $context)
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false)
         {
-            if ($this->getRequest()->revalidate_cache) {
+            if ($this->getRequest()->query->revalidate_cache) {
                 $this->_cleanCache();
             }
             else {
@@ -176,9 +176,9 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     /**
      * Stores the cache output for JSON requests
      *
-     * @param KCommandContext $context
+     * @param KCommand $context
      */
-    protected function _afterGet(KCommandContext $context)
+    protected function _afterGet(KCommand $context)
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false) {
 			$this->_storeOutput($context);
@@ -188,18 +188,18 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     /**
      * Overrridden to not run caching on read actions
      *
-     * @param KCommandContext $context
+     * @param KCommand $context
      */
-    protected function _beforeRead(KCommandContext $context)
+    protected function _beforeRead(KCommand $context)
 	{
 	}
 
     /**
      * Overrridden to not run caching on read actions
      *
-     * @param KCommandContext $context
+     * @param KCommand $context
      */
-	protected function _afterRead(KCommandContext $context)
+	protected function _afterRead(KCommand $context)
 	{
 	}
 
@@ -228,13 +228,14 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	    
 	    // Empty strings get sent in the URL for dispatched requests 
 	    // so we turn them to null before creating the key
-	    foreach ($state as $key => $value) {
+	    foreach ($state as $key => $value)
+        {
 			if ($value === '') {
 				$state[$key] = null;
 			}
 	    }
 
-	    $key = $this->getModel()->folder.':'.md5(http_build_query($state, '', '&'));
+	    $key = $this->getModel()->getState()->folder.':'.md5(http_build_query($state, '', '&'));
 
 	    return $key;
 	}

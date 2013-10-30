@@ -19,7 +19,7 @@ class ComFilesModelDefault extends KModelAbstract
 	{
 		parent::__construct($config);
 
-        $this->_state
+        $this->getState()
             ->insert('limit'    , 'int')
             ->insert('offset'   , 'int')
             ->insert('sort'     , 'cmd')
@@ -41,7 +41,7 @@ class ComFilesModelDefault extends KModelAbstract
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'state' => new ComFilesModelState()
+			'state' => 'com:files.model.state'
 		));
 
 		parent::_initialize($config);

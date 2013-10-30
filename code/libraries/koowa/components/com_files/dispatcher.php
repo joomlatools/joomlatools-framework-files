@@ -18,7 +18,7 @@ class ComFilesDispatcher extends ComKoowaDispatcher
     /**
      * Overloaded execute function to handle exceptions in JSON requests
      */
-    public function execute($action, KCommandContext $context)
+    public function execute($action, KCommand $context)
     {
         try {
             return parent::execute($action, $context);
@@ -52,7 +52,7 @@ class ComFilesDispatcher extends ComKoowaDispatcher
 	 * Overloaded to comply with FancyUpload.
 	 * It doesn't let us pass AJAX headers so this is needed.
 	 */
-	public function _actionForward(KCommandContext $context)
+	public function _actionForward(KCommand $context)
 	{
 		if ($context->result->getStatus() != KDatabase::STATUS_DELETED) {
 			if(KRequest::type() == 'FLASH' || KRequest::format() == 'json') {

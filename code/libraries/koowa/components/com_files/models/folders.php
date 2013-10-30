@@ -19,16 +19,16 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	{
 		parent::__construct($config);
 
-		$this->_state->insert('tree', 'boolean', false);
+		$this->getState()->insert('tree', 'boolean', false);
 	}
 
 	public function getList()
 	{
 		if (!isset($this->_list))
 		{
-			$state = $this->_state;
+			$state = $this->getState();
 
-			$folders = $state->container->getAdapter('iterator')->getFolders(array(
+			$folders = $this->getContainer()->getAdapter('iterator')->getFolders(array(
 				'path'    => $this->_getPath(),
 				'recurse' => !!$state->tree,
 				'filter'  => array($this, 'iteratorFilter'),
@@ -40,7 +40,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
         	}
 			$this->_total = count($folders);
 
-			if (strtolower($this->_state->direction) == 'desc') {
+			if (strtolower($state->direction) == 'desc') {
 				$folders = array_reverse($folders);
 			}
 
@@ -75,22 +75,23 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	public function iteratorMap($path)
 	{
 		$path = str_replace('\\', '/', $path);
-		$path = str_replace($this->_state->container->path.'/', '', $path);
+		$path = str_replace($this->getContainer()->path.'/', '', $path);
 
 		return $path;
 	}
 
 	public function iteratorFilter($path)
 	{
+        $state    = $this->getState();
 		$filename = basename($path);
-		if ($this->_state->name)
+		if ($state->name)
 		{
-			if (!in_array($filename, (array) $this->_state->name)) {
+			if (!in_array($filename, (array) $state->name)) {
 				return false;
 			}
 		}
 
-		if ($this->_state->search && stripos($filename, $this->_state->search) === false) {
+		if ($state->search && stripos($filename, $state->search) === false) {
 			return false;
 		}
 	}

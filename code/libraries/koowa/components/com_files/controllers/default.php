@@ -30,19 +30,19 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 		$request = parent::getRequest();
 
 		// "e_name" is needed to be compatible with com_content of Joomla
-		if ($request->e_name) {
-			$request->editor = $request->e_name;
+		if ($request->query->e_name) {
+			$request->query->editor = $request->query->e_name;
 		}
 
 		// "config" state is only used in HMVC requests and passed to the JS application
 		if ($this->isDispatched()) {
-			unset($request->config);
+			unset($request->query->config);
 		}
 		
 		return $request;
 	}
 
-	protected function _actionCopy(KCommandContext $context)
+	protected function _actionCopy(KCommand $context)
 	{
 		$data = $this->getModel()->getItem();
 
@@ -66,7 +66,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 		return $data;
 	}
 
-	protected function _actionMove(KCommandContext $context)
+	protected function _actionMove(KCommand $context)
 	{
 		$data = $this->getModel()->getItem();
 
@@ -93,9 +93,9 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	/**
 	 * Overridden method to be able to use it with both model and view controllers
 	 */
-	protected function _actionGet(KCommandContext $context)
+	protected function _actionGet(KCommand $context)
 	{
-		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->format == 'html'))
+		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->query->format == 'html'))
 		{
             $this->getObject('translator')->loadLanguageFiles($this->getIdentifier());
 
@@ -109,13 +109,13 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	/**
 	 * Copied to allow 0 as a limit
 	 * 
-	 * @param KCommandContext $context
+	 * @param KCommand $context
 	 */
-	protected function _actionBrowse(KCommandContext $context)
+	protected function _actionBrowse(KCommand $context)
 	{
 	    if($this->isDispatched())
 	    {
-	        $limit = $this->getModel()->get('limit');
+	        $limit = $this->getModel()->getState()->limit;
 
 	        //If limit is empty use default
 	        if(empty($limit) && $limit !== 0) {
@@ -126,8 +126,8 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	        if($limit > $this->_limit->max) {
 	            $limit = $this->_limit->max;
 	        }
-	
-	        $this->limit = $limit;
+
+            $this->getModel()->getState()->limit = $limit;
 	    }
 	
 	    $data = $this->getModel()->getList();
