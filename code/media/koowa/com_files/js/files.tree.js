@@ -116,6 +116,34 @@ if(!Files) var Files = {};
 
             this.tree('selectNode', node);
         },
+        /**
+         * Append a node to the tree
+         * Required properties are 'id' and 'label', other properties are optional.
+         * If no parent specified then the node is appended to the current selected node.
+         * Pass parent as null for adding the node to root
+         *
+         * Previous code:
+         *
+            Files.app.tree.selected.insert({
+                text: row.name,
+                id: row.path,
+                data: {
+                    path: row.path,
+                    url: '#'+row.path,
+                    type: 'folder'
+                }
+            });
+            Files.app.tree.selected.toggle(false, true);
+         *
+         * @param data
+         */
+        appendNode: function(data){
+            $.extend(data, {foo: 'bar'});
+
+            console.log(data);
+
+            return this;
+        },
 
         attachHandlers: function(){
 
