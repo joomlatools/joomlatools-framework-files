@@ -39,10 +39,11 @@ if(!Files) var Files = {};
                         var data = response.entities,
                             parse = function(item, parent) {
                                 var path = (parent && parent.path) ? parent.path+'/' : '',
-                                    level = (parent && parent.level >= 0) ? parent.level + 1 : 0;
+                                    level = (parent && parent.level > 0) ? parent.level + 1 : 1;
                                 path += item.name;
 
                                 //Parse attributes
+                                //@TODO check if 'type' is necessary
                                 item = $.extend(item, {
                                     text: item.name,
                                     id: path,
@@ -122,6 +123,10 @@ if(!Files) var Files = {};
          * If no parent specified then the node is appended to the current selected node.
          * Pass parent as null for adding the node to root
          *
+         * This API is intended for adding user created nodes, don't use this API to add multiple items or to refresh
+         * the tree with updated data from the server.
+         * Use fromUrl instead, as it's performance optimized for that purpose.
+         *
          * Previous code:
          *
             Files.app.tree.selected.insert({
@@ -136,9 +141,19 @@ if(!Files) var Files = {};
             Files.app.tree.selected.toggle(false, true);
          *
          * @param data
+         * @param parent    optional    Node instance, pass 'null' to force the node to be added to the root
          */
-        appendNode: function(data){
-            $.extend(data, {foo: 'bar'});
+        appendNode: function(data, parent){
+
+            if(parent === undefined) parent = this.tree('getSelectedNode');
+
+            $.extend(data, {
+                path: data.id,
+                url: '#'+data.id,
+                type: 'folder'
+            });
+
+            this.tree('appendNode', data, parent)
 
             console.log(data);
 
