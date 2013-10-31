@@ -38,8 +38,7 @@ if(!Files) var Files = {};
 
                         var data = response.entities,
                             parse = function(item, parent) {
-                                var path = (parent && parent.path) ? parent.path+'/' : '',
-                                    level = (parent && parent.level > 0) ? parent.level + 1 : 1;
+                                var path = (parent && parent.path) ? parent.path+'/' : '';
                                 path += item.name;
 
                                 //Parse attributes
@@ -49,8 +48,7 @@ if(!Files) var Files = {};
                                     id: path,
                                     path: path,
                                     url: '#'+item.path,
-                                    type: 'folder',
-                                    level: level
+                                    type: 'folder'
                                 });
 
                                 if (item.children) {
