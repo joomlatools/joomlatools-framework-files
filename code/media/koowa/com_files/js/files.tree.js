@@ -47,7 +47,7 @@ if(!Files) var Files = {};
                                     text: item.name,
                                     id: path,
                                     path: path,
-                                    url: '#'+item.path,
+                                    url: '#'+path,
                                     type: 'folder'
                                 });
 
@@ -125,35 +125,21 @@ if(!Files) var Files = {};
          * the tree with updated data from the server.
          * Use fromUrl instead, as it's performance optimized for that purpose.
          *
-         * Previous code:
-         *
-            Files.app.tree.selected.insert({
-                text: row.name,
-                id: row.path,
-                data: {
-                    path: row.path,
-                    url: '#'+row.path,
-                    type: 'folder'
-                }
-            });
-            Files.app.tree.selected.toggle(false, true);
-         *
-         * @param data
+         * @param row
          * @param parent    optional    Node instance, pass 'null' to force the node to be added to the root
          */
-        appendNode: function(data, parent){
+        appendNode: function(row, parent){
 
             if(parent === undefined) parent = this.tree('getSelectedNode');
 
-            $.extend(data, {
-                path: data.id,
-                url: '#'+data.id,
+            var data = $.extend(true, {}, row, {
+                path: row.id,
+                url: '#'+row.id,
                 type: 'folder'
             });
 
-            this.tree('appendNode', data, parent)
-
-            console.log(data);
+            var node = this.tree('appendNode', data, parent);
+            this.tree('selectNode', node);
 
             return this;
         },
@@ -175,6 +161,18 @@ if(!Files) var Files = {};
 
                             //Fire custom select node handler
                             options.onSelectNode(event.node);
+                        }
+                        if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
+                            var node = event.node,
+                                element = $(node.element),
+                                viewport = self.element.height(),
+                                offsetTop = element[0].offsetTop,
+                                height = element.height(),
+                                scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
+
+                            if(scrollTo > self.element.scrollTop()){ //Only scroll if there's overflow
+                                self.element.animate({scrollTop: scrollTo }, 300);
+                            }
                         }
                     },
                 'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
