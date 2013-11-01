@@ -7,4 +7,3 @@ OUTPUT_FILE=files.min.js
 
 cd $DIR/$JS_PATH
 cat $FILE_LIST | uglifyjs -o $OUTPUT_FILE 
-echo $DIR
