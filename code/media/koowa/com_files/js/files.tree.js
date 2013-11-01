@@ -44,7 +44,7 @@ if(!Files) var Files = {};
                                 //Parse attributes
                                 //@TODO check if 'type' is necessary
                                 item = $.extend(item, {
-                                    text: item.name,
+                                    name: item.name
                                     id: path,
                                     path: path,
                                     url: '#'+path,
@@ -131,14 +131,31 @@ if(!Files) var Files = {};
         appendNode: function(row, parent){
 
             if(parent === undefined) parent = this.tree('getSelectedNode');
+            if(parent === false)     parent = this.tree('getTree').children[0]; //Get the root node when nothing is selected
 
-            var data = $.extend(true, {}, row, {
+            var node, data = $.extend(true, {}, row, {
                 path: row.id,
                 url: '#'+row.id,
                 type: 'folder'
             });
 
-            var node = this.tree('appendNode', data, parent);
+            /**
+             * If there's siblings, make sure it's added in alphabetical order
+             */
+            console.log(parent);
+            if(parent && parent.children && parent.children.length) {
+                if(parent.children[0].label > data.label) {
+                    node = this.tree('addNodeBefore', data, parent.children[0]);
+                }
+                var i = 0, name = data.label.toLowerCase();
+                while(parent.children[i].label.toLowerCase() < name) {
+                    i++;
+                }
+                node = this.tree('addNodeAfter', data, parent.children[i]);
+                console.log(parent.children, i, parent.children[i].label);
+            } else {
+                node = this.tree('appendNode', data, parent);
+            }
             this.tree('selectNode', node);
 
             return this;
