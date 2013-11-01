@@ -21,15 +21,6 @@ if(!Files) var Files = {};
                 defaults = {
                     autoOpen: 0, //root.open = true on previous script
                     onSelectNode: function(){},
-                    onAfterInitialize: function(){
-                        this.onAdopt = this.options.onAdopt;
-
-                        //this.parent(this.options, this.options.root);
-
-                        if (this.options.adopt) {
-                            this.adopt(this.options.adopt);
-                        }
-                    },
                     dataFilter: function(response){
 
                         var data = response.entities,
