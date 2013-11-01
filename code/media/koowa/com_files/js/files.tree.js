@@ -44,7 +44,7 @@ if(!Files) var Files = {};
                                 //Parse attributes
                                 //@TODO check if 'type' is necessary
                                 item = $.extend(item, {
-                                    name: item.name
+                                    //name: item.name
                                     id: path,
                                     path: path,
                                     url: '#'+path,
@@ -144,18 +144,28 @@ if(!Files) var Files = {};
              */
             console.log(parent);
             if(parent && parent.children && parent.children.length) {
-                if(parent.children[0].label > data.label) {
+                console.log(parent.children[0].name);
+                var name = data.label.toLowerCase();
+                if(parent.children[0].name.toLowerCase() > name) {
                     node = this.tree('addNodeBefore', data, parent.children[0]);
+                } else if(parent.children[parent.children.length - 1].name.toLowerCase() < name) {
+                    node = this.tree('appendNode', data, parent);
+                } else {
+                    var i = 0;
+                    while(parent.children[i].name.toLowerCase() < name) {
+                        i++;
+                    }
+                    node = this.tree('addNodeBefore', data, parent.children[i]);
                 }
-                var i = 0, name = data.label.toLowerCase();
-                while(parent.children[i].label.toLowerCase() < name) {
-                    i++;
-                }
-                node = this.tree('addNodeAfter', data, parent.children[i]);
-                console.log(parent.children, i, parent.children[i].label);
             } else {
                 node = this.tree('appendNode', data, parent);
             }
+            /**
+             * @TODO please investigate:
+             * It may be counter-productive to always navigate into newly created folders, investigate if
+             * just selecting the folder in the grid is a better workflow as it allows creating multiple folders with
+             * lesser clicking around.
+             */
             this.tree('selectNode', node);
 
             return this;
