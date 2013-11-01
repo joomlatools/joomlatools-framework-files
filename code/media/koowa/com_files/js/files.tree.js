@@ -191,13 +191,13 @@ if(!Files) var Files = {};
                             options.onSelectNode(event.node);
                         }
                         if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
-                            console.log('special scrollIntoView event that checks if it is a second level node');
+                            if(window.console) console.log('special scrollIntoView event that checks if it is a second level node');
                             self.scrollIntoView(event.node, self.element, 300);
                         }
                     },
                 'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
                     function(event) {
-                        console.log('scrollIntoView when folder opens');
+                        if(window.console) console.log('scrollIntoView when folder opens');
                         self.scrollIntoView(event.node, self.element, 300);
                     }
             });
@@ -209,7 +209,7 @@ if(!Files) var Files = {};
 
                 self.element.one('resize', function(){
                     if(self.tree('getSelectedNode')) {
-                        console.log('scrollIntoView event on tree.select.resize');
+                        if(window.console) console.log('scrollIntoView event on tree.select.resize');
                         self.scrollIntoView(self.tree('getSelectedNode'), self.element, 900);
                     }
                 });
