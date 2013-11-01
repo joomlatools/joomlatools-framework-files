@@ -191,30 +191,14 @@ if(!Files) var Files = {};
                             options.onSelectNode(event.node);
                         }
                         if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
-                            var node = event.node,
-                                element = $(node.element),
-                                viewport = self.element.height(),
-                                offsetTop = element[0].offsetTop,
-                                height = element.height(),
-                                scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
-
-                            if(scrollTo > self.element.scrollTop()){ //Only scroll if there's overflow
-                                self.element.animate({scrollTop: scrollTo }, 300);
-                            }
+                            console.log('special scrollIntoView event that checks if it is a second level node');
+                            self.scrollIntoView(event.node, self.element, 300);
                         }
                     },
                 'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
                     function(event) {
-                        var node = event.node,
-                            element = $(node.element),
-                            viewport = self.element.height(),
-                            offsetTop = element[0].offsetTop,
-                            height = element.height(),
-                            scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
-
-                        if(scrollTo > self.element.scrollTop()){ //Only scroll if there's overflow
-                            self.element.animate({scrollTop: scrollTo }, 300);
-                        }
+                        console.log('scrollIntoView when folder opens');
+                        self.scrollIntoView(event.node, self.element, 300);
                     }
             });
             this.element.on('tree.select', function(){
@@ -225,16 +209,8 @@ if(!Files) var Files = {};
 
                 self.element.one('resize', function(){
                     if(self.tree('getSelectedNode')) {
-                        var node = self.tree('getSelectedNode'),
-                            element = $(node.element),
-                            viewport = self.element.height(),
-                            offsetTop = element[0].offsetTop,
-                            height = element.height(),
-                            scrollTo = Math.min(offsetTop, (offsetTop - viewport) + height);
-
-                        if(scrollTo > self.element.scrollTop()){ //Only scroll if there's overflow
-                            self.element.stop().animate({scrollTop: scrollTo }, 900);
-                        }
+                        console.log('scrollIntoView event on tree.select.resize');
+                        self.scrollIntoView(self.tree('getSelectedNode'), self.element, 900);
                     }
                 });
             });
