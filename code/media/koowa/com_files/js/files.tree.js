@@ -29,10 +29,6 @@ if(!Files) var Files = {};
                         if (this.options.adopt) {
                             this.adopt(this.options.adopt);
                         }
-
-                        if (this.options.title) {
-                            this.setTitle(this.options.title);
-                        }
                     },
                     dataFilter: function(response){
 
@@ -72,18 +68,6 @@ if(!Files) var Files = {};
                 };
 
             return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
-        },
-
-        /**
-         * @TODO refactor out mootools
-         * @param title
-         */
-        setTitle: function(title) {
-            if (!this.title_element) {
-                this.title_element = new Element('h3').inject(document.id(this.options.div), 'top');
-            }
-            this.title = title;
-            this.title_element.set('text', title);
         },
 
         /**
