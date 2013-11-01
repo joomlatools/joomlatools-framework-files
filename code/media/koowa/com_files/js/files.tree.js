@@ -44,7 +44,6 @@ if(!Files) var Files = {};
                                 //Parse attributes
                                 //@TODO check if 'type' is necessary
                                 item = $.extend(item, {
-                                    //name: item.name
                                     id: path,
                                     path: path,
                                     url: '#'+path,
@@ -75,6 +74,10 @@ if(!Files) var Files = {};
             return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
         },
 
+        /**
+         * @TODO refactor out mootools
+         * @param title
+         */
         setTitle: function(title) {
             if (!this.title_element) {
                 this.title_element = new Element('h3').inject(document.id(this.options.div), 'top');
@@ -142,9 +145,7 @@ if(!Files) var Files = {};
             /**
              * If there's siblings, make sure it's added in alphabetical order
              */
-            console.log(parent);
             if(parent && parent.children && parent.children.length) {
-                console.log(parent.children[0].name);
                 var name = data.label.toLowerCase();
                 if(parent.children[0].name.toLowerCase() > name) {
                     node = this.tree('addNodeBefore', data, parent.children[0]);
