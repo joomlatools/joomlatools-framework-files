@@ -53,7 +53,7 @@ Files.App = new Class({
             open_button: '#files-new-folder-toolbar',
             create_button: '#files-new-folder-create',
             onOpen: function(){
-                var handleClose = function(){
+                var modal = this._folder_dialog.view, tmp = this._folder_dialog.tmp, handleClose = function(){
                         modal.inject(tmp);
 
                         SqueezeBox.removeEvent('close', handleClose);
@@ -78,36 +78,36 @@ Files.App = new Class({
             onClose: function(){
                 SqueezeBox.close();
             },
-            onInit: function(){
-                var modal = $(container), tmp = new Element('div', {style: 'display:none'}).inject(document.body);
-                tmp.grab(modal);
-                $(button).addEvent('click', function(e) {
+            onInit: function(folder_dialog){
+                var self = this, modal = folder_dialog.view;
+                folder_dialog.tmp = new Element('div', {style: 'display:none'}).inject(document.body);
+                folder_dialog.tmp.grab(modal);
+                folder_dialog.open_button.addEvent('click', function(e) {
                     e.stop();
 
                     self.openFolderDialog();
-
                 });
 
                 var validate = function(){
                     if(this.value.trim()) {
-                        $('files-new-folder-create').addClass('valid').removeProperty('disabled');
+                        folder_dialog.create_button.addClass('valid').removeProperty('disabled');
                     } else {
-                        $('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
+                        folder_dialog.create_button.removeClass('valid').setProperty('disabled', 'disabled');
                     }
                 };
-                $('files-new-folder-input').addEvent('change', validate);
+                folder_dialog.input.addEvent('change', validate);
                 if(window.addEventListener) {
-                    $('files-new-folder-input').addEventListener('input', validate);
+                    folder_dialog.input.addEventListener('input', validate);
                 } else {
-                    $('files-new-folder-input').addEvent('keyup', validate);
+                    folder_dialog.input.addEvent('keyup', validate);
                 }
             },
             //Fires when the form for creating a new folder is submitted
             onSubmit: function(){},
             //Fires when the json request for creating a folder is complete
-            onCreate: function(){
-                element.set('value', '');
-                $('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
+            onCreate: function(folder_dialog){
+                folder_dialog.input.set('value', '');
+                folder_dialog.create_button.removeClass('valid').setProperty('disabled', 'disabled');
             }
         },
 		history: {
@@ -548,8 +548,8 @@ Files.App = new Class({
         this._folder_dialog.view.getElement('form').addEvent('submit', function(e){
             e.stop();
 
-            if(this.options.folder_dialog.onSubmit) {
-                this.options.folder_dialog.onSubmit.call(self, self._folder_dialog);
+            if(self.options.folder_dialog.onSubmit) {
+                self.options.folder_dialog.onSubmit.call(self, self._folder_dialog);
             }
             var element = self._folder_dialog.input;
             var value = element.get('value').trim();
@@ -568,6 +568,10 @@ Files.App = new Class({
                         label: row.name
                     });
 
+                    if(self.options.folder_dialog.onCreate) {
+                        self.options.folder_dialog.onCreate.call(self, self._folder_dialog);
+                    }
+
                     self.closeFolderDialog();
                 });
             };
@@ -580,7 +584,7 @@ Files.App = new Class({
     openFolderDialog: function(){
 
         if(this.options.folder_dialog) {
-            this.options.folder_dialog.onOpen.call(this);
+            this.options.folder_dialog.onOpen.call(this, this._folder_dialog);
         }
 
         return !!this.options.folder_dialog;
@@ -592,7 +596,7 @@ Files.App = new Class({
     closeFolderDialog: function(){
 
         if(this.options.folder_dialog) {
-            this.options.folder_dialog.onClose.call(this);
+            this.options.folder_dialog.onClose.call(this, this._folder_dialog);
         }
 
         return !!this.options.folder_dialog;
