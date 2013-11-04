@@ -157,6 +157,19 @@ if(!Files) var Files = {};
             return this;
         },
 
+        /**
+         * Remove a node by path
+         * @param path
+         */
+        removeNode: function(path){
+
+            var node = this.tree('getNodeById', path);
+            if(node) {
+                this.tree('removeNode', node);
+            }
+
+        },
+
         attachHandlers: function(){
 
             this._attachHandlers(); // Attach needed events from Koowa.Tree._attachHandlers

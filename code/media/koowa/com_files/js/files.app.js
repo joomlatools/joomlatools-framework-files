@@ -449,13 +449,9 @@ Files.App = new Class({
 
 			if (this.grid) {
 				this.grid.addEvent('afterDeleteNode', function(context) {
-                    console.log('afterDeleteNode', context.node);
 					var node = context.node;
 					if (node.type == 'folder') {
-						var item = that.tree.get(node.path);
-						if (item) {
-							item.remove();
-						}
+                        that.tree.removeNode(node.path);
 					}
 				});
 			}
