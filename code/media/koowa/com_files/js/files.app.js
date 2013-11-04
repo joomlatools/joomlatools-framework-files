@@ -473,6 +473,9 @@ Files.App = new Class({
 
 		this.fireEvent('afterSetTree');
 	},
+    /**
+     * Create the folder dialog markup and link up events
+     */
     setFolderDialog: function(){
         $('files-new-folder-modal').getElement('form').addEvent('submit', function(e){
             e.stop();
@@ -546,6 +549,30 @@ Files.App = new Class({
         };
 
         Files.createModal('files-new-folder-modal', 'files-new-folder-toolbar');
+    },
+    /**
+     * Opens the folder dialog, using the customizable control handle, if the instance exists
+     * @return returns a boolean indicating wether there's a folder dialog active
+     */
+    openFolderDialog: function(){
+
+        if(this.options.folder_dialog) {
+            this.options.folder_dialog.control.onOpen.call(this);
+        }
+
+        return !!this.options.folder_dialog;
+    },
+    /**
+     * Closes the folder dialog, using the customizable control handle, if the instance exists
+     * @return returns a boolean indicating wether there's a folder dialog active
+     */
+    closeFolderDialog: function(){
+
+        if(this.options.folder_dialog) {
+
+        }
+
+        return !!this.options.folder_dialog;
     },
 	getUrl: function() {
 		return new URI(window.location.href);
