@@ -688,8 +688,5 @@ Files.App = new Class({
 		return '?'+new Hash(query).filter(function(value, key) {
 			return typeof value !== 'function';
 		}).toQueryString();
-	},
-    createFolder: function(value, folder){
-
-    }
+	}
 });
