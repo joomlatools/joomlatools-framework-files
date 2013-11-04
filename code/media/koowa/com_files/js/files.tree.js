@@ -84,10 +84,10 @@ if(!Files) var Files = {};
 
             var self = this;
             this.tree('loadDataFromUrl', url, null, function(response){
-                if (Files.app && Files.app.active) {
-                    self.selectPath(Files.app.active);
-                    console.warn('loadDataFromUrl');
-                }
+                /**
+                 * @TODO refactor chaining support to this.selectPath so it works even when the tree isn't loaded yet
+                 */
+                if(Files.app && Files.app.hasOwnProperty('active')) self.selectPath(Files.app.active);
             });
 
         },
