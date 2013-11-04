@@ -48,9 +48,10 @@ Files.App = new Class({
 			element: 'files-paginator'
 		},
         folder_dialog: {
-            element: 'files-new-folder-modal',
-            input: 'files-new-folder-input',
-            button: 'files-new-folder-create',
+            view: '#files-new-folder-modal',
+            input: '#files-new-folder-input',
+            open_button: '#files-new-folder-toolbar',
+            create_button: '#files-new-folder-create',
             control: {
                 open: function(){},
                 close: function(){}
@@ -121,7 +122,6 @@ Files.App = new Class({
 		if (this.options.container) {
 			this.setContainer(this.options.container);
 		}
-
 	},
 	setState: function() {
 		this.fireEvent('beforeSetState');
@@ -291,6 +291,10 @@ Files.App = new Class({
 				this.options.grid.types = this.options.types;
 				this.state.set('types', this.options.types);
 			}
+
+            if (this.options.folder_dialog) {
+                this.setFolderDialog();
+            }
 
 			this.fireEvent('afterSetContainer', {container: item});
 
@@ -469,6 +473,80 @@ Files.App = new Class({
 
 		this.fireEvent('afterSetTree');
 	},
+    setFolderDialog: function(){
+        $('files-new-folder-modal').getElement('form').addEvent('submit', function(e){
+            e.stop();
+            var element = $('files-new-folder-input');
+            var value = element.get('value');
+            if (value.length > 0) {
+                var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
+                folder.add(function(response, responseText) {
+                    if (response.status === false) {
+                        return alert(response.error);
+                    }
+                    element.set('value', '');
+                    $('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
+                    var el = response.entities[0];
+                    var cls = Files[el.type.capitalize()];
+                    var row = new cls(el);
+                    Files.app.grid.insert(row);
+                    Files.app.tree.appendNode({
+                        id: row.path,
+                        label: row.name
+                    });
+
+                    SqueezeBox.close();
+                });
+            };
+        });
+
+        Files.createModal = function(container, button){
+            var modal = $(container), tmp = new Element('div', {style: 'display:none'}).inject(document.body);
+            tmp.grab(modal);
+            $(button).addEvent('click', function(e) {
+                e.stop();
+
+                var handleClose = function(){
+                        modal.inject(tmp);
+
+                        SqueezeBox.removeEvent('close', handleClose);
+                    },
+                    handleOpen = function(){
+                        var focus = modal.getElement('input.focus');
+                        if (focus) {
+                            focus.focus();
+                        }
+
+                        SqueezeBox.removeEvent('open', handleOpen);
+                    },
+                    sizes = modal.measure(function(){return this.getSize();});
+
+                SqueezeBox.addEvent('close', handleClose);
+                SqueezeBox.addEvent('open', handleOpen);
+                SqueezeBox.open(modal.setStyle('display', ''), {
+                    handler: 'adopt',
+                    size: {x: sizes.x, y: sizes.y}
+                });
+
+            });
+
+            var validate = function(){
+                if(this.value.trim()) {
+                    $('files-new-folder-create').addClass('valid').removeProperty('disabled');
+                } else {
+                    $('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
+                }
+            };
+            $('files-new-folder-input').addEvent('change', validate);
+            if(window.addEventListener) {
+                $('files-new-folder-input').addEventListener('input', validate);
+            } else {
+                $('files-new-folder-input').addEvent('keyup', validate);
+            }
+        };
+
+        Files.createModal('files-new-folder-modal', 'files-new-folder-toolbar');
+    },
 	getUrl: function() {
 		return new URI(window.location.href);
 	},
