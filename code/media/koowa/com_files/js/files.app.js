@@ -26,7 +26,6 @@ Files.App = new Class({
 		types: null,
 		container: null,
 		active: null,
-		title: 'files-title',
 		pathway: {
 			element: 'files-pathway'
 		},
@@ -102,10 +101,6 @@ Files.App = new Class({
 			this.options.active = url.getData('folder');
 		}
 
-		if (this.options.title) {
-			this.options.title = document.id(this.options.title);
-		}
-		
 		if (this.options.thumbnails) {
 			this.addEvent('afterSelect', function(resp) {
 				this.setThumbnails();
@@ -531,10 +526,6 @@ Files.App = new Class({
 		this.fireEvent('beforeSetTitle', {title: title});
 
 		this.title = title;
-
-		if (this.options.title) {
-			this.options.title.set('html', title);
-		}
 
 		this.fireEvent('afterSetTitle', {title: title});
 	},

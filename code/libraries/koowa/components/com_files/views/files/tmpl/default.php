@@ -20,7 +20,6 @@ window.addEvent('domready', function() {
             cookie: {
                 path: '<?=KRequest::root()?>'
             },
-            title: false,
 			state: {
 				defaults: {
 					limit: <?= (int) $state->limit; ?>,
@@ -36,7 +35,7 @@ window.addEvent('domready', function() {
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
 		};
 	options = Files.utils.append(options, config);
-console.log(options, config);
+
 	Files.app = new Files.App(options);
 
 	//@TODO hide the uploader in a modal, make it pretty
