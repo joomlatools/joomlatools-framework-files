@@ -15,6 +15,13 @@ if(!Files) var Files = {};
      * @type extend Koowa.Tree
      */
     Files.Tree = Koowa.Tree.extend({
+
+        /**
+         * false before the tree is loaded with data from the initial json request
+         * When tree.loaded_data is fired this property is set to 'true'
+         */
+        loaded: false,
+
         getDefaults: function(){
 
             var self = this,
@@ -69,7 +76,6 @@ if(!Files) var Files = {};
         parseData: function(list){
             return [{
                 label: this.options.root.text,
-                //href: '#',
                 url: '#',
                 children: list
             }];
@@ -80,21 +86,35 @@ if(!Files) var Files = {};
             this.tree('loadDataFromUrl', url, null, function(response){
                 if (Files.app && Files.app.active) {
                     self.selectPath(Files.app.active);
+                    console.warn('loadDataFromUrl');
                 }
             });
 
         },
         selectPath: function(path) {
-            var node = this.tree('getNodeById', path);
 
-            if(window.console) console.log('selectNode', path, node);
+            if(!this.loaded) {
+                var self = this;
+                this.element.one('tree.load_data', function(){
+                    self.selectPath(path);
+                });
 
-            if(!node) {
-                var tree = this.tree('getTree');
-                node = tree.children.length ? tree.children[0] : null;
+            } else {
+
+                var node = this.tree('getNodeById', path);
+
+                if(window.console) console.log('selectNode', path, node);
+
+                if(!node) {
+                    var tree = this.tree('getTree');
+                    node = tree.children.length ? tree.children[0] : null;
+                    console.warn(node, tree);
+                }
+
+                if(window.console) console.log('selectNode', path, node);
+
+                this.tree('selectNode', node);
             }
-
-            this.tree('selectNode', node);
         },
         /**
          * Append a node to the tree
@@ -179,6 +199,11 @@ if(!Files) var Files = {};
                     function(event) {
                         if(window.console) console.log('scrollIntoView when folder opens');
                         self.scrollIntoView(event.node, self.element, 300);
+                    },
+                'tree.load_data':
+                    function(){
+                        console.log('tree.load_data', arguments);
+                        self.loaded = true;
                     }
             });
             this.element.on('tree.select', function(){

@@ -432,31 +432,25 @@ Files.App = new Class({
 
             opts = jQuery.extend(true, {}, {
                 onSelectNode: function(node) {
-                    console.group('onSelectNode');
-                    console.log('node', node);
-                    console.log('node.id || node.url', node.id || node.url);
 					if (node.id || node.url) {
 						that.navigate(node && node.id ? node.id : '');
-                        console.log('that.navigate', node && node.id ? node.id : '');
 					}
-                    console.groupEnd('onSelectNode');
 				},
 				root: {
-					text: this.container.title,
-					data: {
-						url: '#'
-					}
+					text: this.container.title
 				}
 			}, opts);
 			this.tree = new Files.Tree(jQuery(opts.element), opts);
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
 			this.addEvent('afterNavigate', function(path) {
+                console.log('afterNavigate', path);
 				that.tree.selectPath(path);
 			});
 
 			if (this.grid) {
 				this.grid.addEvent('afterDeleteNode', function(context) {
+                    console.log('afterDeleteNode', context.node);
 					var node = context.node;
 					if (node.type == 'folder') {
 						var item = that.tree.get(node.path);
