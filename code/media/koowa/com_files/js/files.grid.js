@@ -196,17 +196,12 @@ Files.Grid = new Class({
 
 		if (this.options.switchers) {
 			var that = this;
-            this.options.switchers.filter(function(el) {
-                console.log(el, that.layout);
-                return el.get('data-layout') == that.layout;
-            }).addClass('active');
-
-			this.options.switchers.addEvent('change', function(e) {
-				e.stop();
-
-				var value = this.get('value');
-				that.setLayout(value);
-			});
+            this.options.switchers.addEvent('click', function(e) {
+                e.stop();
+                var layout = this.get('data-layout');
+                that.setLayout(layout);
+                that._updateSwitchers(layout);
+            });
 		}
 
 		if (this.options.icon_size) {
@@ -399,7 +394,7 @@ Files.Grid = new Class({
 
 			this.layout = layout;
 			if (this.options.switchers) {
-				this.options.switchers.set('value', layout);
+                this._updateSwitchers(layout);
 			}
 
 			this.fireEvent('afterSetLayout', {layout: layout});
@@ -455,6 +450,17 @@ Files.Grid = new Class({
             this.spinner.stop();
             this.spinner = null;
         }
+    },
+    /**
+     * Updates the active state on the switchers
+     * @param layout   string, current layout
+     * @private
+     */
+    _updateSwitchers: function(layout){
+
+        this.options.switchers.removeClass('active').filter(function(el) {
+            return el.get('data-layout') == layout;
+        }).addClass('active');
     }
 });
 

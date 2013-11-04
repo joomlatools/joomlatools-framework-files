@@ -138,20 +138,6 @@ window.addEvent('domready', function() {
     };
 
     Files.createModal('files-new-folder-modal', 'files-new-folder-toolbar');
-
-    var switchers = $$('.files-layout-switcher');
-
-    switchers.filter(function(el) {
-        return el.get('data-layout') == Files.app.grid.layout;
-    }).addClass('active');
-
-    switchers.addEvent('click', function(e) {
-    	e.stop();
-    	var layout = this.get('data-layout');
-    	Files.app.grid.setLayout(layout);
-    	switchers.removeClass('active');
-    	this.addClass('active');
-    });
 });
 </script>
 
