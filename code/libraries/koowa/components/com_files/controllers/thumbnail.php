@@ -15,7 +15,7 @@
  */
 class ComFilesControllerThumbnail extends ComFilesControllerDefault
 {
-    protected function _actionBrowse(KCommand $context)
+    protected function _actionBrowse(KControllerContextInterface $context)
     { 
     	// Clone to make cacheable work since we change model states
         $model = clone $this->getModel();

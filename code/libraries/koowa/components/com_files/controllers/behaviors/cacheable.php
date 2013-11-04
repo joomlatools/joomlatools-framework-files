@@ -115,9 +115,9 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     /**
      * Set the event output from the cache
      *
-     * @param KCommand $context
+     * @param KControllerContextInterface $context
      */
-    protected function _setOutput(KCommand $context)
+    protected function _setOutput(KControllerContextInterface $context)
 	{
 		$cache  = $this->_getCache();
 		$key    = $this->_getKey();
@@ -136,10 +136,10 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	/**
 	 * Store the unrendered view data in the cache
 	 *
-	 * @param   KCommand $context	A command context object
+	 * @param   KControllerContextInterface $context	A command context object
 	 * @return 	void
 	 */
-	protected function _storeOutput(KCommand $context)
+	protected function _storeOutput(KControllerContextInterface $context)
 	{
 		if (empty($this->_output))
 		{
@@ -158,9 +158,9 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      *
      * Also cleans cache if revalidate_cache property is set in request
      *
-     * @param KCommand $context
+     * @param KControllerContextInterface $context
      */
-    protected function _beforeGet(KCommand $context)
+    protected function _beforeGet(KControllerContextInterfaced $context)
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false)
         {
@@ -176,9 +176,9 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     /**
      * Stores the cache output for JSON requests
      *
-     * @param KCommand $context
+     * @param KControllerContextInterface $context
      */
-    protected function _afterGet(KCommand $context)
+    protected function _afterGet(KControllerContextInterface $context)
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false) {
 			$this->_storeOutput($context);
@@ -186,20 +186,20 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	}
 
     /**
-     * Overrridden to not run caching on read actions
+     * Overridden to not run caching on read actions
      *
-     * @param KCommand $context
+     * @param KControllerContextInterface $context
      */
-    protected function _beforeRead(KCommand $context)
+    protected function _beforeRead(KControllerContextInterface $context)
 	{
 	}
 
     /**
-     * Overrridden to not run caching on read actions
+     * Overridden to not run caching on read actions
      *
-     * @param KCommand $context
+     * @param KControllerContextInterface $context
      */
-	protected function _afterRead(KCommand $context)
+	protected function _afterRead(KControllerContextInterface $context)
 	{
 	}
 
