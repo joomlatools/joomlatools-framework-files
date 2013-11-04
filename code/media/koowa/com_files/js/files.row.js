@@ -178,7 +178,7 @@ Files.Folder = new Class({
 		Files.Folder.Request.options.url = url;
 		Files.Folder.Request.get();
 	},
-	'add': function(success, failure) {
+	'add': function(success, failure, complete) {
 		this.fireEvent('beforeAddRow');
 
 		var that = this;
@@ -209,7 +209,12 @@ Files.Folder = new Class({
 					}
 
 					that.fireEvent('afterAddRow', {status: false, response: response, request: this, xhr: xhr});
-				}
+				},
+                onComplete: function(response){
+                    if (typeof complete == 'function') {
+                        complete(response);
+                    }
+                }
 			});
 		request.send();
 	},

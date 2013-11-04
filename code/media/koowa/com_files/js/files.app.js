@@ -47,6 +47,15 @@ Files.App = new Class({
 		paginator: {
 			element: 'files-paginator'
 		},
+        folder_dialog: {
+            element: 'files-new-folder-modal',
+            input: 'files-new-folder-input',
+            button: 'files-new-folder-create',
+            control: {
+                open: function(){},
+                close: function(){}
+            }
+        },
 		history: {
 			enabled: true
 		},
@@ -547,5 +556,8 @@ Files.App = new Class({
 		return '?'+new Hash(query).filter(function(value, key) {
 			return typeof value !== 'function';
 		}).toQueryString();
-	}
+	},
+    createFolder: function(value, folder){
+
+    }
 });
