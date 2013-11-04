@@ -160,7 +160,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      *
      * @param KControllerContextInterface $context
      */
-    protected function _beforeGet(KControllerContextInterfaced $context)
+    protected function _beforeGet(KControllerContextInterface $context)
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false)
         {
