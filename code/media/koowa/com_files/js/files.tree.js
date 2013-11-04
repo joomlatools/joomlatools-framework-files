@@ -69,7 +69,8 @@ if(!Files) var Files = {};
         parseData: function(list){
             return [{
                 label: this.options.root.text,
-                href: '#',
+                //href: '#',
+                url: '#',
                 children: list
             }];
         },
@@ -85,6 +86,8 @@ if(!Files) var Files = {};
         },
         selectPath: function(path) {
             var node = this.tree('getNodeById', path);
+
+            if(window.console) console.log('selectNode', path, node);
 
             if(!node) {
                 var tree = this.tree('getTree');
@@ -156,6 +159,8 @@ if(!Files) var Files = {};
             this.element.bind({
                 'tree.select': // The select event happens when a node is clicked
                     function(event) {
+                        if(window.console) console.log('tree.select', arguments);
+
                         var element;
                         if(event.node) { // When event.node is null, it's actually a deselect event
                             element = $(event.node.element);

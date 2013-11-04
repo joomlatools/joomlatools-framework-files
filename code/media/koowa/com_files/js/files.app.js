@@ -432,9 +432,14 @@ Files.App = new Class({
 
             opts = jQuery.extend(true, {}, {
                 onSelectNode: function(node) {
+                    console.group('onSelectNode');
+                    console.log('node', node);
+                    console.log('node.id || node.url', node.id || node.url);
 					if (node.id || node.url) {
 						that.navigate(node && node.id ? node.id : '');
+                        console.log('that.navigate', node && node.id ? node.id : '');
 					}
+                    console.groupEnd('onSelectNode');
 				},
 				root: {
 					text: this.container.title,
