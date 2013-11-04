@@ -15,13 +15,10 @@ if(!Files) var Files = {};
      * @type extend Koowa.Tree
      */
     Files.Tree = Koowa.Tree.extend({
-
         /**
-         * false before the tree is loaded with data from the initial json request
-         * When tree.loaded_data is fired this property is set to 'true'
+         * Get the default options
+         * @returns options combined with the defaults from parent classes
          */
-        loaded: false,
-
         getDefaults: function(){
 
             var self = this,
@@ -91,30 +88,20 @@ if(!Files) var Files = {};
             });
 
         },
+        /**
+         * Select a path, pass '' to select the root
+         * @param path string
+         */
         selectPath: function(path) {
 
-            if(!this.loaded) {
-                var self = this;
-                this.element.one('tree.load_data', function(){
-                    self.selectPath(path);
-                });
+            var node = this.tree('getNodeById', path);
 
-            } else {
-
-                var node = this.tree('getNodeById', path);
-
-                if(window.console) console.log('selectNode', path, node);
-
-                if(!node) {
-                    var tree = this.tree('getTree');
-                    node = tree.children.length ? tree.children[0] : null;
-                    console.warn(node, tree);
-                }
-
-                if(window.console) console.log('selectNode', path, node);
-
-                this.tree('selectNode', node);
+            if(!node) {
+                var tree = this.tree('getTree');
+                node = tree.children.length ? tree.children[0] : null;
             }
+
+            this.tree('selectNode', node);
         },
         /**
          * Append a node to the tree
@@ -179,8 +166,6 @@ if(!Files) var Files = {};
             this.element.bind({
                 'tree.select': // The select event happens when a node is clicked
                     function(event) {
-                        if(window.console) console.log('tree.select', arguments);
-
                         var element;
                         if(event.node) { // When event.node is null, it's actually a deselect event
                             element = $(event.node.element);
@@ -199,11 +184,6 @@ if(!Files) var Files = {};
                     function(event) {
                         if(window.console) console.log('scrollIntoView when folder opens');
                         self.scrollIntoView(event.node, self.element, 300);
-                    },
-                'tree.load_data':
-                    function(){
-                        console.log('tree.load_data', arguments);
-                        self.loaded = true;
                     }
             });
             this.element.on('tree.select', function(){
