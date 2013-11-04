@@ -17,7 +17,7 @@ Files.Grid = new Class({
 		onClickImage: function (){},
 		onDeleteNode: function (){},
 		onSwitchLayout: function (){},
-		switcher: '.files-layout-controls',
+		switchers: '.files-layout-switcher',
 		layout: false,
 		batch_delete: false,
 		icon_size: 150,
@@ -40,8 +40,8 @@ Files.Grid = new Class({
 		this.nodes = new Hash();
 		this.container = document.id(container);
 
-		if (this.options.switcher) {
-			this.options.switcher = document.getElements(this.options.switcher);
+		if (this.options.switchers) {
+			this.options.switchers = document.getElements(this.options.switchers);
 		}
 
 		if (this.options.batch_delete) {
@@ -194,14 +194,14 @@ Files.Grid = new Class({
 			}.bind(this));
 		}
 
-		if (this.options.switcher) {
+		if (this.options.switchers) {
 			var that = this;
-            this.options.switcher.filter(function(el) {
+            this.options.switchers.filter(function(el) {
                 console.log(el, that.layout);
                 return el.get('data-layout') == that.layout;
             }).addClass('active');
 
-			this.options.switcher.addEvent('change', function(e) {
+			this.options.switchers.addEvent('change', function(e) {
 				e.stop();
 
 				var value = this.get('value');
@@ -398,8 +398,8 @@ Files.Grid = new Class({
 			this.fireEvent('beforeSetLayout', {layout: layout});
 
 			this.layout = layout;
-			if (this.options.switcher) {
-				this.options.switcher.set('value', layout);
+			if (this.options.switchers) {
+				this.options.switchers.set('value', layout);
 			}
 
 			this.fireEvent('afterSetLayout', {layout: layout});
