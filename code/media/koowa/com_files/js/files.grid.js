@@ -41,7 +41,7 @@ Files.Grid = new Class({
 		this.container = document.id(container);
 
 		if (this.options.switcher) {
-			this.options.switcher = document.getElement(this.options.switcher);
+			this.options.switcher = document.getElements(this.options.switcher);
 		}
 
 		if (this.options.batch_delete) {
@@ -196,6 +196,11 @@ Files.Grid = new Class({
 
 		if (this.options.switcher) {
 			var that = this;
+            this.options.switcher.filter(function(el) {
+                console.log(el, that.layout);
+                return el.get('data-layout') == that.layout;
+            }).addClass('active');
+
 			this.options.switcher.addEvent('change', function(e) {
 				e.stop();
 
