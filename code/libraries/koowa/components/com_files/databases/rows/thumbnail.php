@@ -15,20 +15,26 @@
  */
 class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 {
-    protected $_thumbnail_size;
+    /**
+     * @var array Associative array containing the thumbnail size (x, y);
+     */
+    protected $_size;
 
 	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
-		$this->setThumbnailSize(KObjectConfig::unbox($config->thumbnail_size));
+        $this->setSize(KObjectConfig::unbox($config->size));
 	}
 
     protected function _initialize(KObjectConfig $config)
     {
-        $config->append(array(
-            'thumbnail_size' => array('x' => 200, 'y' => 150)
-        ));
+        $size = KObjectConfig::unbox($config->size);
+
+        if (empty($size))
+        {
+            $config->size = array('x' => 200, 'y' => 150);
+        }
 
         parent::_initialize($config);
     }
@@ -37,28 +43,22 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
     {
 		@ini_set('memory_limit', '256M');
 
-    	$source = $this->source;
-    	if ($source && !$source->isNew())
+    	if (($source = $this->getSource()) && $this->_canGenerate())
 		{
-			try {
+            try {
 				//Load the library
 				$this->getObject('koowa:class.loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
-				
-				//Create the thumb
+
+                //Create the thumb
 				$image = PhpThumbFactory::create($source->fullpath)
 					->setOptions(array('jpegQuality' => 50));
-				
-				if ($this->_thumbnail_size['x'] && $this->_thumbnail_size['y']) {
-					// Resize then crop to the provided resolution.
-					$image->adaptiveResize($this->_thumbnail_size['x'], $this->_thumbnail_size['y']);
-				} else {
-					$width = isset($this->_thumbnail_size['x'])?$this->_thumbnail_size['x']:0;
-					$height = isset($this->_thumbnail_size['y'])?$this->_thumbnail_size['y']:0;
-					// PhpThumb will calculate the missing side while preserving the aspect ratio.
-					$image->resize($width, $height);
-				}
-				
-				ob_start();
+
+                $size = $this->getSize();
+
+				// Resize then crop to the provided resolution.
+				$image->adaptiveResize($size['x'], $size['y']);
+
+                ob_start();
 				echo $image->getImageAsString();
 				$str = ob_get_clean();
 				$str = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($str));
@@ -73,27 +73,29 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 		return false;
     }
 
-	public function save()
-	{
-		if ($source = $this->source)
-		{
-			if (!$source->isNew())
-			{
-				$str = $source->thumbnail_string ? $source->thumbnail_string : $this->generateThumbnail();
+    public function save()
+    {
+        $result = false;
 
-		    	$this->setData(array(
-			    	'files_container_id' => $source->container->id,
-					'folder'			 => $source->folder,
-					'filename'           => $source->name,
-					'thumbnail'          => $str
-			    ));
+        if ($source = $this->getSource())
+        {
+            $str = $source->thumbnail_string ? $source->thumbnail_string : $this->generateThumbnail();
 
-			}
-			else return false;
-		}
+            if ($str)
+            {
+                $this->setData(array(
+                    'files_container_id' => $source->getContainer()->id,
+                    'folder'             => $source->folder,
+                    'filename'           => $source->name,
+                    'thumbnail'          => $str
+                ));
 
-		return parent::save();
-	}
+                $result = parent::save();
+            }
+        }
+
+        return $result;
+    }
 
     public function toArray()
     {
@@ -105,16 +107,118 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
         return $data;
     }
 
-    public function getThumbnailSize()
+    public function getSource()
     {
-        return $this->_thumbnail_size;
+        return ($this->source && !$this->source->isNew()) ? $this->source : null;
     }
 
     /**
-     * @param array $size An array with x and y properties
+     * Thumbnail size setter.
+     *
+     * @throws BadMethodCallException If bad formatted size is provided.
+     *
+     * @return $this.
      */
-    public function setThumbnailSize(array $size)
+    public function setSize(array $size)
     {
-        $this->_thumbnail_size = $size;
+        if (!(isset($size['x']) || isset($size['y'])))
+        {
+            throw new BadMethodCallException('The provided size is invalid');
+        }
+
+        $this->_size = $size;
+
+        return $this;
+    }
+
+    /**
+     * Thumbnail size getter.
+     *
+     * @throws RuntimeException If no source or its size cannot be determined.
+     *
+     * @return array Associative array containing the thumbnail width and height.
+     */
+    public function getSize()
+    {
+        $size = $this->_size;
+
+        if ($size && !(isset($size['x']) && isset($size['y'])))
+        {
+            $source = $this->getSource();
+
+            if (!($source && ($image = getimagesize($source->fullpath))))
+            {
+                throw new RuntimeException('Unable to get source size');
+            }
+
+            $ratio = $image[0] / $image [1];
+
+            if (isset($size['x']))
+            {
+                $size['y'] = round($size['x'] / $ratio);
+            }
+            else
+            {
+                $size['x'] = round($size['y'] * $ratio);
+            }
+        }
+
+        return $size;
+    }
+
+    /**
+     * Checks if a thumbnail for the current source and provided size can be generated given the
+     * amount of memory that's available.
+     *
+     * @return bool True if the thumbnail can be "safely" processed, false otherwise.
+     */
+    protected function _canGenerate()
+    {
+        $result = false;
+
+        // Multiplier to take into account memory consumed by the Image Processing Library.
+        $tweak_factor  = 1.65;
+
+        $source = getimagesize($this->getSource()->fullpath);
+
+        $channels      = isset($source['channels']) ? $source['channels'] : 4;
+        $bits          = isset($source['bits']) ? $source['bits'] : 8;
+        $source_memory = ceil($source[0] * $source[1] * $bits * $channels / 8 * $tweak_factor);
+
+        $thumb = $this->getSize();
+
+        // We assume the same amount of bits and channels as source.
+        $thumb_memory = ceil($thumb['x'] * $thumb['y'] * $bits * $channels / 8 * $tweak_factor);
+
+        $limit = ini_get('memory_limit');
+
+        if ($limit == '-1') {
+            // If memory is not limited, we take our chances ...
+            $result = true;
+        }
+        else
+        {
+            $limit = self::convertToBytes($limit);
+            $available_memory = $limit - memory_get_usage();
+
+            if ($source_memory + $thumb_memory < $available_memory) {
+                $result = true;
+            }
+        }
+
+        return $result;
+    }
+
+    public static function convertToBytes($value)
+    {
+        $keys = array('k', 'm', 'g');
+        $last_char = strtolower(substr($value, -1));
+        $value = (int) $value;
+
+        if (in_array($last_char, $keys)) {
+            $value *= pow(1024, array_search($last_char, $keys)+1);
+        }
+
+        return $value;
     }
 }

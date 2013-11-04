@@ -44,7 +44,7 @@ class ComFilesCommandValidatorNode extends KCommandInvokerAbstract
 			return false;
 		}
 
-		$dest_adapter = $row->container->getAdapter($row->getIdentifier()->name, array(
+		$dest_adapter = $row->getContainer()->getAdapter($row->getIdentifier()->name, array(
 			'path' => $row->destination_fullpath
 		));
 		$exists = $dest_adapter->exists();
