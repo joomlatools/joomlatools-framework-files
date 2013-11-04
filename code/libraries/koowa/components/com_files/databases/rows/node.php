@@ -240,4 +240,17 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
     {
         return (int) !$this->isNew();
     }
+
+    /**
+     * Get the context
+     *
+     * @return KCommand
+     */
+    public function getContext()
+    {
+        $context = new KCommand();
+        $context->setSubject($this);
+
+        return $context;
+    }
 }
