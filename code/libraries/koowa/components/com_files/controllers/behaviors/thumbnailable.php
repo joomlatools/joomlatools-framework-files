@@ -15,7 +15,7 @@
  */
 class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstract
 {
-	protected function _afterBrowse(KCommand $context)
+	protected function _afterBrowse(KControllerContextInterface $context)
 	{
 		if (!$this->getRequest()->query->thumbnails || $this->getModel()->getContainer()->parameters->thumbnails !== true) {
 			return;

@@ -32,7 +32,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 
 		$is_new = $this->isNew();
 
-		if ($this->getCommandChain()->run('before.save', $context) !== false)
+		if ($this->getCommandChain()->run('before.save', $context, false) !== false)
 		{
 			$context->result = $this->_adapter->write(!empty($this->contents) ? $this->contents : $this->file);
 
@@ -158,7 +158,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		}
 	}
 
-	public function saveThumbnail(KCommand $context = null)
+	public function saveThumbnail(KDatabaseContextInterface $context = null)
 	{
 		$result = null;
 		$available_extensions = array('jpg', 'jpeg', 'gif', 'png');
@@ -178,7 +178,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		return $result;
 	}
 
-	public function deleteThumbnail(KCommand $context = null)
+	public function deleteThumbnail(KDatabaseContextInterface $context = null)
 	{
 		$thumb = $this->getObject('com://admin/files.model.thumbnails')
 			->source($this)

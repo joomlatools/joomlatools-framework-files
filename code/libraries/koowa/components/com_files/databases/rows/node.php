@@ -57,7 +57,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		$context = $this->getContext();
 		$context->result = false;
 
-		if ($this->getCommandChain()->run('before.copy', $context) !== false)
+		if ($this->getCommandChain()->run('before.copy', $context, false) !== false)
 		{
 			$context->result = $this->_adapter->copy($this->destination_fullpath);
 			$this->getCommandChain()->run('after.copy', $context);
@@ -88,7 +88,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		$context = $this->getContext();
 		$context->result = false;
 
-		if ($this->getCommandChain()->run('before.move', $context) !== false)
+		if ($this->getCommandChain()->run('before.move', $context, false) !== false)
 		{
 			$context->result = $this->_adapter->move($this->destination_fullpath);
 
@@ -120,7 +120,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		$context = $this->getContext();
 		$context->result = false;
 
-		if ($this->getCommandChain()->run('before.delete', $context) !== false)
+		if ($this->getCommandChain()->run('before.delete', $context, false) !== false)
 		{
 			$context->result = $this->_adapter->delete();
 			$this->getCommandChain()->run('after.delete', $context);
@@ -239,5 +239,18 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
     public function count()
     {
         return (int) !$this->isNew();
+    }
+
+    /**
+     * Get the context
+     *
+     * @return KCommand
+     */
+    public function getContext()
+    {
+        $context = new KCommand();
+        $context->setSubject($this);
+
+        return $context;
     }
 }
