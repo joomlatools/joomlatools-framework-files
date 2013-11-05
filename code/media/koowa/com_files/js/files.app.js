@@ -1,6 +1,8 @@
 /**
  * Koowa Framework - http://developer.joomlatools.com/koowa
  *
+ * @codekit-prepend "spin.min.js", "files.utilities.js", "files.state.js", "files.template.js", "files.grid.js", files.tree.js", "files.row.js", "files.paginator.js", "files.pathway.js"
+ *
  * @copyright	Copyright (C) 2011 - 2013 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
@@ -35,8 +37,7 @@ Files.App = new Class({
 		},
 		tree: {
 			enabled: true,
-			div: 'files-tree',
-			theme: ''
+			element: '#files-tree',
 		},
 		grid: {
 			element: 'files-grid',
@@ -428,20 +429,18 @@ Files.App = new Class({
 		if (this.options.tree.enabled) {
 			var opts = this.options.tree,
 				that = this;
-            Files.utils.append(opts, {
-				onClick: function(node) {
-					if (node.id || node.data.url) {
+
+            opts = jQuery.extend(true, {}, {
+                onSelectNode: function(node) {
+					if (node.id || node.url) {
 						that.navigate(node && node.id ? node.id : '');
 					}
 				},
 				root: {
-					text: this.container.title,
-					data: {
-						url: '#'
-					}
+					text: this.container.title
 				}
-			});
-			this.tree = new Files.Tree(opts);
+			}, opts);
+			this.tree = new Files.Tree(jQuery(opts.element), opts);
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
 			this.addEvent('afterNavigate', function(path) {
@@ -452,10 +451,7 @@ Files.App = new Class({
 				this.grid.addEvent('afterDeleteNode', function(context) {
 					var node = context.node;
 					if (node.type == 'folder') {
-						var item = that.tree.get(node.path);
-						if (item) {
-							item.remove();
-						}
+                        that.tree.removeNode(node.path);
 					}
 				});
 			}

@@ -28,9 +28,6 @@ window.addEvent('domready', function() {
 					types: <?= json_encode($state->types); ?>
 				}
 			},
-			tree: {
-				theme: 'media://koowa/com_files/images/mootree.png'
-			},
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($container ? $container->slug : null); ?>,
 			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
@@ -77,16 +74,10 @@ console.log(options, config);
 				var cls = Files[el.type.capitalize()];
 				var row = new cls(el);
 				Files.app.grid.insert(row);
-				Files.app.tree.selected.insert({
-					text: row.name,
-					id: row.path,
-					data: {
-						path: row.path,
-						url: '#'+row.path,
-						type: 'folder'
-					}
-				});
-				Files.app.tree.selected.toggle(false, true);
+                Files.app.tree.appendNode({
+                    id: row.path,
+                    label: row.name
+                });
 
 				SqueezeBox.close();
 			});

@@ -31,6 +31,7 @@ JHtml::_('behavior.modal');
 <?= @helper('behavior.tooltip'); ?>
 <?= @helper('behavior.modal'); ?>
 <?= @helper('bootstrap.load'); ?>
+<?= @helper('behavior.tree'); ?>
 
 <script src="media://koowa/com_files/js/history/history.js" />
 <? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
@@ -38,8 +39,6 @@ JHtml::_('behavior.modal');
 <? endif; ?>
 
 <script src="media://koowa/com_files/js/ejs/ejs.js" />
-
-<script src="media://system/js/mootree.js" />
 
 <script src="media://koowa/com_files/js/spin.min.js" />
 

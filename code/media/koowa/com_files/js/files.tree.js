@@ -8,126 +8,209 @@
 
 if(!Files) var Files = {};
 
-Files.Tree = new Class({
-	Extends: MooTreeControl,
-	Implements: [Options],
-	options: {
-		mode: 'folders',
-		title: '',
-		grid: true,
-		onClick: function (){},
-		onAdopt: function (){},
-		adopt: null,
-		root: {
-			open: true
-		}
-	},
-	initialize: function(options) {
-		this.setOptions(options);
+(function($){
 
-		this.onAdopt = this.options.onAdopt;
+    /**
+     * Files.Tree is a wrapper for Koowa.Tree, which wraps jqTree
+     * @type extend Koowa.Tree
+     */
+    Files.Tree = Koowa.Tree.extend({
+        /**
+         * Get the default options
+         * @returns options combined with the defaults from parent classes
+         */
+        getDefaults: function(){
 
-		this.parent(this.options, this.options.root);
+            var self = this,
+                defaults = {
+                    autoOpen: 0, //root.open = true on previous script
+                    onSelectNode: function(){},
+                    dataFilter: function(response){
 
-		if (options.adopt) {
-			this.adopt(options.adopt);
-		}
+                        var data = response.entities,
+                            parse = function(item, parent) {
+                                var path = (parent && parent.path) ? parent.path+'/' : '';
+                                path += item.name;
 
-		if (this.options.title) {
-			this.setTitle(this.options.title);
-		}
-	},
-	setTitle: function(title) {
-		if (!this.title_element) {
-			this.title_element = new Element('h3').inject(document.id(this.options.div), 'top');
-		}
-		this.title = title;
-		this.title_element.set('text', title);
-	},
-	/**
-	 * We need to duplicate this because in the latest Mootree noClick argument is removed.
-	 */
-	select: function(node, noClick) {
-		if (!noClick) {
-			this.onClick(node); node.onClick(); // fire click events
-		}
-		if (this.selected === node) return; // already selected
-		if (this.selected) {
-			// deselect previously selected node:
-			this.selected.select(false);
-			this.onSelect(this.selected, false);
-		}
-		// select new node:
-		this.selected = node;
-		node.select(true);
-		this.onSelect(node, true);
+                                //Parse attributes
+                                //@TODO check if 'type' is necessary
+                                item = $.extend(item, {
+                                    id: path,
+                                    path: path,
+                                    url: '#'+path,
+                                    type: 'folder'
+                                });
 
-		while (true) {
-			if (!node.parent || node.parent.id == null) {
-				break;
-			}
-			node.parent.toggle(false, true);
+                                if (item.children) {
+                                    var children = [];
+                                    Files.utils.each(item.children, function(child) {
+                                        children.push(parse(child, item));
+                                    });
+                                    item.children = children;
+                                }
 
-			node = node.parent;
-		}
-	},
-	adopt: function(id, parentNode) {
-		this.parent(id, parentNode);
+                                return item;
+                        };
 
-		this.onAdopt(id, parentNode);
-	},
-	fromUrl: function(url) {
-		var that = this,
-			insertNode = function(item, parent) {
-				var path = parent.data.path ? parent.data.path+'/' : '';
-				path += item.name;
+                        if (response.meta.total) {
+                            Files.utils.each(data, function(item, key) {
+                                parse(item);
+                            });
+                        }
 
-				var node = parent.insert({
-					text: item.name,
-					id: path,
-					data: {
-						path: path,
-						url: '#'+item.path,
-						type: 'folder'
-					}
-				});
+                        return self.parseData(data);
+                    }
+                };
 
-                node.div.main.setAttribute('title', node.div.text.innerText);
+            return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
+        },
 
-				if (item.children) {
-                    Files.utils.each(item.children, function(item) {
-						insertNode(item, node);
-					});
-				}
+        /**
+         * Customized parseData method due to using json, in a already nested data format
+         * @param list json returned data
+         * @returns data
+         */
+        parseData: function(list){
+            return [{
+                label: this.options.root.text,
+                url: '#',
+                children: list
+            }];
+        },
+        fromUrl: function(url) {
 
-				return node;
-			};
+            var self = this;
+            this.tree('loadDataFromUrl', url, null, function(response){
+                /**
+                 * @TODO refactor chaining support to this.selectPath so it works even when the tree isn't loaded yet
+                 */
+                if(Files.app && Files.app.hasOwnProperty('active')) self.selectPath(Files.app.active);
+            });
 
-		new Request.JSON({
-			url: url,
-			method: 'get',
-			onSuccess: function(response) {
-				if (response.meta.total) {
-                    Files.utils.each(response.entities, function(item) {
-						insertNode(item, that.root);
-					});
-				}
-				if (Files.app && Files.app.active) {
-					that.selectPath(Files.app.active);
-				}
-                that.onAdopt(that.options.div, that.root);
-			}
-		}).send();
-	},
-	selectPath: function(path) {
-		if (path !== undefined) {
-			var node = this.get(path);
-			if (node) {
-				this.select(node, true);
-			}
-			else {
-				this.select(this.root, true);
-			}
-		}
-	}
-});
+        },
+        /**
+         * Select a path, pass '' to select the root
+         * @param path string
+         */
+        selectPath: function(path) {
+
+            var node = this.tree('getNodeById', path);
+
+            if(!node) {
+                var tree = this.tree('getTree');
+                node = tree.children.length ? tree.children[0] : null;
+            }
+
+            this.tree('selectNode', node);
+        },
+        /**
+         * Append a node to the tree
+         * Required properties are 'id' and 'label', other properties are optional.
+         * If no parent specified then the node is appended to the current selected node.
+         * Pass parent as null for adding the node to root
+         *
+         * This API is intended for adding user created nodes, don't use this API to add multiple items or to refresh
+         * the tree with updated data from the server.
+         * Use fromUrl instead, as it's performance optimized for that purpose.
+         *
+         * @param row
+         * @param parent    optional    Node instance, pass 'null' to force the node to be added to the root
+         */
+        appendNode: function(row, parent){
+
+            if(parent === undefined) parent = this.tree('getSelectedNode');
+            if(parent === false)     parent = this.tree('getTree').children[0]; //Get the root node when nothing is selected
+
+            var node, data = $.extend(true, {}, row, {
+                path: row.id,
+                url: '#'+row.id,
+                type: 'folder'
+            });
+
+            /**
+             * If there's siblings, make sure it's added in alphabetical order
+             */
+            if(parent && parent.children && parent.children.length) {
+                var name = data.label.toLowerCase();
+                if(parent.children[0].name.toLowerCase() > name) {
+                    node = this.tree('addNodeBefore', data, parent.children[0]);
+                } else if(parent.children[parent.children.length - 1].name.toLowerCase() < name) {
+                    node = this.tree('appendNode', data, parent);
+                } else {
+                    var i = 0;
+                    while(parent.children[i].name.toLowerCase() < name) {
+                        i++;
+                    }
+                    node = this.tree('addNodeBefore', data, parent.children[i]);
+                }
+            } else {
+                node = this.tree('appendNode', data, parent);
+            }
+            /**
+             * @TODO please investigate:
+             * It may be counter-productive to always navigate into newly created folders, investigate if
+             * just selecting the folder in the grid is a better workflow as it allows creating multiple folders with
+             * lesser clicking around.
+             */
+            this.tree('selectNode', node);
+
+            return this;
+        },
+
+        /**
+         * Remove a node by path
+         * @param path
+         */
+        removeNode: function(path){
+
+            var node = this.tree('getNodeById', path);
+            if(node) {
+                this.tree('removeNode', node);
+            }
+
+        },
+
+        attachHandlers: function(){
+
+            this._attachHandlers(); // Attach needed events from Koowa.Tree._attachHandlers
+
+            var options = this.options, self = this;
+
+            this.element.bind({
+                'tree.select': // The select event happens when a node is clicked
+                    function(event) {
+                        var element;
+                        if(event.node) { // When event.node is null, it's actually a deselect event
+                            element = $(event.node.element);
+
+                            self.tree('openNode', event.node); // open the selected node, if not open already
+
+                            //Fire custom select node handler
+                            options.onSelectNode(event.node);
+                        }
+                        if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
+                            self.scrollIntoView(event.node, self.element, 300);
+                        }
+                    },
+                'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
+                    function(event) {
+                        self.scrollIntoView(event.node, self.element, 300);
+                    }
+            });
+            this.element.on('tree.select', function(){
+                /**
+                 * Sidebar.js will fire a resize event when it sets the height on load, we want our animated scroll
+                 * to happen after that, but not on future resize events as it would confuse the user experience
+                 */
+
+                self.element.one('resize', function(){
+                    if(self.tree('getSelectedNode')) {
+                        self.scrollIntoView(self.tree('getSelectedNode'), self.element, 900);
+                    }
+                });
+            });
+
+        }
+    });
+
+}(window.jQuery));

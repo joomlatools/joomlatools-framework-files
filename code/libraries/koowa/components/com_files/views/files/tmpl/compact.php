@@ -33,9 +33,6 @@ window.addEvent('domready', function() {
 				}
 			},
 			editor: <?= json_encode($state->editor); ?>,
-			tree: {
-				theme: 'media://koowa/com_files/images/mootree.png'
-			},
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($container ? $container->slug : null); ?>
 		};
