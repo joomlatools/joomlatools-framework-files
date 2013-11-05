@@ -109,6 +109,10 @@ Files.App = new Class({
                 folder_dialog.create_button.removeClass('valid').setProperty('disabled', 'disabled');
             }
         },
+        uploader_dialog: {
+            view: '#files-upload',
+            button: '#files-show-uploader'
+        },
 		history: {
 			enabled: true
 		},
@@ -170,6 +174,10 @@ Files.App = new Class({
 				this.setThumbnails();
 			});
 		}
+
+        if(this.options.uploader_dialog) {
+            this.setUploaderDialog();
+        }
 
 		if (this.options.container) {
 			this.setContainer(this.options.container);
@@ -594,6 +602,56 @@ Files.App = new Class({
         }
 
         return !!this.options.folder_dialog;
+    },
+    /**
+     * Sets the IE Flash workaround and FLOC fix, and hooks the markup with events for the uploader dialog
+     */
+    setUploaderDialog: function(){
+        var self = this;
+        this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
+        document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
+        document.getElement(this.options.uploader_dialog.button).addEvent('click', function(e){
+            e.stop();
+
+            self.openUploaderDialog();
+        });
+    },
+    /**
+     * Opens up the Uploader dialog and performs IE flash workaround
+     * @return returns a boolean indicating wether there's a uploader dialog active
+     */
+    openUploaderDialog: function(){
+
+        if(this.uploader) {
+            var self = this, handleClose = function(){
+                document.getElement(self.options.uploader_dialog.view).getParent().inject(self._tmp_uploader);
+                SqueezeBox.removeEvent('close', handleClose);
+            };
+            SqueezeBox.addEvent('close', handleClose);
+            SqueezeBox.open(document.getElement(self.options.uploader_dialog.view).getParent(), {
+                handler: 'adopt',
+                size: {x: 700, y: document.getElement(self.options.uploader_dialog.view).getParent().measure(function(){
+                    this.setStyle('width', 700);
+                    var height = this.getSize().y;
+                    this.setStyle('width', '');
+                    return height;
+                })}
+            });
+        }
+
+        return !!this.uploader;
+    },
+    /**
+     * Closes the Uploader dialog and performs IE flash workaround
+     * @return returns a boolean indicating wether there's a uploader dialog active
+     */
+    closeUploaderDialog: function(){
+
+        if(this.uploader) {
+            SqueezeBox.close();
+        }
+
+        return !!this.uploader;
     },
 	getUrl: function() {
 		return new URI(window.location.href);
