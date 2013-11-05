@@ -66,7 +66,6 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 			->insert('filename', 'com://admin/files.filter.path', null, true, array('container'))
 			->insert('files', 'com://admin/files.filter.path', null)
 			->insert('paths', 'com://admin/files.filter.path', null)
-			->insert('source', 'raw', null, true)
 			
 			->insert('types', 'cmd', '')
 			->insert('config'   , 'json', '')
@@ -82,22 +81,11 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
 		parent::_initialize($config);
 	}
 
-	public function getItem()
-	{
-		$item = parent::getItem();
-
-		if ($item) {
-			$item->source = $this->getState()->source;
-		}
-
-		return $item;
-	}
-
 	protected function _buildQueryColumns(KDatabaseQueryInterface $query)
     {
     	parent::_buildQueryColumns($query);
 
-    	if ($this->getState()->source instanceof KDatabaseRowInterface || $this->getState()->container) {
+    	if ($this->getState()->container) {
     		$query->columns(array('container' => 'c.slug'));
     	}
     }
@@ -106,7 +94,7 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
     {
     	parent::_buildQueryJoins($query);
 
-    	if ($this->getState()->source instanceof KDatabaseRowInterface || $this->getState()->container) {
+    	if ($this->getState()->container) {
     		$query->join(array('c' => 'files_containers'), 'c.files_container_id = tbl.files_container_id');
     	}
     }
@@ -115,51 +103,40 @@ class ComFilesModelThumbnails extends ComKoowaModelDefault
     {
         $state = $this->getState();
 
-		if ($state->source instanceof KDatabaseRowInterface)
-		{
-			$source = $state->source;
+        if ($state->container) {
+            $query->where('tbl.files_container_id = :container_id')->bind(array('container_id' => $this->getContainer()->id));
+        }
 
-			$query->where('tbl.files_container_id = :container_id')
-				->where('tbl.filename = :filename')
-				->bind(array('container_id' => $source->container->id, 'filename' => $source->name));
+        if ($state->folder !== false) {
+            $query->where('tbl.folder = :folder')->bind(array('folder' => ltrim($state->folder, '/')));
+        }
 
-			if ($source->folder) {
-				$query->where('tbl.folder = :folder')->bind(array('folder' => $source->folder));
-			}
-		}
-		else
-		{
-		    if ($state->container) {
-		        $query->where('tbl.files_container_id = :container_id')->bind(array('container_id' => $this->getContainer()->id));
-		    }
+        // Need this for BC
+        if (!empty($state->files)) {
+            $query->where('tbl.filename IN :files')->bind(array('files' => (array) $state->files));
+        }
 
-		    if ($state->folder !== false) {
-		    	$query->where('tbl.folder = :folder')->bind(array('folder' => ltrim($state->folder, '/')));
-		    }
+        if ($state->filename) {
+            $query->where('tbl.filename IN :filename')->bind(array('filename' => (array) $state->filename));
+        }
 
-		    // Need this for BC
-		    if (!empty($state->files)) {
-		    	$query->where('tbl.filename IN :files')->bind(array('files' => (array) $state->files));
-		    }
-		    
-		    if ($state->filename) {
-		        $query->where('tbl.filename IN :filename')->bind(array('filename' => (array) $state->filename));
-		    }
+        if ($state->paths)
+        {
+            $i = 0;
+            foreach ((array)$state->paths as $path)
+            {
+                $file = basename($path);
+                $folder = dirname($path);
+                if ($folder === '.') {
+                    $folder = '';
+                }
 
-		    if ($state->paths) {
-		        $conditions = array();
-		        foreach ((array)$state->paths as $path) {
-		            $file = basename($path);
-		            $folder = dirname($path);
-		            if ($folder === '.') {
-		                $folder = '';
-		            }
-		            
-		            $query->where("(tbl.filename = :filename$i AND tbl.folder = :folder$i)", 'OR')
-		            	->bind(array('filename'.$i => $file, 'folder'.$i => $folder));
-		        }
-		    }
-		}
+                $query->where("(tbl.filename = :filename$i AND tbl.folder = :folder$i)", 'OR')
+                    ->bind(array('filename'.$i => $file, 'folder'.$i => $folder));
+
+                $i++;
+            }
+        }
 		
 	}
 	

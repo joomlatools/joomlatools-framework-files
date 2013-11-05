@@ -181,7 +181,9 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 	public function deleteThumbnail(KCommandInterface $context = null)
 	{
 		$thumb = $this->getObject('com://admin/files.model.thumbnails')
-			->source($this)
+            ->container($this->container)
+            ->folder($this->folder)
+            ->filename($this->name)
 			->getItem();
 
 		$result = $thumb->delete();
