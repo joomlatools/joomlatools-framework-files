@@ -50,7 +50,7 @@ if(!Files) var Files = {};
                                 }
 
                                 return item;
-                        }
+                        };
 
                         if (response.meta.total) {
                             Files.utils.each(data, function(item, key) {
@@ -67,7 +67,7 @@ if(!Files) var Files = {};
 
         /**
          * Customized parseData method due to using json, in a already nested data format
-         * @param json returned data
+         * @param list json returned data
          * @returns data
          */
         parseData: function(list){
@@ -189,13 +189,11 @@ if(!Files) var Files = {};
                             options.onSelectNode(event.node);
                         }
                         if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
-                            if(window.console) console.log('special scrollIntoView event that checks if it is a second level node');
                             self.scrollIntoView(event.node, self.element, 300);
                         }
                     },
                 'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
                     function(event) {
-                        if(window.console) console.log('scrollIntoView when folder opens');
                         self.scrollIntoView(event.node, self.element, 300);
                     }
             });
@@ -207,7 +205,6 @@ if(!Files) var Files = {};
 
                 self.element.one('resize', function(){
                     if(self.tree('getSelectedNode')) {
-                        if(window.console) console.log('scrollIntoView event on tree.select.resize');
                         self.scrollIntoView(self.tree('getSelectedNode'), self.element, 900);
                     }
                 });
