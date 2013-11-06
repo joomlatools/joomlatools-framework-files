@@ -73,7 +73,7 @@ Files.App = new Class({
 		onAfterNavigate: function(path) {
 			if (path !== undefined) {
 				this.setTitle(this.folder.name || this.container.title);
-                jQuery('#upload-files-to, .upload-files-to').text(this.container.title+(path ? '/'+path : ''));
+                kQuery('#upload-files-to, .upload-files-to').text(this.container.title+(path ? '/'+path : ''));
 	        }
 		}
 	},
@@ -243,7 +243,7 @@ Files.App = new Class({
 		}
 
         if (this.cookie) {
-            var data = jQuery.extend(true, {}, this.state.data);
+            var data = kQuery.extend(true, {}, this.state.data);
             data.folder = this.active;
             Cookie.write(this.cookie+'.state', JSON.encode(data), this.options.cookie);
         }
@@ -386,7 +386,7 @@ Files.App = new Class({
                     img = that.createRoute({view: 'file', format: 'raw', name: row.name, folder: row.folder});
 
 				if (img) {
-                    jQuery.magnificPopup.open({
+                    kQuery.magnificPopup.open({
                         items: {
                             src: img,
                             type: 'image'
@@ -404,9 +404,9 @@ Files.App = new Class({
 
                 copy = copy.render();
 
-                var element = jQuery(copy);
+                var element = kQuery(copy);
                 element.addClass('mfp-hide koowa');
-                jQuery.magnificPopup.open({
+                kQuery.magnificPopup.open({
                     items: {
                         src: element,
                         type: 'inline'
@@ -430,7 +430,7 @@ Files.App = new Class({
 			var opts = this.options.tree,
 				that = this;
 
-            opts = jQuery.extend(true, {}, {
+            opts = kQuery.extend(true, {}, {
                 onSelectNode: function(node) {
 					if (node.id || node.url) {
 						that.navigate(node && node.id ? node.id : '');
@@ -440,7 +440,7 @@ Files.App = new Class({
 					text: this.container.title
 				}
 			}, opts);
-			this.tree = new Files.Tree(jQuery(opts.element), opts);
+			this.tree = new Files.Tree(kQuery(opts.element), opts);
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
 			this.addEvent('afterNavigate', function(path) {

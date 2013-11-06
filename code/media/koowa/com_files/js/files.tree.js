@@ -213,4 +213,4 @@ if(!Files) var Files = {};
         }
     });
 
-}(window.jQuery));
+}(window.kQuery));

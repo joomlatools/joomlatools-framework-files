@@ -15,17 +15,15 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
 <script src="media://koowa/com_files/plupload/plupload.core.html5.flash.queue.js" />
 
 <script>
-jQuery.noConflict();
-
 window.addEvent('domready', function() {
-    var element = jQuery('#files-upload-multi'),
+    var element = kQuery('#files-upload-multi'),
         browse_label = Files._('Choose file');
 
     plupload.addI18n({'Add files': browse_label});
 
     //This trick enables the flash runtime to work properly when the uploader is hidden
     var containershim = 'mushycode'+ Math.floor((Math.random()*10000000000)+1);
-    jQuery('<div id="'+containershim+'" class="uploader-flash-container" />').appendTo(jQuery(document.body));
+    kQuery('<div id="'+containershim+'" class="uploader-flash-container" />').appendTo(kQuery(document.body));
 
     element.pluploadQueue({
         runtimes: 'html5,flash',
@@ -55,7 +53,7 @@ window.addEvent('domready', function() {
             }
         }
     });
-    jQuery('#'+containershim).css({'position': '', 'z-index': 1});
+    kQuery('#'+containershim).css({'position': '', 'z-index': 1});
 
     var uploader = element.pluploadQueue(),
     //We only want to run this once
@@ -76,7 +74,7 @@ window.addEvent('domready', function() {
         var count = uploader.files.length;
 
         if (count > 1) {
-            jQuery.each(uploader.files, function(i, file) {
+            kQuery.each(uploader.files, function(i, file) {
                 if (i !== count-1) { // Find the last file
                     uploader.removeFile(file);
                 }
@@ -120,8 +118,8 @@ window.addEvent('domready', function() {
         }, createDragoverHandler = function(container){
 
             //Create hilite + label
-            var focusring = jQuery('<div class="dropzone-focusring"></div>'),
-                label = jQuery('<div class="alert alert-success">'+Files._('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
+            var focusring = kQuery('<div class="dropzone-focusring"></div>'),
+                label = kQuery('<div class="alert alert-success">'+Files._('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
 
             focusring.css({
                 display: 'none',
@@ -142,7 +140,7 @@ window.addEvent('domready', function() {
             container.append(focusring);
 
             //To inherit styling
-            jQuery('#files-upload').append(label);
+            kQuery('#files-upload').append(label);
             ['border-radius', 'color', 'background', 'border'].forEach(function(prop){
                 label.css(prop, label.css(prop));
             });
@@ -162,8 +160,8 @@ window.addEvent('domready', function() {
                     focusring.css('display', 'block');
                     setTimeout(function(){
                         focusring.css('opacity', 1);
-                        if(!jQuery('#files-upload').is(':visible')) {
-                            jQuery('#files-canvas').addClass('dropzone-droppable');
+                        if(!kQuery('#files-upload').is(':visible')) {
+                            kQuery('#files-canvas').addClass('dropzone-droppable');
                         }
                     }, 1);
 
@@ -173,15 +171,15 @@ window.addEvent('domready', function() {
                 //This is a failsafe measure
                 clearTimeout(timer);
                 timer = setTimeout(function(){
-                    jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
-                    jQuery('#files-canvas').removeClass('dropzone-droppable');
+                    kQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                    kQuery('#files-canvas').removeClass('dropzone-droppable');
                 }, 300);
             };
         }, createDragleaveHandler = function(container){
             return function(e){
                 //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
                 //container.removeClass('dropzone-dragover');
-                //jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                //kQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
             };
         };
 
@@ -214,14 +212,14 @@ window.addEvent('domready', function() {
         }
 
         //Prevent file drops from duplicating due to double drop events
-        jQuery('#files-upload-multi_filelist').bind('drop', function(event){
+        kQuery('#files-upload-multi_filelist').bind('drop', function(event){
             event.stopPropagation();
             //@TODO implement the rest of the drop code from handler, to remove focusring
-            jQuery(document.body).removeClass('dropzone-dragover');
+            kQuery(document.body).removeClass('dropzone-dragover');
         });
 
         // Make the document body a dropzone
-        var files_canvas = jQuery('#files-canvas'), body = jQuery(document.body);
+        var files_canvas = kQuery('#files-canvas'), body = kQuery(document.body);
         body.bind('dragover', createDragoverHandler(body)); //Using dragenter caused inconsistent behavior
         body.bind('dragleave', createDragleaveHandler(body));
         body.bind('dragenter', cancel);
@@ -234,14 +232,14 @@ window.addEvent('domready', function() {
             if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
                 addSelectedFiles(dataTransfer.files);
 
-                if(!jQuery('#files-upload').is(':visible')) {
+                if(!kQuery('#files-upload').is(':visible')) {
                     //@TODO the click handler is written in mootools, so we use mootools here
                     document.id('files-show-uploader').fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
                 }
             }
         });
         body.bind('dragend', function(event){
-            jQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+            kQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
         });
 
     } else {
@@ -265,7 +263,7 @@ window.addEvent('domready', function() {
     });
 
     uploader.bind('UploadComplete', function(uploader) {
-        jQuery('li.plupload_delete a,div.plupload_buttons', element).show();
+        kQuery('li.plupload_delete a,div.plupload_buttons', element).show();
         uploader.refresh();
     });
 
@@ -302,7 +300,7 @@ window.addEvent('domready', function() {
 
     uploader.bind('StateChanged', function(uploader) {
         Object.each(failed, function(error, id) {
-            icon = jQuery('#' + id).attr('class', 'plupload_failed').find('a').css('display', 'block');
+            icon = kQuery('#' + id).attr('class', 'plupload_failed').find('a').css('display', 'block');
             if (error) {
                 icon.attr('title', error);
             }
@@ -349,7 +347,7 @@ window.addEvent('domready', function() {
 
         // Plupload needs to be refreshed if it was hidden
         if (type == 'computer') {
-            var uploader = jQuery('#files-upload-multi').pluploadQueue();
+            var uploader = kQuery('#files-upload-multi').pluploadQueue();
             if(!uploader.files.length && !uploader.features.dragdrop) {
                 document.id('files-upload').removeClass('uploader-files-queued').addClass('uploader-files-empty');
                 if(document.id('files-upload-multi_browse')) {
