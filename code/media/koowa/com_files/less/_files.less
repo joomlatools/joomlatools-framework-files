@@ -6,80 +6,6 @@
 //
 //          For compiling with CodeKit, add this folder as a framework folder instead of as a project.
 
-/* Joomla Specific Styling */
-#element-box {
-    margin-top: 0;
-}
-#element-box #files-sidebar {
-    float:left;
-    width:260px;
-}
-#element-box #files-canvas {
-    float:none;
-    margin-left:260px;
-    border-left:1px solid #dddddd;
-}
-#files-container {
-    min-height: 218px;
-}
-
-#files-canvas .path {
-    padding: 10px;
-    background-color: #F7F7F7;
-    border-bottom: 1px solid #E1E1E1;
-    font-size: 12px;
-}
-
-#files-canvas .view {
-    display: block;
-    margin: 0;
-    padding: 0;
-    background-color: #FFF;
-}
-.com_files {
-    background-color: #f7f7f7;
-    border: 1px solid #dbdbdb;
-    .border-radius(2px);
-}
-.table-pagination {
-    margin-bottom: 0;
-
-    .container {
-        width: auto;
-        margin-right: auto;
-        margin-left: auto;
-
-        .pagination {
-            display: inline-block;
-            padding: 0;
-            margin: 0 auto;
-        }
-    }
-
-    select {
-        vertical-align: 1%;
-        font-size: inherit;
-        width: auto;
-        line-height: 20px;
-        height: 20px;
-        margin: 0;
-        padding: 0;
-        margin-top: 0.1em;
-    }
-
-/* To avoid ugly white borders due to background images expecting a white background */
-    .button2-right div,
-    .button2-left div,
-    .button2-right,
-    .button2-left,
-    a {
-        .border-radius(5px);
-    }
-    .button2-right div {
-        .border-radius(5px);
-    }
-}
-
 /* @group from docman _admin.less */
 #files-sidebar {
     .sidebar-inner {
@@ -101,10 +27,9 @@
 
 
 #files-app {
-    h3 {
-      display: inline-block;
-      padding: 4px 2px;
-      margin: 0;
+    #files-sidebar {
+        float: left;
+        width: 260px;
     }
 
     #files-grid {
@@ -120,7 +45,7 @@
                 }
             }
             th:nth-child(3) {
-              padding-left: 0px;
+                padding-left: 0px;
             }
         }
         tbody tr.files-node {
@@ -130,10 +55,6 @@
                 img {
                     height: auto!important;
                     width: 32px;
-                    max-width: 100%;
-                    height: auto;
-                    vertical-align: middle;
-                    border: 0;
                 }
             }
             td:nth-child(3) {
@@ -204,26 +125,8 @@
                 .divider {
                     display: inline-block;
                     height: 18px;
-                  padding: 0 6px;
-                	background: url(../../com_files/images/arrow.png) no-repeat 0 0;
-                }
-            }
-
-            .files-toolbar-controls {
-                padding: 1px 0px 2px 1px;
-                button {
-                    padding: 0px 10px;
-                    //border-top: none;
-                    //border-bottom: none;
-                    //.border-radius(0);
-                    margin: 0;
-
-                    &:first-child {
-                        //border-left: none;
-                    }
-                    & + .btn {
-                        margin-left: -1px;
-                    }
+                    padding: 0 6px;
+                    background: url(../../koowa/com_files/images/arrow.png) no-repeat 0 0;
                 }
             }
 
@@ -262,7 +165,7 @@
 /* @end */
 
 /* @group jquery.plupload.queue.css */
-@pluploadLocation: '../../../../media/koowa/com_files/plupload/jquery.plupload.queue/img/';
+@pluploadLocation: '../../../media/koowa/com_files/plupload/jquery.plupload.queue/img/';
 
 .plupload_button {
 	display: -moz-inline-box; /* FF < 3*/
