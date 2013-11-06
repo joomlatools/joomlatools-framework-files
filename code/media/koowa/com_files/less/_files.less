@@ -1,4 +1,10 @@
-/* Don't compile directly, include it in your main bootstrap compile file instead */
+// @README: this is a framework file, use this in your project. Do not compile directly.
+//          compile example using lessc with the --include-path option:
+//              cd ~/projects/com_example.git/code/media
+//              lessc --include-path=~/frameworks/joomlatools-components.files/code/media/koowa/com_files/less less/bootstrap.less css/bootstrap.css
+//          Use @import "_files"; without a path to include it in your main compile file.
+//
+//          For compiling with CodeKit, add this folder as a framework folder instead of as a project.
 
 .linear-gradient (@from: hsla(0, 0%, 100%, 0.5), @to: hsla(0, 0%, 0%, 0.5)) {
 
