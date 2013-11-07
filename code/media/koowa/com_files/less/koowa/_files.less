@@ -36,7 +36,7 @@
         min-height: 300px;
 
         thead {
-        //Checkall box, we need it to expand to fill the th element
+            //Checkall box, we need it to expand to fill the th element
             th:first-child {
                 padding: 0;
 
@@ -49,7 +49,7 @@
             }
         }
         tbody tr.files-node {
-        //Image column @TODO implement class hooks instead of using nth-child selectors
+            //Image column @TODO implement class hooks instead of using nth-child selectors
             td:nth-child(2) {
                 padding-right: 0px;
                 img {
@@ -168,94 +168,93 @@
 @pluploadLocation: '../../../media/koowa/com_files/plupload/jquery.plupload.queue/img/';
 
 .plupload_button {
-	display: -moz-inline-box; /* FF < 3*/
-	display: inline-block;
-	font: normal 12px sans-serif;
-	text-decoration: none;
+    display: -moz-inline-box; /* FF < 3*/
+    display: inline-block;
+    font: normal 12px sans-serif;
+    text-decoration: none;
     color: #42454a;
     border: 1px solid #bababa;
     padding: 2px 8px 3px 20px;
-	margin-right: 4px;
+    margin-right: 4px;
     background: #f3f3f3 url('@{pluploadLocation}buttons.png') no-repeat 0 center;
-	outline: 0;
+    outline: 0;
 
     .border-radius(3px);
 }
 
 .plupload_button:hover {
-	color: #000;
-	text-decoration: none;
+    color: #000;
+    text-decoration: none;
 }
 
 .plupload_disabled, a.plupload_disabled:hover {
     color: #737373;
     border-color: #c5c5c5;
     background: #ededed url('@{pluploadLocation}buttons-disabled.png') no-repeat 0 center;
-	cursor: default;
+    cursor: default;
 }
 
 .plupload_add {
-	background-position: -181px center;
+    background-position: -181px center;
 }
 
 .plupload_wrapper {
-	font: normal 11px Verdana,sans-serif;
-	width: 100%;
+    font: normal 11px Verdana,sans-serif;
+    width: 100%;
 }
 
 .plupload_container {
-	padding: 8px;
-	
-	/*-moz-border-radius: 5px;*/
+    padding: 8px;
+
+    /*-moz-border-radius: 5px;*/
 }
 
 .plupload_container input {
-	border: 1px solid #DDD;
-	font: normal 11px Verdana,sans-serif;
-	width: 98%;
+    border: 1px solid #DDD;
+    font: normal 11px Verdana,sans-serif;
+    width: 98%;
 }
 
 .plupload_header {background: #2A2C2E url('@{pluploadLocation}backgrounds.gif') repeat-x;}
 .plupload_header_content {
-	background: url('@{pluploadLocation}backgrounds.gif') no-repeat 0 -317px;
-	min-height: 56px;
-	padding-left: 60px;
-	color: #FFF;
+    background: url('@{pluploadLocation}backgrounds.gif') no-repeat 0 -317px;
+    min-height: 56px;
+    padding-left: 60px;
+    color: #FFF;
 }
 .plupload_header_title {
-	font: normal 18px sans-serif;
-	padding: 6px 0 3px;
+    font: normal 18px sans-serif;
+    padding: 6px 0 3px;
 }
 .plupload_header_text {
-	font: normal 12px sans-serif;
+    font: normal 12px sans-serif;
 }
 
 .plupload_filelist {
-	margin: 0;
-	padding: 0;
-	list-style: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .plupload_scroll .plupload_filelist {
-	height: 185px;
-	background: #F5F5F5;
-	overflow-y: scroll;
+    background: #F5F5F5;
+    overflow-y: scroll;
 }
 
 .plupload_filelist li {
-	padding: 10px 8px;
-	background: #F5F5F5 url('@{pluploadLocation}backgrounds.gif') repeat-x 0 -156px;
-	border-bottom: 1px solid #DDD;
+    padding: 10px 8px;
+    background: #F5F5F5 url('@{pluploadLocation}backgrounds.gif') repeat-x 0 -156px;
+    border-bottom: 1px solid #DDD;
 }
 
 .plupload_filelist_header, .plupload_filelist_footer {
-	background: #DFDFDF;
-	padding: 8px 8px;
-	color: #42454A;
+    background: #DFDFDF;
+    padding: 8px 8px;
+    color: #42454A;
 }
-.plupload_filelist_header {	
-	border-top: 1px solid #EEE;
-	border-bottom: 1px solid #CDCDCD;
+.plupload_filelist_header {
+    border-top: 1px solid #EEE;
+    border-bottom: 1px solid #CDCDCD;
 }
 
 .plupload_filelist_footer {border-top: 1px solid #FFF; height: 22px; line-height: 20px; vertical-align: middle;}
@@ -263,78 +262,78 @@
 .plupload_file_status {color: #777;}
 .plupload_file_status span {color: #42454A;}
 .plupload_file_size, .plupload_file_status, .plupload_progress {
-	float: right;
-	width: 80px;
+    float: right;
+    width: 80px;
 }
 .plupload_file_size, .plupload_file_status, .plupload_file_action {text-align: right;}
 
 .plupload_filelist .plupload_file_name {width: 205px}
 
 .plupload_file_action {
-	float: right;
-	width: 16px;
-	height: 16px;
-	margin-left: 15px;
+    float: right;
+    width: 16px;
+    height: 16px;
+    margin-left: 15px;
 }
 
 .plupload_file_action * {
-	display: none;
-	width: 16px;
-	height: 16px;
+    display: none;
+    width: 16px;
+    height: 16px;
 }
 
 li.plupload_uploading {background: #ECF3DC url('@{pluploadLocation}backgrounds.gif') repeat-x 0 -238px;}
 li.plupload_done {color:#AAA}
 
 li.plupload_delete a {
-	background: url('@{pluploadLocation}delete.gif');
+    background: url('@{pluploadLocation}delete.gif');
 }
 
 li.plupload_failed a {
-	background: url('@{pluploadLocation}error.gif');
-	cursor: default;
+    background: url('@{pluploadLocation}error.gif');
+    cursor: default;
 }
 
 li.plupload_done a {
-	background: url('@{pluploadLocation}done.gif');
-	cursor: default;
+    background: url('@{pluploadLocation}done.gif');
+    cursor: default;
 }
 
 .plupload_progress, .plupload_upload_status {
-	display: none;
+    display: none;
 }
 
 .plupload_progress_container {
-	margin-top: 3px;
-	border: 1px solid #CCC;
-	background: #FFF;
-	padding: 1px;
+    margin-top: 3px;
+    border: 1px solid #CCC;
+    background: #FFF;
+    padding: 1px;
 }
 .plupload_progress_bar {
-	width: 0px;
-	height: 7px;
-	background: #CDEB8B;
+    width: 0px;
+    height: 7px;
+    background: #CDEB8B;
 }
 
 .plupload_scroll .plupload_filelist_header .plupload_file_action, .plupload_scroll .plupload_filelist_footer .plupload_file_action {
-	margin-right: 17px;
+    margin-right: 17px;
 }
 
 /* Floats */
 
 .plupload_clear,.plupload_clearer {clear: both;}
 .plupload_clearer, .plupload_progress_bar {
-	display: block;
-	font-size: 0;
-	line-height: 0;	
+    display: block;
+    font-size: 0;
+    line-height: 0;
 }
 
 li.plupload_droptext {
-	background: transparent;
-	text-align: center;
-	vertical-align: middle;
-	border: 0;
-	line-height: 165px;
+    background: transparent;
+    text-align: center;
+    vertical-align: middle;
+    border: 0;
+    line-height: 165px;
 }
 
 /* @end */
@@ -356,14 +355,14 @@ li.plupload_droptext {
     padding: 0;
     margin: 0;
     overflow: hidden;
-        h3 {
-            padding: 15px 0 0 15px;
-            margin: 0 !important;
-            display: block;
-            float: left;
-            font-size: 18px;
-        }
+    h3 {
+        padding: 15px 0 0 15px;
+        margin: 0 !important;
+        display: block;
+        float: left;
+        font-size: 18px;
     }
+}
 
 #files-upload-controls {
     .upload-buttons {
@@ -457,7 +456,7 @@ li.plupload_droptext {
     font-weight: 100;
     color: #595959;
     font-size: 30px;
-    margin: 100px 0;
+    margin: 35px 0;
 }
 #files-upload .nodropzone {
     display: inline-block;
@@ -509,7 +508,7 @@ li.plupload_droptext {
     box-shadow: hsl(0, 0%, 97%) 0 -1px 0 inset;
     border-bottom: 1px solid hsl(0, 0%, 90%);
     .linear-gradient(white, whitesmoke);
-    }
+}
 
 #files-upload-multi .plupload_filelist_footer {
     -moz-border-radius-bottomleft: 4px;
@@ -539,7 +538,7 @@ li.plupload_droptext {
     padding: 10px 8px;
 }
 #files-upload-multi .plupload_filelist .plupload_file_name {
-/*width: 471px;*/
+    /*width: 471px;*/
     width: 453px;
 }
 
@@ -683,7 +682,7 @@ div#upload-queue-wrapper {
 }
 
 #files-upload.uploader-files-empty {
-/* No files state, this is the initial state */
+    /* No files state, this is the initial state */
     .plupload_filelist_header,
     .plupload_start,
     .plupload_clear,
@@ -846,161 +845,161 @@ table th.file-count {
         overflow: hidden;
     }
 
-& > * {
-    background-color: #F9F9F9;
-}
-
-#insert {
-    & {
-        border: 1px solid #E1E1E1;
-        background-color: #FFF;
-        overflow: hidden;
+    & > * {
+        background-color: #F9F9F9;
     }
 
-    .hide {
-        display: none;
-    }
-
-    #details {
-        overflow: hidden;
-        height: 389px;
-        background-color: #F4F4F4;
-        position: relative;
-    }
-
-    #files-tree-container {
-        width: 200px;
-    }
-    #files-grid {
-        width: 264px;
-    }
-    #files-container {
-        width: 200px;
-    }
-
-    #details,
-    #files-preview {
-        width: 200px;
-
-        tr:last-child td {
-            border-bottom: 1px #E1E1E1 solid;
-        }
-        img.icon {
-            margin: 10px;
-        }
-    }
-
-    #files-tree-container,
-    #files-grid
-    { border-right: 1px solid #E1E1E1; height: 389px; overflow: auto;}
-
-
-    #files-preview {
-        background: white;
-        margin-bottom: 10px;
-    }
-    ul {
-        list-style-type: none;
-    }
-
-}
-
-#files-uploader-web {
-    form {
-        @padding: 5px;
-        padding: @padding;
-
-        .remote-wrap {
-
+    #insert {
+        & {
+            border: 1px solid #E1E1E1;
+            background-color: #FFF;
+            overflow: hidden;
         }
 
-        #remote-url, #remote-name {
-            height: 28px;
-            .box-sizing(border-box);
+        .hide {
+            display: none;
         }
-        #remote-url {
-            .border-radius(@inputBorderRadius 0 0 @inputBorderRadius);
-        }
-        #remote-name {
-            .border-radius(0);
-        }
-        .remote-submit {
-            top: @padding;
-            right: @padding;
-            bottom: @padding;
 
-            .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
+        #details {
+            overflow: hidden;
+            height: 389px;
+            background-color: #F4F4F4;
+            position: relative;
+        }
 
-            &.valid {
-                //.buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+        #files-tree-container {
+            width: 200px;
+        }
+        #files-grid {
+            width: 264px;
+        }
+        #files-container {
+            width: 200px;
+        }
+
+        #details,
+        #files-preview {
+            width: 200px;
+
+            tr:last-child td {
+                border-bottom: 1px #E1E1E1 solid;
+            }
+            img.icon {
+                margin: 10px;
+            }
+        }
+
+        #files-tree-container,
+        #files-grid
+        { border-right: 1px solid #E1E1E1; height: 389px; overflow: auto;}
+
+
+        #files-preview {
+            background: white;
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style-type: none;
+        }
+
+    }
+
+    #files-uploader-web {
+        form {
+            @padding: 5px;
+            padding: @padding;
+
+            .remote-wrap {
+
+            }
+
+            #remote-url, #remote-name {
+                height: 28px;
+                .box-sizing(border-box);
+            }
+            #remote-url {
+                .border-radius(@inputBorderRadius 0 0 @inputBorderRadius);
+            }
+            #remote-name {
+                .border-radius(0);
+            }
+            .remote-submit {
+                top: @padding;
+                right: @padding;
+                bottom: @padding;
+
+                .border-radius(0 @inputBorderRadius @inputBorderRadius 0);
+
+                &.valid {
+                    //.buttonBackground(@btnPrimaryBackground, @btnPrimaryBackgroundHighlight);
+                }
             }
         }
     }
-}
 
-/* tabs */
+    /* tabs */
 
-dl.tabs {
-    float: left;
-    margin: 10px 0 0 0;
-    z-index: 50;
-    background: none;
+    dl.tabs {
+        float: left;
+        margin: 10px 0 0 0;
+        z-index: 50;
+        background: none;
 
-    dt {
-	    float: left;
-	    padding: 6px 14px;
-	    border: 1px solid #ccc;
-	    margin-left: 6px;
-	    background: #f0f0f0;
-	    color: #666;
-	    .border-radius(5px 5px 0 0);
-	    margin-bottom: -1px;
+        dt {
+            float: left;
+            padding: 6px 14px;
+            border: 1px solid #ccc;
+            margin-left: 6px;
+            background: #f0f0f0;
+            color: #666;
+            .border-radius(5px 5px 0 0);
+            margin-bottom: -1px;
 
-	    &:hover {
-		    background: #F6F6F6;
-		    z-index: 100;
-		    color: #333;
-		}
-		
-		&:active,
-		&.open,
-		&.open:active {
-		    background: #F9F9F9;
-		    z-index: 100;
-		    color: #333;
-		    border-bottom-color: #F9F9F9;
-		    .box-shadow(inset hsla(0, 0%, 55%, 0.20) 0px 2px 2px);
-		}
-		
-		&:active {
-		    background: #EEE;
-		    border-bottom-color: #CCC;
-		}
-	}
-}
+            &:hover {
+                background: #F6F6F6;
+                z-index: 100;
+                color: #333;
+            }
 
-div.current {
-    clear: both;
-    border: 1px solid #CCC;
-    padding: 10px 10px;
-}
+            &:active,
+            &.open,
+            &.open:active {
+                background: #F9F9F9;
+                z-index: 100;
+                color: #333;
+                border-bottom-color: #F9F9F9;
+                .box-shadow(inset hsla(0, 0%, 55%, 0.20) 0px 2px 2px);
+            }
 
-div.current dd {
-    padding: 0;
-    margin: 0;
-    line-height: normal !important;
-}
-
-/** Joomla fixes */
-div.current input, div.current textarea, div.current select {
-    margin: 0;
-}
-
-.parameters .detail-label {
-    text-align: right;
-    color: gray;
-}
+            &:active {
+                background: #EEE;
+                border-bottom-color: #CCC;
+            }
+        }
     }
+
+    div.current {
+        clear: both;
+        border: 1px solid #CCC;
+        padding: 10px 10px;
+    }
+
+    div.current dd {
+        padding: 0;
+        margin: 0;
+        line-height: normal !important;
+    }
+
+    /** Joomla fixes */
+    div.current input, div.current textarea, div.current select {
+        margin: 0;
+    }
+
+    .parameters .detail-label {
+        text-align: right;
+        color: gray;
+    }
+}
 /* @end */
 
 /* @group files-layout-icons.css */
@@ -1013,8 +1012,8 @@ div.current input, div.current textarea, div.current select {
     }
 
     #files-grid > div {
-                      padding: 10px;
-                  }
+        padding: 10px;
+    }
     .spinner {
         padding: 0px!important;
     }
@@ -1208,5 +1207,5 @@ div.current input, div.current textarea, div.current select {
         -webkit-animation-duration: 2s;
         -webkit-animation-iteration-count: infinite;
     }
- }
+}
 /* @end */
