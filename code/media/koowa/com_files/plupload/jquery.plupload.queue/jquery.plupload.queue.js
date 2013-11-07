@@ -9,7 +9,7 @@
  */
 
 // JSLint defined globals
-/*global plupload:false, jQuery:false, alert:false */
+/*global plupload:false, kQuery:false, alert:false */
 
 (function($) {
 	var uploaders = {};
@@ -325,4 +325,4 @@
 			return uploaders[$(this[0]).attr('id')];
 		}
 	};
-})(jQuery);
+})(kQuery);
