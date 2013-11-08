@@ -28,7 +28,6 @@ Files.App = new Class({
 		types: null,
 		container: null,
 		active: null,
-		title: 'files-title',
 		pathway: {
 			element: 'files-pathway'
 		},
@@ -47,6 +46,73 @@ Files.App = new Class({
 		paginator: {
 			element: 'files-paginator'
 		},
+        folder_dialog: {
+            view: '#files-new-folder-modal',
+            input: '#files-new-folder-input',
+            open_button: '#files-new-folder-toolbar',
+            create_button: '#files-new-folder-create',
+            onOpen: function(){
+                var modal = this._folder_dialog.view, tmp = this._folder_dialog.tmp, handleClose = function(){
+                        modal.inject(tmp);
+
+                        SqueezeBox.removeEvent('close', handleClose);
+                    },
+                    handleOpen = function(){
+                        var focus = modal.getElement('input.focus');
+                        if (focus) {
+                            focus.focus();
+                        }
+
+                        SqueezeBox.removeEvent('open', handleOpen);
+                    },
+                    sizes = modal.measure(function(){return this.getSize();});
+
+                SqueezeBox.addEvent('close', handleClose);
+                SqueezeBox.addEvent('open', handleOpen);
+                SqueezeBox.open(modal.setStyle('display', ''), {
+                    handler: 'adopt',
+                    size: {x: sizes.x, y: sizes.y}
+                });
+            },
+            onClose: function(){
+                SqueezeBox.close();
+            },
+            onInit: function(folder_dialog){
+                var self = this, modal = folder_dialog.view;
+                folder_dialog.tmp = new Element('div', {style: 'display:none'}).inject(document.body);
+                folder_dialog.tmp.grab(modal);
+                folder_dialog.open_button.addEvent('click', function(e) {
+                    e.stop();
+
+                    self.openFolderDialog();
+                });
+
+                var validate = function(){
+                    if(this.value.trim()) {
+                        folder_dialog.create_button.addClass('valid').removeProperty('disabled');
+                    } else {
+                        folder_dialog.create_button.removeClass('valid').setProperty('disabled', 'disabled');
+                    }
+                };
+                folder_dialog.input.addEvent('change', validate);
+                if(window.addEventListener) {
+                    folder_dialog.input.addEventListener('input', validate);
+                } else {
+                    folder_dialog.input.addEvent('keyup', validate);
+                }
+            },
+            //Fires when the form for creating a new folder is submitted
+            onSubmit: function(){},
+            //Fires when the json request for creating a folder is complete
+            onCreate: function(folder_dialog){
+                folder_dialog.input.set('value', '');
+                folder_dialog.create_button.removeClass('valid').setProperty('disabled', 'disabled');
+            }
+        },
+        uploader_dialog: {
+            view: '#files-upload',
+            button: '#files-show-uploader'
+        },
 		history: {
 			enabled: true
 		},
@@ -103,20 +169,19 @@ Files.App = new Class({
 			this.options.active = url.getData('folder');
 		}
 
-		if (this.options.title) {
-			this.options.title = document.id(this.options.title);
-		}
-		
 		if (this.options.thumbnails) {
 			this.addEvent('afterSelect', function(resp) {
 				this.setThumbnails();
 			});
 		}
 
+        if(this.options.uploader_dialog) {
+            this.setUploaderDialog();
+        }
+
 		if (this.options.container) {
 			this.setContainer(this.options.container);
 		}
-
 	},
 	setState: function() {
 		this.fireEvent('beforeSetState');
@@ -286,6 +351,10 @@ Files.App = new Class({
 				this.options.grid.types = this.options.types;
 				this.state.set('types', this.options.types);
 			}
+
+            if (this.options.folder_dialog) {
+                this.setFolderDialog();
+            }
 
 			this.fireEvent('afterSetContainer', {container: item});
 
@@ -459,6 +528,131 @@ Files.App = new Class({
 
 		this.fireEvent('afterSetTree');
 	},
+    /**
+     * Create the folder dialog markup and link up events
+     */
+    setFolderDialog: function(){
+
+        var self = this;
+
+        this._folder_dialog = {
+            view: document.getElement(this.options.folder_dialog.view),
+            input: document.getElement(this.options.folder_dialog.input),
+            open_button: document.getElement(this.options.folder_dialog.open_button),
+            create_button: document.getElement(this.options.folder_dialog.create_button),
+        }
+
+        if(this.options.folder_dialog.onInit) {
+            this.options.folder_dialog.onInit.call(this, this._folder_dialog);
+        }
+
+
+        this._folder_dialog.view.getElement('form').addEvent('submit', function(e){
+            e.stop();
+
+            if(self.options.folder_dialog.onSubmit) {
+                self.options.folder_dialog.onSubmit.call(self, self._folder_dialog);
+            }
+            var element = self._folder_dialog.input;
+            var value = element.get('value').trim();
+            if (value.length > 0) {
+                var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
+                folder.add(function(response, responseText) {
+                    if (response.status === false) {
+                        return alert(response.error);
+                    }
+                    var el = response.entities[0];
+                    var cls = Files[el.type.capitalize()];
+                    var row = new cls(el);
+                    Files.app.grid.insert(row);
+                    Files.app.tree.appendNode({
+                        id: row.path,
+                        label: row.name
+                    });
+
+                    if(self.options.folder_dialog.onCreate) {
+                        self.options.folder_dialog.onCreate.call(self, self._folder_dialog);
+                    }
+
+                    self.closeFolderDialog();
+                });
+            };
+        });
+    },
+    /**
+     * Opens the folder dialog, using the customizable control handle, if the instance exists
+     * @return returns a boolean indicating wether there's a folder dialog active
+     */
+    openFolderDialog: function(){
+
+        if(this.options.folder_dialog) {
+            this.options.folder_dialog.onOpen.call(this, this._folder_dialog);
+        }
+
+        return !!this.options.folder_dialog;
+    },
+    /**
+     * Closes the folder dialog, using the customizable control handle, if the instance exists
+     * @return returns a boolean indicating wether there's a folder dialog active
+     */
+    closeFolderDialog: function(){
+
+        if(this.options.folder_dialog) {
+            this.options.folder_dialog.onClose.call(this, this._folder_dialog);
+        }
+
+        return !!this.options.folder_dialog;
+    },
+    /**
+     * Sets the IE Flash workaround and FLOC fix, and hooks the markup with events for the uploader dialog
+     */
+    setUploaderDialog: function(){
+        var self = this;
+        this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
+        document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
+        document.getElement(this.options.uploader_dialog.button).addEvent('click', function(e){
+            e.stop();
+
+            self.openUploaderDialog();
+        });
+    },
+    /**
+     * Opens up the Uploader dialog and performs IE flash workaround
+     * @return returns a boolean indicating wether there's a uploader dialog active
+     */
+    openUploaderDialog: function(){
+
+        if(this.uploader) {
+            var self = this, handleClose = function(){
+                document.getElement(self.options.uploader_dialog.view).getParent().inject(self._tmp_uploader);
+                SqueezeBox.removeEvent('close', handleClose);
+            };
+            SqueezeBox.addEvent('close', handleClose);
+            SqueezeBox.open(document.getElement(self.options.uploader_dialog.view).getParent(), {
+                handler: 'adopt',
+                size: {x: 700, y: document.getElement(self.options.uploader_dialog.view).getParent().measure(function(){
+                    this.setStyle('width', 700);
+                    var height = this.getSize().y;
+                    this.setStyle('width', '');
+                    return height;
+                })}
+            });
+        }
+
+        return !!this.uploader;
+    },
+    /**
+     * Closes the Uploader dialog and performs IE flash workaround
+     * @return returns a boolean indicating wether there's a uploader dialog active
+     */
+    closeUploaderDialog: function(){
+
+        if(this.uploader) {
+            SqueezeBox.close();
+        }
+
+        return !!this.uploader;
+    },
 	getUrl: function() {
 		return new URI(window.location.href);
 	},
@@ -527,10 +721,6 @@ Files.App = new Class({
 		this.fireEvent('beforeSetTitle', {title: title});
 
 		this.title = title;
-
-		if (this.options.title) {
-			this.options.title.set('html', title);
-		}
 
 		this.fireEvent('afterSetTitle', {title: title});
 	},

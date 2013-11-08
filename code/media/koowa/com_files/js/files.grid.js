@@ -17,7 +17,7 @@ Files.Grid = new Class({
 		onClickImage: function (){},
 		onDeleteNode: function (){},
 		onSwitchLayout: function (){},
-		switcher: '.files-layout-controls',
+		switchers: '.files-layout-switcher',
 		layout: false,
 		batch_delete: false,
 		icon_size: 150,
@@ -40,8 +40,8 @@ Files.Grid = new Class({
 		this.nodes = new Hash();
 		this.container = document.id(container);
 
-		if (this.options.switcher) {
-			this.options.switcher = document.getElement(this.options.switcher);
+		if (this.options.switchers) {
+			this.options.switchers = document.getElements(this.options.switchers);
 		}
 
 		if (this.options.batch_delete) {
@@ -194,14 +194,14 @@ Files.Grid = new Class({
 			}.bind(this));
 		}
 
-		if (this.options.switcher) {
+		if (this.options.switchers) {
 			var that = this;
-			this.options.switcher.addEvent('change', function(e) {
-				e.stop();
-
-				var value = this.get('value');
-				that.setLayout(value);
-			});
+            this.options.switchers.addEvent('click', function(e) {
+                e.stop();
+                var layout = this.get('data-layout');
+                that.setLayout(layout);
+                that._updateSwitchers(layout);
+            });
 		}
 
 		if (this.options.icon_size) {
@@ -393,8 +393,8 @@ Files.Grid = new Class({
 			this.fireEvent('beforeSetLayout', {layout: layout});
 
 			this.layout = layout;
-			if (this.options.switcher) {
-				this.options.switcher.set('value', layout);
+			if (this.options.switchers) {
+                this._updateSwitchers(layout);
 			}
 
 			this.fireEvent('afterSetLayout', {layout: layout});
@@ -450,6 +450,17 @@ Files.Grid = new Class({
             this.spinner.stop();
             this.spinner = null;
         }
+    },
+    /**
+     * Updates the active state on the switchers
+     * @param layout   string, current layout
+     * @private
+     */
+    _updateSwitchers: function(layout){
+
+        this.options.switchers.removeClass('active').filter(function(el) {
+            return el.get('data-layout') == layout;
+        }).addClass('active');
     }
 });
 

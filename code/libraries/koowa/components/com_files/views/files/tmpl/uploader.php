@@ -10,7 +10,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <?= @import('uploader_initialize') ?>
 
-<div class="com_files" style="visibility: hidden">
+<div class="koowa" style="visibility: hidden">
     <div id="files-upload" style="clear: both" class="uploader-files-empty well">
         <div style="text-align: center;">
             <h3 style=" float: none">
@@ -44,7 +44,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <div id="files-uploader-web" class="upload-form" style="display: none">
             <form action="" method="post" name="remoteForm" id="remoteForm" >
                 <div class="remote-wrap">
-                    <input type="text" placeholder="<?= @translate('Remote URL') ?>" title="<?= @translate('Remote URL') ?>" id="remote-url" name="file" size="50" />
+                    <input type="text" placeholder="<?= @translate('Remote Link') ?>" title="<?= @translate('Remote Link') ?>" id="remote-url" name="file" size="50" />
                     <input type="text" placeholder="<?= @translate('File name') ?>" id="remote-name" name="name" />
                 </div>
                 <input type="submit" class="remote-submit btn" disabled value="<?= @translate('Transfer File'); ?>" />
