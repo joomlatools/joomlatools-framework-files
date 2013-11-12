@@ -14,9 +14,15 @@ Files.Compact.App = new Class({
 	Implements: [Events, Options],
 
 	options: {
+        persistent: false,
 		types: ['file', 'image'],
 		editor: null,
 		preview: 'files-preview',
+        state: {
+            defaults: {
+                limit: 0
+            }
+        },
 		grid: {
 			cookie: false,
 			layout: 'compact',
