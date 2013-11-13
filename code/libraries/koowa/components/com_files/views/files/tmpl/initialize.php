@@ -52,3 +52,7 @@ JHtml::_('behavior.modal');
 <script src="media://koowa/com_files/js/files.pathway.js" />
 
 <script src="media://koowa/com_files/js/files.app.js" />
+
+<!--[if lte IE 9]>
+<script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>
+<![endif]-->

@@ -78,7 +78,9 @@ Files.App = new Class({
                 SqueezeBox.close();
             },
             onInit: function(folder_dialog){
-                var self = this, modal = folder_dialog.view;
+                var self = this,
+                    modal = folder_dialog.view;
+
                 folder_dialog.tmp = new Element('div', {style: 'display:none'}).inject(document.body);
                 folder_dialog.tmp.grab(modal);
                 if(folder_dialog.open_button) {
@@ -542,44 +544,46 @@ Files.App = new Class({
             input: document.getElement(this.options.folder_dialog.input),
             open_button: document.getElement(this.options.folder_dialog.open_button),
             create_button: document.getElement(this.options.folder_dialog.create_button),
-        }
+        };
 
         if(this.options.folder_dialog.onInit) {
             this.options.folder_dialog.onInit.call(this, this._folder_dialog);
         }
 
+        if (this._folder_dialog.view.getElement('form')) {
+            this._folder_dialog.view.getElement('form').addEvent('submit', function(e){
+                e.stop();
 
-        this._folder_dialog.view.getElement('form').addEvent('submit', function(e){
-            e.stop();
+                if(self.options.folder_dialog.onSubmit) {
+                    self.options.folder_dialog.onSubmit.call(self, self._folder_dialog);
+                }
+                var element = self._folder_dialog.input;
+                var value = element.get('value').trim();
+                if (value.length > 0) {
+                    var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
+                    folder.add(function(response, responseText) {
+                        if (response.status === false) {
+                            return alert(response.error);
+                        }
+                        var el = response.entities[0];
+                        var cls = Files[el.type.capitalize()];
+                        var row = new cls(el);
+                        Files.app.grid.insert(row);
+                        Files.app.tree.appendNode({
+                            id: row.path,
+                            label: row.name
+                        });
 
-            if(self.options.folder_dialog.onSubmit) {
-                self.options.folder_dialog.onSubmit.call(self, self._folder_dialog);
-            }
-            var element = self._folder_dialog.input;
-            var value = element.get('value').trim();
-            if (value.length > 0) {
-                var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
-                folder.add(function(response, responseText) {
-                    if (response.status === false) {
-                        return alert(response.error);
-                    }
-                    var el = response.entities[0];
-                    var cls = Files[el.type.capitalize()];
-                    var row = new cls(el);
-                    Files.app.grid.insert(row);
-                    Files.app.tree.appendNode({
-                        id: row.path,
-                        label: row.name
+                        if(self.options.folder_dialog.onCreate) {
+                            self.options.folder_dialog.onCreate.call(self, self._folder_dialog);
+                        }
+
+                        self.closeFolderDialog();
                     });
+                }
+            });
+        }
 
-                    if(self.options.folder_dialog.onCreate) {
-                        self.options.folder_dialog.onCreate.call(self, self._folder_dialog);
-                    }
-
-                    self.closeFolderDialog();
-                });
-            };
-        });
     },
     /**
      * Opens the folder dialog, using the customizable control handle, if the instance exists
@@ -609,12 +613,16 @@ Files.App = new Class({
      * Sets the IE Flash workaround and FLOC fix, and hooks the markup with events for the uploader dialog
      */
     setUploaderDialog: function(){
-        var self = this;
+        var self = this,
+            button = document.getElement(this.options.uploader_dialog.button);
+
         this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
+
         document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
-        if(document.getElement(this.options.uploader_dialog.button)) {
-            document.getElement(this.options.uploader_dialog.button).addEvent('click', function(e){
-                e.preventDefault();
+
+        if (button) {
+            button.addEvent('click', function(e){
+                e.stop();
 
                 self.openUploaderDialog();
             });
