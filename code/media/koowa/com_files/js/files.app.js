@@ -81,11 +81,13 @@ Files.App = new Class({
                 var self = this, modal = folder_dialog.view;
                 folder_dialog.tmp = new Element('div', {style: 'display:none'}).inject(document.body);
                 folder_dialog.tmp.grab(modal);
-                folder_dialog.open_button.addEvent('click', function(e) {
-                    e.stop();
+                if(folder_dialog.open_button) {
+                    folder_dialog.open_button.addEvent('click', function(e) {
+                        e.stop();
 
-                    self.openFolderDialog();
-                });
+                        self.openFolderDialog();
+                    });
+                }
 
                 var validate = function(){
                     if(this.value.trim()) {
@@ -352,7 +354,7 @@ Files.App = new Class({
 				this.state.set('types', this.options.types);
 			}
 
-            if (this.options.folder_dialog) {
+            if (this.options.folder_dialog && document.getElement(this.options.folder_dialog.view) && document.getElement(this.options.folder_dialog.view).getElement('form')) {
                 this.setFolderDialog();
             }
 
@@ -610,11 +612,13 @@ Files.App = new Class({
         var self = this;
         this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
         document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
-        document.getElement(this.options.uploader_dialog.button).addEvent('click', function(e){
-            e.stop();
+        if(document.getElement(this.options.uploader_dialog.button)) {
+            document.getElement(this.options.uploader_dialog.button).addEvent('click', function(e){
+                e.preventDefault();
 
-            self.openUploaderDialog();
-        });
+                self.openUploaderDialog();
+            });
+        }
     },
     /**
      * Opens up the Uploader dialog and performs IE flash workaround
