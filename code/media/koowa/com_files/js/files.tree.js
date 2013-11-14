@@ -190,7 +190,7 @@ if(!Files) var Files = {};
                             if(!initial) {
                                 options.onSelectNode(event.node);
                             } else {
-                                initial = true;
+                                initial = false;
                             }
                         }
                         if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
