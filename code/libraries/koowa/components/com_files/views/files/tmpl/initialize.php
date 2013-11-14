@@ -55,4 +55,9 @@ JHtml::_('behavior.modal');
 
 <!--[if lte IE 9]>
 <script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>
+<script data-inline type="text/javascript">
+kQuery(function($) {
+    $('input, textarea').placeholder();
+});
+</script>
 <![endif]-->
