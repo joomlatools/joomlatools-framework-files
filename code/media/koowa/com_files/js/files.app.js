@@ -36,7 +36,7 @@ Files.App = new Class({
 		},
 		tree: {
 			enabled: true,
-			element: '#files-tree',
+			element: '#files-tree'
 		},
 		grid: {
 			element: 'files-grid',
@@ -247,12 +247,20 @@ Files.App = new Class({
 			this.addEvent('afterNavigate', function(path, type) {
 				if (type !== 'stateless' && that.history) {
 					var obj = {
-						folder: that.active,
-						container: that.container ? that.container.slug : null
-					};
-					obj = Files.utils.append(obj, that.state.getData());
+                        folder: that.active,
+                        container: that.container ? that.container.slug : null
+                    },
+                    state = this.state.getData();
+
+                    Object.each(state, function(value, key) {
+                        if (typeof value !== 'function' && typeof value !== 'undefined') {
+                            obj[key] = value;
+                        }
+                    });
+
 					var method = type === 'initial' ? 'replaceState' : 'pushState';
-					var url = that.getUrl().setData(obj, true).set('fragment', '').toString()
+					var url = that.getUrl().setData(obj, true).set('fragment', '').toString();
+
 					that.history[method](obj, null, url);
 				}
 			});
@@ -516,7 +524,7 @@ Files.App = new Class({
 			this.tree = new Files.Tree(kQuery(opts.element), opts);
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
-			this.addEvent('afterNavigate', function(path) {
+			this.addEvent('afterNavigate', function(path, type) {
 				that.tree.selectPath(path);
 			});
 
@@ -543,7 +551,7 @@ Files.App = new Class({
             view: document.getElement(this.options.folder_dialog.view),
             input: document.getElement(this.options.folder_dialog.input),
             open_button: document.getElement(this.options.folder_dialog.open_button),
-            create_button: document.getElement(this.options.folder_dialog.create_button),
+            create_button: document.getElement(this.options.folder_dialog.create_button)
         };
 
         if(this.options.folder_dialog.onInit) {
@@ -707,12 +715,7 @@ Files.App = new Class({
         if(this._cached_grid_width != this.grid.root.element.getSize().x || force) {
             var width = this.grid.root.element.getSize().x,
                 factor = width/(this.grid.options.icon_size.toInt()+40),
-                limit = Math.min(Math.floor(factor), this.grid.nodes.getLength()),
-                resize = width / limit,
-                thumbs = [[]],
-                labels = [[]],
-                index = 0,
-                pointer = 0;
+                limit = Math.min(Math.floor(factor), this.grid.nodes.getLength());
 
             this.grid.root.element.getElements('.files-node-shadow').each(function(element, i, elements){
                 element.setStyle('width', (100/limit)+'%');
