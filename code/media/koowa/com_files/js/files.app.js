@@ -519,13 +519,16 @@ Files.App = new Class({
 				},
 				root: {
 					text: this.container.title
-				}
+				},
+                initial_response: !!this.options.initial_response
 			}, opts);
 			this.tree = new Files.Tree(kQuery(opts.element), opts);
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
 			this.addEvent('afterNavigate', function(path, type) {
-				that.tree.selectPath(path);
+				if(!type || (type && type != 'initial')) {
+                    that.tree.selectPath(path);
+                }
 			});
 
 			if (this.grid) {

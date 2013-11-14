@@ -23,6 +23,7 @@ if(!Files) var Files = {};
 
             var self = this,
                 defaults = {
+                    initial_response: false,
                     autoOpen: 0, //root.open = true on previous script
                     onSelectNode: function(){},
                     dataFilter: function(response){
@@ -174,7 +175,7 @@ if(!Files) var Files = {};
 
             this._attachHandlers(); // Attach needed events from Koowa.Tree._attachHandlers
 
-            var options = this.options, self = this;
+            var options = this.options, self = this, initial = this.options.initial_response;
 
             this.element.bind({
                 'tree.select': // The select event happens when a node is clicked
@@ -186,7 +187,11 @@ if(!Files) var Files = {};
                             self.tree('openNode', event.node); // open the selected node, if not open already
 
                             //Fire custom select node handler
-                            options.onSelectNode(event.node);
+                            if(!initial) {
+                                options.onSelectNode(event.node);
+                            } else {
+                                initial = true;
+                            }
                         }
                         if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
                             self.scrollIntoView(event.node, self.element, 300);
