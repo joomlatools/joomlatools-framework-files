@@ -355,9 +355,8 @@ window.addEvent('domready', function() {
                     uploader.bind('QueueChanged', exposePlupload);
                 }
             }
-        } else {
-            document.id('remote-url').focus();
         }
+
         window.fireEvent('refresh');
     };
 
