@@ -660,6 +660,7 @@ Files.App = new Class({
                     return height;
                 })}
             });
+            window.addEvent('QueueChanged', this._changeUploaderDialogHeight.bind(this));
         }
 
         return !!this.uploader;
@@ -672,9 +673,18 @@ Files.App = new Class({
 
         if(this.uploader) {
             SqueezeBox.close();
+            window.removeEvent('QueueChanged', this._changeUploaderDialogHeight);
         }
 
         return !!this.uploader;
+    },
+    /**
+     * Updates the uploader dialog height
+     * @private
+     */
+    _changeUploaderDialogHeight: function(){
+        var height = document.getElement(this.options.uploader_dialog.view).getParent().scrollHeight;
+        SqueezeBox.resize({x: 700, y: height});
     },
 	getUrl: function() {
 		return new URI(window.location.href);
