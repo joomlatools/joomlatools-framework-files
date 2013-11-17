@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @import('uploader_initialize') ?>
+<?= @import('uploader_initialize.html') ?>
 
 <div class="koowa" style="visibility: hidden">
     <div id="files-upload" style="clear: both" class="uploader-files-empty well">

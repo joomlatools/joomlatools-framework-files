@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @import('initialize');?>
+<?= @import('initialize.html');?>
 
 <script>
 Files.sitebase = '<?= $sitebase; ?>';
@@ -39,8 +39,8 @@ window.addEvent('domready', function() {
 
 
 <div id="files-app" class="com_files">
-	<?= @import('templates_icons'); ?>
-	<?= @import('templates_details'); ?>
+	<?= @import('templates_icons.html'); ?>
+	<?= @import('templates_details.html'); ?>
 
 	<div id="files-sidebar">
         <h3><?= @translate('Folders'); ?></h3>
@@ -75,7 +75,7 @@ window.addEvent('domready', function() {
             </tfoot>
         </table>
 
-		<?= @import('uploader');?>
+		<?= @import('uploader.html');?>
 	</div>
 	<div style="clear: both"></div>
 </div>
