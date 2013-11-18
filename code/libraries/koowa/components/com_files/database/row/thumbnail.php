@@ -31,8 +31,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
     {
         $size = KObjectConfig::unbox($config->size);
 
-        if (empty($size))
-        {
+        if (empty($size)) {
             $config->size = array('x' => 200, 'y' => 150);
         }
 
@@ -45,9 +44,10 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
 
     	if (($source = $this->getSource()) && $this->_canGenerate())
 		{
-            try {
+            try
+            {
 				//Load the library
-				$this->getObject('koowa:class.loader')->loadIdentifier('com://admin/files.helper.phpthumb.phpthumb');
+				$this->getObject('koowa:class.loader')->loadIdentifier('com:files.helper.phpthumb.phpthumb');
 
                 //Create the thumb
 				$image = PhpThumbFactory::create($source->fullpath)

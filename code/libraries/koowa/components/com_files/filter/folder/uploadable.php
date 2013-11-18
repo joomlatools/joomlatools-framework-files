@@ -19,6 +19,6 @@ class ComFilesFilterFolderUploadable extends KFilterChain
 	{
 		parent::__construct($config);
 
-		$this->addFilter($this->getObject('com://admin/files.filter.folder.name'), self::PRIORITY_HIGH);
+		$this->addFilter($this->getObject('com:files.filter.folder.name'), self::PRIORITY_HIGH);
 	}
 }

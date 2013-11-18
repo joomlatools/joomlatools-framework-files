@@ -31,7 +31,7 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 					$mimetype = $info ? $info['mime'] : false;
 				}
                 elseif ($row->file instanceof SplFileInfo) {
-					$mimetype = $this->getObject('com://admin/files.mixin.mimetype')->getMimetype($row->file->getPathname());
+					$mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($row->file->getPathname());
 				}
 			}
 

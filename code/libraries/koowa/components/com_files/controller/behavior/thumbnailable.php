@@ -30,7 +30,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 		}
 
 		$folder = $this->getRequest()->query->folder;
-		$thumbnails = $this->getObject('com://admin/files.controller.thumbnail', array(
+		$thumbnails = $this->getObject('com:files.controller.thumbnail', array(
 			'request' => array(
 				'container' => $this->getModel()->getState()->container,
 				'folder' => $folder,

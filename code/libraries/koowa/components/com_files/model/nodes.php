@@ -111,7 +111,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 			$state = $this->getState();
 			$type = !empty($state->types) ? (array) $state->types : array();
 
-			$list = $this->getObject('com://admin/files.database.rowset.nodes');
+			$list = $this->getObject('com:files.database.rowset.nodes');
 
 			// Special case for limit=0. We set it to -1
 			// so loop goes on till end since limit is a negative value
@@ -121,7 +121,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 
 			if (empty($type) || in_array('folder', $type))
 			{
-                $folders_model = $this->getObject('com://admin/files.model.folders');
+                $folders_model = $this->getObject('com:files.model.folders');
 				$folders_model->setState($state->getValues());
 
 				$folders = $folders_model->getList();
@@ -143,7 +143,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
 			{
 				$data = $state->getValues();
 				$data['offset'] = $offset_left < 0 ? 0 : $offset_left;
-				$files_model = $this->getObject('com://admin/files.model.files')->setState($data);
+				$files_model = $this->getObject('com:files.model.files')->setState($data);
 				$files = $files_model->getList();
 
 				foreach ($files as $file)

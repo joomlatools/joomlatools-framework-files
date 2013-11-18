@@ -29,7 +29,7 @@ class ComFilesAdapterLocalIterator extends KObject
 
 	public function getNodes(array $config = array())
 	{
-		$config['path'] = $this->getObject('com://admin/files.adapter.local.folder',
+		$config['path'] = $this->getObject('com:files.adapter.local.folder',
 					array('path' => $config['path']))->getRealPath();
 
 		try {

@@ -31,6 +31,6 @@ class ComFilesFilterFolderName extends KFilterAbstract
 	public function sanitize($value)
 	{
 		$value = str_replace('/', '', $value);
-		return $this->getObject('com://admin/files.filter.path')->sanitize($value);
+		return $this->getObject('com:files.filter.path')->sanitize($value);
 	}
 }

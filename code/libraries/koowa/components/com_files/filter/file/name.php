@@ -26,6 +26,6 @@ class ComFilesFilterFileName extends KFilterAbstract
 
 	public function sanitize($value)
 	{
-		return $this->getObject('com://admin/files.filter.path')->sanitize($value);
+		return $this->getObject('com:files.filter.path')->sanitize($value);
 	}
 }

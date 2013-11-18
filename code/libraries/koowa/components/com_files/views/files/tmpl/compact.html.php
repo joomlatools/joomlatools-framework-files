@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @import('com://admin/files.views.files.initialize.html'); ?>
+<?= @import('com:files.views.files.initialize.html'); ?>
 
 <script src="media://koowa/com_files/js/files.compact.js" />
 
@@ -46,7 +46,7 @@ window.addEvent('domready', function() {
 });
 </script>
 
-<?= @import('com://admin/files.view.files.templates_compact.html');?>
+<?= @import('com:files.view.files.templates_compact.html');?>
 
 <div id="files-compact" class="com_files">
 	<?=	@helper('tabs.startPane', array('id' => 'pane_insert')); ?>
@@ -65,7 +65,7 @@ window.addEvent('domready', function() {
 	<?= @helper('tabs.endPanel'); ?>
 	<?= @helper('tabs.startPanel', array('title' => @translate('Upload'))); ?>
 
-		<?= @import('com://admin/files.view.files.uploader.html'); ?>
+		<?= @import('com:files.view.files.uploader.html'); ?>
 
 	<?= @helper('tabs.endPanel'); ?>
 	<?= @helper('tabs.endPane'); ?>

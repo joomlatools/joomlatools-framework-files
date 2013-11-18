@@ -23,7 +23,7 @@ class ComFilesControllerThumbnail extends ComFilesControllerDefault
     	// Save state data for later
         $state_data = $model->getState()->getValues();
         
-        $nodes = $this->getObject('com://admin/files.model.nodes')->setState($state_data)->getList();
+        $nodes = $this->getObject('com:files.model.nodes')->setState($state_data)->getList();
         
         if (!$model->getState()->files && !$model->getState()->filename) 
         {

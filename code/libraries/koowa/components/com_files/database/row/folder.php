@@ -58,7 +58,7 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 	public function __get($column)
 	{
 		if ($column == 'children' && !isset($this->_data['children'])) {
-			$this->_data['children'] = $this->getObject('com://admin/files.database.rowset.folders');
+			$this->_data['children'] = $this->getObject('com:files.database.rowset.folders');
 		}
 
 		return parent::__get($column);

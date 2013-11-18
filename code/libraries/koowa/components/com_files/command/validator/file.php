@@ -22,7 +22,7 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 		if (is_string($row->file) && !is_uploaded_file($row->file))
 		{
 			// remote file
-            $file = $this->getObject('com://admin/files.database.row.url');
+            $file = $this->getObject('com:files.database.row.url');
             $file->setData(array('file' => $row->file));
 
             if (!$file->load()) {
@@ -43,7 +43,7 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 			}
 		}
 
-        $filter = $this->getObject('com://admin/files.filter.file.uploadable');
+        $filter = $this->getObject('com:files.filter.file.uploadable');
 
         $result = parent::_databaseBeforeSave($context) && $filter->validate($context->subject);
 
