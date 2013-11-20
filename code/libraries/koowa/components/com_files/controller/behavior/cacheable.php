@@ -45,8 +45,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	{
 		parent::__construct($config);
 		
-		$this->_group = $config->group;
-
+		$this->_group      = $config->group;
         $this->_only_clear = $config->only_clear;
 	}
 
@@ -56,8 +55,8 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'priority' => self::PRIORITY_LOWEST,
-			'group' => 'com_files',
+			'priority'   => self::PRIORITY_LOWEST,
+			'group'      => 'com_files',
             'only_clear' => false // If true, behavior only clears the cache after add/edit/delets and do not store new data
 		));
 
@@ -160,7 +159,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      *
      * @param KControllerContextInterface $context
      */
-    protected function _beforeGet(KControllerContextInterface $context)
+    protected function _beforeRender(KControllerContextInterface $context)
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false)
         {
@@ -178,7 +177,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      *
      * @param KControllerContextInterface $context
      */
-    protected function _afterGet(KControllerContextInterface $context)
+    protected function _afterRender(KControllerContextInterface $context)
 	{
 		if ($this->getView()->getFormat() === 'json' && $this->_only_clear === false) {
 			$this->_storeOutput($context);

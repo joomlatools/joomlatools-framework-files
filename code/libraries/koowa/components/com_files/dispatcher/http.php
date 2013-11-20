@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDispatcher extends ComKoowaDispatcher
+class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
 {
     /**
      * Overloaded execute function to handle exceptions in JSON requests
@@ -49,22 +49,24 @@ class ComFilesDispatcher extends ComKoowaDispatcher
     }
 
     /**
-     * Overloaded to comply with FancyUpload.
-     * It doesn't let us pass AJAX headers so this is needed.
+     * Overloaded to comply with Plupload.
+     *
+     * It doesn'allow us pass AJAX headers so this is needed.
      *
      * @param KDispatcherContextInterface $context
      * @return bool|mixed
      */
-	public function _actionForward(KDispatcherContextInterface $context)
+	public function _actionDispatch(KDispatcherContextInterface $context)
 	{
-		if ($context->result->getStatus() != KDatabase::STATUS_DELETED) {
+        $result = parent::_actionDispatch($context);
+
+        if (KRequest::method() != 'GET' && $result->getStatus() != KDatabase::STATUS_DELETED)
+        {
 			if(KRequest::type() == 'FLASH' || KRequest::format() == 'json') {
-				$context->result = $this->getController()->execute('display', $context);
-			} else {
-				parent::_actionForward($context);
+				$result = $this->getController()->execute('display', $context);
 			}
 		}
-		return $context->result;
 
+		return $result;
 	}
 }

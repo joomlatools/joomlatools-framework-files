@@ -15,16 +15,6 @@
  */
 class ComFilesControllerDefault extends ComKoowaControllerDefault
 {
-	protected function _initialize(KObjectConfig $config)
-	{
-		$config->append(array(
-			'persistable' => false,
-			'limit' => array('max' => 1000)
-		));
-
-		parent::_initialize($config);
-	}
-
 	public function getRequest()
 	{
 		$request = parent::getRequest();
@@ -61,7 +51,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 			}
 			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
-		else $context->setError(new KControllerExceptionNotFound('Resource Not Found', KHttpResponse::NOT_FOUND));
+		else $context->setError(new KControllerExceptionNotFound('Resource Not Found'));
 
 		return $data;
 	}
@@ -85,7 +75,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 			}
 			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
-		else $context->setError(new KControllerExceptionNotFound('Resource Not Found', KHttpResponse::NOT_FOUND));
+		else $context->setError(new KControllerExceptionNotFound('Resource Not Found'));
 
 		return $data;
 	}
@@ -96,7 +86,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
      * @param KControllerContextInterface $context
      * @return bool|string
      */
-	protected function _actionGet(KControllerContextInterface $context)
+	protected function _actionRender(KControllerContextInterface $context)
 	{
 		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->query->format == 'html'))
 		{
@@ -106,34 +96,6 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 			return $result;
 		}
 
-		return parent::_actionGet($context);
-	}
-	
-	/**
-	 * Copied to allow 0 as a limit
-	 * 
-	 * @param KControllerContextInterface $context
-	 */
-	protected function _actionBrowse(KControllerContextInterface $context)
-	{
-	    if($this->isDispatched())
-	    {
-	        $limit = $this->getModel()->getState()->limit;
-
-	        //If limit is empty use default
-	        if(empty($limit) && $limit !== 0) {
-	            $limit = $this->_limit->default;
-	        }
-	
-	        //Force the maximum limit
-	        if($limit > $this->_limit->max) {
-	            $limit = $this->_limit->max;
-	        }
-
-            $this->getModel()->getState()->limit = $limit;
-	    }
-	
-	    $data = $this->getModel()->getList();
-		return $data;
+		return parent::_actionRender($context);
 	}
 }
