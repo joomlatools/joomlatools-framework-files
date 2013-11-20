@@ -63,7 +63,7 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
         if (KRequest::method() != 'GET' && $result->getStatus() != KDatabase::STATUS_DELETED)
         {
 			if(KRequest::type() == 'FLASH' || KRequest::format() == 'json') {
-				$result = $this->getController()->execute('display', $context);
+				$result = $this->getController()->execute('render', $context);
 			}
 		}
 
