@@ -53,15 +53,6 @@
     background: @canvasColor radial-gradient(ellipse closest-corner, @innerColor, @outerColor);
     background-repeat: no-repeat;
 }
-
-/* @group experimental CSS4 stuff */
-/* CSS filter experiment that automatically hue rotate blue icons to match other color schemes */
-.hue-rotate-icon(@hue: 211) {
-    @rotate: (@hue - hue(@linkColor)) * -1;
-    @saturate: saturation(@linkColor);
-    -webkit-filter: hue-rotate(~`"@{rotate}deg"`) ~`"saturate(@{saturate})"`;
-}
-/* @end */
 /* @end */
 
 /* @group from docman _admin.less */
