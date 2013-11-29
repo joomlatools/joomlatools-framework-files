@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
+class ComFilesDatabaseRowContainer extends KDatabaseRowTable
 {
 	public $adapter = 'local';
 
