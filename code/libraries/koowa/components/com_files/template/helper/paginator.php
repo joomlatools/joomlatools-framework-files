@@ -90,28 +90,4 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
 
         return $html;
     }
-
-    public function limit($config = array())
-    {
-        $config = new KObjectConfig($config);
-        $config->append(array(
-            'limit'	  	=> 0,
-            'attribs'	=> array(),
-        ));
-
-        $html = '';
-
-        $selected = '';
-        foreach (array(10, 20, 50, 100) as $value) {
-            if ($value == $config->limit) {
-                $selected = $value;
-            }
-
-            $options[] = $this->option(array('text' => $value, 'value' => $value));
-        }
-
-        $html .= $this->optionlist(array('options' => $options, 'name' => 'limit', 'attribs' => $config->attribs, 'selected' => $selected));
-
-        return $html;
-    }
 }
