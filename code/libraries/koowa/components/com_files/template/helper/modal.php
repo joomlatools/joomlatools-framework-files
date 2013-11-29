@@ -32,7 +32,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
         ));
 
         if ($config->callback) {
-            $config->link .= '&callback='.$config->callback;
+            $config->link .= '&callback='.urlencode($config->callback);
         }
 
         $attribs = $this->buildAttributes($config->attribs);
