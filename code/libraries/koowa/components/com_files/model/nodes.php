@@ -47,7 +47,7 @@ class ComFilesModelNodes extends ComFilesModelDefault
             $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->getItem();
 
             if (!is_object($container) || $container->isNew()) {
-                throw new UnexpectedValueException('Invalid container');
+                throw new UnexpectedValueException('Invalid container: '.$this->getState()->container);
             }
 
             self::$_container = $container;

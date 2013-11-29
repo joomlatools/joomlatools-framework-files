@@ -17,41 +17,38 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 {
 	protected function _afterBrowse(KControllerContextInterface $context)
 	{
-		if (!$this->getRequest()->query->thumbnails || $this->getModel()->getContainer()->parameters->thumbnails !== true) {
-			return;
-		}
+		if ($this->getRequest()->query->thumbnails || $this->getModel()->getContainer()->parameters->thumbnails == true)
+        {
+            $files = array();
+            foreach ($context->result as $row)
+            {
+                if ($row->getIdentifier()->name === 'file') {
+                    $files[] = $row->name;
+                }
+            }
 
-		$files = array();
-		foreach ($context->result as $row) 
-		{
-			if ($row->getIdentifier()->name === 'file') {
-				$files[] = $row->name;
-			}
-		}
+            $folder = $this->getRequest()->query->folder;
+            $thumbnails = $this->getObject('com:files.controller.thumbnail')
+                ->container($this->getModel()->getState()->container)
+                ->folder($folder)
+                ->filename($files)
+                ->limit(0)
+                ->offset(0)
+                ->browse();
 
-		$folder = $this->getRequest()->query->folder;
-		$thumbnails = $this->getObject('com:files.controller.thumbnail', array(
-			'request' => array(
-				'container' => $this->getModel()->getState()->container,
-				'folder' => $folder,
-				'filename' => $files,
-				'limit' => 0,
-				'offset' => 0
-			)
-		))->browse();
+            foreach ($thumbnails as $thumbnail)
+            {
+                if ($row = $context->result->find($thumbnail->filename)) {
+                    $row->thumbnail = $thumbnail->thumbnail;
+                }
+            }
 
-		foreach ($thumbnails as $thumbnail) 
-		{
-			if ($row = $context->result->find($thumbnail->filename)) {
-				$row->thumbnail = $thumbnail->thumbnail;
-			}
-		}
-		
-		foreach ($context->result as $row) 
-		{
-			if (!is_string($row->thumbnail)) {
-				$row->thumbnail = false;
-			}
+            foreach ($context->result as $row)
+            {
+                if (!is_string($row->thumbnail)) {
+                    $row->thumbnail = false;
+                }
+            }
 		}
 	}
 }

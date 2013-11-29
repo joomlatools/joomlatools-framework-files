@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @import('initialize.html');?>
+<?= @import('scripts.html');?>
 
 <script>
 Files.sitebase = '<?= $sitebase; ?>';
