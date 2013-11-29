@@ -84,7 +84,7 @@ class ComFilesControllerDefault extends ComKoowaControllerDefault
 	{
 		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->query->format == 'html'))
 		{
-            $this->getObject('translator')->loadLanguageFiles($this->getIdentifier());
+            $this->getObject('translator')->loadTranslations($this->getIdentifier());
 
 			$result = $this->getView()->display();
 			return $result;
