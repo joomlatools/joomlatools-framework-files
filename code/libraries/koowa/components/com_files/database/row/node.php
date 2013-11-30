@@ -29,7 +29,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		if ($config->validator !== false)
 		{
 			if ($config->validator === true) {
-				$config->validator = 'com:files.command.validator.'.$this->getIdentifier()->name;
+				$config->validator = 'com:files.database.validator.'.$this->getIdentifier()->name;
 			}
 
 			$this->getCommandChain()->enqueue($this->getObject($config->validator));

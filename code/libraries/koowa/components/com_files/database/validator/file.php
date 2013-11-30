@@ -13,9 +13,9 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
+class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 {
-	protected function _databaseBeforeSave(KCommandInterface $context)
+	protected function _beforeSave(KDatabaseContext $context)
 	{
 		$row = $context->subject;
 
@@ -43,14 +43,19 @@ class ComFilesCommandValidatorFile extends ComFilesCommandValidatorNode
 			}
 		}
 
-        $filter = $this->getObject('com:files.filter.file.uploadable');
+        $result = parent::_beforeSave($context);
 
-        $result = parent::_databaseBeforeSave($context) && $filter->validate($context->subject);
-
-        if (!$result && $filter->getErrors())
+        if ($result)
         {
-            $errors = $filter->getErrors();
-            $context->setError(array_shift($errors));
+            $filter = $this->getObject('com:files.filter.file.uploadable');
+            $result = $filter->validate($context->getSubject());
+            if ($result === false)
+            {
+                $errors = $filter->getErrors();
+                if (count($errors)) {
+                    $context->getSubject()->setStatusMessage(array_shift($errors));
+                }
+            }
         }
 
 		return $result;
