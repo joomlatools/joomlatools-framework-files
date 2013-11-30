@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowThumbnail extends KDatabaseRowDefault
+class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
 {
     /**
      * @var array Associative array containing the thumbnail size (x, y);

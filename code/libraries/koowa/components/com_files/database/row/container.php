@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
+class ComFilesDatabaseRowContainer extends KDatabaseRowTable
 {
 	/**
 	 * A reference to the container configuration

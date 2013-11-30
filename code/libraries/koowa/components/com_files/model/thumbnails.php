@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelThumbnails extends ComKoowaModelDefault
+class ComFilesModelThumbnails extends KModelTable
 {
     /**
      * A container object
