@@ -15,8 +15,6 @@
  */
 class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 {
-	public $adapter = 'local';
-
 	/**
 	 * A reference to the container configuration
 	 *
@@ -27,26 +25,29 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 
 	public function __get($column)
 	{
-		if ($column == 'path' && !empty($this->_data['path']))
-		{
-			$result = $this->_data['path'];
-			// Prepend with site root if it is a relative path
-			if ($this->adapter === 'local' && !preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
-				$result = JPATH_ROOT.'/'.$result;
-			}
+        if ($column == 'path' && !empty($this->_data['path']))
+        {
+            $result = $this->_data['path'];
+            // Prepend with site root if it is a relative path
+            if (!preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
+                $result = JPATH_ROOT.'/'.$result;
+            }
 
-			$result = rtrim(str_replace('\\', '/', $result), '\\');
-			return $result;
-		}
-		else if ($column == 'relative_path') {
-			return $this->getRelativePath();
-		}
-		else if ($column == 'path_value') {
-			return $this->_data['path'];
-		}
-		else if ($column == 'parameters' && !is_object($this->_data['parameters'])) {
-			return $this->getParameters();
-		}
+            $result = rtrim(str_replace('\\', '/', $result), '\\');
+            return $result;
+        }
+
+        if ($column == 'relative_path') {
+            return $this->getRelativePath();
+        }
+
+        if ($column == 'path_value') {
+            return $this->_data['path'];
+        }
+
+        if ($column == 'parameters' && !is_object($this->_data['parameters'])) {
+            return $this->getParameters();
+        }
 
 		return parent::__get($column);
 	}
@@ -55,6 +56,7 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 	{
 		$path = $this->path;
 		$root = str_replace('\\', '/', JPATH_ROOT);
+
 		return str_replace($root.'/', '', $path);
 	}
 
@@ -73,8 +75,8 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 	{
 		$data = parent::toArray();
 
-		$data['path'] = $this->path_value;
-		$data['parameters'] = $this->parameters->toArray();
+		$data['path']          = $this->path_value;
+		$data['parameters']    = $this->parameters->toArray();
 		$data['relative_path'] = $this->getRelativePath();
 
 		return $data;
@@ -93,6 +95,6 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowDefault
 
 	public function getAdapter($type, array $config = array())
 	{
-		return $this->getObject('com:files.adapter.'.$this->adapter.'.'.$type, $config);
+		return $this->getObject('com:files.adapter.'.$type, $config);
 	}
 }

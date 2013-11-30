@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesAdapterLocalIterator extends KObject
+class ComFilesAdapterIterator extends KObject
 {
 	public function getFiles(array $config = array())
 	{
@@ -29,13 +29,12 @@ class ComFilesAdapterLocalIterator extends KObject
 
 	public function getNodes(array $config = array())
 	{
-		$config['path'] = $this->getObject('com:files.adapter.local.folder',
+		$config['path'] = $this->getObject('com:files.adapter.folder',
 					array('path' => $config['path']))->getRealPath();
 
 		try {
 			$results = ComFilesIteratorDirectory::getNodes($config);
-		}
-		catch (Exception $e) {
+		} catch (Exception $e) {
 			return false;
 		}
 

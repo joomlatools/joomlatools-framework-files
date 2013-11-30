@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-abstract class ComFilesAdapterLocalAbstract extends KObject
+abstract class ComFilesAdapterAbstract extends KObject
 {
 	/**
 	 * Path to the node

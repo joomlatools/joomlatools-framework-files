@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesAdapterLocalFolder extends ComFilesAdapterLocalAbstract
+class ComFilesAdapterFolder extends ComFilesAdapterAbstract
 {
 	public function move($target)
 	{

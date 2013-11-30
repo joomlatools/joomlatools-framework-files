@@ -13,23 +13,27 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
+class ComFilesAdapterFile extends ComFilesAdapterAbstract
 {
 	protected $_metadata;
 
 	public function getMetadata()
 	{
-		if ($this->_handle && empty($this->_metadata)) {
+		if ($this->_handle && empty($this->_metadata))
+        {
 			$this->_metadata = array(
 				'extension' => strtolower(pathinfo($this->_handle->getFilename(), PATHINFO_EXTENSION)),
-				'mimetype' => $this->getObject('com:files.mixin.mimetype')->getMimetype($this->_path)
+				'mimetype'  => $this->getObject('com:files.mixin.mimetype')->getMimetype($this->_path)
 			);
-			try {
+
+            try
+            {
 				$this->_metadata += array(
-					'size' => $this->_handle->getSize(),
+					'size'          => $this->_handle->getSize(),
 					'modified_date' => $this->_handle->getMTime()
 				);
-			} catch (RunTimeException $e) {}
+			}
+            catch (RunTimeException $e) {}
 		}
 
 		return $this->_metadata;
@@ -149,7 +153,8 @@ class ComFilesAdapterLocalFile extends ComFilesAdapterLocalAbstract
 			}
 		}
 
-		if ($result) {
+		if ($result)
+        {
 			unset($this->_metadata);
 			clearstatcache();
 		}
