@@ -17,22 +17,22 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 {
 	protected function _initialize(KObjectConfig $config)
 	{
-		$config->auto_assign = false;
+		$config->auto_fetch = false;
 
 		parent::_initialize($config);
 	}
 
-	public function display()
+    public function fetchData(KViewContext $context)
 	{
 	    $state = $this->getModel()->getState();
 	    if (empty($state->limit)) {
 	        $state->limit = JFactory::getApplication()->getCfg('list_limit');
 	    }
 	     
-		$this->sitebase  = trim(JURI::root(), '/');
-		$this->token     = JSession::getFormToken();
-		$this->container = $this->getModel()->getContainer();
+		$context->data->sitebase  = trim(JURI::root(), '/');
+		$context->data->token     = JSession::getFormToken();
+		$context->data->container = $this->getModel()->getContainer();
 
-		return parent::display();
+		return parent::fetchData($context);
 	}
 }

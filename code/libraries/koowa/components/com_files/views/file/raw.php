@@ -15,7 +15,7 @@
  */
 class ComFilesViewFileRaw extends KViewFile
 {
-    public function display()
+    protected function _actionRender(KViewContext $context)
     {
         $file = $this->getModel()->getItem();
 
@@ -30,6 +30,6 @@ class ComFilesViewFileRaw extends KViewFile
             throw new RuntimeException($this->getObject('translator')->translate('File not found'));
         }
 
-        return parent::display();
+        return parent::_actionRender($context);
     }
 }
