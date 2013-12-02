@@ -24,13 +24,13 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
             return parent::execute($action, $context);
         }
         catch (Exception $e) {
-            $this->_handleException($e);
+            return $this->_handleException($e);
         }
     }
 
     protected function _handleException(Exception $e) 
     {
-    	if (KRequest::get('get.format', 'cmd') == 'json') 
+    	if ($this->getRequest()->getFormat() == 'json')
         {
     		$obj = new stdClass;
     		$obj->status = false;
@@ -38,7 +38,7 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
     		$obj->code   = $e->getCode();
 
     		// Plupload do not pass the error to our application if the status code is not 200
-    		$code = KRequest::get('get.plupload', 'int') ? 200 : ($e->getCode() ? $e->getCode() : 500);
+    		$code = $this->getRequest()->query->plupload ? 200 : ($e->getCode() ? $e->getCode() : 500);
 
     		header($code.' '.str_replace("\n", ' ', $e->getMessage()), true, $code);
 
@@ -46,6 +46,8 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
     		JFactory::getApplication()->close();
     	}
     	else throw $e;
+
+        return false;
     }
 
     /**
@@ -60,9 +62,9 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
 	{
         $result = parent::_actionDispatch($context);
 
-        if (KRequest::method() != 'GET' && $result->getStatus() != KDatabase::STATUS_DELETED)
+        if ($this->getRequest()->getMethod() != 'GET' && $result->getStatus() != KDatabase::STATUS_DELETED)
         {
-			if(KRequest::type() == 'FLASH' || KRequest::format() == 'json') {
+			if(KRequest::type() == 'FLASH' || $this->getRequest()->getFormat() == 'json') {
 				$result = $this->getController()->execute('render', $context);
 			}
 		}

@@ -8,22 +8,11 @@
  */
 
 /**
- * Config State
+ * Folder Controller
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelState extends KModelState
+class ComFilesControllerFolder extends ComFilesControllerAbstract
 {
-	/**
-	 * Needed to make sure form filter does not add config to the form action
-	 */
-	public function getValues($unique = false)
-	{
-		$data = parent::getValues($unique);
-		
-		unset($data['config']);
-		
-		return $data;
-	}
 }

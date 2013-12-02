@@ -43,7 +43,7 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
         } else {
             $html .= '<div class="pagination pagination-legacy" id="files-paginator">';
         }
-        $html .= '<div class="limit">'.$this->translate('Display NUM').' '.$this->limit($config->toArray()).'</div>';
+        $html .= '<div class="limit">'.$this->limit($config->toArray()).'</div>';
         if(version_compare(JVERSION, '3.0', '>=')) {
             $html .= '<span class="start hidden"><a></a></span>';
             $html .= '<ul class="pagination-list">';

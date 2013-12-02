@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseTableContainers extends KDatabaseTableDefault
+class ComFilesDatabaseTableContainers extends KDatabaseTableAbstract
 {
 	protected function _initialize(KObjectConfig $config)
 	{

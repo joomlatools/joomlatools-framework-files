@@ -16,7 +16,7 @@
  * @author  Stian Didriksen <https://github.com/stipsan>
  * @package Koowa\Component\Files
  */
- class ComFilesControllerProxy extends ComFilesControllerDefault
+ class ComFilesControllerProxy extends ComFilesControllerAbstract
 {
 	public function _actionRender(KControllerContextInterface $context)
 	{

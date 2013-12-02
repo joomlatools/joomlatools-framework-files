@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesControllerDefault extends ComKoowaControllerModel
+abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 {
 	public function getRequest()
 	{
