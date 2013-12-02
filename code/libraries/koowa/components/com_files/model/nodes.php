@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelNodes extends ComFilesModelDefault
+class ComFilesModelNodes extends KModelAbstract
 {
     /**
      * A container object
@@ -21,6 +21,28 @@ class ComFilesModelNodes extends ComFilesModelDefault
      * @var ComFilesDatabaseRowContainer
      */
     protected static $_container;
+
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->getState()
+            ->insert('limit'    , 'int')
+            ->insert('offset'   , 'int')
+            ->insert('sort'     , 'cmd')
+            ->insert('direction', 'word', 'asc')
+            ->insert('search'   , 'string')
+
+            ->insert('container', 'com:files.filter.container', null)
+            ->insert('folder'	, 'com:files.filter.path', '')
+            ->insert('name'		, 'com:files.filter.path', '', true)
+
+            ->insert('types'	, 'cmd', '')
+            // used in modal windows
+            ->insert('editor'   , 'string', '')
+            // used to pass options to the JS application in HMVC, internal
+            ->insert('config'   , 'json', '', false, array(), true);
+    }
 
     /**
      * Reset the cached container object if container changes
