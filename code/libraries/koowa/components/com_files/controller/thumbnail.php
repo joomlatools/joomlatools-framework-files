@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesControllerThumbnail extends ComFilesControllerDefault
+class ComFilesControllerThumbnail extends ComFilesControllerAbstract
 {
     protected function _actionBrowse(KControllerContextInterface $context)
     { 

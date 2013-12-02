@@ -8,19 +8,11 @@
  */
 
 /**
- * Node Controller
+ * Folder Controller
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesControllerNode extends ComFilesControllerAbstract
+class ComFilesControllerFolder extends ComFilesControllerAbstract
 {
-	protected function _initialize(KObjectConfig $config)
-	{
-		$config->append(array(
-			'behaviors' => array('thumbnailable')
-		));
-
-		parent::_initialize($config);
-	}
 }

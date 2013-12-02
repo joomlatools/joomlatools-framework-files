@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesControllerFile extends ComFilesControllerDefault
+class ComFilesControllerFile extends ComFilesControllerAbstract
 {
 	public function __construct(KObjectConfig $config)
 	{
