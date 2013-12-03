@@ -49,26 +49,4 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
 
         return false;
     }
-
-    /**
-     * Overloaded to comply with Plupload.
-     *
-     * It doesn'allow us pass AJAX headers so this is needed.
-     *
-     * @param KDispatcherContextInterface $context
-     * @return bool|mixed
-     */
-	public function _actionDispatch(KDispatcherContextInterface $context)
-	{
-        $result = parent::_actionDispatch($context);
-
-        if ($this->getRequest()->getMethod() != 'GET' && $result->getStatus() != KDatabase::STATUS_DELETED)
-        {
-			if(KRequest::type() == 'FLASH' || $this->getRequest()->getFormat() == 'json') {
-				$result = $this->getController()->execute('render', $context);
-			}
-		}
-
-		return $result;
-	}
 }
