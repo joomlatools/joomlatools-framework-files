@@ -41,7 +41,7 @@ window.addEvent('domready', function() {
             _token: Files.token
         },
         headers: {
-            'X-Requested-With': 'xmlhttprequest'
+            'X-Requested-With': 'XMLHttpRequest'
         },
         preinit: {
             Error: function(up, args){
