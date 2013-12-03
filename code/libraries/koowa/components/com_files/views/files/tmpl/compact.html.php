@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @import('com:files.views.files.scripts.html'); ?>
+<?= @import('com:files.files.scripts.html'); ?>
 
 <script src="media://koowa/com_files/js/files.compact.js" />
 
