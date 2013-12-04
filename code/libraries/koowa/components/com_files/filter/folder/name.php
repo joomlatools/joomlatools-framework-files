@@ -15,17 +15,31 @@
  */
 class ComFilesFilterFolderName extends KFilterAbstract
 {
-	public function validate($row)
+    protected static $_rejected_names = array('.htaccess', 'web.config', 'index.htm', 'index.html', 'index.php', '.svn', '.git', 'cvs');
+
+    public function validate($row)
 	{
         $value = $row->name;
 
-		if (strpos($value, '/') !== false) {
+        if (strpos($value, '/') !== false) {
             return $this->_error($this->getObject('translator')->translate('Folder names cannot contain slashes'));
 		}
 
-		if ($this->sanitize($value) == '') {
+        $value = $this->sanitize($value);
+
+        if (in_array(strtolower($value), self::$_rejected_names))
+        {
+            return $this->_error($this->getObject('translator')->translate(
+                'You cannot create a folder named {foldername} for security reasons.',
+                array('foldername' => $value)
+            ));
+        }
+
+		if ($value == '') {
             return $this->_error($this->getObject('translator')->translate('Invalid folder name'));
 		}
+
+        return true;
 	}
 
 	public function sanitize($value)

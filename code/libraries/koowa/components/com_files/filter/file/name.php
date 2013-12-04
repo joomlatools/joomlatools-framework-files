@@ -15,13 +15,25 @@
  */
 class ComFilesFilterFileName extends KFilterAbstract
 {
+    protected static $_rejected_names = array('.htaccess', 'web.config', 'index.htm', 'index.html', 'index.php', '.svn', '.git', 'cvs');
+
     public function validate($row)
 	{
         $value = $this->sanitize($row->name);
 
+        if (in_array(strtolower($value), self::$_rejected_names))
+        {
+            throw new KControllerExceptionActionFailed($this->getObject('translator')->translate(
+                'You cannot upload a file named {filename} for security reasons.',
+                array('filename' => $value)
+            ));
+        }
+
 		if ($value == '') {
             return $this->_error($this->getObject('translator')->translate('Invalid file name'));
 		}
+
+        return true;
 	}
 
 	public function sanitize($value)
