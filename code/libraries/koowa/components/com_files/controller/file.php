@@ -42,4 +42,24 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 			}
 		}
 	}
+
+    protected function _actionRender(KControllerContextInterface $context)
+    {
+        $model = $this->getModel();
+
+        if($model->getState()->isUnique())
+        {
+            $file = $this->getModel()->getItem();
+
+            if (!file_exists($file->fullpath)) {
+                throw new KControllerExceptionNotFound('File not found');
+            }
+
+            //Set the data in the response
+            $context->response
+                ->attachTransport('chunked')
+                ->setPath('file://'.$file->fullpath, $file->mimetype);
+        }
+        else parent::_actionRender($context);
+    }
 }
