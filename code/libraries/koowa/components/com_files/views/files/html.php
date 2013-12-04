@@ -24,15 +24,40 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 
     public function fetchData(KViewContext $context)
 	{
-	    $state = $this->getModel()->getState();
-	    if (empty($state->limit)) {
-	        $state->limit = JFactory::getApplication()->getCfg('list_limit');
-	    }
-	     
+	    $state     = $this->getModel()->getState();
+        $container = $this->getModel()->getContainer();
+
+        $config = array(
+            'router' => array(
+                'defaults' => (object) array(
+                    'option' => 'com_'.substr($container->slug, 0, strpos($container->slug, '-')),
+                    'routed' => '1'
+                )
+            ),
+            'initial_response' => true
+        );
+
+	    if (is_array($state->config)) {
+            $config = array_merge_recursive($config, $state->config);
+        }
+
+        if ($config['initial_response'] === true)
+        {
+            $query = $state->getValues();
+            unset($query['config']);
+            $query['thumbnails'] = $this->getModel()->getContainer()->parameters->thumbnails;
+
+            $config['initial_response'] = $this->getObject('com:files.controller.node', array('query' => $query))
+                ->format('json')
+                ->render();
+        }
+
+        $state->config = $config;
+
 		$context->data->sitebase  = trim(JURI::root(), '/');
 		$context->data->token     = JSession::getFormToken();
-		$context->data->container = $this->getModel()->getContainer();
+		$context->data->container = $container;
 
-		return parent::fetchData($context);
+		parent::fetchData($context);
 	}
 }

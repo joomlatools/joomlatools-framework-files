@@ -20,7 +20,7 @@ Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
 window.addEvent('domready', function() {
-	var config = kQuery.parseJSON(<?= json_encode($state->config); ?>),
+	var config = <?= json_encode($state->config); ?>,
 		options = {
             cookie: {
                 path: '<?=KRequest::root()?>'
@@ -34,7 +34,9 @@ window.addEvent('domready', function() {
 			},
 			editor: <?= json_encode($state->editor); ?>,
 			types: <?= json_encode($state->types); ?>,
-			container: <?= json_encode($container ? $container->slug : null); ?>
+			container: <?= json_encode($container ? $container->toArray() : null); ?>,
+            uploader_dialog: false,
+            folder_dialog: false
 		};
 	options = Files.utils.append(options, config);
 

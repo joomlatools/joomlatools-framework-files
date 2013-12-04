@@ -23,11 +23,6 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 		if ($request->query->e_name) {
 			$request->query->editor = $request->query->e_name;
 		}
-
-		// "config" state is only used in HMVC requests and passed to the JS application
-		if ($this->isDispatched()) {
-			unset($request->query->config);
-		}
 		
 		return $request;
 	}
@@ -72,24 +67,5 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 		else throw new KControllerExceptionNotFound('Resource Not Found');
 
 		return $data;
-	}
-
-    /**
-     * Overridden method to be able to use it with both model and view controllers
-     *
-     * @param KControllerContextInterface $context
-     * @return bool|string
-     */
-	protected function _actionRender(KControllerContextInterface $context)
-	{
-		if ($this->getIdentifier()->name == 'image' || ($this->getIdentifier()->name == 'file' && $this->getRequest()->query->format == 'html'))
-		{
-            $this->getObject('translator')->loadTranslations($this->getIdentifier());
-
-			$result = $this->getView()->display();
-			return $result;
-		}
-
-		return parent::_actionRender($context);
 	}
 }

@@ -11,30 +11,30 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <?= @import('scripts.html');?>
 
 <script>
-Files.sitebase = '<?= $sitebase; ?>';
-Files.token = '<?= $token; ?>';
+    Files.sitebase = '<?= $sitebase; ?>';
+    Files.token = '<?= $token; ?>';
 
-window.addEvent('domready', function() {
-	var config = kQuery.parseJSON(<?= json_encode($state->config); ?>),
-		options = {
-            cookie: {
-                path: '<?=KRequest::root()?>'
-            },
-			state: {
-				defaults: {
-					limit: <?= (int) $state->limit; ?>,
-					offset: <?= (int) $state->offset; ?>,
-					types: <?= json_encode($state->types); ?>
-				}
-			},
-			types: <?= json_encode($state->types); ?>,
-			container: <?= json_encode($container ? $container->slug : null); ?>,
-			thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
-		};
-	options = Files.utils.append(options, config);
+    window.addEvent('domready', function() {
+        var config = <?= json_encode($state->config); ?>,
+            options = {
+                cookie: {
+                    path: '<?=KRequest::root()?>'
+                },
+                state: {
+                    defaults: {
+                        limit: <?= (int) $state->limit; ?>,
+                        offset: <?= (int) $state->offset; ?>,
+                        types: <?= json_encode($state->types); ?>
+                    }
+                },
+                types: <?= json_encode($state->types); ?>,
+                container: <?= json_encode($container ? $container->toArray() : null); ?>,
+                thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
+            };
+        options = Files.utils.append(options, config);
 
-	Files.app = new Files.App(options);
-});
+        Files.app = new Files.App(options);
+    });
 </script>
 
 
@@ -47,53 +47,51 @@ window.addEvent('domready', function() {
 		<div id="files-tree"></div>
 	</div>
 
-	<div id="files-canvas">
-	    <div class="path" style="height: 24px;">
-            <div class="files-toolbar-controls btn-group">
+    <div id="files-canvas">
+        <div class="path" style="height: 24px;">
+            <div class="files-toolbar-controls btn-group" style="display: none">
                 <button id="files-show-uploader" class="btn btn-mini"><?= @translate('Upload'); ?></button>
                 <button id="files-new-folder-toolbar" class="btn btn-mini"><?= @translate('New Folder'); ?></button>
                 <button id="files-batch-delete" class="btn btn-mini" disabled><?= @translate('Delete'); ?></button>
-			</div>
+            </div>
             <div id="files-pathway"></div>
-			<div class="files-layout-controls btn-group" data-toggle="buttons-radio">
-				<button class="btn files-layout-switcher" data-layout="icons" title="<?= @translate('Show files as icons'); ?>">
+            <div class="files-layout-controls btn-group" data-toggle="buttons-radio">
+                <button class="btn files-layout-switcher" data-layout="icons" title="<?= @translate('Show files as icons'); ?>">
                     <i class="icon-th icon-grid-view-2"></i>
-				</button>
-				<button class="btn files-layout-switcher" data-layout="details" title="<?= @translate('Show files in a list'); ?>">
+                </button>
+                <button class="btn files-layout-switcher" data-layout="details" title="<?= @translate('Show files in a list'); ?>">
                     <i class="icon-list"></i>
-				</button>
-			</div>
-		</div>
-		<div class="view">
-			<div id="files-grid"></div>
-		</div>
+                </button>
+            </div>
+        </div>
+        <div class="view">
+            <div id="files-grid"></div>
+        </div>
         <table class="table">
             <tfoot>
             <tr><td>
-                <?= @helper('paginator.pagination') ?>
-            </td></tr>
+                    <?= @helper('paginator.pagination') ?>
+                </td></tr>
             </tfoot>
         </table>
 
-		<?= @import('uploader.html');?>
-	</div>
-	<div style="clear: both"></div>
+        <?= @import('uploader.html');?>
+    </div>
+    <div style="clear: both"></div>
 </div>
 
-<div>
-    <div id="files-new-folder-modal" style="display: none">
-        <div class="com_files">
-            <form class="files-modal well">
-                <div style="text-align: center;">
-                    <h3 style=" float: none">
-                        <?= str_replace('{folder}', '<span class="upload-files-to"></span>', @translate('Create a new folder in {folder}')) ?>
-                    </h3>
-                </div>
-                <div class="input-append">
-                    <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= @translate('Enter a folder name') ?>" />
-                    <button id="files-new-folder-create" class="btn btn-primary" disabled><?= @translate('Create'); ?></button>
-                </div>
-            </form>
+<div id="files-new-folder-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
+    <form class="files-modal well">
+        <div style="text-align: center;">
+            <h3 style=" float: none">
+                <?= @translate('Create a new folder in {folder}', array(
+                    'folder' => '<span class="upload-files-to"></span>'
+                )) ?>
+            </h3>
         </div>
-	</div>
+        <div class="input-append">
+            <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= @translate('Enter a folder name') ?>" />
+            <button id="files-new-folder-create" class="btn btn-primary" disabled><?= @translate('Create'); ?></button>
+        </div>
+    </form>
 </div>

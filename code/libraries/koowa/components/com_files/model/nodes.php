@@ -41,7 +41,7 @@ class ComFilesModelNodes extends KModelAbstract
             // used in modal windows
             ->insert('editor'   , 'string', '')
             // used to pass options to the JS application in HMVC, internal
-            ->insert('config'   , 'json', '', false, array(), true);
+            ->insert('config'   , 'raw', '', false, array(), true);
     }
 
     /**

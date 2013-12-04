@@ -61,7 +61,38 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                 ->attachTransport('chunked')
                 ->setPath('file://'.$file->fullpath, $file->mimetype);
         }
-        else $result = parent::_actionRender($context);
+        else
+        {
+            $query     = $this->getRequest()->query;
+            $container = $this->getModel()->getContainer();
+            // Note: PHP converts dots to underscores in cookie names
+            $cookie = json_decode($this->getObject('request')->cookies['com_files_container_'.$container->slug.'_state'], true);
+
+            if (is_array($cookie))
+            {
+                // Check if the folder exists, folder shouldn't exist in query for cookie to be used
+                if (isset($cookie['folder']))
+                {
+                    $adapter = $container->getAdapter('folder');
+                    $adapter->setPath($container->path . '/' . $cookie['folder']);
+                    // Unset folder cookie if path does not exists.
+                    if (!$adapter->exists()) {
+                        unset($cookie['folder']);
+                    }
+                }
+
+                foreach ($cookie as $key => $value)
+                {
+                    if (!$query->has($key)) {
+                        $query->$key = $value;
+                    }
+                }
+
+                $model->getState()->setValues($query->toArray());
+            }
+
+            $result = parent::_actionRender($context);
+        }
 
         return $result;
     }
