@@ -29,7 +29,7 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 
         $config = array(
             'router' => array(
-                'defaults' => (object) array(
+                'defaults' => array(
                     'option' => 'com_'.substr($container->slug, 0, strpos($container->slug, '-')),
                     'routed' => '1'
                 )
