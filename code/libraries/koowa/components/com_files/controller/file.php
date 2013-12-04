@@ -45,7 +45,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 
     protected function _actionRender(KControllerContextInterface $context)
     {
-        $model = $this->getModel();
+        $model  = $this->getModel();
+        $result = null;
 
         if($model->getState()->isUnique())
         {
@@ -60,6 +61,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                 ->attachTransport('chunked')
                 ->setPath('file://'.$file->fullpath, $file->mimetype);
         }
-        else parent::_actionRender($context);
+        else $result = parent::_actionRender($context);
+
+        return $result;
     }
 }
