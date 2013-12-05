@@ -105,6 +105,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 			if ($this->destination_folder) {
 				$this->folder = $this->destination_folder;
 			}
+
 			if ($this->destination_name) {
 				$this->name = $this->destination_name;
 			}
