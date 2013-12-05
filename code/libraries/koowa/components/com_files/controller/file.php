@@ -58,7 +58,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 
             //Set the data in the response
             $context->response
-                ->attachTransport('chunked')
+                ->attachTransport('stream')
                 ->setPath('file://'.$file->fullpath, $file->mimetype);
         }
         else
