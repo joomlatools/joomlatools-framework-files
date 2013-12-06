@@ -14,31 +14,6 @@ if (!Files._) {
 	};
 }
 
-// Legacy for Joomla 1.5
-if (!Files.utils) {
-    Files.utils = {
-        append: function(a,b){
-            if(window.$extend) return $extend(a,b);
-            else return Object.append(a,b);
-        },
-        typeOf: function(subject) {
-            if(window.$type) return $type(subject);
-            else return typeOf(subject);
-        },
-        merge: function(a,b){
-            if(window.$merge) return $merge(a,b);
-            else {
-                var i=Array.slice(arguments);i.unshift({});
-                return Object.merge.apply(null,i);
-            }
-        },
-        each: function(a,b,c){
-            if(window.$each) return $each(a,b,c);
-            else return Object.each(a,b,c);
-        }
-    };
-}
-
 Files.Filesize = new Class({
 	Implements: Options,
 	options: {
@@ -71,7 +46,7 @@ Files.FileTypes.map = {
 Files.getFileType = function(extension) {
 	var type = 'document';
 	extension = extension.toLowerCase();
-    Files.utils.each(Files.FileTypes.map, function(value, key) {
+    Object.each(Files.FileTypes.map, function(value, key) {
 		if (value.contains(extension)) {
 			type = key;
 		}

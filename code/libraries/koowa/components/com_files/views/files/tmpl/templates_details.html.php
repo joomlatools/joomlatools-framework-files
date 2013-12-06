@@ -15,7 +15,7 @@ window.addEvent('domready', function() {
 			grid = Files.app.grid,
 			nodes = grid.nodes;
 
-		Files.utils.each(nodes, function(node) {
+		Object.each(nodes, function(node) {
 			if (value && !node.checked) {
 				grid.checkNode(node);
 			} else if (!value && node.checked) {

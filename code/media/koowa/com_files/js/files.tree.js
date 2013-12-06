@@ -44,7 +44,7 @@ if(!Files) var Files = {};
 
                                 if (item.children) {
                                     var children = [];
-                                    Files.utils.each(item.children, function(child) {
+                                    Object.each(item.children, function(child) {
                                         children.push(parse(child, item));
                                     });
                                     item.children = children;
@@ -54,7 +54,7 @@ if(!Files) var Files = {};
                         };
 
                         if (response.meta.total) {
-                            Files.utils.each(data, function(item, key) {
+                            Object.each(data, function(item, key) {
                                 parse(item);
                             });
                         }

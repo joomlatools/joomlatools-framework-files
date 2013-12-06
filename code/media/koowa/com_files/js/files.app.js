@@ -201,7 +201,7 @@ Files.App = new Class({
 
                 delete obj.folder;
 
-                this.options.state.defaults = Files.utils.merge(this.options.state.defaults, obj);
+                this.options.state.defaults = Object.merge({}, this.options.state.defaults, obj);
 
             }
 
@@ -226,7 +226,7 @@ Files.App = new Class({
 					new_state = state.data,
 					state_changed = false;
 
-				Files.utils.each(old_state, function(value, key) {
+				Object.each(old_state, function(value, key) {
 					if (state_changed === true) {
 						return;
 					}
@@ -236,7 +236,7 @@ Files.App = new Class({
 				});
 
 				if (that.container && (state_changed || that.active !== state.data.folder)) {
-					var set_state = Files.utils.append({}, state.data);
+					var set_state = Object.append({}, state.data);
 					['option', 'view', 'layout', 'folder', 'container'].each(function(key) {
 						delete set_state[key];
 					});
@@ -296,7 +296,7 @@ Files.App = new Class({
 			}.bind(this),
 			success = function(resp) {
 				if (resp.status !== false) {
-                    Files.utils.each(resp.entities, function(item) {
+                    Object.each(resp.entities, function(item) {
 						if (!item.baseurl) {
 							item.baseurl = that.baseurl;
 						}
@@ -400,7 +400,7 @@ Files.App = new Class({
 		var opts = this.options.paginator,
 			state = this.state;
 
-        Files.utils.append(opts, {
+        Object.append(opts, {
 			'state' : state,
 			'onClickPage': function(el) {
 				this.state.set('limit', el.get('data-limit'));
@@ -451,7 +451,7 @@ Files.App = new Class({
 			opts.layout = Cookie.read(key);
 		}
 
-        Files.utils.append(opts, {
+        Object.append(opts, {
 			'onClickFolder': function(e) {
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
@@ -479,7 +479,7 @@ Files.App = new Class({
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
 					row = node.retrieve('row'),
-					copy = Files.utils.append({}, row);
+					copy = Object.append({}, row);
 
 				copy.template = 'file_preview';
 
@@ -753,7 +753,7 @@ Files.App = new Class({
 		this.fireEvent('afterSetTitle', {title: title});
 	},
 	createRoute: function(query) {
-		query = Files.utils.merge(this.options.router.defaults, query || {});
+		query = Object.merge({}, this.options.router.defaults, query || {});
 
 		if (query.container !== false && !query.container && this.container) {
 			query.container = this.container.slug;

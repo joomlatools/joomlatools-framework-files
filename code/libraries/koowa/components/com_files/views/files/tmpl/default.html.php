@@ -31,7 +31,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
                 thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
             };
-        options = Files.utils.append(options, config);
+        options = Object.append(options, config);
 
         Files.app = new Files.App(options);
     });

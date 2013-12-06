@@ -19,11 +19,11 @@ Files.State = new Class({
 		this.setOptions(options);
 
 		if (this.options.data) {
-            Files.utils.append(this.data, this.options.data);
+            Object.append(this.data, this.options.data);
 		}
 		if (this.options.defaults) {
-            Files.utils.append(this.defaults, this.options.defaults);
-            Files.utils.append(this.data, this.defaults);
+            Object.append(this.defaults, this.options.defaults);
+            Object.append(this.data, this.defaults);
 		}
 	},
 	getData: function() {
@@ -35,8 +35,8 @@ Files.State = new Class({
 		return this;
 	},
 	set: function(key, value) {
-		if (Files.utils.typeOf(key) == 'object') {
-            Files.utils.append(this.data, key);
+		if (typeOf(key) == 'object') {
+            Object.append(this.data, key);
 		} else {
 			this.data[key] = value;
 		}

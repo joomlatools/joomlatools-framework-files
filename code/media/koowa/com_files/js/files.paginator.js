@@ -133,7 +133,7 @@ Files.Paginator = new Class({
 			values.page_total = 1;
 			values.page_current = 1;
 		} else {
-            Files.utils.each(data, function(value, key) {
+            Object.each(data, function(value, key) {
 				values[key] = value;
 			});
 

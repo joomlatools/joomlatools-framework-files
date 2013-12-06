@@ -38,7 +38,7 @@ window.addEvent('domready', function() {
             uploader_dialog: false,
             folder_dialog: false
 		};
-	options = Files.utils.append(options, config);
+	options = Object.append(options, config);
 
 	Files.app = new Files.Compact.App(options);
 

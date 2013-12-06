@@ -47,7 +47,7 @@ String.implement({
 				var current = obj[key];
 				if(i < keys.length - 1)
 					obj = obj[key] = current || {};
-				else if(Files.utils.typeOf(current) == 'array')
+				else if(typeOf(current) == 'array')
 					current.push(value);
 				else
 					obj[key] = $defined(current) ? [current, value] : value;
@@ -196,7 +196,7 @@ var URI = new Class({
 			data[arguments[0]] = arguments[1];
 			values = data;
 		} else if (merge) {
-			values = Files.utils.merge(this.getData(), values);
+			values = Object.merge({}, this.getData(), values);
 		}
 		return this.set(part || 'query', Hash.toQueryString(values));
 	},
