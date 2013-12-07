@@ -51,7 +51,8 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 
 	public function __get($column)
 	{
-		if (in_array($column, array('size', 'extension', 'modified_date', 'mimetype'))) {
+		if (in_array($column, array('size', 'extension', 'modified_date', 'mimetype')))
+        {
 			$metadata = $this->_adapter->getMetadata();
 			return $metadata && array_key_exists($column, $metadata) ? $metadata[$column] : false;
 		}
@@ -75,7 +76,8 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 			return $metadata;
 		}
 
-		if (in_array($column, array('width', 'height', 'thumbnail')) && $this->isImage()) {
+		if (in_array($column, array('width', 'height', 'thumbnail')) && $this->isImage())
+        {
 			if ($column == 'thumbnail' && isset($this->_data['thumbnail'])) {
 				return $this->_data['thumbnail'];
 			}
