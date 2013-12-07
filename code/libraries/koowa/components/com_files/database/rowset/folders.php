@@ -42,8 +42,8 @@ class ComFilesDatabaseRowsetFolders extends ComFilesDatabaseRowsetNodes
      * id's from root to the node. If no path exists or the path is empty the row will be added to
      * the root node.
      *
-	 * @param  array  	An associative array of row data to be inserted.
-	 * @param  boolean	If TRUE, mark the row(s) as new (i.e. not in the database yet). Default TRUE
+	 * @param  array  	$list An associative array of row data to be inserted.
+	 * @param  boolean	$new  If TRUE, mark the row(s) as new (i.e. not in the database yet). Default TRUE
 	 * @return  KDatabaseRowsetAbstract
 	 * @see __construct
      */
@@ -75,9 +75,8 @@ class ComFilesDatabaseRowsetFolders extends ComFilesDatabaseRowsetNodes
 				}
 
 				$node->insertChild($instance);
-        	} else {
-        		$this->insert($instance);	
         	}
+            else $this->insert($instance);
 		}
 
 		return $this;
