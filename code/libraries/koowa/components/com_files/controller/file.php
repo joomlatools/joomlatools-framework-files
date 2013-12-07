@@ -52,19 +52,21 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
         {
             $file = $this->getModel()->getItem();
 
-            if (!file_exists($file->fullpath)) {
+            try
+            {
+                $this->getResponse()
+                    ->attachTransport('stream')
+                    ->setPath($file->fullpath, $file->mimetype);
+            }
+            catch (InvalidArgumentException $e) {
                 throw new KControllerExceptionNotFound('File not found');
             }
-
-            //Set the data in the response
-            $context->response
-                ->attachTransport('stream')
-                ->setPath('file://'.$file->fullpath, $file->mimetype);
         }
         else
         {
             $query     = $this->getRequest()->query;
             $container = $this->getModel()->getContainer();
+
             // Note: PHP converts dots to underscores in cookie names
             $cookie = json_decode($this->getObject('request')->cookies['com_files_container_'.$container->slug.'_state'], true);
 
