@@ -36,9 +36,7 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
         		}
         	}
         }
-        else {
-        	$needed = $model->getState()->files ? $model->getState()->files : $model->getState()->filename;
-        }
+        else $needed = $model->getState()->files ? $model->getState()->files : $model->getState()->filename;
 
 		$model->reset()
 		      ->setState($state_data)

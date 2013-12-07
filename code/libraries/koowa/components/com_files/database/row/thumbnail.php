@@ -121,8 +121,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
      */
     public function setSize(array $size)
     {
-        if (!(isset($size['x']) || isset($size['y'])))
-        {
+        if (!(isset($size['x']) || isset($size['y']))) {
             throw new BadMethodCallException('The provided size is invalid');
         }
 
@@ -146,19 +145,15 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
         {
             $source = $this->getSource();
 
-            if (!($source && ($image = getimagesize($source->fullpath))))
-            {
+            if (!($source && ($image = getimagesize($source->fullpath)))) {
                 throw new RuntimeException('Unable to get source size');
             }
 
             $ratio = $image[0] / $image [1];
 
-            if (isset($size['x']))
-            {
+            if (isset($size['x'])) {
                 $size['y'] = round($size['x'] / $ratio);
-            }
-            else
-            {
+            } else {
                 $size['x'] = round($size['y'] * $ratio);
             }
         }
@@ -190,13 +185,8 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
         // We assume the same amount of bits and channels as source.
         $thumb_memory = ceil($thumb['x'] * $thumb['y'] * $bits * $channels / 8 * $tweak_factor);
 
-        $limit = ini_get('memory_limit');
-
-        if ($limit == '-1') {
-            // If memory is not limited, we take our chances ...
-            $result = true;
-        }
-        else
+        //If memory is limited
+        if ($limit = ini_get('memory_limit') != '-1')
         {
             $limit = self::convertToBytes($limit);
             $available_memory = $limit - memory_get_usage();
@@ -205,6 +195,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
                 $result = true;
             }
         }
+        else $result = true;
 
         return $result;
     }

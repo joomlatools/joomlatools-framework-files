@@ -38,21 +38,25 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
         }
 
         $html  = '<div class="container" id="files-paginator-container">';
+
         if(version_compare(JVERSION, '3.0', '>=')) {
             $html .= '<div class="pagination pagination-toolbar" id="files-paginator">';
         } else {
             $html .= '<div class="pagination pagination-legacy" id="files-paginator">';
         }
+
         $html .= '<div class="limit">'.$this->limit($config->toArray()).'</div>';
-        if(version_compare(JVERSION, '3.0', '>=')) {
+
+        if(version_compare(JVERSION, '3.0', '>='))
+        {
             $html .= '<span class="start hidden"><a></a></span>';
             $html .= '<ul class="pagination-list">';
             $html .=  $this->_pages();
             $html .= '</ul>';
             $html .= '<span class="end hidden"><a></a></span>';
-        } else {
-            $html .=  $this->_pages();
         }
+        else $html .=  $this->_pages();
+
         $html .= '<div class="limit pull-right"> ';
         $html .= sprintf($current_of_total, '<strong class="page-current">1</strong>', '<strong class="page-total">1</strong></div>');
         $html .= '</div>';
@@ -72,13 +76,16 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
      */
     protected function _pages($pages = null)
     {
-        if(version_compare(JVERSION, '3.0', '>=')) {
+        if(version_compare(JVERSION, '3.0', '>='))
+        {
             $tpl = '<li class="%s"><a href="#">%s</a></li>';
 
             $html  = sprintf($tpl, 'prev', '&larr;');
             $html .= '<li class="page"></li>';
             $html .= sprintf($tpl, 'next', '&rarr;');
-        } else {
+        }
+        else
+        {
             $tpl = '<div class="button2-%s"><div class="%s"><a href="#">%s</a></div></div>';
 
             $html = sprintf($tpl, 'right', 'start', $this->translate('Start'));

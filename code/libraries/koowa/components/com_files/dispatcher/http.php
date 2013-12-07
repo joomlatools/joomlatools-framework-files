@@ -22,8 +22,7 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
     {
         try {
             return parent::execute($action, $context);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return $this->_handleException($e);
         }
     }
