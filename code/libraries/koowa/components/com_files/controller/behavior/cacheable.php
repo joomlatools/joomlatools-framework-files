@@ -64,18 +64,6 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	}
 
     /**
-     * Get configuration value from the application
-     *
-     * @param      $key
-     * @param null $default
-     *
-     * @return mixed
-     */
-    protected function _getConfig($key, $default = null) {
-        return JFactory::getApplication()->getCfg($key, $default);
-    }
-
-    /**
      * Create a JCache instance
      *
      * @return JCache
@@ -85,14 +73,15 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 		if (!$this->_cache) 
 		{
 			jimport('joomla.cache.cache');
-			
+
+            $app     = JFactory::getApplication();
 			$options = array(
 				'caching' 		=> true, 
 				'defaultgroup'  => $this->_getGroup(),
 				'lifetime' 		=> 60*24*180,
-				'cachebase' 	=> $this->_getConfig('cache_path'),
-				'language' 		=> $this->_getConfig('language'),
-				'storage'		=> $this->_getConfig('cache_handler', 'file')
+				'cachebase' 	=> $app->getCfg('cache_path'),
+				'language' 		=> $app->getCfg('language'),
+				'storage'		=> $app->getCfg('cache_handler', 'file')
 			);
 			
 			$this->_cache = JCache::getInstance('output', $options);
