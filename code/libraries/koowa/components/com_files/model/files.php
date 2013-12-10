@@ -28,6 +28,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
         		'map'     => array($this, 'iteratorMap'),
             	'sort'    => $state->sort
         	));
+
         	if ($files === false) {
         		throw new UnexpectedValueException('Invalid folder');
         	}
@@ -45,8 +46,8 @@ class ComFilesModelFiles extends ComFilesModelNodes
             {
                 $data[] = array(
                 	'container' => $state->container,
-                	'folder' => $state->folder,
-                	'name' => $file
+                	'folder'    => $state->folder,
+                	'name'      => $file
                 );
             }
 
@@ -69,7 +70,8 @@ class ComFilesModelFiles extends ComFilesModelNodes
 		$filename  = basename($path);
 		$extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-		if ($state->name) {
+		if ($state->name)
+        {
 			if (!in_array($filename, (array) $state->name)) {
 				return false;
 			}
