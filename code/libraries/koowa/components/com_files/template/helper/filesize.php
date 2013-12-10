@@ -17,7 +17,7 @@ class ComFilesTemplateHelperFilesize extends KTemplateHelperAbstract
 {
 	public function humanize($config = array())
 	{
-		$config = new KObjectConfig($config);
+		$config = new KObjectConfigJson($config);
 		$config->append(array(
 			'sizes' => array('Bytes', 'KB', 'MB', 'GB', 'TB', 'PB')
 		));

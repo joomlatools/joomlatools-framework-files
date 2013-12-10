@@ -24,7 +24,7 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
      */
     public function pagination($config = array())
     {
-        $config = new KObjectConfig($config);
+        $config = new KObjectConfigJson($config);
         $config->append(array(
             'limit'   => 0,
         ));

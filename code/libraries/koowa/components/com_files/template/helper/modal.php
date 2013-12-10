@@ -17,7 +17,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
 {
 	public function select($config = array())
 	{
-        $config = new KObjectConfig($config);
+        $config = new KObjectConfigJson($config);
         $config->append(array(
             'name' => '',
             'attribs' => array(),

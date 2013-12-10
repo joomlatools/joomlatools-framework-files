@@ -31,7 +31,7 @@ class ComFilesTemplateHelperIcon extends KTemplateHelperAbstract
      */
     public function icon($config = array())
     {
-        $config = new KObjectConfig($config);
+        $config = new KObjectConfigJson($config);
         $config->append(array(
             'extension' => null
         ));

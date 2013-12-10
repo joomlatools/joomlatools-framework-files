@@ -19,7 +19,7 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperAbstract
 {
     public function javascript($config = array())
     {
-        $config = new KObjectConfig($config);
+        $config = new KObjectConfigJson($config);
         $config->append(array(
             'keys' => array(
                 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB',
