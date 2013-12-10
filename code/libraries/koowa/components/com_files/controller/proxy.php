@@ -26,8 +26,7 @@
 		);
 
 		if (!function_exists('curl_init')) {
-			$context->setError(new Exception('Curl library does not exist', KHttpResponse::SERVICE_UNAVAILABLE));
-			return;
+			throw new RuntimeException('Curl library does not exist', KHttpResponse::SERVICE_UNAVAILABLE);
 		}
 
 		$ch = curl_init();
@@ -44,13 +43,12 @@
 		$response = curl_exec($ch);
 
 		if (curl_errno($ch)) {
-			$context->setError(new Exception('Curl Error: '.curl_error($ch), KHttpResponse::SERVICE_UNAVAILABLE));
-			return;
+			throw new RuntimeException('Curl Error: '.curl_error($ch), KHttpResponse::SERVICE_UNAVAILABLE);
 		}
 
 		$info = curl_getinfo($ch);
 		if (isset($info['http_code']) && $info['http_code'] != 200) {
-			$context->setError(new Exception($data['url'].' Not Found', $info['http_code']));
+			throw new RuntimeException($data['url'].' Not Found', $info['http_code']);
 		}
 		if (isset($info['download_content_length'])) {
 			$data['content-length'] = $info['download_content_length'];
