@@ -18,7 +18,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         var config = <?= json_encode($state->config); ?>,
             options = {
                 cookie: {
-                    path: '<?=KRequest::root()?>'
+                    path: '<?=@object('request')->getBaseUrl('site')?>'
                 },
                 state: {
                     defaults: {

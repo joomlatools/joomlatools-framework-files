@@ -23,7 +23,7 @@ window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
             cookie: {
-                path: '<?=KRequest::root()?>'
+                path: '<?=@object('request')->getBaseUrl('site')?>'
             },
             pathway: false,
 			state: {
