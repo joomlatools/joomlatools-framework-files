@@ -55,7 +55,7 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
         $state->config = $config;
 
 		$context->data->sitebase  = trim(JURI::root(), '/');
-		$context->data->token     = JSession::getFormToken();
+        $context->data->token     = $this->getObject('user')->getSession()->getToken();
 		$context->data->container = $container;
 
 		parent::fetchData($context);
