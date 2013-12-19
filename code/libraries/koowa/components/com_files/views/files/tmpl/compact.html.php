@@ -13,7 +13,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <script src="media://koowa/com_files/js/files.compact.js" />
 
 <style src="media://koowa/com_files/css/files.css" />
-<style src="media://koowa/com_files/css/files-compact.css" />
 
 <script>
 Files.sitebase = '<?= $sitebase; ?>';
@@ -67,7 +66,7 @@ window.addEvent('domready', function() {
 	<?= @helper('tabs.endPanel'); ?>
 	<?= @helper('tabs.startPanel', array('title' => @translate('Upload'))); ?>
 
-		<?= @import('com:files.files.uploader.html'); ?>
+        <?= @import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
 
 	<?= @helper('tabs.endPanel'); ?>
 	<?= @helper('tabs.endPane'); ?>
