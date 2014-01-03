@@ -48,4 +48,12 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
 
         return false;
     }
+
+    // FIXME: this is here because forwarded dispatchers still render results
+    protected function _actionSend(KDispatcherContextInterface $context)
+    {
+        if (!$context->getRequest()->isGet() || $context->getResponse()->getContentType() !== 'text/html') {
+            return parent::_actionSend($context);
+        }
+    }
 }
