@@ -105,7 +105,6 @@
         tbody tr.files-node {
             //Image column @TODO implement class hooks instead of using nth-child selectors
             td:nth-child(2) {
-                padding-right: 0px;
                 img {
                     height: auto!important;
                     width: 32px;
@@ -118,6 +117,11 @@
                 td:nth-child(2) {
                     padding-top: 4px;
                     padding-bottom: 4px;
+
+                    .footable-toggle:before {
+                        height: 0;
+                        overflow: hidden;
+                    }
                 }
             }
             &.files-file {
