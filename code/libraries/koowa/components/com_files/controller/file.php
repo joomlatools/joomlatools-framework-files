@@ -19,8 +19,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 	{
 		parent::__construct($config);
 
-		$this->registerCallback('before.add'  , array($this, 'addFile'));
-        $this->registerCallback('before.edit' , array($this, 'addFile'));
+		$this->registerCallback('before.add'   , array($this, 'addFile'));
+        $this->registerCallback('before.edit'  , array($this, 'addFile'));
 	}
 	
 	protected function _initialize(KObjectConfig $config)
@@ -70,7 +70,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
             // Note: PHP converts dots to underscores in cookie names
             $cookie = json_decode($this->getObject('request')->cookies['com_files_container_'.$container->slug.'_state'], true);
 
-            if (is_array($cookie))
+            if (strpos($query->layout, 'compact') === false && is_array($cookie))
             {
                 // Check if the folder exists, folder shouldn't exist in query for cookie to be used
                 if (isset($cookie['folder']))
