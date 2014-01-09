@@ -514,7 +514,10 @@ Files.App = new Class({
             opts = kQuery.extend(true, {}, {
                 onSelectNode: function(node) {
 					if (node.id || node.url) {
-						that.navigate(node && node.id ? node.id : '');
+                        var path = node && node.id ? node.id : '';
+                        if (path != that.active) {
+                            that.navigate();
+                        }
 					}
 				},
 				root: {
@@ -526,7 +529,7 @@ Files.App = new Class({
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
 			this.addEvent('afterNavigate', function(path, type) {
-				if(!type || (type != 'initial' && type != 'stateless')) {
+				if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
                     that.tree.selectPath(path);
                 }
 			});
