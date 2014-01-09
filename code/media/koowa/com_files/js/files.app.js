@@ -516,7 +516,7 @@ Files.App = new Class({
 					if (node.id || node.url) {
                         var path = node && node.id ? node.id : '';
                         if (path != that.active) {
-                            that.navigate();
+                            that.navigate(path);
                         }
 					}
 				},
