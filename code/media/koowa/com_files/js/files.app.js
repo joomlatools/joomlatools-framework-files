@@ -526,7 +526,7 @@ Files.App = new Class({
 			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '0'}));
 
 			this.addEvent('afterNavigate', function(path, type) {
-				if(!type || (type && type != 'initial')) {
+				if(!type || (type != 'initial' && type != 'stateless')) {
                     that.tree.selectPath(path);
                 }
 			});
