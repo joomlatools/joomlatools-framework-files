@@ -416,8 +416,7 @@ Files.App = new Class({
                     offset = Files.app.paginator.values.offset;
 
                 if (total) {
-                    var page_count = Math.ceil(total/limit);
-                    offset = (page_count-1)*limit;
+                    offset = limit ? Math.floor((offset/limit)*limit) : 0;
                 }
 
 				this.state.set('offset', offset);
