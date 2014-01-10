@@ -66,7 +66,7 @@ window.addEvent('domready', function() {
 			<input type="checkbox" class="files-select" value="" />
 		</td>
 		<td>
-            <img src="media://koowa/com_files/images/folder-64.png" height="24px" alt="[%=name%]" border="0" />
+            <span class="koowa_icon koowa-icon-folder"><i>[%=name%]</i></span>
 		</td>
 		<td colspan="3">
 			<a href="#" class="navigate">
@@ -81,9 +81,19 @@ window.addEvent('domready', function() {
 		<td>
 			<input type="checkbox" class="files-select" value="" />
 		</td>
-		<td>
-            <img src="media://koowa/com_files/images/document-64.png" height="24px" alt="[%=name%]" border="0" />
-		</td>
+        [%
+        var icon = 'default',
+        extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
+
+        kQuery.each(Files.icon_map, function(key, value) {
+        if (kQuery.inArray(extension, value) !== -1) {
+        icon = key;
+        }
+        });
+        %]
+        <td>
+            <span class="koowa_icon koowa-icon-[%=icon%]"><i>[%=icon%]</i></span>
+        </td>
 		<td>
 			<a href="#" class="navigate">
 				[%=name%]
@@ -107,7 +117,7 @@ window.addEvent('domready', function() {
             [% if (typeof thumbnail === 'string') { %]
                 <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
             [% } else { %]
-                <img src="media://koowa/com_files/images/image-16.png" height="24px" alt="[%=name%]" border="0" />
+                <span class="koowa_icon koowa-icon-image"><i>[%=name%]</i></span>
             [% } %]
 		</td>
 		<td>

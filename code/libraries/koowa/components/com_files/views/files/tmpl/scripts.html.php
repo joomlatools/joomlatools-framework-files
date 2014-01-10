@@ -61,3 +61,5 @@ kQuery(function($) {
 });
 </script>
 <![endif]-->
+
+<?= @helper('icon.icon_map'); ?>

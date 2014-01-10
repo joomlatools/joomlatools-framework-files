@@ -23,6 +23,20 @@ class ComFilesTemplateHelperIcon extends KTemplateHelperAbstract
         return self::$icon_extension_map;
     }
 
+    public function icon_map($config = array())
+    {
+        $icon_map = json_encode(self::getIconExtensionMap());
+
+        $html = "
+            <script>
+            if (typeof Files === 'undefined') Files = {};
+
+            Files.icon_map = $icon_map;
+            </script>";
+
+        return $html;
+    }
+
     /**
      * Gets the icon for the given extension
      *
