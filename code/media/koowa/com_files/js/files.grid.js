@@ -76,7 +76,7 @@ Files.Grid = new Class({
 		    }
 			if (e.target.get('tag') == 'input') {
 				e.target.setProperty('checked', !e.target.getProperty('checked'));
-			};
+			}
 			var box = e.target.getParent('.files-node-shadow');
 			if (!box) {
 				box = e.target.match('.files-node') ? e.target :  e.target.getParent('.files-node');
@@ -118,8 +118,7 @@ Files.Grid = new Class({
 			var chain = new Chain(),
 				chain_call = function() {
 					chain.callChain();
-				},
-				that = this;
+				};
 
 			this.addEvent('afterCheckNode', function() {
 				var checked = this.container.getElements('input[type=checkbox]:checked');
@@ -130,7 +129,7 @@ Files.Grid = new Class({
 				e.stop();
 
 				var file_count = 0,
-					files = []
+					files = [],
 					folder_count = 0,
 					folders = [],
 					checkboxes = this.container.getElements('input[type=checkbox]:checked.files-select')
@@ -195,7 +194,6 @@ Files.Grid = new Class({
 		}
 
 		if (this.options.switchers) {
-			var that = this;
             this.options.switchers.addEvent('click', function(e) {
                 e.stop();
                 var layout = this.get('data-layout');
@@ -267,7 +265,7 @@ Files.Grid = new Class({
 		this.fireEvent('afterRender');
 	},
 	renderObject: function(object, position) {
-		var position = position || 'alphabetical';
+		position = position || 'alphabetical';
 
 		this.fireEvent('beforeRenderObject', {object: object, position: position});
 
