@@ -462,7 +462,7 @@ window.addEvent('domready', function() {
     var request = new Request.JSON({
         url: Files.app.createRoute({view: 'file', folder: Files.app.getPath()}),
         data: {
-            action: 'add',
+            _method: 'put',
             _token: Files.token,
             file: ''
         },
