@@ -16,12 +16,21 @@
  * @author  Stian Didriksen <https://github.com/stipsan>
  * @package Koowa\Component\Files
  */
- class ComFilesControllerProxy extends ComFilesControllerAbstract
+class ComFilesControllerProxy extends ComFilesControllerAbstract
 {
-	public function _actionRender(KControllerContextInterface $context)
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'model' => 'koowa:model.empty'
+        ));
+
+        parent::_initialize($config);
+    }
+
+    public function _actionRender(KControllerContextInterface $context)
 	{
 		$data = array(
-			'url' => $this->_request->url, 
+			'url' => $context->getRequest()->query->get('url', 'url'),
 			'content-length' => false
 		);
 
@@ -30,8 +39,8 @@
 		}
 
 		$ch = curl_init();
+
 		curl_setopt($ch, CURLOPT_URL, $data['url']);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
@@ -47,16 +56,17 @@
 		}
 
 		$info = curl_getinfo($ch);
+
 		if (isset($info['http_code']) && $info['http_code'] != 200) {
 			throw new RuntimeException($data['url'].' Not Found', $info['http_code']);
 		}
+
 		if (isset($info['download_content_length'])) {
 			$data['content-length'] = $info['download_content_length'];
 		}
 
-
 		curl_close($ch);
 
-		return json_encode($data);
+		return $data;
 	}
 }
