@@ -109,9 +109,9 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 	{
 		if(!($this->_children instanceof KDatabaseRowsetInterface))
 		{
-			$identifier         = clone $this->getIdentifier();
-			$identifier->path   = array('database', 'rowset');
-			$identifier->name   = KStringInflector::pluralize($this->getIdentifier()->name);
+			$identifier         = $this->getIdentifier()->toArray();
+			$identifier['path'] = array('database', 'rowset');
+			$identifier['name'] = KStringInflector::pluralize($this->getIdentifier()->name);
 
 			//The row default options
 			$options  = array(
@@ -137,7 +137,7 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 	/**
 	 * Set the parent node
 	 *
-	 * @return ComArticlesDatabaseRowNode
+	 * @return ComFilesDatabaseRowNode
 	 */
 	public function setParent( $node )
 	{

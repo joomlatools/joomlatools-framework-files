@@ -98,17 +98,17 @@ class ComFilesModelNodes extends KModelAbstract
 
     public function getRow(array $options = array())
     {
-        $identifier         = clone $this->getIdentifier();
-        $identifier->path   = array('database', 'row');
-        $identifier->name   = KStringInflector::singularize($this->getIdentifier()->name);
+        $identifier         = $this->getIdentifier()->toArray();
+        $identifier['path'] = array('database', 'row');
+        $identifier['name'] = KStringInflector::singularize($this->getIdentifier()->name);
 
         return $this->getObject($identifier, $options);
     }
 
     public function getRowset(array $options = array())
     {
-        $identifier         = clone $this->getIdentifier();
-        $identifier->path   = array('database', 'rowset');
+        $identifier         = $this->getIdentifier()->toArray();
+        $identifier['path'] = array('database', 'rowset');
 
         return $this->getObject($identifier, $options);
     }
