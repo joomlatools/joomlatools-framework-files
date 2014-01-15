@@ -67,6 +67,9 @@ class ComFilesControllerProxy extends ComFilesControllerAbstract
 
 		curl_close($ch);
 
+        //Set the data in the response
+        $context->response->setContent(json_encode($data), 'application/json');
+
 		return $data;
 	}
 }
