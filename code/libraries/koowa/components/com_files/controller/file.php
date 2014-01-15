@@ -48,7 +48,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
         $model  = $this->getModel();
         $result = null;
 
-        if($model->getState()->isUnique())
+        // Serve file
+        if($model->getState()->isUnique() && $this->getRequest()->getFormat() === 'html')
         {
             $file = $this->getModel()->getItem();
 
@@ -62,7 +63,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                 throw new KControllerExceptionNotFound('File not found');
             }
         }
-        else
+        elseif (!$model->getState()->isUnique())
         {
             $query     = $this->getRequest()->query;
             $container = $this->getModel()->getContainer();
@@ -95,6 +96,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 
             $result = parent::_actionRender($context);
         }
+        else $result = parent::_actionRender($context);
 
         return $result;
     }
