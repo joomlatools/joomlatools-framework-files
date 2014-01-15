@@ -15,7 +15,7 @@
  */
 class ComFilesDatabaseValidatorFolder extends ComFilesDatabaseValidatorNode
 {
-	protected function _beforeSave(KDatabaseContext $context)
+	protected function _databaseBeforeSave(KCommandInterface $context)
 	{
         $result = parent::_databaseBeforeSave($context);
 
