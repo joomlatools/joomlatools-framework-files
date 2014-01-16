@@ -19,7 +19,7 @@ class ComFilesTemplateHelperFilesize extends KTemplateHelperAbstract
 	{
 		$config = new KObjectConfigJson($config);
 		$config->append(array(
-			'sizes' => array('Bytes', 'KB', 'MB', 'GB', 'TB', 'PB')
+			'sizes' => array('B', 'KB', 'MB', 'GB', 'TB', 'PB')
 		));
 		$bytes = $config->size;
 		$result = '';
@@ -33,10 +33,6 @@ class ComFilesTemplateHelperFilesize extends KTemplateHelperAbstract
 				break;
 			}
 			$bytes /= 1024;
-		}
-
-		if ($result == 1) {
-			$size = KStringInflector::singularize($size);
 		}
 
 		return sprintf($format, $result, $this->translate($size));
