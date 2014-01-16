@@ -463,7 +463,7 @@ Files.App = new Class({
 				var target = document.id(e.target),
 				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
                     row = node.retrieve('row'),
-                    img = that.createRoute({view: 'file', format: 'html', name: row.name, folder: row.folder});
+                    img = that.createRoute({view: 'file', format: 'raw', name: row.name, folder: row.folder});
 
 				if (img) {
                     kQuery.magnificPopup.open({
@@ -629,11 +629,11 @@ Files.App = new Class({
         var self = this,
             button = document.getElement(this.options.uploader_dialog.button);
 
-        this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
-
-        document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
-
         if (button) {
+            this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
+
+            document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
+
             button.addEvent('click', function(e){
                 e.stop();
 
