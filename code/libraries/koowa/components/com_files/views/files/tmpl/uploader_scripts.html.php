@@ -500,7 +500,14 @@ window.addEvent('domready', function() {
         },
         onFailure: function(xhr) {
             submit.removeProperty('disabled');
-            alert(Files._('An error occurred with status code: ')+xhr.status);
+
+            var response = kQuery.parseJSON(xhr.response);
+            if (response && response.error) {
+                alert(Files._('An error occurred: ') + response.error);
+            } else {
+                alert(Files._('An error occurred with status code: ')+xhr.status);
+            }
+
         }
     });
     form.addEvent('submit', function(e) {
