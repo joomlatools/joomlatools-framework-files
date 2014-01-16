@@ -11,7 +11,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <textarea style="display: none" id="file_preview">
 <div style="position: relative;background-color: white;margin: 20px auto;max-width: 300px;">
 <div class="preview extension-[%=metadata.extension%]">
-    [% var view_path = Files.app.createRoute({view: 'file', format: 'raw', name: name, folder: folder}); %]
+    [% var view_path = Files.app.createRoute({view: 'file', format: 'html', name: name, folder: folder}); %]
     <span class="koowa_icon koowa-icon-document"><i>[%=name%]</i></span>
 
     <div class="btn-toolbar">
