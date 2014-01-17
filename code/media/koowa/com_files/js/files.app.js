@@ -49,68 +49,51 @@ Files.App = new Class({
         folder_dialog: {
             view: '#files-new-folder-modal',
             input: '#files-new-folder-input',
-            open_button: '#files-new-folder-toolbar',
+            open_button: '#toolbar-newfolder a',
             create_button: '#files-new-folder-create',
-            onOpen: function(){
-                var modal = this._folder_dialog.view, tmp = this._folder_dialog.tmp, handleClose = function(){
-                        modal.inject(tmp);
-
-                        SqueezeBox.removeEvent('close', handleClose);
-                    },
-                    handleOpen = function(){
-                        var focus = modal.getElement('input.focus');
-                        if (focus) {
-                            focus.focus();
-                        }
-
-                        SqueezeBox.removeEvent('open', handleOpen);
-                    },
-                    sizes = modal.measure(function(){return this.getSize();});
-
-                SqueezeBox.addEvent('close', handleClose);
-                SqueezeBox.addEvent('open', handleOpen);
-                SqueezeBox.open(modal.setStyle('display', ''), {
-                    handler: 'adopt',
-                    size: {x: sizes.x, y: sizes.y}
-                });
-            },
-            onClose: function(){
-                SqueezeBox.close();
-            },
-            onInit: function(folder_dialog){
-                var self = this,
-                    modal = folder_dialog.view;
-
-                folder_dialog.tmp = new Element('div', {style: 'display:none'}).inject(document.body);
-                folder_dialog.tmp.grab(modal);
-                if(folder_dialog.open_button) {
-                    folder_dialog.open_button.addEvent('click', function(e) {
-                        e.stop();
-
-                        self.openFolderDialog();
-                    });
-                }
-
-                var validate = function(){
-                    if(this.value.trim()) {
-                        folder_dialog.create_button.addClass('valid').removeProperty('disabled');
-                    } else {
-                        folder_dialog.create_button.removeClass('valid').setProperty('disabled', 'disabled');
-                    }
-                };
-                folder_dialog.input.addEvent('change', validate);
-                if(window.addEventListener) {
-                    folder_dialog.input.addEventListener('input', validate);
-                } else {
-                    folder_dialog.input.addEvent('keyup', validate);
-                }
-            },
             //Fires when the form for creating a new folder is submitted
             onSubmit: function(){},
             //Fires when the json request for creating a folder is complete
             onCreate: function(folder_dialog){
                 folder_dialog.input.set('value', '');
                 folder_dialog.create_button.removeClass('valid').setProperty('disabled', 'disabled');
+            },
+            onOpen: function(folder_dialog){
+                kQuery.magnificPopup.open({
+                    items: {
+                        src: kQuery(folder_dialog.view),
+                        type: 'inline'
+                    },
+                    callbacks: {
+                        open: function(){
+                            setTimeout(function(){
+                                folder_dialog.input.focus();
+                            }, 100);
+                        }
+                    }
+                });
+            },
+            onClose: function(){
+                kQuery.magnificPopup.close();
+            },
+            onInit: function(folder_dialog){
+                var input    = kQuery(folder_dialog.input),
+                    trigger  = kQuery(folder_dialog.create_button),
+                    validate = function(){
+                        if (kQuery.trim(kQuery(this).val())) {
+                            trigger.addClass('valid').prop('disabled', false);
+                        } else {
+                            trigger.removeClass('valid').prop('disabled', true);
+                        }
+                    };
+
+                input.on('change', validate);
+
+                if(window.addEventListener) {
+                    input.on('input', validate);
+                } else {
+                    input.on('keyup', validate);
+                }
             }
         },
         uploader_dialog: {
@@ -561,6 +544,18 @@ Files.App = new Class({
 
         if(this.options.folder_dialog.onInit) {
             this.options.folder_dialog.onInit.call(this, this._folder_dialog);
+        }
+
+        if (this._folder_dialog.open_button) {
+            this._folder_dialog.open_button.addEvent('click', function(e) {
+                e.stop();
+
+                if (this.hasClass('unauthorized')) {
+                    return;
+                }
+
+                Files.app.openFolderDialog();
+            });
         }
 
         if (this._folder_dialog.view.getElement('form')) {
