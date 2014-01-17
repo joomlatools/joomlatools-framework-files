@@ -227,6 +227,20 @@ Files.Grid = new Class({
 		row.checked = !old;
 		checkbox.setProperty('checked', !old);
 
+        var tbody = node.getParent('tbody');
+
+        if (tbody) {
+            var length = tbody.getElements('.selected').length;
+
+            if (length === 1) {
+                tbody.addClass('selected-single').removeClass('selected-multiple');
+            } else if (length > 1) {
+                tbody.addClass('selected-multiple').removeClass('selected-single');
+            } else {
+                tbody.removeClass('selected-multiple').removeClass('selected-single');
+            }
+        }
+
 		if (fire_events !== false) {
 			this.fireEvent('afterCheckNode', {row: row, checkbox: checkbox});
 		}
