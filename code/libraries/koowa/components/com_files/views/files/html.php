@@ -47,6 +47,10 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
             unset($query['config']);
             $query['thumbnails'] = $this->getModel()->getContainer()->parameters->thumbnails;
 
+            if (strpos($this->getLayout(), 'compact') !== false) {
+                $query['limit'] = 0;
+            }
+
             $config['initial_response'] = $this->getObject('com:files.controller.node', array('query' => $query))
                 ->format('json')
                 ->render();
