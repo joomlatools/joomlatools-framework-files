@@ -186,7 +186,8 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
         $thumb_memory = ceil($thumb['x'] * $thumb['y'] * $bits * $channels / 8 * $tweak_factor);
 
         //If memory is limited
-        if ($limit = ini_get('memory_limit') != '-1')
+        $limit = ini_get('memory_limit');
+        if ($limit != '-1')
         {
             $limit = self::convertToBytes($limit);
             $available_memory = $limit - memory_get_usage();
