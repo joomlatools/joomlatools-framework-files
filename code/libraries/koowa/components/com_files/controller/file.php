@@ -19,8 +19,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 	{
 		parent::__construct($config);
 
-        $this->addCommandHandler('before.add'   , 'addFile');
-        $this->addCommandHandler('before.edit'  , 'addFile');
+        $this->addCommandHandler('before.add' , '_setFile');
+        $this->addCommandHandler('before.edit', '_setFile');
 	}
 	
 	protected function _initialize(KObjectConfig $config)
@@ -32,7 +32,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 		parent::_initialize($config);
 	}
 
-	public function addFile(KControllerContextInterface $context)
+	public function _setFile(KControllerContextInterface $context)
 	{
 		if (empty($context->request->data->file) && $context->request->files->has('file'))
 		{
