@@ -15,7 +15,7 @@
  */
 class ComFilesDatabaseValidatorNode extends KCommandInvokerDynamic
 {
-	protected function _databaseBeforeSave(KCommandInterface $context)
+	protected function _beforeSave(KCommandInterface $context)
 	{
         $row = $context->getSubject();
 
@@ -29,7 +29,7 @@ class ComFilesDatabaseValidatorNode extends KCommandInvokerDynamic
 		return true;
 	}
 
-	protected function _databaseBeforeCopy(KCommandInterface $context)
+	protected function _beforeCopy(KCommandInterface $context)
 	{
 		$row        = $context->subject;
 		$translator = $this->getObject('translator');
@@ -65,7 +65,7 @@ class ComFilesDatabaseValidatorNode extends KCommandInvokerDynamic
 		return true;
 	}
 
-	protected function _databaseBeforeMove(KCommandInterface $context)
+	protected function _beforeMove(KCommandInterface $context)
 	{
 		return $this->_beforeCopy($context);
 	}

@@ -15,7 +15,7 @@
  */
 class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 {
-	protected function _databaseBeforeSave(KCommandInterface $context)
+	protected function _beforeSave(KCommandInterface $context)
 	{
 		$row = $context->subject;
 
@@ -43,7 +43,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 			}
 		}
 
-        $result = parent::_databaseBeforeSave($context);
+        $result = parent::_beforeSave($context);
 
         if ($result)
         {
