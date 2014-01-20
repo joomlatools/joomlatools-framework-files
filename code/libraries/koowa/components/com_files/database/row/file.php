@@ -21,8 +21,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 	{
 		parent::__construct($config);
 
-        $this->addCommandHandler('after.save'  , 'saveThumbnail');
-        $this->addCommandHandler('after.delete', 'deleteThumbnail');
+        $this->addBehavior('com:files.database.behavior.thumbnail');
 	}
 
 	public function save()
@@ -156,38 +155,5 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 			default:
 				return array('width' => $width, 'height' => $height);
 		}
-	}
-
-	public function saveThumbnail(KCommandInterface $context = null)
-	{
-		$result = null;
-		$available_extensions = array('jpg', 'jpeg', 'gif', 'png');
-
-		if ($this->isImage() 
-			&& $this->getContainer()->getParameters()->thumbnails
-			&& in_array(strtolower($this->extension), $available_extensions)
-		) {
-			$parameters = $this->getContainer()->getParameters();
-			$thumbnails_size = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
-			$thumb = $this->getObject('com:files.database.row.thumbnail', array('size' => $thumbnails_size));
-			$thumb->source = $this;
-
-			$result = $thumb->save();
-		}
-
-		return $result;
-	}
-
-	public function deleteThumbnail(KCommandInterface $context = null)
-	{
-		$thumb = $this->getObject('com:files.model.thumbnails')
-            ->container($this->container)
-            ->folder($this->folder)
-            ->filename($this->name)
-			->getItem();
-
-		$result = $thumb->delete();
-
-		return $result;
 	}
 }
