@@ -21,8 +21,8 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 	{
 		parent::__construct($config);
 
-		$this->registerCallback('after.save'  , array($this, 'saveThumbnail'));
-		$this->registerCallback('after.delete', array($this, 'deleteThumbnail'));
+        $this->addCommandHandler('after.save'  , 'saveThumbnail');
+        $this->addCommandHandler('after.delete', 'deleteThumbnail');
 	}
 
 	public function save()
@@ -32,17 +32,17 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 
 		$is_new = $this->isNew();
 
-		if ($this->getCommandChain()->run('before.save', $context, false) !== false)
+		if ($this->invokeCommand('before.save', $context) !== false)
 		{
 			$context->result = $this->_adapter->write(!empty($this->contents) ? $this->contents : $this->file);
-
-			$this->getCommandChain()->run('after.save', $context);
+			$this->invokeCommand('after.save', $context);
         }
 
 		if ($context->result === false) {
 			$this->setStatus(KDatabase::STATUS_FAILED);
-		}
-		else $this->setStatus($is_new ? KDatabase::STATUS_CREATED : KDatabase::STATUS_UPDATED);
+		} else {
+            $this->setStatus($is_new ? KDatabase::STATUS_CREATED : KDatabase::STATUS_UPDATED);
+        }
 
 		return $context->result;
 	}

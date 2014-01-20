@@ -32,16 +32,14 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 				$config->validator = 'com:files.database.validator.'.$this->getIdentifier()->name;
 			}
 
-			$this->getCommandChain()->enqueue($this->getObject($config->validator));
+			$this->addCommandInvoker($this->getObject($config->validator));
 		}
 	}
 
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'dispatch_events'   => false,
-			'enable_callbacks'  => true,
-			'validator' 		=> true
+			'validator' => true
 		));
 
 		parent::_initialize($config);
@@ -57,10 +55,10 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		$context = $this->getContext();
 		$context->result = false;
 
-		if ($this->getCommandChain()->run('before.copy', $context, false) !== false)
+		if ($this->invokeCommand('before.copy', $context) !== false)
 		{
 			$context->result = $this->_adapter->copy($this->destination_fullpath);
-			$this->getCommandChain()->run('after.copy', $context);
+			$this->invokeCommand('after.copy', $context);
         }
 
 		if ($context->result === false) {
@@ -86,11 +84,10 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		$context = $this->getContext();
 		$context->result = false;
 
-		if ($this->getCommandChain()->run('before.move', $context, false) !== false)
+		if ($this->invokeCommand('before.move', $context) !== false)
 		{
 			$context->result = $this->_adapter->move($this->destination_fullpath);
-
-			$this->getCommandChain()->run('after.move', $context);
+			$this->invokeCommand('after.move', $context);
         }
 
 		if ($context->result === false) {
@@ -117,10 +114,10 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		$context = $this->getContext();
 		$context->result = false;
 
-		if ($this->getCommandChain()->run('before.delete', $context, false) !== false)
+		if ($this->invokeCommand('before.delete', $context) !== false)
 		{
 			$context->result = $this->_adapter->delete();
-			$this->getCommandChain()->run('after.delete', $context);
+			$this->invokeCommand('after.delete', $context);
         }
 
 		if ($context->result === false) {

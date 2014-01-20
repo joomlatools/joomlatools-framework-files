@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseValidatorNode extends KCommandInvokerAbstract
+class ComFilesDatabaseValidatorNode extends KCommandInvokerDynamic
 {
 	protected function _databaseBeforeSave(KCommandInterface $context)
 	{
