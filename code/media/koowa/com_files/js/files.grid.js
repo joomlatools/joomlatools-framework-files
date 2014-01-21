@@ -87,6 +87,28 @@ Files.Grid = new Class({
 		this.container.addEvent('click:relay(div.imgOutline)', fireCheck.bind(this));
         this.container.addEvent('click:relay(input.files-select)', fireCheck.bind(this));
 
+        // Check the box when user clicks on the row
+        this.container.addEvent('click', function(event) {
+            if (that.layout !== 'details') {
+                return;
+            }
+
+            var target = event.target;
+            if (target.get('tag') === 'a' || target.get('tag') === 'input') {
+                return;
+            }
+
+            var node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
+
+            if(node) {
+                row = node.retrieve('row');
+
+                if (row) {
+                    that.checkNode(row);
+                }
+            }
+        });
+
 		/*
 		 * Delete events
 		 */
