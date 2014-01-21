@@ -634,14 +634,17 @@ Files.App = new Class({
      * Sets the IE Flash workaround and FLOC fix, and hooks the markup with events for the uploader dialog
      */
     setUploaderDialog: function(){
-        var self = this,
-            button = document.getElement(this.options.uploader_dialog.button);
+        var self   = this,
+            button = document.getElement(this.options.uploader_dialog.button),
+            view   = document.getElement(this.options.uploader_dialog.view);
 
-        if (button) {
+        if (view) {
             this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
 
             document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
+        }
 
+        if (button) {
             button.addEvent('click', function(e){
                 e.stop();
 
