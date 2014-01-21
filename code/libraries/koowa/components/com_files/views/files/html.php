@@ -22,7 +22,7 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 		parent::_initialize($config);
 	}
 
-    public function fetchData(KViewContext $context)
+    protected function _fetchData(KViewContext $context)
 	{
 	    $state     = $this->getModel()->getState();
         $container = $this->getModel()->getContainer();
@@ -62,6 +62,6 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
         $context->data->token     = $this->getObject('user')->getSession()->getToken();
 		$context->data->container = $container;
 
-		parent::fetchData($context);
+		parent::_fetchData($context);
 	}
 }
