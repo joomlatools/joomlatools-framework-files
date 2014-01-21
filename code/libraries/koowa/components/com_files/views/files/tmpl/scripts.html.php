@@ -30,7 +30,7 @@ JHtml::_('behavior.modal');
 <?= @helper('behavior.keepalive'); ?>
 <?= @helper('behavior.tooltip'); ?>
 <?= @helper('behavior.modal'); ?>
-<?= @helper('bootstrap.load'); ?>
+<?= @helper('bootstrap.load', array('wrapper' => false)); ?>
 <?= @helper('behavior.tree'); ?>
 
 <script src="media://koowa/com_files/js/history/history.js" />
