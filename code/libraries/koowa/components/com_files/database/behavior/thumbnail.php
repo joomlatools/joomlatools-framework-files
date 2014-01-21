@@ -15,18 +15,30 @@
  */
 class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
 {
-    public function saveThumbnail(KCommandInterface $context = null)
+    /**
+     * Constructor.
+     *
+     * @param KObjectConfig $config	An optional KObjectConfig object with configuration options.
+     */
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->addCommandHandler('after.save'  , 'saveThumbnail');
+        $this->addCommandHandler('after.delete', 'deleteThumbnail');
+    }
+
+    public function saveThumbnail()
     {
         $result = null;
         $available_extensions = array('jpg', 'jpeg', 'gif', 'png');
 
-        if ($this->isImage()
-            && $this->getContainer()->getParameters()->thumbnails
-            && in_array(strtolower($this->extension), $available_extensions)
-        ) {
-            $parameters = $this->getContainer()->getParameters();
-            $thumbnails_size = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
-            $thumb = $this->getObject('com:files.database.row.thumbnail', array('size' => $thumbnails_size));
+        if ($this->isImage() && $this->getContainer()->getParameters()->thumbnails && in_array(strtolower($this->extension), $available_extensions))
+        {
+            $parameters  = $this->getContainer()->getParameters();
+            $size        = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
+
+            $thumb = $this->getObject('com:files.database.row.thumbnail', array('size' => $size));
             $thumb->source = $this;
 
             $result = $thumb->save();
@@ -35,7 +47,7 @@ class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
         return $result;
     }
 
-    public function deleteThumbnail(KCommandInterface $context = null)
+    public function deleteThumbnail()
     {
         $thumb = $this->getObject('com:files.model.thumbnails')
             ->container($this->container)
@@ -46,15 +58,5 @@ class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
         $result = $thumb->delete();
 
         return $result;
-    }
-
-    protected function _afterSave(KCommandInterface $context = null)
-    {
-        return $this->saveThumbnail($context);
-    }
-
-    protected function _afterDelete(KCommandInterface $context = null)
-    {
-        return $this->deleteThumbnail($context);
     }
 }
