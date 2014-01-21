@@ -16,6 +16,10 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
 
 <script>
 window.addEvent('domready', function() {
+    if (kQuery('#files-upload-multi').length === 0) {
+        return;
+    }
+    
     var element = kQuery('#files-upload-multi'),
         browse_label = Files._('Choose file');
 
@@ -392,7 +396,7 @@ window.addEvent('domready', function() {
         document.id('files-uploader-'+type).setStyle('display', 'block');
 
         // Plupload needs to be refreshed if it was hidden
-        if (type == 'computer') {
+        if (type == 'computer' && kQuery('#files-upload-multi').length) {
             var uploader = kQuery('#files-upload-multi').pluploadQueue();
             if(!uploader.files.length && !uploader.features.dragdrop) {
                 document.id('files-upload').removeClass('uploader-files-queued').addClass('uploader-files-empty');

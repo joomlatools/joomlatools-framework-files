@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die;
 
-$can_upload = @object('user')->authorise('com_docman.upload', 'com_docman');
+$can_upload = isset($state->config['can_upload']) ? $state->config['can_upload'] : true;
 ?>
 
 <?= @import('com:files.files.scripts.html'); ?>
