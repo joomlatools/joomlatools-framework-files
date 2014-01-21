@@ -83,14 +83,59 @@ window.addEvent('domready', function() {
 
         modifying_queue = false;
     },
+    // Check to see if the file exists
+    fileExists = function(name) {
+        var result = false;
+
+        kQuery.each(Files.app.grid.nodes, function(key, value) {
+            if (result === true) {
+                return true;
+            }
+
+            if (value.name === name) {
+                result = true;
+            }
+        });
+
+        return result;
+    },
+    // Get a unique file name by appending (1) (2) etc.
+    getUniqueName = function(name) {
+        var i = 1,
+            extension = name.substr(name.lastIndexOf('.')+1),
+            base = name.substr(0, name.lastIndexOf('.'));
+
+        while (fileExists(name)) {
+            name = base+' ('+i+').'+extension;
+            i++;
+        }
+
+        return name;
+    },
+    renameDuplicates = function(uploader) {
+        if (uploader.files.length && fileExists(uploader.files[0].name)) {
+            if (confirm(overwrite_prompt)) {
+                uploader.settings.multipart_params.overwrite = 1;
+            } else {
+                uploader.settings.multipart_params.overwrite = 0;
+
+                var file = uploader.files[0];
+                file.name = getUniqueName(file.name);
+            }
+        }
+
+        modifying_queue = false;
+    },
     // These two variables are used to make sure we only trigger below events once
     initial_add = true,
-    modifying_queue = false;
+    modifying_queue = false,
+    overwrite_prompt = <?= json_encode(@translate('A file with the same name already exists. Would you like to overwrite it?')); ?>;
 
     uploader.bind('FilesAdded', function(uploader) {
         if (initial_add === true) {
             modifying_queue = true;
             removeExcessFiles(uploader);
+            renameDuplicates(uploader);
             initial_add = false;
         }
     });
@@ -101,6 +146,7 @@ window.addEvent('domready', function() {
 
         modifying_queue = true;
         removeExcessFiles(uploader);
+        renameDuplicates(uploader);
     });
     <? endif; ?>
 
