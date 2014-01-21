@@ -66,7 +66,7 @@ class ComFilesIteratorDirectory extends DirectoryIterator
         $results = array();
         foreach (new self($config->path) as $file)
         {
-            if ($file->isDot() || in_array($file->getFilename(), $exclude)) {
+            if ($file->isDot() || strpos($file->getFilename(), 0, 2) === '._' || in_array($file->getFilename(), $exclude)) {
                 continue;
             }
 
