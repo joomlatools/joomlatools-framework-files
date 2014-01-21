@@ -111,6 +111,7 @@ Files.App = new Class({
 			}
 		},
 		initial_response: null,
+        refresh_button: '#toolbar-refresh',
 
 		onAfterSetGrid: function(){
 		    window.addEvent('resize', function(){
@@ -169,6 +170,18 @@ Files.App = new Class({
 		if (this.options.container) {
 			this.setContainer(this.options.container);
 		}
+
+        if (this.options.refresh_button) {
+            var refresh = document.getElement(this.options.refresh_button),
+                self    = this;
+
+            if (refresh) {
+                refresh.addEvent('click', function(e) {
+                    e.stop();
+                    self.navigate(undefined, 'stateless', true);
+                });
+            }
+        }
 	},
 	setState: function() {
 		this.fireEvent('beforeSetState');
