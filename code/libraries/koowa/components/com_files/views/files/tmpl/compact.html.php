@@ -49,25 +49,70 @@ window.addEvent('domready', function() {
 
 <?= @import('com:files.files.templates_compact.html');?>
 
-<div id="files-compact" class="com_files">
-	<?=	@helper('tabs.startPane', array('id' => 'pane_insert')); ?>
-	<?= @helper('tabs.startPanel', array('title' => 'Insert')); ?>
-		<div id="insert">
-			<div id="files-tree-container" style="float: left">
-				<div id="files-tree"></div>
-			</div>
+<div class="docman_dialog docman_dialog--file_dialog">
+    <div class="docman_dialog__menu">
+        <a class="docman_dialog__menu__child--insert"><?= @translate('Select'); ?></a>
+        <a class="docman_dialog__menu__child--download"><?= @translate('Upload'); ?></a>
+    </div>
+    <div class="docman_dialog__layout">
+        <div class="docman_dialog__wrapper">
+            <div class="docman_dialog__wrapper__child docman_dialog__file_dialog_categories">
+                <h2 class="docman_dialog__title">
+                    <?= @translate('Select a folder'); ?>
+                </h2>
+                <div class="docman_dialog__child__content docman_dialog__folders_files">
+                    <div class="docman_dialog__child__content__box">
+                        <div class="docman_dialog__files_tree" id="files-tree" style="overflow: auto; height: auto;"></div>
+                    </div>
+                    <div class="docman_dialog__new_folder">
+                        <h2 class="docman_dialog__title docman_dialog__title--child">
+                            <?= @translate('Create a new folder'); ?>
+                        </h2>
+                        <div class="docman_dialog__block" id="files-new-folder-modal">
+                            <div class="input-group" style="margin:0;">
+                                <input type="text" class="input-group-form-control" id="files-new-folder-input" />
+                        <span class="input-group-btn">
+                            <button id="files-new-folder-create" class="btn" disabled><?= @translate('Add folder'); ?></button>
+                        </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-			<div id="files-grid" style="float: left"></div>
-			<div id="details" style="float: left;">
-				<div id="files-preview"></div>
-			</div>
-			<div class="clear" style="clear: both"></div>
-		</div>
-	<?= @helper('tabs.endPanel'); ?>
-	<?= @helper('tabs.startPanel', array('title' => @translate('Upload'))); ?>
+            <div class="docman_dialog__wrapper__child docman_dialog__file_dialog_files">
+                <h2 class="docman_dialog__title">
+                    <?= @translate('Select a file'); ?>
+                </h2>
+                <div class="docman_dialog__child__content">
+                    <div class="docman_dialog__child__content__box">
+                        <div id="files-grid">
 
-        <?= @import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
-
-	<?= @helper('tabs.endPanel'); ?>
-	<?= @helper('tabs.endPane'); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="docman_dialog__wrapper__child docman_dialog__file_dialog_insert">
+                <h2 class="docman_dialog__title">
+                    <?= @translate('Selected file info'); ?>
+                </h2>
+                <div class="docman_dialog__child__content">
+                    <div class="docman_dialog__child__content__box">
+                        <div id="files-preview"></div>
+                        <div id="insert-button-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="docman_dialog__file_dialog_upload" class="docman_dialog__wrapper__child docman_dialog__file_dialog_upload">
+                <h2 class="docman_dialog__title">
+                    <?= @translate('Upload files to docman'); ?>
+                </h2>
+                <div class="docman_dialog__child__content">
+                    <div class="docman_dialog__child__content__box">
+                        <?= @import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
