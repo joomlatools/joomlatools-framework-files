@@ -234,7 +234,7 @@ window.addEvent('domready', function() {
 
                 if(!kQuery('#files-upload').is(':visible')) {
                     //@TODO the click handler is written in mootools, so we use mootools here
-                    document.id('files-show-uploader').fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
+                    document.getElement(Files.app.uploader_dialog.button).fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
                 }
             }
         });

@@ -49,11 +49,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
     <div id="files-canvas">
         <div class="path" style="height: 24px;">
-            <div class="files-toolbar-controls btn-group" style="display: none">
-                <button id="files-show-uploader" class="btn btn-mini"><?= @translate('Upload'); ?></button>
-                <button id="files-new-folder-toolbar" class="btn btn-mini"><?= @translate('New Folder'); ?></button>
-                <button id="files-batch-delete" class="btn btn-mini" disabled><?= @translate('Delete'); ?></button>
-            </div>
             <div id="files-pathway"></div>
             <div class="files-layout-controls btn-group" data-toggle="buttons-radio">
                 <button class="btn files-layout-switcher" data-layout="icons" title="<?= @translate('Show files as icons'); ?>">

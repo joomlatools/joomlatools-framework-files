@@ -40,7 +40,7 @@ Files.App = new Class({
 		},
 		grid: {
 			element: 'files-grid',
-			batch_delete: '#files-batch-delete',
+			batch_delete: '#toolbar-delete a',
 			icon_size: 150
 		},
 		paginator: {
@@ -98,7 +98,7 @@ Files.App = new Class({
         },
         uploader_dialog: {
             view: '#files-upload',
-            button: '#files-show-uploader'
+            button: '#toolbar-upload a'
         },
 		history: {
 			enabled: true
@@ -631,6 +631,10 @@ Files.App = new Class({
 
             button.addEvent('click', function(e){
                 e.stop();
+
+                if (this.hasClass('unauthorized')) {
+                    return;
+                }
 
                 self.openUploaderDialog();
             });
