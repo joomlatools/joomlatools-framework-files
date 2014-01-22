@@ -107,7 +107,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <div class="files-node-shadow">
     <div class="imgOutline [%= typeof thumbnail === 'string' ? 'thumbnails' : 'nothumbnails' %] files-node files-image [%= typeof thumbnail === 'string' ? (client_cache ? 'load' : 'loading') : '' %]">
     	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
-    		<a class="navigate koowa_icon koowa-icon-image koowa_icon--48" href="#" title="[%=name%]"
+    		<a class="navigate
+    		        [%= typeof thumbnail === 'string' ? '' : 'koowa_icon koowa-icon-image koowa_icon--48' %]"  href="#" title="[%=name%]"
     	 		data-filetype="[%=filetype%]"
     	 		data-extension="[%=metadata.extension%]">
     		[% if (typeof thumbnail === 'string') { %]
