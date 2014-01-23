@@ -19,7 +19,7 @@ window.addEvent('domready', function() {
     if (kQuery('#files-upload-multi').length === 0) {
         return;
     }
-    
+
     var element = kQuery('#files-upload-multi'),
         browse_label = Files._('Choose file');
 
@@ -85,7 +85,7 @@ window.addEvent('domready', function() {
             });
         }
 
-        modifying_queue = false;
+        //modifying_queue = false;
     },
     // Check to see if the file exists
     fileExists = function(name) {
@@ -135,14 +135,14 @@ window.addEvent('domready', function() {
     modifying_queue = false,
     overwrite_prompt = <?= json_encode(@translate('A file with the same name already exists. Would you like to overwrite it?')); ?>;
 
-    uploader.bind('FilesAdded', function(uploader) {
+    /*uploader.bind('FilesAdded', function(uploader) {
         if (initial_add === true) {
             modifying_queue = true;
             removeExcessFiles(uploader);
             renameDuplicates(uploader);
             initial_add = false;
         }
-    });
+    });*/
     uploader.bind('QueueChanged', function(uploader) {
         if (modifying_queue) {
             return;
