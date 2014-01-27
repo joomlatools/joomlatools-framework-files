@@ -26,7 +26,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
             $file->setData(array('file' => $row->file));
 
             if (!$file->load()) {
-                throw new KControllerExceptionActionFailed('File cannot be downloaded');
+                throw new RuntimeException('File cannot be downloaded');
             }
 
             $row->contents = $file->contents;
