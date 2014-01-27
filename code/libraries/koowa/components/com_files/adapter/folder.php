@@ -100,8 +100,11 @@ class ComFilesAdapterFolder extends ComFilesAdapterAbstract
 		$iter = new RecursiveDirectoryIterator($this->_path);
 		foreach (new RecursiveIteratorIterator($iter, RecursiveIteratorIterator::CHILD_FIRST) as $f) 
 		{
-			if ($f->isDir()) {
-				rmdir($f->getPathname());
+			if ($f->isDir())
+            {
+                if (!in_array($f->getFilename(), array('.', '..'))) {
+                    rmdir($f->getPathname());
+                }
 			} else {
 				unlink($f->getPathname());
 			}
