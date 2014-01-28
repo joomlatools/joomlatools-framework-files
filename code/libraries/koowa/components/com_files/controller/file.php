@@ -19,8 +19,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 	{
 		parent::__construct($config);
 
-        $this->addCommandHandler('before.add' , '_setFile');
-        $this->addCommandHandler('before.edit', '_setFile');
+        $this->addCommandCallback('before.add' , '_setFile');
+        $this->addCommandCallback('before.edit', '_setFile');
 	}
 	
 	protected function _initialize(KObjectConfig $config)

@@ -24,8 +24,8 @@ class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
     {
         parent::__construct($config);
 
-        $this->addCommandHandler('after.save'  , 'saveThumbnail');
-        $this->addCommandHandler('after.delete', 'deleteThumbnail');
+        $this->addCommandCallback('after.save'  , 'saveThumbnail');
+        $this->addCommandCallback('after.delete', 'deleteThumbnail');
     }
 
     public function saveThumbnail()
