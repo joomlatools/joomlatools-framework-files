@@ -13,9 +13,9 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseValidatorNode extends KCommandInvokerDynamic
+class ComFilesDatabaseValidatorNode extends KCommandInvokerAbstract
 {
-	protected function _beforeSave(KCommandInterface $context)
+	protected function _beforeSave(KDatabaseContextInterface $context)
 	{
         $row = $context->getSubject();
 
@@ -29,7 +29,7 @@ class ComFilesDatabaseValidatorNode extends KCommandInvokerDynamic
 		return true;
 	}
 
-	protected function _beforeCopy(KCommandInterface $context)
+	protected function _beforeCopy(KDatabaseContextInterface $context)
 	{
 		$row        = $context->subject;
 		$translator = $this->getObject('translator');
@@ -65,7 +65,7 @@ class ComFilesDatabaseValidatorNode extends KCommandInvokerDynamic
 		return true;
 	}
 
-	protected function _beforeMove(KCommandInterface $context)
+	protected function _beforeMove(KDatabaseContextInterface $context)
 	{
 		return $this->_beforeCopy($context);
 	}
