@@ -13,8 +13,9 @@ Files.Compact = {};
 Files.Compact.App = new Class({
 	Extends: Files.App,
 	Implements: [Events, Options],
-
+    cache: false,
 	options: {
+        persistent: false,
 		types: ['file', 'image'],
 		editor: null,
 		preview: 'files-preview',
