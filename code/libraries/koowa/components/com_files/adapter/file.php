@@ -28,10 +28,14 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
             try
             {
-				$this->_metadata += array(
-					'size'          => $this->_handle->getSize(),
-					'modified_date' => $this->_handle->getMTime()
-				);
+                if ($this->_handle->isReadable())
+                {
+                    $this->_metadata += array(
+                        'size'          => $this->_handle->getSize(),
+                        'modified_date' => $this->_handle->getMTime()
+                    );
+                }
+
 			}
             catch (RunTimeException $e) {}
 		}
