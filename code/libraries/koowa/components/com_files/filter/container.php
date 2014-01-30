@@ -18,7 +18,7 @@ class ComFilesFilterContainer extends KFilterAbstract
     public function validate($data)
     {
         if (is_string($data)) {
-            return $this->getObject('koowa:filter.cmd')->validate($data);
+            return $this->getObject('lib:filter.cmd')->validate($data);
         } else if (is_object($data)) {
             return true;
         }
@@ -29,7 +29,7 @@ class ComFilesFilterContainer extends KFilterAbstract
     public function sanitize($data)
     {
         if (is_string($data)) {
-            return $this->getObject('koowa:filter.cmd')->sanitize($data);
+            return $this->getObject('lib:filter.cmd')->sanitize($data);
         } else if (is_object($data)) {
             return $data;
         }

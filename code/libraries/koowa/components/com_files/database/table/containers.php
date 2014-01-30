@@ -23,7 +23,7 @@ class ComFilesDatabaseTableContainers extends KDatabaseTableAbstract
 				'path'               => 'com:files.filter.path',
 				'parameters'         => 'json'
 			),
-			'behaviors' => array('koowa:database.behavior.sluggable' => array('columns' => array('id', 'title')))
+			'behaviors' => array('lib:database.behavior.sluggable' => array('columns' => array('id', 'title')))
 		));
 
 		parent::_initialize($config);

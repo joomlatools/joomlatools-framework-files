@@ -21,7 +21,7 @@ class ComFilesControllerProxy extends ComFilesControllerAbstract
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
-            'model' => 'koowa:model.empty'
+            'model' => 'lib:model.empty'
         ));
 
         parent::_initialize($config);

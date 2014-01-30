@@ -24,7 +24,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		parent::__construct($config);
 
         // Mixin the behavior interface
-        $this->mixin('koowa:behavior.mixin', $config);
+        $this->mixin('lib:behavior.mixin', $config);
 
 		if ($config->validator !== false)
 		{

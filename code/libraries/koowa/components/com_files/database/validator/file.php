@@ -33,7 +33,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 
 			if (empty($row->name))
 			{
-				$uri = $this->getObject('koowa:http.url', array('url' => $row->file));
+				$uri = $this->getObject('lib:http.url', array('url' => $row->file));
 	        	$path = $uri->toString(KHttpUrl::PATH | KHttpUrl::FORMAT);
 	        	if (strpos($path, '/') !== false) {
 	        		$path = basename($path);
