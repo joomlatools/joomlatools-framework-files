@@ -113,7 +113,7 @@ kQuery(function($) {
         $('.koowa_dialog__file_dialog_upload').show();
     });
 
-    if ( $('body').width() <= '800' ) {
+    if ( $('body').width() <= '699' ) { // 699 is when colums go from stacked to aligned
         $('a.koowa_dialog__menu__child--download').click(function() {
             $('html, body').animate({
                 scrollTop: $("#koowa_dialog__file_dialog_upload").offset().top
