@@ -74,6 +74,7 @@ if(!Files) var Files = {};
         parseData: function(list){
             return [{
                 label: this.options.root.text,
+                id: -1, //negative 1 used as 0 doesn't work with this.selectNode
                 url: '#',
                 children: list
             }];
@@ -178,8 +179,15 @@ if(!Files) var Files = {};
             var options = this.options, self = this, initial = this.options.initial_response;
 
             this.element.bind({
-                'tree.select': // The select event happens when a node is clicked
-                    function(event) {
+                'tree.init': function(){
+                    /**
+                     * Select the root node, if no other node is selected
+                     */
+                    if(!$(this).tree('getSelectedNode')) $(this).tree('selectNode', $(this).tree('getNodeById', -1));
+                    console.log($(this).tree('getSelectedNode'));
+
+                    this.element.on('tree.select', function(event){
+
                         var element;
                         if(event.node) { // When event.node is null, it's actually a deselect event
                             element = $(event.node.element);
@@ -196,6 +204,14 @@ if(!Files) var Files = {};
                         if(event.node && !event.node.hasOwnProperty('is_open') && event.node.getLevel() === 2) {
                             self.scrollIntoView(event.node, self.element, 300);
                         }
+
+
+
+                    });
+                },
+                'tree.select': // The select event happens when a node is clicked
+                    function(event) {
+
                     },
                 'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
                     function(event) {
