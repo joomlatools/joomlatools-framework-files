@@ -74,7 +74,6 @@ if(!Files) var Files = {};
         parseData: function(list){
             return [{
                 label: this.options.root.text,
-                id: -1, //negative 1 used as 0 doesn't work with this.selectNode
                 url: '#',
                 children: list
             }];
@@ -180,13 +179,7 @@ if(!Files) var Files = {};
 
             this.element.bind({
                 'tree.init': function(){
-                    /**
-                     * Select the root node, if no other node is selected
-                     */
-                    if(!$(this).tree('getSelectedNode')) $(this).tree('selectNode', $(this).tree('getNodeById', -1));
-                    console.log($(this).tree('getSelectedNode'));
-
-                    this.element.on('tree.select', function(event){
+                    self.element.on('tree.select', function(event){
 
                         var element;
                         if(event.node) { // When event.node is null, it's actually a deselect event
@@ -205,30 +198,22 @@ if(!Files) var Files = {};
                             self.scrollIntoView(event.node, self.element, 300);
                         }
 
+                        /**
+                         * Sidebar.js will fire a resize event when it sets the height on load, we want our animated scroll
+                         * to happen after that, but not on future resize events as it would confuse the user experience
+                         */
 
-
+                        self.element.one('resize', function(){
+                            if(self.tree('getSelectedNode')) {
+                                self.scrollIntoView(self.tree('getSelectedNode'), self.element, 900);
+                            }
+                        });
                     });
                 },
-                'tree.select': // The select event happens when a node is clicked
-                    function(event) {
-
-                    },
-                'tree.open': // Animate a scroll to the node being opened so child elements scroll into view
-                    function(event) {
-                        self.scrollIntoView(event.node, self.element, 300);
-                    }
-            });
-            this.element.on('tree.select', function(){
-                /**
-                 * Sidebar.js will fire a resize event when it sets the height on load, we want our animated scroll
-                 * to happen after that, but not on future resize events as it would confuse the user experience
-                 */
-
-                self.element.one('resize', function(){
-                    if(self.tree('getSelectedNode')) {
-                        self.scrollIntoView(self.tree('getSelectedNode'), self.element, 900);
-                    }
-                });
+                // Animate a scroll to the node being opened so child elements scroll into view
+                'tree.open': function(event) {
+                    self.scrollIntoView(event.node, self.element, 300);
+                }
             });
 
         }
