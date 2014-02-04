@@ -13,6 +13,8 @@
 @rowBackgroundColor: hsl(0, 0%, 95%);
 @rowBackgroundColorHSLA: darken(fade(@rowBackgroundColor, 100-lightness(@rowBackgroundColor)), lightness(@rowBackgroundColor));
 
+@comFilesLocation: '../../../media/koowa/com_files';
+
 .linear-gradient (@from: hsla(0, 0%, 100%, 0.5), @to: hsla(0, 0%, 0%, 0.5)) {
     @fromAlphaFromFloat: ~`Math.round(parseFloat("@{from}".split(',')[3])*255)`;
     @fromAlphaToHex: ~`(parseInt("@{fromAlphaFromFloat}", 10) > 255 ? 255 : (parseInt("@{fromAlphaFromFloat}", 10) < 0 ? 0 : parseInt("@{fromAlphaFromFloat}", 10))).toString(16).toUpperCase()`;
@@ -175,7 +177,16 @@
                     display: inline-block;
                     height: 18px;
                     padding: 0 6px;
-                    background: url(../../koowa/com_files/images/arrow.png) no-repeat 0 0;
+                    background: url('@{comFilesLocation}/images/arrow.png') no-repeat center;
+                }
+
+                /* Retina-ize icons */
+
+                @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)  {
+                    .divider {
+                        background-image: url('@{comFilesLocation}/images/arrow@2x.png');
+                        background-size: 8px 16px;
+                    }
                 }
             }
 
@@ -1055,7 +1066,7 @@ table th.file-count {
 /* @group files-layout-icons.css */
 #files-app
 {
-    @comFilesLocation: '../../../media/koowa/com_files/images/';
+
     #files-grid {
         min-height: 120px;
         overflow: hidden;
@@ -1167,7 +1178,7 @@ table th.file-count {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
-        background: url('@{comFilesLocation}checker.png') repeat left top white;
+        background: url('@{comFilesLocation}/images/checker.png') repeat left top white;
     }
 
     div.imgBorder {
