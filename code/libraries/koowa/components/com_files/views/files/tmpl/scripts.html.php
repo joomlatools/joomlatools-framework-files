@@ -27,6 +27,7 @@ JHtml::_('behavior.modal');
 
 <?= @helper('behavior.mootools'); ?>
 <?= @helper('behavior.koowa'); ?>
+<?= @helper('behavior.local_dates'); ?>
 <?= @helper('behavior.keepalive'); ?>
 <?= @helper('behavior.tooltip'); ?>
 <?= @helper('behavior.modal'); ?>
