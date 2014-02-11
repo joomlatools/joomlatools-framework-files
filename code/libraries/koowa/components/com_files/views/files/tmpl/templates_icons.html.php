@@ -12,7 +12,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <div style="position: relative;background-color: white;margin: 20px auto;max-width: 300px;">
 <div class="preview extension-[%=metadata.extension%]">
     [% var view_path = Files.app.createRoute({view: 'file', format: 'html', name: name, folder: folder}); %]
-    <span class="koowa_icon koowa-icon-document"><i>[%=name%]</i></span>
+    <span class="koowa_icon--document"><i>[%=name%]</i></span>
 
     <div class="btn-toolbar">
         [% if (typeof image !== 'undefined') { %]
@@ -58,7 +58,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <div class="files-node-shadow">
     <div class="imgOutline files-node files-folder">
     	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
-    			<a href="#" class="navigate koowa_icon koowa-icon-folder koowa_icon--48"></a>
+    			<a href="#" class="navigate koowa_icon--folder koowa_icon--48"></a>
     	</div>
     	<div class="files-icons-controls">
     	<div class="controls" style="display:none">
@@ -87,7 +87,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 }
             });
             %]
-    	 	<a class="navigate koowa_icon koowa-icon-[%=icon%] koowa_icon--48 extension-label" href="#"
+    	 	<a class="navigate koowa_icon--[%=icon%] koowa_icon--48 extension-label" href="#"
     	 		data-filetype="[%=filetype%]"
     	 		data-extension="[%=metadata.extension%]"></a>
     	</div>
@@ -108,7 +108,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="imgOutline [%= typeof thumbnail === 'string' ? 'thumbnails' : 'nothumbnails' %] files-node files-image [%= typeof thumbnail === 'string' ? (client_cache ? 'load' : 'loading') : '' %]">
     	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
     		<a class="navigate
-    		        [%= typeof thumbnail === 'string' ? '' : 'koowa_icon koowa-icon-image koowa_icon--48' %]"  href="#" title="[%=name%]"
+    		        [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
     	 		data-filetype="[%=filetype%]"
     	 		data-extension="[%=metadata.extension%]">
     		[% if (typeof thumbnail === 'string') { %]
