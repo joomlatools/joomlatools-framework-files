@@ -15,8 +15,8 @@
  */
 class ComFilesControllerBehaviorPersistable extends ComKoowaControllerBehaviorPersistable
 {
-    public function getHandle()
+    public function isSupported()
     {
-        return null;
+        return false;
     }
 }
