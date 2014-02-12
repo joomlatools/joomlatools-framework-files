@@ -60,7 +60,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                     ->setPath($file->fullpath, $file->mimetype);
             }
             catch (InvalidArgumentException $e) {
-                throw new KControllerExceptionNotFound('File not found');
+                throw new KControllerExceptionResourceNotFound('File not found');
             }
         }
         elseif (!$model->getState()->isUnique())

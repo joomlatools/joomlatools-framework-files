@@ -43,7 +43,7 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 			}
 			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
-		else throw new KControllerExceptionNotFound('Resource Not Found');
+		else throw new KControllerExceptionResourceNotFound('Resource Not Found');
 
 		return $data;
 	}
@@ -64,7 +64,7 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 			}
 			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
-		else throw new KControllerExceptionNotFound('Resource Not Found');
+		else throw new KControllerExceptionResourceNotFound('Resource Not Found');
 
 		return $data;
 	}
