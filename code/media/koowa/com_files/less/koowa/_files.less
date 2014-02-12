@@ -111,38 +111,6 @@
                 padding-left: 0px;
             }
         }
-        tbody tr.files-node {
-            //Image column @TODO implement class hooks instead of using nth-child selectors
-            td:nth-child(2) {
-                img {
-                    height: auto!important;
-                    width: 32px;
-                }
-            }
-            td:nth-child(3) {
-                padding-left: 0px;
-            }
-            &.files-folder {
-                td:nth-child(2) {
-                    padding-top: 4px;
-                    padding-bottom: 4px;
-
-                    .footable-toggle:before {
-                        height: 0;
-                        overflow: hidden;
-                    }
-                }
-            }
-            &.files-file {
-                td:nth-child(2) {
-                    padding-top: 4px;
-                    padding-bottom: 4px;
-                }
-            }
-            td:nth-child(1) {
-                padding-left: 10px;
-            }
-        }
     }
 
     #files-canvas {
@@ -1181,7 +1149,13 @@ table th.file-count {
         text-align: center;
         background: url('@{comFilesLocation}/images/checker.png') repeat left top white;
     }
-
+    div.imgTotal a.navigate[class*="koowa_icon--"] {
+        &:before {
+            position: relative;
+            top: 50%;
+            margin-top: -24px;
+        }
+    }
     div.imgBorder {
         height: 72px;
         vertical-align: middle;
