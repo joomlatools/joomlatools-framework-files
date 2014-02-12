@@ -28,6 +28,11 @@ window.addEvent('domready', function() {
     //This trick enables the flash runtime to work properly when the uploader is hidden
     var containershim = 'mushycode'+ Math.floor((Math.random()*10000000000)+1);
     kQuery('<div id="'+containershim+'" class="uploader-flash-container" />').appendTo(kQuery(document.body));
+    SqueezeBox.addEvent('open', function(){
+        //This is to make sure the flash upload button shim is positioned correctly after the modal is opened
+        window.fireEvent('refresh');
+    });
+
 
     element.pluploadQueue({
         runtimes: 'html5,flash',
@@ -51,13 +56,12 @@ window.addEvent('domready', function() {
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
 
-                    element.append('<span class="warning">'+Files._('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</span>');
+                    element.append('<div class="alert alert-error warning">'+Files._('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</div>');
 
                 }
             }
         }
     });
-    kQuery('#'+containershim).css({'position': '', 'z-index': 1});
 
     var uploader = element.pluploadQueue(),
     //We only want to run this once
@@ -398,7 +402,7 @@ window.addEvent('domready', function() {
         // Plupload needs to be refreshed if it was hidden
         if (type == 'computer' && kQuery('#files-upload-multi').length) {
             var uploader = kQuery('#files-upload-multi').pluploadQueue();
-            if(!uploader.files.length && !uploader.features.dragdrop) {
+            if(!uploader.files.length && uploader.features.dragdrop) {
                 document.id('files-upload').removeClass('uploader-files-queued').addClass('uploader-files-empty');
                 if(document.id('files-upload-multi_browse')) {
                     document.id('files-upload-multi_browse').set('text', browse_label);
