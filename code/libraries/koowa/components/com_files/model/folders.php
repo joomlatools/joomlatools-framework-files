@@ -29,7 +29,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 			$state = $this->getState();
 
 			$folders = $this->getContainer()->getAdapter('iterator')->getFolders(array(
-				'path'    => $this->_getPath(),
+				'path'    => $this->getPath(),
 				'recurse' => !!$state->tree,
 				'filter'  => array($this, 'iteratorFilter'),
 				'map'     => array($this, 'iteratorMap'),

@@ -113,7 +113,7 @@ class ComFilesModelNodes extends KModelAbstract
         return $this->getObject($identifier, $options);
     }
 
-    protected function _getPath()
+    public function getPath()
     {
         $state = $this->getState();
 

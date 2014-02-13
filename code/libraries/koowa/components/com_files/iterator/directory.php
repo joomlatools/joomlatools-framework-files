@@ -40,6 +40,40 @@ class ComFilesIteratorDirectory extends DirectoryIterator
     }
 
     /**
+     * Returns the total number of nodes in the given path
+     *
+     * @param array $config
+     * @return integer Total count
+     */
+    public static function countNodes($config = array())
+    {
+        $config = new KObjectConfig($config);
+        $config->append(array(
+            'path' 		=> null, // path to the directory
+            'fullpath' 	=> false, // true to return full paths, false to return basename only
+            'exclude' 	=> array('.svn', '.git', 'CVS'), // an array of values to exclude from results
+        ));
+
+        $exclude = KObjectConfig::unbox($config->exclude);
+        $count   = 0;
+
+        if ($handle = opendir($config->path))
+        {
+            while (false !== ($entry = readdir($handle)))
+            {
+                if ($entry === '.' && $entry === '..' || substr($entry, 0, 2) === '._' || in_array($entry, $exclude)) {
+                    continue;
+                }
+                $count++;
+            }
+
+            closedir($handle);
+        }
+
+        return $count;
+    }
+
+    /**
      * Method to read child nodes of a folder
      *
      * @param array $config

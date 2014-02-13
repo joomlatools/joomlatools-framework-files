@@ -43,17 +43,24 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 
         if ($config['initial_response'] === true)
         {
+            $count = 0;
             $query = $state->getValues();
             unset($query['config']);
             $query['thumbnails'] = $this->getModel()->getContainer()->parameters->thumbnails;
 
             if (strpos($this->getLayout(), 'compact') !== false) {
                 $query['limit'] = 0;
+
+                $count = ComFilesIteratorDirectory::countNodes(array('path' => $this->getModel()->getPath()));
             }
 
-            $config['initial_response'] = $this->getObject('com:files.controller.node', array('query' => $query))
-                ->format('json')
-                ->render();
+            if ($count < 100) {
+                $controller = $this->getObject('com:files.controller.node', array('query' => $query));
+                $config['initial_response'] = $controller->format('json')->render();
+            }
+            else {
+                unset($config['initial_response']);
+            }
         }
 
         $state->config = $config;
