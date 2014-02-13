@@ -19,6 +19,7 @@ class ComFilesIteratorDirectory extends DirectoryIterator
      * Method to get files in a folder
      *
      * @param array $config
+     * @return array
      */
     public static function getFiles($config = array())
     {
@@ -30,6 +31,7 @@ class ComFilesIteratorDirectory extends DirectoryIterator
      * Method to get child folders of a folder
      *
      * @param array $config
+     * @return array
      */
     public static function getFolders($config = array())
     {
@@ -41,6 +43,7 @@ class ComFilesIteratorDirectory extends DirectoryIterator
      * Method to read child nodes of a folder
      *
      * @param array $config
+     * @return array
      */
     public static function getNodes($config = array())
     {
@@ -54,7 +57,8 @@ class ComFilesIteratorDirectory extends DirectoryIterator
             'map' 		=> null, // a callback to return values from items in the iterator
             'exclude' 	=> array('.svn', '.git', 'CVS'), // an array of values to exclude from results
             'sort' 		=> 'name',
-            'return_raw'=> false
+            'return_raw'=> false,
+            'count'     => false, // only returns a node count if true
         ));
 
         $exclude = KObjectConfig::unbox($config->exclude);
@@ -64,6 +68,7 @@ class ComFilesIteratorDirectory extends DirectoryIterator
         $recurse = $config->recurse;
 
         $results = array();
+        $total   = 0;
         foreach (new self($config->path) as $file)
         {
             if ($file->isDot() || substr($file->getFilename(), 0, 2) === '._' || in_array($file->getFilename(), $exclude)) {
@@ -89,6 +94,8 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 
             if ($filter)
             {
+                $ignore = null;
+
                 if (is_callable($filter)) {
                     $ignore = call_user_func($filter, rawurldecode($file->getPathname())) === false;
                 } else if (is_array($filter)) {
@@ -96,21 +103,38 @@ class ComFilesIteratorDirectory extends DirectoryIterator
                 } else if (is_string($filter)) {
                     $ignore = !preg_match("/$filter/", $file->getFilename());
                 }
+
                 if ($ignore) {
                     continue;
                 }
             }
 
-            if (is_callable($map)) {
-                $result = call_user_func($map, rawurldecode($file->getPathname()));
-            } else {
-                $result = $config->fullpath ? $file->getPathname() : $file->getFilename();
-            }
-            $results[] = array('path' => $result, 'modified' => $file->getMTime());
+            if ($config->count)
+            {
+                $total++;
 
-            if (!empty($child_results)) {
-                $results = array_merge($results, $child_results);
+                if (!empty($child_results)) {
+                    $total += $child_results;
+                }
             }
+            else
+            {
+                if (is_callable($map)) {
+                    $result = call_user_func($map, rawurldecode($file->getPathname()));
+                } else {
+                    $result = $config->fullpath ? $file->getPathname() : $file->getFilename();
+                }
+
+                $results[] = array('path' => $result, 'modified' => $file->getMTime());
+
+                if (!empty($child_results)) {
+                    $results = array_merge($results, $child_results);
+                }
+            }
+        }
+
+        if ($config->count) {
+            return $total;
         }
 
         if ($sort === 'modified_on') {
