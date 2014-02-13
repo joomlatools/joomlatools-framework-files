@@ -80,7 +80,7 @@ Files.File = new Class({
 					'_action': 'delete',
 					'_token': Files.token
 				},
-				onSuccess: function(response, responseText) {
+				onSuccess: function(response) {
 					if (typeof success == 'function') {
 						success(response);
 					}
@@ -160,24 +160,6 @@ Files.Folder = new Class({
 	type: 'folder',
 	template: 'folder',
 
-	getChildren: function(success, failure, extra_vars, url_builder) {
-		var path = this.path,
-			url = {
-				view: 'nodes',
-				folder: path
-			};
-		if (extra_vars) {
-			url = Object.append(url, extra_vars);
-		}
-		
-		var url = url_builder ? url_builder(url) : Files.app.createRoute(url);
-		
-
-		Files.Folder.Request._onSuccess = success;
-		Files.Folder.Request._onFailure = failure;
-		Files.Folder.Request.options.url = url;
-		Files.Folder.Request.get();
-	},
 	'add': function(success, failure, complete) {
 		this.fireEvent('beforeAddRow');
 
@@ -189,7 +171,7 @@ Files.Folder = new Class({
 					'_action': 'add',
 					'_token': Files.token
 				},
-				onSuccess: function(response, responseText) {
+				onSuccess: function(response) {
 					if (typeof success == 'function') {
 						success(response);
 					}
@@ -227,7 +209,7 @@ Files.Folder = new Class({
 					'_action': 'delete',
 					'_token': Files.token
 				},
-				onSuccess: function(response, responseText) {
+				onSuccess: function(response) {
 					if (typeof success == 'function') {
 						success(response);
 					}
@@ -254,25 +236,5 @@ Files.Folder = new Class({
 				}
 			});
 		request.send();
-	}
-});
-
-
-Files.Folder.Request = new Request.JSON({
-	method: 'get',
-	onSuccess: function(response, responseText) {
-		if (typeof this._onSuccess == 'function') {
-			this._onSuccess(response);
-		}
-	},
-	onFailure: function(xhr) {
-		if (typeof this._onFailure == 'function') {
-			this._onFailure(xhr);
-		}
-		else {
-			resp = JSON.decode(xhr.responseText, true);
-			error = resp && resp.error ? resp.error : Files._('An error occurred during request');
-			alert(error);
-		}
 	}
 });

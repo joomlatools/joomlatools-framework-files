@@ -27,16 +27,6 @@ Files.Grid = new Class({
 	initialize: function(container, options) {
 		this.setOptions(options);
 
-        // Attach spinner events
-        this.addEvents({
-            afterReset: function(){
-                this.spin();
-            },
-            afterInsertRows: function(){
-                this.unspin();
-            }
-        });
-
 		this.nodes = new Hash();
 		this.container = document.id(container);
 
@@ -463,26 +453,34 @@ Files.Grid = new Class({
     	this.fireEvent('afterSetIconSize', {size: size});
 	},
     spin: function(){
-        if(!this.spinner)
-        {
-            var target = document.id('files-grid');
-            var opts = {
-                lines: 12, // The number of lines to draw
-                length: 7, // The length of each line
-                width: 4, // The line thickness
-                radius: 10, // The radius of the inner circle
-                color: '#666', // #rgb or #rrggbb
-                speed: 1, // Rounds per second
-                trail: 60 // Afterglow percentage
-            };
-            this.spinner = new Koowa.Spinner(opts);
+        if (this.is_spinning) {
+            return;
         }
-        this.spinner.spin(target);
+
+        var target = document.getElementById('files-grid');
+        var opts = {
+            lines: 12, // The number of lines to draw
+            length: 7, // The length of each line
+            width: 4, // The line thickness
+            radius: 10, // The radius of the inner circle
+            color: '#666', // #rgb or #rrggbb
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage,
+            top: 50
+        };
+        this.spinner = new Koowa.Spinner(opts);
+
+        this.is_spinning = true;
+
+        var spinner = this.spinner.spin(target);
+        //spinner.el.style.top = '50px';
+
+        return spinner;
     },
     unspin: function(){
         if(this.spinner) {
+            this.is_spinning = false;
             this.spinner.stop();
-            this.spinner = null;
         }
     },
     /**

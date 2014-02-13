@@ -279,6 +279,7 @@ Files.App = new Class({
 		}
 
 		this.grid.reset();
+        this.grid.spin();
 
 		var parts = this.active.split('/'),
 			name = parts[parts.length ? parts.length-1 : 0],
@@ -290,29 +291,36 @@ Files.App = new Class({
 				}
 				return this.createRoute(url);
 			}.bind(this),
-			success = function(resp) {
-				if (resp.status !== false) {
-                    Object.each(resp.entities, function(item) {
-						if (!item.baseurl) {
-							item.baseurl = that.baseurl;
-						}
-					});
-					that.response = resp;
-					that.grid.insertRows(resp.entities);
+            handleResponse = function(response) {
+                if (response) {
+                    if (response.status !== false) {
+                        Object.each(response.entities, function(item) {
+                            if (!item.baseurl) {
+                                item.baseurl = that.baseurl;
+                            }
+                        });
 
-					that.fireEvent('afterSelect', resp);
-				} else {
-					alert(resp.error);
-				}
+                        that.grid.insertRows(response.entities);
 
+                        if (!response.partial) {
+                            that.grid.unspin();
+                            that.response = response;
+                            that.fireEvent('afterSelect', response);
+                        }
+                    } else if (response.error) {
+                        alert(response.error);
+                    }
+                }
 			};
 
 		this.folder = new Files.Folder({'folder': folder, 'name': name});
 		
 		if (response) {
-			success(response);
+            handleResponse(response);
+            this.grid.unspin();
 		} else {
-			this.folder.getChildren(success, null, this.state.getData(), url_builder);
+			this.fetch(this.folder.path, url_builder)
+                       .done(handleResponse).progress(handleResponse);
 		}
 
         if (this.cookie) {
@@ -323,6 +331,52 @@ Files.App = new Class({
 
 		this.fireEvent('afterNavigate', [path, type]);
 	},
+    fetch: function(path, url_builder) {
+        var self = this,
+            deferred = kQuery.Deferred(),
+            fail = function(xhr) {
+                var response = JSON.decode(xhr.responseText, true);
+
+                if (response && response.error) {
+                    alert(response.error);
+                }
+            },
+            query = Object.append({view: 'nodes', folder: path}, this.state.getData());
+
+        if (this.ajax_cache) {
+            this.ajax_cache.abort();
+        }
+
+        if (typeof query.limit !== 'undefined' && query.limit !== 0) {
+            this.ajax_cache = kQuery.getJSON(url_builder(query)).fail(fail);
+            return this.ajax_cache;
+        }
+
+        query.limit = 100;
+
+        var done = function(response) {
+                if (!response || typeof response.entities === 'undefined' || typeof response.meta === 'undefined') {
+                    deferred.reject('');
+
+                    return;
+                }
+
+                if (response.meta.offset + response.entities.length < response.meta.total) {
+                    response.partial = true;
+                    deferred.notify(response);
+
+                    query.offset = response.meta.offset+response.meta.limit;
+                    self.ajax_cache = kQuery.getJSON(url_builder(query)).done(done).fail(fail);
+                } else {
+                    response.completed = true;
+                    deferred.resolve(response);
+                }
+            };
+
+        self.ajax_cache = kQuery.getJSON(url_builder(query)).done(done).fail(fail);
+
+        return deferred.promise();
+    },
 
 	setContainer: function(container) {
 		var setter = function(item) {
