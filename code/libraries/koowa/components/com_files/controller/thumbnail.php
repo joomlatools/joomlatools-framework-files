@@ -24,34 +24,35 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
         $state_data = $model->getState()->getValues();
         $state_data['types'] = array('image', 'file');
 
-        $nodes = $this->getObject('com:files.model.nodes')->setState($state_data)->getList();
-        
-        if (!$model->getState()->files && !$model->getState()->filename) 
+        if ($this->isDispatched())
         {
-        	$needed  = array();
+        	$files  = array();
+            $nodes   = $this->getObject('com:files.model.nodes')->setState($state_data)->getList();
+
         	foreach ($nodes as $row)
         	{
         		if ($row->isImage()) {
-        			$needed[] = $row->name;
+        			$files[] = $row->name;
         		}
         	}
         }
-        else $needed = $model->getState()->files ? $model->getState()->files : $model->getState()->filename;
+        else $files = $model->getState()->filename;
 
 		$model->reset()
 		      ->setState($state_data)
-		      ->getState()->set('files', $needed);
+		      ->filename($files);
 		
 		$list  = $model->getList();
-		
+
     	$found = array();
         foreach ($list as $row) {
         	$found[] = $row->filename;
         }
 
-        if (count($found) !== count($needed))
+        if (count($found) !== count($files))
         {
         	$new = array();
+            $nodes = isset($nodes) ? $nodes : $this->getObject('com:files.model.nodes')->setState($state_data)->getList();
         	foreach ($nodes as $row)
         	{
         		if ($row->isImage() && !in_array($row->name, $found))

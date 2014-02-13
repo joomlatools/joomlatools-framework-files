@@ -64,7 +64,6 @@ class ComFilesModelThumbnails extends KModelTable
 			->insert('container', 'com:files.filter.container', null)
 			->insert('folder', 'com:files.filter.path')
 			->insert('filename', 'com:files.filter.path', null, true, array('container'))
-			->insert('files', 'com:files.filter.path', null)
 			->insert('paths', 'com:files.filter.path', null)
 			
 			->insert('types', 'cmd', '')
@@ -109,11 +108,6 @@ class ComFilesModelThumbnails extends KModelTable
 
         if ($state->folder !== false) {
             $query->where('tbl.folder = :folder')->bind(array('folder' => ltrim($state->folder, '/')));
-        }
-
-        // Need this for BC
-        if (!empty($state->files)) {
-            $query->where('tbl.filename IN :files')->bind(array('files' => (array) $state->files));
         }
 
         if ($state->filename) {
