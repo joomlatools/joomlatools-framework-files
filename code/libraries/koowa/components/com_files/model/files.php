@@ -20,7 +20,6 @@ class ComFilesModelFiles extends ComFilesModelNodes
         if (!isset($this->_list))
         {
             $state = $this->getState();
-
             $files = $this->getContainer()->getAdapter('iterator')->getFiles(array(
         		'path'    => $this->_getPath(),
         		'exclude' => array('.svn', '.htaccess', 'web.config', '.git', 'CVS', 'index.html', '.DS_Store', 'Thumbs.db', 'Desktop.ini'),
@@ -38,7 +37,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
             if (strtolower($state->direction) == 'desc') {
             	$files = array_reverse($files);
             }
-            
+
             $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_total);
 
             $data = array();
@@ -51,9 +50,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
                 );
             }
 
-            $this->_list = $this->getRowset(array(
-                'data' => $data
-            ));
+            $this->_list = $this->getRowset()->addRow($data);
         }
 
         return parent::getList();
