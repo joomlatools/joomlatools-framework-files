@@ -27,45 +27,46 @@ if(!Files) var Files = {};
                     autoOpen: 0, //root.open = true on previous script
                     onSelectNode: function(){},
                     dataFilter: function(response){
-
-                        var data = response.entities,
-                            parse = function(item, parent) {
-                                var path = (parent && parent.path) ? parent.path+'/' : '';
-                                path += item.name;
-
-                                //Parse attributes
-                                //@TODO check if 'type' is necessary
-                                item = $.extend(item, {
-                                    id: path,
-                                    path: path,
-                                    url: '#'+path,
-                                    type: 'folder'
-                                });
-
-                                if (item.children) {
-                                    var children = [];
-                                    Object.each(item.children, function(child) {
-                                        children.push(parse(child, item));
-                                    });
-                                    item.children = children;
-                                }
-
-                                return item;
-                        };
-
-                        if (response.meta.total) {
-                            Object.each(data, function(item, key) {
-                                parse(item);
-                            });
-                        }
-
-                        return self.parseData(data);
+                        return self.filterData(response);
                     }
                 };
 
             return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
         },
+        filterData: function(response) {
+            var data = response.entities,
+                parse = function(item, parent) {
+                    var path = (parent && parent.path) ? parent.path+'/' : '';
+                    path += item.name;
 
+                    //Parse attributes
+                    //@TODO check if 'type' is necessary
+                    item = $.extend(item, {
+                        id: path,
+                        path: path,
+                        url: '#'+path,
+                        type: 'folder'
+                    });
+
+                    if (item.children) {
+                        var children = [];
+                        Object.each(item.children, function(child) {
+                            children.push(parse(child, item));
+                        });
+                        item.children = children;
+                    }
+
+                    return item;
+                };
+
+            if (response.meta.total) {
+                Object.each(data, function(item, key) {
+                    parse(item);
+                });
+            }
+
+            return this.parseData(data);
+        },
         /**
          * Customized parseData method due to using json, in a already nested data format
          * @param list json returned data

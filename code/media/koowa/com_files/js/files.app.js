@@ -127,7 +127,7 @@ Files.App = new Class({
 		onAfterNavigate: function(path) {
 			if (path !== undefined) {
 				this.setTitle(this.folder.name || this.container.title);
-                kQuery('#upload-files-to, .upload-files-to').text(this.container.title+(path ? '/'+path : ''));
+                kQuery('#upload-files-to, .upload-files-to').text(path ? path : this.container.title);
 	        }
 		}
 	},

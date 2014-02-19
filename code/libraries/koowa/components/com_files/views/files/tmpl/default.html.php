@@ -29,7 +29,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 },
                 types: <?= json_encode($state->types); ?>,
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
-                thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>
+                thumbnails: <?= json_encode($container ? $container->parameters->thumbnails : true); ?>,
+                onBeforeSetContainer: function(response) {
+                    if (typeof response.container !== 'undefined') {
+                        response.container.title = <?= json_encode(@translate('Root folder')) ?>;
+                    }
+                }
             };
         options = Object.append(options, config);
 

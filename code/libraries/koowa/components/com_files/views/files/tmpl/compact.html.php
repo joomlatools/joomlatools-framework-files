@@ -35,8 +35,10 @@ window.addEvent('domready', function() {
 			editor: <?= json_encode($state->editor); ?>,
 			types: <?= json_encode($state->types); ?>,
 			container: <?= json_encode($container ? $container->toArray() : null); ?>,
-            onBeforeSetContainer: function(container) {
-                container.title = <?= json_encode('Root') ?>;
+            onBeforeSetContainer: function(response) {
+                if (typeof response.container !== 'undefined') {
+                    response.container.title = <?= json_encode(@translate('Root folder')) ?>;
+                }
             },
             uploader_dialog: false,
             folder_dialog: false
