@@ -14,13 +14,15 @@ Files.Compact.App = new Class({
 	Implements: [Events, Options],
     cookie: false,
 	options: {
+        pathway: false,
         persistent: false,
 		types: ['file', 'image'],
 		editor: null,
 		preview: 'files-preview',
         state: {
             defaults: {
-                limit: 0
+                limit: 0,
+                offset: 0
             }
         },
 		grid: {
@@ -30,7 +32,9 @@ Files.Compact.App = new Class({
 		},
 		history: {
 			enabled: false
-		}
+		},
+        uploader_dialog: false,
+        folder_dialog: false
 	},
 
 	initialize: function(options) {

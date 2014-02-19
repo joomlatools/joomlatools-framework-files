@@ -20,6 +20,7 @@ Files.App = new Class({
 	title: '',
 	cookie: null,
 	options: {
+        root_text: 'Root folder',
         cookie: {
             path: '/'
         },
@@ -129,7 +130,12 @@ Files.App = new Class({
 				this.setTitle(this.folder.name || this.container.title);
                 kQuery('#upload-files-to, .upload-files-to').text(path ? path : this.container.title);
 	        }
-		}
+		},
+        onBeforeSetContainer: function(response) {
+            if (typeof response.container !== 'undefined') {
+                response.container.title = this.options.root_text;
+            }
+        }
 	},
 
 	initialize: function(options) {
@@ -570,7 +576,7 @@ Files.App = new Class({
 					}
 				},
 				root: {
-					text: this.container.title
+					text: this.options.root_text
 				},
                 initial_response: !!this.options.initial_response
 			}, opts);

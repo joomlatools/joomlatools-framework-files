@@ -25,23 +25,10 @@ window.addEvent('domready', function() {
             cookie: {
                 path: '<?=@object('request')->getBaseUrl('site')?>'
             },
-            pathway: false,
-			state: {
-				defaults: {
-					limit: 0,
-					offset: 0
-				}
-			},
+            root_text: <?= json_encode(@translate('Root folder')) ?>,
 			editor: <?= json_encode($state->editor); ?>,
 			types: <?= json_encode($state->types); ?>,
-			container: <?= json_encode($container ? $container->toArray() : null); ?>,
-            onBeforeSetContainer: function(response) {
-                if (typeof response.container !== 'undefined') {
-                    response.container.title = <?= json_encode(@translate('Root folder')) ?>;
-                }
-            },
-            uploader_dialog: false,
-            folder_dialog: false
+			container: <?= json_encode($container ? $container->toArray() : null); ?>
 		};
 	options = Object.append(options, config);
 
