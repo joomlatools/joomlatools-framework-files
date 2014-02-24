@@ -14,25 +14,23 @@ if (!Files._) {
 	};
 }
 
-Files.Filesize = new Class({
-	Implements: Options,
-	options: {
-		units: ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
-	},
-	initialize: function(size, options) {
-		this.setOptions(options);
-		this.size = size;
-	},
-	humanize: function() {
-		var i = 0, size = this.size;
-		while (size >= 1024) {
-			size /= 1024;
-			i++;
-		}
+Files.Filesize = function(size) {
+    this.size = size;
+};
 
-		return (i === 0 || size % 1 === 0 ? size : size.toFixed(2)) + ' ' + Files._(this.options.units[i]);
-	}
-});
+Files.Filesize.prototype.units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+
+Files.Filesize.prototype.humanize = function() {
+    var i = 0,
+        size = this.size;
+
+    while (size >= 1024) {
+        size /= 1024;
+        i++;
+    }
+
+    return (i === 0 || size % 1 === 0 ? size : size.toFixed(2)) + ' ' + Files._(this.units[i]);
+};
 
 Files.FileTypes = {};
 Files.FileTypes.map = {
@@ -44,12 +42,20 @@ Files.FileTypes.map = {
 };
 
 Files.getFileType = function(extension) {
-	var type = 'document';
+	var type = 'document',
+        map = Files.FileTypes.map;
+
 	extension = extension.toLowerCase();
-    Object.each(Files.FileTypes.map, function(value, key) {
-		if (value.contains(extension)) {
-			type = key;
-		}
-	});
+
+    for (var key in map) {
+        if (map.hasOwnProperty(key)) {
+            var extensions = map[key];
+            if (extensions.indexOf(extension) != -1) {
+                type = key;
+                break;
+            }
+        }
+    }
+
 	return type;
 };
