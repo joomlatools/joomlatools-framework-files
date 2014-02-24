@@ -23,9 +23,14 @@ defined('KOOWA') or die( 'Restricted access' );
 <script src="media://koowa/com_files/js/files.app.js" />
 */
 JHtml::_('behavior.modal');
+
+if (version_compare(JVERSION, '3.0', 'ge')) {
+    JHtml::_('behavior.framework', true);
+} else {
+    JHtml::_('behavior.mootools', false);
+}
 ?>
 
-<?= @helper('behavior.mootools'); ?>
 <?= @helper('behavior.koowa'); ?>
 <?= @helper('behavior.local_dates'); ?>
 <?= @helper('behavior.keepalive'); ?>
