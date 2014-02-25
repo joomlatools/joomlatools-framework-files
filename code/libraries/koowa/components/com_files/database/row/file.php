@@ -54,6 +54,12 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 			return $metadata && array_key_exists($column, $metadata) ? $metadata[$column] : false;
 		}
 
+        if (in_array($column, array('width', 'height')))
+        {
+            $metadata = $this->_adapter->getMetadata();
+            return $metadata && array_key_exists($column, $metadata['image']) ? $metadata['image'][$column] : false;
+        }
+
 		if ($column == 'filename') {
 			return pathinfo($this->name, PATHINFO_FILENAME);
 		}
