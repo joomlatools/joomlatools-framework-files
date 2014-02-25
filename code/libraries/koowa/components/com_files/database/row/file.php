@@ -67,25 +67,8 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		if ($column == 'metadata')
 		{
 			$metadata = $this->_adapter->getMetadata();
-			if ($this->isImage() && !empty($metadata))
-			{
-				$image = array(
-					'thumbnail' => $this->thumbnail,
-					'width' => $this->width,
-					'height' => $this->height
-				);
-				$metadata['image'] = $image;
-			}
-			return $metadata;
-		}
 
-		if (in_array($column, array('width', 'height', 'thumbnail')) && $this->isImage())
-        {
-			if ($column == 'thumbnail' && isset($this->_data['thumbnail'])) {
-				return $this->_data['thumbnail'];
-			}
-			
-			return $this->getImageSize($column);
+			return $metadata;
 		}
 
 		return parent::__get($column);
@@ -131,35 +114,5 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 	public function isImage()
 	{
 		return in_array(strtolower($this->extension), self::$image_extensions);
-	}
-
-	public function getImageSize($column)
-	{
-		$size = $this->_adapter->getImageSize();
-
-		if ($size === false) {
-			return false;
-		}
-
-		list($width, $height) = $size;
-
-		switch ($column)
-		{
-			case 'width':
-				return $width;
-			case 'height':
-				return $height;
-			case 'thumbnail':
-				if ($width < 200 && $height < 200) {
-					// go down to default case
-				}
-				else {
-					$higher = $width > $height ? $width : $height;
-					$ratio = 200 / $higher;
-					return array_map('round', array('width' => $ratio*$width, 'height' => $ratio*$height));
-				}
-			default:
-				return array('width' => $width, 'height' => $height);
-		}
 	}
 }
