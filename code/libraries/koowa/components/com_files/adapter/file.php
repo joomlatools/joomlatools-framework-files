@@ -34,8 +34,11 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                         'size'          => $this->_handle->getSize(),
                         'modified_date' => $this->_handle->getMTime()
                     );
-                }
 
+                    if ($image_size = $this->getImageSize()) {
+                        $this->_metadata['image'] = array('width' => $image_size[0], 'height' => $image_size[1]);
+                    }
+                }
 			}
             catch (RunTimeException $e) {}
 		}
