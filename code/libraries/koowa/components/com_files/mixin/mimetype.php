@@ -39,7 +39,7 @@ class ComFilesMixinMimetype extends KObject
 	protected function _initialize(KObjectConfig $config)
 	{
 		if (empty($config->adapters)) {
-			$config->adapters = array('image', 'finfo');
+			$config->adapters = array('image');
 		}
 
 		parent::_initialize($config);
@@ -80,7 +80,8 @@ class ComFilesMixinMimetype extends KObject
 	protected function _detectImage($path)
 	{
 		if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), ComFilesDatabaseRowFile::$image_extensions)
-			&& $info = getimagesize($path)) {
+			&& ($info = getimagesize($path))
+        ) {
 			return $info['mime'];
 		}
 
