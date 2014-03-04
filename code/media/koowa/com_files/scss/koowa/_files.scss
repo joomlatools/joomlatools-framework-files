@@ -24,7 +24,6 @@ $comFilesLocation: '../../../media/koowa/com_files';
     background-image: linear-gradient(top, $from, $to); // The standard
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($from)}', endColorstr='#{ie-hex-str($to)}');
 }
-
 @mixin radial-elliptical-gradient($innerColor, $centerColor, $outerColor: false, $fallbackColor: whiteSmoke, $canvasColor: white) {
     $gradient: $innerColor, $centerColor, $outerColor;
     @if $outerColor == false {
