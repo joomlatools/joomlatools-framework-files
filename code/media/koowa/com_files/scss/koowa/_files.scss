@@ -15,6 +15,7 @@ $comFilesLocation: '../../../media/koowa/com_files';
   background-image: linear-gradient(top, $from, $to); // The standard
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($from)}', endColorstr='#{ie-hex-str($to)}');
 }
+
 @mixin radial-elliptical-gradient($innerColor, $centerColor, $outerColor: false, $fallbackColor: whiteSmoke, $canvasColor: white) {
   $gradient: $innerColor, $centerColor, $outerColor;
   @if $outerColor == false {
@@ -28,6 +29,7 @@ $comFilesLocation: '../../../media/koowa/com_files';
   background: $canvasColor radial-gradient(ellipse closest-corner, $gradient);
   background-repeat: no-repeat;
 }
+
 @mixin image-set($url, $retina) {
   background-image: url($url);
   background-image: -webkit-image-set(url($url) 1x, url($retina) 2x);
@@ -53,7 +55,6 @@ $comFilesLocation: '../../../media/koowa/com_files';
     margin: 0;
   }
 }
-
 
 #files-app {
   #files-sidebar {
@@ -194,7 +195,7 @@ $pluploadLocation: '../../../media/koowa/com_files/plupload/jquery.plupload.queu
 }
 
 .plupload_wrapper {
-  font: normal 11px Verdana,sans-serif;
+  font: normal 11px Verdana, sans-serif;
   width: 100%;
 }
 
@@ -206,21 +207,26 @@ $pluploadLocation: '../../../media/koowa/com_files/plupload/jquery.plupload.queu
 
 .plupload_container input {
   border: 1px solid #DDD;
-  font: normal 11px Verdana,sans-serif;
+  font: normal 11px Verdana, sans-serif;
   width: 98%;
 }
 
-.plupload_header {background: #2A2C2E url('#{$pluploadLocation}backgrounds.gif') repeat-x;}
+.plupload_header {
+  background: #2A2C2E url('#{$pluploadLocation}backgrounds.gif') repeat-x;
+}
+
 .plupload_header_content {
   background: url('#{$pluploadLocation}backgrounds.gif') no-repeat 0 -317px;
   min-height: 56px;
   padding-left: 60px;
   color: #FFF;
 }
+
 .plupload_header_title {
   font: normal 18px sans-serif;
   padding: 6px 0 3px;
 }
+
 .plupload_header_text {
   font: normal 12px sans-serif;
 }
@@ -248,22 +254,44 @@ $pluploadLocation: '../../../media/koowa/com_files/plupload/jquery.plupload.queu
   padding: 8px 8px;
   color: #42454A;
 }
+
 .plupload_filelist_header {
   border-top: 1px solid #EEE;
   border-bottom: 1px solid #CDCDCD;
 }
 
-.plupload_filelist_footer {border-top: 1px solid #FFF; height: 22px; line-height: 20px; vertical-align: middle;}
-.plupload_file_name {float: left; overflow: hidden}
-.plupload_file_status {color: #777;}
-.plupload_file_status span {color: #42454A;}
+.plupload_filelist_footer {
+  border-top: 1px solid #FFF;
+  height: 22px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.plupload_file_name {
+  float: left;
+  overflow: hidden
+}
+
+.plupload_file_status {
+  color: #777;
+}
+
+.plupload_file_status span {
+  color: #42454A;
+}
+
 .plupload_file_size, .plupload_file_status, .plupload_progress {
   float: right;
   width: 80px;
 }
-.plupload_file_size, .plupload_file_status, .plupload_file_action {text-align: right;}
 
-.plupload_filelist .plupload_file_name {width: 205px}
+.plupload_file_size, .plupload_file_status, .plupload_file_action {
+  text-align: right;
+}
+
+.plupload_filelist .plupload_file_name {
+  width: 205px
+}
 
 .plupload_file_action {
   float: right;
@@ -278,8 +306,13 @@ $pluploadLocation: '../../../media/koowa/com_files/plupload/jquery.plupload.queu
   height: 16px;
 }
 
-li.plupload_uploading {background: #ECF3DC url('#{$pluploadLocation}backgrounds.gif') repeat-x 0 -238px;}
-li.plupload_done {color:#AAA}
+li.plupload_uploading {
+  background: #ECF3DC url('#{$pluploadLocation}backgrounds.gif') repeat-x 0 -238px;
+}
+
+li.plupload_done {
+  color: #AAA
+}
 
 li.plupload_delete a {
   background: url('#{$pluploadLocation}delete.gif');
@@ -305,6 +338,7 @@ li.plupload_done a {
   background: #FFF;
   padding: 1px;
 }
+
 .plupload_progress_bar {
   width: 0px;
   height: 7px;
@@ -317,7 +351,10 @@ li.plupload_done a {
 
 /* Floats */
 
-.plupload_clear,.plupload_clearer {clear: both;}
+.plupload_clear, .plupload_clearer {
+  clear: both;
+}
+
 .plupload_clearer, .plupload_progress_bar {
   display: block;
   font-size: 0;
@@ -344,7 +381,7 @@ li.plupload_droptext {
 /**
  * Upload Widget CSS
  */
-#files-upload  {
+#files-upload {
   padding: 0;
   margin: 0;
   overflow: hidden;
@@ -421,6 +458,7 @@ li.plupload_droptext {
     }
   }
 }
+
 .uploader-files-queued #files-upload-controls .upload-buttons li a.active.target-computer::after {
   border-bottom-color: white;
 }
@@ -442,8 +480,9 @@ li.plupload_droptext {
 }
 
 .uploader-files-queued .dropzone, .uploader-files-queued .nodropzone {
-  display: none!important;
+  display: none !important;
 }
+
 .dropzone h2 {
   text-align: center;
   font-weight: 100;
@@ -451,6 +490,7 @@ li.plupload_droptext {
   font-size: 30px;
   margin: 100px 0;
 }
+
 #files-upload .nodropzone {
   display: inline-block;
   float: none;
@@ -461,12 +501,15 @@ li.plupload_droptext {
   color: #595959;
   font-size: 15px;
 }
+
 .uploader-files-empty .upload-form {
   text-align: center;
 }
+
 .uploader-files-empty #files-upload-multi {
   display: inline-block;
 }
+
 #files-upload-multi .warning {
   display: block;
   float: none;
@@ -475,17 +518,21 @@ li.plupload_droptext {
   text-align: center;
   margin-bottom: 0px;
 }
+
 #files-uploader-web form {
   padding: 2px;
 }
+
 #files-upload-multi .plupload_container {
   padding: 0px;
 }
+
 /* blur focus fix */
 #files-uploader-web input:focus {
   z-index: 1;
   position: relative;
 }
+
 #files-uploader-web input.success {
   @include placeholder($successText);
 }
@@ -493,6 +540,7 @@ li.plupload_droptext {
 #files-upload-multi .plupload_filelist_header, #files-upload-multi .plupload_filelist_footer {
   background: none;
 }
+
 #files-upload-multi .plupload_filelist_header {
   -moz-border-radius-topleft: 4px;
   -moz-border-radius-topright: 4px;
@@ -513,31 +561,36 @@ li.plupload_droptext {
   border-top: none;
   box-shadow: 0 -1px 0 hsl(0, 0%, 90%);
 }
+
 .uploader-files-empty #files-upload-multi .plupload_filelist_footer {
   border: 0 hidden transparent;
   box-shadow: none;
 }
+
 #files-upload-multi .plupload_scroll .plupload_filelist {
   background: none;
 }
+
 #files-upload-multi .plupload_filelist {
   list-style: none;
   margin: 0;
   padding: 0;
 }
+
 #files-upload-multi .plupload_filelist li {
   background: none;
   line-height: normal;
   margin: 0;
   padding: 10px 8px;
 }
+
 #files-upload-multi .plupload_filelist .plupload_file_name {
   /*width: 471px;*/
   width: 453px;
 }
 
 #upload-max {
-  font-size: 11px!important;
+  font-size: 11px !important;
   padding-top: 6px;
   margin-left: 30px;
   color: #444;
@@ -550,8 +603,8 @@ li.plupload_droptext {
 
 #upload-queue {
   list-style: none;
-  clear:both;
-  padding:0;
+  clear: both;
+  padding: 0;
   margin: 0;
   background-color: #FFF;
   width: 100%;
@@ -613,9 +666,9 @@ li.plupload_droptext {
 
 div#files-noimages {
   width: 100%;
-  text-align:center;
-  font-weight:bold;
-  color:#CCCCCC;
+  text-align: center;
+  font-weight: bold;
+  color: #CCCCCC;
 }
 
 div#upload-queue-wrapper {
@@ -698,10 +751,12 @@ div#upload-queue-wrapper {
   height: $baseLineHeight + 8px; // bottom + top paddding
   @include border-radius(0px);
 }
+
 #remote-url {
   width: 75%;
   border-right-color: #e6e6e6;
 }
+
 #remote-name {
   width: 25%;
   border-left-color: #e6e6e6;
@@ -709,12 +764,14 @@ div#upload-queue-wrapper {
   border-left-style: solid;
   border-left-color: inherit;
 }
+
 .remote-wrap {
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
   border: 1px solid hsl(0, 0%, 90%);
   border-right-width: 0;
 }
+
 .remote-wrap::after {
   content: '.';
   clear: both;
@@ -722,6 +779,7 @@ div#upload-queue-wrapper {
   height: 0;
   visibility: hidden;
 }
+
 #files-uploader-web .remote-submit {
   position: absolute;
   right: 2px;
@@ -735,9 +793,11 @@ div#upload-queue-wrapper {
   @include border-top-right-radius(2px);
   @include border-bottom-right-radius(2px);
 }
+
 #files-uploader-web input.remote-submit:focus {
   position: absolute;
 }
+
 #files-uploader-web form {
   position: relative;
 }
@@ -789,6 +849,7 @@ table td.file-count, table th.file-count {
   text-align: center;
   width: 10px;
 }
+
 table th.file-count {
   text-align: right;
   padding-right: 20px;
@@ -810,7 +871,7 @@ table th.file-count {
 
     h3 {
       padding: 0 0 0 0;
-      margin: 10px 0!important;
+      margin: 10px 0 !important;
       display: block;
       float: left;
       font-size: 18px;
@@ -873,9 +934,11 @@ table th.file-count {
     }
 
     #files-tree-container,
-    #files-grid
-    { border-right: 1px solid #E1E1E1; height: 389px; overflow: auto;}
-
+    #files-grid {
+      border-right: 1px solid #E1E1E1;
+      height: 389px;
+      overflow: auto;
+    }
 
     #files-preview {
       background: white;
@@ -977,8 +1040,7 @@ table th.file-count {
   }
 }
 
-#files-app
-{
+#files-app {
 
   #files-grid {
     min-height: 120px;
@@ -990,7 +1052,7 @@ table th.file-count {
     @include clearfix();
   }
   .spinner {
-    padding: 0px!important;
+    padding: 0px !important;
   }
 
   .files-node-shadow {
@@ -1120,7 +1182,7 @@ table th.file-count {
     height: 72px;
     width: 88px;
     background-color: #f0f0f0;
-    color : #FF6600;
+    color: #FF6600;
   }
 
   .imgBorderHover {
@@ -1171,7 +1233,7 @@ table th.file-count {
 
   .dirField {
     font-size: 9pt;
-    width:110px;
+    width: 110px;
   }
 
   div.image {
