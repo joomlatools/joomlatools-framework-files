@@ -1,10 +1,10 @@
 #!/bin/bash
 
-LESSC_BIN=lessc
+SAAS_BIN=sass
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-INPUT_PATH=$DIR/../code/media/koowa/com_files/less
-FW_PATH=$DIR/../../koowa/code/media/koowa/com_koowa/less
-FW_PATH_ALT=$DIR/../../joomlatools-framework/code/media/koowa/com_koowa/less
+INPUT_PATH=$DIR/../code/media/koowa/com_files/scss
+FW_PATH=$DIR/../../koowa/code/media/koowa/com_koowa/scss
+FW_PATH_ALT=$DIR/../../joomlatools-framework/code/media/koowa/com_koowa/scss
 OUTPUT_PATH=$DIR/../code/media/koowa/com_files/css
 FILES=('files')
 
@@ -21,10 +21,10 @@ do
   if [ "$FW_PROMPT" = '' ]; then
     break
   fi
-  FW_PATH=$FW_PROMPT/code/media/koowa/com_koowa/less
+  FW_PATH=$FW_PROMPT/code/media/koowa/com_koowa/scss
 done
 
 for FILE in "${FILES[@]}"
 do
-  $LESSC_BIN --include-path="$FW_PATH:$FILES_PATH" --verbose $INPUT_PATH/$FILE.less $OUTPUT_PATH/$FILE.css -compress
+  $SAAS_BIN --load-path $FW_PATH --style compressed $INPUT_PATH/$FILE.scss $OUTPUT_PATH/$FILE.css
 done
