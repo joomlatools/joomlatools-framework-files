@@ -1,30 +1,6 @@
 #!/bin/bash
 
-SAAS_BIN=sass
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-INPUT_PATH=$DIR/../code/media/koowa/com_files/scss
-FW_PATH=$DIR/../../koowa/code/media/koowa/com_koowa/scss
-FW_PATH_ALT=$DIR/../../joomlatools-framework/code/media/koowa/com_koowa/scss
-OUTPUT_PATH=$DIR/../code/media/koowa/com_files/css
-FILES=('files')
+FOLDER=koowa/com_files
+BASE="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-while [ ! -d "$FW_PATH" ]
-do
-  if [ -d "$FW_PATH_ALT" ]; then
-    FW_PATH=$FW_PATH_ALT
-    break
-  fi
-  echo "${FW_PATH} doesn't exist!"
-  read -p "Enter the root directory for the koowa framework git checkout, or hit enter to skip:
-" FW_PROMPT
-  echo "You entered: $FW_PROMPT"
-  if [ "$FW_PROMPT" = '' ]; then
-    break
-  fi
-  FW_PATH=$FW_PROMPT/code/media/koowa/com_koowa/scss
-done
-
-for FILE in "${FILES[@]}"
-do
-  $SAAS_BIN --load-path $FW_PATH --style compressed $INPUT_PATH/$FILE.scss $OUTPUT_PATH/$FILE.css
-done
+source $BASE/../../koowa/scripts/compile_css
