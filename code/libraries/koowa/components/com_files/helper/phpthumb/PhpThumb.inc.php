@@ -210,7 +210,7 @@ class PhpThumb
 			$pluginPath = substr($pluginPath, 0, strlen($pluginPath) - 1);
 		}
 		
-		if ($handle = opendir($pluginPath))
+		if ($handle = @opendir($pluginPath))
 		{
 			while (false !== ($file = readdir($handle)))
 			{
