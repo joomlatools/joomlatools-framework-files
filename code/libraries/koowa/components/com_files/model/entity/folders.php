@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowsetFolders extends ComFilesDatabaseRowsetNodes
+class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
 {
     /**
      * Returns if an iterator can be created for the current entry.

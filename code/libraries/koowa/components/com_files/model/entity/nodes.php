@@ -8,15 +8,19 @@
  */
 
 /**
- * Config Database Row
+ * Nodes Database Rowset
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowConfig extends KDatabaseRowAbstract
+class ComFilesModelEntityNodes extends KModelEntityCollection
 {
-	public function __toString()
-	{
-		return json_encode($this->getData());
-	}
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'identity_key' => 'name'
+        ));
+
+        parent::_initialize($config);
+    }
 }

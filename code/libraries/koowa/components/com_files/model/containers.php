@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelContainers extends KModelTable
+class ComFilesModelContainers extends KModelDatabase
 {
 	protected function _buildQueryWhere(KDatabaseQueryInterface $query)
 	{

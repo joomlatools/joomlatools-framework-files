@@ -22,57 +22,68 @@ class ComFilesModelFolders extends ComFilesModelNodes
 		$this->getState()->insert('tree', 'boolean', false);
 	}
 
-	public function getList()
-	{
-		if (!isset($this->_list))
-		{
-			$state = $this->getState();
+    protected function _actionFetch(KModelContext $context)
+    {
+        $state = $this->getState();
 
-			$folders = $this->getContainer()->getAdapter('iterator')->getFolders(array(
-				'path'    => $this->getPath(),
-				'recurse' => !!$state->tree,
-				'filter'  => array($this, 'iteratorFilter'),
-				'map'     => array($this, 'iteratorMap'),
-            	'sort'    => $state->sort
-			));
-        	if ($folders === false) {
-        		throw new UnexpectedValueException('Invalid folder');
-        	}
-			$this->_total = count($folders);
+        $folders = $this->getContainer()->getAdapter('iterator')->getFolders(array(
+            'path'    => $this->getPath(),
+            'recurse' => !!$state->tree,
+            'filter'  => array($this, 'iteratorFilter'),
+            'map'     => array($this, 'iteratorMap'),
+            'sort'    => $state->sort
+        ));
 
-			if (strtolower($state->direction) == 'desc') {
-				$folders = array_reverse($folders);
-			}
+        if ($folders === false) {
+            throw new UnexpectedValueException('Invalid folder');
+        }
 
-			$folders = array_slice($folders, $state->offset, $state->limit ? $state->limit : $this->_total);
+        $this->_count = count($folders);
 
-			$results = array();
-			foreach ($folders as $folder)
-			{
-				$hierarchy = array();
-				if ($state->tree)
-				{
-					$hierarchy = explode('/', dirname($folder));
-					if (count($hierarchy) === 1 && $hierarchy[0] === '.') {
-						$hierarchy = array();
-					}
-				}
+        if (strtolower($state->direction) == 'desc') {
+            $folders = array_reverse($folders);
+        }
 
-                $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : basename($folder);
+        $folders = array_slice($folders, $state->offset, $state->limit ? $state->limit : $this->_total);
 
-				$results[] = array(
-					'container' => $state->container,
-					'folder' 	=> $hierarchy ? implode('/', $hierarchy) : $state->folder,
-					'name' 		=> $name,
-					'hierarchy' => $hierarchy
-				);
-			}
+        $identifier         = $this->getIdentifier()->toArray();
+        $identifier['path'] = array('model', 'entity');
+        $collection = $this->getObject($identifier);
 
-			$this->_list = $this->getRowset()->addData($results);
-		}
+        foreach ($folders as $folder)
+        {
+            $hierarchy = array();
+            if ($state->tree)
+            {
+                $hierarchy = explode('/', dirname($folder));
+                if (count($hierarchy) === 1 && $hierarchy[0] === '.') {
+                    $hierarchy = array();
+                }
+            }
 
-		return parent::getList();
+            $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : basename($folder);
+
+            $properties[] = array(
+                'container' => $state->container,
+                'folder' 	=> $hierarchy ? implode('/', $hierarchy) : $state->folder,
+                'name' 		=> $name,
+                'hierarchy' => $hierarchy
+            );
+
+            $collection->create($properties);
+        }
+
+        return $collection;
 	}
+
+    protected function _actionCount(KModelContext $context)
+    {
+        if (!isset($this->_count)) {
+            $this->fetch();
+        }
+
+        return $this->_count;
+    }
 
 	public function iteratorMap($path)
 	{

@@ -8,12 +8,12 @@
  */
 
 /**
- * Thumbnail Database Row
+ * Thumbnail Entity
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
+class ComFilesDatabaseRowThumbnail extends KModelEntityRow
 {
     /**
      * @var array Associative array containing the thumbnail size (x, y);
@@ -83,7 +83,7 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
 
             if ($str)
             {
-                $this->setData(array(
+                $this->setProperties(array(
                     'files_container_id' => $source->getContainer()->id,
                     'folder'             => $source->folder,
                     'filename'           => $source->name,
@@ -115,9 +115,9 @@ class ComFilesDatabaseRowThumbnail extends KDatabaseRowTable
     /**
      * Thumbnail size setter.
      *
-     * @throws BadMethodCallException If bad formatted size is provided.
-     *
-     * @return $this.
+     * @param  array $size
+     * @throws BadMethodCallException
+     * @return $this
      */
     public function setSize(array $size)
     {

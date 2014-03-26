@@ -15,45 +15,52 @@
  */
 class ComFilesModelFiles extends ComFilesModelNodes
 {
-    public function getList()
+    protected function _actionFetch(KModelContext $context)
     {
-        if (!isset($this->_list))
-        {
-            $state = $this->getState();
-            $files = $this->getContainer()->getAdapter('iterator')->getFiles(array(
-        		'path'    => $this->getPath(),
-        		'exclude' => array('.svn', '.htaccess', 'web.config', '.git', 'CVS', 'index.html', '.DS_Store', 'Thumbs.db', 'Desktop.ini'),
-        		'filter'  => array($this, 'iteratorFilter'),
-        		'map'     => array($this, 'iteratorMap'),
-            	'sort'    => $state->sort
-        	));
+        $state = $this->getState();
+        $files = $this->getContainer()->getAdapter('iterator')->getFiles(array(
+            'path'    => $this->getPath(),
+            'exclude' => array('.svn', '.htaccess', 'web.config', '.git', 'CVS', 'index.html', '.DS_Store', 'Thumbs.db', 'Desktop.ini'),
+            'filter'  => array($this, 'iteratorFilter'),
+            'map'     => array($this, 'iteratorMap'),
+            'sort'    => $state->sort
+        ));
 
-        	if ($files === false) {
-        		throw new UnexpectedValueException('Invalid folder');
-        	}
-
-            $this->_total = count($files);
-            
-            if (strtolower($state->direction) == 'desc') {
-            	$files = array_reverse($files);
-            }
-
-            $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_total);
-
-            $data = array();
-            foreach ($files as $file)
-            {
-                $data[] = array(
-                	'container' => $state->container,
-                	'folder'    => $state->folder,
-                	'name'      => $file
-                );
-            }
-
-            $this->_list = $this->getRowset()->addRow($data);
+        if ($files === false) {
+            throw new UnexpectedValueException('Invalid folder');
         }
 
-        return parent::getList();
+        $this->_total = count($files);
+
+        if (strtolower($state->direction) == 'desc') {
+            $files = array_reverse($files);
+        }
+
+        $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_total);
+
+        $data = array();
+        foreach ($files as $file)
+        {
+            $data[] = array(
+                'container' => $state->container,
+                'folder'    => $state->folder,
+                'name'      => $file
+            );
+        }
+
+        $identifier         = $this->getIdentifier()->toArray();
+        $identifier['path'] = array('model', 'entity');
+
+        return $this->getObject($identifier, array('data' => $data));
+    }
+
+    protected function _actionCount(KModelContext $context)
+    {
+        if (!isset($this->_count)) {
+            $this->fetch();
+        }
+
+        return $this->_count;
     }
 
 	public function iteratorMap($path)
@@ -76,8 +83,8 @@ class ComFilesModelFiles extends ComFilesModelNodes
 
 		if ($state->types)
         {
-			if ((in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('image', (array) $state->types))
-			|| (!in_array($extension, ComFilesDatabaseRowFile::$image_extensions) && !in_array('file', (array) $state->types))
+			if ((in_array($extension, ComFilesModelEntityFile::$image_extensions) && !in_array('image', (array) $state->types))
+			|| (!in_array($extension, ComFilesModelEntityFile::$image_extensions) && !in_array('file', (array) $state->types))
 			) {
 				return false;
 			}

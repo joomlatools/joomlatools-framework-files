@@ -51,7 +51,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
         // Serve file
         if($model->getState()->isUnique() && $this->getRequest()->getFormat() === 'html')
         {
-            $file = $this->getModel()->getItem();
+            $file = $this->getModel()->fetch();
 
             try
             {

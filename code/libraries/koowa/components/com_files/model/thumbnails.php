@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelThumbnails extends KModelTable
+class ComFilesModelThumbnails extends KModelDatabase
 {
     /**
      * A container object
@@ -36,7 +36,7 @@ class ComFilesModelThumbnails extends KModelTable
     /**
      * Returns the current container row
      *
-     * @return ComFilesDatabaseRowContainer
+     * @return ComFilesModelEntityContainer
      * @throws UnexpectedValueException
      */
     public function getContainer()
@@ -44,13 +44,13 @@ class ComFilesModelThumbnails extends KModelTable
         if(!isset($this->_container))
         {
             //Set the container
-            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->getItem();
+            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->fetch();
 
-            if (!is_object($container) || $container->isNew()) {
+            if (!is_object($container) || !count($container) || $container->isNew()) {
                 throw new UnexpectedValueException('Invalid container');
             }
 
-            $this->_container = $container;
+            $this->_container = $container->top();
         }
 
         return $this->_container;

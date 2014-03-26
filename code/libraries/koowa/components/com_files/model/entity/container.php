@@ -8,22 +8,21 @@
  */
 
 /**
- * Container Database Row
+ * Container Entity
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowContainer extends KDatabaseRowTable
+class ComFilesModelEntityContainer extends KModelEntityRow
 {
 	/**
 	 * A reference to the container configuration
 	 *
-	 * @var ComFilesDatabaseRowConfig
-	 *
+	 * @var ComFilesModelEntityConfig
 	 */
 	protected $_parameters;
 
-	public function __get($column)
+	public function getProperty($column)
 	{
         if ($column == 'path' && !empty($this->_data['path']))
         {
@@ -49,7 +48,7 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowTable
             return $this->getParameters();
         }
 
-		return parent::__get($column);
+		return parent::getProperty($column);
 	}
 
 	public function getRelativePath()
@@ -64,8 +63,8 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowTable
 	{
 		if (empty($this->_parameters))
         {
-			$this->_parameters = $this->getObject('com:files.database.row.config')
-				->setData(json_decode($this->_data['parameters'], true));
+            $this->_parameters = $this->getObject('com:files.model.entity.config')
+                ->setProperties(json_decode($this->_data['parameters'], true));
 		}
 
 		return $this->_parameters;
@@ -87,7 +86,7 @@ class ComFilesDatabaseRowContainer extends KDatabaseRowTable
 		$data = parent::getData($modified);
 
 		if (isset($data['parameters'])) {
-			$data['parameters'] = $this->parameters->getData();
+			$data['parameters'] = $this->parameters->getProperties();
 		}
 
 		return $data;

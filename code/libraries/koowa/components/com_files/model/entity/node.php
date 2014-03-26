@@ -8,12 +8,12 @@
  */
 
 /**
- * Node Database Row
+ * Node Entity
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
+class ComFilesModelEntityNode extends KModelEntityAbstract
 {
 	protected $_adapter;
 
@@ -130,7 +130,7 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		return $context->result;
 	}
 
-	public function __get($column)
+	public function getProperty($column)
 	{
 		if ($column == 'fullpath' && !isset($this->_data['fullpath'])) {
 			return $this->getFullpath();
@@ -156,12 +156,12 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		}
 
 
-		return parent::__get($column);
+		return parent::getProperty($column);
 	}
 
-	public function __set($column, $value)
+	public function setProperty($column, $value, $modified = true)
 	{
-		parent::__set($column, $value);
+		parent::setProperty($column, $value, $modified = true);
 
 		if (in_array($column, array('container', 'folder', 'name'))) {
 			$this->setAdapter();
@@ -177,17 +177,17 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 
             if (is_string($container)) {
                 if (!isset(self::$_container_cache[$container])) {
-                    self::$_container_cache[$container] = $this->getObject('com:files.model.containers')->slug($container)->getItem();
+                    self::$_container_cache[$container] = $this->getObject('com:files.model.containers')->slug($container)->fetch();
                 }
 
                 $container = self::$_container_cache[$container];
             }
 
-            if (!is_object($container) || $container->isNew()) {
+            if (!is_object($container) || !count($container) || $container->isNew()) {
                 throw new UnexpectedValueException('Invalid container');
             }
 
-            $this->_container = $container;
+            $this->_container = $container->top();
         }
 
         return $this->_container;
@@ -206,16 +206,16 @@ class ComFilesDatabaseRowNode extends KDatabaseRowAbstract
 		return $this;
 	}
 
-	public function setData($data, $modified = true)
-	{
-		$result = parent::setData($data, $modified);
+    public function setProperties($data, $modified = true)
+    {
+        $result = parent::setProperties($data, $modified);
 
-		if (isset($data['container'])) {
-			$this->setAdapter();
-		}
+        if (isset($data['container'])) {
+            $this->setAdapter();
+        }
 
-		return $result;
-	}
+        return $result;
+    }
 
 	public function getFullpath()
 	{

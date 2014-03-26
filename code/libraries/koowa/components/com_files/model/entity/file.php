@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
+class ComFilesModelEntityFile extends ComFilesModelEntityNode
 {
 	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp');
 
@@ -46,7 +46,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 		return $context->result;
 	}
 
-	public function __get($column)
+	public function getProperty($column)
 	{
 		if (in_array($column, array('size', 'extension', 'modified_date', 'mimetype')))
         {
@@ -71,7 +71,7 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 			return $metadata;
 		}
 
-		return parent::__get($column);
+		return parent::getProperty($column);
 	}	
 	
 	/**
@@ -79,13 +79,13 @@ class ComFilesDatabaseRowFile extends ComFilesDatabaseRowNode
 	 * 
 	 * @param string $key
 	 */
-	public function __isset($key)
+	public function hasProperty($key)
 	{
-		$result = parent::__isset($key);
+		$result = parent::hasProperty($key);
 		
 		if (!$result) 
 		{
-			$var = $this->__get($key);
+			$var = $this->getProperty($key);
 			if (!empty($var)) {
 				$result = true;
 			}

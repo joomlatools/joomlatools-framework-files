@@ -8,12 +8,12 @@
  */
 
 /**
- * Url Database Row
+ * Url Entity
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
+class ComFilesModelEntityUrl extends KModelEntityAbstract
 {
 	/**
 	 * Adapters to use for remote access
@@ -42,15 +42,18 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 		parent::_initialize($config);
 	}
 
-	public function load()
-	{
-		$url = $this->file;
-		$response = $this->_fetch($url);
+    public function getProperty($name)
+    {
+        if($name == 'contents' && !isset($this->_data['contents']))
+        {
+            $url = $this->file;
+            $response = $this->_fetch($url);
 
-		$this->contents = $response;
+            $this->_data['contents'] = $response;
+        }
 
-		return (bool) $response;
-	}
+        return parent::getProperty($name);
+    }
 
 	protected function _fetch($url)
 	{
@@ -112,7 +115,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 	protected function _fetchFsockopen($url)
 	{
 		if (!in_array('tcp', stream_get_transports())) {
-			throw new ComFilesExceptionRemoteAdapterNotAvailable('Adapter does not exist');
+			throw new ComFilesDatabaseExceptionRemoteAdapterNotAvailable('Adapter does not exist');
 		}
 
 		$uri = $this->getObject('lib:http.url', array('url' => $url));
@@ -124,7 +127,7 @@ class ComFilesDatabaseRowUrl extends KDatabaseRowAbstract
 
 		if ($scheme == 'https://') {
 			if (!in_array('ssl', stream_get_transports())) {
-				throw new ComFilesExceptionRemoteAdapterNotAvailable('fsockopen does not support SSL');
+				throw new ComFilesDatabaseExceptionRemoteAdapterNotAvailable('fsockopen does not support SSL');
 			}
 			$host = 'ssl://'.$host;
 			$port = 443;

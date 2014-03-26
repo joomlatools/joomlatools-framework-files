@@ -18,7 +18,7 @@ class ComFilesModelNodes extends KModelAbstract
     /**
      * A container object
      *
-     * @var ComFilesDatabaseRowContainer
+     * @var ComFilesModelEntityContainer
      */
     protected static $_container;
 
@@ -44,6 +44,88 @@ class ComFilesModelNodes extends KModelAbstract
             ->insert('config'   , 'raw', '', false, array(), true);
     }
 
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'behaviors' => array('paginatable'),
+        ));
+
+        parent::_initialize($config);
+    }
+
+    protected function _actionCreate(KModelContext $context)
+    {
+        $identifier         = $this->getIdentifier()->toArray();
+        $identifier['path'] = array('model', 'entity');
+        $identifier['name'] = KStringInflector::singularize($this->getIdentifier()->name);
+
+        $options = array('data' => array(
+            'container' => $context->state->container,
+            'folder'    => $context->state->folder,
+            'name'      => $context->state->name
+        ));
+
+        $entity = $this->getObject($identifier, $options);
+
+        return $entity;
+    }
+
+    protected function _actionFetch(KModelContext $context)
+    {
+        $state = $context->state;
+
+        $type = !empty($state->types) ? (array)$state->types : array();
+
+        $list = $this->getObject('com:files.model.entity.nodes');
+
+        // Special case for limit=0. We set it to -1 so loop goes on till end since limit is a negative value
+        $limit_left  = $state->limit ? $state->limit : -1;
+        $offset_left = $state->offset;
+        $total       = 0;
+
+        if (empty($type) || in_array('folder', $type))
+        {
+            $folders = $this->getObject('com:files.model.folders')->setState($state->getValues());
+
+            foreach ($folders->fetch() as $folder)
+            {
+                if (!$limit_left) {
+                    break;
+                }
+
+                $list->insert($folder);
+                $limit_left--;
+            }
+
+            $total += $folders->count();
+            $offset_left -= $total;
+        }
+
+        if ((empty($type) || (in_array('file', $type) || in_array('image', $type))))
+        {
+            $data           = $state->getValues();
+            $data['offset'] = $offset_left < 0 ? 0 : $offset_left;
+
+            $files = $this->getObject('com:files.model.files')->setState($data);
+
+            foreach ($files->fetch() as $file)
+            {
+                if (!$limit_left) {
+                    break;
+                }
+
+                $list->insert($file);
+                $limit_left--;
+            }
+
+            $total += $files->count();
+        }
+
+        $this->_count = $total;
+
+        return $list;
+    }
+
     /**
      * Reset the cached container object if container changes
      * @param string $name
@@ -58,7 +140,7 @@ class ComFilesModelNodes extends KModelAbstract
     /**
      * Returns the current container row
      *
-     * @return ComFilesDatabaseRowContainer
+     * @return ComFilesModelEntityContainer
      * @throws UnexpectedValueException
      */
     public function getContainer()
@@ -66,51 +148,16 @@ class ComFilesModelNodes extends KModelAbstract
         if(!isset(self::$_container))
         {
             //Set the container
-            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->getItem();
+            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->fetch();
 
-            if (!is_object($container) || $container->isNew()) {
+            if (!is_object($container) || !count($container) || $container->isNew()) {
                 throw new UnexpectedValueException('Invalid container: '.$this->getState()->container);
             }
 
-            self::$_container = $container;
+            self::$_container = $container->top();
         }
 
         return self::$_container;
-    }
-
-    public function getItem()
-    {
-        if (!isset($this->_item))
-        {
-            $state = $this->getState();
-
-            $this->_item = $this->getRow(array(
-                'data' => array(
-            		'container' => $state->container,
-                    'folder' 	=> $state->folder,
-                    'name' 		=> $state->name
-                )
-            ));
-        }
-
-        return parent::getItem();
-    }
-
-    public function getRow(array $options = array())
-    {
-        $identifier         = $this->getIdentifier()->toArray();
-        $identifier['path'] = array('database', 'row');
-        $identifier['name'] = KStringInflector::singularize($this->getIdentifier()->name);
-
-        return $this->getObject($identifier, $options);
-    }
-
-    public function getRowset(array $options = array())
-    {
-        $identifier         = $this->getIdentifier()->toArray();
-        $identifier['path'] = array('database', 'rowset');
-
-        return $this->getObject($identifier, $options);
     }
 
     public function getPath()
@@ -125,66 +172,4 @@ class ComFilesModelNodes extends KModelAbstract
 
         return $path;
     }
-
-	public function getList()
-	{
-		if (!isset($this->_list))
-		{
-			$state = $this->getState();
-			$type = !empty($state->types) ? (array) $state->types : array();
-
-			$list = $this->getObject('com:files.database.rowset.nodes');
-
-			// Special case for limit=0. We set it to -1
-			// so loop goes on till end since limit is a negative value
-			$limit_left = $state->limit ? $state->limit : -1;
-			$offset_left = $state->offset;
-			$total = 0;
-
-			if (empty($type) || in_array('folder', $type))
-			{
-                $folders_model = $this->getObject('com:files.model.folders');
-				$folders_model->setState($state->getValues());
-
-				$folders = $folders_model->getList();
-
-				foreach ($folders as $folder)
-				{
-					if (!$limit_left) {
-						break;
-					}
-					$list->insert($folder);
-					$limit_left--;
-				}
-
-				$total += $folders_model->getTotal();
-				$offset_left -= $total;
-			}
-
-			if ((empty($type) || (in_array('file', $type) || in_array('image', $type))))
-			{
-				$data = $state->getValues();
-				$data['offset'] = $offset_left < 0 ? 0 : $offset_left;
-				$files_model = $this->getObject('com:files.model.files')->setState($data);
-				$files = $files_model->getList();
-
-				foreach ($files as $file)
-				{
-					if (!$limit_left) {
-						break;
-					}
-					$list->insert($file);
-					$limit_left--;
-				}
-
-				$total += $files_model->getTotal();
-			}
-
-			$this->_total = $total;
-
-			$this->_list = $list;
-		}
-
-		return parent::getList();
-	}
 }

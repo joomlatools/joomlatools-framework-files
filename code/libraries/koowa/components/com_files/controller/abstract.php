@@ -29,7 +29,7 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 
 	protected function _actionCopy(KControllerContextInterface $context)
 	{
-		$data = $this->getModel()->getItem();
+		$data = $this->getModel()->fetch();
 
 		if(!$data->isNew())
 		{
@@ -50,7 +50,7 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 
 	protected function _actionMove(KControllerContextInterface $context)
 	{
-		$data = $this->getModel()->getItem();
+		$data = $this->getModel()->fetch();
 
 		if(!$data->isNew())
 		{

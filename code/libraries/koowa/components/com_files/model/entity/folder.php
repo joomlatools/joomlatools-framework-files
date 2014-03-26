@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
+class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 {
 	/**
 	 * Nodes object or identifier (com://APP/COMPONENT.rowset.NAME)
@@ -53,13 +53,13 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 		return $context->result;
 	}
 
-	public function __get($column)
+	public function getProperty($column)
 	{
 		if ($column == 'children' && !isset($this->_data['children'])) {
-			$this->_data['children'] = $this->getObject('com:files.database.rowset.folders');
+			$this->_data['children'] = $this->getObject('com:files.model.entity.folders');
 		}
 
-		return parent::__get($column);
+		return parent::getProperty($column);
 	}
 
 	public function toArray()
@@ -73,12 +73,12 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 		return $data;
 	}
 
-	public function getData($modified = false)
+	public function getProperties($modified = false)
 	{
-		$result = parent::getData($modified);
+		$result = parent::getProperties($modified);
 
 		if (isset($result['children']) && $result['children'] instanceof KDatabaseRowsetInterface) {
-			$result['children'] = $result['children']->getData();
+			$result['children'] = $result['children']->getProperties();
 		}
 
 		return $result;
@@ -110,12 +110,12 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 		if(!($this->_children instanceof KDatabaseRowsetInterface))
 		{
 			$identifier         = $this->getIdentifier()->toArray();
-			$identifier['path'] = array('database', 'rowset');
+			$identifier['path'] = array('model', 'entity');
 			$identifier['name'] = KStringInflector::pluralize($this->getIdentifier()->name);
 
 			//The row default options
 			$options  = array(
-				'identity_column' => $this->getIdentityColumn()
+                'identity_key' => $this->getIdentityKey()
 			);
 
 			$this->_children = $this->getObject($identifier, $options);
@@ -137,7 +137,7 @@ class ComFilesDatabaseRowFolder extends ComFilesDatabaseRowNode
 	/**
 	 * Set the parent node
 	 *
-	 * @return ComFilesDatabaseRowNode
+	 * @return ComFilesModelEntityNode
 	 */
 	public function setParent( $node )
 	{

@@ -53,7 +53,7 @@ class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
             ->container($this->container)
             ->folder($this->folder)
             ->filename($this->name)
-            ->getItem();
+            ->fetch();
 
         $result = $thumb->delete();
 
