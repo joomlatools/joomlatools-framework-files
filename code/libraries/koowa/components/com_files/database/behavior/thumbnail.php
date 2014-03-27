@@ -38,7 +38,7 @@ class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
             $parameters  = $this->getContainer()->getParameters();
             $size        = isset($parameters['thumbnail_size']) ? $parameters['thumbnail_size'] : array();
 
-            $thumb = $this->getObject('com:files.database.row.thumbnail', array('size' => $size));
+            $thumb = $this->getObject('com:files.model.entity.thumbnail', array('size' => $size));
             $thumb->source = $this;
 
             $result = $thumb->save();

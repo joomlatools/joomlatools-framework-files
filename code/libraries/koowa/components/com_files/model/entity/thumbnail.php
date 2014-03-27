@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDatabaseRowThumbnail extends KModelEntityRow
+class ComFilesModelEntityThumbnail extends KModelEntityRow
 {
     /**
      * @var array Associative array containing the thumbnail size (x, y);

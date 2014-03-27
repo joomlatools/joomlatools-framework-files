@@ -22,7 +22,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 		if (is_string($row->file) && !is_uploaded_file($row->file))
 		{
 			// remote file
-            $file = $this->getObject('com:files.database.row.url');
+            $file = $this->getObject('com:files.model.entity.url');
             $file->setData(array('file' => $row->file));
 
             if (!$file->load()) {
