@@ -56,7 +56,7 @@ class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
 
 		    //Create a row prototype and clone it this is faster then instantiating a new row
 			$instance = $this->getRow()
-							->setData($row)
+							->setProperties($row)
 							->setStatus($new ? NULL : KDatabase::STATUS_LOADED);
 
         	if($hierarchy)

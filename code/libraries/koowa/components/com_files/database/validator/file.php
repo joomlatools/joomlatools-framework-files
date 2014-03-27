@@ -23,7 +23,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 		{
 			// remote file
             $file = $this->getObject('com:files.model.entity.url');
-            $file->setData(array('file' => $row->file));
+            $file->setProperties(array('file' => $row->file));
 
             if (!$file->load()) {
                 throw new RuntimeException('File cannot be downloaded');

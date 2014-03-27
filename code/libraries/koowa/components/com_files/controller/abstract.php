@@ -33,7 +33,7 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 
 		if(!$data->isNew())
 		{
-			$data->setData($context->request->data->toArray());
+			$data->setProperties($context->request->data->toArray());
 
 			//Only throw an error if the action explicitly failed.
 			if($data->copy() === false)
@@ -54,7 +54,7 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 
 		if(!$data->isNew())
 		{
-			$data->setData($context->request->data->toArray());
+			$data->setProperties($context->request->data->toArray());
 
 			//Only throw an error if the action explicitly failed.
 			if($data->move() === false)

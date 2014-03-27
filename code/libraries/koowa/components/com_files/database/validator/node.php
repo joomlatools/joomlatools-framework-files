@@ -34,7 +34,7 @@ class ComFilesDatabaseValidatorNode extends KCommandHandlerAbstract
 		$row        = $context->subject;
 		$translator = $this->getObject('translator');
 
-		if (!array_intersect(array('destination_folder', 'destination_name'), $row->getModified()))
+		if (!array_intersect(array('destination_folder', 'destination_name'), array_keys($row->getProperties(true))))
         {
             $row->setStatusMessage($translator->translate('Please supply a destination.'));
 			return false;
