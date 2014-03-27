@@ -24,10 +24,10 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         }
 
         $files = array();
-        foreach ($context->result as $row)
+        foreach ($context->result as $entity)
         {
-            if ($row->getIdentifier()->name === 'file' && $row->isImage()) {
-                $files[] = $row->name;
+            if ($entity->getIdentifier()->name === 'file' && $entity->isImage()) {
+                $files[] = $entity->name;
             }
         }
 
@@ -41,15 +41,15 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
         foreach ($thumbnails as $thumbnail)
         {
-            if ($row = $context->result->find($thumbnail->filename)) {
-                $row->thumbnail = $thumbnail->thumbnail;
+            if ($entity = $context->result->find($thumbnail->filename)) {
+                $entity->thumbnail = $thumbnail->thumbnail;
             }
         }
 
-        foreach ($context->result as $row)
+        foreach ($context->result as $entity)
         {
-            if (!is_string($row->thumbnail)) {
-                $row->thumbnail = false;
+            if (!is_string($entity->thumbnail)) {
+                $entity->thumbnail = false;
             }
         }
 	}

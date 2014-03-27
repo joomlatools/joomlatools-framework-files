@@ -8,7 +8,7 @@
  */
 
 /**
- * Nodes Database Rowset
+ * Nodes Entity
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files

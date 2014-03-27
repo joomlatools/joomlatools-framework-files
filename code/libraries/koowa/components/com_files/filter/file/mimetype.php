@@ -15,21 +15,21 @@
  */
 class ComFilesFilterFileMimetype extends KFilterAbstract
 {
-    public function validate($row)
+    public function validate($entity)
 	{
-		$mimetypes = KObjectConfig::unbox($row->getContainer()->parameters->allowed_mimetypes);
+		$mimetypes = KObjectConfig::unbox($entity->getContainer()->parameters->allowed_mimetypes);
 
 		if (is_array($mimetypes))
 		{
-			$mimetype = $row->mimetype;
+			$mimetype = $entity->mimetype;
 
 			if (empty($mimetype))
             {
-				if (is_uploaded_file($row->file)) {
-                    $mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($row->file);
+				if (is_uploaded_file($entity->file)) {
+                    $mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($entity->file);
 				}
-                elseif ($row->file instanceof SplFileInfo) {
-					$mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($row->file->getPathname());
+                elseif ($entity->file instanceof SplFileInfo) {
+					$mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($entity->file->getPathname());
 				}
 			}
 

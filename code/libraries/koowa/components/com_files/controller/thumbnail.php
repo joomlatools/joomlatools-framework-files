@@ -29,10 +29,10 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
         	$files  = array();
             $nodes   = $this->getObject('com:files.model.nodes')->setState($state_data)->fetch();
 
-        	foreach ($nodes as $row)
+        	foreach ($nodes as $entity)
         	{
-        		if ($row->isImage()) {
-        			$files[] = $row->name;
+        		if ($entity->isImage()) {
+        			$files[] = $entity->name;
         		}
         	}
         }
@@ -45,21 +45,21 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
 		$list  = $model->fetch();
 
     	$found = array();
-        foreach ($list as $row) {
-        	$found[] = $row->filename;
+        foreach ($list as $entity) {
+        	$found[] = $entity->filename;
         }
 
         if (count($found) !== count($files))
         {
         	$new = array();
             $nodes = isset($nodes) ? $nodes : $this->getObject('com:files.model.nodes')->setState($state_data)->fetch();
-        	foreach ($nodes as $row)
+        	foreach ($nodes as $entity)
         	{
-        		if ($row->isImage() && !in_array($row->name, $found))
+        		if ($entity->isImage() && !in_array($entity->name, $found))
         		{
-	        		$result = $row->saveThumbnail();
+	        		$result = $entity->saveThumbnail();
 	        		if ($result) {
-	        			$new[] = $row->name;
+	        			$new[] = $entity->name;
 	        		}
         		}
         	}
@@ -72,8 +72,8 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
 				
 				$additional = $model->fetch();
 				
-				foreach ($additional as $row) {
-					$list->insert($row);
+				foreach ($additional as $entity) {
+					$list->insert($entity);
 				}
         	}
         }

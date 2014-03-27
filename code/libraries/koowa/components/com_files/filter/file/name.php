@@ -17,9 +17,9 @@ class ComFilesFilterFileName extends KFilterAbstract
 {
     protected static $_rejected_names = array('.htaccess', 'web.config', 'index.htm', 'index.html', 'index.php', '.svn', '.git', 'cvs');
 
-    public function validate($row)
+    public function validate($entity)
 	{
-        $value = $this->sanitize($row->name);
+        $value = $this->sanitize($entity->name);
 
         if (in_array(strtolower($value), self::$_rejected_names))
         {

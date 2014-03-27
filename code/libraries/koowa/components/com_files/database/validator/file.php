@@ -17,29 +17,29 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 {
 	protected function _beforeSave(KDatabaseContextInterface $context)
 	{
-		$row = $context->subject;
+		$entity = $context->subject;
 
-		if (is_string($row->file) && !is_uploaded_file($row->file))
+		if (is_string($entity->file) && !is_uploaded_file($entity->file))
 		{
 			// remote file
             $file = $this->getObject('com:files.model.entity.url');
-            $file->setProperties(array('file' => $row->file));
+            $file->setProperties(array('file' => $entity->file));
 
             if (!$file->load()) {
                 throw new RuntimeException('File cannot be downloaded');
             }
 
-            $row->contents = $file->contents;
+            $entity->contents = $file->contents;
 
-			if (empty($row->name))
+			if (empty($entity->name))
 			{
-				$uri = $this->getObject('lib:http.url', array('url' => $row->file));
+				$uri = $this->getObject('lib:http.url', array('url' => $entity->file));
 	        	$path = $uri->toString(KHttpUrl::PATH | KHttpUrl::FORMAT);
 	        	if (strpos($path, '/') !== false) {
 	        		$path = basename($path);
 	        	}
 
-	        	$row->name = $path;
+	        	$entity->name = $path;
 			}
 		}
 

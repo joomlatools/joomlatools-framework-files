@@ -17,12 +17,12 @@ class ComFilesDatabaseValidatorNode extends KCommandHandlerAbstract
 {
 	protected function _beforeSave(KDatabaseContextInterface $context)
 	{
-        $row = $context->getSubject();
+        $entity = $context->getSubject();
 
-        if (!$row->isNew() && !$row->overwrite)
+        if (!$entity->isNew() && !$entity->overwrite)
         {
             $translator = $this->getObject('translator');
-            $row->setStatusMessage($translator->translate('Resource already exists and overwrite switch is not present.'));
+            $entity->setStatusMessage($translator->translate('Resource already exists and overwrite switch is not present.'));
             return false;
         }
 
@@ -31,35 +31,35 @@ class ComFilesDatabaseValidatorNode extends KCommandHandlerAbstract
 
 	protected function _beforeCopy(KDatabaseContextInterface $context)
 	{
-		$row        = $context->subject;
+		$entity        = $context->subject;
 		$translator = $this->getObject('translator');
 
-		if (!array_intersect(array('destination_folder', 'destination_name'), array_keys($row->getProperties(true))))
+		if (!array_intersect(array('destination_folder', 'destination_name'), array_keys($entity->getProperties(true))))
         {
-            $row->setStatusMessage($translator->translate('Please supply a destination.'));
+            $entity->setStatusMessage($translator->translate('Please supply a destination.'));
 			return false;
 		}
 
-		if ($row->fullpath === $row->destination_fullpath)
+		if ($entity->fullpath === $entity->destination_fullpath)
         {
-            $row->setStatusMessage($translator->translate('Source and destination are the same.'));
+            $entity->setStatusMessage($translator->translate('Source and destination are the same.'));
 			return false;
 		}
 
-		$dest_adapter = $row->getContainer()->getAdapter($row->getIdentifier()->name, array(
-			'path' => $row->destination_fullpath
+		$dest_adapter = $entity->getContainer()->getAdapter($entity->getIdentifier()->name, array(
+			'path' => $entity->destination_fullpath
 		));
 
 		$exists = $dest_adapter->exists();
 
 		if ($exists)
 		{
-			if (!$row->overwrite)
+			if (!$entity->overwrite)
             {
-                $row->setStatusMessage($translator->translate('Destination resource already exists.'));
+                $entity->setStatusMessage($translator->translate('Destination resource already exists.'));
 				return false;
 			}
-            else $row->overwritten = true;
+            else $entity->overwritten = true;
 		}
 
 		return true;

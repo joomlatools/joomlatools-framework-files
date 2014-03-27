@@ -15,10 +15,10 @@
  */
 class ComFilesFilterFileExtension extends KFilterAbstract
 {
-    public function validate($row)
+    public function validate($entity)
 	{
-        $allowed = $row->getContainer()->parameters->allowed_extensions;
-        $value   = $row->extension;
+        $allowed = $entity->getContainer()->parameters->allowed_extensions;
+        $value   = $entity->extension;
 
 		if (is_array($allowed) && (empty($value) || !in_array(strtolower($value), $allowed))) {
             return $this->_error($this->getObject('translator')->translate('Invalid file extension'));

@@ -17,9 +17,9 @@ class ComFilesFilterFolderName extends KFilterAbstract
 {
     protected static $_rejected_names = array('.htaccess', 'web.config', 'index.htm', 'index.html', 'index.php', '.svn', '.git', 'cvs');
 
-    public function validate($row)
+    public function validate($entity)
 	{
-        $value = $row->name;
+        $value = $entity->name;
 
         if (strpos($value, '/') !== false) {
             return $this->_error($this->getObject('translator')->translate('Folder names cannot contain slashes'));

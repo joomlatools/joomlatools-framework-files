@@ -16,14 +16,14 @@
 class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 {
 	/**
-	 * Nodes object or identifier (com://APP/COMPONENT.rowset.NAME)
+	 * Nodes object or identifier
 	 *
 	 * @var string|object
 	 */
 	protected $_children = null;
 
 	/**
-	 * Node object or identifier (com://APP/COMPONENT.rowset.NAME)
+	 * Node object or identifier
 	 *
 	 * @var string|object
 	 */
@@ -89,7 +89,6 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 		//Track the parent
 		$node->setParent($this);
 
-		//Insert the row in the rowset
 		$this->getChildren()->insert($node);
 
 		return $this;
@@ -101,7 +100,7 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 	}
 
 	/**
-	 * Get the children rowset
+	 * Get the children entity
 	 *
 	 * @return	object
 	 */

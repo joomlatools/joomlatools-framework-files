@@ -15,17 +15,17 @@
  */
 class ComFilesFilterFileSize extends KFilterAbstract
 {
-    public function validate($row)
+    public function validate($entity)
 	{
-		$max = $row->getContainer()->parameters->maximum_size;
+		$max = $entity->getContainer()->parameters->maximum_size;
 
 		if ($max)
 		{
-			$size = $row->contents ? strlen($row->contents) : false;
-			if (!$size && is_uploaded_file($row->file)) {
-				$size = filesize($row->file);
-			} elseif ($row->file instanceof SplFileInfo && $row->file->isFile()) {
-				$size = $row->file->getSize();
+			$size = $entity->contents ? strlen($entity->contents) : false;
+			if (!$size && is_uploaded_file($entity->file)) {
+				$size = filesize($entity->file);
+			} elseif ($entity->file instanceof SplFileInfo && $entity->file->isFile()) {
+				$size = $entity->file->getSize();
 			}
 
 			if ($size && $size > $max) {

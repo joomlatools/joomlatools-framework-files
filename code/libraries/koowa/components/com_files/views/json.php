@@ -21,13 +21,13 @@ class ComFilesViewJson extends KViewJson
 
         if (!$this->_plural)
         {
-            $row    = $this->getModel()->fetch();
-            $status = $row->getStatus() !== KDatabase::STATUS_FAILED;
+            $entity    = $this->getModel()->fetch();
+            $status = $entity->getStatus() !== KDatabase::STATUS_FAILED;
 
             $output['status'] = $status;
 
             if ($status === false){
-                $output['error'] = $row->getStatusMessage();
+                $output['error'] = $entity->getStatusMessage();
             }
         }
 

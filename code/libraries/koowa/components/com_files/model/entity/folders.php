@@ -8,7 +8,7 @@
  */
 
 /**
- * Folders Database Rowset
+ * Folders Entity
  *
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
@@ -49,14 +49,14 @@ class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
      */
 	public function addData(array $list, $new = true)
     {
-    	foreach($list as $k => $row)
+    	foreach($list as $entity)
 		{
-			$hierarchy = !empty($row['hierarchy']) ? $row['hierarchy'] : false;
-			unset($row['hierarchy']);
+			$hierarchy = !empty($entity['hierarchy']) ? $entity['hierarchy'] : false;
+			unset($entity['hierarchy']);
 
 		    //Create a row prototype and clone it this is faster then instantiating a new row
 			$instance = $this->getRow()
-							->setProperties($row)
+							->setProperties($entity)
 							->setStatus($new ? NULL : KDatabase::STATUS_LOADED);
 
         	if($hierarchy)
