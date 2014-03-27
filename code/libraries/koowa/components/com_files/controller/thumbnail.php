@@ -27,7 +27,7 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
         if ($this->isDispatched())
         {
         	$files  = array();
-            $nodes   = $this->getObject('com:files.model.nodes')->setState($state_data)->getList();
+            $nodes   = $this->getObject('com:files.model.nodes')->setState($state_data)->fetch();
 
         	foreach ($nodes as $row)
         	{
@@ -42,7 +42,7 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
 		      ->setState($state_data)
 		      ->filename($files);
 		
-		$list  = $model->getList();
+		$list  = $model->fetch();
 
     	$found = array();
         foreach ($list as $row) {
@@ -52,7 +52,7 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
         if (count($found) !== count($files))
         {
         	$new = array();
-            $nodes = isset($nodes) ? $nodes : $this->getObject('com:files.model.nodes')->setState($state_data)->getList();
+            $nodes = isset($nodes) ? $nodes : $this->getObject('com:files.model.nodes')->setState($state_data)->fetch();
         	foreach ($nodes as $row)
         	{
         		if ($row->isImage() && !in_array($row->name, $found))
@@ -70,7 +70,7 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
 				    ->setState($state_data)
 				    ->getState()->set('files', $new);
 				
-				$additional = $model->getList();
+				$additional = $model->fetch();
 				
 				foreach ($additional as $row) {
 					$list->insert($row);

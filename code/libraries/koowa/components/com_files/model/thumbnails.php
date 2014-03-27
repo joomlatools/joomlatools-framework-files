@@ -18,7 +18,7 @@ class ComFilesModelThumbnails extends KModelDatabase
     /**
      * A container object
      *
-     * @var ComFilesDatabaseRowContainer
+     * @var ComFilesModelEntityContainer
      */
     protected $_container;
 

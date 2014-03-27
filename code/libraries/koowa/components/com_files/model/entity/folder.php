@@ -77,14 +77,14 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 	{
 		$result = parent::getProperties($modified);
 
-		if (isset($result['children']) && $result['children'] instanceof KDatabaseRowsetInterface) {
+		if (isset($result['children']) && $result['children'] instanceof KModelEntityInterface) {
 			$result['children'] = $result['children']->getProperties();
 		}
 
 		return $result;
 	}
 
-	public function insertChild(KDatabaseRowInterface $node)
+	public function insertChild(KModelEntityInterface $node)
 	{
 		//Track the parent
 		$node->setParent($this);
@@ -107,7 +107,7 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 	 */
 	public function getChildren()
 	{
-		if(!($this->_children instanceof KDatabaseRowsetInterface))
+		if(!($this->_children instanceof KModelEntityInterface))
 		{
 			$identifier         = $this->getIdentifier()->toArray();
 			$identifier['path'] = array('model', 'entity');

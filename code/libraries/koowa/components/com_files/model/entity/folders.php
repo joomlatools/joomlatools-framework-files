@@ -44,7 +44,7 @@ class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
      *
 	 * @param  array  	$list An associative array of row data to be inserted.
 	 * @param  boolean	$new  If TRUE, mark the row(s) as new (i.e. not in the database yet). Default TRUE
-	 * @return  KDatabaseRowsetAbstract
+	 * @return  KModelEntityInterface
 	 * @see __construct
      */
 	public function addData(array $list, $new = true)

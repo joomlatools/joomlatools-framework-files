@@ -17,7 +17,7 @@ class ComFilesViewThumbnailsJson extends ComFilesViewJson
 {
     protected function _renderData()
     {
-        $list = $this->getModel()->getList();
+        $list = $this->getModel()->fetch();
         $results = array();
         foreach ($list as $item) 
         {
