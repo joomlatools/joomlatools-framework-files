@@ -53,14 +53,10 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 		return $context->result;
 	}
 
-	public function getProperty($column)
-	{
-		if ($column == 'children' && !isset($this->_data['children'])) {
-			$this->_data['children'] = $this->getObject('com:files.model.entity.folders');
-		}
-
-		return parent::getProperty($column);
-	}
+    public function getPropertyChildren()
+    {
+        return $this->getObject('com:files.model.entity.folders');
+    }
 
 	public function toArray()
 	{

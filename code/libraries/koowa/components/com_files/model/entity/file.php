@@ -46,54 +46,92 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
 		return $context->result;
 	}
 
-	public function getProperty($column)
-	{
-		if (in_array($column, array('size', 'extension', 'modified_date', 'mimetype')))
-        {
-			$metadata = $this->_adapter->getMetadata();
-			return $metadata && array_key_exists($column, $metadata) ? $metadata[$column] : false;
-		}
 
-        if (in_array($column, array('width', 'height')))
+    public function getPropertyFilename()
+    {
+        return pathinfo($this->name, PATHINFO_FILENAME);
+    }
+
+    public function getPropertySize()
+    {
+        if($metadata = $this->_adapter->getMetadata())
         {
-            $metadata = $this->_adapter->getMetadata();
-            return $metadata && array_key_exists($column, $metadata['image']) ? $metadata['image'][$column] : false;
+            if(isset($metadata['size'])) {
+                return $metadata['size'];
+            }
         }
 
-		if ($column == 'filename') {
-			return pathinfo($this->name, PATHINFO_FILENAME);
-		}
+        return false;
+    }
 
-		if ($column == 'metadata')
-		{
-			$metadata = $this->_adapter->getMetadata();
+    public function getPropertyExtension()
+    {
+        if($metadata = $this->_adapter->getMetadata())
+        {
+            if(isset($metadata['extension'])) {
+                return $metadata['extension'];
+            }
+        }
 
-			return $metadata;
-		}
+        return false;
+    }
 
-		return parent::getProperty($column);
-	}	
-	
-	/**
-	 * This method checks for computed properties as well
-	 * 
-	 * @param string $key
-	 */
-	public function hasProperty($key)
-	{
-		$result = parent::hasProperty($key);
-		
-		if (!$result) 
-		{
-			$var = $this->getProperty($key);
-			if (!empty($var)) {
-				$result = true;
-			}
-		}
-		
-		return $result;
-		
-	}
+    public function getPropertyModifiedDate()
+    {
+        if($metadata = $this->_adapter->getMetadata())
+        {
+            if(isset($metadata['modified_date'])) {
+                return $metadata['modified_date'];
+            }
+        }
+
+        return false;
+    }
+
+    public function getPropertyMimetype()
+    {
+        if($metadata = $this->_adapter->getMetadata())
+        {
+            if(isset($metadata['mimetype'])) {
+                return $metadata['mimetype'];
+            }
+        }
+
+        return false;
+    }
+
+    public function getPropertyWidth()
+    {
+        if($this->isImage())
+        {
+            $size = $this->_adapter->getImageSize();
+
+            if ($size !== false) {
+                return $size[0];
+            }
+        }
+
+        return false;
+    }
+
+    public function getPropertyHeight()
+    {
+        if($this->isImage())
+        {
+            $size = $this->_adapter->getImageSize();
+
+            if ($size !== false) {
+                return $size[1];
+            }
+        }
+
+        return false;
+    }
+
+    public function getPropertyMetadata()
+    {
+        return $this->_adapter->getMetadata();
+    }
 
     public function toArray()
     {

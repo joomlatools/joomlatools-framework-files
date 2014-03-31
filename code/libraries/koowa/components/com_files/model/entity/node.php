@@ -130,34 +130,38 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 		return $context->result;
 	}
 
-	public function getProperty($column)
-	{
-		if ($column == 'fullpath' && !isset($this->_data['fullpath'])) {
-			return $this->getFullpath();
-		}
+    public function getPropertyFullpath()
+    {
+        return $this->_adapter->getRealPath();
+    }
 
-		if ($column == 'path') {
-			return trim(($this->folder ? $this->folder.'/' : '').$this->name, '/\\');
-		}
+    public function getPropertyPath()
+    {
+        return trim(($this->folder ? $this->folder . '/' : '') . $this->name, '/\\');
+    }
 
-		if ($column == 'destination_path')
-		{
-			$folder = !empty($this->destination_folder) ? $this->destination_folder.'/' : (!empty($this->folder) ? $this->folder.'/' : '');
-			$name = !empty($this->destination_name) ? $this->destination_name : $this->name;
-			return trim($folder.$name, '/\\');
-		}
+    public function getPropertyDisplayName()
+    {
+        return $this->name;
+    }
 
-		if ($column == 'destination_fullpath') {
-			return $this->getContainer()->path.'/'.$this->destination_path;
-		}
+    public function getPropertyDestinationPath()
+    {
+        $folder = !empty($this->destination_folder) ? $this->destination_folder . '/' : (!empty($this->folder) ? $this->folder . '/' : '');
+        $name   = !empty($this->destination_name) ? $this->destination_name : $this->name;
 
-		if ($column == 'adapter') {
-			return $this->_adapter;
-		}
+        return trim($folder . $name, '/\\');
+    }
 
+    public function getPropertyDestinationFullpath()
+    {
+        return $this->getContainer()->path . '/' . $this->destination_path;
+    }
 
-		return parent::getProperty($column);
-	}
+    public function getPropertyAdapter()
+    {
+        return $this->_adapter;
+    }
 
 	public function setProperty($column, $value, $modified = true)
 	{
@@ -175,7 +179,8 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
             //Set the container
             $container = $this->container;
 
-            if (is_string($container)) {
+            if (is_string($container))
+            {
                 if (!isset(self::$_container_cache[$container])) {
                     self::$_container_cache[$container] = $this->getObject('com:files.model.containers')->slug($container)->fetch();
                 }
@@ -216,11 +221,6 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
         return $result;
     }
-
-	public function getFullpath()
-	{
-		return $this->_adapter->getRealPath();
-	}
 
     public function toArray()
     {

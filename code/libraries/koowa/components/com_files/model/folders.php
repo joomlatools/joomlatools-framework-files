@@ -63,7 +63,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 
             $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : basename($folder);
 
-            $properties[] = array(
+            $properties = array(
                 'container' => $state->container,
                 'folder' 	=> $hierarchy ? implode('/', $hierarchy) : $state->folder,
                 'name' 		=> $name,
