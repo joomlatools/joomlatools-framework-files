@@ -47,6 +47,7 @@ class ComFilesModelNodes extends KModelAbstract
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
+            'identity_key' => 'name',
             'behaviors' => array('paginatable'),
         ));
 
@@ -55,17 +56,13 @@ class ComFilesModelNodes extends KModelAbstract
 
     protected function _actionCreate(KModelContext $context)
     {
-        $identifier         = $this->getIdentifier()->toArray();
-        $identifier['path'] = array('model', 'entity');
-        $identifier['name'] = KStringInflector::singularize($this->getIdentifier()->name);
+        $entity = parent::_actionCreate($context);
 
-        $options = array('data' => array(
+        $entity->setProperties(array(
             'container' => $context->state->container,
             'folder'    => $context->state->folder,
             'name'      => $context->state->name
         ));
-
-        $entity = $this->getObject($identifier, $options);
 
         return $entity;
     }
