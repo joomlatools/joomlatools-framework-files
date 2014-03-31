@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelEntityNodes extends KModelEntityCollection
+class ComFilesModelEntityNodes extends KModelEntityComposite
 {
     protected function _initialize(KObjectConfig $config)
     {
