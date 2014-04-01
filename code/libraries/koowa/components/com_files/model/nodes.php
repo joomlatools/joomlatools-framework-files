@@ -161,7 +161,7 @@ class ComFilesModelNodes extends KModelAbstract
     {
         $state = $this->getState();
 
-        $path = $this->getContainer()->path;
+        $path = $this->getContainer()->fullpath;
 
         if (!empty($state->folder) && $state->folder != '/') {
             $path .= '/'.ltrim($state->folder, '/');

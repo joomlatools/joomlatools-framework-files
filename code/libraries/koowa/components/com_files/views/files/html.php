@@ -46,7 +46,7 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
             $count = 0;
             $query = $state->getValues();
             unset($query['config']);
-            $query['thumbnails'] = $this->getModel()->getContainer()->parameters->thumbnails;
+            $query['thumbnails'] = $this->getModel()->getContainer()->getParameters()->thumbnails;
 
             if (strpos($this->getLayout(), 'compact') !== false)
             {

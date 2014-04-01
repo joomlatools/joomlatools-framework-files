@@ -155,7 +155,7 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
     public function getPropertyDestinationFullpath()
     {
-        return $this->getContainer()->path . '/' . $this->destination_path;
+        return $this->getContainer()->fullpath . '/' . $this->destination_path;
     }
 
     public function getPropertyAdapter()
@@ -202,7 +202,7 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		$type = $this->getIdentifier()->name;
 		$this->_adapter = $this->getContainer()->getAdapter($type, array(
-			'path' => $this->getContainer()->path.'/'.($this->folder ? $this->folder.'/' : '').$this->name
+			'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '').$this->name
 		));
 
 		unset($this->_data['fullpath']);

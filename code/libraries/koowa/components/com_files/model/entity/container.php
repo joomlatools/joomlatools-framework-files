@@ -15,79 +15,33 @@
  */
 class ComFilesModelEntityContainer extends KModelEntityRow
 {
-	/**
-	 * A reference to the container configuration
-	 *
-	 * @var ComFilesModelEntityConfig
-	 */
-	protected $_parameters;
+    public function getPropertyRelativePath()
+    {
+        $path = $this->fullpath;
+        $root = str_replace('\\', '/', JPATH_ROOT);
 
-	public function getProperty($column)
-	{
-        if ($column == 'path' && !empty($this->_data['path']))
-        {
-            $result = $this->_data['path'];
-            // Prepend with site root if it is a relative path
-            if (!preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
-                $result = JPATH_ROOT.'/'.$result;
-            }
+        return str_replace($root.'/', '', $path);
+    }
 
-            $result = rtrim(str_replace('\\', '/', $result), '\\');
-            return $result;
+    public function getPropertyFullpath()
+    {
+        $result = $this->getProperty('path');
+
+        // Prepend with site root if it is a relative path
+        if (!preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
+            $result = JPATH_ROOT.'/'.$result;
         }
 
-        if ($column == 'relative_path') {
-            return $this->getRelativePath();
-        }
+        $result = rtrim(str_replace('\\', '/', $result), '\\');
 
-        if ($column == 'path_value') {
-            return $this->_data['path'];
-        }
-
-        if ($column == 'parameters' && !is_object($this->_data['parameters'])) {
-            return $this->getParameters();
-        }
-
-		return parent::getProperty($column);
-	}
-
-	public function getRelativePath()
-	{
-		$path = $this->path;
-		$root = str_replace('\\', '/', JPATH_ROOT);
-
-		return str_replace($root.'/', '', $path);
-	}
-
-	public function getParameters()
-	{
-		if (empty($this->_parameters))
-        {
-            $this->_parameters = $this->getObject('com:files.model.entity.config')
-                ->setProperties(json_decode($this->_data['parameters'], true));
-		}
-
-		return $this->_parameters;
-	}
+        return $result;
+    }
 
 	public function toArray()
 	{
 		$data = parent::toArray();
-
-		$data['path']          = $this->path_value;
-		$data['parameters']    = $this->parameters->toArray();
-		$data['relative_path'] = $this->getRelativePath();
-
-		return $data;
-	}
-
-	public function getData($modified = false)
-	{
-		$data = parent::getData($modified);
-
-		if (isset($data['parameters'])) {
-			$data['parameters'] = $this->parameters->getProperties();
-		}
+        $data['relative_path'] = $this->getProperty('relative_path');
+		$data['parameters']    = $this->getParameters()->toArray();
 
 		return $data;
 	}

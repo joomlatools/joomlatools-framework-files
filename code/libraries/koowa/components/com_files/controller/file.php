@@ -77,7 +77,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                 if (isset($cookie['folder']))
                 {
                     $adapter = $container->getAdapter('folder');
-                    $adapter->setPath($container->path . '/' . $cookie['folder']);
+                    $adapter->setPath($container->fullpath . '/' . $cookie['folder']);
                     // Unset folder cookie if path does not exists.
                     if (!$adapter->exists()) {
                         unset($cookie['folder']);

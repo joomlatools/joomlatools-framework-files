@@ -19,7 +19,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 	{
         $container = $this->getModel()->getContainer();
 
-        if (!$context->request->query->get('thumbnails', 'cmd') || $container->parameters->thumbnails !== true) {
+        if (!$context->request->query->get('thumbnails', 'cmd') || $container->getParameters()->thumbnails !== true) {
             return;
         }
 
