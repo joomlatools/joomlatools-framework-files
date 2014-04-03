@@ -53,17 +53,12 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 		return $context->result;
 	}
 
-    public function getPropertyChildren()
-    {
-        return $this->getObject('com:files.model.entity.folders');
-    }
-
 	public function toArray()
 	{
 		$data = parent::toArray();
 
 		if ($this->hasChildren()) {
-			$data['children'] = $this->getChildren()->toArray();
+			$data['children'] = array_values($this->getChildren()->toArray());
 		}
 
 		return $data;
@@ -122,7 +117,7 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 	/**
 	 * Get the parent node
 	 *
-	 * @return	object
+	 * @return	ComFilesModelEntityFolder
 	 */
 	public function getParent()
 	{
@@ -132,11 +127,13 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 	/**
 	 * Set the parent node
 	 *
-	 * @return ComFilesModelEntityNode
+     * @param  ComFilesModelEntityFolder $node
+	 * @return $this
 	 */
-	public function setParent( $node )
+	public function setParent($node)
 	{
 		$this->_parent = $node;
+
 		return $this;
 	}
 }

@@ -15,6 +15,15 @@
  */
 class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
 {
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'identity_key' => 'path'
+        ));
+
+        parent::_initialize($config);
+    }
+
 	/**
      * Adds the rows as a hierachical tree of nodes.
      *
@@ -34,18 +43,26 @@ class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
             $nodes   = $this;
             $node    = null;
 
-            foreach($hierarchy as $parent)
+            foreach($hierarchy as $key => $parent)
             {
+                $path = implode('/', array_slice($hierarchy, 0, $key+1));
+
                 if ($node) {
                     $nodes = $node->getChildren();
                 }
 
-                $node = $nodes->find($parent);
+                $node = $nodes->find($path);
+            }
+
+            if (!$node) {
+                throw new RuntimeException('Parent folder not found in the tree');
             }
 
             $node->insertChild($entity);
         }
 
         $entity->removeProperty('hierarchy');
+
+        return $entity;
     }
 }

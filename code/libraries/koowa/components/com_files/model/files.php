@@ -30,13 +30,13 @@ class ComFilesModelFiles extends ComFilesModelNodes
             throw new UnexpectedValueException('Invalid folder');
         }
 
-        $this->_total = count($files);
+        $this->_count = count($files);
 
         if (strtolower($state->direction) == 'desc') {
             $files = array_reverse($files);
         }
 
-        $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_total);
+        $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_count);
 
         $data = array();
         foreach ($files as $file)
