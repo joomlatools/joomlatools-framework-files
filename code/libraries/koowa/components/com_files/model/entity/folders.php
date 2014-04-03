@@ -15,70 +15,37 @@
  */
 class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
 {
-    /**
-     * Returns if an iterator can be created for the current entry.
-     *
-     * @return	boolean
-     */
-	public function hasChildren()
-	{
-		return current($this->_data)->hasChildren();
-	}
-
 	/**
-     * Returns an iterator for the current entry.
+     * Adds the rows as a hierachical tree of nodes.
      *
-     * @return	RecursiveIterator
+     * {@inheritdoc}
      */
-	public function getChildren()
-	{
-		return $this->current()->getChildren();
-	}
-
-	/**
-     * Adds the rows as an hierachical tree of nodes.
-     *
-     * This function requires each row to contain a an enumerated 'path' array containing the node
-     * id's from root to the node. If no path exists or the path is empty the row will be added to
-     * the root node.
-     *
-	 * @param  array  	$list An associative array of row data to be inserted.
-	 * @param  boolean	$new  If TRUE, mark the row(s) as new (i.e. not in the database yet). Default TRUE
-	 * @return  KModelEntityInterface
-	 * @see __construct
-     */
-	public function addData(array $list, $new = true)
+    public function create(array $properties = array(), $status = null)
     {
-    	foreach($list as $entity)
-		{
-			$hierarchy = !empty($entity['hierarchy']) ? $entity['hierarchy'] : false;
-			unset($entity['hierarchy']);
+        $entity = parent::create($properties, $status);
 
-		    //Create a row prototype and clone it this is faster then instantiating a new row
-			$instance = $this->getRow()
-							->setProperties($entity)
-							->setStatus($new ? NULL : KDatabase::STATUS_LOADED);
+        $hierarchy = $entity->hierarchy;
 
-        	if($hierarchy)
-        	{
-        		$nodes   = $this;
-				$node    = null;
-				$parents = $hierarchy;
+        if(!empty($hierarchy) && is_array($entity->hierarchy))
+        {
+            // We are gonna add it as a child of another node
+            $this->remove($entity);
 
-				foreach($parents as $parent)
-       			{
-       				if($node) {
-						$nodes = $node->getChildren();
-					}
+            $nodes   = $this;
+            $node    = null;
 
-       				$node = $nodes->find($parent);
-				}
+            foreach($hierarchy as $parent)
+            {
+                if ($node) {
+                    $nodes = $node->getChildren();
+                }
 
-				$node->insertChild($instance);
-        	}
-            else $this->insert($instance);
-		}
+                $node = $nodes->find($parent);
+            }
 
-		return $this;
+            $node->insertChild($entity);
+        }
+
+        $entity->removeProperty('hierarchy');
     }
 }
