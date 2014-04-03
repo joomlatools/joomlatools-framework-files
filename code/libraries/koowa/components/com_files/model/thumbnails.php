@@ -110,10 +110,6 @@ class ComFilesModelThumbnails extends KModelDatabase
             $query->where('tbl.folder = :folder')->bind(array('folder' => ltrim($state->folder, '/')));
         }
 
-        if ($state->filename) {
-            $query->where('tbl.filename IN :filename')->bind(array('filename' => (array) $state->filename));
-        }
-
         if ($state->paths)
         {
             $i = 0;

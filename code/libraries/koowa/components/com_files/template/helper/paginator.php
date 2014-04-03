@@ -37,7 +37,7 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
 
         $html .= '<span class="start hidden"><a></a></span>';
         $html .= '<ul class="pagination-list">';
-        $html .=  $this->_pages();
+        $html .=  $this->_pages(array());
         $html .= '</ul>';
         $html .= '<span class="end hidden"><a></a></span>';
 
@@ -58,7 +58,7 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
      * @param   array   $pages An array of page data
      * @return  string  Html
      */
-    protected function _pages($pages = null)
+    protected function _pages($pages)
     {
         $tpl = '<li class="%s"><a href="#">%s</a></li>';
 
