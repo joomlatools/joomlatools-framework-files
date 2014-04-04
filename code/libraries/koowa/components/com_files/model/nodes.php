@@ -132,7 +132,8 @@ class ComFilesModelNodes extends KModelAbstract
      */
     protected function _afterReset(KModelContextInterface $context)
     {
-        if (in_array('container', $context->modified->toArray())) {
+        $modified = (array) KObjectConfig::unbox($context->modified);
+        if (in_array('container', $modified)) {
             self::$_container = null;
         }
     }
