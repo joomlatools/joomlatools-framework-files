@@ -116,8 +116,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 			$data = unserialize($data);
 	
 			$context->result = $data['component'];
-	
-			$this->_output = $context->result;
+			$this->_output   = $context->result;
 		}
 	}
 	
@@ -154,8 +153,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
         {
             if ($this->getRequest()->query->revalidate_cache) {
                 $this->_cleanCache();
-            }
-            else {
+            } else {
                 $this->_setOutput($context);
             }
 		}
