@@ -15,6 +15,23 @@
  */
 class ComFilesModelThumbnails extends KModelDatabase
 {
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->getState()
+            ->insert('container', 'com:files.filter.container', null)
+            ->insert('folder', 'com:files.filter.path')
+            ->insert('filename', 'com:files.filter.path', null, true, array('container'))
+            ->insert('paths', 'com:files.filter.path', null)
+
+            ->insert('types', 'cmd', '')
+            ->insert('config'   , 'json', '')
+        ;
+
+        $this->addCommandCallback('after.reset', '_afterReset');
+    }
+
     /**
      * A container object
      *
@@ -24,11 +41,12 @@ class ComFilesModelThumbnails extends KModelDatabase
 
     /**
      * Reset the cached container object if container changes
-     * @param string $name
+     *
+     * @param KModelContextInterface $context
      */
-    public function onStateChange($name)
+    protected function _afterReset(KModelContextInterface $context)
     {
-        if ($name === 'container') {
+        if (in_array('container', $context->modified->toArray())) {
             unset($this->_container);
         }
     }
@@ -55,21 +73,6 @@ class ComFilesModelThumbnails extends KModelDatabase
 
         return $this->_container;
     }
-
-	public function __construct(KObjectConfig $config)
-	{
-		parent::__construct($config);
-
-		$this->getState()
-			->insert('container', 'com:files.filter.container', null)
-			->insert('folder', 'com:files.filter.path')
-			->insert('filename', 'com:files.filter.path', null, true, array('container'))
-			->insert('paths', 'com:files.filter.path', null)
-			
-			->insert('types', 'cmd', '')
-			->insert('config'   , 'json', '')
-			;
-	}
 
 	protected function _initialize(KObjectConfig $config)
 	{

@@ -42,6 +42,8 @@ class ComFilesModelNodes extends KModelAbstract
             ->insert('editor'   , 'string', '')
             // used to pass options to the JS application in HMVC, internal
             ->insert('config'   , 'raw', '', false, array(), true);
+
+        $this->addCommandCallback('after.reset', '_afterReset');
     }
 
     protected function _initialize(KObjectConfig $config)
@@ -125,11 +127,12 @@ class ComFilesModelNodes extends KModelAbstract
 
     /**
      * Reset the cached container object if container changes
-     * @param string $name
+     *
+     * @param KModelContextInterface $context
      */
-    public function onStateChange($name)
+    protected function _afterReset(KModelContextInterface $context)
     {
-        if ($name === 'container') {
+        if (in_array('container', $context->modified->toArray())) {
             self::$_container = null;
         }
     }
