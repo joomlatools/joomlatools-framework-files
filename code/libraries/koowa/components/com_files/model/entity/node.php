@@ -255,4 +255,9 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
         return $context;
     }
+
+    public function isLockable()
+    {
+        return false;
+    }
 }
