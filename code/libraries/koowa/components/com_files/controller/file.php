@@ -48,53 +48,56 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
         $model  = $this->getModel();
         $result = null;
 
-        // Serve file
-        if($model->getState()->isUnique() && $this->getRequest()->getFormat() === 'html')
+        if ($this->getRequest()->getFormat() === 'html')
         {
-            $file = $this->getModel()->fetch();
-
-            try
+            // Serve file
+            if ($model->getState()->isUnique())
             {
-                $this->getResponse()
-                    ->attachTransport('stream')
-                    ->setPath($file->fullpath, $file->mimetype);
-            }
-            catch (InvalidArgumentException $e) {
-                throw new KControllerExceptionResourceNotFound('File not found');
-            }
-        }
-        elseif (!$model->getState()->isUnique())
-        {
-            $query     = $this->getRequest()->query;
-            $container = $this->getModel()->getContainer();
+                $file = $this->getModel()->fetch();
 
-            // Note: PHP converts dots to underscores in cookie names
-            $cookie = json_decode($this->getObject('request')->cookies['com_files_container_'.$container->slug.'_state'], true);
-
-            if (strpos($query->layout, 'compact') === false && is_array($cookie))
-            {
-                // Check if the folder exists, folder shouldn't exist in query for cookie to be used
-                if (isset($cookie['folder']))
+                try
                 {
-                    $adapter = $container->getAdapter('folder');
-                    $adapter->setPath($container->fullpath . '/' . $cookie['folder']);
-                    // Unset folder cookie if path does not exists.
-                    if (!$adapter->exists()) {
-                        unset($cookie['folder']);
+                    $this->getResponse()
+                        ->attachTransport('stream')
+                        ->setPath($file->fullpath, $file->mimetype);
+                }
+                catch (InvalidArgumentException $e) {
+                    throw new KControllerExceptionResourceNotFound('File not found');
+                }
+            }
+            else
+            {
+                $query     = $this->getRequest()->query;
+                $container = $this->getModel()->getContainer();
+
+                // Note: PHP converts dots to underscores in cookie names
+                $cookie = json_decode($this->getObject('request')->cookies['com_files_container_'.$container->slug.'_state'], true);
+
+                if (strpos($query->layout, 'compact') === false && is_array($cookie))
+                {
+                    // Check if the folder exists, folder shouldn't exist in query for cookie to be used
+                    if (isset($cookie['folder']))
+                    {
+                        $adapter = $container->getAdapter('folder');
+                        $adapter->setPath($container->fullpath . '/' . $cookie['folder']);
+                        // Unset folder cookie if path does not exists.
+                        if (!$adapter->exists()) {
+                            unset($cookie['folder']);
+                        }
                     }
+
+                    foreach ($cookie as $key => $value)
+                    {
+                        if (!$query->has($key)) {
+                            $query->$key = $value;
+                        }
+                    }
+
+                    $model->getState()->setValues($query->toArray());
                 }
 
-                foreach ($cookie as $key => $value)
-                {
-                    if (!$query->has($key)) {
-                        $query->$key = $value;
-                    }
-                }
-
-                $model->getState()->setValues($query->toArray());
+                $result = parent::_actionRender($context);
             }
-
-            $result = parent::_actionRender($context);
         }
         else $result = parent::_actionRender($context);
 
