@@ -158,7 +158,7 @@ Files.App = new Class({
 		if (url.getData('container') && !this.options.container) {
 			this.options.container = url.getData('container');
 		}
-		
+
 		if (url.getData('folder')) {
 			this.options.active = url.getData('folder');
 		}
@@ -197,7 +197,7 @@ Files.App = new Class({
                 obj   = JSON.decode(state, true);
 
             if (obj) {
-                if (!this.getUrl().getData('folder')) {
+                if (typeof this.getUrl().getData('folder') === undefined) {
                     this.options.active = obj.folder;
                 }
 
