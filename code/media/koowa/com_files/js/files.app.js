@@ -197,7 +197,7 @@ Files.App = new Class({
                 obj   = JSON.decode(state, true);
 
             if (obj) {
-                if (typeof this.getUrl().getData('folder') === undefined) {
+                if (typeof this.getUrl().getData('folder') === 'undefined') {
                     this.options.active = obj.folder;
                 }
 
