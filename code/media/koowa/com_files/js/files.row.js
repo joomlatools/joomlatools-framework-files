@@ -61,13 +61,17 @@ Files.File = new Class({
 		this.filetype = Files.getFileType(this.metadata.extension);
 	},
 	getModifiedDate: function(formatted) {
-		var date = new Date();
-		date.setTime(this.metadata.modified_date*1000);
-		if (formatted) {
-            return date.getDate()+' '+Koowa.Date.getMonthName(date.getMonth()+1, true)+' '+date.getFullYear();
-		} else {
-			return date;
-		}
+        if (this.metadata.modified_date) {
+            var date = new Date();
+            date.setTime(this.metadata.modified_date*1000);
+            if (formatted) {
+                return date.getDate()+' '+Koowa.Date.getMonthName(date.getMonth()+1, true)+' '+date.getFullYear();
+            } else {
+                return date;
+            }
+        }
+
+        return null;
 	},
 	'delete': function(success, failure) {
 		this.fireEvent('beforeDeleteRow');
