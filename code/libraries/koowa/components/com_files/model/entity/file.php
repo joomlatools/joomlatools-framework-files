@@ -49,7 +49,7 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
 
     public function getPropertyFilename()
     {
-        return pathinfo($this->name, PATHINFO_FILENAME);
+        return ltrim(pathinfo(strtr($this->name, array('/' => '/ ')), PATHINFO_FILENAME));
     }
 
     public function getPropertySize()
