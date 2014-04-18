@@ -65,13 +65,13 @@ class ComFilesModelFiles extends ComFilesModelNodes
 
 	public function iteratorMap($path)
 	{
-		return basename($path);
+		return ltrim(basename(strtr($path, array('/' => '/ '))));
 	}
 
 	public function iteratorFilter($path)
 	{
         $state     = $this->getState();
-		$filename  = basename($path);
+		$filename  = ltrim(basename(strtr($path, array('/' => '/ '))));
 		$extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
 		if ($state->name)

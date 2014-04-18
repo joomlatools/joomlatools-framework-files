@@ -61,7 +61,8 @@ class ComFilesModelFolders extends ComFilesModelNodes
                 }
             }
 
-            $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : basename($folder);
+            $base = ltrim(basename(strtr($folder, array('/' => '/ '))));
+            $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : $base;
 
             $properties = array(
                 'container' => $state->container,
@@ -96,7 +97,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	public function iteratorFilter($path)
 	{
         $state    = $this->getState();
-		$filename = basename($path);
+		$filename = ltrim(basename(strtr($path, array('/' => '/ '))));
 		if ($state->name)
 		{
 			if (!in_array($filename, (array) $state->name)) {

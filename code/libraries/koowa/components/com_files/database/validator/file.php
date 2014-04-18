@@ -36,7 +36,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 				$uri = $this->getObject('lib:http.url', array('url' => $entity->file));
 	        	$path = $uri->toString(KHttpUrl::PATH | KHttpUrl::FORMAT);
 	        	if (strpos($path, '/') !== false) {
-	        		$path = basename($path);
+	        		$path = ltrim(basename(strtr($path, array('/' => '/ '))));
 	        	}
 
 	        	$entity->name = $path;

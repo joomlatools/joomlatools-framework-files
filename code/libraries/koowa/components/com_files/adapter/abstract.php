@@ -55,7 +55,9 @@ abstract class ComFilesAdapterAbstract extends KObject
 
 	public function getName()
 	{
-		return $this->normalize($this->_handle->getBasename());
+        $path = $this->_handle->getBasename();
+
+		return $this->normalize(ltrim(basename(strtr($path, array('/' => '/ ')))));
 	}
 
 	public function getPath()
