@@ -119,7 +119,7 @@ class ComFilesModelThumbnails extends KModelDatabase
             $i = 0;
             foreach ((array)$state->paths as $path)
             {
-                $file = ltrim(basename(strtr($path, array('/' => '/ '))));
+                $file = ltrim(basename(' '.strtr($path, array('/' => '/ '))));
                 $folder = dirname($path);
                 if ($folder === '.') {
                     $folder = '';
