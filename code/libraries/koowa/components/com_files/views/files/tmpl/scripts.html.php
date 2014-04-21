@@ -39,7 +39,22 @@ if (version_compare(JVERSION, '3.0', 'ge')) {
 <?= @helper('bootstrap.load', array('wrapper' => false)); ?>
 <?= @helper('behavior.tree'); ?>
 
-<?= @helper('translator.script'); ?>
+<?= @helper('translator.script', array('translations' => array(
+    'B', 'KB', 'MB', 'GB', 'TB', 'PB',
+    'An error occurred during request',
+    'You are deleting {item}. Are you sure?',
+    'You are deleting {items}. Are you sure?',
+    '{count} files and folders',
+    '{count} folders',
+    '{count} files',
+    'All Files',
+    'An error occurred with status code: {code}',
+    'An error occurred: {error}',
+    'Unknown error',
+    'Uploaded successfully!',
+    'Select files from your computer',
+    'Select file'
+))); ?>
 
 <script src="media://koowa/com_files/js/history/history.js" />
 <? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
