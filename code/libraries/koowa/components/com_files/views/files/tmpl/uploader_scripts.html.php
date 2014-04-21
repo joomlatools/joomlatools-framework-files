@@ -21,7 +21,7 @@ window.addEvent('domready', function() {
     }
 
     var element = kQuery('#files-upload-multi'),
-        browse_label = Files._('Choose file');
+        browse_label = Koowa.translate('Choose file');
 
     plupload.addI18n({'Add files': browse_label});
 
@@ -56,7 +56,7 @@ window.addEvent('domready', function() {
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
 
-                    element.append('<div class="alert alert-error warning">'+Files._('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</div>');
+                    element.append('<div class="alert alert-error warning">'+Koowa.translate('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</div>');
 
                 }
             }
@@ -173,7 +173,7 @@ window.addEvent('domready', function() {
 
             //Create hilite + label
             var focusring = kQuery('<div class="dropzone-focusring"></div>'),
-                label = kQuery('<div class="alert alert-success">'+Files._('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
+                label = kQuery('<div class="alert alert-success">'+Koowa.translate('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
 
             focusring.css({
                 display: 'none',
@@ -210,7 +210,7 @@ window.addEvent('domready', function() {
                 e.preventDefault();// required by FF + Safari
                 e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
                 if(focusring.css('display') == 'none') {
-                    label.text(Files._('Drop your file(s) to upload to \'{{folder}}\'').replace('{{folder}}', Files.app.title));
+                    label.text(Koowa.translate('Drop your file(s) to upload to \'{{folder}}\'').replace('{{folder}}', Files.app.title));
                     focusring.css('display', 'block');
                     setTimeout(function(){
                         focusring.css('opacity', 1);
@@ -377,7 +377,7 @@ window.addEvent('domready', function() {
     if (Files.app && Files.app.container) {
         if (Files.app.container.parameters.allowed_extensions) {
             uploader.settings.filters = [
-                {title: Files._('All Files'), extensions: Files.app.container.parameters.allowed_extensions.join(',')}
+                {title: Koowa.translate('All Files'), extensions: Files.app.container.parameters.allowed_extensions.join(',')}
             ];
         }
 
@@ -546,10 +546,10 @@ window.addEvent('domready', function() {
                 submit.removeClass('btn-primary').set('value', submit_default);
                 setRemoteWrapMargin();
                 form.reset();
-                input.set('placeholder', Files._('Uploaded successfully!')).addClass('success');
+                input.set('placeholder', Koowa.translate('Uploaded successfully!')).addClass('success');
             } else {
-                var error = json.error ? json.error : Files._('Unknown error');
-                alert(Files._('An error occurred: ') + error);
+                var error = json.error ? json.error : Koowa.translate('Unknown error');
+                alert(Koowa.translate('An error occurred: ') + error);
             }
         },
         onFailure: function(xhr) {
@@ -557,9 +557,9 @@ window.addEvent('domready', function() {
 
             var response = kQuery.parseJSON(xhr.response);
             if (response && response.error) {
-                alert(Files._('An error occurred: ') + response.error);
+                alert(Koowa.translate('An error occurred: ') + response.error);
             } else {
-                alert(Files._('An error occurred with status code: ')+xhr.status);
+                alert(Koowa.translate('An error occurred with status code: ')+xhr.status);
             }
 
         }

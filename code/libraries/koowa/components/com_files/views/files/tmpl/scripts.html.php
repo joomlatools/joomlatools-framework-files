@@ -39,6 +39,8 @@ if (version_compare(JVERSION, '3.0', 'ge')) {
 <?= @helper('bootstrap.load', array('wrapper' => false)); ?>
 <?= @helper('behavior.tree'); ?>
 
+<?= @helper('translator.javascript'); ?>
+
 <script src="media://koowa/com_files/js/history/history.js" />
 <? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
 <script src="media://koowa/com_files/js/history/history.html4.js" />

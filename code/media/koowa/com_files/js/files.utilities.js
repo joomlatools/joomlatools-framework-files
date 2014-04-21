@@ -8,12 +8,6 @@
 
 if(!Files) var Files = {};
 
-if (!Files._) {
-	Files._ = function(string) {
-		return string;
-	};
-}
-
 Files.Filesize = function(size) {
     this.size = size;
 };
@@ -29,7 +23,7 @@ Files.Filesize.prototype.humanize = function() {
         i++;
     }
 
-    return (i === 0 || size % 1 === 0 ? size : size.toFixed(2)) + ' ' + Files._(this.units[i]);
+    return (i === 0 || size % 1 === 0 ? size : size.toFixed(2)) + ' ' + Koowa.translate(this.units[i]);
 };
 
 Files.FileTypes = {};

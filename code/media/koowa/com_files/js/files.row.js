@@ -102,7 +102,7 @@ Files.File = new Class({
 					}
 					else {
 						response = JSON.decode(xhr.responseText, true);
-						error = response && response.error ? response.error : Files._('An error occurred during request');
+						error = response && response.error ? response.error : Koowa.translate('An error occurred during request');
 						alert(error);
 					}
 
@@ -148,7 +148,7 @@ Files.Image = new Class({
 					}
 					else {
 						response = JSON.decode(xhr.responseText, true);
-						error = response && response.error ? response.error : Files._('An error occurred during request');
+						error = response && response.error ? response.error : Koowa.translate('An error occurred during request');
 						alert(error);
 					}
 				}
@@ -190,7 +190,7 @@ Files.Folder = new Class({
 					}
 					else {
 						response = JSON.decode(xhr.responseText, true);
-						error = response && response.error ? response.error : Files._('An error occurred during request');
+						error = response && response.error ? response.error : Koowa.translate('An error occurred during request');
 						alert(error);
 					}
 
@@ -232,7 +232,7 @@ Files.Folder = new Class({
 					}
 					else {
 						response = JSON.decode(xhr.responseText, true);
-						error = response && response.error ? response.error : Files._('An error occurred during request');
+						error = response && response.error ? response.error : Koowa.translate('An error occurred during request');
 						alert(error);
 					}
 

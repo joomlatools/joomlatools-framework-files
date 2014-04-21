@@ -43,25 +43,13 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperAbstract
         
         $map = array();
         foreach ($keys as $key) {
-            $map[$key] = $this->translate($key);
+            $map[$key] = addslashes($this->translate($key));
         }
         
         ob_start();
         ?>
         <script>
-        if (typeof Files === 'undefined') {
-            Files = {};
-        }
-        (function() {
-            var keys = <?php echo json_encode($map); ?>;
-            Files._ = function(key) {
-                if (typeof keys[key] !== 'undefined') {
-                    return keys[key];
-                }
-
-                return key;
-            };
-        })();
+        Koowa.translator.loadTranslations(<?php echo json_encode($map); ?>);
         </script>
         <?php 
         

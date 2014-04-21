@@ -396,7 +396,7 @@ Files.App = new Class({
 			if (this.uploader) {
 				if (this.container.parameters.allowed_extensions) {
 					this.uploader.settings.filters = [
-					     {title: Files._('All Files'), extensions: this.container.parameters.allowed_extensions.join(',')}
+					     {title: Koowa.translate('All Files'), extensions: this.container.parameters.allowed_extensions.join(',')}
 	    			];
 				}
 				
