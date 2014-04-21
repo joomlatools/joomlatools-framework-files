@@ -549,7 +549,7 @@ window.addEvent('domready', function() {
                 input.set('placeholder', Koowa.translate('Uploaded successfully!')).addClass('success');
             } else {
                 var error = json.error ? json.error : Koowa.translate('Unknown error');
-                alert(Koowa.translate('An error occurred: ') + error);
+                alert(Koowa.translate('An error occurred: {error}', {error: error}));
             }
         },
         onFailure: function(xhr) {
@@ -557,9 +557,9 @@ window.addEvent('domready', function() {
 
             var response = kQuery.parseJSON(xhr.response);
             if (response && response.error) {
-                alert(Koowa.translate('An error occurred: ') + response.error);
+                alert(Koowa.translate('An error occurred: {error}', {error: response.error}));
             } else {
-                alert(Koowa.translate('An error occurred with status code: ')+xhr.status);
+                alert(Koowa.translate('An error occurred with status code: {code}', {code: xhr.status}));
             }
 
         }

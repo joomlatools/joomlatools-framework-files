@@ -164,12 +164,14 @@ Files.Grid = new Class({
 				var message = '';
 				// special case for single deletes
 				if (file_count+folder_count === 1) {
-					message = Koowa.translate('You are deleting {item}. Are you sure?');
-					message = message.replace('{item}', folder_count ? folders[0] : files[0]);
+					message = Koowa.translate('You are deleting {item}. Are you sure?', {
+                        item: folder_count ? folders[0] : files[0]
+                    });
 				} else {
-					var count   = file_count+folder_count,
-					message = Koowa.translate('You are deleting {items}. Are you sure?'),
-					items   = Koowa.translate('{count} files and folders');
+					var count = file_count+folder_count,
+					    items = Koowa.translate('{count} files and folders');
+
+                    message = Koowa.translate('You are deleting {items}. Are you sure?');
 
 					if (!folder_count && file_count) {
 						items = Koowa.translate('{count} files');
