@@ -22,7 +22,7 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperTranslator
         $config = new KObjectConfigJson($config);
         $config->append(array(
             'translations' => array(
-                'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB',
+                'B', 'KB', 'MB', 'GB', 'TB', 'PB',
                 'An error occurred during request',
                 'You are deleting {item}. Are you sure?',
                 'You are deleting {items}. Are you sure?',
@@ -35,7 +35,7 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperTranslator
                 'Unknown error',
                 'Uploaded successfully!',
                 'Select files from your computer',
-                'Choose File'
+                'Select file'
             )
         ));
 

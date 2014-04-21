@@ -12,7 +12,7 @@ Files.Filesize = function(size) {
     this.size = size;
 };
 
-Files.Filesize.prototype.units = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
+Files.Filesize.prototype.units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
 Files.Filesize.prototype.humanize = function() {
     var i = 0,

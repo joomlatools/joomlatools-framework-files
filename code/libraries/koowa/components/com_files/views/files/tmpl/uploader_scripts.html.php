@@ -21,7 +21,7 @@ window.addEvent('domready', function() {
     }
 
     var element = kQuery('#files-upload-multi'),
-        browse_label = Koowa.translate('Choose file');
+        browse_label = Koowa.translate('Select file');
 
     plupload.addI18n({'Add files': browse_label});
 
