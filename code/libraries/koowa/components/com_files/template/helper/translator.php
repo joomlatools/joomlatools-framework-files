@@ -15,20 +15,20 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesTemplateHelperTranslator extends KTemplateHelperAbstract
+class ComFilesTemplateHelperTranslator extends KTemplateHelperTranslator
 {
-    public function javascript($config = array())
+    public function script($config = array())
     {
         $config = new KObjectConfigJson($config);
         $config->append(array(
-            'keys' => array(
+            'translations' => array(
                 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB',
                 'An error occurred during request',
-            	'You are deleting {item}. Are you sure?',
+                'You are deleting {item}. Are you sure?',
                 'You are deleting {items}. Are you sure?',
-            	'{count} files and folders',
-            	'{count} folders',
-            	'{count} files',
+                '{count} files and folders',
+                '{count} folders',
+                '{count} files',
                 'All Files',
                 'An error occurred with status code: ',
                 'An error occurred: ',
@@ -38,23 +38,7 @@ class ComFilesTemplateHelperTranslator extends KTemplateHelperAbstract
                 'Choose File'
             )
         ));
-        
-        $keys = KObjectConfig::unbox($config->keys);
-        
-        $map = array();
-        foreach ($keys as $key) {
-            $map[$key] = addslashes($this->translate($key));
-        }
-        
-        ob_start();
-        ?>
-        <script>
-        Koowa.translator.loadTranslations(<?php echo json_encode($map); ?>);
-        </script>
-        <?php 
-        
-        $html = ob_get_clean();
-        
-        return $html;
+
+        return parent::script($config);
     }
 }
