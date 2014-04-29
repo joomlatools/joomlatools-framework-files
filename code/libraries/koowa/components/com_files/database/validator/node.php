@@ -22,7 +22,7 @@ class ComFilesDatabaseValidatorNode extends KCommandHandlerAbstract
         if (!$entity->isNew() && !$entity->overwrite)
         {
             $translator = $this->getObject('translator');
-            $entity->setStatusMessage($translator->translate('Resource already exists and overwrite switch is not present.'));
+            $entity->setStatusMessage($translator->translate('Resource already exists'));
             return false;
         }
 
