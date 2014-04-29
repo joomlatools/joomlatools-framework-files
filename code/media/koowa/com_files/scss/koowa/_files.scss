@@ -39,6 +39,8 @@ $comFilesLocation: '../../../media/koowa/com_files';
 }
 
 #files-sidebar {
+  border-bottom: 1px solid $tableBorder;
+
   .sidebar-inner {
     border-right: 1px solid $tableBorder;
   }
@@ -86,7 +88,10 @@ $comFilesLocation: '../../../media/koowa/com_files';
 
   #files-canvas {
     float: none;
-    margin-left: 260px;
+
+    @media screen and (min-width: 600px) {
+      margin-left: 260px;
+    }
 
     border-left: 1px solid #dddddd;
 
