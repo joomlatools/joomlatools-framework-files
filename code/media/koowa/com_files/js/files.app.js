@@ -635,6 +635,8 @@ Files.App = new Class({
             this._folder_dialog.view.getElement('form').addEvent('submit', function(e){
                 e.stop();
 
+                self._folder_dialog.create_button.setProperty('disabled', 'disabled');
+
                 if(self.options.folder_dialog.onSubmit) {
                     self.options.folder_dialog.onSubmit.call(self, self._folder_dialog);
                 }
@@ -660,6 +662,8 @@ Files.App = new Class({
                         }
 
                         self.closeFolderDialog();
+                    }, null, function() {
+                        self._folder_dialog.create_button.setProperty('disabled', false);
                     });
                 }
             });
