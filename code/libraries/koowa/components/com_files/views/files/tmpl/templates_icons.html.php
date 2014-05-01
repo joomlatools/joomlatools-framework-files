@@ -113,7 +113,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     	 		data-extension="[%=metadata.extension%]">
     		[% if (typeof thumbnail === 'string') { %]
     		    <div class="spinner"></div>
-    			<img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" style="max-width: [%=metadata.image.width%]px" />
+    			<img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" style="max-width: [%=metadata.image? metadata.image.width : 512%]px" />
     		[% } %]
     		</a>
     	</div>
