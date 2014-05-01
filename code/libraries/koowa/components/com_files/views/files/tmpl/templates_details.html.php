@@ -127,7 +127,9 @@ window.addEvent('domready', function() {
 		</td>
 		<td align="center">
             [%=size.humanize()%]
+            [% if (metadata.image) { %]
             ([%=metadata.image.width%] x [%=metadata.image.height%])
+            [% } %]
 		</td>
 		<td align="center">
 			[%=getModifiedDate(true)%]
