@@ -145,7 +145,7 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
         {
             $source = $this->getSource();
 
-            if (!($source && ($image = getimagesize($source->fullpath)))) {
+            if (!($source && ($image = @getimagesize($source->fullpath)))) {
                 throw new RuntimeException('Unable to get source size');
             }
 
@@ -174,7 +174,7 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
         // Multiplier to take into account memory consumed by the Image Processing Library.
         $tweak_factor  = 1.65;
 
-        $source = getimagesize($this->getSource()->fullpath);
+        $source = @getimagesize($this->getSource()->fullpath);
 
         $channels      = isset($source['channels']) ? $source['channels'] : 4;
         $bits          = isset($source['bits']) ? $source['bits'] : 8;

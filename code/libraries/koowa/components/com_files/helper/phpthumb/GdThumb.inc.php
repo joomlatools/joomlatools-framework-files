@@ -1069,7 +1069,7 @@ class GdThumb extends ThumbBase
 			return;
 		}
 
-		$formatInfo = getimagesize($this->fileName);
+		$formatInfo = @getimagesize($this->fileName);
 
 		// non-image files will return false
 		if ($formatInfo === false)
