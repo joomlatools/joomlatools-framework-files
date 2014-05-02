@@ -23,7 +23,7 @@ window.addEvent('domready', function() {
 	var config = <?= json_encode($state->config); ?>,
 		options = {
             cookie: {
-                path: '<?=@object('request')->getBaseUrl('site')?>'
+                path: '<?=@object('request')->getSiteUrl()?>'
             },
             root_text: <?= json_encode(@translate('Root folder')) ?>,
 			editor: <?= json_encode($state->editor); ?>,
