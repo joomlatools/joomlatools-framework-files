@@ -96,7 +96,7 @@ window.addEvent('domready', function() {
         // yes => set overwrite switch in POST
         // no  => for each file { if HEAD file (1).txt does not exist use it }
 
-        var names = [],
+        /*var names = [],
             request;
         kQuery.each(uploader.files, function(i, file) {
             names.push(file.name);
@@ -107,7 +107,7 @@ window.addEvent('domready', function() {
 
         });
 
-        /*request = new Request.JSON({
+        request = new Request.JSON({
             url: ,
             data: {
                 /*_action: 'add',
@@ -118,7 +118,7 @@ window.addEvent('domready', function() {
         request.get();*/
 
         if (!kQuery(this).hasClass('plupload_disabled')) {
-            //uploader.start();
+            uploader.start();
         }
 
         e.preventDefault();
