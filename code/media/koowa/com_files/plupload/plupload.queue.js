@@ -307,7 +307,7 @@
 
                     $('#' + id + '_container').attr('title', 'Using runtime: ' + res.runtime);
 
-                    $('.plupload_start', target).click(function(e) {
+                    $('a.plupload_start', target).click(function(e) {
                         if (!$(this).hasClass('plupload_disabled')) {
                             uploader.start();
                         }
