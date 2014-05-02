@@ -12,7 +12,9 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
 ?>
 
 <?= @helper('behavior.jquery'); ?>
-<script src="media://koowa/com_files/plupload/plupload.core.html5.flash.queue.js" />
+<script type="text/javascript" src="media://koowa/com_files/plupload/moxie.js"></script>
+<script type="text/javascript" src="media://koowa/com_files/plupload/plupload.dev.js"></script>
+<script type="text/javascript" src="media://koowa/com_files/plupload/plupload.queue.js"></script>
 
 <script>
 window.addEvent('domready', function() {
@@ -42,8 +44,8 @@ window.addEvent('domready', function() {
         dragdrop: true,
         unique_names: false,
         rename: true,
-        url: '', // this is added on the go in BeforeUpload event
-        flash_swf_url: 'media://koowa/com_files/plupload/plupload.flash.swf',
+        url: '/', // this is added on the go in BeforeUpload event
+        flash_swf_url: 'media://koowa/com_files/plupload/Moxie.swf',
         urlstream_upload: true, // required for flash
         multipart_params: {
             action: 'add',
@@ -55,9 +57,7 @@ window.addEvent('domready', function() {
         preinit: {
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
-
                     element.append('<div class="alert alert-error warning">'+Koowa.translate('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</div>');
-
                 }
             }
         }
@@ -229,7 +229,7 @@ window.addEvent('domready', function() {
                     kQuery('#files-canvas').removeClass('dropzone-droppable');
                 }, 300);
             };
-        }, createDragleaveHandler = function(container){
+        }, createDragleaveHandler = function(/*container*/){
             return function(e){
                 //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
                 //container.removeClass('dropzone-dragover');
@@ -292,7 +292,7 @@ window.addEvent('domready', function() {
                 }
             }
         });
-        body.bind('dragend', function(event){
+        body.bind('dragend', function(){
             kQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
         });
 
@@ -346,9 +346,7 @@ window.addEvent('domready', function() {
             }
             Files.app.fireEvent('uploadFile', [row]);
         } else {
-            var error = json.error ? json.error : 'Unknown error';
-
-            failed[file.id] = error;
+            failed[file.id] = json.error ? json.error : Koowa.translate('Unknown error');
         }
     });
 
