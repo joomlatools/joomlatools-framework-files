@@ -11,6 +11,21 @@ defined('KOOWA') or die( 'Restricted access' );
 $multi_selection = isset($multi_selection) ? $multi_selection : true;
 ?>
 
+<?= @helper('translator.script', array('translations' => array(
+    'Filename',
+    'Status',
+    'Size',
+    'Add files',
+    'Start upload',
+    'Clear queue',
+    'Uploaded %d/%d files',
+    'Add Files',
+    '%d files queued',
+    'Drag files here.',
+    'Error: File too large:',
+    'Error: Invalid file extension:'
+))); ?>
+
 <?= @helper('behavior.jquery'); ?>
 <script type="text/javascript" src="media://koowa/com_files/plupload/moxie.js"></script>
 <script type="text/javascript" src="media://koowa/com_files/plupload/plupload.dev.js"></script>
@@ -69,9 +84,45 @@ window.addEvent('domready', function() {
             document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
             uploader.refresh();
             uploader.unbind('QueueChanged', exposePlupload);
-            //@TODO investigate better event name convention
             window.fireEvent('QueueChanged');
         };
+
+    kQuery('.plupload_start', element).click(function(e) {
+
+        // folder=foo&name[]=1&name[]=2...
+        // consider POSTing for URL size restriction
+        // if any of the files exist ask user if he wants to override
+        // e.g. foo.txt already exists would you like to override or these files already exist would you like to override?
+        // yes => set overwrite switch in POST
+        // no  => for each file { if HEAD file (1).txt does not exist use it }
+
+        var names = [],
+            request;
+        kQuery.each(uploader.files, function(i, file) {
+            names.push(file.name);
+        });
+
+        kQuery.getJSON(Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath(), name: names}))
+        .succes(function(response) {
+
+        });
+
+        /*request = new Request.JSON({
+            url: ,
+            data: {
+                /*_action: 'add',
+                _token: Files.token,
+                file: ''*/
+            /*}
+        });
+        request.get();*/
+
+        if (!kQuery(this).hasClass('plupload_disabled')) {
+            //uploader.start();
+        }
+
+        e.preventDefault();
+    });
 
     // Single file uploader
     <? if ($multi_selection === false): ?>
