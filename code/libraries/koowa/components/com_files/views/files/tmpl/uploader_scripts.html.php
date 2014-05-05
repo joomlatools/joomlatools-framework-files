@@ -125,9 +125,7 @@ window.addEvent('domready', function() {
                 var message = '';
 
                 if (files.length === 1) {
-                    message = Koowa.translate('{name} already exists. Would you like to overwrite it?', {
-                        name: files[0]
-                    });
+                    message = Koowa.translate('A file with the same name already exists. Would you like to overwrite it?');
                 } else if (files.length > 1) {
                     message = Koowa.translate('Following files already exist. Would you like to overwrite them? {names}', {
                         names: "\n"+files.join("\n")
@@ -186,12 +184,19 @@ window.addEvent('domready', function() {
                 }
             };
 
+        var names = [];
+        $.each(uploader.files, function(i, file) {
+            if (file.loaded == 0) {
+                names.push(file.name);
+            }
+        });
+
         $.ajax({
             url: Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath()}),
             type: 'POST',
             data: {
                 _method: 'GET',
-                name: getNamesFromArray(uploader.files)
+                name: names
             }
         }).done(checkDuplicates).fail(startUpload);
     });
