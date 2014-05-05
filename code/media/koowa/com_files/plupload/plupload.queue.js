@@ -305,7 +305,7 @@
                         });
                     }
 
-                    $('#' + id + '_container').attr('title', 'Using runtime: ' + res.runtime);
+                    $('#' + id + '_container').data('plupload-runtime', res.runtime);
 
                     $('a.plupload_start', target).click(function(e) {
                         if (!$(this).hasClass('plupload_disabled')) {
