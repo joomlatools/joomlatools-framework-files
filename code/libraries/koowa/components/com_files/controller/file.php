@@ -43,6 +43,18 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 		}
 	}
 
+    public function getRequest()
+    {
+        $request = parent::getRequest();
+
+        // This is used to circumvent the URL size exceeding 2k bytes problem for file counts in uploader
+        if ($request->query->view === 'files' && $request->data->has('name')) {
+            $request->query->name = $request->data->name;
+        }
+
+        return $request;
+    }
+
     protected function _actionRender(KControllerContextInterface $context)
     {
         $model  = $this->getModel();

@@ -33,23 +33,20 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
 
 <script>
 window.addEvent('domready', function() {
-    if (kQuery('#files-upload-multi').length === 0) {
+    var $ = kQuery,
+        element = $('#files-upload-multi');
+
+    if (element.length === 0) {
         return;
     }
 
-    var element = kQuery('#files-upload-multi'),
-        browse_label = Koowa.translate('Select file');
-
-    plupload.addI18n({'Add files': browse_label});
-
     //This trick enables the flash runtime to work properly when the uploader is hidden
     var containershim = 'mushycode'+ Math.floor((Math.random()*10000000000)+1);
-    kQuery('<div id="'+containershim+'" class="uploader-flash-container" />').appendTo(kQuery(document.body));
+    $('<div id="'+containershim+'" class="uploader-flash-container" />').appendTo($(document.body));
     SqueezeBox.addEvent('open', function(){
         //This is to make sure the flash upload button shim is positioned correctly after the modal is opened
         window.fireEvent('refresh');
     });
-
 
     element.pluploadQueue({
         runtimes: 'html5,flash',
@@ -79,53 +76,142 @@ window.addEvent('domready', function() {
     });
 
     var uploader = element.pluploadQueue(),
-    //We only want to run this once
+        //We only want to run this once
         exposePlupload = function(uploader) {
             document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
             uploader.refresh();
             uploader.unbind('QueueChanged', exposePlupload);
             window.fireEvent('QueueChanged');
+        },
+        getUniqueName = function(name, fileExists) {
+            // Get a unique file name by appending (1) (2) etc.
+            var i = 1,
+                extension = name.substr(name.lastIndexOf('.')+1),
+                base = name.substr(0, name.lastIndexOf('.'));
+
+            while (true) {
+                name = base+' ('+i+').'+extension;
+
+                if (!fileExists(name)) {
+                    break;
+                }
+
+                i++;
+            }
+
+            return name;
         };
 
-    kQuery('.plupload_start', element).click(function(e) {
-
-        // folder=foo&name[]=1&name[]=2...
-        // consider POSTing for URL size restriction
-        // if any of the files exist ask user if he wants to override
-        // e.g. foo.txt already exists would you like to override or these files already exist would you like to override?
-        // yes => set overwrite switch in POST
-        // no  => for each file { if HEAD file (1).txt does not exist use it }
-
-        /*var names = [],
-            request;
-        kQuery.each(uploader.files, function(i, file) {
-            names.push(file.name);
-        });
-
-        kQuery.getJSON(Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath(), name: names}))
-        .succes(function(response) {
-
-        });
-
-        request = new Request.JSON({
-            url: ,
-            data: {
-                /*_action: 'add',
-                _token: Files.token,
-                file: ''*/
-            /*}
-        });
-        request.get();*/
-
-        if (!kQuery(this).hasClass('plupload_disabled')) {
-            uploader.start();
-        }
-
+    // Multi file uploader
+    <? if ($multi_selection !== false): ?>
+    $('.plupload_start', element).click(function(e) {
         e.preventDefault();
+
+        var $this = $(this),
+            getNamesFromArray = function(array) {
+                var results = [];
+                $.each(array, function(i, entity) {
+                    results.push(entity.name);
+                });
+
+                return results;
+            },
+            startUpload = function() {
+                if (!$this.hasClass('plupload_disabled')) {
+                    uploader.start();
+                }
+            },
+            getConfirmationMessage = function(files) {
+                var message = '';
+
+                if (files.length === 1) {
+                    message = Koowa.translate('{name} already exists. Would you like to overwrite it?', {
+                        name: files[0]
+                    });
+                } else if (files.length > 1) {
+                    message = Koowa.translate('Following files already exist. Would you like to overwrite them? {names}', {
+                        names: "\n"+files.join("\n")
+                    });
+                }
+
+                return message;
+            },
+            makeUnique = function(file, similar) {
+                var names = [];
+                if (typeof similar.entities === 'object' && similar.entities.length) {
+                    names = getNamesFromArray(similar.entities);
+                }
+
+                file.name = getUniqueName(file.name, function (name) {
+                    return $.inArray(name, names) !== -1;
+                });
+
+                $('#' + file.id).find('div.plupload_file_name span').text(file.name);
+            },
+            checkDuplicates = function(response) {
+                uploader.settings.multipart_params.overwrite = 0;
+
+                if (typeof response.entities === 'object' && response.entities.length) {
+                    var existing = getNamesFromArray(response.entities),
+                        promises = [];
+
+                    if (confirm(getConfirmationMessage(existing))) {
+                        uploader.settings.multipart_params.overwrite = 1;
+
+                        return startUpload();
+                    }
+
+                    $.each(uploader.files, function(i, file) {
+                        if ($.inArray(file.name, existing) !== -1) {
+                            promises.push($.ajax({
+                                type: 'GET',
+                                url: Files.app.createRoute({
+                                    view: 'files', folder: Files.app.getPath(), limit: 100,
+                                    search: file.name.substr(0, file.name.lastIndexOf('.'))+' ('
+                                })
+                            }).done(function(response) {
+                                return makeUnique(file, response)
+                            }));
+                        }
+                    });
+
+                    if (promises) {
+                        $.when.apply(kQuery, promises).then(function() {
+                            startUpload();
+                        });
+                    }
+                }
+                else {
+                    startUpload();
+                }
+            };
+
+        $.ajax({
+            url: Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath()}),
+            type: 'POST',
+            data: {
+                _method: 'GET',
+                name: getNamesFromArray(uploader.files)
+            }
+        }).done(checkDuplicates).fail(startUpload);
+    });
+
+    // Do not allow more than 100 files to be uploaded at once
+    uploader.bind('FilesAdded', function(uploader) {
+        if (uploader.files.length > 100) {
+            uploader.splice(0, 100);
+        }
     });
 
     // Single file uploader
-    <? if ($multi_selection === false): ?>
+    <? else: ?>
+    $('.plupload_start', element).click(function(e) {
+        e.preventDefault();
+
+        if (!$(this).hasClass('plupload_disabled')) {
+            uploader.start();
+        }
+    });
     /**
      * Only leave the last file if there are more than one in the queue
      */
@@ -133,7 +219,7 @@ window.addEvent('domready', function() {
         var count = uploader.files.length;
 
         if (count > 1) {
-            kQuery.each(uploader.files, function(i, file) {
+            $.each(uploader.files, function(i, file) {
                 if (i !== count-1) { // Find the last file
                     uploader.removeFile(file);
                 }
@@ -146,7 +232,7 @@ window.addEvent('domready', function() {
     fileExists = function(name) {
         var result = false;
 
-        kQuery.each(Files.app.grid.nodes, function(key, value) {
+        $.each(Files.app.grid.nodes, function(key, value) {
             if (result === true) {
                 return true;
             }
@@ -158,19 +244,6 @@ window.addEvent('domready', function() {
 
         return result;
     },
-    // Get a unique file name by appending (1) (2) etc.
-    getUniqueName = function(name) {
-        var i = 1,
-            extension = name.substr(name.lastIndexOf('.')+1),
-            base = name.substr(0, name.lastIndexOf('.'));
-
-        while (fileExists(name)) {
-            name = base+' ('+i+').'+extension;
-            i++;
-        }
-
-        return name;
-    },
     renameDuplicates = function(uploader) {
         if (uploader.files.length && fileExists(uploader.files[0].name)) {
             if (confirm(overwrite_prompt)) {
@@ -179,7 +252,7 @@ window.addEvent('domready', function() {
                 uploader.settings.multipart_params.overwrite = 0;
 
                 var file = uploader.files[0];
-                file.name = getUniqueName(file.name);
+                file.name = getUniqueName(file.name, fileExists);
             }
         }
 
@@ -223,8 +296,8 @@ window.addEvent('domready', function() {
         }, createDragoverHandler = function(container){
 
             //Create hilite + label
-            var focusring = kQuery('<div class="dropzone-focusring"></div>'),
-                label = kQuery('<div class="alert alert-success">'+Koowa.translate('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
+            var focusring = $('<div class="dropzone-focusring"></div>'),
+                label = $('<div class="alert alert-success">'+Koowa.translate('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
 
             focusring.css({
                 display: 'none',
@@ -245,7 +318,7 @@ window.addEvent('domready', function() {
             container.append(focusring);
 
             //To inherit styling
-            kQuery('#files-upload').append(label);
+            $('#files-upload').append(label);
             ['border-radius', 'color', 'background', 'border'].forEach(function(prop){
                 label.css(prop, label.css(prop));
             });
@@ -265,8 +338,8 @@ window.addEvent('domready', function() {
                     focusring.css('display', 'block');
                     setTimeout(function(){
                         focusring.css('opacity', 1);
-                        if(!kQuery('#files-upload').is(':visible')) {
-                            kQuery('#files-canvas').addClass('dropzone-droppable');
+                        if(!$('#files-upload').is(':visible')) {
+                            $('#files-canvas').addClass('dropzone-droppable');
                         }
                     }, 1);
 
@@ -276,15 +349,15 @@ window.addEvent('domready', function() {
                 //This is a failsafe measure
                 clearTimeout(timer);
                 timer = setTimeout(function(){
-                    kQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
-                    kQuery('#files-canvas').removeClass('dropzone-droppable');
+                    $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                    $('#files-canvas').removeClass('dropzone-droppable');
                 }, 300);
             };
         }, createDragleaveHandler = function(/*container*/){
             return function(e){
                 //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
                 //container.removeClass('dropzone-dragover');
-                //kQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                //$('.dropzone-focusring').css('opacity', 0).css('display', 'none');
             };
         };
 
@@ -317,14 +390,15 @@ window.addEvent('domready', function() {
         }
 
         //Prevent file drops from duplicating due to double drop events
-        kQuery('#files-upload-multi_filelist').bind('drop', function(event){
+        $('#files-upload-multi_filelist').bind('drop', function(event){
             event.stopPropagation();
             //@TODO implement the rest of the drop code from handler, to remove focusring
-            kQuery(document.body).removeClass('dropzone-dragover');
+            $(document.body).removeClass('dropzone-dragover');
         });
 
         // Make the document body a dropzone
-        var files_canvas = kQuery('#files-canvas'), body = kQuery(document.body);
+        var files_canvas = $('#files-canvas'),
+            body = $(document.body);
         body.bind('dragover', createDragoverHandler(body)); //Using dragenter caused inconsistent behavior
         body.bind('dragleave', createDragleaveHandler(body));
         body.bind('dragenter', cancel);
@@ -337,14 +411,14 @@ window.addEvent('domready', function() {
             if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
                 addSelectedFiles(dataTransfer.files);
 
-                if(!kQuery('#files-upload').is(':visible')) {
+                if(!$('#files-upload').is(':visible')) {
                     //@TODO the click handler is written in mootools, so we use mootools here
                     document.getElement(Files.app.uploader_dialog.button).fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
                 }
             }
         });
         body.bind('dragend', function(){
-            kQuery('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+            $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
         });
 
     } else {
@@ -368,7 +442,7 @@ window.addEvent('domready', function() {
     });
 
     uploader.bind('UploadComplete', function(uploader) {
-        kQuery('li.plupload_delete a,div.plupload_buttons', element).show();
+        $('li.plupload_delete a,div.plupload_buttons', element).show();
         uploader.refresh();
     });
 
@@ -403,7 +477,7 @@ window.addEvent('domready', function() {
 
     uploader.bind('StateChanged', function(uploader) {
         Object.each(failed, function(error, id) {
-            icon = kQuery('#' + id).attr('class', 'plupload_failed').find('a').css('display', 'block');
+            icon = $('#' + id).attr('class', 'plupload_failed').find('a').css('display', 'block');
             if (error) {
                 icon.attr('title', error);
             }
@@ -449,12 +523,11 @@ window.addEvent('domready', function() {
         document.id('files-uploader-'+type).setStyle('display', 'block');
 
         // Plupload needs to be refreshed if it was hidden
-        if (type == 'computer' && kQuery('#files-upload-multi').length) {
-            var uploader = kQuery('#files-upload-multi').pluploadQueue();
+        if (type == 'computer' && $('#files-upload-multi').length) {
+            var uploader = $('#files-upload-multi').pluploadQueue();
             if(!uploader.files.length && uploader.features.dragdrop) {
                 document.id('files-upload').removeClass('uploader-files-queued').addClass('uploader-files-empty');
                 if(document.id('files-upload-multi_browse')) {
-                    document.id('files-upload-multi_browse').set('text', browse_label);
                     uploader.bind('QueueChanged', exposePlupload);
                 }
             }
@@ -604,7 +677,7 @@ window.addEvent('domready', function() {
         onFailure: function(xhr) {
             submit.removeProperty('disabled');
 
-            var response = kQuery.parseJSON(xhr.response);
+            var response = $.parseJSON(xhr.response);
             if (response && response.error) {
                 alert(Koowa.translate('An error occurred: {error}', {error: response.error}));
             } else {
