@@ -149,7 +149,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      */
     protected function _beforeRender(KControllerContextInterface $context)
 	{
-		if ($this->getRequest()->getFormat() === 'json' && $this->_only_clear === false)
+		if ($this->getRequest()->isSafe() && $this->getRequest()->getFormat() === 'json' && $this->_only_clear === false)
         {
             if ($this->getRequest()->query->revalidate_cache) {
                 $this->_cleanCache();
@@ -166,7 +166,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      */
     protected function _afterRender(KControllerContextInterface $context)
 	{
-		if ($this->getRequest()->getFormat() === 'json' && $this->_only_clear === false) {
+		if ($this->getRequest()->isSafe() && $this->getRequest()->getFormat() === 'json' && $this->_only_clear === false) {
 			$this->_storeOutput($context);
 		}
 	}

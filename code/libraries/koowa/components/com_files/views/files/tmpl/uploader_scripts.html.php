@@ -60,7 +60,7 @@ window.addEvent('domready', function() {
         flash_swf_url: 'media://koowa/com_files/plupload/Moxie.swf',
         urlstream_upload: true, // required for flash
         multipart_params: {
-            action: 'add',
+            _action: 'add',
             _token: Files.token
         },
         headers: {
