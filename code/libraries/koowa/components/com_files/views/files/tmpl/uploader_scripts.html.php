@@ -27,9 +27,9 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
 ))); ?>
 
 <?= @helper('behavior.jquery'); ?>
-<script type="text/javascript" src="media://koowa/com_files/plupload/moxie.js"></script>
-<script type="text/javascript" src="media://koowa/com_files/plupload/plupload.dev.js"></script>
-<script type="text/javascript" src="media://koowa/com_files/plupload/plupload.queue.js"></script>
+<script type="text/javascript" src="media://koowa/com_files/js/plupload/moxie.js"></script>
+<script type="text/javascript" src="media://koowa/com_files/js/plupload/plupload.dev.js"></script>
+<script type="text/javascript" src="media://koowa/com_files/js/plupload/plupload.queue.js"></script>
 
 <script>
 window.addEvent('domready', function() {
@@ -57,7 +57,7 @@ window.addEvent('domready', function() {
         unique_names: false,
         rename: true,
         url: '/', // this is added on the go in BeforeUpload event
-        flash_swf_url: 'media://koowa/com_files/plupload/Moxie.swf',
+        flash_swf_url: 'media://koowa/com_files/js/plupload/Moxie.swf',
         urlstream_upload: true, // required for flash
         multipart_params: {
             _action: 'add',
