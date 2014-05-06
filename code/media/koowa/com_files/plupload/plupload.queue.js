@@ -419,4 +419,4 @@
             return uploaders[$(this[0]).attr('id')];
         }
     };
-})(jQuery, mOxie);
+})(kQuery, mOxie);
