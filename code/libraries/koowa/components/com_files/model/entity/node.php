@@ -226,7 +226,7 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
     {
         $data = parent::toArray();
 
-        unset($data['_token']);
+        unset($data['csrf_token']);
         unset($data['action']);
         unset($data['option']);
         unset($data['format']);

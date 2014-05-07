@@ -61,7 +61,7 @@ window.addEvent('domready', function() {
         urlstream_upload: true, // required for flash
         multipart_params: {
             _action: 'add',
-            _token: Files.token
+            csrf_token: Files.token
         },
         headers: {
             'X-Requested-With': 'XMLHttpRequest'
@@ -644,7 +644,7 @@ window.addEvent('domready', function() {
         url: Files.app.createRoute({view: 'file', folder: Files.app.getPath()}),
         data: {
             _action: 'add',
-            _token: Files.token,
+            csrf_token: Files.token,
             file: ''
         },
         onRequest: function(){
