@@ -62,9 +62,9 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
     {
         $tpl = '<li class="%s"><a href="#">%s</a></li>';
 
-        $html  = sprintf($tpl, 'prev', '&larr;');
+        $html  = sprintf($tpl, 'prev', '&laquo;');
         $html .= '<li class="page"></li>';
-        $html .= sprintf($tpl, 'next', '&rarr;');
+        $html .= sprintf($tpl, 'next', '&raquo;');
 
         return $html;
     }
