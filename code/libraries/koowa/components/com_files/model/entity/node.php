@@ -167,7 +167,7 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		parent::setProperty($column, $value, $modified = true);
 
-		if (in_array($column, array('container', 'folder', 'name'))) {
+        if ($column === 'container' || (in_array($column, array('folder', 'name')) && $this->container)) {
 			$this->setAdapter();
 		}
 	}
