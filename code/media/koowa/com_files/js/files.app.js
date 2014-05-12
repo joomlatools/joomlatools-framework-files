@@ -185,6 +185,7 @@ Files.App = new Class({
                 refresh.addEvent('click', function(e) {
                     e.stop();
                     self.navigate(undefined, 'stateless', true);
+                    self.setTree();
                 });
             }
         }
