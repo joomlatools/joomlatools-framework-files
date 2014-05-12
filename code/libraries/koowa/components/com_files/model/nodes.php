@@ -58,13 +58,13 @@ class ComFilesModelNodes extends KModelAbstract
 
     protected function _actionCreate(KModelContext $context)
     {
-        $entity = parent::_actionCreate($context);
-
-        $entity->setProperties(array(
+        $context->entity = array(
             'container' => $context->state->container,
             'folder'    => $context->state->folder,
             'name'      => $context->state->name
-        ));
+        );
+
+        $entity = parent::_actionCreate($context);
 
         return $entity;
     }
