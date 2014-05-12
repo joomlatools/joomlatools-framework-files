@@ -15,6 +15,17 @@
  */
 class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
 {
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'limit' => array(
+                'max' => 1000 // Used in tree view
+            )
+        ));
+
+        parent::_initialize($config);
+    }
+
     /**
      * Overloaded execute function to handle exceptions in JSON requests
      */
