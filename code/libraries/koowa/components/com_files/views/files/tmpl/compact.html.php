@@ -79,33 +79,41 @@ window.addEvent('domready', function() {
 });
 
 kQuery(function($) {
+    var insert_trigger = $('.koowa_dialog__menu__child--insert'),
+        upload_trigger = $('.koowa_dialog__menu__child--download'),
+        insert_dialog  = $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_insert'),
+        upload_dialog  = $('.koowa_dialog__file_dialog_upload');
 
     // Set initially
-    $('.koowa_dialog__file_dialog_upload').hide();
+    if (upload_dialog.length) {
+        insert_dialog.hide();
+        upload_trigger.addClass('active');
+    } else {
+        upload_dialog.hide();
+        insert_trigger.addClass('active');
+    }
 
-    $('.koowa_dialog__menu__child--insert')
-        .addClass('active')
-        .click(function() {
-            $(this).addClass('active')
-                .siblings().removeClass('active');
-
-            $('.koowa_dialog__file_dialog_upload').hide();
-
-            $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_insert').show();
-        });
-
-    $('.koowa_dialog__menu__child--download').click(function() {
+    insert_trigger.click(function() {
         $(this).addClass('active')
-            .siblings().removeClass('active');
+               .siblings().removeClass('active');
 
-        $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_insert').hide();
-        $('.koowa_dialog__file_dialog_upload').show();
+        upload_dialog.hide();
+
+        insert_dialog.show();
+    });
+
+    upload_trigger.click(function() {
+        $(this).addClass('active')
+               .siblings().removeClass('active');
+
+        insert_dialog.hide();
+        upload_dialog.show();
     });
 
     if ( $('body').width() <= '699' ) { // 699 is when colums go from stacked to aligned
-        $('a.koowa_dialog__menu__child--download').click(function() {
+        upload_trigger.click(function() {
             $('html, body').animate({
-                scrollTop: $("#koowa_dialog__file_dialog_upload").offset().top
+                scrollTop: upload_dialog.offset().top
             }, 1000);
         });
     }
@@ -117,10 +125,10 @@ kQuery(function($) {
 
 <div class="koowa_dialog koowa_dialog--file_dialog">
     <div class="koowa_dialog__menu">
-        <a class="koowa_dialog__menu__child--insert"><?= @translate('Select'); ?></a>
         <? if ($can_upload): ?>
             <a class="koowa_dialog__menu__child--download"><?= @translate('Upload'); ?></a>
         <? endif; ?>
+        <a class="koowa_dialog__menu__child--insert"><?= @translate('Select'); ?></a>
     </div>
     <div class="koowa_dialog__layout">
         <div class="koowa_dialog__wrapper">
@@ -150,6 +158,20 @@ kQuery(function($) {
                 </div>
             </div>
 
+            <? if ($can_upload): ?>
+            <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
+                <h2 class="koowa_dialog__title">
+                    <?= @translate('Upload a file'); ?>
+                </h2>
+                <div class="koowa_dialog__child__content">
+                    <div class="koowa_dialog__child__content__box">
+                        <?= @import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
+                    </div>
+                </div>
+            </div>
+            <? endif; ?>
+
+
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_files">
                 <h2 class="koowa_dialog__title">
                     <?= @translate('Select a file'); ?>
@@ -173,18 +195,6 @@ kQuery(function($) {
                     </div>
                 </div>
             </div>
-            <? if ($can_upload): ?>
-            <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
-                <h2 class="koowa_dialog__title">
-                    <?= @translate('Upload a file'); ?>
-                </h2>
-                <div class="koowa_dialog__child__content">
-                    <div class="koowa_dialog__child__content__box">
-                        <?= @import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
-                    </div>
-                </div>
-            </div>
-            <? endif; ?>
         </div>
     </div>
 </div>
