@@ -52,9 +52,23 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
         if (count($found) !== count($files))
         {
         	$new = array();
-            $nodes = isset($nodes) ? $nodes : $this->getObject('com:files.model.nodes')->setState($state_data)->fetch();
+            $nodes = isset($nodes) ? $nodes : $this->getObject('com:files.model.nodes')
+                ->setState($state_data)->name(array_diff($files, $found))->fetch();
+
+            $max_time = ini_get('max_execution_time');
+            $start    = microtime(true);
+            if (empty($max_time)) {
+                $max_time = 45; // Don't keep the user waiting too much
+            } else {
+                $max_time -= 10; // Let's assume we need another 10 secs before/after this script
+            }
+
         	foreach ($nodes as $entity)
         	{
+                if ((microtime(true)-$start) > $max_time) {
+                    break;
+                }
+
         		if ($entity->isImage() && !in_array($entity->name, $found))
         		{
 	        		$result = $entity->saveThumbnail();
@@ -62,7 +76,7 @@ class ComFilesControllerThumbnail extends ComFilesControllerAbstract
 	        			$new[] = $entity->name;
 	        		}
         		}
-        	}
+            }
         	
         	if (count($new))
         	{
