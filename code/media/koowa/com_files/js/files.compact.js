@@ -63,7 +63,7 @@ Files.Compact.App = new Class({
 
 				copy.render('compact').inject(that.preview);
 
-				that.preview.getElement('img').set('src', copy.image);
+				that.preview.getElement('img').set('src', copy.image).show();
 			},
 			'onClickFile': function(e) {
 				var target = document.id(e.target),

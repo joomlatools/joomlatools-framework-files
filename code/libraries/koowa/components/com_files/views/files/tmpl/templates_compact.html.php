@@ -20,6 +20,7 @@ if (metadata.image) {
 <div class="details">
     <div style="text-align: center">
         <img class="icon" src="" alt="[%=name%]" border="0"
+             onerror="kQuery(this).hide();"
             width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
     </div>
     <table class="table table-condensed parameters">
