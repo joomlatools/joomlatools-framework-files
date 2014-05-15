@@ -104,6 +104,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      * Set the event output from the cache
      *
      * @param KControllerContextInterface $context
+     * @return boolean
      */
     protected function _setOutput(KControllerContextInterface $context)
 	{
@@ -116,8 +117,14 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 			$data = unserialize($data);
 	
 			$context->result = $data['component'];
-			$this->_output   = $context->result;
+            $this->_output   = $context->result;
+
+            $context->response->setContent($context->result, $this->getView()->mimetype);
+
+            return false;
 		}
+
+        return true;
 	}
 	
 	/**
@@ -146,6 +153,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      * Also cleans cache if revalidate_cache property is set in request
      *
      * @param KControllerContextInterface $context
+     * @return boolean
      */
     protected function _beforeRender(KControllerContextInterface $context)
 	{
@@ -154,9 +162,11 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
             if ($this->getRequest()->query->revalidate_cache) {
                 $this->_cleanCache();
             } else {
-                $this->_setOutput($context);
+                return $this->_setOutput($context);
             }
 		}
+
+        return true;
 	}
 
     /**
