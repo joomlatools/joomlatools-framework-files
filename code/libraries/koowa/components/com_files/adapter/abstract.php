@@ -48,7 +48,7 @@ abstract class ComFilesAdapterAbstract extends KObject
 		$this->_path = $path;
 		$this->_handle = new SplFileInfo($path);
 
-		unset($this->_metadata);
+		$this->_metadata = null;
 
 		return $this;
 	}

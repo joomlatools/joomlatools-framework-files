@@ -162,7 +162,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
 		if ($result)
         {
-			unset($this->_metadata);
+			$this->_metadata = null;
 			clearstatcache();
 		}
 
