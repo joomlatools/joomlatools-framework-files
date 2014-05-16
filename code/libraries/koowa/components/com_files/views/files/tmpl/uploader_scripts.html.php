@@ -63,6 +63,9 @@ window.addEvent('domready', function() {
             _action: 'add',
             csrf_token: Files.token
         },
+        filters: {
+            prevent_duplicates: true
+        },
         headers: {
             'X-Requested-With': 'XMLHttpRequest'
         },
@@ -204,7 +207,7 @@ window.addEvent('domready', function() {
     // Do not allow more than 100 files to be uploaded at once
     uploader.bind('FilesAdded', function(uploader) {
         if (uploader.files.length > 100) {
-            uploader.splice(0, 100);
+            uploader.splice(0, uploader.files.length-100);
         }
     });
 
@@ -504,13 +507,13 @@ window.addEvent('domready', function() {
 
     if (Files.app && Files.app.container) {
         if (Files.app.container.parameters.allowed_extensions) {
-            uploader.settings.filters = [
-                {title: Koowa.translate('All Files'), extensions: Files.app.container.parameters.allowed_extensions.join(',')}
-            ];
+            uploader.setOption('filters', {
+                'mimetypes': [{title: Koowa.translate('All Files'), extensions: Files.app.container.parameters.allowed_extensions.join(',')}]
+            });
         }
 
         if (Files.app.container.parameters.maximum_size) {
-            uploader.settings.max_file_size = Files.app.container.parameters.maximum_size;
+            uploader.setOption('max_file_size', Files.app.container.parameters.maximum_size);
             var max_size = document.id('upload-max-size');
             if (max_size) {
                 max_size.set('html', new Files.Filesize(Files.app.container.parameters.maximum_size).humanize());
