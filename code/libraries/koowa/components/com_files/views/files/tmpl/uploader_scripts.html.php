@@ -294,6 +294,9 @@ window.addEvent('domready', function() {
         uploader.refresh();
     });
 
+    setTimeout(function() {
+
+
     if(uploader.features.dragdrop) {
         document.id('files-upload').addClass('uploader-droppable');
 
@@ -383,12 +386,8 @@ window.addEvent('domready', function() {
                 }
                 fileNames[file.name] = true;
 
-                // Store away gears blob internally
-                id = plupload.guid();
-                plupload.html5files[id] = file;
-
                 // Expose id, name and size
-                files.push(new plupload.File(id, file.fileName || file.name, file.fileSize || file.size)); // fileName / fileSize depricated
+                files.push(new plupload.File(file));
             }
 
             // Trigger FilesAdded event if we added any
@@ -421,7 +420,7 @@ window.addEvent('domready', function() {
 
                 if(!$('#files-upload').is(':visible')) {
                     //@TODO the click handler is written in mootools, so we use mootools here
-                    document.getElement(Files.app.uploader_dialog.button).fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
+                    document.getElement(Files.app.options.uploader_dialog.button).fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
                 }
             }
         });
@@ -439,6 +438,7 @@ window.addEvent('domready', function() {
         document.id('files-upload').setStyle('position', '').addClass('uploader-files-queued').removeClass('uploader-files-empty');
         uploader.refresh();
     }
+    }, 500);
 
     uploader.bind('BeforeUpload', function(uploader, file) {
         // set directory in the request
