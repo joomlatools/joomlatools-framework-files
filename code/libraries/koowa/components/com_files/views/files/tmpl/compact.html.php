@@ -176,7 +176,7 @@ kQuery(function($) {
                 <h2 class="koowa_dialog__title">
                     <?= @translate('Select a file'); ?>
                 </h2>
-                <div class="koowa_dialog__child__content">
+                <div class="koowa_dialog__child__content" id="spinner_container">
                     <div class="koowa_dialog__child__content__box">
                         <div id="files-grid">
 

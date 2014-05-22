@@ -459,7 +459,7 @@ Files.Grid = new Class({
             return;
         }
 
-        var target = document.getElementById('files-grid');
+        var target = document.getElementById('spinner_container');
         var opts = {
             lines: 12, // The number of lines to draw
             length: 7, // The length of each line
@@ -467,8 +467,7 @@ Files.Grid = new Class({
             radius: 10, // The radius of the inner circle
             color: '#666', // #rgb or #rrggbb
             speed: 1, // Rounds per second
-            trail: 60, // Afterglow percentage,
-            top: 50
+            trail: 60 // Afterglow percentage,
         };
         this.spinner = new Koowa.Spinner(opts);
 
