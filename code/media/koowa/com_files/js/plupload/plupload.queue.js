@@ -364,6 +364,8 @@
                 uploader.bind('StateChanged', function() {
                     if (uploader.state === plupload.STARTED) {
                         $('li.plupload_delete a,div.plupload_buttons', target).hide();
+                        uploader.disableBrowse(true);
+
                         $('span.plupload_upload_status,div.plupload_progress,a.plupload_stop', target).css('display', 'block');
                         $('span.plupload_upload_status', target).html('Uploaded ' + uploader.total.uploaded + '/' + uploader.files.length + ' files');
 
@@ -377,6 +379,8 @@
 
                         if (settings.multiple_queues && uploader.total.uploaded + uploader.total.failed == uploader.files.length) {
                             $(".plupload_buttons,.plupload_upload_status", target).css("display", "inline");
+                            uploader.disableBrowse(true);
+
                             $(".plupload_start", target).addClass("plupload_disabled");
                             $('span.plupload_total_status,span.plupload_total_file_size', target).hide();
                         }
