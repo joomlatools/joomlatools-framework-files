@@ -704,9 +704,9 @@ Files.App = new Class({
             view   = document.getElement(this.options.uploader_dialog.view);
 
         if (view) {
-            //this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
+            this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
 
-            //document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
+            document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
         }
 
         if (button) {

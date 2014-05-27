@@ -55,7 +55,6 @@ window.addEvent('domready', function() {
         rename: true,
         url: '/', // this is added on the go in BeforeUpload event
         flash_swf_url: 'media://koowa/com_files/js/plupload/Moxie.swf',
-        urlstream_upload: true, // required for flash
         multipart_params: {
             _action: 'add',
             csrf_token: Files.token
