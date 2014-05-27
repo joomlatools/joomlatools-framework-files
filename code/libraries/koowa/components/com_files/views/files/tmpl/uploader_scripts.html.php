@@ -308,7 +308,7 @@ window.addEvent('domready', function() {
 
             //Create hilite + label
             var focusring = $('<div class="dropzone-focusring"></div>'),
-                label = $('<div class="alert alert-success">'+Koowa.translate('Drop your file(s) to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
+                label = $('<div class="alert alert-success">'+Koowa.translate('Drop your files to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
 
             focusring.css({
                 display: 'none',
@@ -318,7 +318,7 @@ window.addEvent('domready', function() {
                 left: 0,
                 bottom: 0,
                 right: 0,
-                zIndex: 65555,
+                zIndex: 65558,
                 borderStyle: 'solid',
                 borderWidth: '5px',
                 opacity: 0,
