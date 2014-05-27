@@ -37,7 +37,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             <div class="dropzone">
                 <h2><?= @translate('Drag files here') ?></h2>
             </div>
-            <h3 class="nodropzone"><?= @translate('OR Select a file to upload:') ?></h3>
+            <h3 class="nodropzone"><?= @translate('Or select a file to upload:') ?></h3>
             <div id="files-upload-multi"></div>
 
         </div>
