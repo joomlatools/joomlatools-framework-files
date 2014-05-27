@@ -1704,7 +1704,6 @@ plupload.Uploader = function(options) {
 
 			// Check for required options
 			if (!settings.browse_button || !settings.url) {
-                console.log('foo', settings);
 				this.trigger('Error', {
 					code : plupload.INIT_ERROR,
 					message : plupload.translate('Init error.')
