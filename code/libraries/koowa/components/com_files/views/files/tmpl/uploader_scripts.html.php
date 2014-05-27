@@ -438,7 +438,7 @@ window.addEvent('domready', function() {
         document.id('files-upload').setStyle('position', '').addClass('uploader-files-queued').removeClass('uploader-files-empty');
         uploader.refresh();
     }
-    }, 500);
+    }, 1500);
 
     uploader.bind('BeforeUpload', function(uploader, file) {
         // set directory in the request
