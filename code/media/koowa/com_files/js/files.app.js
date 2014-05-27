@@ -704,9 +704,9 @@ Files.App = new Class({
             view   = document.getElement(this.options.uploader_dialog.view);
 
         if (view) {
-            this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
+            //this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
 
-            document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
+            //document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
         }
 
         if (button) {
@@ -728,45 +728,25 @@ Files.App = new Class({
     openUploaderDialog: function(){
 
         if(this.uploader) {
-            var self = this, handleClose = function(){
-                document.getElement(self.options.uploader_dialog.view).getParent().inject(self._tmp_uploader);
-                SqueezeBox.removeEvent('close', handleClose);
-            };
-            SqueezeBox.addEvent('close', handleClose);
-            SqueezeBox.open(document.getElement(self.options.uploader_dialog.view).getParent(), {
-                handler: 'adopt',
-                size: {x: 700, y: document.getElement(self.options.uploader_dialog.view).getParent().measure(function(){
-                    this.setStyle('width', 700);
-                    var height = this.getSize().y;
-                    this.setStyle('width', '');
-                    return height;
-                })}
+            var self = this;
+            kQuery.magnificPopup.open({
+                items: {
+                    src: kQuery(self.options.uploader_dialog.view).parent(),
+                    type: 'inline'
+                },
+                callbacks: {
+                    open: function() {
+                        self.uploader.refresh();
+                    },
+                    close: function() {
+                        //self.uploader.splice();
+                        //document.getElement(self.options.uploader_dialog.view).getParent().inject(self._tmp_uploader);
+                    }
+                }
             });
-            window.addEvent('QueueChanged', this._changeUploaderDialogHeight.bind(this));
         }
 
         return !!this.uploader;
-    },
-    /**
-     * Closes the Uploader dialog and performs IE flash workaround
-     * @return returns a boolean indicating wether there's a uploader dialog active
-     */
-    closeUploaderDialog: function(){
-
-        if(this.uploader) {
-            SqueezeBox.close();
-            window.removeEvent('QueueChanged', this._changeUploaderDialogHeight);
-        }
-
-        return !!this.uploader;
-    },
-    /**
-     * Updates the uploader dialog height
-     * @private
-     */
-    _changeUploaderDialogHeight: function(){
-        var height = document.getElement(this.options.uploader_dialog.view).getParent().scrollHeight;
-        SqueezeBox.resize({x: 700, y: height});
     },
 	getUrl: function() {
 		return new URI(window.location.href);
