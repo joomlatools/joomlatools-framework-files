@@ -700,14 +700,7 @@ Files.App = new Class({
      */
     setUploaderDialog: function(){
         var self   = this,
-            button = document.getElement(this.options.uploader_dialog.button),
-            view   = document.getElement(this.options.uploader_dialog.view);
-
-        if (view) {
-            this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
-
-            document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
-        }
+            button = document.getElement(this.options.uploader_dialog.button);
 
         if (button) {
             button.addEvent('click', function(e){
@@ -736,11 +729,11 @@ Files.App = new Class({
                 },
                 callbacks: {
                     open: function() {
+                        kQuery(self.options.uploader_dialog.view).css('visibility', '');
                         self.uploader.refresh();
                     },
                     close: function() {
-                        //self.uploader.splice();
-                        //document.getElement(self.options.uploader_dialog.view).getParent().inject(self._tmp_uploader);
+                        kQuery(self.options.uploader_dialog.view).css('visibility', 'hidden');
                     }
                 }
             });

@@ -438,6 +438,8 @@ window.addEvent('domready', function() {
 
     uploader.bind('UploadComplete', function(uploader) {
         $('li.plupload_delete a,div.plupload_buttons', element).show();
+
+        uploader.disableBrowse(false);
         uploader.refresh();
     });
 

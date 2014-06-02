@@ -11,7 +11,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <?= @import('com:files.files.uploader_scripts.html') ?>
 
 <div class="koowa" style="visibility: hidden">
-    <div id="files-upload" style="clear: both" class="uploader-files-empty well">
+    <div id="files-upload" style="clear: both; visibility: hidden" class="uploader-files-empty well">
         <div style="text-align: center;">
             <h3 style=" float: none">
                 <?= @translate('Upload files to {folder}', array(
