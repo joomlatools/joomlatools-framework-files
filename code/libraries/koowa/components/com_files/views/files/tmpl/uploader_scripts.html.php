@@ -66,10 +66,36 @@ window.addEvent('domready', function() {
             'X-Requested-With': 'XMLHttpRequest'
         },
         preinit: {
+            Init: function(up, info) {
+                console.log('[Init]', 'Info:', info, 'Features:', up.features);
+            },
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
                     element.append('<div class="alert alert-error warning">'+Koowa.translate('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</div>');
                 }
+            }
+        },
+        // Post init events, bound after the internal events
+        init : {
+            PostInit: function() {
+                // Called after initialization is finished and internal event handlers bound
+                console.log('[PostInit]');
+            },
+            Browse: function(up) {
+                // Called when file picker is clicked
+                console.log('[Browse]');
+            },
+            Refresh: function(up) {
+                // Called when the position or dimensions of the picker change
+                console.log('[Refresh]');
+            },
+            FilesAdded: function(up, files) {
+                // Called when files are added to queue
+                console.log('[FilesAdded]');
+
+                plupload.each(files, function(file) {
+                    console.log('  File:', file);
+                });
             }
         }
     });
@@ -79,8 +105,8 @@ window.addEvent('domready', function() {
         exposePlupload = function(uploader) {
             document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
             uploader.refresh();
+
             uploader.unbind('QueueChanged', exposePlupload);
-            window.fireEvent('QueueChanged');
         },
         getUniqueName = function(name, fileExists) {
             // Get a unique file name by appending (1) (2) etc.
@@ -266,15 +292,6 @@ window.addEvent('domready', function() {
     initial_add = true,
     modifying_queue = false,
     overwrite_prompt = <?= json_encode(@translate('A file with the same name already exists. Would you like to overwrite it?')); ?>;
-
-    /*uploader.bind('FilesAdded', function(uploader) {
-        if (initial_add === true) {
-            modifying_queue = true;
-            removeExcessFiles(uploader);
-            renameDuplicates(uploader);
-            initial_add = false;
-        }
-    });*/
     uploader.bind('QueueChanged', function(uploader) {
         if (modifying_queue) {
             return;
@@ -420,12 +437,23 @@ window.addEvent('domready', function() {
         } else {
             document.id('files-upload')
                 .addClass('uploader-nodroppable')
-                .setStyle('position', '')
-                .addClass('uploader-files-queued').removeClass('uploader-files-empty');
+                .setStyle('position', '');
 
-            uploader.refresh();
+            exposePlupload(uploader);
         }
     }, 1500);
+
+    $$('.plupload_clear').addEvent('click', function(e) {
+        e.stop();
+
+        if(confirm(<?= json_encode(@translate('Are you sure you want to clear the upload queue? This cannot be undone!')) ?>)) {
+            // need to work on a clone, otherwise iterator gets confused after elements are removed
+            var files = uploader.files.slice(0);
+            files.each(function(file) {
+                uploader.removeFile(file);
+            });
+        }
+    });
 
     uploader.bind('BeforeUpload', function(uploader, file) {
         // set directory in the request
@@ -480,18 +508,6 @@ window.addEvent('domready', function() {
             }
         });
 
-    });
-
-    $$('.plupload_clear').addEvent('click', function(e) {
-        e.stop();
-
-        if(confirm(<?= json_encode(@translate('Are you sure you want to clear the upload queue? This cannot be undone!')) ?>)) {
-            // need to work on a clone, otherwise iterator gets confused after elements are removed
-            var files = uploader.files.slice(0);
-            files.each(function(file) {
-                uploader.removeFile(file);
-            });
-        }
     });
 
     if (Files.app && Files.app.container) {

@@ -702,6 +702,8 @@ Files.App = new Class({
         var self   = this,
             button = document.getElement(this.options.uploader_dialog.button);
 
+        kQuery(this.options.uploader_dialog.view).css('visibility', 'hidden');
+
         if (button) {
             button.addEvent('click', function(e){
                 e.stop();
@@ -722,6 +724,7 @@ Files.App = new Class({
 
         if(this.uploader) {
             var self = this;
+
             kQuery.magnificPopup.open({
                 items: {
                     src: kQuery(self.options.uploader_dialog.view).parent(),
@@ -733,7 +736,7 @@ Files.App = new Class({
                         self.uploader.refresh();
                     },
                     close: function() {
-                        kQuery(self.options.uploader_dialog.view).css('visibility', 'hidden');
+                        //kQuery(self.options.uploader_dialog.view).css('visibility', 'hidden');
                     }
                 }
             });
