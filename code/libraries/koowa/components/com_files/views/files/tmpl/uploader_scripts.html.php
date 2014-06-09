@@ -474,12 +474,25 @@ window.addEvent('domready', function() {
     // Keeps track of failed uploads and error messages so we can later display them in the queue
     var failed = {};
     uploader.bind('FileUploaded', function(uploader, file, response) {
-        var json = JSON.decode(response.response, true) || {};
+        var json = JSON.decode(response.response, true) || {},
+            row,
+            item;
         if (json.status) {
-            var item = json.entities[0];
-            var cls = Files[item.type.capitalize()];
-            var row = new cls(item);
-            Files.app.grid.insert(row);
+            item = json.entities[0];
+
+            if (typeof Files.app.grid.nodes[item.name] === 'undefined') {
+                var cls = Files[item.type.capitalize()];
+                row = new cls(item);
+                Files.app.grid.insert(row);
+            } else {
+                row = Files.app.grid.nodes[item.name];
+
+                if (item.metadata) {
+                    row.metadata = item.metadata;
+                    row.size = new Files.Filesize(row.metadata.size);
+                }
+            }
+
             if (row.type == 'image' && Files.app.grid.layout == 'icons') {
                 var image = row.element.getElement('img');
                 if (image) {
