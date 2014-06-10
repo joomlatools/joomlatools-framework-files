@@ -16,13 +16,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     'Start upload',
     'Clear queue',
     'Uploaded %d/%d files',
-    'Uploaded successfully!',
     'All Files',
     '%d files queued',
     'Drag files here.',
-    'An error occurred: {error}',
-    'An error occurred with status code: {code}',
-    'Unknown error',
     'Error: File too large:',
     'Error: Invalid file extension:',
     'A file with the same name already exists. Would you like to overwrite it?',
@@ -31,7 +27,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     'Drop your files to upload to {folder}'
 ))); ?>
 
-<?= @helper('behavior.jquery'); ?>
 <script type="text/javascript" src="media://koowa/com_files/js/plupload/moxie.js"></script>
 <script type="text/javascript" src="media://koowa/com_files/js/plupload/plupload.dev.js"></script>
 <script type="text/javascript" src="media://koowa/com_files/js/plupload/plupload.queue.js"></script>
