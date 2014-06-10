@@ -43,11 +43,14 @@ window.addEvent('domready', function() {
     //This trick enables the flash runtime to work properly when the uploader is hidden
     var containershim = 'mushycode'+ Math.floor((Math.random()*10000000000)+1);
     $('<div id="'+containershim+'" class="uploader-flash-container" />').appendTo($(document.body));
+    SqueezeBox.addEvent('open', function(){
+        //This is to make sure the flash upload button shim is positioned correctly after the modal is opened
+        window.fireEvent('refresh');
+    });
 
     element.pluploadQueue({
         runtimes: 'html5,flash',
-        //runtimes: 'flash',
-        //container: containershim,
+        container: containershim,
         browse_button: 'pickfiles',
         multi_selection: <?= json_encode($multi_selection) ?>,
         dragdrop: true,
@@ -55,6 +58,7 @@ window.addEvent('domready', function() {
         rename: true,
         url: '/', // this is added on the go in BeforeUpload event
         flash_swf_url: 'media://koowa/com_files/js/plupload/Moxie.swf',
+        urlstream_upload: true, // required for flash
         multipart_params: {
             _action: 'add',
             csrf_token: Files.token
@@ -66,47 +70,21 @@ window.addEvent('domready', function() {
             'X-Requested-With': 'XMLHttpRequest'
         },
         preinit: {
-            Init: function(up, info) {
-                console.log('[Init]', 'Info:', info, 'Features:', up.features);
-            },
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
                     element.append('<div class="alert alert-error warning">'+Koowa.translate('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</div>');
                 }
             }
-        },
-        // Post init events, bound after the internal events
-        init : {
-            PostInit: function() {
-                // Called after initialization is finished and internal event handlers bound
-                console.log('[PostInit]');
-            },
-            Browse: function(up) {
-                // Called when file picker is clicked
-                console.log('[Browse]');
-            },
-            Refresh: function(up) {
-                // Called when the position or dimensions of the picker change
-                console.log('[Refresh]');
-            },
-            FilesAdded: function(up, files) {
-                // Called when files are added to queue
-                console.log('[FilesAdded]');
-
-                plupload.each(files, function(file) {
-                    console.log('  File:', file);
-                });
-            }
         }
     });
 
     var uploader = element.pluploadQueue(),
-        //We only want to run this once
+    //We only want to run this once
         exposePlupload = function(uploader) {
             document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
             uploader.refresh();
-
             uploader.unbind('QueueChanged', exposePlupload);
+            window.fireEvent('QueueChanged');
         },
         getUniqueName = function(name, fileExists) {
             // Get a unique file name by appending (1) (2) etc.
@@ -246,52 +224,61 @@ window.addEvent('domready', function() {
      * Only leave the last file if there are more than one in the queue
      */
     var removeExcessFiles = function(uploader) {
-        var count = uploader.files.length;
+            var count = uploader.files.length;
 
-        if (count > 1) {
-            $.each(uploader.files, function(i, file) {
-                if (i !== count-1) { // Find the last file
-                    uploader.removeFile(file);
+            if (count > 1) {
+                $.each(uploader.files, function(i, file) {
+                    if (i !== count-1) { // Find the last file
+                        uploader.removeFile(file);
+                    }
+                });
+            }
+
+            //modifying_queue = false;
+        },
+    // Check to see if the file exists
+        fileExists = function(name) {
+            var result = false;
+
+            $.each(Files.app.grid.nodes, function(key, value) {
+                if (result === true) {
+                    return true;
+                }
+
+                if (value.name === name) {
+                    result = true;
                 }
             });
-        }
 
-        //modifying_queue = false;
-    },
-    // Check to see if the file exists
-    fileExists = function(name) {
-        var result = false;
+            return result;
+        },
+        renameDuplicates = function(uploader) {
+            if (uploader.files.length && fileExists(uploader.files[0].name)) {
+                if (confirm(overwrite_prompt)) {
+                    uploader.settings.multipart_params.overwrite = 1;
+                } else {
+                    uploader.settings.multipart_params.overwrite = 0;
 
-        $.each(Files.app.grid.nodes, function(key, value) {
-            if (result === true) {
-                return true;
+                    var file = uploader.files[0];
+                    file.name = getUniqueName(file.name, fileExists);
+                }
             }
 
-            if (value.name === name) {
-                result = true;
-            }
-        });
-
-        return result;
-    },
-    renameDuplicates = function(uploader) {
-        if (uploader.files.length && fileExists(uploader.files[0].name)) {
-            if (confirm(overwrite_prompt)) {
-                uploader.settings.multipart_params.overwrite = 1;
-            } else {
-                uploader.settings.multipart_params.overwrite = 0;
-
-                var file = uploader.files[0];
-                file.name = getUniqueName(file.name, fileExists);
-            }
-        }
-
-        modifying_queue = false;
-    },
+            modifying_queue = false;
+        },
     // These two variables are used to make sure we only trigger below events once
-    initial_add = true,
-    modifying_queue = false,
-    overwrite_prompt = <?= json_encode(@translate('A file with the same name already exists. Would you like to overwrite it?')); ?>;
+        initial_add = true,
+        modifying_queue = false,
+        overwrite_prompt = <?= json_encode(@translate('A file with the same name already exists. Would you like to overwrite it?')); ?>;
+
+    /*uploader.bind('FilesAdded', function(uploader) {
+     if (initial_add === true) {
+     modifying_queue = true;
+     removeExcessFiles(uploader);
+     renameDuplicates(uploader);
+     initial_add = false;
+     }
+     });*/
     uploader.bind('QueueChanged', function(uploader) {
         if (modifying_queue) {
             return;
@@ -308,7 +295,9 @@ window.addEvent('domready', function() {
     });
 
     setTimeout(function() {
-        if(uploader.features.dragdrop)  {
+
+
+        if(uploader.features.dragdrop) {
             document.id('files-upload').addClass('uploader-droppable');
 
             var timer, cancel= function(e) {
@@ -356,7 +345,7 @@ window.addEvent('domready', function() {
                     e.preventDefault();// required by FF + Safari
                     e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
                     if(focusring.css('display') == 'none') {
-                        label.text(Koowa.translate('Drop your files to upload to \'{{folder}}\'').replace('{{folder}}', Files.app.title));
+                        label.text(Koowa.translate('Drop your file(s) to upload to \'{{folder}}\'').replace('{{folder}}', Files.app.title));
                         focusring.css('display', 'block');
                         setTimeout(function(){
                             focusring.css('opacity', 1);
@@ -375,7 +364,7 @@ window.addEvent('domready', function() {
                         $('#files-canvas').removeClass('dropzone-droppable');
                     }, 300);
                 };
-            }, createDragleaveHandler = function(container){
+            }, createDragleaveHandler = function(/*container*/){
                 return function(e){
                     //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
                     //container.removeClass('dropzone-dragover');
@@ -397,7 +386,13 @@ window.addEvent('domready', function() {
                     }
                     fileNames[file.name] = true;
 
-                    uploader.addFile(file);
+                    // Expose id, name and size
+                    files.push(new plupload.File(file));
+                }
+
+                // Trigger FilesAdded event if we added any
+                if (files.length) {
+                    uploader.trigger("FilesAdded", files);
                 }
             }
 
@@ -433,27 +428,17 @@ window.addEvent('domready', function() {
                 $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
             });
 
+        } else {
+            document.id('files-upload').addClass('uploader-nodroppable');
+        }
+
+        if(uploader.features.dragdrop) {
             uploader.bind('QueueChanged', exposePlupload);
         } else {
-            document.id('files-upload')
-                .addClass('uploader-nodroppable')
-                .setStyle('position', '');
-
-            exposePlupload(uploader);
+            document.id('files-upload').setStyle('position', '').addClass('uploader-files-queued').removeClass('uploader-files-empty');
+            uploader.refresh();
         }
     }, 1500);
-
-    $$('.plupload_clear').addEvent('click', function(e) {
-        e.stop();
-
-        if(confirm(<?= json_encode(@translate('Are you sure you want to clear the upload queue? This cannot be undone!')) ?>)) {
-            // need to work on a clone, otherwise iterator gets confused after elements are removed
-            var files = uploader.files.slice(0);
-            files.each(function(file) {
-                uploader.removeFile(file);
-            });
-        }
-    });
 
     uploader.bind('BeforeUpload', function(uploader, file) {
         // set directory in the request
@@ -477,6 +462,7 @@ window.addEvent('domready', function() {
         var json = JSON.decode(response.response, true) || {},
             row,
             item;
+
         if (json.status) {
             item = json.entities[0];
 
@@ -523,6 +509,18 @@ window.addEvent('domready', function() {
 
     });
 
+    $$('.plupload_clear').addEvent('click', function(e) {
+        e.stop();
+
+        if(confirm(<?= json_encode(@translate('Are you sure you want to clear the upload queue? This cannot be undone!')) ?>)) {
+            // need to work on a clone, otherwise iterator gets confused after elements are removed
+            var files = uploader.files.slice(0);
+            files.each(function(file) {
+                uploader.removeFile(file);
+            });
+        }
+    });
+
     if (Files.app && Files.app.container) {
         if (Files.app.container.parameters.allowed_extensions) {
             uploader.setOption('filters', {
@@ -549,7 +547,8 @@ window.addEvent('domready', function() {
         document.id('files-uploader-'+type).setStyle('display', 'block');
 
         // Plupload needs to be refreshed if it was hidden
-        if (type == 'computer' && element.length) {
+        if (type == 'computer' && $('#files-upload-multi').length) {
+            var uploader = $('#files-upload-multi').pluploadQueue();
             if(!uploader.files.length && uploader.features.dragdrop) {
                 document.id('files-upload').removeClass('uploader-files-queued').addClass('uploader-files-empty');
                 if(document.id('files-upload-multi_browse')) {

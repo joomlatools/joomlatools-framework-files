@@ -13,40 +13,40 @@ if(!Files) var Files = {};
 Files.blank_image = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAMAAAAoyzS7AAAABGdBTUEAALGPC/xhBQAAAAd0SU1FB9MICA0xMTLhM9QAAAADUExURf///6fEG8gAAAABdFJOUwBA5thmAAAACXBIWXMAAAsSAAALEgHS3X78AAAACklEQVQIHWNgAAAAAgABz8g15QAAAABJRU5ErkJggg==';
 
 Files.App = new Class({
-	Implements: [Events, Options],
+    Implements: [Events, Options],
 
-	_tmpl_cache: {},
-	active: null,
-	title: '',
-	cookie: null,
-	options: {
+    _tmpl_cache: {},
+    active: null,
+    title: '',
+    cookie: null,
+    options: {
         root_text: 'Root folder',
         cookie: {
             path: '/'
         },
-		persistent: true,
-		thumbnails: true,
-		types: null,
-		container: null,
-		active: null,
-		pathway: {
-			element: 'files-pathway'
-		},
-		state: {
-			defaults: {}
-		},
-		tree: {
-			enabled: true,
-			element: '#files-tree'
-		},
-		grid: {
-			element: 'files-grid',
-			batch_delete: '#toolbar-delete a',
-			icon_size: 150
-		},
-		paginator: {
-			element: 'files-paginator'
-		},
+        persistent: true,
+        thumbnails: true,
+        types: null,
+        container: null,
+        active: null,
+        pathway: {
+            element: 'files-pathway'
+        },
+        state: {
+            defaults: {}
+        },
+        tree: {
+            enabled: true,
+            element: '#files-tree'
+        },
+        grid: {
+            element: 'files-grid',
+            batch_delete: '#toolbar-delete a',
+            icon_size: 150
+        },
+        paginator: {
+            element: 'files-paginator'
+        },
         folder_dialog: {
             view: '#files-new-folder-modal',
             input: '#files-new-folder-input',
@@ -101,81 +101,81 @@ Files.App = new Class({
             view: '#files-upload',
             button: '#toolbar-upload a'
         },
-		history: {
-			enabled: true
-		},
-		router: {
-			defaults: {
-				option: 'com_files',
-				view: 'files',
-				format: 'json'
-			}
-		},
-		initial_response: null,
+        history: {
+            enabled: true
+        },
+        router: {
+            defaults: {
+                option: 'com_files',
+                view: 'files',
+                format: 'json'
+            }
+        },
+        initial_response: null,
         refresh_button: '#toolbar-refresh',
 
-		onAfterSetGrid: function(){
-		    window.addEvent('resize', function(){
-		        this.setDimensions(true);
-		    }.bind(this));
-		    this.grid.addEvent('onAfterRenew', function(){
-		        this.setDimensions(true);
-		    }.bind(this));
-		    this.addEvent('onUploadFile', function(){
-		        this.setDimensions(true);
-		    }.bind(this));
-		},
-		onAfterNavigate: function(path) {
-			if (path !== undefined) {
-				this.setTitle(this.folder.name || this.container.title);
+        onAfterSetGrid: function(){
+            window.addEvent('resize', function(){
+                this.setDimensions(true);
+            }.bind(this));
+            this.grid.addEvent('onAfterRenew', function(){
+                this.setDimensions(true);
+            }.bind(this));
+            this.addEvent('onUploadFile', function(){
+                this.setDimensions(true);
+            }.bind(this));
+        },
+        onAfterNavigate: function(path) {
+            if (path !== undefined) {
+                this.setTitle(this.folder.name || this.container.title);
                 kQuery('#upload-files-to, .upload-files-to').text(path ? path : this.container.title);
-	        }
-		},
+            }
+        },
         onBeforeSetContainer: function(response) {
             if (typeof response.container !== 'undefined') {
                 response.container.title = this.options.root_text;
             }
         }
-	},
+    },
 
-	initialize: function(options) {
-		this.setOptions(options);
+    initialize: function(options) {
+        this.setOptions(options);
 
-		if (this.options.persistent && this.options.container) {
-			var container = typeof this.options.container === 'string' ? this.options.container : this.options.container.slug;
-			this.cookie = 'com.files.container.'+container;
-		}
+        if (this.options.persistent && this.options.container) {
+            var container = typeof this.options.container === 'string' ? this.options.container : this.options.container.slug;
+            this.cookie = 'com.files.container.'+container;
+        }
 
-		if(this.options.pathway) {
+        if(this.options.pathway) {
             this.setPathway();
         }
-		this.setState();
-		this.setHistory();
-		this.setGrid();
-		this.setPaginator();
+        this.setState();
+        this.setHistory();
+        this.setGrid();
+        this.setPaginator();
 
-		var url = this.getUrl();
-		if (url.getData('container') && !this.options.container) {
-			this.options.container = url.getData('container');
-		}
+        var url = this.getUrl();
+        if (url.getData('container') && !this.options.container) {
+            this.options.container = url.getData('container');
+        }
 
-		if (url.getData('folder')) {
-			this.options.active = url.getData('folder');
-		}
+        if (url.getData('folder')) {
+            this.options.active = url.getData('folder');
+        }
 
-		if (this.options.thumbnails) {
-			this.addEvent('afterSelect', function(resp) {
-				this.setThumbnails();
-			});
-		}
+        if (this.options.thumbnails) {
+            this.addEvent('afterSelect', function(resp) {
+                this.setThumbnails();
+            });
+        }
 
         if(this.options.uploader_dialog) {
             this.setUploaderDialog();
         }
 
-		if (this.options.container) {
-			this.setContainer(this.options.container);
-		}
+        if (this.options.container) {
+            this.setContainer(this.options.container);
+        }
 
         if (this.options.refresh_button) {
             var refresh = document.getElement(this.options.refresh_button),
@@ -189,11 +189,11 @@ Files.App = new Class({
                 });
             }
         }
-	},
-	setState: function() {
-		this.fireEvent('beforeSetState');
+    },
+    setState: function() {
+        this.fireEvent('beforeSetState');
 
-		if (this.cookie) {
+        if (this.cookie) {
             var state = Cookie.read(this.cookie+'.state'),
                 obj   = JSON.decode(state, true);
 
@@ -210,50 +210,50 @@ Files.App = new Class({
 
         }
 
-		var opts = this.options.state;
-		this.state = new Files.State(opts);
+        var opts = this.options.state;
+        this.state = new Files.State(opts);
 
-		this.fireEvent('afterSetState');
-	},
-	setHistory: function() {
-		this.fireEvent('beforeSetHistory');
+        this.fireEvent('afterSetState');
+    },
+    setHistory: function() {
+        this.fireEvent('beforeSetHistory');
 
-		if (this.options.history.enabled) {
-			var that = this;
-			this.history = History;
-			window.addEvent('popstate', function(e) {
-				if (e) { e.stop(); }
+        if (this.options.history.enabled) {
+            var that = this;
+            this.history = History;
+            window.addEvent('popstate', function(e) {
+                if (e) { e.stop(); }
 
-				var state = History.getState(),
-					old_state = that.state.getData(),
-					new_state = state.data,
-					state_changed = false;
+                var state = History.getState(),
+                    old_state = that.state.getData(),
+                    new_state = state.data,
+                    state_changed = false;
 
-				Object.each(old_state, function(value, key) {
-					if (state_changed === true) {
-						return;
-					}
-					if (new_state && new_state[key] && value !== new_state[key]) {
-						state_changed = true;
-					}
-				});
+                Object.each(old_state, function(value, key) {
+                    if (state_changed === true) {
+                        return;
+                    }
+                    if (new_state && new_state[key] && value !== new_state[key]) {
+                        state_changed = true;
+                    }
+                });
 
-				if (that.container && (state_changed || that.active !== state.data.folder)) {
-					var set_state = Object.append({}, state.data);
-					['option', 'view', 'layout', 'folder', 'container'].each(function(key) {
-						delete set_state[key];
-					});
-					that.state.set(set_state);
-					that.navigate(state.data.folder, 'stateless');
-				}
-			});
-			this.addEvent('afterNavigate', function(path, type) {
-				if (type !== 'stateless' && that.history) {
-					var obj = {
-                        folder: that.active,
-                        container: that.container ? that.container.slug : null
-                    },
-                    state = this.state.getData();
+                if (that.container && (state_changed || that.active !== state.data.folder)) {
+                    var set_state = Object.append({}, state.data);
+                    ['option', 'view', 'layout', 'folder', 'container'].each(function(key) {
+                        delete set_state[key];
+                    });
+                    that.state.set(set_state);
+                    that.navigate(state.data.folder, 'stateless');
+                }
+            });
+            this.addEvent('afterNavigate', function(path, type) {
+                if (type !== 'stateless' && that.history) {
+                    var obj = {
+                            folder: that.active,
+                            container: that.container ? that.container.slug : null
+                        },
+                        state = this.state.getData();
 
                     Object.each(state, function(value, key) {
                         if (typeof value !== 'function' && typeof value !== 'undefined') {
@@ -261,43 +261,43 @@ Files.App = new Class({
                         }
                     });
 
-					var method = type === 'initial' ? 'replaceState' : 'pushState';
-					var url = that.getUrl().setData(obj, true).set('fragment', '').toString();
+                    var method = type === 'initial' ? 'replaceState' : 'pushState';
+                    var url = that.getUrl().setData(obj, true).set('fragment', '').toString();
 
-					that.history[method](obj, null, url);
-				}
-			});
-		}
+                    that.history[method](obj, null, url);
+                }
+            });
+        }
 
-		this.fireEvent('afterSetHistory');
-	},
-	/**
-	 * type can be 'stateless' for no state or 'initial' to use replaceState
-	 * response can be set if you want to set the results without an AJAX request.
-	 */
-	navigate: function(path, type, revalidate_cache, response) {
-		this.fireEvent('beforeNavigate', [path, type]);
-		if (path !== undefined) {
-			if (this.active) {
-				// Reset offset if we are changing folders
-				this.state.set('offset', 0);
-			}
-			this.active = path == '/' ? '' : path;
-		}
+        this.fireEvent('afterSetHistory');
+    },
+    /**
+     * type can be 'stateless' for no state or 'initial' to use replaceState
+     * response can be set if you want to set the results without an AJAX request.
+     */
+    navigate: function(path, type, revalidate_cache, response) {
+        this.fireEvent('beforeNavigate', [path, type]);
+        if (path !== undefined) {
+            if (this.active) {
+                // Reset offset if we are changing folders
+                this.state.set('offset', 0);
+            }
+            this.active = path == '/' ? '' : path;
+        }
 
-		this.grid.reset();
+        this.grid.reset();
         this.grid.spin();
 
-		var parts = this.active.split('/'),
-			name = parts[parts.length ? parts.length-1 : 0],
-			folder = parts.slice(0, parts.length-1).join('/'),
-			that = this,
-			url_builder = function(url) {
-				if (revalidate_cache) {
-					url['revalidate_cache'] = 1;
-				}
-				return this.createRoute(url);
-			}.bind(this),
+        var parts = this.active.split('/'),
+            name = parts[parts.length ? parts.length-1 : 0],
+            folder = parts.slice(0, parts.length-1).join('/'),
+            that = this,
+            url_builder = function(url) {
+                if (revalidate_cache) {
+                    url['revalidate_cache'] = 1;
+                }
+                return this.createRoute(url);
+            }.bind(this),
             handleResponse = function(response) {
                 if (response) {
                     if (response.status !== false) {
@@ -318,17 +318,17 @@ Files.App = new Class({
                         alert(response.error);
                     }
                 }
-			};
+            };
 
-		this.folder = new Files.Folder({'folder': folder, 'name': name});
-		
-		if (response) {
+        this.folder = new Files.Folder({'folder': folder, 'name': name});
+
+        if (response) {
             handleResponse(response);
             this.grid.unspin();
-		} else {
-			this.fetch(this.folder.path, url_builder)
-                       .done(handleResponse).progress(handleResponse);
-		}
+        } else {
+            this.fetch(this.folder.path, url_builder)
+                .done(handleResponse).progress(handleResponse);
+        }
 
         if (this.cookie) {
             var data = kQuery.extend(true, {}, this.state.data);
@@ -336,8 +336,8 @@ Files.App = new Class({
             Cookie.write(this.cookie+'.state', JSON.encode(data), this.options.cookie);
         }
 
-		this.fireEvent('afterNavigate', [path, type]);
-	},
+        this.fireEvent('afterNavigate', [path, type]);
+    },
     fetch: function(path, url_builder) {
         var self = this,
             deferred = kQuery.Deferred(),
@@ -362,111 +362,111 @@ Files.App = new Class({
         query.limit = 100;
 
         var done = function(response) {
-                if (!response || typeof response.entities === 'undefined' || typeof response.meta === 'undefined') {
-                    deferred.reject('');
+            if (!response || typeof response.entities === 'undefined' || typeof response.meta === 'undefined') {
+                deferred.reject('');
 
-                    return;
-                }
+                return;
+            }
 
-                if (response.meta.offset + response.entities.length < response.meta.total) {
-                    response.partial = true;
-                    deferred.notify(response);
+            if (response.meta.offset + response.entities.length < response.meta.total) {
+                response.partial = true;
+                deferred.notify(response);
 
-                    query.offset = response.meta.offset+response.meta.limit;
-                    self.ajax_cache = kQuery.getJSON(url_builder(query)).done(done).fail(fail);
-                } else {
-                    response.completed = true;
-                    deferred.resolve(response);
-                }
-            };
+                query.offset = response.meta.offset+response.meta.limit;
+                self.ajax_cache = kQuery.getJSON(url_builder(query)).done(done).fail(fail);
+            } else {
+                response.completed = true;
+                deferred.resolve(response);
+            }
+        };
 
         self.ajax_cache = kQuery.getJSON(url_builder(query)).done(done).fail(fail);
 
         return deferred.promise();
     },
 
-	setContainer: function(container) {
-		var setter = function(item) {
-			this.fireEvent('beforeSetContainer', {container: item});
+    setContainer: function(container) {
+        var setter = function(item) {
+            this.fireEvent('beforeSetContainer', {container: item});
 
-			this.container = item;
-			this.baseurl = Files.sitebase + '/' + item.relative_path;
+            this.container = item;
+            this.baseurl = Files.sitebase + '/' + item.relative_path;
 
-			this.active = '';
+            this.active = '';
 
-			if (this.uploader) {
-				if (this.container.parameters.allowed_extensions) {
-					this.uploader.settings.filters = [
-					     {title: Koowa.translate('All Files'), extensions: this.container.parameters.allowed_extensions.join(',')}
-	    			];
-				}
-				
-				if (this.container.parameters.maximum_size) {
-					this.uploader.settings.max_file_size = this.container.parameters.maximum_size;
-					var max_size = document.id('upload-max-size');
-					if (max_size) {
-						max_size.set('html', new Files.Filesize(this.container.parameters.maximum_size).humanize());
-					}
-				}
-			}
+            if (this.uploader) {
+                if (this.container.parameters.allowed_extensions) {
+                    this.uploader.settings.filters = [
+                        {title: Koowa.translate('All Files'), extensions: this.container.parameters.allowed_extensions.join(',')}
+                    ];
+                }
 
-			if (this.container.parameters.thumbnails !== true) {
-				this.options.thumbnails = false;
-			} else {
-				this.state.set('thumbnails', true);
-			}
+                if (this.container.parameters.maximum_size) {
+                    this.uploader.settings.max_file_size = this.container.parameters.maximum_size;
+                    var max_size = document.id('upload-max-size');
+                    if (max_size) {
+                        max_size.set('html', new Files.Filesize(this.container.parameters.maximum_size).humanize());
+                    }
+                }
+            }
 
-			if (this.options.types !== null) {
-				this.options.grid.types = this.options.types;
-				this.state.set('types', this.options.types);
-			}
+            if (this.container.parameters.thumbnails !== true) {
+                this.options.thumbnails = false;
+            } else {
+                this.state.set('thumbnails', true);
+            }
+
+            if (this.options.types !== null) {
+                this.options.grid.types = this.options.types;
+                this.state.set('types', this.options.types);
+            }
 
             if (this.options.folder_dialog && document.getElement(this.options.folder_dialog.view) && document.getElement(this.options.folder_dialog.view).getElement('form')) {
                 this.setFolderDialog();
             }
 
-			this.fireEvent('afterSetContainer', {container: item});
+            this.fireEvent('afterSetContainer', {container: item});
 
-			this.setTree();
+            this.setTree();
 
-			this.active = this.options.active || '';
-			this.options.active = '';
-			 
-			if (typeof this.options.initial_response === 'string') {
-				this.options.initial_response = JSON.decode(this.options.initial_response);
-			}
+            this.active = this.options.active || '';
+            this.options.active = '';
 
-			this.navigate(this.active, 'initial', false, this.options.initial_response);
-		}.bind(this);
+            if (typeof this.options.initial_response === 'string') {
+                this.options.initial_response = JSON.decode(this.options.initial_response);
+            }
 
-		if (typeof container === 'string') {
-			new Request.JSON({
-				url: this.createRoute({view: 'container', slug: container, container: false}),
-				method: 'get',
-				onSuccess: function(response) {
-					setter(response.entities[0]);
-				}.bind(this)
-			}).send();
-		} else {
-			setter(container);
-		}
-	},
-	setPaginator: function() {
-		this.fireEvent('beforeSetPaginator');
+            this.navigate(this.active, 'initial', false, this.options.initial_response);
+        }.bind(this);
 
-		var opts = this.options.paginator,
-			state = this.state;
+        if (typeof container === 'string') {
+            new Request.JSON({
+                url: this.createRoute({view: 'container', slug: container, container: false}),
+                method: 'get',
+                onSuccess: function(response) {
+                    setter(response.entities[0]);
+                }.bind(this)
+            }).send();
+        } else {
+            setter(container);
+        }
+    },
+    setPaginator: function() {
+        this.fireEvent('beforeSetPaginator');
+
+        var opts = this.options.paginator,
+            state = this.state;
 
         Object.append(opts, {
-			'state' : state,
-			'onClickPage': function(el) {
-				this.state.set('limit', el.get('data-limit'));
-				this.state.set('offset', el.get('data-offset'));
+            'state' : state,
+            'onClickPage': function(el) {
+                this.state.set('limit', el.get('data-limit'));
+                this.state.set('offset', el.get('data-offset'));
 
-				this.navigate();
-			}.bind(this),
-			'onChangeLimit': function(limit) {
-				this.state.set('limit', limit);
+                this.navigate();
+            }.bind(this),
+            'onChangeLimit': function(limit) {
+                this.state.set('limit', limit);
 
                 // Recalculate offset
                 var total = Files.app.paginator.values.total,
@@ -476,68 +476,68 @@ Files.App = new Class({
                     offset = limit ? Math.floor((offset/limit)*limit) : 0;
                 }
 
-				this.state.set('offset', offset);
+                this.state.set('offset', offset);
 
-				this.navigate();
-			}.bind(this)
-		});
-		this.paginator = new Files.Paginator(opts.element, opts);
+                this.navigate();
+            }.bind(this)
+        });
+        this.paginator = new Files.Paginator(opts.element, opts);
 
 
-		var that = this;
-		that.addEvent('afterSelect', function(response) {
-			that.paginator.setData({
-				limit: response.meta.limit,
-				offset: response.meta.offset,
-				total: response.meta.total
-			});
-			that.paginator.setValues();
-		});
+        var that = this;
+        that.addEvent('afterSelect', function(response) {
+            that.paginator.setData({
+                limit: response.meta.limit,
+                offset: response.meta.offset,
+                total: response.meta.total
+            });
+            that.paginator.setValues();
+        });
 
-		this.fireEvent('afterSetPaginator');
-	},
-	setGrid: function() {
-		this.fireEvent('beforeSetGrid');
+        this.fireEvent('afterSetPaginator');
+    },
+    setGrid: function() {
+        this.fireEvent('beforeSetGrid');
 
-		var that = this,
-		    opts = this.options.grid,
-			key = this.cookie+'.grid.layout';
+        var that = this,
+            opts = this.options.grid,
+            key = this.cookie+'.grid.layout';
 
-		if (this.cookie && Cookie.read(key)) {
-			opts.layout = Cookie.read(key);
-		}
+        if (this.cookie && Cookie.read(key)) {
+            opts.layout = Cookie.read(key);
+        }
 
         Object.append(opts, {
-			'onClickFolder': function(e) {
-				var target = document.id(e.target),
-				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
-					path = node.retrieve('row').path;
-				if (path) {
-					this.navigate(path);
-				}
-			}.bind(this),
-			'onClickImage': function(e) {
-				var target = document.id(e.target),
-				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
+            'onClickFolder': function(e) {
+                var target = document.id(e.target),
+                    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
+                    path = node.retrieve('row').path;
+                if (path) {
+                    this.navigate(path);
+                }
+            }.bind(this),
+            'onClickImage': function(e) {
+                var target = document.id(e.target),
+                    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
                     row = node.retrieve('row'),
                     img = that.createRoute({view: 'file', format: 'html', name: row.name, folder: row.folder});
 
-				if (img) {
+                if (img) {
                     kQuery.magnificPopup.open({
                         items: {
                             src: img,
                             type: 'image'
                         }
                     });
-				}
-			},
-			'onClickFile': function(e) {
-				var target = document.id(e.target),
-				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
-					row = node.retrieve('row'),
-					copy = Object.append({}, row);
+                }
+            },
+            'onClickFile': function(e) {
+                var target = document.id(e.target),
+                    node = target.getParent('.files-node-shadow') || target.getParent('.files-node'),
+                    row = node.retrieve('row'),
+                    copy = Object.append({}, row);
 
-				copy.template = 'file_preview';
+                copy.template = 'file_preview';
 
                 copy = copy.render();
 
@@ -549,59 +549,59 @@ Files.App = new Class({
                         type: 'inline'
                     }
                 });
-			},
-			'onAfterSetLayout': function(context) {
-				if (key) {
-					Cookie.write(key, context.layout, this.options.cookie);
-				}
-			}.bind(this)
-		});
-		this.grid = new Files.Grid(this.options.grid.element, opts);
+            },
+            'onAfterSetLayout': function(context) {
+                if (key) {
+                    Cookie.write(key, context.layout, this.options.cookie);
+                }
+            }.bind(this)
+        });
+        this.grid = new Files.Grid(this.options.grid.element, opts);
 
-		this.fireEvent('afterSetGrid');
-	},
-	setTree: function() {
-		this.fireEvent('beforeSetTree');
+        this.fireEvent('afterSetGrid');
+    },
+    setTree: function() {
+        this.fireEvent('beforeSetTree');
 
-		if (this.options.tree.enabled) {
-			var opts = this.options.tree,
-				that = this;
+        if (this.options.tree.enabled) {
+            var opts = this.options.tree,
+                that = this;
 
             opts = kQuery.extend(true, {}, {
                 onSelectNode: function(node) {
-					if (node.id || node.url) {
+                    if (node.id || node.url) {
                         var path = node && node.id ? node.id : '';
                         if (path != that.active) {
                             that.navigate(path);
                         }
-					}
-				},
-				root: {
-					text: this.options.root_text
-				},
+                    }
+                },
+                root: {
+                    text: this.options.root_text
+                },
                 initial_response: !!this.options.initial_response
-			}, opts);
-			this.tree = new Files.Tree(kQuery(opts.element), opts);
-			this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '1000'}));
+            }, opts);
+            this.tree = new Files.Tree(kQuery(opts.element), opts);
+            this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '1000'}));
 
-			this.addEvent('afterNavigate', function(path, type) {
-				if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
+            this.addEvent('afterNavigate', function(path, type) {
+                if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
                     that.tree.selectPath(path);
                 }
-			});
+            });
 
-			if (this.grid) {
-				this.grid.addEvent('afterDeleteNode', function(context) {
-					var node = context.node;
-					if (node.type == 'folder') {
+            if (this.grid) {
+                this.grid.addEvent('afterDeleteNode', function(context) {
+                    var node = context.node;
+                    if (node.type == 'folder') {
                         that.tree.removeNode(node.path);
-					}
-				});
-			}
-		}
+                    }
+                });
+            }
+        }
 
-		this.fireEvent('afterSetTree');
-	},
+        this.fireEvent('afterSetTree');
+    },
     /**
      * Create the folder dialog markup and link up events
      */
@@ -700,9 +700,14 @@ Files.App = new Class({
      */
     setUploaderDialog: function(){
         var self   = this,
-            button = document.getElement(this.options.uploader_dialog.button);
+            button = document.getElement(this.options.uploader_dialog.button),
+            view   = document.getElement(this.options.uploader_dialog.view);
 
-        kQuery(this.options.uploader_dialog.view).css('visibility', 'hidden');
+        if (view) {
+            this._tmp_uploader = new Element('div', {style: 'display:none'}).inject(document.body);
+
+            document.getElement(this.options.uploader_dialog.view).getParent().inject(this._tmp_uploader).setStyle('visibility', '');
+        }
 
         if (button) {
             button.addEvent('click', function(e){
@@ -723,64 +728,83 @@ Files.App = new Class({
     openUploaderDialog: function(){
 
         if(this.uploader) {
-            var self = this;
+            var self = this, handleClose = function(){
+                document.getElement(self.options.uploader_dialog.view).getParent().inject(self._tmp_uploader);
+                SqueezeBox.removeEvent('close', handleClose);
+            };
+            SqueezeBox.addEvent('close', handleClose);
+            SqueezeBox.open(document.getElement(self.options.uploader_dialog.view).getParent(), {
+                handler: 'adopt',
+                size: {x: 700, y: document.getElement(self.options.uploader_dialog.view).getParent().measure(function(){
+                    this.setStyle('width', 700);
+                    var height = this.getSize().y;
+                    this.setStyle('width', '');
+                    return height;
+                })}
+            });
+            window.addEvent('QueueChanged', this._changeUploaderDialogHeight.bind(this));
+        }
 
-            kQuery.magnificPopup.open({
-                items: {
-                    src: kQuery(self.options.uploader_dialog.view).parent(),
-                    type: 'inline'
-                },
-                callbacks: {
-                    open: function() {
-                        kQuery(self.options.uploader_dialog.view).css('visibility', '');
-                        self.uploader.refresh();
-                    },
-                    close: function() {
-                        //kQuery(self.options.uploader_dialog.view).css('visibility', 'hidden');
+        return !!this.uploader;
+    },
+    /**
+     * Closes the Uploader dialog and performs IE flash workaround
+     * @return returns a boolean indicating wether there's a uploader dialog active
+     */
+    closeUploaderDialog: function(){
+
+        if(this.uploader) {
+            SqueezeBox.close();
+            window.removeEvent('QueueChanged', this._changeUploaderDialogHeight);
+        }
+
+        return !!this.uploader;
+    },
+    /**
+     * Updates the uploader dialog height
+     * @private
+     */
+    _changeUploaderDialogHeight: function(){
+        var height = document.getElement(this.options.uploader_dialog.view).getParent().scrollHeight;
+        SqueezeBox.resize({x: 700, y: height});
+    },
+    getUrl: function() {
+        return new URI(window.location.href);
+    },
+    getPath: function() {
+        return this.active;
+    },
+    setThumbnails: function() {
+        this.setDimensions(true);
+        var nodes = this.grid.nodes,
+            that = this;
+        if (nodes.getLength()) {
+            nodes.each(function(node) {
+                if (node.filetype !== 'image') {
+                    return;
+                }
+                var name = node.name;
+
+                var img = node.element.getElement('img.image-thumbnail');
+                if (img) {
+                    img.addEvent('load', function(){
+                        this.addClass('loaded');
+                    });
+                    img.set('src', node.thumbnail ? node.thumbnail : Files.blank_image);
+
+                    (node.element.getElement('.files-node') || node.element).addClass('loaded').removeClass('loading');
+
+                    if(window.sessionStorage) {
+                        sessionStorage[node.image.toString()] = img.get('src');
                     }
                 }
             });
         }
 
-        return !!this.uploader;
     },
-	getUrl: function() {
-		return new URI(window.location.href);
-	},
-	getPath: function() {
-		return this.active;
-	},
-	setThumbnails: function() {
-		this.setDimensions(true);
-		var nodes = this.grid.nodes,
-			that = this;
-		if (nodes.getLength()) {
-			nodes.each(function(node) {
-				if (node.filetype !== 'image') {
-					return;
-				}
-				var name = node.name;
+    setDimensions: function(force){
 
-				var img = node.element.getElement('img.image-thumbnail');
-				if (img) {
-					img.addEvent('load', function(){
-					    this.addClass('loaded');
-					});
-					img.set('src', node.thumbnail ? node.thumbnail : Files.blank_image);
-					
-					(node.element.getElement('.files-node') || node.element).addClass('loaded').removeClass('loading');
-
-					if(window.sessionStorage) {
-					    sessionStorage[node.image.toString()] = img.get('src');
-					}
-				}
-			});
-		}
-
-	},
-	setDimensions: function(force){
-
-	    if(!this._cached_grid_width) this._cached_grid_width = 0;
+        if(!this._cached_grid_width) this._cached_grid_width = 0;
 
         //Only fire if the cache have changed
         if(this._cached_grid_width != this.grid.root.element.getSize().x || force) {
@@ -796,35 +820,35 @@ Files.App = new Class({
         }
     },
     setPathway: function() {
-    	this.fireEvent('beforeSetPathway');
+        this.fireEvent('beforeSetPathway');
 
         var pathway = new Files.Pathway(this.options.pathway);
         this.addEvent('afterSetTitle', pathway.setPath.bind(pathway, this));
 
-		this.fireEvent('afterSetPathway');
-	},
-	setTitle: function(title) {
-		this.fireEvent('beforeSetTitle', {title: title});
+        this.fireEvent('afterSetPathway');
+    },
+    setTitle: function(title) {
+        this.fireEvent('beforeSetTitle', {title: title});
 
-		this.title = title;
+        this.title = title;
 
-		this.fireEvent('afterSetTitle', {title: title});
-	},
-	createRoute: function(query) {
-		query = Object.merge({}, this.options.router.defaults, query || {});
+        this.fireEvent('afterSetTitle', {title: title});
+    },
+    createRoute: function(query) {
+        query = Object.merge({}, this.options.router.defaults, query || {});
 
-		if (query.container !== false && !query.container && this.container) {
-			query.container = this.container.slug;
-		} else {
-			delete query.container;
-		}
+        if (query.container !== false && !query.container && this.container) {
+            query.container = this.container.slug;
+        } else {
+            delete query.container;
+        }
 
-		if (query.format == 'html') {
-			delete query.format;
-		}
+        if (query.format == 'html') {
+            delete query.format;
+        }
 
-		return '?'+new Hash(query).filter(function(value, key) {
-			return typeof value !== 'function';
-		}).toQueryString();
-	}
+        return '?'+new Hash(query).filter(function(value, key) {
+            return typeof value !== 'function';
+        }).toQueryString();
+    }
 });
