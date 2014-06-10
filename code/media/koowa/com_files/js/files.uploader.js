@@ -154,6 +154,25 @@ var addDragDrop = function(uploader) {
     uploader.bind('QueueChanged', exposePlupload);
 };
 
+var getUniqueName = function (name, fileExists) {
+    // Get a unique file name by appending (1) (2) etc.
+    var i = 1,
+        extension = name.substr(name.lastIndexOf('.') + 1),
+        base = name.substr(0, name.lastIndexOf('.'));
+
+    while (true) {
+        name = base + ' (' + i + ').' + extension;
+
+        if (!fileExists(name)) {
+            break;
+        }
+
+        i++;
+    }
+
+    return name;
+};
+
 Files.createUploader = function (multi_selection) {
     var element = $('#files-upload-multi');
 
@@ -167,6 +186,10 @@ Files.createUploader = function (multi_selection) {
     SqueezeBox.addEvent('open', function () {
         //This is to make sure the flash upload button shim is positioned correctly after the modal is opened
         window.fireEvent('refresh');
+    });
+
+    window.addEvent('refresh', function () {
+        uploader.refresh();
     });
 
     element.pluploadQueue({
@@ -203,25 +226,7 @@ Files.createUploader = function (multi_selection) {
         }
     });
 
-    var uploader = element.pluploadQueue(),
-        getUniqueName = function (name, fileExists) {
-            // Get a unique file name by appending (1) (2) etc.
-            var i = 1,
-                extension = name.substr(name.lastIndexOf('.') + 1),
-                base = name.substr(0, name.lastIndexOf('.'));
-
-            while (true) {
-                name = base + ' (' + i + ').' + extension;
-
-                if (!fileExists(name)) {
-                    break;
-                }
-
-                i++;
-            }
-
-            return name;
-        };
+    var uploader = element.pluploadQueue();
 
     // Multi file uploader
     if (multi_selection) {
@@ -354,7 +359,7 @@ Files.createUploader = function (multi_selection) {
 
                 //modifying_queue = false;
             },
-        // Check to see if the file exists
+            // Check to see if the file exists
             fileExists = function (name) {
                 var result = false;
 
@@ -384,19 +389,9 @@ Files.createUploader = function (multi_selection) {
 
                 modifying_queue = false;
             },
-        // These two variables are used to make sure we only trigger below events once
-            initial_add = true,
             modifying_queue = false,
             overwrite_prompt = Koowa.translate('A file with the same name already exists. Would you like to overwrite it?');
 
-        /*uploader.bind('FilesAdded', function(uploader) {
-         if (initial_add === true) {
-         modifying_queue = true;
-         removeExcessFiles(uploader);
-         renameDuplicates(uploader);
-         initial_add = false;
-         }
-         });*/
         uploader.bind('QueueChanged', function (uploader) {
             if (modifying_queue) {
                 return;
@@ -407,10 +402,6 @@ Files.createUploader = function (multi_selection) {
             renameDuplicates(uploader);
         });
     }
-
-    window.addEvent('refresh', function () {
-        uploader.refresh();
-    });
 
     setTimeout(function () {
         if (uploader.features.dragdrop) {
