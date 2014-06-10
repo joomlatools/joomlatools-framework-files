@@ -8,9 +8,154 @@
 
 if (!Files) var Files = {};
 
+(function($) {
+
+//We only want to run this once
+var exposePlupload = function (uploader) {
+    document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
+    uploader.refresh();
+    uploader.unbind('QueueChanged', exposePlupload);
+    window.fireEvent('QueueChanged');
+};
+
+var addDragDrop = function(uploader) {
+    var timer,
+        cancel = function (e) {
+            e.preventDefault();// required by FF + Safari
+            e.stopPropagation();
+            e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
+        },
+        createDragoverHandler = function (container) {
+
+            //Create hilite + label
+            var focusring = $('<div class="dropzone-focusring"></div>'),
+                label = $('<div class="alert alert-success">' + Koowa.translate('Drop your files to upload to {folder}').replace('{folder}', Files.app.title) + '</div>');
+
+            focusring.css({
+                display: 'none',
+                position: 'absolute',
+                backgroundColor: 'hsla(0, 0%, 100%, 0.75)',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                zIndex: 65558,
+                borderStyle: 'solid',
+                borderWidth: '5px',
+                opacity: 0,
+                transition: 'opacity 300ms',
+                paddingTop: 10,
+                textAlign: 'center'
+            });
+            container.append(focusring);
+
+            //To inherit styling
+            $('#files-upload').append(label);
+            ['border-radius', 'color', 'background', 'border'].forEach(function (prop) {
+                label.css(prop, label.css(prop));
+            });
+            label.css({
+                display: 'inline-block',
+                margin: '0 auto'
+            });
+            focusring.append(label);
+            focusring.css('border-color', label.css('color')); //border-color too bright
+
+            return function (e) {
+
+                e.preventDefault();// required by FF + Safari
+                e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
+                if (focusring.css('display') == 'none') {
+                    label.text(Koowa.translate('Drop your files to upload to {folder}').replace('{folder}', Files.app.title));
+                    focusring.css('display', 'block');
+                    setTimeout(function () {
+                        focusring.css('opacity', 1);
+                        if (!$('#files-upload').is(':visible')) {
+                            $('#files-canvas').addClass('dropzone-droppable');
+                        }
+                    }, 1);
+
+                }
+                //container.addClass('dropzone-dragover'); //This breaks safaris drag and drop, still unknown why
+
+                //This is a failsafe measure
+                clearTimeout(timer);
+                timer = setTimeout(function () {
+                    $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+                    $('#files-canvas').removeClass('dropzone-droppable');
+                }, 300);
+            };
+        },
+        createDragleaveHandler = function (/*container*/) {
+            return function (e) {
+                //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
+                //container.removeClass('dropzone-dragover');
+                //$('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+            };
+        },
+        addSelectedFiles = function(native_files) {
+            var file, i, files = [], fileNames = {};
+
+            // Add the selected files to the file queue
+            for (i = 0; i < native_files.length; i++) {
+                file = native_files[i];
+
+                // Safari on Windows will add first file from dragged set multiple times
+                // @see: https://bugs.webkit.org/show_bug.cgi?id=37957
+                if (fileNames[file.name]) {
+                    continue;
+                }
+                fileNames[file.name] = true;
+
+                // Expose id, name and size
+                files.push(new plupload.File(file));
+            }
+
+            // Trigger FilesAdded event if we added any
+            if (files.length) {
+                uploader.trigger("FilesAdded", files);
+            }
+        },
+    // Make the document body a dropzone
+        files_canvas = $('#files-canvas'),
+        body = $(document.body);
+
+    document.id('files-upload').addClass('uploader-droppable');
+
+    //Prevent file drops from duplicating due to double drop events
+    $('#files-upload-multi_filelist').bind('drop', function (event) {
+        event.stopPropagation();
+        //@TODO implement the rest of the drop code from handler, to remove focusring
+        $(document.body).removeClass('dropzone-dragover');
+    });
+
+    body.bind('dragover', createDragoverHandler(body)); //Using dragenter caused inconsistent behavior
+    body.bind('dragleave', createDragleaveHandler(body));
+    body.bind('dragenter', cancel);
+    body.bind('drop', function (event) {
+        event.preventDefault();
+        files_canvas.removeClass('dragover');
+        var dataTransfer = event.originalEvent.dataTransfer;
+
+        // Add dropped files
+        if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
+            addSelectedFiles(dataTransfer.files);
+
+            if (!$('#files-upload').is(':visible')) {
+                //@TODO the click handler is written in mootools, so we use mootools here
+                document.getElement(Files.app.options.uploader_dialog.button).fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
+            }
+        }
+    });
+    body.bind('dragend', function () {
+        $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
+    });
+
+    uploader.bind('QueueChanged', exposePlupload);
+};
+
 Files.createUploader = function (multi_selection) {
-    var $ = kQuery,
-        element = $('#files-upload-multi');
+    var element = $('#files-upload-multi');
 
     if (element.length === 0) {
         return;
@@ -59,13 +204,6 @@ Files.createUploader = function (multi_selection) {
     });
 
     var uploader = element.pluploadQueue(),
-    //We only want to run this once
-        exposePlupload = function (uploader) {
-            document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
-            uploader.refresh();
-            uploader.unbind('QueueChanged', exposePlupload);
-            window.fireEvent('QueueChanged');
-        },
         getUniqueName = function (name, fileExists) {
             // Get a unique file name by appending (1) (2) etc.
             var i = 1,
@@ -275,140 +413,8 @@ Files.createUploader = function (multi_selection) {
     });
 
     setTimeout(function () {
-
-
         if (uploader.features.dragdrop) {
-            document.id('files-upload').addClass('uploader-droppable');
-
-            var timer, cancel = function (e) {
-                e.preventDefault();// required by FF + Safari
-                e.stopPropagation();
-                e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
-            }, createDragoverHandler = function (container) {
-
-                //Create hilite + label
-                var focusring = $('<div class="dropzone-focusring"></div>'),
-                    label = $('<div class="alert alert-success">' + Koowa.translate('Drop your files to upload to {folder}').replace('{folder}', Files.app.title) + '</div>');
-
-                focusring.css({
-                    display: 'none',
-                    position: 'absolute',
-                    backgroundColor: 'hsla(0, 0%, 100%, 0.75)',
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: 0,
-                    zIndex: 65558,
-                    borderStyle: 'solid',
-                    borderWidth: '5px',
-                    opacity: 0,
-                    transition: 'opacity 300ms',
-                    paddingTop: 10,
-                    textAlign: 'center'
-                });
-                container.append(focusring);
-
-                //To inherit styling
-                $('#files-upload').append(label);
-                ['border-radius', 'color', 'background', 'border'].forEach(function (prop) {
-                    label.css(prop, label.css(prop));
-                });
-                label.css({
-                    display: 'inline-block',
-                    margin: '0 auto'
-                });
-                focusring.append(label);
-                focusring.css('border-color', label.css('color')); //border-color too bright
-
-                return function (e) {
-
-                    e.preventDefault();// required by FF + Safari
-                    e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
-                    if (focusring.css('display') == 'none') {
-                        label.text(Koowa.translate('Drop your files to upload to {folder}').replace('{folder}', Files.app.title));
-                        focusring.css('display', 'block');
-                        setTimeout(function () {
-                            focusring.css('opacity', 1);
-                            if (!$('#files-upload').is(':visible')) {
-                                $('#files-canvas').addClass('dropzone-droppable');
-                            }
-                        }, 1);
-
-                    }
-                    //container.addClass('dropzone-dragover'); //This breaks safaris drag and drop, still unknown why
-
-                    //This is a failsafe measure
-                    clearTimeout(timer);
-                    timer = setTimeout(function () {
-                        $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
-                        $('#files-canvas').removeClass('dropzone-droppable');
-                    }, 300);
-                };
-            }, createDragleaveHandler = function (/*container*/) {
-                return function (e) {
-                    //@TODO following code is too buggy, it fires multiple times causing a flickr, for now the focusring will only dissappear on drop
-                    //container.removeClass('dropzone-dragover');
-                    //$('.dropzone-focusring').css('opacity', 0).css('display', 'none');
-                };
-            };
-
-            function addSelectedFiles(native_files) {
-                var file, i, files = [], id, fileNames = {};
-
-                // Add the selected files to the file queue
-                for (i = 0; i < native_files.length; i++) {
-                    file = native_files[i];
-
-                    // Safari on Windows will add first file from dragged set multiple times
-                    // @see: https://bugs.webkit.org/show_bug.cgi?id=37957
-                    if (fileNames[file.name]) {
-                        continue;
-                    }
-                    fileNames[file.name] = true;
-
-                    // Expose id, name and size
-                    files.push(new plupload.File(file));
-                }
-
-                // Trigger FilesAdded event if we added any
-                if (files.length) {
-                    uploader.trigger("FilesAdded", files);
-                }
-            }
-
-            //Prevent file drops from duplicating due to double drop events
-            $('#files-upload-multi_filelist').bind('drop', function (event) {
-                event.stopPropagation();
-                //@TODO implement the rest of the drop code from handler, to remove focusring
-                $(document.body).removeClass('dropzone-dragover');
-            });
-
-            // Make the document body a dropzone
-            var files_canvas = $('#files-canvas'),
-                body = $(document.body);
-            body.bind('dragover', createDragoverHandler(body)); //Using dragenter caused inconsistent behavior
-            body.bind('dragleave', createDragleaveHandler(body));
-            body.bind('dragenter', cancel);
-            body.bind('drop', function (event) {
-                event.preventDefault();
-                files_canvas.removeClass('dragover');
-                var dataTransfer = event.originalEvent.dataTransfer;
-
-                // Add dropped files
-                if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
-                    addSelectedFiles(dataTransfer.files);
-
-                    if (!$('#files-upload').is(':visible')) {
-                        //@TODO the click handler is written in mootools, so we use mootools here
-                        document.getElement(Files.app.options.uploader_dialog.button).fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
-                    }
-                }
-            });
-            body.bind('dragend', function () {
-                $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
-            });
-
-            uploader.bind('QueueChanged', exposePlupload);
+            addDragDrop(uploader);
         } else {
             document.id('files-upload')
                 .addClass('uploader-nodroppable')
@@ -529,8 +535,7 @@ Files.createUploader = function (multi_selection) {
         document.id('files-uploader-' + type).setStyle('display', 'block');
 
         // Plupload needs to be refreshed if it was hidden
-        if (type == 'computer' && $('#files-upload-multi').length) {
-            var uploader = $('#files-upload-multi').pluploadQueue();
+        if (type == 'computer' && element.length) {
             if (!uploader.files.length && uploader.features.dragdrop) {
                 document.id('files-upload').removeClass('uploader-files-queued').addClass('uploader-files-empty');
                 if (document.id('files-upload-multi_browse')) {
@@ -710,3 +715,5 @@ Files.createUploader = function (multi_selection) {
     //Remove FLOC fix
     document.id('files-upload').getParent().setStyle('visibility', '');
 };
+
+})(kQuery);
