@@ -6,10 +6,7 @@
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/koowa-files for the canonical source repository
  */
-defined('KOOWA') or die( 'Restricted access' );
-
-$multi_selection = isset($multi_selection) ? $multi_selection : true;
-?>
+defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <?= @helper('translator.script', array('translations' => array(
     'Filename',
@@ -19,11 +16,19 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
     'Start upload',
     'Clear queue',
     'Uploaded %d/%d files',
-    'Add Files',
+    'Uploaded successfully!',
+    'All Files',
     '%d files queued',
     'Drag files here.',
+    'An error occurred: {error}',
+    'An error occurred with status code: {code}',
+    'Unknown error',
     'Error: File too large:',
-    'Error: Invalid file extension:'
+    'Error: Invalid file extension:',
+    'A file with the same name already exists. Would you like to overwrite it?',
+    'Are you sure you want to clear the upload queue? This cannot be undone!',
+    'Following files already exist. Would you like to overwrite them? {names}',
+    'Drop your files to upload to {folder}'
 ))); ?>
 
 <?= @helper('behavior.jquery'); ?>
@@ -34,6 +39,7 @@ $multi_selection = isset($multi_selection) ? $multi_selection : true;
 <script>
 window.addEvent('domready', function() {
     var $ = kQuery,
+        multi_selection = <?= json_encode((!isset($multi_selection) || $multi_selection !== false) ? true : false) ?>,
         element = $('#files-upload-multi');
 
     if (element.length === 0) {
@@ -52,7 +58,7 @@ window.addEvent('domready', function() {
         runtimes: 'html5,flash',
         container: containershim,
         browse_button: 'pickfiles',
-        multi_selection: <?= json_encode($multi_selection) ?>,
+        multi_selection: multi_selection,
         dragdrop: true,
         unique_names: false,
         rename: true,
@@ -72,7 +78,11 @@ window.addEvent('domready', function() {
         preinit: {
             Error: function(up, args){
                 if(args.code == plupload.INIT_ERROR) {
-                    element.append('<div class="alert alert-error warning">'+Koowa.translate('<a href="https://google.com/chrome" target="_blank">HTML5 enabled browser</a> or <a href="https://get.adobe.com/flashplayer/" target="_blank">Adobe Flash Player<a/> required for uploading files from your computer.')+'</div>');
+                    var message = Koowa.translate('{html5} or {flash} required for uploading files from your computer.', {
+                        html5: '<a href="https://google.com/chrome" target="_blank">'+Koowa.translate('HTML5 enabled browser')+'</a>',
+                        flash: '<a href="https://get.adobe.com/flashplayer/" target="_blank">'+Koowa.translate('Flash Player')+'<a/>'
+                    });
+                    element.append('<div class="alert alert-error warning">'+message+'</div>');
                 }
             }
         }
@@ -106,189 +116,189 @@ window.addEvent('domready', function() {
         };
 
     // Multi file uploader
-    <? if ($multi_selection !== false): ?>
-    $('.plupload_start', element).click(function(e) {
-        e.preventDefault();
+    if (multi_selection) {
+        $('.plupload_start', element).click(function(e) {
+            e.preventDefault();
 
-        var $this = $(this),
-            getNamesFromArray = function(array) {
-                var results = [];
-                $.each(array, function(i, entity) {
-                    results.push(entity.name);
-                });
-
-                return results;
-            },
-            startUpload = function() {
-                if (!$this.hasClass('plupload_disabled')) {
-                    uploader.start();
-                }
-            },
-            getConfirmationMessage = function(files) {
-                var message = '';
-
-                if (files.length === 1) {
-                    message = Koowa.translate('A file with the same name already exists. Would you like to overwrite it?');
-                } else if (files.length > 1) {
-                    message = Koowa.translate('Following files already exist. Would you like to overwrite them? {names}', {
-                        names: "\n"+files.join("\n")
+            var $this = $(this),
+                getNamesFromArray = function(array) {
+                    var results = [];
+                    $.each(array, function(i, entity) {
+                        results.push(entity.name);
                     });
-                }
 
-                return message;
-            },
-            makeUnique = function(file, similar) {
-                var names = [];
-                if (typeof similar.entities === 'object' && similar.entities.length) {
-                    names = getNamesFromArray(similar.entities);
-                }
-
-                file.name = getUniqueName(file.name, function (name) {
-                    return $.inArray(name, names) !== -1;
-                });
-
-                $('#' + file.id).find('div.plupload_file_name span').text(file.name);
-            },
-            checkDuplicates = function(response) {
-                uploader.settings.multipart_params.overwrite = 0;
-
-                if (typeof response.entities === 'object' && response.entities.length) {
-                    var existing = getNamesFromArray(response.entities),
-                        promises = [];
-
-                    if (confirm(getConfirmationMessage(existing))) {
-                        uploader.settings.multipart_params.overwrite = 1;
-
-                        return startUpload();
+                    return results;
+                },
+                startUpload = function() {
+                    if (!$this.hasClass('plupload_disabled')) {
+                        uploader.start();
                     }
+                },
+                getConfirmationMessage = function(files) {
+                    var message = '';
 
-                    $.each(uploader.files, function(i, file) {
-                        if ($.inArray(file.name, existing) !== -1) {
-                            promises.push($.ajax({
-                                type: 'GET',
-                                url: Files.app.createRoute({
-                                    view: 'files', folder: Files.app.getPath(), limit: 100,
-                                    search: file.name.substr(0, file.name.lastIndexOf('.'))+' ('
-                                })
-                            }).done(function(response) {
-                                return makeUnique(file, response)
-                            }));
-                        }
-                    });
-
-                    if (promises) {
-                        $.when.apply(kQuery, promises).then(function() {
-                            startUpload();
+                    if (files.length === 1) {
+                        message = Koowa.translate('A file with the same name already exists. Would you like to overwrite it?');
+                    } else if (files.length > 1) {
+                        message = Koowa.translate('Following files already exist. Would you like to overwrite them? {names}', {
+                            names: "\n"+files.join("\n")
                         });
                     }
-                }
-                else {
-                    startUpload();
-                }
-            };
 
-        var names = [];
-        $.each(uploader.files, function(i, file) {
-            if (file.loaded == 0) {
-                names.push(file.name);
-            }
-        });
-
-        $.ajax({
-            url: Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath()}),
-            type: 'POST',
-            data: {
-                _method: 'GET',
-                name: names
-            }
-        }).done(checkDuplicates).fail(startUpload);
-    });
-
-    // Do not allow more than 100 files to be uploaded at once
-    uploader.bind('FilesAdded', function(uploader) {
-        if (uploader.files.length > 100) {
-            uploader.splice(0, uploader.files.length-100);
-        }
-    });
-
-    // Single file uploader
-    <? else: ?>
-    $('.plupload_start', element).click(function(e) {
-        e.preventDefault();
-
-        if (!$(this).hasClass('plupload_disabled')) {
-            uploader.start();
-        }
-    });
-    /**
-     * Only leave the last file if there are more than one in the queue
-     */
-    var removeExcessFiles = function(uploader) {
-            var count = uploader.files.length;
-
-            if (count > 1) {
-                $.each(uploader.files, function(i, file) {
-                    if (i !== count-1) { // Find the last file
-                        uploader.removeFile(file);
+                    return message;
+                },
+                makeUnique = function(file, similar) {
+                    var names = [];
+                    if (typeof similar.entities === 'object' && similar.entities.length) {
+                        names = getNamesFromArray(similar.entities);
                     }
-                });
-            }
 
-            //modifying_queue = false;
-        },
-    // Check to see if the file exists
-        fileExists = function(name) {
-            var result = false;
+                    file.name = getUniqueName(file.name, function (name) {
+                        return $.inArray(name, names) !== -1;
+                    });
 
-            $.each(Files.app.grid.nodes, function(key, value) {
-                if (result === true) {
-                    return true;
-                }
+                    $('#' + file.id).find('div.plupload_file_name span').text(file.name);
+                },
+                checkDuplicates = function(response) {
+                    uploader.settings.multipart_params.overwrite = 0;
 
-                if (value.name === name) {
-                    result = true;
+                    if (typeof response.entities === 'object' && response.entities.length) {
+                        var existing = getNamesFromArray(response.entities),
+                            promises = [];
+
+                        if (confirm(getConfirmationMessage(existing))) {
+                            uploader.settings.multipart_params.overwrite = 1;
+
+                            return startUpload();
+                        }
+
+                        $.each(uploader.files, function(i, file) {
+                            if ($.inArray(file.name, existing) !== -1) {
+                                promises.push($.ajax({
+                                    type: 'GET',
+                                    url: Files.app.createRoute({
+                                        view: 'files', folder: Files.app.getPath(), limit: 100,
+                                        search: file.name.substr(0, file.name.lastIndexOf('.'))+' ('
+                                    })
+                                }).done(function(response) {
+                                    return makeUnique(file, response)
+                                }));
+                            }
+                        });
+
+                        if (promises) {
+                            $.when.apply(kQuery, promises).then(function() {
+                                startUpload();
+                            });
+                        }
+                    }
+                    else {
+                        startUpload();
+                    }
+                };
+
+            var names = [];
+            $.each(uploader.files, function(i, file) {
+                if (file.loaded == 0) {
+                    names.push(file.name);
                 }
             });
 
-            return result;
-        },
-        renameDuplicates = function(uploader) {
-            if (uploader.files.length && fileExists(uploader.files[0].name)) {
-                if (confirm(overwrite_prompt)) {
-                    uploader.settings.multipart_params.overwrite = 1;
-                } else {
-                    uploader.settings.multipart_params.overwrite = 0;
-
-                    var file = uploader.files[0];
-                    file.name = getUniqueName(file.name, fileExists);
+            $.ajax({
+                url: Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath()}),
+                type: 'POST',
+                data: {
+                    _method: 'GET',
+                    name: names
                 }
+            }).done(checkDuplicates).fail(startUpload);
+        });
+
+        // Do not allow more than 100 files to be uploaded at once
+        uploader.bind('FilesAdded', function(uploader) {
+            if (uploader.files.length > 100) {
+                uploader.splice(0, uploader.files.length-100);
+            }
+        });
+    }
+    else {
+        // Single file uploader
+        $('.plupload_start', element).click(function(e) {
+            e.preventDefault();
+
+            if (!$(this).hasClass('plupload_disabled')) {
+                uploader.start();
+            }
+        });
+        /**
+         * Only leave the last file if there are more than one in the queue
+         */
+        var removeExcessFiles = function(uploader) {
+                var count = uploader.files.length;
+
+                if (count > 1) {
+                    $.each(uploader.files, function(i, file) {
+                        if (i !== count-1) { // Find the last file
+                            uploader.removeFile(file);
+                        }
+                    });
+                }
+
+                //modifying_queue = false;
+            },
+        // Check to see if the file exists
+            fileExists = function(name) {
+                var result = false;
+
+                $.each(Files.app.grid.nodes, function(key, value) {
+                    if (result === true) {
+                        return true;
+                    }
+
+                    if (value.name === name) {
+                        result = true;
+                    }
+                });
+
+                return result;
+            },
+            renameDuplicates = function(uploader) {
+                if (uploader.files.length && fileExists(uploader.files[0].name)) {
+                    if (confirm(overwrite_prompt)) {
+                        uploader.settings.multipart_params.overwrite = 1;
+                    } else {
+                        uploader.settings.multipart_params.overwrite = 0;
+
+                        var file = uploader.files[0];
+                        file.name = getUniqueName(file.name, fileExists);
+                    }
+                }
+
+                modifying_queue = false;
+            },
+        // These two variables are used to make sure we only trigger below events once
+            initial_add = true,
+            modifying_queue = false,
+            overwrite_prompt = Koowa.translate('A file with the same name already exists. Would you like to overwrite it?');
+
+        /*uploader.bind('FilesAdded', function(uploader) {
+         if (initial_add === true) {
+         modifying_queue = true;
+         removeExcessFiles(uploader);
+         renameDuplicates(uploader);
+         initial_add = false;
+         }
+         });*/
+        uploader.bind('QueueChanged', function(uploader) {
+            if (modifying_queue) {
+                return;
             }
 
-            modifying_queue = false;
-        },
-    // These two variables are used to make sure we only trigger below events once
-        initial_add = true,
-        modifying_queue = false,
-        overwrite_prompt = <?= json_encode(@translate('A file with the same name already exists. Would you like to overwrite it?')); ?>;
-
-    /*uploader.bind('FilesAdded', function(uploader) {
-     if (initial_add === true) {
-     modifying_queue = true;
-     removeExcessFiles(uploader);
-     renameDuplicates(uploader);
-     initial_add = false;
-     }
-     });*/
-    uploader.bind('QueueChanged', function(uploader) {
-        if (modifying_queue) {
-            return;
-        }
-
-        modifying_queue = true;
-        removeExcessFiles(uploader);
-        renameDuplicates(uploader);
-    });
-    <? endif; ?>
+            modifying_queue = true;
+            removeExcessFiles(uploader);
+            renameDuplicates(uploader);
+        });
+    }
 
     window.addEvent('refresh', function(){
         uploader.refresh();
@@ -308,7 +318,7 @@ window.addEvent('domready', function() {
 
                 //Create hilite + label
                 var focusring = $('<div class="dropzone-focusring"></div>'),
-                    label = $('<div class="alert alert-success">'+Koowa.translate('Drop your files to upload to {{folder}}').replace('{{folder}}', Files.app.title)+'</div>');
+                    label = $('<div class="alert alert-success">'+Koowa.translate('Drop your files to upload to {folder}').replace('{folder}', Files.app.title)+'</div>');
 
                 focusring.css({
                     display: 'none',
@@ -345,7 +355,7 @@ window.addEvent('domready', function() {
                     e.preventDefault();// required by FF + Safari
                     e.originalEvent.dataTransfer.dropEffect = 'copy'; // tells the browser what drop effect is allowed here
                     if(focusring.css('display') == 'none') {
-                        label.text(Koowa.translate('Drop your file(s) to upload to \'{{folder}}\'').replace('{{folder}}', Files.app.title));
+                        label.text(Koowa.translate('Drop your files to upload to {folder}').replace('{folder}', Files.app.title));
                         focusring.css('display', 'block');
                         setTimeout(function(){
                             focusring.css('opacity', 1);
@@ -428,14 +438,14 @@ window.addEvent('domready', function() {
                 $('.dropzone-focusring').css('opacity', 0).css('display', 'none');
             });
 
-        } else {
-            document.id('files-upload').addClass('uploader-nodroppable');
-        }
-
-        if(uploader.features.dragdrop) {
             uploader.bind('QueueChanged', exposePlupload);
         } else {
-            document.id('files-upload').setStyle('position', '').addClass('uploader-files-queued').removeClass('uploader-files-empty');
+            document.id('files-upload')
+                .addClass('uploader-nodroppable')
+                .setStyle('position', '')
+                .addClass('uploader-files-queued')
+                .removeClass('uploader-files-empty');
+
             uploader.refresh();
         }
     }, 1500);
@@ -512,7 +522,7 @@ window.addEvent('domready', function() {
     $$('.plupload_clear').addEvent('click', function(e) {
         e.stop();
 
-        if(confirm(<?= json_encode(@translate('Are you sure you want to clear the upload queue? This cannot be undone!')) ?>)) {
+        if(confirm(Koowa.translate('Are you sure you want to clear the upload queue? This cannot be undone!'))) {
             // need to work on a clone, otherwise iterator gets confused after elements are removed
             var files = uploader.files.slice(0);
             files.each(function(file) {
