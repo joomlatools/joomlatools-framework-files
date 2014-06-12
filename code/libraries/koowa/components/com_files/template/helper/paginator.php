@@ -18,7 +18,7 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
     /**
      * Render item pagination
      *
-     * @param   array   An optional array with configuration options
+     * @param   array   $config An optional array with configuration options
      * @return  string  Html
      * @see     http://developer.yahoo.com/ypatterns/navigation/pagination/
      */

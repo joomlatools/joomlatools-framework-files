@@ -25,7 +25,7 @@ class ComFilesFilterPath extends KFilterAbstract implements KFilterTraversable
     /**
      * Validate a value
      *
-     * @param	scalar	$value Value to be validated
+     * @param	mixed	$value Value to be validated
      * @return	bool	True when the variable is valid
      */
     public function validate($value)
