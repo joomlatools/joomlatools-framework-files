@@ -94,7 +94,7 @@ var addDragDrop = function(uploader) {
             };
         },
         addSelectedFiles = function(native_files) {
-            var file, i, files = [], fileNames = {};
+            var file, i, files = [], id, fileNames = {};
 
             // Add the selected files to the file queue
             for (i = 0; i < native_files.length; i++) {
@@ -107,13 +107,7 @@ var addDragDrop = function(uploader) {
                 }
                 fileNames[file.name] = true;
 
-                // Expose id, name and size
-                files.push(new plupload.File(file));
-            }
-
-            // Trigger FilesAdded event if we added any
-            if (files.length) {
-                uploader.trigger("FilesAdded", files);
+                uploader.addFile(file);
             }
         },
     // Make the document body a dropzone
@@ -139,12 +133,16 @@ var addDragDrop = function(uploader) {
 
         // Add dropped files
         if (dataTransfer && dataTransfer.files && dataTransfer.files.length) {
-            addSelectedFiles(dataTransfer.files);
+            var copy = dataTransfer.files;
 
             if (!$('#files-upload').is(':visible')) {
                 //@TODO the click handler is written in mootools, so we use mootools here
                 document.getElement(Files.app.options.uploader_dialog.button).fireEvent('click', 'DOMEvent' in window ? new DOMEvent : new Event);
             }
+
+            setTimeout(function() {
+                addSelectedFiles(copy);
+            }, 300);
         }
     });
     body.bind('dragend', function () {
@@ -404,7 +402,15 @@ Files.createUploader = function (multi_selection) {
     }
 
     setTimeout(function () {
-        if (uploader.features.dragdrop) {
+        var is_ie   = false,
+            msie    = window.navigator.userAgent.indexOf('MSIE '),
+            trident = window.navigator.userAgent.indexOf('Trident/');
+
+        if (msie > 0 || trident > 0) {
+            is_ie = true;
+        }
+
+        if (uploader.features.dragdrop/* && !is_ie*/) {
             addDragDrop(uploader);
         } else {
             document.id('files-upload')
