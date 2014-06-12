@@ -444,17 +444,19 @@ Files.createUploader = function (multi_selection) {
     uploader.bind('FileUploaded', function (uploader, file, response) {
         var json = JSON.decode(response.response, true) || {},
             row,
-            item;
+            item,
+            path;
 
         if (json.status) {
             item = json.entities[0];
+            path = (item.folder ? item.folder+'/' : '') + item.name;
 
-            if (typeof Files.app.grid.nodes[item.name] === 'undefined') {
+            if (typeof Files.app.grid.nodes[path] === 'undefined') {
                 var cls = Files[item.type.capitalize()];
                 row = new cls(item);
                 Files.app.grid.insert(row);
             } else {
-                row = Files.app.grid.nodes[item.name];
+                row = Files.app.grid.nodes[path];
 
                 if (item.metadata) {
                     row.metadata = item.metadata;
