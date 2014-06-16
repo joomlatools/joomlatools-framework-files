@@ -434,7 +434,7 @@ Files.createUploader = function (options) {
             is_ie = true;
         }
 
-        if (uploader.features.dragdrop/* && !is_ie*/) {
+        if (uploader.features.dragdrop && !is_ie) {
             addDragDrop(uploader);
         } else {
             document.id('files-upload')
