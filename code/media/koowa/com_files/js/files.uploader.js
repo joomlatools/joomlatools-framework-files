@@ -171,8 +171,13 @@ var getUniqueName = function (name, fileExists) {
     return name;
 };
 
-Files.createUploader = function (multi_selection) {
-    var element = $('#files-upload-multi');
+Files.createUploader = function (options) {
+    options = $.extend({}, {
+        element: '#files-upload-multi',
+        multi_selection: true,
+        media_path: ''
+    }, options);
+    var element = $(options.element);
 
     if (element.length === 0) {
         return;
@@ -181,25 +186,17 @@ Files.createUploader = function (multi_selection) {
     //This trick enables the flash runtime to work properly when the uploader is hidden
     var containershim = 'mushycode' + Math.floor((Math.random() * 10000000000) + 1);
     $('<div id="' + containershim + '" class="uploader-flash-container" />').appendTo($(document.body));
-    SqueezeBox.addEvent('open', function () {
-        //This is to make sure the flash upload button shim is positioned correctly after the modal is opened
-        window.fireEvent('refresh');
-    });
 
-    window.addEvent('refresh', function () {
-        uploader.refresh();
-    });
-
-    element.pluploadQueue({
+    var config  = {
         runtimes: 'html5,flash',
         container: containershim,
         browse_button: 'pickfiles',
-        multi_selection: multi_selection,
-        dragdrop: true,
+        multi_selection: options.multi_selection,
+        dragdrop: false,
         unique_names: false,
         rename: true,
         url: '/', // this is added on the go in BeforeUpload event
-        flash_swf_url: 'media://koowa/com_files/js/plupload/Moxie.swf',
+        flash_swf_url: options.media_path+'koowa/com_files/js/plupload/Moxie.swf',
         urlstream_upload: true, // required for flash
         multipart_params: {
             _action: 'add',
@@ -222,12 +219,39 @@ Files.createUploader = function (multi_selection) {
                 }
             }
         }
+    };
+
+    if (Files.app && Files.app.container) {
+        if (Files.app.container.parameters.allowed_extensions) {
+            config.filters.mime_types = [
+                {title: Koowa.translate('All Files'), extensions: Files.app.container.parameters.allowed_extensions.join(',')}
+            ]
+        }
+
+        if (Files.app.container.parameters.maximum_size) {
+            config.max_file_size = Files.app.container.parameters.maximum_size;
+            var max_size = document.id('upload-max-size');
+            if (max_size) {
+                max_size.set('html', new Files.Filesize(Files.app.container.parameters.maximum_size).humanize());
+            }
+        }
+    }
+
+    SqueezeBox.addEvent('open', function () {
+        //This is to make sure the flash upload button shim is positioned correctly after the modal is opened
+        window.fireEvent('refresh');
     });
+
+    window.addEvent('refresh', function () {
+        uploader.refresh();
+    });
+
+    element.pluploadQueue(config);
 
     var uploader = element.pluploadQueue();
 
     // Multi file uploader
-    if (multi_selection) {
+    if (options.multi_selection) {
         $('.plupload_start', element).click(function (e) {
             e.preventDefault();
 
@@ -505,24 +529,6 @@ Files.createUploader = function (multi_selection) {
             });
         }
     });
-
-    if (Files.app && Files.app.container) {
-        if (Files.app.container.parameters.allowed_extensions) {
-            uploader.setOption('filters', {
-                'mimetypes': [
-                    {title: Koowa.translate('All Files'), extensions: Files.app.container.parameters.allowed_extensions.join(',')}
-                ]
-            });
-        }
-
-        if (Files.app.container.parameters.maximum_size) {
-            uploader.setOption('max_file_size', Files.app.container.parameters.maximum_size);
-            var max_size = document.id('upload-max-size');
-            if (max_size) {
-                max_size.set('html', new Files.Filesize(Files.app.container.parameters.maximum_size).humanize());
-            }
-        }
-    }
 
     Files.app.uploader = uploader;
 

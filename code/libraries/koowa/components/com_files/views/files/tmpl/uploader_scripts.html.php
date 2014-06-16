@@ -33,6 +33,23 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <script>
 window.addEvent('domready', function() {
-    Files.createUploader(<?= json_encode((!isset($multi_selection) || $multi_selection !== false) ? true : false) ?>);
+    var timeout = null,
+        createUploader = function() {
+            if (Files.app) {
+                Files.createUploader({
+                    multi_selection: <?= json_encode((!isset($multi_selection) || $multi_selection !== false) ? true : false) ?>,
+                    media_path: 'media://'
+                });
+
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+            } else {
+                timeout = setTimeout(createUploader, 100);
+            }
+        };
+
+    createUploader();
+
 });
 </script>
