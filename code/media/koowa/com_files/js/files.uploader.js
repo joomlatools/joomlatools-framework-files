@@ -425,18 +425,10 @@ Files.createUploader = function (options) {
         });
     }
 
-    setTimeout(function () {
-        var is_ie   = false,
-            msie    = window.navigator.userAgent.indexOf('MSIE '),
-            trident = window.navigator.userAgent.indexOf('Trident/');
-
-        if (msie > 0 || trident > 0) {
-            is_ie = true;
-        }
-
-        if (uploader.features.dragdrop && !is_ie) {
-            addDragDrop(uploader);
-        } else {
+    var msie    = window.navigator.userAgent.indexOf('MSIE '),
+        trident = window.navigator.userAgent.indexOf('Trident/'),
+        is_ie   = (msie > 0 || trident > 0),
+        hideDropZone = function() {
             document.id('files-upload')
                 .addClass('uploader-nodroppable')
                 .setStyle('position', '')
@@ -444,8 +436,19 @@ Files.createUploader = function (options) {
                 .removeClass('uploader-files-empty');
 
             uploader.refresh();
-        }
-    }, 1500);
+        };
+
+    if (!is_ie) {
+        setTimeout(function() {
+            if (uploader.features.dragdrop) {
+                addDragDrop(uploader);
+            } else {
+                hideDropZone();
+            }
+        }, 1500);
+    } else {
+        hideDropZone();
+    }
 
     uploader.bind('BeforeUpload', function (uploader, file) {
         // set directory in the request
