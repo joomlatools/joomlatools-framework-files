@@ -192,7 +192,7 @@ Files.createUploader = function (options) {
         container: containershim,
         browse_button: 'pickfiles',
         multi_selection: options.multi_selection,
-        dragdrop: false,
+        dragdrop: true,
         unique_names: false,
         rename: true,
         url: '/', // this is added on the go in BeforeUpload event
