@@ -287,6 +287,11 @@ Files.createUploader = function (options) {
                     if (typeof similar.entities === 'object' && similar.entities.length) {
                         names = getNamesFromArray(similar.entities);
                     }
+                    $.each(uploader.files, function (i, f) {
+                        if (f.id !== file.id) {
+                            names.push(f.name);
+                        }
+                    });
 
                     file.name = getUniqueName(file.name, function (name) {
                         return $.inArray(name, names) !== -1;
