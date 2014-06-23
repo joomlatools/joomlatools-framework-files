@@ -339,14 +339,17 @@ Files.createUploader = function (options) {
                 }
             });
 
-            $.ajax({
-                url: Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath()}),
-                type: 'POST',
-                data: {
-                    _method: 'GET',
-                    name: names
-                }
-            }).done(checkDuplicates).fail(startUpload);
+            if (names.length) {
+                $.ajax({
+                    url: Files.app.createRoute({view: 'files', limit: 100, folder: Files.app.getPath()}),
+                    type: 'POST',
+                    data: {
+                        _method: 'GET',
+                        name: names
+                    }
+                }).done(checkDuplicates).fail(startUpload);
+            }
+
         });
 
         // Do not allow more than 100 files to be uploaded at once
