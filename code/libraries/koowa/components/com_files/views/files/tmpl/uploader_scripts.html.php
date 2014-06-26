@@ -16,7 +16,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     'Start upload',
     'Clear queue',
     'Uploaded %d/%d files',
-    'All Files',
     '%d files queued',
     'Drag files here.',
     'Error: File too large:',
@@ -24,7 +23,13 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     'A file with the same name already exists. Would you like to overwrite it?',
     'Are you sure you want to clear the upload queue? This cannot be undone!',
     'Following files already exist. Would you like to overwrite them? {names}',
-    'Drop your files to upload to {folder}'
+    'Drop your files to upload to {folder}',
+    '{html5} or {flash} required for uploading files from your computer.',
+    'HTML5 enabled browser',
+    'Flash Player',
+    'Uploaded successfully!',
+    'Select files from your computer',
+    'Select file'
 ))); ?>
 
 <script type="text/javascript" src="media://koowa/com_files/js/plupload/moxie.js"></script>
