@@ -215,7 +215,11 @@ Files.createUploader = function (options) {
                         html5: '<a href="https://google.com/chrome" target="_blank">' + Koowa.translate('HTML5 enabled browser') + '</a>',
                         flash: '<a href="https://get.adobe.com/flashplayer/" target="_blank">' + Koowa.translate('Flash Player') + '<a/>'
                     });
-                    element.append('<div class="alert alert-error warning">' + message + '</div>');
+
+                    // Plupload clears element's contents after the event so setTimeout is needed
+                    setTimeout(function() {
+                        element.append('<div class="alert alert-error warning">' + message + '</div>');
+                    }, 100);
                 }
             }
         }
