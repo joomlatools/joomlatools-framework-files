@@ -110,10 +110,17 @@ kQuery(function($) {
         upload_dialog.show();
     });
 
+    // Scroll to upload or insert area after click
     if ( $('body').width() <= '699' ) { // 699 is when colums go from stacked to aligned
         upload_trigger.click(function() {
             $('html, body').animate({
                 scrollTop: upload_dialog.offset().top
+            }, 1000);
+        });
+
+        $('#files-grid').on('click', 'a.navigate', function() {
+            $('html, body').animate({
+                scrollTop: '5000' // Scroll to highest amount so it will at least scroll to the bottom where the insert button is
             }, 1000);
         });
     }
@@ -178,7 +185,7 @@ kQuery(function($) {
                 </h2>
                 <div class="koowa_dialog__child__content" id="spinner_container">
                     <div class="koowa_dialog__child__content__box">
-                        <div id="files-grid">
+                        <div id="files-grid" style="max-height:450px;">
 
                         </div>
                     </div>
