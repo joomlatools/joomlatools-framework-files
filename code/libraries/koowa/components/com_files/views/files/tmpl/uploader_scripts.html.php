@@ -32,9 +32,13 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     'Select file'
 ))); ?>
 
-<script type="text/javascript" src="media://koowa/com_files/js/plupload/moxie.js"></script>
-<script type="text/javascript" src="media://koowa/com_files/js/plupload/plupload.dev.js"></script>
-<script type="text/javascript" src="media://koowa/com_files/js/plupload/plupload.queue.js"></script>
+<!--
+For debugging:
+<script src="media://koowa/com_files/js/plupload/moxie.js" />
+<script src="media://koowa/com_files/js/plupload/plupload.dev.js" />
+<script src="media://koowa/com_files/js/plupload/plupload.queue.js" />
+-->
+<script src="media://koowa/com_files/js/uploader.min.js" />
 
 <script>
 window.addEvent('domready', function() {
