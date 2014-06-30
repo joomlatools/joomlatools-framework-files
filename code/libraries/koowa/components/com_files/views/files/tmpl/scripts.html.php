@@ -8,27 +8,8 @@
  */
 defined('KOOWA') or die( 'Restricted access' );
 
-/* DEBUG FILES:
-<script src="media://koowa/com_files/js/spin.min.js" />
-
-<script src="media://koowa/com_files/js/files.utilities.js" />
-<script src="media://koowa/com_files/js/files.state.js" />
-<script src="media://koowa/com_files/js/files.template.js" />
-<script src="media://koowa/com_files/js/files.grid.js" />
-<script src="media://koowa/com_files/js/files.tree.js" />
-<script src="media://koowa/com_files/js/files.row.js" />
-<script src="media://koowa/com_files/js/files.paginator.js" />
-<script src="media://koowa/com_files/js/files.pathway.js" />
-
-<script src="media://koowa/com_files/js/files.app.js" />
-*/
 JHtml::_('behavior.modal');
-
-if (version_compare(JVERSION, '3.0', 'ge')) {
-    JHtml::_('behavior.framework', true);
-} else {
-    JHtml::_('behavior.mootools', false);
-}
+JHtml::_('behavior.framework', true);
 ?>
 
 <?= @helper('behavior.koowa'); ?>
@@ -60,6 +41,8 @@ if (version_compare(JVERSION, '3.0', 'ge')) {
 
 <script src="media://koowa/com_files/js/ejs/ejs.js" />
 
+<? /*
+For debugging:
 <script src="media://koowa/com_files/js/spin.min.js" />
 
 <script src="media://koowa/com_files/js/files.utilities.js" />
@@ -73,6 +56,8 @@ if (version_compare(JVERSION, '3.0', 'ge')) {
 
 <script src="media://koowa/com_files/js/files.app.js" />
 <script src="media://koowa/com_files/js/files.uploader.js" />
+ */ ?>
+<script src="media://koowa/com_files/js/files.min.js" />
 
 <!--[if lte IE 9]>
 <script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>

@@ -32,12 +32,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     'Select file'
 ))); ?>
 
-<!--
+<? /*
 For debugging:
 <script src="media://koowa/com_files/js/plupload/moxie.js" />
 <script src="media://koowa/com_files/js/plupload/plupload.dev.js" />
 <script src="media://koowa/com_files/js/plupload/plupload.queue.js" />
--->
+*/ ?>
 <script src="media://koowa/com_files/js/uploader.min.js" />
 
 <script>
