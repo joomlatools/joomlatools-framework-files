@@ -79,7 +79,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 				'caching' 		=> true, 
 				'defaultgroup'  => $this->_getGroup(),
 				'lifetime' 		=> 60*24*180,
-				'cachebase' 	=> $app->getCfg('cache_path'),
+				'cachebase' 	=> JPATH_ADMINISTRATOR.'/cache',
 				'language' 		=> $app->getCfg('language'),
 				'storage'		=> $app->getCfg('cache_handler', 'file')
 			);
