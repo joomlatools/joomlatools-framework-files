@@ -42,7 +42,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
 
         $link = '<span class="input-group-btn"><a class="koowa-modal btn mfp-iframe" %s href="%s">%s</a></span>';
 
-        $html = sprintf($input, $config->name, $config->id, $this->escape($config->value), $config->visible ? 'type="text" readonly' : 'type="hidden"', $attribs);
+        $html = sprintf($input, $config->name, $config->id, $this->getTemplate()->escape($config->value), $config->visible ? 'type="text" readonly' : 'type="hidden"', $attribs);
         $html .= sprintf($link, $button_attribs, $config->link, $config->link_text);
 
         $html .= $this->getTemplate()->getHelper('behavior')->modal();
