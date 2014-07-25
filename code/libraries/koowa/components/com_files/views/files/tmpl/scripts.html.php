@@ -34,30 +34,30 @@ JHtml::_('behavior.framework', true);
     'Unknown error'
 ))); ?>
 
-<script src="media://koowa/com_files/js/history/history.js" />
+<ktml:script src="media://koowa/com_files/js/history/history.js" />
 <? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
-<script src="media://koowa/com_files/js/history/history.html4.js" />
+<ktml:script src="media://koowa/com_files/js/history/history.html4.js" />
 <? endif; ?>
 
-<script src="media://koowa/com_files/js/ejs/ejs.js" />
+<ktml:script src="media://koowa/com_files/js/ejs/ejs.js" />
 
 <? /*
 For debugging:
-<script src="media://koowa/com_files/js/spin.min.js" />
+<ktml:script src="media://koowa/com_files/js/spin.min.js" />
 
-<script src="media://koowa/com_files/js/files.utilities.js" />
-<script src="media://koowa/com_files/js/files.state.js" />
-<script src="media://koowa/com_files/js/files.template.js" />
-<script src="media://koowa/com_files/js/files.grid.js" />
-<script src="media://koowa/com_files/js/files.tree.js" />
-<script src="media://koowa/com_files/js/files.row.js" />
-<script src="media://koowa/com_files/js/files.paginator.js" />
-<script src="media://koowa/com_files/js/files.pathway.js" />
+<ktml:script src="media://koowa/com_files/js/files.utilities.js" />
+<ktml:script src="media://koowa/com_files/js/files.state.js" />
+<ktml:script src="media://koowa/com_files/js/files.template.js" />
+<ktml:script src="media://koowa/com_files/js/files.grid.js" />
+<ktml:script src="media://koowa/com_files/js/files.tree.js" />
+<ktml:script src="media://koowa/com_files/js/files.row.js" />
+<ktml:script src="media://koowa/com_files/js/files.paginator.js" />
+<ktml:script src="media://koowa/com_files/js/files.pathway.js" />
 
-<script src="media://koowa/com_files/js/files.app.js" />
-<script src="media://koowa/com_files/js/files.uploader.js" />
+<ktml:script src="media://koowa/com_files/js/files.app.js" />
+<ktml:script src="media://koowa/com_files/js/files.uploader.js" />
  */ ?>
-<script src="media://koowa/com_files/js/files.min.js" />
+<ktml:script src="media://koowa/com_files/js/files.min.js" />
 
 <!--[if lte IE 9]>
 <script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>
