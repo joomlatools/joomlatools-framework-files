@@ -60,8 +60,8 @@ For debugging:
 <ktml:script src="media://koowa/com_files/js/files.min.js" />
 
 <!--[if lte IE 9]>
-<ktml:script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>
-<ktml:script data-inline type="text/javascript">
+<script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>
+<script data-inline type="text/javascript">
 kQuery(function($) {
     $('input, textarea').placeholder();
 });
