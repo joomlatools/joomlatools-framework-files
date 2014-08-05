@@ -71,7 +71,7 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                 {
                     $this->getResponse()
                         ->attachTransport('stream')
-                        ->setPath($file->fullpath, $file->mimetype);
+                        ->setContent($file->fullpath, $file->mimetype);
                 }
                 catch (InvalidArgumentException $e) {
                     throw new KControllerExceptionResourceNotFound('File not found');
