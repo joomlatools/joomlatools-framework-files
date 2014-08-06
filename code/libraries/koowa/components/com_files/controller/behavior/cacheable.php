@@ -66,9 +66,12 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
     /**
      * Create a JCache instance
      *
+     * @param string $group
+     * @param string $handler
+     * @param null   $storage
      * @return JCache
      */
-    protected function _getCache()
+    protected function _getCache($group = '', $handler = 'callback', $storage = null)
 	{
 		if (!$this->_cache) 
 		{
@@ -220,7 +223,7 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
      */
     protected function _getKey()
 	{
-	    $state = $this->getModel()->getState()->toArray();
+	    $state = $this->getModel()->getState()->getValues();
 	    
 	    // Empty strings get sent in the URL for dispatched requests 
 	    // so we turn them to null before creating the key
@@ -230,6 +233,8 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 				$state[$key] = null;
 			}
 	    }
+
+        unset($state['config']);
 
 	    $key = $this->getModel()->getState()->folder.':'.md5(http_build_query($state, '', '&'));
 
