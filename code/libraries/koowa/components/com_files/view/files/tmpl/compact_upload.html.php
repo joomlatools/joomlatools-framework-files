@@ -73,7 +73,7 @@ defined('KOOWA') or die; ?>
                 </h2>
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">
-                        <?= @import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
+                        <?= @import('com:files.files.uploader.html', array('multi_selection' => (isset($state->config['multi_selection']) ? $state->config['multi_selection'] : false))); ?>
                     </div>
                 </div>
             </div>
