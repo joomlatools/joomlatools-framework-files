@@ -35,6 +35,6 @@ class ComFilesTemplateHelperFilesize extends KTemplateHelperAbstract
 			$bytes /= 1024;
 		}
 
-		return sprintf($format, $result, $this->translate($size));
+		return sprintf($format, $result, $this->getObject('translator')->translate($size));
 	}
 }

@@ -24,7 +24,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
             'button_attribs' => array(),
             'visible' => true,
             'link' => '',
-            'link_text' => $this->translate('Select'),
+            'link_text' => $this->getObject('translator')->translate('Select'),
             'callback' => ''
         ))->append(array(
             'id' => $config->name,

@@ -29,6 +29,8 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
             'limit'   => 0,
         ));
 
+        $translator = $this->getObject('translator');
+
         $html  = '<div class="container" id="files-paginator-container">';
 
         $html .= '<div class="pagination pagination-toolbar" id="files-paginator">';
@@ -42,7 +44,7 @@ class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
         $html .= '<span class="end hidden"><a></a></span>';
 
         $html .= '<div class="limit pull-right"> ';
-        $html .= sprintf($this->translate('JLIB_HTML_PAGE_CURRENT_OF_TOTAL'), '<strong class="page-current">1</strong>', '<strong class="page-total">1</strong></div>');
+        $html .= sprintf($translator->translate('JLIB_HTML_PAGE_CURRENT_OF_TOTAL'), '<strong class="page-current">1</strong>', '<strong class="page-total">1</strong></div>');
         $html .= '</div>';
         $html .= '</div>';
 
