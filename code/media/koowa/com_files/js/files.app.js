@@ -550,6 +550,10 @@ Files.App = new Class({
                     }
                 });
             },
+            'onBeforeRenderObject': function(context) {
+                var row = context.object;
+                row.download_link = that.createRoute({view: 'file', format: 'html', name: row.name, folder: row.folder});
+            }.bind(this),
             'onAfterSetLayout': function(context) {
                 if (key) {
                     Cookie.write(key, context.layout, this.options.cookie);

@@ -88,6 +88,10 @@ Files.Grid = new Class({
                 return;
             }
 
+            if (target.get('tag') === 'i' && target.hasClass('icon-download')) {
+                return;
+            }
+
             var node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
 
             if(node) {

@@ -52,6 +52,7 @@ window.addEvent('domready', function() {
 				<th><?= @translate('Name'); ?></th>
                 <th><?= @translate('Size'); ?></th>
                 <th><?= @translate('Last Modified'); ?></th>
+                <th width="1" style="text-align: center;"><i class="icon-download"></i></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -68,7 +69,7 @@ window.addEvent('domready', function() {
 		<td>
             <span class="koowa_icon--folder"><i>[%=name%]</i></span>
 		</td>
-		<td colspan="3">
+		<td colspan="4">
 			<a href="#" class="navigate">
 				[%=name%]
 			</a>
@@ -105,6 +106,9 @@ window.addEvent('domready', function() {
 		<td align="center">
 			[%=getModifiedDate(true)%]
 		</td>
+        <td align="right">
+            <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
+        </td>
 	</tr>
 </textarea>
 
@@ -134,5 +138,8 @@ window.addEvent('domready', function() {
 		<td align="center">
 			[%=getModifiedDate(true)%]
 		</td>
+        <td align="right">
+            <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
+        </td>
 	</tr>
 </textarea>
