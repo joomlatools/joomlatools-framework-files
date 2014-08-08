@@ -15,6 +15,15 @@
  */
 abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 {
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'formats'   => array('json')
+        ));
+
+        parent::_initialize($config);
+    }
+
 	public function getRequest()
 	{
 		$request = parent::getRequest();
