@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @helper('translator.script', array('translations' => array(
+<?= @helper('translator.script', array('strings' => array(
     'Filename',
     'Status',
     'Size',

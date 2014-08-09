@@ -20,7 +20,7 @@ JHtml::_('behavior.framework', true);
 <?= @helper('bootstrap.load', array('wrapper' => false)); ?>
 <?= @helper('behavior.tree'); ?>
 
-<?= @helper('translator.script', array('translations' => array(
+<?= @helper('translator.script', array('strings' => array(
     'B', 'KB', 'MB', 'GB', 'TB', 'PB',
     'You are deleting {item}. Are you sure?',
     'You are deleting {items}. Are you sure?',
