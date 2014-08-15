@@ -227,8 +227,17 @@ Files.createUploader = function (options) {
 
     if (Files.app && Files.app.container) {
         if (Files.app.container.parameters.allowed_extensions) {
+            var types = Files.app.state.get('types'),
+                extensions = Files.app.container.parameters.allowed_extensions;
+
+            if (typeof types === 'object' && types.length === 1 && types[0] === 'image') {
+                extensions = $.grep(Files.app.container.parameters.allowed_extensions, function(extension) {
+                    return $.inArray(extension, Files.FileTypes.map.image) !== -1;
+                });
+            }
+
             config.filters.mime_types = [
-                {title: Koowa.translate('All Files'), extensions: Files.app.container.parameters.allowed_extensions.join(',')}
+                {title: Koowa.translate('All Files'), extensions: extensions.join(',')}
             ]
         }
 
