@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die;
 
-$can_upload = isset($state->config['can_upload']) ? $state->config['can_upload'] : true;
+$can_upload = isset(state()->config['can_upload']) ? state()->config['can_upload'] : true;
 ?>
 
 <?= @import('com:files.files.scripts.html'); ?>
@@ -20,14 +20,14 @@ Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
 window.addEvent('domready', function() {
-	var config = <?= json_encode($state->config); ?>,
+	var config = <?= json_encode(state()->config); ?>,
 		options = {
             cookie: {
                 path: '<?=@object('request')->getSiteUrl()?>'
             },
             root_text: <?= json_encode(@translate('Root folder')) ?>,
-			editor: <?= json_encode($state->editor); ?>,
-			types: <?= json_encode($state->types); ?>,
+			editor: <?= json_encode(state()->editor); ?>,
+			types: <?= json_encode(state()->types); ?>,
 			container: <?= json_encode($container ? $container->toArray() : null); ?>
 		};
 	options = Object.append(options, config);

@@ -15,20 +15,20 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     Files.token = '<?= $token; ?>';
 
     window.addEvent('domready', function() {
-        var config = <?= json_encode($state->config); ?>,
+        var config = <?= json_encode(state()->config); ?>,
             options = {
                 cookie: {
                     path: '<?=@object('request')->getSiteUrl()?>'
                 },
                 state: {
                     defaults: {
-                        limit: <?= (int) $state->limit; ?>,
-                        offset: <?= (int) $state->offset; ?>,
-                        types: <?= json_encode($state->types); ?>
+                        limit: <?= (int) state()->limit; ?>,
+                        offset: <?= (int) state()->offset; ?>,
+                        types: <?= json_encode(state()->types); ?>
                     }
                 },
                 root_text: <?= json_encode(@translate('Root folder')) ?>,
-                types: <?= json_encode($state->types); ?>,
+                types: <?= json_encode(state()->types); ?>,
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
                 thumbnails: <?= json_encode($container ? $container->getParameters()->thumbnails : true); ?>
             };

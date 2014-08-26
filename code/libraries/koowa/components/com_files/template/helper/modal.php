@@ -45,7 +45,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
         $html = sprintf($input, $config->name, $config->id, $this->getTemplate()->escape($config->value), $config->visible ? 'type="text" readonly' : 'type="hidden"', $attribs);
         $html .= sprintf($link, $button_attribs, $config->link, $config->link_text);
 
-        $html .= $this->getTemplate()->getHelper('behavior')->modal();
+        $html .= $this->getTemplate()->createHelper('behavior')->modal();
 
 		return $html;
 	}
