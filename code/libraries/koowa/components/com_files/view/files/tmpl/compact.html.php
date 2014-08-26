@@ -11,7 +11,7 @@ defined('KOOWA') or die;
 $can_upload = isset(state()->config['can_upload']) ? state()->config['can_upload'] : true;
 ?>
 
-<?= @import('com:files.files.scripts.html'); ?>
+<?= import('com:files.files.scripts.html'); ?>
 
 <ktml:script src="media://koowa/com_files/js/files.compact.js" />
 
@@ -23,9 +23,9 @@ window.addEvent('domready', function() {
 	var config = <?= json_encode(state()->config); ?>,
 		options = {
             cookie: {
-                path: '<?=@object('request')->getSiteUrl()?>'
+                path: '<?=object('request')->getSiteUrl()?>'
             },
-            root_text: <?= json_encode(@translate('Root folder')) ?>,
+            root_text: <?= json_encode(translate('Root folder')) ?>,
 			editor: <?= json_encode(state()->editor); ?>,
 			types: <?= json_encode(state()->types); ?>,
 			container: <?= json_encode($container ? $container->toArray() : null); ?>
@@ -128,20 +128,20 @@ kQuery(function($) {
 });
 </script>
 
-<?= @import('com:files.files.templates_compact.html');?>
+<?= import('com:files.files.templates_compact.html');?>
 
 <div class="koowa_dialog koowa_dialog--file_dialog">
     <div class="koowa_dialog__menu">
         <? if ($can_upload): ?>
-            <a class="koowa_dialog__menu__child--download"><?= @translate('Upload'); ?></a>
+            <a class="koowa_dialog__menu__child--download"><?= translate('Upload'); ?></a>
         <? endif; ?>
-        <a class="koowa_dialog__menu__child--insert"><?= @translate('Select'); ?></a>
+        <a class="koowa_dialog__menu__child--insert"><?= translate('Select'); ?></a>
     </div>
     <div class="koowa_dialog__layout">
         <div class="koowa_dialog__wrapper">
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_categories">
                 <h2 class="koowa_dialog__title">
-                    <?= @translate('Select a folder'); ?>
+                    <?= translate('Select a folder'); ?>
                 </h2>
                 <div class="koowa_dialog__child__content koowa_dialog__folders_files">
                     <div class="koowa_dialog__child__content__box">
@@ -150,13 +150,13 @@ kQuery(function($) {
                     <? if ($can_upload): ?>
                         <div class="koowa_dialog__new_folder">
                             <h2 class="koowa_dialog__title koowa_dialog__title--child">
-                                <?= @translate('Create a new folder'); ?>
+                                <?= translate('Create a new folder'); ?>
                             </h2>
                             <div class="koowa_dialog__block" id="files-new-folder-modal">
                                 <div class="input-group" style="margin:0;">
                                     <input type="text" class="input-group-form-control" id="files-new-folder-input" />
                             <span class="input-group-btn">
-                                <button id="files-new-folder-create" class="btn" disabled><?= @translate('Add folder'); ?></button>
+                                <button id="files-new-folder-create" class="btn" disabled><?= translate('Add folder'); ?></button>
                             </span>
                                 </div>
                             </div>
@@ -168,11 +168,11 @@ kQuery(function($) {
             <? if ($can_upload): ?>
             <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
                 <h2 class="koowa_dialog__title">
-                    <?= @translate('Upload a file'); ?>
+                    <?= translate('Upload a file'); ?>
                 </h2>
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">
-                        <?= @import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
+                        <?= import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
                     </div>
                 </div>
             </div>
@@ -181,7 +181,7 @@ kQuery(function($) {
 
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_files">
                 <h2 class="koowa_dialog__title">
-                    <?= @translate('Select a file'); ?>
+                    <?= translate('Select a file'); ?>
                 </h2>
                 <div class="koowa_dialog__child__content" id="spinner_container">
                     <div class="koowa_dialog__child__content__box">
@@ -193,7 +193,7 @@ kQuery(function($) {
             </div>
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_insert">
                 <h2 class="koowa_dialog__title">
-                    <?= @translate('Selected file info'); ?>
+                    <?= translate('Selected file info'); ?>
                 </h2>
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">

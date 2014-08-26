@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die; ?>
 
-<?= @import('com:files.files.scripts.html'); ?>
+<?= import('com:files.files.scripts.html'); ?>
 
 <ktml:script src="media://koowa/com_files/js/files.compact.js" />
 
@@ -20,9 +20,9 @@ defined('KOOWA') or die; ?>
         var config = <?= json_encode(state()->config); ?>,
             options = {
                 cookie: {
-                    path: '<?=@object('request')->getSiteUrl()?>'
+                    path: '<?=object('request')->getSiteUrl()?>'
                 },
-                root_text: <?= json_encode(@translate('Root folder')) ?>,
+                root_text: <?= json_encode(translate('Root folder')) ?>,
                 editor: <?= json_encode(state()->editor); ?>,
                 types: <?= json_encode(state()->types); ?>,
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
@@ -52,14 +52,14 @@ defined('KOOWA') or die; ?>
     });
 </script>
 
-<?= @import('com:files.files.templates_compact.html');?>
+<?= import('com:files.files.templates_compact.html');?>
 
 <div class="koowa_dialog koowa_dialog--file_dialog koowa_dialog--no_menu koowa_dialog--no_categories">
     <div class="koowa_dialog__layout">
         <div class="koowa_dialog__wrapper">
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_categories" style="display: none">
                 <h2 class="koowa_dialog__title">
-                    <?= @translate('Select a folder'); ?>
+                    <?= translate('Select a folder'); ?>
                 </h2>
                 <div class="koowa_dialog__child__content koowa_dialog__folders_files">
                     <div class="koowa_dialog__child__content__box">
@@ -69,11 +69,11 @@ defined('KOOWA') or die; ?>
             </div>
             <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
                 <h2 class="koowa_dialog__title">
-                    <?= @translate('Upload a file'); ?>
+                    <?= translate('Upload a file'); ?>
                 </h2>
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">
-                        <?= @import('com:files.files.uploader.html', array('multi_selection' => (isset(state()->config['multi_selection']) ? state()->config['multi_selection'] : false))); ?>
+                        <?= import('com:files.files.uploader.html', array('multi_selection' => (isset(state()->config['multi_selection']) ? state()->config['multi_selection'] : false))); ?>
                     </div>
                 </div>
             </div>

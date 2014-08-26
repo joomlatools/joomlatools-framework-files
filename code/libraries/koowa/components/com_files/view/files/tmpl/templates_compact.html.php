@@ -26,15 +26,15 @@ if (metadata.image) {
     <table class="table table-condensed parameters">
         <tbody>
             <tr>
-                <td class="detail-label"><?= @translate('Name'); ?></td>
+                <td class="detail-label"><?= translate('Name'); ?></td>
                 <td>[%=name%]</td>
             </tr>
             <tr>
-                <td class="detail-label"><?= @translate('Dimensions'); ?></td>
+                <td class="detail-label"><?= translate('Dimensions'); ?></td>
                 <td>[%=width%] x [%=height%]</td>
             </tr>
             <tr>
-                <td class="detail-label"><?= @translate('Size'); ?></td>
+                <td class="detail-label"><?= translate('Size'); ?></td>
                 <td>[%=size.humanize()%]</td>
             </tr>
         </tbody>
@@ -50,11 +50,11 @@ if (metadata.image) {
     <table class="table table-condensed parameters">
         <tbody>
             <tr>
-                <td class="detail-label"><?= @translate('Name'); ?></td>
+                <td class="detail-label"><?= translate('Name'); ?></td>
                 <td>[%=name%]</td>
             </tr>
             <tr>
-                <td class="detail-label"><?= @translate('Size'); ?></td>
+                <td class="detail-label"><?= translate('Size'); ?></td>
                 <td>[%=size.humanize()%]</td>
             </tr>
         </tbody>

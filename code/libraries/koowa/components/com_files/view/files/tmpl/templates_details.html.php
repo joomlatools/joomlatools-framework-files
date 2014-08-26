@@ -49,9 +49,9 @@ window.addEvent('domready', function() {
                     </div>
                 </th>
                 <th width="32"></th>
-				<th><?= @translate('Name'); ?></th>
-                <th><?= @translate('Size'); ?></th>
-                <th><?= @translate('Last Modified'); ?></th>
+				<th><?= translate('Name'); ?></th>
+                <th><?= translate('Size'); ?></th>
+                <th><?= translate('Last Modified'); ?></th>
                 <th width="1" style="text-align: center;"><i class="icon-download"></i></th>
 			</tr>
 		</thead>

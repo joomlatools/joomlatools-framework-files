@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= @import('scripts.html');?>
+<?= import('scripts.html');?>
 
 <script>
     Files.sitebase = '<?= $sitebase; ?>';
@@ -18,7 +18,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         var config = <?= json_encode(state()->config); ?>,
             options = {
                 cookie: {
-                    path: '<?=@object('request')->getSiteUrl()?>'
+                    path: '<?=object('request')->getSiteUrl()?>'
                 },
                 state: {
                     defaults: {
@@ -27,7 +27,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                         types: <?= json_encode(state()->types); ?>
                     }
                 },
-                root_text: <?= json_encode(@translate('Root folder')) ?>,
+                root_text: <?= json_encode(translate('Root folder')) ?>,
                 types: <?= json_encode(state()->types); ?>,
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
                 thumbnails: <?= json_encode($container ? $container->getParameters()->thumbnails : true); ?>
@@ -40,11 +40,11 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 
 <div id="files-app" class="com_files">
-	<?= @import('templates_icons.html'); ?>
-	<?= @import('templates_details.html'); ?>
+	<?= import('templates_icons.html'); ?>
+	<?= import('templates_details.html'); ?>
 
 	<div id="files-sidebar">
-        <h3><?= @translate('Folders'); ?></h3>
+        <h3><?= translate('Folders'); ?></h3>
 		<div id="files-tree"></div>
 	</div>
 
@@ -52,10 +52,10 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <div class="path" style="height: 24px;">
             <div id="files-pathway"></div>
             <div class="files-layout-controls btn-group" data-toggle="buttons-radio">
-                <button class="btn files-layout-switcher" data-layout="icons" title="<?= @translate('Show files as icons'); ?>">
+                <button class="btn files-layout-switcher" data-layout="icons" title="<?= translate('Show files as icons'); ?>">
                     <i class="icon-th icon-grid-view-2"></i>
                 </button>
-                <button class="btn files-layout-switcher" data-layout="details" title="<?= @translate('Show files in a list'); ?>">
+                <button class="btn files-layout-switcher" data-layout="details" title="<?= translate('Show files in a list'); ?>">
                     <i class="icon-list"></i>
                 </button>
             </div>
@@ -66,12 +66,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <table class="table">
             <tfoot>
             <tr><td>
-                    <?= @helper('paginator.pagination') ?>
+                    <?= helper('paginator.pagination') ?>
                 </td></tr>
             </tfoot>
         </table>
 
-        <?= @import('uploader.html');?>
+        <?= import('uploader.html');?>
     </div>
     <div style="clear: both"></div>
 </div>
@@ -80,14 +80,14 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <form class="files-modal well">
         <div style="text-align: center;">
             <h3 style=" float: none">
-                <?= @translate('Create a new folder in {folder}', array(
+                <?= translate('Create a new folder in {folder}', array(
                     'folder' => '<span class="upload-files-to"></span>'
                 )) ?>
             </h3>
         </div>
         <div class="input-append">
-            <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= @translate('Enter a folder name') ?>" />
-            <button id="files-new-folder-create" class="btn btn-primary" disabled><?= @translate('Create'); ?></button>
+            <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= translate('Enter a folder name') ?>" />
+            <button id="files-new-folder-create" class="btn btn-primary" disabled><?= translate('Create'); ?></button>
         </div>
     </form>
 </div>

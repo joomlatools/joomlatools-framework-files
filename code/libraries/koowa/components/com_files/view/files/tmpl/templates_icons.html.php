@@ -17,11 +17,11 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="btn-toolbar">
         [% if (typeof image !== 'undefined') { %]
         <a class="btn btn-mini" href="[%=view_path%]" target="_blank">
-            <i class="icon-eye-open"></i> <?= @translate('View'); ?>
+            <i class="icon-eye-open"></i> <?= translate('View'); ?>
         </a>
         [% } else { %]
         <a class="btn btn-mini" href="[%=view_path%]" target="_blank" download="[%=name%]">
-            <i class="icon-download"></i> <?= @translate('Download'); ?>
+            <i class="icon-download"></i> <?= translate('Download'); ?>
         </a>
         [% } %]
     </div>
@@ -31,15 +31,15 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <table class="table table-condensed parameters">
         <tbody>
         <tr>
-            <td class="detail-label"><?= @translate('Name'); ?></td>
+            <td class="detail-label"><?= translate('Name'); ?></td>
             <td>[%=name%]</td>
         </tr>
         <tr>
-            <td class="detail-label"><?= @translate('Size'); ?></td>
+            <td class="detail-label"><?= translate('Size'); ?></td>
             <td>[%=size.humanize()%]</td>
         </tr>
         <tr>
-            <td class="detail-label"><?= @translate('Modified'); ?></td>
+            <td class="detail-label"><?= translate('Modified'); ?></td>
             <td>[%=getModifiedDate(true)%]</td>
         </tr>
         </tbody>

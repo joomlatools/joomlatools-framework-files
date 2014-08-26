@@ -12,15 +12,15 @@ JHtml::_('behavior.modal');
 JHtml::_('behavior.framework', true);
 ?>
 
-<?= @helper('behavior.koowa'); ?>
-<?= @helper('behavior.local_dates'); ?>
-<?= @helper('behavior.keepalive'); ?>
-<?= @helper('behavior.tooltip'); ?>
-<?= @helper('behavior.modal'); ?>
-<?= @helper('bootstrap.load', array('wrapper' => false)); ?>
-<?= @helper('behavior.tree'); ?>
+<?= helper('behavior.koowa'); ?>
+<?= helper('behavior.local_dates'); ?>
+<?= helper('behavior.keepalive'); ?>
+<?= helper('behavior.tooltip'); ?>
+<?= helper('behavior.modal'); ?>
+<?= helper('bootstrap.load', array('wrapper' => false)); ?>
+<?= helper('behavior.tree'); ?>
 
-<?= @helper('translator.script', array('strings' => array(
+<?= helper('translator.script', array('strings' => array(
     'B', 'KB', 'MB', 'GB', 'TB', 'PB',
     'You are deleting {item}. Are you sure?',
     'You are deleting {items}. Are you sure?',
@@ -68,4 +68,4 @@ kQuery(function($) {
 </script>
 <![endif]-->
 
-<?= @helper('icon.icon_map'); ?>
+<?= helper('icon.icon_map'); ?>
