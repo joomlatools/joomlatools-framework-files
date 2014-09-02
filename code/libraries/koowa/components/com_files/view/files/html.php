@@ -72,5 +72,8 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 		$context->data->container = $container;
 
 		parent::_fetchData($context);
-	}
+
+        $context->parameters = $state->getValues();
+        $context->parameters->config = $config;
+    }
 }

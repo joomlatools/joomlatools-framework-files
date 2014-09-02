@@ -15,7 +15,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     Files.token = '<?= $token; ?>';
 
     window.addEvent('domready', function() {
-        var config = <?= json_encode(parameters()->config); ?>,
+        var config = <?= json_encode(KObjectConfig::unbox(parameters()->config)); ?>,
             options = {
                 cookie: {
                     path: '<?=object('request')->getSiteUrl()?>'
