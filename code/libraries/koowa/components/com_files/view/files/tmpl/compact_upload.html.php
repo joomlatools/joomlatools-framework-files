@@ -17,14 +17,14 @@ defined('KOOWA') or die; ?>
     Files.token = '<?= $token; ?>';
 
     window.addEvent('domready', function() {
-        var config = <?= json_encode(state()->config); ?>,
+        var config = <?= json_encode(parameters()->config); ?>,
             options = {
                 cookie: {
                     path: '<?=object('request')->getSiteUrl()?>'
                 },
                 root_text: <?= json_encode(translate('Root folder')) ?>,
-                editor: <?= json_encode(state()->editor); ?>,
-                types: <?= json_encode(state()->types); ?>,
+                editor: <?= json_encode(parameters()->editor); ?>,
+                types: <?= json_encode(parameters()->types); ?>,
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
                 tree: {
                     dataFilter: function(response){
@@ -73,7 +73,7 @@ defined('KOOWA') or die; ?>
                 </h2>
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">
-                        <?= import('com:files.files.uploader.html', array('multi_selection' => (isset(state()->config['multi_selection']) ? state()->config['multi_selection'] : false))); ?>
+                        <?= import('com:files.files.uploader.html', array('multi_selection' => (isset(parameters()->config['multi_selection']) ? parameters()->config['multi_selection'] : false))); ?>
                     </div>
                 </div>
             </div>
