@@ -25,7 +25,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
             $file = $this->getObject('com:files.model.entity.url');
             $file->setProperties(array('file' => $entity->file));
 
-            if (!$file->load()) {
+            if (!$file->contents) {
                 throw new RuntimeException('File cannot be downloaded');
             }
 
