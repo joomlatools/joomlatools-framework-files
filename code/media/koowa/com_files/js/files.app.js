@@ -586,7 +586,7 @@ Files.App = new Class({
                 initial_response: !!this.options.initial_response
             }, opts);
             this.tree = new Files.Tree(kQuery(opts.element), opts);
-            this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '1000'}));
+            this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
 
             this.addEvent('afterNavigate', function(path, type) {
                 if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
