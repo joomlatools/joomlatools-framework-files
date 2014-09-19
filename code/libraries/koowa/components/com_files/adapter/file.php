@@ -35,7 +35,8 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                         'modified_date' => $this->_handle->getMTime()
                     );
 
-                    if ($image_size = $this->getImageSize()) {
+                    // getimagesize is not safe to call with large files
+                    if ($this->_metadata['size'] < 1048576*48 && $image_size = $this->getImageSize()) {
                         $this->_metadata['image'] = array('width' => $image_size[0], 'height' => $image_size[1]);
                     }
                 }
