@@ -851,8 +851,10 @@ Files.App = new Class({
             delete query.format;
         }
 
-        return '?'+new Hash(query).filter(function(value, key) {
+        var route = '?'+new Hash(query).filter(function(value, key) {
             return typeof value !== 'function';
         }).toQueryString();
+
+        return this.options.base_url ? this.options.base_url+route : route;
     }
 });
