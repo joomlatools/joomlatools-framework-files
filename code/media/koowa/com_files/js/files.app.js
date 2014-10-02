@@ -586,7 +586,7 @@ Files.App = new Class({
                 initial_response: !!this.options.initial_response
             }, opts);
             this.tree = new Files.Tree(kQuery(opts.element), opts);
-            this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '1000'}));
+            this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
 
             this.addEvent('afterNavigate', function(path, type) {
                 if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
@@ -851,8 +851,10 @@ Files.App = new Class({
             delete query.format;
         }
 
-        return '?'+new Hash(query).filter(function(value, key) {
+        var route = '?'+new Hash(query).filter(function(value, key) {
             return typeof value !== 'function';
         }).toQueryString();
+
+        return this.options.base_url ? this.options.base_url+route : route;
     }
 });

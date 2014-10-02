@@ -19,7 +19,7 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
     {
         $config->append(array(
             'limit' => array(
-                'max' => 1000 // Used in tree view
+                'max' => 2000 // Used in tree view
             )
         ));
 
