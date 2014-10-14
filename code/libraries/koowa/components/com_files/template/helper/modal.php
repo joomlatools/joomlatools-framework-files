@@ -35,6 +35,8 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
             $config->link .= '&callback='.urlencode($config->callback);
         }
 
+        $config->link = preg_replace_callback('#folder=(.*?)&#i', array($this, '_encodingFixer'), $config->link);
+
         $attribs = $this->buildAttributes($config->attribs);
         $button_attribs = $this->buildAttributes($config->button_attribs);
 
@@ -49,4 +51,9 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
 
 		return $html;
 	}
+
+    protected function _encodingFixer($matches)
+    {
+        return 'folder='.str_replace('+', '%20', $matches[1]).'&';
+    }
 }
