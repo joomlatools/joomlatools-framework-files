@@ -70,9 +70,7 @@ window.addEvent('domready', function() {
             <span class="koowa_icon--folder"><i>[%=name%]</i></span>
 		</td>
 		<td colspan="4">
-			<a href="#" class="navigate">
-				[%=name%]
-			</a>
+            <div class="docman_table_content"><a href="#" class="navigate">[%=name%]</a></div>
 		</td>
 	</tr>
 </textarea>
@@ -96,9 +94,7 @@ window.addEvent('domready', function() {
             <span class="koowa_icon--[%=icon%]"><i>[%=icon%]</i></span>
         </td>
 		<td>
-			<a href="#" class="navigate">
-				[%=name%]
-			</a>
+            <div class="docman_table_content"><a href="#" class="navigate">[%=name%]</a></div>
 		</td>
 		<td align="center">
 			[%=size.humanize()%]
@@ -125,9 +121,7 @@ window.addEvent('domready', function() {
             [% } %]
 		</td>
 		<td>
-			<a href="#" class="navigate">
-				[%=name%]
-			</a>
+            <div class="docman_table_content"><a href="#" class="navigate">[%=name%]</a></div>
 		</td>
 		<td align="center">
             [%=size.humanize()%]

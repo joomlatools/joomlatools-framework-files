@@ -32,7 +32,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <tbody>
         <tr>
             <td class="detail-label"><?= translate('Name'); ?></td>
-            <td>[%=name%]</td>
+            <td><div class="docman_table_content">[%=name%]</div></td>
         </tr>
         <tr>
             <td class="detail-label"><?= translate('Size'); ?></td>
