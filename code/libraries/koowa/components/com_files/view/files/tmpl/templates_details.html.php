@@ -70,7 +70,7 @@ window.addEvent('domready', function() {
             <span class="koowa_icon--folder"><i>[%=name%]</i></span>
 		</td>
 		<td colspan="4">
-            <div class="docman_table_wrapped">
+            <div class="koowa_wrapped_content">
                 <a href="#" class="navigate">[%=name%]</a>
             </div>
 		</td>
@@ -96,7 +96,7 @@ window.addEvent('domready', function() {
             <span class="koowa_icon--[%=icon%]"><i>[%=icon%]</i></span>
         </td>
 		<td>
-            <div class="docman_table_wrapped">
+            <div class="koowa_wrapped_content">
                 <a href="#" class="navigate">[%=name%]</a>
             </div>
 		</td>
@@ -125,11 +125,11 @@ window.addEvent('domready', function() {
             [% } %]
 		</td>
 		<td>
-            <div class="docman_table_wrapped">
+            <div class="koowa_wrapped_content">
                 <a href="#" class="navigate">[%=name%]</a>
             </div>
 		</td>
-		<td align="center">
+		<td align="center" style="white-space: nowrap;">
             [%=size.humanize()%]
             [% if (metadata.image) { %]
             ([%=metadata.image.width%] x [%=metadata.image.height%])
