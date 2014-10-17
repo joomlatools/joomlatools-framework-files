@@ -32,7 +32,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <tbody>
         <tr>
             <td class="detail-label"><?= translate('Name'); ?></td>
-            <td><div class="koowa_wrapped_content">[%=name%]</div></td>
+            <td>
+                <div class="koowa_wrapped_content">[%=name%]</div>
+            </td>
         </tr>
         <tr>
             <td class="detail-label"><?= translate('Size'); ?></td>
