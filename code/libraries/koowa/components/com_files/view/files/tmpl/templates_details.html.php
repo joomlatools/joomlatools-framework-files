@@ -130,10 +130,12 @@ window.addEvent('domready', function() {
             </div>
 		</td>
 		<td align="center" style="white-space: nowrap;">
-            [%=size.humanize()%]
-            [% if (metadata.image) { %]
-            ([%=metadata.image.width%] x [%=metadata.image.height%])
-            [% } %]
+            <div class="koowa_wrapped_content">
+                [%=size.humanize()%]
+                [% if (metadata.image) { %]
+                ([%=metadata.image.width%] x [%=metadata.image.height%])
+                [% } %]
+            </div>
 		</td>
 		<td align="center">
 			[%=getModifiedDate(true)%]
