@@ -50,8 +50,8 @@ window.addEvent('domready', function() {
                 </th>
                 <th width="32"></th>
 				<th><?= translate('Name'); ?></th>
-                <th><?= translate('Size'); ?></th>
-                <th><?= translate('Last Modified'); ?></th>
+                <th width="1" ><?= translate('Size'); ?></th>
+                <th width="1" ><?= translate('Last Modified'); ?></th>
                 <th width="1" style="text-align: center;"><i class="icon-download"></i></th>
 			</tr>
 		</thead>
@@ -70,9 +70,9 @@ window.addEvent('domready', function() {
             <span class="koowa_icon--folder"><i>[%=name%]</i></span>
 		</td>
 		<td colspan="4">
-			<a href="#" class="navigate">
-				[%=name%]
-			</a>
+            <div class="koowa_wrapped_content">
+                <a href="#" class="navigate">[%=name%]</a>
+            </div>
 		</td>
 	</tr>
 </textarea>
@@ -96,9 +96,9 @@ window.addEvent('domready', function() {
             <span class="koowa_icon--[%=icon%]"><i>[%=icon%]</i></span>
         </td>
 		<td>
-			<a href="#" class="navigate">
-				[%=name%]
-			</a>
+            <div class="koowa_wrapped_content">
+                <a href="#" class="navigate">[%=name%]</a>
+            </div>
 		</td>
 		<td align="center">
 			[%=size.humanize()%]
@@ -125,15 +125,17 @@ window.addEvent('domready', function() {
             [% } %]
 		</td>
 		<td>
-			<a href="#" class="navigate">
-				[%=name%]
-			</a>
+            <div class="koowa_wrapped_content">
+                <a href="#" class="navigate">[%=name%]</a>
+            </div>
 		</td>
-		<td align="center">
-            [%=size.humanize()%]
-            [% if (metadata.image) { %]
-            ([%=metadata.image.width%] x [%=metadata.image.height%])
-            [% } %]
+		<td align="center" style="white-space: nowrap;">
+            <div class="koowa_wrapped_content">
+                [%=size.humanize()%]
+                [% if (metadata.image) { %]
+                ([%=metadata.image.width%] x [%=metadata.image.height%])
+                [% } %]
+            </div>
 		</td>
 		<td align="center">
 			[%=getModifiedDate(true)%]

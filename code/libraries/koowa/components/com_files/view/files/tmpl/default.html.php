@@ -66,8 +66,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <table class="table">
             <tfoot>
             <tr><td>
-                    <?= helper('paginator.pagination') ?>
-                </td></tr>
+                <?= helper('paginator.pagination') ?>
+            </td></tr>
             </tfoot>
         </table>
 
