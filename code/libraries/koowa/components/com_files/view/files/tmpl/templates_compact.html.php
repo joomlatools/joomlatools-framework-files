@@ -28,7 +28,9 @@ if (metadata.image) {
             <tr>
                 <td class="detail-label"><?= translate('Name'); ?></td>
                 <td>
-                    <div class="koowa_wrapped_content">[%=name%]</div>
+                    <div class="koowa_wrapped_content">
+                        <div class="whitespace_preserver">[%=name%]</div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -54,7 +56,9 @@ if (metadata.image) {
             <tr>
                 <td class="detail-label"><?= translate('Name'); ?></td>
                 <td>
-                    <div class="koowa_wrapped_content">[%=name%]</div>
+                    <div class="koowa_wrapped_content">
+                        <div class="whitespace_preserver">[%=name%]</div>
+                    </div>
                 </td>
             </tr>
             <tr>

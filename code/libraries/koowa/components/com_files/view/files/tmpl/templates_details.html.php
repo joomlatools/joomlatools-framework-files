@@ -71,7 +71,9 @@ window.addEvent('domready', function() {
 		</td>
 		<td colspan="4">
             <div class="koowa_wrapped_content">
-                <a href="#" class="navigate">[%=name%]</a>
+                <div class="whitespace_preserver">
+                    <a href="#" class="navigate">[%=name%]</a>
+                </div>
             </div>
 		</td>
 	</tr>
@@ -97,7 +99,9 @@ window.addEvent('domready', function() {
         </td>
 		<td>
             <div class="koowa_wrapped_content">
-                <a href="#" class="navigate">[%=name%]</a>
+                <div class="whitespace_preserver">
+                    <a href="#" class="navigate">[%=name%]</a>
+                </div>
             </div>
 		</td>
 		<td align="center">
@@ -126,15 +130,19 @@ window.addEvent('domready', function() {
 		</td>
 		<td>
             <div class="koowa_wrapped_content">
-                <a href="#" class="navigate">[%=name%]</a>
+                <div class="whitespace_preserver">
+                    <a href="#" class="navigate">[%=name%]</a>
+                </div>
             </div>
 		</td>
 		<td align="center" style="white-space: nowrap;">
             <div class="koowa_wrapped_content">
-                [%=size.humanize()%]
-                [% if (metadata.image) { %]
-                ([%=metadata.image.width%] x [%=metadata.image.height%])
-                [% } %]
+                <div class="whitespace_preserver">
+                    [%=size.humanize()%]
+                    [% if (metadata.image) { %]
+                    ([%=metadata.image.width%] x [%=metadata.image.height%])
+                    [% } %]
+                </div>
             </div>
 		</td>
 		<td align="center">
