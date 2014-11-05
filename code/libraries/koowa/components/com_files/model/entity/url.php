@@ -123,7 +123,7 @@ class ComFilesModelEntityUrl extends KModelEntityAbstract
 		$scheme = $uri->toString(KHttpUrl::SCHEME);
 		$host   = $uri->toString(KHttpUrl::HOST);
 		$port   = $uri->toString(KHttpUrl::PORT);
-		$path   = $uri->toString(KHttpUrl::PATH | KHttpUrl::FORMAT | KHttpUrl::QUERY | KHttpUrl::FRAGMENT);
+		$path   = $uri->toString(KHttpUrl::PATH | KHttpUrl::QUERY | KHttpUrl::FRAGMENT);
 
 		if ($scheme == 'https://') {
 			if (!in_array('ssl', stream_get_transports())) {
