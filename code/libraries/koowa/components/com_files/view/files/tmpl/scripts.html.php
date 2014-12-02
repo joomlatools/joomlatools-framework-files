@@ -43,6 +43,9 @@ JHtml::_('behavior.framework', true);
 
 <? /*
 For debugging:
+<ktml:script src="media://koowa/com_files/js/files.min.js" />
+ */ ?>
+
 <ktml:script src="media://koowa/com_files/js/spin.min.js" />
 
 <ktml:script src="media://koowa/com_files/js/files.utilities.js" />
@@ -56,8 +59,6 @@ For debugging:
 
 <ktml:script src="media://koowa/com_files/js/files.app.js" />
 <ktml:script src="media://koowa/com_files/js/files.uploader.js" />
- */ ?>
-<ktml:script src="media://koowa/com_files/js/files.min.js" />
 
 <!--[if lte IE 9]>
 <script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>

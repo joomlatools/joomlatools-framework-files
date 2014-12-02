@@ -135,9 +135,119 @@ Files.App = new Class({
             if (typeof response.container !== 'undefined') {
                 response.container.title = this.options.root_text;
             }
+        },
+        move_dialog: {
+            view: '#files-move-modal',
+            trigger: '.btn-primary',
+            open_button: '#toolbar-move',
+            onOpen: function(move_dialog){
+                var data = Files.app.tree.tree('toJson'),
+                    tree = new Koowa.Tree(move_dialog.view.find('.tree-container'));
+
+                tree.tree('loadData', kQuery.parseJSON(data));
+
+                kQuery.magnificPopup.open({
+                    items: {
+                        src: kQuery(move_dialog.view),
+                        type: 'inline'
+                    },
+                    callbacks: {
+                        close: function(){
+                            move_dialog.tree.empty();
+                        }
+                    }
+                });
+
+            },
+            onClose: function(){
+                kQuery.magnificPopup.close();
+            },
+            onInit: function(folder_dialog){
+                var trigger  = kQuery(folder_dialog.trigger, folder_dialog),
+                    validate = function(){
+                        if (kQuery.trim(kQuery(this).val())) {
+                            trigger.addClass('valid').prop('disabled', false);
+                        } else {
+                            trigger.removeClass('valid').prop('disabled', true);
+                        }
+                    };
+
+            }
         }
     },
+    setMoveDialog: function(){
 
+        var self = this,
+            options = this.options.move_dialog;
+
+        this._move_dialog = {
+            view: kQuery(options.view),
+            tree: kQuery(options.view).find('.tree-container'),
+            trigger: kQuery(options.trigger, options.view),
+            open_button: document.getElement(options.open_button),
+            create_button: document.getElement(options.create_button)
+        };
+
+        if(this.options.move_dialog.onInit) {
+            this.options.move_dialog.onInit.call(this, this._folder_dialog);
+        }
+
+        if (this._move_dialog.open_button) {
+            this._move_dialog.open_button.addEvent('click', function(e) {
+                e.stop();
+
+                var count = Object.getLength(Files.app.grid.nodes.filter(function(row) { return row.checked }));
+
+                if (this.hasClass('unauthorized') || !count) {
+                    return;
+                }
+
+                options.onOpen(self._move_dialog);
+            });
+        }
+
+
+        if (this._move_dialog.view.find('form')) {
+            this._move_dialog.view.find('form').submit(function(e){
+                e.preventDefault();
+
+                self._move_dialog.trigger.prop('disabled', true);
+
+                if(self.options.move_dialog.onSubmit) {
+                    self.options.move_dialog.onSubmit.call(self, self._move_dialog);
+                }
+
+                var nodes = Files.app.grid.nodes.filter(function(row) { return row.checked }),
+                    names = Object.values(nodes.map(function(node) {
+                        return node.name;
+                    })),
+                    target = self._move_dialog.view.find('.tree-container').tree('getSelectedNode').path;
+
+                if (!names.length) {
+                    return;
+                }
+
+                var url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath(), name: names});
+
+                kQuery.ajax(url, {
+                    type: 'POST',
+                    data: {
+                        'destination_folder': target,
+                        '_action': 'move',
+                        'csrf_token': Files.token
+                    }
+                }).done(function( response) {
+                    console.log(response);
+                });
+
+                // clean up Files.app.grid
+                // handle fail
+                // show success and close window
+                // inspect drive and dropbox
+            });
+        }
+
+    },
     initialize: function(options) {
         this.setOptions(options);
 
@@ -423,6 +533,10 @@ Files.App = new Class({
 
             if (this.options.folder_dialog && document.getElement(this.options.folder_dialog.view) && document.getElement(this.options.folder_dialog.view).getElement('form')) {
                 this.setFolderDialog();
+            }
+
+            if (this.options.move_dialog && document.getElement(this.options.move_dialog.view)) {
+                this.setMoveDialog();
             }
 
             this.fireEvent('afterSetContainer', {container: item});
