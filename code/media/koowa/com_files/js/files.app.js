@@ -101,6 +101,11 @@ Files.App = new Class({
             view: '#files-upload',
             button: '#toolbar-upload a'
         },
+        move_dialog: {
+            view: '#files-move-modal',
+            button: '.btn-primary',
+            open_button: '#toolbar-move'
+        },
         history: {
             enabled: true
         },
@@ -135,12 +140,33 @@ Files.App = new Class({
             if (typeof response.container !== 'undefined') {
                 response.container.title = this.options.root_text;
             }
-        },
-        move_dialog: {
-            view: '#files-move-modal',
-            trigger: '.btn-primary',
-            open_button: '#toolbar-move',
-            onOpen: function(move_dialog){
+        }
+    },
+    setMoveDialog: function(){
+        var options = this.options.move_dialog,
+            closeDialog = function() {
+                kQuery.magnificPopup.close();
+            };
+
+        var move_dialog = {
+            view: kQuery(options.view),
+            tree: kQuery(options.view).find('.tree-container'),
+            button: kQuery(options.button, options.view),
+            open_button: document.getElement(options.open_button),
+            create_button: document.getElement(options.create_button)
+        };
+
+        if (move_dialog.open_button) {
+            move_dialog.open_button.addEvent('click', function(e) {
+                e.stop();
+
+                var self  = this,
+                    count = Object.getLength(Files.app.grid.nodes.filter(function(row) { return row.checked }));
+
+                if (this.hasClass('unauthorized') || !count) {
+                    return;
+                }
+
                 var data = Files.app.tree.tree('toJson'),
                     tree = new Koowa.Tree(move_dialog.view.find('.tree-container'));
 
@@ -165,70 +191,20 @@ Files.App = new Class({
                         }
                     }
                 });
-
-            },
-            onClose: function(){
-                kQuery.magnificPopup.close();
-            },
-            onInit: function(folder_dialog){
-                var trigger  = kQuery(folder_dialog.trigger, folder_dialog),
-                    validate = function(){
-                        if (kQuery.trim(kQuery(this).val())) {
-                            trigger.addClass('valid').prop('disabled', false);
-                        } else {
-                            trigger.removeClass('valid').prop('disabled', true);
-                        }
-                    };
-
-            }
-        }
-    },
-    setMoveDialog: function(){
-
-        var self = this,
-            options = this.options.move_dialog;
-
-        this._move_dialog = {
-            view: kQuery(options.view),
-            tree: kQuery(options.view).find('.tree-container'),
-            trigger: kQuery(options.trigger, options.view),
-            open_button: document.getElement(options.open_button),
-            create_button: document.getElement(options.create_button)
-        };
-
-        if(this.options.move_dialog.onInit) {
-            this.options.move_dialog.onInit.call(this, this._folder_dialog);
-        }
-
-        if (this._move_dialog.open_button) {
-            this._move_dialog.open_button.addEvent('click', function(e) {
-                e.stop();
-
-                var count = Object.getLength(Files.app.grid.nodes.filter(function(row) { return row.checked }));
-
-                if (this.hasClass('unauthorized') || !count) {
-                    return;
-                }
-
-                options.onOpen(self._move_dialog);
             });
         }
 
-        if (this._move_dialog.view.find('form')) {
-            this._move_dialog.view.find('form').submit(function(e){
+        if (move_dialog.view.find('form')) {
+            move_dialog.view.find('form').submit(function(e){
                 e.preventDefault();
 
-                //self._move_dialog.trigger.prop('disabled', true);
-
-                if(self.options.move_dialog.onSubmit) {
-                    self.options.move_dialog.onSubmit.call(self, self._move_dialog);
-                }
+                //move_dialog.button.prop('disabled', true);
 
                 var nodes = Files.app.grid.nodes.filter(function(row) { return row.checked }),
                     names = Object.values(nodes.map(function(node) {
                         return node.name;
                     })),
-                    destination = self._move_dialog.view.find('.tree-container').tree('getSelectedNode').path;
+                    destination = move_dialog.view.find('.tree-container').tree('getSelectedNode').path;
 
                 if (!names.length) {
                     return;
@@ -269,7 +245,7 @@ Files.App = new Class({
                 }).fail(function(xhr) {
                     var response = JSON.decode(xhr.responseText, true);
 
-                    self.options.move_dialog.onClose.call(self, self._move_dialog);
+                    closeDialog();
 
                     if (response && response.error) {
                         alert(response.error);
