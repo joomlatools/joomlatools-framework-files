@@ -106,6 +106,11 @@ Files.App = new Class({
             button: '.btn-primary',
             open_button: '#toolbar-move'
         },
+        copy_dialog: {
+            view: '#files-copy-modal',
+            button: '.btn-primary',
+            open_button: '#toolbar-copy'
+        },
         history: {
             enabled: true
         },
@@ -141,119 +146,6 @@ Files.App = new Class({
                 response.container.title = this.options.root_text;
             }
         }
-    },
-    setMoveDialog: function(){
-        var options = this.options.move_dialog,
-            closeDialog = function() {
-                kQuery.magnificPopup.close();
-            };
-
-        var move_dialog = {
-            view: kQuery(options.view),
-            tree: kQuery(options.view).find('.tree-container'),
-            button: kQuery(options.button, options.view),
-            open_button: document.getElement(options.open_button),
-            create_button: document.getElement(options.create_button)
-        };
-
-        if (move_dialog.open_button) {
-            move_dialog.open_button.addEvent('click', function(e) {
-                e.stop();
-
-                var self  = this,
-                    count = Object.getLength(Files.app.grid.nodes.filter(function(row) { return row.checked }));
-
-                if (this.hasClass('unauthorized') || !count) {
-                    return;
-                }
-
-                var data = Files.app.tree.tree('toJson'),
-                    tree = new Koowa.Tree(move_dialog.view.find('.tree-container'));
-
-                tree.tree('loadData', kQuery.parseJSON(data));
-
-                var nodes = Files.app.grid.nodes.filter(function(row) { return row.checked });
-                nodes.each(function(node) {
-                    var tree_node = tree.tree('getNodeById', node.path);
-                    if (tree_node) {
-                        tree.tree('removeNode', tree_node);
-                    }
-                });
-
-                kQuery.magnificPopup.open({
-                    items: {
-                        src: kQuery(move_dialog.view),
-                        type: 'inline'
-                    },
-                    callbacks: {
-                        close: function(){
-                            move_dialog.tree.empty();
-                        }
-                    }
-                });
-            });
-        }
-
-        if (move_dialog.view.find('form')) {
-            move_dialog.view.find('form').submit(function(e){
-                e.preventDefault();
-
-                //move_dialog.button.prop('disabled', true);
-
-                var nodes = Files.app.grid.nodes.filter(function(row) { return row.checked }),
-                    names = Object.values(nodes.map(function(node) {
-                        return node.name;
-                    })),
-                    destination = move_dialog.view.find('.tree-container').tree('getSelectedNode').path;
-
-                if (!names.length) {
-                    return;
-                }
-
-                var url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath()});
-
-                kQuery.ajax(url, {
-                    type: 'POST',
-                    data: {
-                        'name' : names,
-                        'destination_folder': destination || '',
-                        '_action': 'move',
-                        'csrf_token': Files.token
-                    }
-                }).done(function(response) {
-                    var tree = Files.app.tree;
-                    nodes.each(function(node) {
-                        if (node.element) {
-                            node.element.dispose();
-                        }
-
-                        Files.app.grid.nodes.erase(node.path);
-
-                        var tree_node = tree.tree('getNodeById', node.path);
-                        if (tree_node) {
-                            tree_node.path = (destination ? destination+'/' : '')+node.name;
-                            tree_node.id = tree_node.path;
-                            tree_node.url = '#'+tree_node.path;
-
-                            var parent_node = destination ? tree.tree('getNodeById', destination) : tree.tree('getTree').children[0];
-
-                            if (parent_node) {
-                                tree.tree('moveNode', tree_node, parent_node, 'inside');
-                            }
-                        }
-                    });
-                }).fail(function(xhr) {
-                    var response = JSON.decode(xhr.responseText, true);
-
-                    closeDialog();
-
-                    if (response && response.error) {
-                        alert(response.error);
-                    }
-                });
-            });
-        }
-
     },
     initialize: function(options) {
         this.setOptions(options);
@@ -542,8 +434,12 @@ Files.App = new Class({
                 this.setFolderDialog();
             }
 
-            if (this.options.move_dialog && document.getElement(this.options.move_dialog.view)) {
-                this.setMoveDialog();
+            if (this.options.move_dialog) {
+                this.move_dialog = new Files.MoveDialog(this.options.move_dialog);
+            }
+
+            if (this.options.copy_dialog) {
+                this.copy_dialog = new Files.CopyDialog(this.options.copy_dialog);
             }
 
             this.fireEvent('afterSetContainer', {container: item});

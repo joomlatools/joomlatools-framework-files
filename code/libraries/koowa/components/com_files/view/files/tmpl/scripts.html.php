@@ -60,6 +60,8 @@ For debugging:
 <ktml:script src="media://koowa/com_files/js/files.app.js" />
 <ktml:script src="media://koowa/com_files/js/files.uploader.js" />
 
+<ktml:script src="media://koowa/com_files/js/files.copymove.js" />
+
 <!--[if lte IE 9]>
 <script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>
 <script data-inline type="text/javascript">

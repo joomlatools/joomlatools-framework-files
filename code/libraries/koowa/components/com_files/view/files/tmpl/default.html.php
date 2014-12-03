@@ -100,6 +100,18 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             </h3>
         </div>
         <div class="tree-container"></div>
-        <button id="files-new-folder-create" class="btn btn-primary" ><?= translate('Move'); ?></button>
+        <button class="btn btn-primary" ><?= translate('Move'); ?></button>
+    </form>
+</div>
+
+<div id="files-copy-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
+    <form class="files-modal well">
+        <div style="text-align: center;">
+            <h3 style=" float: none">
+                <?= translate('Copy to...') ?>
+            </h3>
+        </div>
+        <div class="tree-container"></div>
+        <button class="btn btn-primary" ><?= translate('Copy'); ?></button>
     </form>
 </div>
