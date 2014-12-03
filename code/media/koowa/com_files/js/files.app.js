@@ -146,6 +146,14 @@ Files.App = new Class({
 
                 tree.tree('loadData', kQuery.parseJSON(data));
 
+                var nodes = Files.app.grid.nodes.filter(function(row) { return row.checked });
+                nodes.each(function(node) {
+                    var tree_node = tree.tree('getNodeById', node.path);
+                    if (tree_node) {
+                        tree.tree('removeNode', tree_node);
+                    }
+                });
+
                 kQuery.magnificPopup.open({
                     items: {
                         src: kQuery(move_dialog.view),
@@ -206,12 +214,11 @@ Files.App = new Class({
             });
         }
 
-
         if (this._move_dialog.view.find('form')) {
             this._move_dialog.view.find('form').submit(function(e){
                 e.preventDefault();
 
-                self._move_dialog.trigger.prop('disabled', true);
+                //self._move_dialog.trigger.prop('disabled', true);
 
                 if(self.options.move_dialog.onSubmit) {
                     self.options.move_dialog.onSubmit.call(self, self._move_dialog);
@@ -221,29 +228,53 @@ Files.App = new Class({
                     names = Object.values(nodes.map(function(node) {
                         return node.name;
                     })),
-                    target = self._move_dialog.view.find('.tree-container').tree('getSelectedNode').path;
+                    destination = self._move_dialog.view.find('.tree-container').tree('getSelectedNode').path;
 
                 if (!names.length) {
                     return;
                 }
 
-                var url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath(), name: names});
+                var url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath()});
 
                 kQuery.ajax(url, {
                     type: 'POST',
                     data: {
-                        'destination_folder': target,
+                        'name' : names,
+                        'destination_folder': destination || '',
                         '_action': 'move',
                         'csrf_token': Files.token
                     }
-                }).done(function( response) {
-                    console.log(response);
-                });
+                }).done(function(response) {
+                    var tree = Files.app.tree;
+                    nodes.each(function(node) {
+                        if (node.element) {
+                            node.element.dispose();
+                        }
 
-                // clean up Files.app.grid
-                // handle fail
-                // show success and close window
-                // inspect drive and dropbox
+                        Files.app.grid.nodes.erase(node.path);
+
+                        var tree_node = tree.tree('getNodeById', node.path);
+                        if (tree_node) {
+                            tree_node.path = (destination ? destination+'/' : '')+node.name;
+                            tree_node.id = tree_node.path;
+                            tree_node.url = '#'+tree_node.path;
+
+                            var parent_node = destination ? tree.tree('getNodeById', destination) : tree.tree('getTree').children[0];
+
+                            if (parent_node) {
+                                tree.tree('moveNode', tree_node, parent_node, 'inside');
+                            }
+                        }
+                    });
+                }).fail(function(xhr) {
+                    var response = JSON.decode(xhr.responseText, true);
+
+                    self.options.move_dialog.onClose.call(self, self._move_dialog);
+
+                    if (response && response.error) {
+                        alert(response.error);
+                    }
+                });
             });
         }
 
