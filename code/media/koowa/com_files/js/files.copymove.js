@@ -112,7 +112,19 @@ Files.CopyDialog = CopyMoveDialog.extend({
                 'csrf_token': Files.token
             }
         }).done(function(response) {
-            // Add new nodes to the tree
+            var tree = Files.app.tree,
+                refresh_tree = false;
+
+            nodes.each(function(node) {
+                var tree_node = tree.tree('getNodeById', node.path);
+                if (tree_node) {
+                    refresh_tree = true;
+                }
+            });
+
+            if (refresh_tree) {
+                Files.app.tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
+            }
 
             self.hide();
         }).fail($.proxy(this.handleError, this));
@@ -140,7 +152,9 @@ Files.MoveDialog = CopyMoveDialog.extend({
                 'csrf_token': Files.token
             }
         }).done(function(response) {
-            var tree = Files.app.tree;
+            var tree = Files.app.tree,
+                refresh_tree = false;
+
             nodes.each(function(node) {
                 if (node.element) {
                     node.element.dispose();
@@ -150,18 +164,13 @@ Files.MoveDialog = CopyMoveDialog.extend({
 
                 var tree_node = tree.tree('getNodeById', node.path);
                 if (tree_node) {
-                    // Update properties
-                    tree_node.path = (destination ? destination+'/' : '')+node.name;
-                    tree_node.id = tree_node.path;
-                    tree_node.url = '#'+tree_node.path;
-
-                    // Move under new parent
-                    var parent_node = destination ? tree.tree('getNodeById', destination) : tree.tree('getTree').children[0];
-                    if (parent_node) {
-                        tree.tree('moveNode', tree_node, parent_node, 'inside');
-                    }
+                    refresh_tree = true;
                 }
             });
+
+            if (refresh_tree) {
+                Files.app.tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
+            }
 
             self.hide();
         }).fail($.proxy(this.handleError, this));
