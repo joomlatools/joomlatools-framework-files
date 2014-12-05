@@ -52,7 +52,11 @@ var CopyMoveDialog = Koowa.Class.extend({
         }
 
         var data = Files.app.tree.tree('toJson'),
-            tree = new Koowa.Tree(options.view.find('.tree-container'));
+            tree = new Koowa.Tree(options.view.find('.tree-container'), {
+                onCanSelectNode: function(node) {
+                    return (node.path != Files.app.getPath());
+                }
+            });
 
         tree.tree('loadData', $.parseJSON(data));
 
@@ -103,6 +107,8 @@ Files.CopyDialog = CopyMoveDialog.extend({
             return;
         }
 
+        this.options.button.prop('disabled', true);
+
         $.ajax(url, {
             type: 'POST',
             data: {
@@ -127,7 +133,10 @@ Files.CopyDialog = CopyMoveDialog.extend({
             }
 
             self.hide();
-        }).fail($.proxy(this.handleError, this));
+        }).fail($.proxy(this.handleError, this))
+        .always(function() {
+            self.options.button.prop('disabled', false);
+        });
     }
 });
 
@@ -142,6 +151,8 @@ Files.MoveDialog = CopyMoveDialog.extend({
         if (!names.length) {
             return;
         }
+
+        this.options.button.prop('disabled', true);
 
         $.ajax(url, {
             type: 'POST',
@@ -173,7 +184,10 @@ Files.MoveDialog = CopyMoveDialog.extend({
             }
 
             self.hide();
-        }).fail($.proxy(this.handleError, this));
+        }).fail($.proxy(this.handleError, this))
+        .always(function() {
+            self.options.button.prop('disabled', false);
+        });
     }
 });
 
