@@ -94,24 +94,24 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <div id="files-move-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
     <form class="files-modal well">
-        <div style="text-align: center;">
-            <h3 style=" float: none">
-                <?= translate('Move to...') ?>
-            </h3>
+        <div>
+            <h3><?= translate('Move to...') ?></h3>
         </div>
         <div class="tree-container"></div>
-        <button class="btn btn-primary" ><?= translate('Move'); ?></button>
+        <div class="form-actions" style="padding-left: 0">
+            <button class="btn btn-primary" ><?= translate('Move'); ?></button>
+        </div>
     </form>
 </div>
 
 <div id="files-copy-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
     <form class="files-modal well">
-        <div style="text-align: center;">
-            <h3 style=" float: none">
-                <?= translate('Copy to...') ?>
-            </h3>
+        <div>
+            <h3><?= translate('Copy to...') ?></h3>
         </div>
         <div class="tree-container"></div>
-        <button class="btn btn-primary" ><?= translate('Copy'); ?></button>
+        <div class="form-actions" style="padding-left: 0">
+            <button class="btn btn-primary" ><?= translate('Copy'); ?></button>
+        </div>
     </form>
 </div>
