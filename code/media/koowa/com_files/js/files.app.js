@@ -101,16 +101,6 @@ Files.App = new Class({
             view: '#files-upload',
             button: '#toolbar-upload a'
         },
-        move_dialog: {
-            view: '#files-move-modal',
-            button: '.btn-primary',
-            open_button: '#toolbar-move'
-        },
-        copy_dialog: {
-            view: '#files-copy-modal',
-            button: '.btn-primary',
-            open_button: '#toolbar-copy'
-        },
         history: {
             enabled: true
         },
@@ -147,6 +137,7 @@ Files.App = new Class({
             }
         }
     },
+
     initialize: function(options) {
         this.setOptions(options);
 
@@ -432,14 +423,6 @@ Files.App = new Class({
 
             if (this.options.folder_dialog && document.getElement(this.options.folder_dialog.view) && document.getElement(this.options.folder_dialog.view).getElement('form')) {
                 this.setFolderDialog();
-            }
-
-            if (this.options.move_dialog) {
-                this.move_dialog = new Files.MoveDialog(this.options.move_dialog);
-            }
-
-            if (this.options.copy_dialog) {
-                this.copy_dialog = new Files.CopyDialog(this.options.copy_dialog);
             }
 
             this.fireEvent('afterSetContainer', {container: item});

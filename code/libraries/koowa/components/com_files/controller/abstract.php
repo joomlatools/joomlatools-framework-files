@@ -38,47 +38,43 @@ abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
 
 	protected function _actionCopy(KControllerContextInterface $context)
 	{
-		$entities = $this->getModel()->fetch();
+		$data = $this->getModel()->fetch();
 
-		if(!$entities->isNew())
+		if(!$data->isNew())
 		{
-            foreach($entities as $entity) {
-                $entity->setProperties($context->request->data->toArray());
-            }
+			$data->setProperties($context->request->data->toArray());
 
 			//Only throw an error if the action explicitly failed.
-			if($entities->copy() === false)
+			if($data->copy() === false)
 			{
-				$error = $entities->getStatusMessage();
+				$error = $data->getStatusMessage();
 				throw new KControllerExceptionActionFailed($error ? $error : 'Copy Action Failed');
 			}
-			else $context->status = $entities->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
+			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
 		else throw new KControllerExceptionResourceNotFound('Resource Not Found');
 
-		return $entities;
+		return $data;
 	}
 
 	protected function _actionMove(KControllerContextInterface $context)
 	{
-		$entities = $this->getModel()->fetch();
+		$data = $this->getModel()->fetch();
 
-		if(!$entities->isNew())
+		if(!$data->isNew())
 		{
-            foreach($entities as $entity) {
-                $entity->setProperties($context->request->data->toArray());
-            }
+			$data->setProperties($context->request->data->toArray());
 
 			//Only throw an error if the action explicitly failed.
-			if($entities->move() === false)
+			if($data->move() === false)
 			{
-				$error = $entities->getStatusMessage();
+				$error = $data->getStatusMessage();
 				throw new KControllerExceptionActionFailed($error ? $error : 'Move Action Failed');
 			}
-			else $context->status = $entities->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
+			else $context->status = $data->getStatus() === KDatabase::STATUS_CREATED ? KHttpResponse::CREATED : KHttpResponse::NO_CONTENT;
 		}
 		else throw new KControllerExceptionResourceNotFound('Resource Not Found');
 
-		return $entities;
+		return $data;
 	}
 }

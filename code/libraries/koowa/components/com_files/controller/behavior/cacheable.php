@@ -203,40 +203,6 @@ class ComFilesControllerBehaviorCacheable extends ComKoowaControllerBehaviorCach
 	}
 
     /**
-     * Clean the cache
-     *
-     * @param   KControllerContextInterface $context A command context object
-     * @return  boolean
-     */
-    protected function _afterCopy(KControllerContextInterface $context)
-    {
-        $status = $context->result->getStatus();
-
-        if($status !== KDatabase::STATUS_FAILED) {
-            $this->_getCache()->clean($this->_getGroup());
-        }
-
-        return true;
-    }
-
-    /**
-     * Clean the cache
-     *
-     * @param   KControllerContextInterface $context A command context object
-     * @return  boolean
-     */
-    protected function _afterMove(KControllerContextInterface $context)
-    {
-        $status = $context->result->getStatus();
-
-        if($status !== KDatabase::STATUS_FAILED) {
-            $this->_getCache()->clean($this->_getGroup());
-        }
-
-        return true;
-    }
-
-    /**
      * Returns cache group name
      *
      * @return string
