@@ -391,49 +391,17 @@ Files.createUploader = function (options) {
                     });
                 }
 
-                //modifying_queue = false;
+                queue_locked = false;
             },
-            // Check to see if the file exists
-            fileExists = function (name) {
-                var result = false;
-
-                $.each(Files.app.grid.nodes, function (key, value) {
-                    if (result === true) {
-                        return true;
-                    }
-
-                    if (value.name === name) {
-                        result = true;
-                    }
-                });
-
-                return result;
-            },
-            renameDuplicates = function (uploader) {
-                if (uploader.files.length && fileExists(uploader.files[0].name)) {
-                    if (confirm(overwrite_prompt)) {
-                        uploader.settings.multipart_params.overwrite = 1;
-                    } else {
-                        uploader.settings.multipart_params.overwrite = 0;
-
-                        var file = uploader.files[0];
-                        file.name = getUniqueName(file.name, fileExists);
-                    }
-                }
-
-                modifying_queue = false;
-            },
-            modifying_queue = false,
-            overwrite_prompt = Koowa.translate('A file with the same name already exists. Would you like to overwrite it?');
+            queue_locked = false;
 
         uploader.bind('QueueChanged', function (uploader) {
-            if (modifying_queue) {
+            if (queue_locked) {
                 return;
             }
 
-            modifying_queue = true;
+            queue_locked = true;
             removeExcessFiles(uploader);
-            renameDuplicates(uploader);
         });
     }
 
