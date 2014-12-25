@@ -46,24 +46,27 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
 		{
             try
             {
-				//Load the library
-                require_once JPATH_LIBRARIES.'/koowa/components/com_files/helper/phpthumb/phpthumb.php';
-
-                //Create the thumb
-				$image = PhpThumbFactory::create($source->fullpath)
-					->setOptions(array('jpegQuality' => 50));
+                $imagine = new \Imagine\Gd\Imagine();
+                $image   = $imagine->open($source->fullpath);
 
                 $size = $this->getSize();
 
-				// Resize then crop to the provided resolution.
-				$image->adaptiveResize($size['x'], $size['y']);
+                if ($size['x'] && $size['y']) {
+                    $size = new \Imagine\Image\Box($size['x'], $size['y']);
+                }
+                else
+                {
+                    $image_size = $image->getSize();
+                    $larger     = max($image_size->getWidth(), $image_size->getHeight());
+                    $scale      = max($size['x'], $size['y']);
 
-                ob_start();
-				echo $image->getImageAsString();
-				$str = ob_get_clean();
-				$str = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($str));
+                    $size       = $image_size->scale(1/($larger/$scale));
+                }
+
+				$string = (string) $image->thumbnail($size, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
+				$string = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($string));
 				
-				return $str;
+				return $string;
 			}
 			catch (Exception $e) {
 				return false;
@@ -141,7 +144,7 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
     {
         $size = $this->_size;
 
-        if ($size && !(isset($size['x']) && isset($size['y'])))
+        if ($size && (!isset($size['x']) || !isset($size['y'])))
         {
             $source = $this->getSource();
 
