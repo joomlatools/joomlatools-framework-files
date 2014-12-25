@@ -1,0 +1,26 @@
+{
+    "name": "nooku/nooku-files",
+    "type": "nooku-component",
+    "license": "GPLv3",
+    "description": "A reusable component for file management",
+    "keywords": [
+        "nooku",
+        "components",
+        "files"
+    ],
+    "homepage": "https://github.com/nooku/nooku-files",
+    "authors": [
+        {
+            "name": "Timble",
+            "email": "info@timble.net",
+            "homepage": "http://www.timble.net"
+        }
+    ],
+    "require": {
+        "nooku/nooku-framework": "~2.0",
+        "imagine/imagine": "~0.6"
+    },
+    "autoload": {
+        "files": ["autoload.php"]
+    }
+}
