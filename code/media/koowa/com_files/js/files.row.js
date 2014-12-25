@@ -17,6 +17,10 @@ Files.Row = new Class({
 			this[key] = value;
 		}.bind(this));
 
+        if (typeof this.name !== 'string') {
+            this.name = '';
+        }
+
 		if (!this.path) {
 			this.path = (object.folder ? object.folder+'/' : '') + object.name;
 		}

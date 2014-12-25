@@ -50,8 +50,8 @@ window.addEvent('domready', function() {
                 </th>
                 <th width="32"></th>
 				<th><?= translate('Name'); ?></th>
-                <th width="1" ><?= translate('Size'); ?></th>
-                <th width="1" ><?= translate('Last Modified'); ?></th>
+                <th width="100" style="text-align: center;"><?= translate('Size'); ?></th>
+                <th width="100" style="text-align: center;"><?= translate('Last Modified'); ?></th>
                 <th width="1" style="text-align: center;"><i class="icon-download"></i></th>
 			</tr>
 		</thead>
@@ -104,11 +104,19 @@ window.addEvent('domready', function() {
                 </div>
             </div>
 		</td>
-		<td align="center">
-			[%=size.humanize()%]
+		<td style="text-align: center;">
+            <div class="koowa_wrapped_content">
+                <div class="whitespace_preserver">
+                    [%=size.humanize()%]
+                </div>
+            </div>
 		</td>
-		<td align="center">
-			[%=getModifiedDate(true)%]
+		<td style="text-align: center;">
+            <div class="koowa_wrapped_content">
+                <div class="whitespace_preserver">
+                    [%=getModifiedDate(true)%]
+                </div>
+            </div>
 		</td>
         <td align="right">
             <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
@@ -135,18 +143,20 @@ window.addEvent('domready', function() {
                 </div>
             </div>
 		</td>
-		<td align="center" style="white-space: nowrap;">
+		<td style="text-align: center;">
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
-                    [%=size.humanize()%]
-                    [% if (metadata.image) { %]
-                    ([%=metadata.image.width%] x [%=metadata.image.height%])
-                    [% } %]
+                    [%=size.humanize()%][% if (metadata.image) { %]<br />
+                    ([%=metadata.image.width%] x [%=metadata.image.height%])[% } %]
                 </div>
             </div>
 		</td>
-		<td align="center">
-			[%=getModifiedDate(true)%]
+		<td style="text-align: center;">
+            <div class="koowa_wrapped_content">
+                <div class="whitespace_preserver">
+                    [%=getModifiedDate(true)%]
+                </div>
+            </div>
 		</td>
         <td align="right">
             <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
