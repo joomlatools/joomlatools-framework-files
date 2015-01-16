@@ -246,7 +246,7 @@ Files.Grid = new Class({
 	setState: function(state) {
 		var headers = this.container.getElements('th.files__sortable'),
 			header  = headers.filter('[data-name="'+state.sort+'"]')[0];
-		console.log(header, state.sort);
+
 		if (!header) {
 			return;
 		}
