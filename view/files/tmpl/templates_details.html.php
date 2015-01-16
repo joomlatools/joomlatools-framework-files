@@ -49,9 +49,15 @@ window.addEvent('domready', function() {
                     </div>
                 </th>
                 <th width="32"></th>
-				<th><?= translate('Name'); ?></th>
+				<th data-name="name" class="files__sortable">
+                    <?= translate('Name'); ?>
+                    <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
+                </th>
                 <th width="100" style="text-align: center;"><?= translate('Size'); ?></th>
-                <th width="100" style="text-align: center;"><?= translate('Last Modified'); ?></th>
+                <th width="100" style="text-align: center;" data-name="modified_on"  class="files__sortable">
+                    <?= translate('Last Modified'); ?>
+                    <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
+                </th>
                 <th width="1" style="text-align: center;"><i class="icon-download"></i></th>
 			</tr>
 		</thead>

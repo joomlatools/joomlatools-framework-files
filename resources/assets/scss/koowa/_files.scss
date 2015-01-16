@@ -1244,4 +1244,30 @@ table th.file-count {
     -webkit-animation-duration: 2s;
     -webkit-animation-iteration-count: infinite;
   }
+
+  #files-grid {
+    // Sortables
+    table > thead > tr > th.files__sortable:hover {
+      cursor: pointer;
+    }
+
+    table > thead > tr > th.files__sortable--sorted > span.files__sortable--indicator {
+      @extend .koowa_icon_font;
+      @extend .koowa_icon--12;
+
+      &:before {
+        content: '\e616';
+      }
+    }
+
+    table > thead > tr > th.files__sortable--sorted-desc > span.files__sortable--indicator {
+      @extend .koowa_icon_font;
+      @extend .koowa_icon--12;
+
+      &:before {
+        content: "\e617";
+      }
+    }
+
+  }
 }

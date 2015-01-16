@@ -573,8 +573,16 @@ Files.App = new Class({
             }.bind(this),
             'onAfterSetLayout': function(context) {
                 if (key) {
-                    Cookie.write(key, context.layout, this.options.cookie);
+                    Cookie.write(key, context.layout, that.options.cookie);
                 }
+            },
+            onAfterRender: function() {
+                this.setState(that.state.data);
+            },
+            onSetState: function(state) {
+                this.state.set(state);
+
+                this.navigate();
             }.bind(this)
         });
         this.grid = new Files.Grid(this.options.grid.element, opts);
