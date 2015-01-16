@@ -59,6 +59,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                     <i class="icon-list"></i>
                 </button>
             </div>
+            <div style="float: right">
+                <?= helper('grid.search', array(
+                    'submit_on_clear' => false,
+                    'placeholder' => @translate('Find by file or folder name&hellip;')
+                )) ?>
+            </div>
         </div>
         <div class="view">
             <div id="files-grid"></div>

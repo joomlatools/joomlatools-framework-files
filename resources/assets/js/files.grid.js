@@ -242,8 +242,38 @@ Files.Grid = new Class({
 
 			that.fireEvent('setState', state);
 		});
+
+		var input = kQuery('.search_button', '#files-canvas'),
+			send = function(value) {
+				var state = {search: typeof value === 'undefined' ? input.val() : value};
+
+				that.setState(state);
+				that.fireEvent('setState', state);
+			};
+
+		input.blur(function() {
+			send();
+		})
+		.keypress(function(event) {
+			if (event.which === 13) { // enter key
+				send();
+			}
+		});
+
+		kQuery('.search_button--empty', '#files-canvas').click(function() {
+			if (input.val()) {
+				send('');
+			}
+		});
 	},
 	setState: function(state) {
+		if (typeof state.search !== 'undefined') {
+			var search = document.id('files-canvas').getElement('.search_button');
+			if (search) {
+				search.set('value', state.search);
+			}
+		}
+
 		var headers = this.container.getElements('th.files__sortable'),
 			header  = headers.filter('[data-name="'+state.sort+'"]')[0];
 
