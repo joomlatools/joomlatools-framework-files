@@ -15,7 +15,9 @@
  */
 class ComFilesAdapterFile extends ComFilesAdapterAbstract
 {
-	protected $_metadata;
+    public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp');
+
+    protected $_metadata;
 
 	public function getMetadata()
 	{
@@ -35,10 +37,15 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                         'modified_date' => $this->_handle->getMTime()
                     );
 
-                    // getimagesize is not safe to call with large files
-                    if ($this->_metadata['size'] < 1048576*48 && $image_size = $this->getImageSize()) {
-                        $this->_metadata['image'] = array('width' => $image_size[0], 'height' => $image_size[1]);
+                    if (in_array($this->_metadata['extension'], self::$image_extensions))
+                    {
+                        // getimagesize is not safe to call with large files
+                        if ($this->_metadata['size'] < 1048576*10 && $image_size = $this->getImageSize()) {
+                            $this->_metadata['image'] = array('width' => $image_size[0], 'height' => $image_size[1]);
+                        }
                     }
+
+
                 }
 			}
             catch (RunTimeException $e) {}
