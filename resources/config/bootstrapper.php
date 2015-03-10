@@ -8,7 +8,9 @@
  */
 
 // Include autoloader for Imagine
-require_once dirname(dirname(__DIR__)).'/vendor/autoload.php';
+if (!class_exists('\Imagine\Gd\Imagine') && is_file(dirname(dirname(__DIR__)).'/vendor/autoload.php')) {
+    require_once dirname(dirname(__DIR__)).'/vendor/autoload.php';
+}
 
 return array(
 );
