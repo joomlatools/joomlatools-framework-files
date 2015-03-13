@@ -26,13 +26,13 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'behaviors' => array('thumbnailable')
+			'behaviors' => array('chunkable', 'thumbnailable')
 		));
 
 		parent::_initialize($config);
 	}
 
-	public function _setFile(KControllerContextInterface $context)
+	protected function _setFile(KControllerContextInterface $context)
 	{
 		if (empty($context->request->data->file) && $context->request->files->has('file'))
 		{

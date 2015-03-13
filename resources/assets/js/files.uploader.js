@@ -242,11 +242,18 @@ if (!Files) var Files = {};
             }
 
             if (Files.app.container.parameters.maximum_size) {
-                config.max_file_size = Files.app.container.parameters.maximum_size;
-                var max_size = document.id('upload-max-size');
-                if (max_size) {
-                    max_size.set('html', new Files.Filesize(Files.app.container.parameters.maximum_size).humanize());
+                // Leave 16 mb for the PHP application to run
+                var maximum = Files.app.container.parameters.maximum_size - 16777216;
+
+                if (maximum < 4194304) {
+                    maximum = 4194304; // use 4 mb chunks at the minimum
                 }
+                else if (maximum > 536870912) {
+                    maximum = 536870912; // use 512 mb chunks at the maximum
+                }
+
+                config.chunk_size = maximum;
+                document.id('upload-max').setStyle('display', 'none');
             }
         }
 
@@ -404,6 +411,17 @@ if (!Files) var Files = {};
                 removeExcessFiles(uploader);
             });
         }
+
+        uploader.bind('ChunkUploaded', function(up, file, info) {
+            var response = $.parseJSON(info.response);
+
+            if (response.status === false)
+            {
+                file.status = plupload.FAILED;
+                failed[file.id] = response.error;
+                up.stop();
+            }
+        });
 
         var msie    = window.navigator.userAgent.indexOf('MSIE '),
             trident = window.navigator.userAgent.indexOf('Trident/'),
