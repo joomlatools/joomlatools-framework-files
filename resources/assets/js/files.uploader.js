@@ -242,13 +242,10 @@ if (!Files) var Files = {};
             }
 
             if (Files.app.container.parameters.maximum_size) {
-                // Leave 16 mb for the PHP application to run
-                var maximum = Files.app.container.parameters.maximum_size - 16777216;
+                // Leave 1 mb for the rest of the POST data
+                var maximum = Math.max(1048576, Files.app.container.parameters.maximum_size - 1048576);
 
-                if (maximum < 4194304) {
-                    maximum = 4194304; // use 4 mb chunks at the minimum
-                }
-                else if (maximum > 536870912) {
+                if (maximum > 536870912) {
                     maximum = 536870912; // use 512 mb chunks at the maximum
                 }
 
