@@ -98,6 +98,11 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	{
         $state    = $this->getState();
 		$filename = ltrim(basename(' '.strtr($path, array('/' => '/ '))));
+
+        if ($filename && $filename[0] === '.') {
+            return false;
+        }
+
 		if ($state->name)
 		{
 			if (!in_array($filename, (array) $state->name)) {

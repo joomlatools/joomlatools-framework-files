@@ -74,7 +74,11 @@ class ComFilesModelFiles extends ComFilesModelNodes
 		$filename  = ltrim(basename(' '.strtr($path, array('/' => '/ '))));
 		$extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
-		if ($state->name)
+        if ($filename && $filename[0] === '.') {
+            return false;
+        }
+
+        if ($state->name)
         {
 			if (!in_array($filename, (array) $state->name)) {
 				return false;
