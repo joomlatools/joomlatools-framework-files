@@ -22,6 +22,6 @@ class ComFilesFilterFileUploadable extends KFilterChain
 
 		$this->addFilter($this->getObject('com:files.filter.file.extension'));
 		$this->addFilter($this->getObject('com:files.filter.file.mimetype'));
-		//$this->addFilter($this->getObject('com:files.filter.file.size'));
+		$this->addFilter($this->getObject('com:files.filter.file.size'));
 	}
 }

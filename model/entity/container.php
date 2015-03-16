@@ -42,6 +42,7 @@ class ComFilesModelEntityContainer extends KModelEntityRow
 		$data = parent::toArray();
         $data['relative_path'] = $this->getProperty('relative_path');
 		$data['parameters']    = $this->getParameters()->toArray();
+        $data['server_upload_limit'] = static::getServerUploadLimit();
 
 		return $data;
 	}
@@ -50,4 +51,29 @@ class ComFilesModelEntityContainer extends KModelEntityRow
 	{
 		return $this->getObject('com:files.adapter.'.$type, $config);
 	}
+
+    /**
+     * Finds the maximum possible upload size based on a few different INI settings
+     *
+     * @return int
+     */
+    public static function getServerUploadLimit()
+    {
+        $convertToBytes = function($value) {
+            $keys = array('k', 'm', 'g');
+            $last_char = strtolower(substr($value, -1));
+            $value = (int) $value;
+
+            if (in_array($last_char, $keys)) {
+                $value *= pow(1024, array_search($last_char, $keys)+1);
+            }
+
+            return $value;
+        };
+
+        $max_upload = $convertToBytes(ini_get('upload_max_filesize'));
+        $max_post   = $convertToBytes(ini_get('post_max_size'));
+
+        return min($max_post, $max_upload);
+    }
 }

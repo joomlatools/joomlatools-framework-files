@@ -241,17 +241,39 @@ if (!Files) var Files = {};
                 ]
             }
 
-            if (Files.app.container.parameters.maximum_size) {
-                // Leave 1 mb for the rest of the POST data
-                var maximum = Math.max(1048576, Files.app.container.parameters.maximum_size - 1048576);
+            /**
+             * Enable chunking only for HTML5 runtime. See http://plupload.com/docs/Chunking for more info
+             */
+            config.preinit.Init = function(uploader) {
+                var chunking = (uploader.runtime === 'html5' && uploader.features.chunks),
+                    limit = Files.app.container.parameters.maximum_size,
+                    server_limit = Files.app.container.server_upload_limit;
 
-                if (maximum > 536870912) {
-                    maximum = 536870912; // use 512 mb chunks at the maximum
+                if (!chunking) {
+                    if (!limit || limit == 0 || (limit > server_limit)) {
+                        limit = server_limit - 1048576;
+                    }
+                } else {
+                    // Leave 1 mb for the rest of the POST data
+                    var chunk_size = Math.max(1048576, server_limit - 1048576);
+
+                    if (chunk_size > 536870912) {
+                        chunk_size = 536870912; // use 512 mb chunks at the maximum
+                    }
+                    uploader.setOption('chunk_size', chunk_size);
                 }
 
-                config.chunk_size = maximum;
-                document.id('upload-max').setStyle('display', 'none');
-            }
+                if (limit > 0) {
+                    uploader.setOption('max_file_size', limit);
+
+                    var max_size = document.id('upload-max-size');
+                    if (max_size) {
+                        max_size.set('html', new Files.Filesize(limit).humanize());
+                    }
+                } else {
+                    document.id('upload-max').setStyle('display', 'none');
+                }
+            };
         }
 
         SqueezeBox.addEvent('open', function () {
