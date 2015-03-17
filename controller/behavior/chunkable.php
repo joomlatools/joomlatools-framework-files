@@ -44,7 +44,7 @@ class ComFilesControllerBehaviorChunkable extends KControllerBehaviorAbstract
     {
         $request = $context->request;
 
-        if (!$request->data->has('chunk') && !$request->data->has('name')) {
+        if (!$request->data->has('chunk') || !$request->data->has('name')) {
             return true;
         }
 
