@@ -117,9 +117,11 @@ class ComFilesAdapterFolder extends ComFilesAdapterAbstract
 	{
 		$result = true;
 
-		if (!is_dir($this->_path)) {
-			$result = mkdir($this->_path, 0755, true);
-		}
+		if (!is_dir($this->_path))
+        {
+			mkdir($this->_path, 0755, true);
+            $result = is_dir($this->_path);
+        }
 
 		return $result;
 	}
