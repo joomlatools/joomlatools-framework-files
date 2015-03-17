@@ -1,4 +1,12 @@
 // Core variables and mixins
-@import "bootstrap/variables";// Modify this for custom colors, font-sizes, etc
-@import "bootstrap/mixins";
+// Core variables and mixins without output available outside .koowa scope
+@import "../../../../koowa/code/media/koowa/com_koowa/scss/bootstrap/variables";
+@import "../../../../koowa/code/media/koowa/com_koowa/scss/bootstrap/mixins";
+
+// Path variable
+$koowaPath: '../../koowa/com_koowa';
+
+// Import icons
+@import "../../../../koowa/code/media/koowa/com_koowa/scss/koowa/icons";
+
 @import "koowa/files";
