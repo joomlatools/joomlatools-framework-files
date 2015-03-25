@@ -59,7 +59,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                     <i class="icon-list"></i>
                 </button>
             </div>
-            <div style="float: right">
+            <div class="scopebar-search-container">
                 <?= helper('grid.search', array(
                     'submit_on_clear' => false,
                     'placeholder' => @translate('Find by file or folder name&hellip;')
