@@ -257,9 +257,10 @@ if (!Files) var Files = {};
                     // Leave 1 mb for the rest of the POST data
                     var chunk_size = Math.max(1048576, server_limit - 1048576);
 
-                    if (chunk_size > 536870912) {
-                        chunk_size = 536870912; // use 512 mb chunks at the maximum
+                    if (chunk_size > 33554432) {
+                        chunk_size = 33554432; // use 512 mb chunks at the maximum
                     }
+
                     uploader.setOption('chunk_size', chunk_size);
                 }
 
