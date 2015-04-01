@@ -161,7 +161,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 				if ($handle)
 				{
 					foreach ($data as $line) {
-						$result = fwrite($handle, $line);
+						$result = (fwrite($handle, $line) !== false);
 					}
 					fclose($handle);
 				}
