@@ -27,7 +27,7 @@ window.addEvent('domready', function() {
             },
             root_text: <?= json_encode(translate('Root folder')) ?>,
 			editor: <?= json_encode(parameters()->editor); ?>,
-			types: <?= json_encode(parameters()->types); ?>,
+			types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
 			container: <?= json_encode($container ? $container->toArray() : null); ?>
 		};
 	options = Object.append(options, config);

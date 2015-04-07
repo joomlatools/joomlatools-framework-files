@@ -24,11 +24,11 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                     defaults: {
                         limit: <?= (int) parameters()->limit; ?>,
                         offset: <?= (int) parameters()->offset; ?>,
-                        types: <?= json_encode(parameters()->types); ?>
+                        types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>
                     }
                 },
                 root_text: <?= json_encode(translate('Root folder')) ?>,
-                types: <?= json_encode(parameters()->types); ?>,
+                types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
                 thumbnails: <?= json_encode($container ? $container->getParameters()->thumbnails : true); ?>
             };
