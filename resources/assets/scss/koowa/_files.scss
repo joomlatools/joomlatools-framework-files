@@ -126,7 +126,7 @@ $comFilesLocation: '../../../media/koowa/com_files';
           height: 18px;
           padding: 0 6px;
           background: no-repeat 30% center;
-          @include image-set('#{$comFilesLocation}/images/arrow.png', '#{$comFilesLocation}/images/arrow@2x.png');
+          @include image-set('#{$comFilesLocation}/img/arrow.png', '#{$comFilesLocation}/img/arrow@2x.png');
         }
       }
 
@@ -163,7 +163,7 @@ $comFilesLocation: '../../../media/koowa/com_files';
   }
 }
 
-$pluploadLocation: '../../../media/koowa/com_files/images/plupload/';
+$pluploadLocation: '../../../media/koowa/com_files/img/plupload/';
 
 .plupload_button {
   display: inline-block;
@@ -1157,7 +1157,7 @@ table th.file-count {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
-    background: url('#{$comFilesLocation}/images/checker.png') repeat left top white;
+    background: url('#{$comFilesLocation}/img/checker.png') repeat left top white;
   }
   div.imgTotal a.navigate[class*="koowa_icon--"] {
     &:before {
