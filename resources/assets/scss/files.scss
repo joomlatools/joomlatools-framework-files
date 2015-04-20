@@ -1,12 +1,12 @@
 // Core variables and mixins
 // Core variables and mixins without output available outside .koowa scope
-@import "../../../../koowa/code/resources/assets/scss/bootstrap/variables";
-@import "../../../../koowa/code/resources/assets/scss/bootstrap/mixins";
+@import "../../../../nooku-framework/code/resources/assets/scss/bootstrap/variables";
+@import "../../../../nooku-framework/code/resources/assets/scss/bootstrap/mixins";
 
 // Path variable
 $koowaPath: '../../../libraries/nooku/resources/assets';
 
 // Import icons
-@import "../../../../koowa/code/resources/assets/scss/koowa/icons";
+@import "../../../../nooku-framework/code/resources/assets/scss/koowa/icons";
 
 @import "koowa/files";
