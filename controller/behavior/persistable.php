@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesControllerBehaviorPersistable extends ComKoowaControllerBehaviorPersistable
+class ComFilesControllerBehaviorPersistable extends KControllerBehaviorPersistable
 {
     public function isSupported()
     {

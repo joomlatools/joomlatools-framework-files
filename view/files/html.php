@@ -13,11 +13,15 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesViewFilesHtml extends ComKoowaViewHtml
+class ComFilesViewFilesHtml extends KViewHtml
 {
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->auto_fetch = false;
+
+        $config->append(array(
+            'template_filters' => array('version')
+        ));
 
 		parent::_initialize($config);
 	}
