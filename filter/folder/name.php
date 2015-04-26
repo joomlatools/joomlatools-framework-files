@@ -22,21 +22,21 @@ class ComFilesFilterFolderName extends KFilterAbstract
         $value = $entity->name;
 
         if (strpos($value, '/') !== false) {
-            return $this->_error($this->getObject('translator')->translate('Folder names cannot contain slashes'));
+            return $this->addError($this->getObject('translator')->translate('Folder names cannot contain slashes'));
 		}
 
         $value = $this->sanitize($value);
 
         if (in_array(strtolower($value), self::$_rejected_names))
         {
-            return $this->_error($this->getObject('translator')->translate(
+            return $this->addError($this->getObject('translator')->translate(
                 'You cannot create a folder named {foldername} for security reasons.',
                 array('foldername' => $value)
             ));
         }
 
 		if ($value == '') {
-            return $this->_error($this->getObject('translator')->translate('Invalid folder name'));
+            return $this->addError($this->getObject('translator')->translate('Invalid folder name'));
 		}
 
         return true;
