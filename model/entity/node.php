@@ -142,8 +142,8 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
     public function getPropertyDestinationPath()
     {
-        $folder = !empty($this->destination_folder) ? $this->destination_folder . '/' : (!empty($this->folder) ? $this->folder . '/' : '');
-        $name   = !empty($this->destination_name) ? $this->destination_name : $this->name;
+        $folder = isset($this->destination_folder) ? $this->destination_folder . '/' : (!empty($this->folder) ? $this->folder . '/' : '');
+        $name   = isset($this->destination_name) ? $this->destination_name : $this->name;
 
         return trim($folder . $name, '/\\');
     }

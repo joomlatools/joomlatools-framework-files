@@ -34,7 +34,9 @@ Files.Compact.App = new Class({
 			enabled: false
 		},
         uploader_dialog: false,
-        folder_dialog: false
+        folder_dialog: false,
+        copy_dialog: false,
+        move_dialog: false
 	},
 
 	initialize: function(options) {

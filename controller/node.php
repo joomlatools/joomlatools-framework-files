@@ -23,4 +23,19 @@ class ComFilesControllerNode extends ComFilesControllerAbstract
 
 		parent::_initialize($config);
 	}
+
+    protected function _beforeMove(KControllerContextInterface $context)
+    {
+        $request = $this->getRequest();
+
+        if ($request->data->has('name')) {
+            $request->query->name = $request->data->name;
+            unset($request->data->name);
+        }
+    }
+
+    protected function _beforeCopy(KControllerContextInterface $context)
+    {
+        $this->_beforeMove($context);
+    }
 }
