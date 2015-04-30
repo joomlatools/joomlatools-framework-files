@@ -30,7 +30,7 @@ class ComFilesFilterFileName extends KFilterAbstract
         }
 
 		if ($value == '') {
-            return $this->_error($this->getObject('translator')->translate('Invalid file name'));
+            return $this->addError($this->getObject('translator')->translate('Invalid file name'));
 		}
 
         return true;
