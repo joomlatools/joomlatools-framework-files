@@ -134,7 +134,7 @@ class ComFilesControllerBehaviorChunkable extends KControllerBehaviorAbstract
     protected function _afterAdd(KControllerContextInterface $context)
     {
         if ($this->_temporary_file && is_file($this->_temporary_file)) {
-            unlink($this->_temporary_file);
+            @unlink($this->_temporary_file);
         }
     }
 
