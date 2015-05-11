@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "nooku/nooku-framework": "dev-develop",
+        "nooku/nooku-framework": "~3.0@beta",
         "imagine/imagine": "~0.6"
     },
     "autoload": {
