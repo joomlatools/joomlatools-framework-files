@@ -4,7 +4,7 @@
 $rowBackgroundColor: hsl(0, 0%, 95%);
 $rowBackgroundColorHSLA: change-color($rowBackgroundColor, $alpha: (100 - lightness($rowBackgroundColor) ) / 100, $lightness: 0%);
 
-$comFilesLocation: '../../../media/koowa/com_files';
+$comFilesLocation: '..';
 
 @mixin linear-gradient($from: hsla(0, 0%, 100%, 0.5), $to: hsla(0, 0%, 0%, 0.5)) {
   background-image: -moz-linear-gradient(top, $from, $to); // FF 3.6+
