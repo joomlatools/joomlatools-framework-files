@@ -26,7 +26,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->append(array(
-			'behaviors' => array('chunkable', 'thumbnailable')
+			'behaviors' => array('chunkable', 'thumbnailable'),
+            'toolbars' => array('com:files.controller.toolbar.file')
 		));
 
 		parent::_initialize($config);
