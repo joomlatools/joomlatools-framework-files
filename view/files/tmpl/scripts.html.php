@@ -31,7 +31,8 @@ JHtml::_('behavior.framework', true);
     'An error occurred during request',
     'An error occurred with status code: {code}',
     'An error occurred: {error}',
-    'Unknown error'
+    'Unknown error',
+    'Insert'
 ))); ?>
 
 <ktml:script src="media://koowa/com_files/js/history/history.js" />
