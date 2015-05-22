@@ -25,7 +25,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
         {
 			$this->_metadata = array(
 				'extension' => strtolower(pathinfo($this->_handle->getFilename(), PATHINFO_EXTENSION)),
-				'mimetype'  => $this->getObject('com:files.mixin.mimetype')->getMimetype($this->_path)
+				'mimetype'  => $this->getObject('filesystem.mimetype.extension')->fromPath($this->_path)
 			);
 
             try
