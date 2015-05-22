@@ -10,4 +10,4 @@ defined('KOOWA') or die; ?>
 
 <?= import('com:files.files.compact.html') ?>
 
-<ktml:script src="media://koowa/com_files/js/files.select.js" />
+<ktml:script src="assets://files/js/files.select.js" />

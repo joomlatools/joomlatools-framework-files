@@ -13,7 +13,7 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 
 <?= import('com:files.files.scripts.html'); ?>
 
-<ktml:script src="media://koowa/com_files/js/files.compact.js" />
+<ktml:script src="assets://files/js/files.compact.js" />
 
 <script>
 Files.sitebase = '<?= $sitebase; ?>';

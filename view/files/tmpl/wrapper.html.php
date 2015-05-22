@@ -22,7 +22,7 @@ defined('KOOWA') or die; ?>
     <ktml:toolbar type="actionbar" title="Files">
 </ktml:module>
 
-<ktml:style src="media://koowa/com_files/css/files.css" />
+<ktml:style src="assets://files/css/files.css" />
 
 <ktml:content>
 
