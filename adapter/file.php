@@ -23,9 +23,16 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 	{
 		if ($this->_handle && empty($this->_metadata))
         {
+            try {
+                $mimetype = $this->getObject('filesystem.mimetype.extension')->fromPath($this->_path);
+            }
+            catch (Exception $e) {
+                $mimetype = null;
+            }
+
 			$this->_metadata = array(
 				'extension' => strtolower(pathinfo($this->_handle->getFilename(), PATHINFO_EXTENSION)),
-				'mimetype'  => $this->getObject('filesystem.mimetype.extension')->fromPath($this->_path)
+				'mimetype'  => $mimetype
 			);
 
             try

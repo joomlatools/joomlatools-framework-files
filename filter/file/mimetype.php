@@ -24,6 +24,11 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
             $mimetype = null;
             $resolver = $this->getObject('filesystem.mimetype.fileinfo');
 
+            try {
+                $mimetype = $this->getObject('filesystem.mimetype.extension')->fromPath($this->_path);
+            }
+            catch (Exception $e) {}
+
             if (is_uploaded_file($entity->file)) {
                 $mimetype = $resolver->fromPath($entity->file);
             }
