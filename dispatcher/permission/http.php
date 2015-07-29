@@ -13,7 +13,7 @@
  * @author  Johan Janssens <https://github.com/johanjanssens>
  * @package Files\Library\Dispatcher
  */
-class ComFilesDispatcherPermissionHttp extends ComKoowaDispatcherPermissionAbstract
+class ComFilesDispatcherPermissionHttp extends KDispatcherPermissionAbstract
 {
     /**
      * Check if user can can access a component in the administrator backend

@@ -13,6 +13,6 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesControllerContainer extends ComKoowaControllerModel
+class ComFilesControllerContainer extends KControllerModel
 {
 }

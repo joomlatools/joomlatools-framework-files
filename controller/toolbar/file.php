@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesControllerToolbarFile extends ComKoowaControllerToolbarActionbar
+class ComFilesControllerToolbarFile extends KControllerToolbarActionbar
 {
 	public function getCommands()
 	{

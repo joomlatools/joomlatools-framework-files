@@ -38,22 +38,28 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
         }
     }
 
+    /**
+     * Plupload do not pass the error to our application if the status code is not 200
+     *
+     * @param Exception $e
+     * @return bool
+     * @throws Exception
+     */
     protected function _handleException(Exception $e) 
     {
     	if ($this->getRequest()->getFormat() == 'json')
         {
-    		$obj = new stdClass;
-    		$obj->status = false;
-    		$obj->error  = $e->getMessage();
-    		$obj->code   = $e->getCode();
+    		$response = new stdClass;
+    		$response->status = false;
+    		$response->error  = $e->getMessage();
+    		$response->code   = $e->getCode();
 
-    		// Plupload do not pass the error to our application if the status code is not 200
-    		$code = $this->getRequest()->query->plupload ? 200 : ($e->getCode() ? $e->getCode() : 500);
+    		$status_code = $this->getRequest()->query->plupload ? 200 : ($e->getCode() ?: 500);
 
-    		header($code.' '.str_replace("\n", ' ', $e->getMessage()), true, $code);
-
-    		echo json_encode($obj);
-    		JFactory::getApplication()->close();
+            $this->getResponse()
+                ->setStatus($status_code)
+                ->setContent(json_encode($response), 'application/json')
+                ->send();
     	}
     	else throw $e;
 

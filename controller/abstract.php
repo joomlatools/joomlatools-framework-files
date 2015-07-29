@@ -13,11 +13,13 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-abstract class ComFilesControllerAbstract extends ComKoowaControllerModel
+abstract class ComFilesControllerAbstract extends KControllerModel
 {
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
+            'toolbars'  => array(),
+            'behaviors' => array('editable'),
             'formats'   => array('json')
         ));
 
