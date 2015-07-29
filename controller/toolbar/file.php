@@ -26,7 +26,7 @@ class ComFilesControllerToolbarFile extends KControllerToolbarActionbar
 
         $this->addNewfolder(array(
             'label' => 'New Folder',
-            'icon' => 'icon-32-new'
+            'icon' => 'icon-new'
         ));
 
         $this->addSeparator();
