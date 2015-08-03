@@ -310,13 +310,17 @@ Files.App = new Class({
             handleResponse = function(response) {
                 if (response) {
                     if (response.status !== false) {
-                        Object.each(response.entities, function(item) {
-                            if (!item.baseurl) {
-                                item.baseurl = that.baseurl;
+                        var rows = [];
+                        Object.each(response.data, function(item) {
+                            var attributes = item.attributes;
+
+                            if (!attributes.baseurl) {
+                                attributes.baseurl = that.baseurl;
                             }
+                            rows.push(attributes);
                         });
 
-                        that.grid.insertRows(response.entities);
+                        that.grid.insertRows(rows);
 
                         if (!response.partial) {
                             that.grid.unspin();
@@ -371,13 +375,13 @@ Files.App = new Class({
         query.limit = 100;
 
         var done = function(response) {
-            if (!response || typeof response.entities === 'undefined' || typeof response.meta === 'undefined') {
+            if (!response || typeof response.data === 'undefined' || typeof response.meta === 'undefined') {
                 deferred.reject('');
 
                 return;
             }
 
-            if (response.meta.offset + response.entities.length < response.meta.total) {
+            if (response.meta.offset + response.data.length < response.meta.total) {
                 response.partial = true;
                 deferred.notify(response);
 
@@ -461,7 +465,7 @@ Files.App = new Class({
                 url: this.createRoute({view: 'container', slug: container, container: false}),
                 method: 'get',
                 onSuccess: function(response) {
-                    setter(response.entities[0]);
+                    setter(response.data.attributes);
                 }.bind(this)
             }).send();
         } else {
@@ -678,7 +682,7 @@ Files.App = new Class({
                         if (response.status === false) {
                             return alert(response.error);
                         }
-                        var el = response.entities[0];
+                        var el = response.data.attributes;
                         var cls = Files[el.type.capitalize()];
                         var row = new cls(el);
                         Files.app.grid.insert(row);

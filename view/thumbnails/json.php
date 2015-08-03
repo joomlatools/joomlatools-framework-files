@@ -15,7 +15,7 @@
  */
 class ComFilesViewThumbnailsJson extends ComFilesViewJson
 {
-    protected function _renderData()
+    protected function _fetchData(KViewContext $context)
     {
         $list = $this->getModel()->fetch();
         $results = array();
@@ -26,10 +26,10 @@ class ComFilesViewThumbnailsJson extends ComFilesViewJson
         }
         ksort($results);
 
-    	$output = parent::_renderData();
+    	$output = array();
         $output['items'] = $results;
         $output['total'] = count($list);
 
-        return $output;
+        $this->setContent($output);
     }
 }

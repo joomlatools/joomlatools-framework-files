@@ -295,7 +295,7 @@ if (!Files) var Files = {};
             getNamesFromArray = function (array) {
                 var results = [];
                 $.each(array, function (i, entity) {
-                    results.push(entity.name);
+                    results.push(entity.attributes.name);
                 });
 
                 return results;
@@ -320,8 +320,8 @@ if (!Files) var Files = {};
             },
             makeUnique = function (file, similar) {
                 var names = [];
-                if (typeof similar.entities === 'object' && similar.entities.length) {
-                    names = getNamesFromArray(similar.entities);
+                if (typeof similar.data === 'object' && similar.data.length) {
+                    names = getNamesFromArray(similar.data);
                 }
                 $.each(uploader.files, function (i, f) {
                     if (f.id !== file.id) {
@@ -338,8 +338,8 @@ if (!Files) var Files = {};
             checkDuplicates = function (response) {
                 uploader.settings.multipart_params.overwrite = 0;
 
-                if (typeof response.entities === 'object' && response.entities.length) {
-                    var existing = getNamesFromArray(response.entities),
+                if (typeof response.data === 'object' && response.data.length) {
+                    var existing = getNamesFromArray(response.data),
                         promises = [];
 
                     if (confirm(getConfirmationMessage(existing))) {
@@ -493,7 +493,7 @@ if (!Files) var Files = {};
                 path;
 
             if (json.status) {
-                item = json.entities[0];
+                item = json.data.attributes;
                 path = (item.folder ? item.folder+'/' : '') + item.name;
 
                 if (typeof Files.app.grid.nodes[path] === 'undefined') {
@@ -685,7 +685,7 @@ if (!Files) var Files = {};
             },
             onSuccess: function (json) {
                 if (this.status == 201 && json.status) {
-                    var el = json.entities[0];
+                    var el = json.data.attributes;
                     var cls = Files[el.type.capitalize()];
                     var row = new cls(el);
                     Files.app.grid.insert(row);
