@@ -195,6 +195,9 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
             $limit = self::convertToBytes($limit);
             $available_memory = $limit - memory_get_usage();
 
+            // Leave 16 megs for the rest of the request
+            $available_memory -= 16777216;
+
             if ($source_memory + $thumb_memory < $available_memory) {
                 $result = true;
             }
