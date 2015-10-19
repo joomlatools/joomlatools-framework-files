@@ -175,7 +175,7 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
         $result = false;
 
         // Multiplier to take into account memory consumed by the Image Processing Library.
-        $tweak_factor  = 4;
+        $tweak_factor  = 6;
 
         $source = @getimagesize($this->getSource()->fullpath);
 
