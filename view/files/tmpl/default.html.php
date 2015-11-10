@@ -39,7 +39,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </script>
 
 
-<div id="files-app" class="com_files">
+<div id="files-app" class="k-list-layout com_files">
 	<?= import('templates_icons.html'); ?>
 	<?= import('templates_details.html'); ?>
 
