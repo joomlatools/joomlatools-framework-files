@@ -54,36 +54,52 @@
                 'white-space': 'nowrap',
                 bottom: 0,
                 top: 0,
-                left: (pathway.getPrevious() ? pathway.getPrevious().getSize().x : 0) + this.options.offset,
-                right: pathway.getNext().getSize().x + this.options.offset,
+                //left: (pathway.getPrevious() ? pathway.getPrevious().getSize().x : 0) + this.options.offset,
+                //right: pathway.getNext().getSize().x + this.options.offset,
                 'position': 'absolute'
             });
             pathway.empty();
-            var list = new Element('ul', {'class': 'breadcrumb breadcrumb-resizable'}), wrap = function(app, title, path, icon){
-                var result = new Element('li', {
-                        title: title,
+            var list = new Element('ul'),
+                wrap = function(app, title, path, icon){
+                    var result, link;
+
+                    result = new Element('li', {
                         events: {
                             click: function(){
                                 app.navigate(path);
                             }
                         }
-                    }),
-                    link = new Element('span', {text: title});
-                result.grab(link);
-                if(icon) {
-                    link.grab(new Element('span', {'class': 'divider'}), 'top');
-                }
-                return result;
-            };
-            var root = wrap(app, ' '+app.container.title, '', false).getElement('span').grab(new Element('i', {'class': 'icon-database icon-hdd'}), 'top').getParent();
+                    });
+
+                    link = new Element('a', {
+                        'class': 'k-breadcrumb__item',
+                        html: title
+                    });
+
+                    result.grab(link);
+
+                    if(icon) {
+                       // link.grab(new Element('span', {'class': 'divider'}), 'top');
+                    }
+                    return result;
+                };
+
+
+            var root = wrap(app, '<span class="visually-hidden">'+app.container.title+'</span>', '', false)
+                        .addClass('home')
+                        .getElement('a').addClass('k-icon-home').getParent();
+
             list.adopt(root);
+
             var folders = app.getPath().split('/'), path = '';
+
             folders.each(function(title){
                 if(title.trim()) {
                     path += path ? '/'+title : title;
                     list.adopt(wrap(app, title, path, true));
                 }
             });
+
             list.getLast().addClass('active');
 
             pathway.setStyle('visibility', 'hidden');
