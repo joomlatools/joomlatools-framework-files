@@ -99,7 +99,7 @@ Files.App = new Class({
         },
         uploader_dialog: {
             view: '#files-upload',
-            button: '#toolbar-upload a'
+            button: '#toolbar-upload'
         },
         move_dialog: {
             view: '#files-move-modal',
