@@ -12,6 +12,7 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 ?>
 
 <?= import('com:files.files.scripts.html'); ?>
+<?= import('templates_compact.html');?>
 
 <ktml:script src="assets://files/js/files.compact.js" />
 
@@ -129,6 +130,8 @@ kQuery(function($) {
 </script>
 
 
+
+
 <!-- Wrapper -->
 <div class="k-wrapper">
 
@@ -144,9 +147,7 @@ kQuery(function($) {
     <div class="k-content-wrapper">
 
         <!-- Sidebar -->
-        <div id="k-sidebar" class="k-sidebar">
-            Sidebar
-        </div>
+        <?= import('compact_sidebar.html'); ?>
 
         <!-- Content -->
         <div class="k-content">
@@ -157,22 +158,9 @@ kQuery(function($) {
                 <!-- Form -->
                 <form class="k-list-layout -koowa-grid" id="k-offcanvas-container" action="" method="get">
 
-                    <!-- Scopebar -->
-                    Scopebar
-
-                    <!-- Table -->
 
 
 
-
-
-
-
-
-
-
-
-                    <?= import('com:files.files.templates_compact.html');?>
 
                     <div class="koowa_dialog koowa_dialog--file_dialog">
                         <div class="koowa_dialog__menu">
@@ -183,31 +171,7 @@ kQuery(function($) {
                         </div>
                         <div class="koowa_dialog__layout">
                             <div class="koowa_dialog__wrapper">
-                                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_categories">
-                                    <h2 class="koowa_dialog__title">
-                                        <?= translate('Select a folder'); ?>
-                                    </h2>
-                                    <div class="koowa_dialog__child__content koowa_dialog__folders_files">
-                                        <div class="koowa_dialog__child__content__box">
-                                            <div class="koowa_dialog__files_tree" id="files-tree" style="overflow: auto; height: auto;"></div>
-                                        </div>
-                                        <? if ($can_upload): ?>
-                                            <div class="koowa_dialog__new_folder">
-                                                <h2 class="koowa_dialog__title koowa_dialog__title--child">
-                                                    <?= translate('Create a new folder'); ?>
-                                                </h2>
-                                                <div class="koowa_dialog__block" id="files-new-folder-modal">
-                                                    <div class="input-group" style="margin:0;">
-                                                        <input type="text" class="input-group-form-control" id="files-new-folder-input" />
-                                <span class="input-group-btn">
-                                    <button id="files-new-folder-create" class="btn" disabled><?= translate('Add folder'); ?></button>
-                                </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <? endif; ?>
-                                    </div>
-                                </div>
+
 
                                 <? if ($can_upload): ?>
                                     <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
@@ -229,23 +193,14 @@ kQuery(function($) {
                                     </h2>
                                     <div class="koowa_dialog__child__content" id="spinner_container">
                                         <div class="koowa_dialog__child__content__box">
-                                            <div id="files-grid" style="max-height:450px;">
-
+                                            <div class="k-table-container">
+                                                <div class="k-table" id="files-grid">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_insert">
-                                    <h2 class="koowa_dialog__title">
-                                        <?= translate('Selected file info'); ?>
-                                    </h2>
-                                    <div class="koowa_dialog__child__content">
-                                        <div class="koowa_dialog__child__content__box">
-                                            <div id="files-preview"></div>
-                                            <div id="insert-button-container"></div>
-                                        </div>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -266,20 +221,7 @@ kQuery(function($) {
         </div><!-- k-content -->
 
         <!-- Sidebar -->
-        <div id="k-sidebar-right" class="k-sidebar-right">
-            <div class="k-sidebar__item">
-                <div class="k-sidebar__header">
-                    Selected file
-                </div>
-                <div class="k-sidebar__content">
-                    <p><img src="http://demo.joomlatools.com/joomla3/docman/image-gallery/127-donkey-1/file"></p>
-                    <p><strong class="labl">Name</strong> Donkey.jpg</p>
-                    <p><strong class="labl">Dimensions</strong> 1280 x 897</p>
-                    <p><strong class="labl">Size</strong> 449.57KB</p>
-                    <p style="margin-top: 1em;"><a href="select-document.html" class="btn btn-success btn-block">Insert file</a></p>
-                </div>
-            </div>
-        </div><!-- .k-sidebar-right -->
+        <?= import('compact_sidebar_right.html'); ?>
 
     </div><!-- .k-content-wrapper -->
 
