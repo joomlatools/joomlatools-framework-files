@@ -17,7 +17,6 @@ JHtml::_('behavior.framework', true);
 <?= helper('behavior.keepalive'); ?>
 <?= helper('behavior.tooltip'); ?>
 <?= helper('behavior.modal'); ?>
-<?= helper('bootstrap.load', array('wrapper' => false)); ?>
 <?= helper('behavior.tree'); ?>
 
 <?= helper('translator.script', array('strings' => array(
