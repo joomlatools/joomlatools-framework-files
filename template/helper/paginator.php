@@ -31,19 +31,19 @@ class ComFilesTemplateHelperPaginator extends KTemplateHelperPaginator
 
         $translator = $this->getObject('translator');
 
-        $html  = '<div class="container" id="files-paginator-container">';
+        $html  = '<div id="files-paginator-container">';
 
-        $html .= '<div class="pagination pagination-toolbar" id="files-paginator">';
+        $html .= '<div class="k-pagination" id="files-paginator">';
 
         $html .= '<div class="limit">'.$this->limit($config->toArray()).'</div>';
 
         $html .= '<span class="start hidden"><a></a></span>';
-        $html .= '<ul class="pagination-list">';
+        $html .= '<ul class="pagination">';
         $html .=  $this->_pages(array());
         $html .= '</ul>';
         $html .= '<span class="end hidden"><a></a></span>';
 
-        $html .= '<div class="limit pull-right"> ';
+        $html .= '<div class="limit k-pagination-pages"> ';
         $html .= sprintf($translator->translate('JLIB_HTML_PAGE_CURRENT_OF_TOTAL'), '<strong class="page-current">1</strong>', '<strong class="page-total">1</strong></div>');
         $html .= '</div>';
         $html .= '</div>';
