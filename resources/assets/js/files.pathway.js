@@ -49,14 +49,12 @@
             this.element.getParent().setStyle('position', 'relative');
             var pathway = this.element;
             pathway.setStyles({
-                'overflow': 'visible',
+                'overflow': 'auto',
                 'text-overflow': 'ellipsis',
                 'white-space': 'nowrap',
-                bottom: 0,
-                top: 0,
-                //left: (pathway.getPrevious() ? pathway.getPrevious().getSize().x : 0) + this.options.offset,
-                //right: pathway.getNext().getSize().x + this.options.offset,
-                'position': 'absolute'
+                'bottom': 'auto',
+                'top': 'auto',
+                'position': 'static'
             });
             pathway.empty();
             var list = new Element('ul'),
