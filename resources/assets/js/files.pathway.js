@@ -83,7 +83,7 @@
                 };
 
 
-            var root = wrap(app, '<span class="visually-hidden">'+app.container.title+'</span>', '', false)
+            var root = wrap(app, '<span class="k-breadcrumb_root-text">'+app.container.title+'</span>', '', false)
                         .addClass('home')
                         .getElement('a').addClass('k-icon-home').getParent();
 
