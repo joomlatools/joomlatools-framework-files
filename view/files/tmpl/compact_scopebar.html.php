@@ -12,19 +12,8 @@ defined('KOOWA') or die;
 <!-- Scopebar -->
 <div class="k-scopebar">
 
-    <?//@TODO: @Ercan: Fix smart filters so they actually work; ?>
     <!-- Filters -->
-    <div class="k-scopebar__item k-scopebar__item--fluid ercan-todo">
-
-        <!-- Filter title -->
-        <div class="k-scopebar__item--title"><?= translate('Filter:'); ?></div>
-
-        <div class="k-scopebar__item--filter">
-            <button type="button" class="k-scopebar__filter-button">
-                <span class="add-filter"><?= translate('Add filter'); ?></span>
-                <span class="clear-filter" style="display: none;"><?= translate('Clear filter'); ?></span>
-            </button>
-        </div>
+    <div class="k-scopebar__item k-scopebar__item--fluid">
 
         <!-- Search toggle button -->
         <button type="button" class="k-toggle-search"><span class="k-icon-magnifying-glass"></span><span class="visually-hidden"><?= translate('Search'); ?></span></button>
