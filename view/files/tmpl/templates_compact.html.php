@@ -63,42 +63,34 @@ if (metadata.image) {
 </textarea>
 
 <textarea style="display: none" id="compact_container">
-<table>
-<tbody>
+<ul>
 
-</tbody>
-</table>
+</ul>
 </textarea>
 
 
 <? // @TODO: Make this work, right now we're only getting the <a> tags while we need the <tr> and <td> as well; ?>
 
 <textarea style="display: none"  id="compact_folder">
-<tr>
-    <td class="files-node files-folder">
+    <li class="files-node files-folder">
         <a class="navigate" href="#" title="[%= name %]">
             [%= name %]
         </a>
-    </td>
-</tr>
+    </li>
 </textarea>
 
 <textarea style="display: none"  id="compact_image">
-<tr>
-    <td class="files-node files-image">
+    <li class="files-node files-image">
         <a class="navigate" href="#" title="[%= name %]">
             [%= name %]
         </a>
-    </td>
-</tr>
+    </li>
 </textarea>
 
 <textarea style="display: none"  id="compact_file">
-<tr>
-    <td class="files-node files-file">
+    <li class="files-node files-file">
         <a class="navigate" href="#" title="[%= name %]">
             [%= name %]
         </a>
-    </td>
-</tr>
+    </li>
 </textarea>

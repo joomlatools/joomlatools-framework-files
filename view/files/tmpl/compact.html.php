@@ -85,32 +85,6 @@ kQuery(function($) {
         insert_dialog  = $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_insert'),
         upload_dialog  = $('.koowa_dialog__file_dialog_upload');
 
-    // Set initially
-    if (upload_dialog.length) {
-        insert_dialog.hide();
-        upload_trigger.addClass('active');
-    } else {
-        upload_dialog.hide();
-        insert_trigger.addClass('active');
-    }
-
-    insert_trigger.click(function() {
-        $(this).addClass('active')
-               .siblings().removeClass('active');
-
-        upload_dialog.hide();
-
-        insert_dialog.show();
-    });
-
-    upload_trigger.click(function() {
-        $(this).addClass('active')
-               .siblings().removeClass('active');
-
-        insert_dialog.hide();
-        upload_dialog.show();
-    });
-
     // Scroll to upload or insert area after click
     if ( $('body').width() <= '699' ) { // 699 is when colums go from stacked to aligned
         upload_trigger.click(function() {
@@ -158,61 +132,17 @@ kQuery(function($) {
                 <!-- Form -->
                 <form class="k-list-layout -koowa-grid" id="k-offcanvas-container" action="" method="get">
 
+                    <? // @TODO: :Ercan: Get a working dynamic pathway here; ?>
+                    <?= import('compact_breadcrumbs.html'); ?>
 
+                    <? // @TODO: Ercan: We need to fix the uploader; ?>
+                    <?= import('compact_upload.html'); ?>
 
+                    <? // @TODO: Ercan: We need to fix the scopebar; ?>
+                    <?= import('compact_scopebar.html'); ?>
 
-
-                    <div class="koowa_dialog koowa_dialog--file_dialog">
-                        <div class="koowa_dialog__menu">
-                            <? if ($can_upload): ?>
-                                <a class="koowa_dialog__menu__child--download"><?= translate('Upload'); ?></a>
-                            <? endif; ?>
-                            <a class="koowa_dialog__menu__child--insert"><?= translate('Select'); ?></a>
-                        </div>
-                        <div class="koowa_dialog__layout">
-                            <div class="koowa_dialog__wrapper">
-
-
-                                <? if ($can_upload): ?>
-                                    <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
-                                        <h2 class="koowa_dialog__title">
-                                            <?= translate('Upload a file'); ?>
-                                        </h2>
-                                        <div class="koowa_dialog__child__content">
-                                            <div class="koowa_dialog__child__content__box">
-                                                <?= import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <? endif; ?>
-
-
-                                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_files">
-                                    <h2 class="koowa_dialog__title">
-                                        <?= translate('Select a file'); ?>
-                                    </h2>
-                                    <div class="koowa_dialog__child__content" id="spinner_container">
-                                        <div class="koowa_dialog__child__content__box">
-                                            <div class="k-table-container">
-                                                <div class="k-table" id="files-grid">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
+                    <? // @TODO: Ercan: We need to fix the file picker so it's a table; ?>
+                    <?= import('compact_select.html'); ?>
 
                 </form><!-- .k-list-layout -->
 

@@ -43,7 +43,7 @@ class ComFilesTemplateHelperPaginator extends KTemplateHelperPaginator
         $html .= '</ul>';
         $html .= '<span class="end hidden"><a></a></span>';
 
-        $html .= '<div class="limit k-pagination-pages"> ';
+        $html .= '<div class="k-pagination-pages"> ';
         $html .= sprintf($translator->translate('JLIB_HTML_PAGE_CURRENT_OF_TOTAL'), '<strong class="page-current">1</strong>', '<strong class="page-total">1</strong></div>');
         $html .= '</div>';
         $html .= '</div>';

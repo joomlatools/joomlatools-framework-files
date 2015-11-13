@@ -54,6 +54,30 @@ defined('KOOWA') or die; ?>
 
 <?= import('com:files.files.templates_compact.html');?>
 
+<? if ($can_upload): ?>
+    <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
+        <h2 class="koowa_dialog__title">
+            <?= translate('Upload a file'); ?>
+        </h2>
+        <div class="koowa_dialog__child__content">
+            <div class="koowa_dialog__child__content__box">
+                <?= import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
+            </div>
+        </div>
+    </div>
+<? endif; ?>
+
+<div class="k-upload">
+    <div class="k-upload__drop">
+        Drop files here <small>(max 10MB)</small>
+    </div>
+    <div class="k-upload__buttons">
+        <button class="btn btn-sm btn-primary">Select</button>
+        <button class="btn btn-sm btn-primary">From URL</button>
+    </div>
+</div>
+
+<? if ( 1 == 2) : ?>
 <div class="koowa_dialog koowa_dialog--file_dialog koowa_dialog--no_menu koowa_dialog--no_categories">
     <div class="koowa_dialog__layout">
         <div class="koowa_dialog__wrapper">
@@ -84,4 +108,4 @@ defined('KOOWA') or die; ?>
     <div id="files-preview" style="display: none"></div>
     <div id="insert-button-container" style="display: none"></div>
 </div>
-
+<? endif; ?>
