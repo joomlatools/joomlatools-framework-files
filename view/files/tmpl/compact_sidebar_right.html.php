@@ -11,14 +11,13 @@ defined('KOOWA') or die;
 
 <div id="k-sidebar-right" class="k-sidebar-right">
 
-
-
     <div class="k-sidebar__item">
         <div class="k-sidebar__header">
             <?= translate('Selected file info'); ?>
         </div>
-        <? // @TODO: add message to select a file via the select tab; ?>
-        <div class="k-sidebar__content">
+        <? // @TODO: @Ercan: add message to select a file via the select tab; ?>
+        <? // @TODO: @Robin: Create image placeholder file with a fixed width height so the insert button won't jump on selection; ?>
+        <div class="k-sidebar__content ercan-todo">
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_insert">
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">

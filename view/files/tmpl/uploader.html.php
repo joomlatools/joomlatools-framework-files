@@ -20,21 +20,35 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 <button class="btn btn-sm btn-default upload-form-toggle target-computer active" href="#computer"><?= translate('Computer'); ?></button>
                 <button class="btn btn-sm btn-default upload-form-toggle target-web" href="#web"><?= translate('From URL'); ?></button>
             </div>
+            <p id="upload-max">
+                <?= translate('Each file should be smaller than {size}', array(
+                    'size' => '<span id="upload-max-size"></span>'
+                )); ?>
+            </p>
         </div>
     </div>
 
     <div id="files-uploader-computer" class="k-upload__drop upload-form">
-        <div class="k-upload__drop__content">
+        <div id="files-upload" class="k-upload__drop__content">
             <div class="k-upload__drop__message">
-                Drop files here <small>(max 10MB)</small>
+                <p>Drop files here <small>(max 10MB)</small></p>
             </div>
-            <div class="k-upload__drop__uploader" id="files-upload-multi"></div>
+            <? // @TODO: @Ercan: Make sure that the name of the selected file will be visible here before you click upload
+               // Also make sure that the upload info (percentage thing) is visible while uploading. This is currently hidden by CSS
+               // Last but not least; we should create a better visual loading bar when uploading. remove .visuall-hidden class from .k-upload__loading div below ?>
+            <div class="k-upload__drop__uploader ercan-todo" id="files-upload-multi"></div>
+            <div class="k-upload__loading visually-hidden">
+                <div class="k-upload__loading__bar"></div>
+                <div class="k-upload__loading__text">
+                    50%
+                </div>
+            </div>
         </div>
     </div>
 
     <div id="files-uploader-web" class="upload-form k-upload__web" style="display: none">
         <form action="" method="post" name="remoteForm" id="remoteForm" >
-            <div class="input-group">
+            <div class="input-group remote-wrap">
                 <div class="input-group-input">
                     <input class="form-control has-left-radius" type="text" placeholder="<?= translate('Remote Link') ?>" title="<?= translate('Remote Link') ?>" id="remote-url" name="file" size="50" />
                 </div>
