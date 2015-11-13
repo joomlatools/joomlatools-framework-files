@@ -129,9 +129,10 @@ kQuery(function($) {
           <!-- Component -->
             <div class="k-component">
 
-                <!-- Form -->
+                <!-- Form
+                @robin this ain't needed and actually breaks stuff since you cannot nest forms
                 <form class="k-list-layout -koowa-grid" id="k-offcanvas-container" action="" method="get">
-
+                -->
                     <div class="k-breadcrumb" id="files-pathway"></div>
 
                     <? // @TODO: Ercan: We need to fix the uploader; ?>
@@ -143,7 +144,7 @@ kQuery(function($) {
                     <? // @TODO: Ercan: We need to fix the file picker so it's a table; ?>
                     <?= import('compact_select.html'); ?>
 
-                </form><!-- .k-list-layout -->
+                    <!--</form> .k-list-layout -->
 
             </div><!-- .k-component -->
 
