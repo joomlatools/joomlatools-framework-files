@@ -13,42 +13,6 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 
 <div id="k-sidebar" class="k-sidebar">
 
-    <? // @TODO: How I want it to be ?>
-    <div class="k-sidebar__item k-sidebar__item--overflow">
-        <div class="k-sidebar__header">
-            <?= translate('Select a folder'); ?>
-        </div>
-        <ul class="jqtree_common jqtree-tree">
-            <li class="jqtree_common jqtree-folder jqtree-selected active">
-                <a href="javascript:void(0)">
-                    <span class="jqtree-element jqtree_common" title="Root folder">
-                        <span class="jqtree_common jqtree-title jqtree-title-folder">
-                            <span class="jqtree_common k-jqtree-toggler"></span>
-                            <span class="jqtree_common k-jqtree-folder--open"></span>
-                            <span class="jqtree_common k-jqtree-name">Root folder</span>
-                        </span>
-                    </span>
-                </a>
-                <ul class="jqtree_common ">
-                    <li class="jqtree_common">
-                        <a href="javascript:void(0)">
-                            <span class="jqtree-element jqtree_common" title="Sub folder">
-                                <span class="jqtree-title jqtree_common">
-                                    <span class="jqtree_common k-jqtree-whitespace"></span>
-                                    <span class="jqtree_common k-jqtree-toggler--hide"></span>
-                                    <span class="jqtree_common k-jqtree-folder"></span>
-                                    <span class="jqtree_common k-jqtree-name">Sub folder</span>
-                                </span>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
-
-    <? // @TODO: How it currently is ?>
     <div class="k-sidebar__item k-sidebar__item--overflow">
         <div class="k-sidebar__header">
             <?= translate('Select a folder'); ?>
