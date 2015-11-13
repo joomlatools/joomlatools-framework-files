@@ -576,6 +576,15 @@ Files.App = new Class({
                 row.download_link = that.createRoute({view: 'file', format: 'html', name: row.name, folder: row.folder});
             }.bind(this),
             'onAfterSetLayout': function(context) {
+
+                if (context.layout === 'icons' || context.layout === 'details') {
+                    var layout = context.layout === 'icons' ? 'grid' : 'table',
+                        remove = layout === 'grid' ? 'table' : 'grid';
+
+                    this.container.removeClass('k-'+remove).addClass('k-'+layout);
+                    kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
+                }
+
                 if (key) {
                     Cookie.write(key, context.layout, that.options.cookie);
                 }
