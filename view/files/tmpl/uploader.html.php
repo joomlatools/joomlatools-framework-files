@@ -10,6 +10,50 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <?= import('com:files.files.uploader_scripts.html') ?>
 
+
+<? // Inline upload style ( 1 file allowed) ?>
+<div class="k-upload k-upload--single">
+
+    <div id="files-upload-controls" class="clearfix">
+        <div class="k-upload__buttons">
+            <div class="btn-group">
+                <button class="btn btn-sm btn-default upload-form-toggle target-computer active" href="#computer"><?= translate('Computer'); ?></button>
+                <button class="btn btn-sm btn-default upload-form-toggle target-web" href="#web"><?= translate('From URL'); ?></button>
+            </div>
+        </div>
+    </div>
+
+    <div id="files-uploader-computer" class="k-upload__drop upload-form">
+        <div class="k-upload__drop__content">
+            <div class="k-upload__drop__message">
+                Drop files here <small>(max 10MB)</small>
+            </div>
+            <div class="k-upload__drop__uploader" id="files-upload-multi"></div>
+        </div>
+    </div>
+
+    <div id="files-uploader-web" class="upload-form k-upload__web" style="display: none">
+        <form action="" method="post" name="remoteForm" id="remoteForm" >
+            <div class="input-group">
+                <div class="input-group-input">
+                    <input class="form-control has-left-radius" type="text" placeholder="<?= translate('Remote Link') ?>" title="<?= translate('Remote Link') ?>" id="remote-url" name="file" size="50" />
+                </div>
+                <div class="input-group-input">
+                    <input class="form-control" type="text" placeholder="<?= translate('File name') ?>" id="remote-name" name="name" />
+                </div>
+                <span class="input-group-btn">
+                    <input type="submit" class="remote-submit btn" disabled value="<?= translate('Transfer File'); ?>" />
+                </span>
+            </div>
+            <input type="hidden" name="action" value="save" />
+        </form>
+    </div>
+
+
+
+</div>
+
+<? if ( 1 == 2 ) : ?>
 <div class="js-com_files" style="visibility: hidden">
     <div id="files-upload" style="clear: both" class="uploader-files-empty well">
         <div style="text-align: center;">
@@ -53,3 +97,5 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         </div>
     </div>
 </div>
+<? endif; ?>
+

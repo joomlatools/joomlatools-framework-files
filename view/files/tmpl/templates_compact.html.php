@@ -69,8 +69,6 @@ if (metadata.image) {
 </textarea>
 
 
-<? // @TODO: Make this work, right now we're only getting the <a> tags while we need the <tr> and <td> as well; ?>
-
 <textarea style="display: none"  id="compact_folder">
     <li class="files-node files-folder">
         <a class="navigate" href="#" title="[%= name %]">
