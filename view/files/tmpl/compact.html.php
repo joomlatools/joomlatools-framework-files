@@ -132,8 +132,7 @@ kQuery(function($) {
                 <!-- Form -->
                 <form class="k-list-layout -koowa-grid" id="k-offcanvas-container" action="" method="get">
 
-                    <? // @TODO: :Ercan: Get a working dynamic pathway here; ?>
-                    <?= import('compact_breadcrumbs.html'); ?>
+                    <div class="k-breadcrumb" id="files-pathway"></div>
 
                     <? // @TODO: Ercan: We need to fix the uploader; ?>
                     <?= import('compact_upload.html'); ?>

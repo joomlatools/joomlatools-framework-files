@@ -14,7 +14,6 @@ Files.Compact.App = new Class({
 	Implements: [Events, Options],
     cookie: false,
 	options: {
-        pathway: false,
         persistent: false,
 		types: ['file', 'image'],
 		editor: null,

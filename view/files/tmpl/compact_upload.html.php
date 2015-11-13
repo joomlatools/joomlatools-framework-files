@@ -6,7 +6,10 @@
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/nooku/nooku-files for the canonical source repository
  */
-defined('KOOWA') or die; ?>
+defined('KOOWA') or die;
+
+$can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['can_upload'] : true;
+?>
 
 <?= import('com:files.files.scripts.html'); ?>
 
