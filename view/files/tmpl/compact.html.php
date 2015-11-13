@@ -21,19 +21,39 @@ Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
 window.addEvent('domready', function() {
-	var config = <?= json_encode(KObjectConfig::unbox(parameters()->config)); ?>,
-		options = {
+    var config = <?= json_encode(KObjectConfig::unbox(parameters()->config)); ?>,
+        options = {
             cookie: {
                 path: '<?=object('request')->getSiteUrl()?>'
             },
             root_text: <?= json_encode(translate('Root folder')) ?>,
-			editor: <?= json_encode(parameters()->editor); ?>,
-			types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
-			container: <?= json_encode($container ? $container->toArray() : null); ?>
-		};
-	options = Object.append(options, config);
+            editor: <?= json_encode(parameters()->editor); ?>,
+            types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
+            container: <?= json_encode($container ? $container->toArray() : null); ?>,
+            tree: {
+                dataFilter: function(response){
+                    if (response.data.length === 0) {
+                        return [];
+                    }
 
-	Files.app = new Files.Compact.App(options);
+                    kQuery('.koowa_dialog__file_dialog_categories').css('display', 'block');
+                    kQuery('.koowa_dialog--file_dialog').removeClass('koowa_dialog--no_categories');
+
+                    return Files.app.tree.filterData(response);
+                }
+            }
+        },
+        app = new Class({
+            Extends: Files.Compact.App,
+            // TODO: ercan: fix lazy loading
+            /*fetch: function() {
+                this.grid.unspin();
+                return kQuery.Deferred();
+            }*/
+        });
+    options = Object.append(options, config);
+
+    Files.app = new app(options);
 
     <? if ($can_upload): ?>
     $('files-new-folder-create').addEvent('click', function(e){

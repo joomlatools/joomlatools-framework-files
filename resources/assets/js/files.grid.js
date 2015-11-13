@@ -243,7 +243,7 @@ Files.Grid = new Class({
 			that.fireEvent('setState', state);
 		});
 
-		var input = kQuery('.search_button', '#files-canvas'),
+		var input = kQuery('.k-scopebar__item .k-search__field'),
 			send = function(value) {
 				var state = {search: typeof value === 'undefined' ? input.val() : value};
 
@@ -251,16 +251,14 @@ Files.Grid = new Class({
 				that.fireEvent('setState', state);
 			};
 
-		input.blur(function() {
-			send();
-		})
-		.keypress(function(event) {
+		input.keypress(function(event) {
 			if (event.which === 13) { // enter key
 				send();
 			}
 		});
 
-		kQuery('.search_button--empty', '#files-canvas').click(function() {
+		kQuery('.k-scopebar__item .k-search__button-empty').click(function(event) {
+			event.preventDefault();
 			if (input.val()) {
 				send('');
 			}
@@ -268,7 +266,7 @@ Files.Grid = new Class({
 	},
 	setState: function(state) {
 		if (typeof state.search !== 'undefined') {
-			var search = document.id('files-canvas').getElement('.search_button');
+			var search = document.getElement('.k-scopebar__item .k-search__field');
 			if (search) {
 				search.set('value', state.search);
 			}

@@ -31,10 +31,12 @@ defined('KOOWA') or die;
 
     </div>
 
-    <?//@TODO: @Ercan: This whole search needs to be implemented; ?>
     <!-- Search -->
-    <div class="k-scopebar__item k-scopebar__search ercan-todo">
-        <?= helper('grid.search', array('submit_on_clear' => true)) ?>
+    <div class="k-scopebar__item k-scopebar__search">
+        <?= helper('grid.search', array(
+            'submit_on_clear' => false,
+            'placeholder' => translate('Find by file or folder name&hellip;')
+        )) ?>
     </div>
 
 </div><!-- .k-scopebar -->

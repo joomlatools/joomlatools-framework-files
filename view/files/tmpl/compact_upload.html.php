@@ -15,47 +15,6 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 
 <ktml:script src="assets://files/js/files.compact.js" />
 
-<script>
-    Files.sitebase = '<?= $sitebase; ?>';
-    Files.token = '<?= $token; ?>';
-
-    window.addEvent('domready', function() {
-        var config = <?= json_encode(KObjectConfig::unbox(parameters()->config)); ?>,
-            options = {
-                cookie: {
-                    path: '<?=object('request')->getSiteUrl()?>'
-                },
-                root_text: <?= json_encode(translate('Root folder')) ?>,
-                editor: <?= json_encode(parameters()->editor); ?>,
-                types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
-                container: <?= json_encode($container ? $container->toArray() : null); ?>,
-                tree: {
-                    dataFilter: function(response){
-                        if (response.entities.length === 0) {
-                            return [];
-                        }
-
-                        kQuery('.koowa_dialog__file_dialog_categories').css('display', 'block');
-                        kQuery('.koowa_dialog--file_dialog').removeClass('koowa_dialog--no_categories');
-
-                        return Files.app.tree.filterData(response);
-                    }
-                }
-            },
-            app = new Class({
-                Extends: Files.Compact.App,
-                fetch: function() {
-                    this.grid.unspin();
-                    return kQuery.Deferred();
-                }
-            });
-        options = Object.append(options, config);
-
-        Files.app = new app(options);
-    });
-</script>
-
-<?= import('com:files.files.templates_compact.html');?>
 
 <? if ($can_upload): ?>
     <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload">
