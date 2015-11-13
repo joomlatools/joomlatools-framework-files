@@ -11,8 +11,4 @@ defined('KOOWA') or die;
 
 <div class="k-table-container">
     <div class="k-table" id="files-grid"></div>
-    <? // @TODO: @Ercan: Fix pagination for select window; ?>
-    <div class="k-table-pagination ercan-todo">
-        <?= helper('paginator.pagination') ?>
-    </div><!-- .k-table-pagination -->
 </div>
