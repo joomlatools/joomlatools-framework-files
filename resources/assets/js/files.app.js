@@ -41,7 +41,7 @@ Files.App = new Class({
         },
         grid: {
             element: 'files-grid',
-            batch_delete: '#toolbar-delete a',
+            batch_delete: '#toolbar-delete',
             icon_size: 150
         },
         paginator: {
@@ -50,7 +50,7 @@ Files.App = new Class({
         folder_dialog: {
             view: '#files-new-folder-modal',
             input: '#files-new-folder-input',
-            open_button: '#toolbar-newfolder a',
+            open_button: '#toolbar-newfolder',
             create_button: '#files-new-folder-create',
             //Fires when the form for creating a new folder is submitted
             onSubmit: function(){},
