@@ -133,7 +133,7 @@ kQuery(function($) {
     <div class="k-titlebar">
 
         <!-- Title -->
-        <h2>Insert / Upload file</h2>
+        <h2><?= translate('Insert / Upload file'); ?></h2>
 
     </div><!-- .k-titlebar -->
 
