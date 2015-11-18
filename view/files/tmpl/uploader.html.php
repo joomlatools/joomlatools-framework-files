@@ -8,6 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
+
 <?= import('com:files.files.uploader_scripts.html') ?>
 
 
@@ -38,12 +39,16 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                    // Also make sure that the upload info (percentage thing) is visible while uploading. This is currently hidden by CSS
                    // Last but not least; we should create a better visual loading bar when uploading. remove .visuall-hidden class from .k-upload__loading div below ?>
                 <div class="k-upload__drop__uploader ercan-todo" id="files-upload-multi"></div>
-                <div class="k-upload__loading visually-hidden">
+                <div class="k-upload__loading" style="display: none">
                     <div class="k-upload__loading__bar"></div>
-                    <div class="k-upload__loading__text">
-                        50%
-                    </div>
                 </div>
+                <script>
+                    kQuery(document).ready(function ($) {
+                        $('.plupload_start').on('click', function() {
+                            $('.k-upload__loading').show().find('.k-upload__loading__bar').addClass('k-load-bar').find('.k-upload__loading__text').addClass('k-load-text');
+                        });
+                    });
+                </script>
             </div>
         </div>
 

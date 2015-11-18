@@ -27,7 +27,8 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
     </div>
 
     <? if ($can_upload): ?>
-        <div class="k-sidebar__item">
+        <? // @TODO: @Ercan: Make sure that the new folders get added immediately to the tree above; ?>
+        <div class="k-sidebar__item ercan-todo">
             <div class="k-sidebar__header">
                 <?= translate('Create a new folder'); ?>
             </div>

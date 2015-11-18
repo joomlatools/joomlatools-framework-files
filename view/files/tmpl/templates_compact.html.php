@@ -14,15 +14,17 @@ var width = 0, height = 0, ratio = 0;
 if (metadata.image) {
     width  = metadata.image.width;
     height = metadata.image.height;
-    ratio  = 150 / (width > height ? width : height);
+    ratio  = 250 / (width > height ? width : height);
 }
 %]
 <div class="details">
-    <p>
-        <img class="icon" src="" alt="[%=name%]" border="0"
-             onerror="kQuery(this).hide();"
-            width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
-    </p>
+    <div class="k-details-image-placeholder">
+        <div class="k-details-image-placeholder__content">
+            <img class="icon" src="" alt="[%=name%]" border="0"
+                 onerror="kQuery(this).hide();"
+                width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+        </div>
+    </div>
     <p>
         <strong class="labl"><?= translate('Name'); ?></strong>
         [%=name%]
