@@ -16,29 +16,16 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <? // Inline upload style ( 1 file allowed) ?>
     <div class="k-upload k-upload--single">
 
-        <div id="files-upload-controls" class="clearfix">
-            <div class="k-upload__buttons">
-                <div class="btn-group">
-                    <button class="btn btn-sm btn-default upload-form-toggle target-computer active" href="#computer"><?= translate('Computer'); ?></button>
-                    <button class="btn btn-sm btn-default upload-form-toggle target-web" href="#web"><?= translate('From URL'); ?></button>
-                </div>
-                <p id="upload-max">
-                    <?= translate('Each file should be smaller than {size}', array(
-                        'size' => '<span id="upload-max-size"></span>'
-                    )); ?>
-                </p>
-            </div>
-        </div>
-
         <div id="files-uploader-computer" class="k-upload__drop upload-form">
             <div id="files-upload" class="k-upload__drop__content">
                 <div class="k-upload__drop__message">
-                    <p>Drop files here <small>(max 10MB)</small></p>
+                    <p>Drop file here <small>(max 10MB)</small></p>
                 </div>
                 <? // @TODO: @Ercan: Make sure that the name of the selected file will be visible here before you click upload
                    // Also make sure that the upload info (percentage thing) is visible while uploading. This is currently hidden by CSS
+                   // We also need to make the upload button appear when a file is selected (or upload automatically)
                    // Last but not least; we should create a better visual loading bar when uploading. remove .visuall-hidden class from .k-upload__loading div below ?>
-                <div class="k-upload__drop__uploader ercan-todo" id="files-upload-multi"></div>
+                <div class="k-upload__drop__uploader" id="files-upload-multi"></div>
                 <div class="k-upload__loading" style="display: none">
                     <div class="k-upload__loading__bar"></div>
                 </div>
@@ -67,6 +54,20 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 </div>
                 <input type="hidden" name="action" value="save" />
             </form>
+        </div>
+
+        <div id="files-upload-controls" class="clearfix">
+            <div class="k-upload__buttons">
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-default upload-form-toggle target-computer active" href="#computer"><?= translate('Computer'); ?></button>
+                    <button class="btn btn-sm btn-default upload-form-toggle target-web" href="#web"><?= translate('From URL'); ?></button>
+                </div>
+                <p id="upload-max">
+                    <?= translate('Each file should be smaller than {size}', array(
+                        'size' => '<span id="upload-max-size"></span>'
+                    )); ?>
+                </p>
+            </div>
         </div>
 
     </div>
