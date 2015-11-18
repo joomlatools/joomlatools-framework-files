@@ -17,7 +17,7 @@ if (metadata.image) {
     ratio  = 250 / (width > height ? width : height);
 }
 %]
-<div class="details">
+<div class="k-details">
     <div class="k-details-image-placeholder">
         <div class="k-details-image-placeholder__content">
             <img class="icon" src="" alt="[%=name%]" border="0"
