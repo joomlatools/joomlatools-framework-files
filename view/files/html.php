@@ -27,21 +27,19 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 	    $state     = $this->getModel()->getState();
         $container = $this->getModel()->getContainer();
 
-        $config = array(
-            'router' => array(
+        $config = new KObjectConfig($state->config);
+
+        $config->append(array(
+            'router'           => array(
                 'defaults' => array(
-                    'option' => 'com_'.substr($container->slug, 0, strpos($container->slug, '-')),
+                    'option' => 'com_' . substr($container->slug, 0, strpos($container->slug, '-')),
                     'routed' => '1'
                 )
             ),
             'initial_response' => true
-        );
+        ));
 
-	    if (is_array($state->config)) {
-            $config = array_merge_recursive($config, $state->config);
-        }
-
-        if ($config['initial_response'] === true)
+        if ($config->initial_response === true)
         {
             $count = 0;
             $query = $state->getValues();
@@ -59,13 +57,12 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
                 $controller = $this->getObject('com:files.controller.node');
                 $controller->getRequest()->setQuery($query);
 
-                $config['initial_response'] = $controller->format('json')->render();
+                $config->initial_response = $controller->format('json')->render();
             }
-
-            else unset($config['initial_response']);
+            else unset($config->initial_response);
         }
 
-        $state->config = $config;
+        $state->config = $config->toArray();
 
 		$context->data->sitebase  = trim(JURI::root(), '/');
         $context->data->token     = $this->getObject('user')->getSession()->getToken();

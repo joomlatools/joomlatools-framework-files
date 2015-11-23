@@ -1,0 +1,23 @@
+@media screen and (min-width: $dialogScreenWidth) {
+  .koowa_dialog__menu--fullwidth {
+    left: 0%;
+  }
+
+  .koowa_dialog__file_dialog_insert--fullwidth {
+    width: 58%;
+  }
+
+  .koowa_dialog__file_dialog_upload--fullwidth {
+    width: 100%;
+  }
+}
+
+.old-ie {
+  .koowa_dialog__menu--fullwidth {
+    left: 0%;
+  }
+
+  .koowa_dialog__file_dialog_insert--fullwidth {
+    width: 58%;
+  }
+}
