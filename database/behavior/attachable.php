@@ -56,18 +56,24 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 
         $attached = $model->table($this->_getTableName())->row($this->{$this->_row_column})->fetch();
 
+        $container = $this->_getContainer();
+
         $ignore = array();
 
         foreach ($attached as $attachment)
         {
-            if (!in_array($attachment->name, $attachments)) {
-                $attachment->delete();
-            } else {
-                $ignore[] = $attachment->name;
-            }
-        }
+            if (!in_array($attachment->name, $attachments))
+            {
 
-        $container = $this->_getContainer();
+                if ($attachment->delete())
+                {
+                    // Delete the file if not being used by any other attachment. This cannot be
+                    // done in the entity since it cannot resolve the attachments model identifier.
+                    $this->_deleteFiles($attachment);
+                }
+            }
+            else $ignore[] = $attachment->name;
+        }
 
         foreach ($attachments as $attachment)
         {
@@ -90,7 +96,28 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 
     protected function _afterDelete(KDatabaseContextInterface $context)
     {
-        $this->_getAttachmentsModel()->table($this->_getTableName())->row($this->{$this->_row_column})->fetch()->delete();
+        $attachments = $this->_getAttachmentsModel()->table($this->_getTableName())->row($this->{$this->_row_column})->fetch();
+
+        if ($attachments->delete()) {
+            $this->_deleteFiles($attachments);
+        }
+    }
+
+    protected function _deleteFiles($attachments)
+    {
+        $model = $this->_getAttachmentsModel();
+
+        foreach ($attachments as $attachment)
+        {
+            if (!$model->container($attachment->container)->name($attachment->name)->count())
+            {
+                $file = $attachment->file;
+
+                if (!$file->isNew()) {
+                    $file->delete();
+                }
+            }
+        }
     }
 
     public function getAttachments()
@@ -108,6 +135,11 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 
     protected function _getTableName()
     {
+        return $this->_getTable()->getBase();
+    }
+
+    protected function _getTable()
+    {
         $mixer = $this->getMixer();
 
         if ($mixer instanceof KModelEntityInterface) {
@@ -116,7 +148,7 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
             $table = $mixer;
         }
 
-        return $table->getBase();
+        return $table;
     }
 
     protected function _getAttachmentsModel()
