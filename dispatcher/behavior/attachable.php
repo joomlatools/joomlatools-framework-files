@@ -28,6 +28,8 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
 
         $this->_container = $config->container;
 
+        $mixer = $this->getMixer();
+
         $aliases = array(
             'com:files.model.attachments'            => array(
                 'path' => array('model'),
@@ -36,13 +38,17 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
             'com:files.database.behavior.attachable' => array(
                 'path' => array('database', 'behavior'),
                 'name' => 'attachable'
+            ),
+            'com:files.controller.permission.attachment' => array(
+                'path' => array('controller', 'permission'),
+                'name' => 'attachment'
             )
         );
 
         // Create aliases for attachment classes where required.
         foreach ($aliases as $identifier => $alias)
         {
-            $alias = array_merge($this->getMixer()->getIdentifier()->toArray(), $alias);
+            $alias = array_merge($mixer->getIdentifier()->toArray(), $alias);
 
             $manager = $this->getObject('manager');
 
@@ -51,6 +57,16 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
                 $manager->registerAlias($identifier, $alias);
             }
         }
+
+        // Set up file controller permission.
+        $identifier = $mixer->getIdentifier()->toArray();
+        $identifier['path'] = array('controller', 'permission');
+        $identifier['name'] = 'attachment';
+        $identifier = $this->getIdentifier($identifier)->toString();
+
+        $this->getIdentifier('com:files.controller.file')
+             ->getConfig()
+             ->append(array('behaviors' => array('permissible' => array('permission' => $identifier))));
 
         // Make resource tables attachable.
         foreach ($config->resources as $resource)
