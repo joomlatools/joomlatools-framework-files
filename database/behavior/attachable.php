@@ -83,18 +83,4 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 
         return $this->getObject($identifier);
     }
-
-    protected function _getContainer()
-    {
-        if (!$this->_container instanceof ComFilesModelEntityContainer)
-        {
-            $this->_container = $this->getObject('com:files.model.containers')->slug($this->_container)->fetch();
-
-            if ($this->_container->isNew()) {
-                throw new RuntimeException('Invalid container ' . $this->_container);
-            }
-        }
-
-        return $this->_container;
-    }
 }
