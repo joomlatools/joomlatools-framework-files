@@ -19,25 +19,22 @@ class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
     {
         $config = new KObjectConfig($config);
 
+        $entity = $config->entity;
+
         $info = array();
 
-        foreach ($config->attachments as $attachment)
+        if ($entity->isAttachable())
         {
-            $file = $attachment->file;
-
-            if ($file->isImage() && !$attachment->thumbnail)
+            foreach ($entity->getAttachments() as $attachment)
             {
-                $thumbnail = $this->getObject('com:files.model.thumbnails')
-                                  ->filename($attachment->name)
-                                  ->container($attachment->container_slug)
-                                  ->fetch();
+                $file = $attachment->file;
 
-                if (!$thumbnail->isNew()) {
+                if ($file->isThumbnail() && ($thumbnail = $file->getThumbnail())) {
                     $attachment->file->thumbnail = $thumbnail->thumbnail;
                 }
-            }
 
-            $info[] = current(array_values($attachment->file->toArray()));
+                $info[] = current(array_values($attachment->file->toArray()));
+            }
         }
 
         return $info;
