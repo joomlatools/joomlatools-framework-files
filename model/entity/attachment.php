@@ -19,4 +19,35 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
     {
         return $this->getObject('com:files.model.files')->container($this->container_slug)->name($this->name)->fetch();
     }
+
+    public function delete()
+    {
+        $result = parent::delete();
+
+        if ($result)
+        {
+            // This is the best model guess there is ...
+            $parts = $this->getIdentifier()->toArray();
+
+            $parts['path'] = array('model');
+            $parts['name'] = 'attachments';
+
+            $model =  $this->getObject($parts);
+
+            $attachments = $model->container($this->container)
+                                 ->name($this->name)
+                                 ->count();
+
+            if (!$attachments)
+            {
+                $file = $this->file;
+
+                if (!$file->isNew()) {
+                    $file->delete();
+                }
+            }
+        }
+
+        return $result;
+    }
 }
