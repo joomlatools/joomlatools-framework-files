@@ -28,15 +28,99 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
 
         $this->_container = $config->container;
 
+        $this->_setConfigurations();
+        $this->_setAliases();
+    }
+
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'resources' => array(),
+            'container' => sprintf('%s-attachments',
+                $config->mixer->getIdentifier()->getPackage())
+        ));
+
+        parent::_initialize($config);
+    }
+
+    protected function _setConfigurations()
+    {
+        $mixer = $this->getMixer();
+
+        // Set up controller permissions.
+        $controllers = array('com:files.controller.file');
+
+        $parts = $mixer->getIdentifier()->toArray();
+        $parts['path'] = array('controller');
+        $parts['name'] = 'attachment';
+
+        $identifier = $this->getIdentifier($parts);
+
+        // Set attachment controller container.
+        $identifier->getConfig()->append(array('container' => $this->_container));
+
+        $controllers[] = $identifier->toString();
+
+        $parts['path'] = array('controller', 'permission');
+
+        $identifier = $this->getIdentifier($parts)->toString();
+
+        foreach ($controllers as $controller)
+        {
+            $this->getIdentifier($controller)
+                 ->getConfig()
+                 ->append(array('behaviors' => array('permissible' => array('permission' => $identifier))));
+        }
+
+        // Make resource controllers and tables attachable.
+        foreach ($this->getConfig()->resources as $resource)
+        {
+            $subject = $behavior = $mixer->getIdentifier()->toArray();
+
+            // Database layer.
+            $subject['path'] = array('database', 'table');
+            $subject['name'] = KStringInflector::pluralize($resource);
+
+            $behavior['path'] = array('database', 'behavior');
+            $behavior['name'] = 'attachable';
+
+            $identifier = $this->getIdentifier($behavior);
+            $identifier->getConfig()->append(array('container' => $this->_container));
+
+            $this->getIdentifier($subject)->getConfig()
+                 ->append(array('behaviors' => array($identifier)));
+
+            // Controller layer.
+            $subject['path'] = array('controller');
+            $subject['name'] = KStringInflector::singularize($resource);
+
+            $behavior['path'] = array('controller', 'behavior');
+            $behavior['name'] = 'attachable';
+
+            $this->getIdentifier($subject)->getConfig()
+                 ->append(array('behaviors' => array($this->getIdentifier($behavior))));
+        }
+    }
+
+    protected function _setAliases()
+    {
         $mixer = $this->getMixer();
 
         $aliases = array(
-            'com:files.model.attachments'            => array(
+            'com:files.controller.attachment'            => array(
+                'path' => array('controller'),
+                'name' => 'attachment'
+            ),
+            'com:files.model.attachments'                => array(
                 'path' => array('model'),
                 'name' => 'attachments'
             ),
-            'com:files.database.behavior.attachable' => array(
+            'com:files.database.behavior.attachable'     => array(
                 'path' => array('database', 'behavior'),
+                'name' => 'attachable'
+            ),
+            'com:files.controller.behavior.attachable'   => array(
+                'path' => array('controller', 'behavior'),
                 'name' => 'attachable'
             ),
             'com:files.controller.permission.attachment' => array(
@@ -57,49 +141,6 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
                 $manager->registerAlias($identifier, $alias);
             }
         }
-
-        // Set up file controller permission.
-        $identifier = $mixer->getIdentifier()->toArray();
-        $identifier['path'] = array('controller', 'permission');
-        $identifier['name'] = 'attachment';
-        $identifier = $this->getIdentifier($identifier)->toString();
-
-        $this->getIdentifier('com:files.controller.file')
-             ->getConfig()
-             ->append(array('behaviors' => array('permissible' => array('permission' => $identifier))));
-
-        // Make resource tables attachable.
-        foreach ($config->resources as $resource)
-        {
-            $table = $behavior = $config->mixer->getIdentifier()->toArray();
-
-            $table['path'] = array('database', 'table');
-            $table['name'] = KStringInflector::pluralize($resource);
-
-            $behavior['path'] = array('database', 'behavior');
-            $behavior['name'] = 'attachable';
-
-            $behavior = $this->getIdentifier($behavior);
-            $behavior->getConfig()->append(array('container' => $this->_container));
-
-            $this->getIdentifier($table)
-                 ->getConfig()
-                 ->append(array(
-                         'behaviors' => array($behavior)
-                     )
-                 );
-        }
-    }
-
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(array(
-            'resources' => array(),
-            'container' => sprintf('%s-attachments',
-                $config->mixer->getIdentifier()->getPackage())
-        ));
-
-        parent::_initialize($config);
     }
 
     protected function _beforeGet(KDispatcherContextInterface $context)
