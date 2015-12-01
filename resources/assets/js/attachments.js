@@ -15,8 +15,10 @@
                 init: function (config)
                 {
                     my.template = $(config.template);
-                    my.url = config.url;
-                    my.attachments = {};
+                    my.get_url = config.get_url;
+                    my.post_url = config.post_url;
+                    my.csrf_token = config.csrf_token;
+                    my.table = config.table;
                 },
                 render: function(attachment)
                 {
@@ -46,30 +48,45 @@
                 {
                     this.template.trigger('before.insert', attachment);
 
-                    var name = $.type(attachment) === 'string' ? attachment : attachment.name;
+                    var data = {
+                        attachments: [attachment],
+                        csrf_token: this.csrf_token
+                    };
 
-                    if (!this.attachments[name])
-                    {
-                        this.attachments[name] = 1;
-                        this.template.trigger('after.insert', attachment);
-                    }
+                    $.ajax({
+                        url: this.post_url,
+                        method: 'POST',
+                        data: data,
+                        success: function(event, data) {
+                            my.template.trigger('after.insert', attachment);
+                        }
+                    });
                 },
                 remove: function(attachment)
                 {
                     this.template.trigger('before.remove', attachment);
 
-                    var name = $.type(attachment) === 'string' ? attachment : attachment.name;
+                    var data = {
+                        attachments: [attachment],
+                        csrf_token: this.csrf_token,
+                        _action: 'delete'
+                    };
 
-                    if (this.attachments[name])
-                    {
-                        this.attachments[name] = 0;
-                        this.template.trigger('after.remove', attachment);
-                    }
+                    $.ajax({
+                        url: this.post_url,
+                        method: 'POST',
+                        data: data,
+                        success: function(event, data) {
+                            my.template.trigger('after.remove', attachment);
+                        }
+                    });
+
+
                 },
                 route: function(name, format)
                 {
                     format = format ? format : 'html';
-                    return this.url.replace('%7Bname%7D', encodeURIComponent(name)).replace('%7Bformat%7D', format);
+                    return this.get_url.replace('%7Bname%7D', encodeURIComponent(name)).replace('%7Bformat%7D', format);
                 },
                 bind: function(event, handler)
                 {
