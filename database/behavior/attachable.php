@@ -17,7 +17,7 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 {
     protected function _afterDelete(KDatabaseContextInterface $context)
     {
-        $attachments = $this->_getAttachmentsModel()->table($this->_getTableName())->row($this->{$this->_row_column})->fetch();
+        $attachments = $this->_getAttachmentsModel()->table($this->_getTableName())->row($this->id)->fetch();
 
         if ($attachments->delete()) {
             $this->_deleteFiles($attachments);
@@ -26,7 +26,7 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 
     protected function _deleteFiles($attachments)
     {
-        $model = $this->_getAttachmentsModel();
+        $model = $this->_getModel();
 
         foreach ($attachments as $attachment)
         {
@@ -43,7 +43,7 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 
     public function getAttachments()
     {
-        $model = $this->_getAttachmentsModel();
+        $model = $this->_getModel();
 
         if (!$this->isNew()) {
             $attachments = $model->table($this->_getTableName())->row($this->{$this->_row_column})->fetch();
@@ -72,7 +72,7 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
         return $table;
     }
 
-    protected function _getAttachmentsModel()
+    protected function _getModel()
     {
         $mixer = $this->getMixer();
 
