@@ -15,37 +15,58 @@
  */
 class ComFilesControllerAttachment extends ComKoowaControllerModel
 {
-    protected $_container;
-
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
-        $this->_container = $config->container;
-    }
+        $aliases = array(
+            'com:files.model.attachments'                => array(
+                'path' => array('model'),
+                'name' => 'attachments'
+            ),
+            'com:files.controller.permission.attachment' => array(
+                'path' => array('controller', 'permission'),
+                'name' => 'attachment'
+            )
+        );
 
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(array('container' => sprintf('%s-attachments', $config->object_identifier->getPackage())));
-        parent::_initialize($config);
-    }
+        $manager = $this->getObject('manager');
 
-    protected function _beforeAdd(KControllerContextInterface $context)
-    {
-        $context->getRequest()->getData()->container = $this->_getContainer()->id;
-    }
-
-    protected function _getContainer()
-    {
-        if (!$this->_container instanceof ComFilesModelEntityContainer)
+        foreach ($aliases as $identifier => $alias)
         {
-            $this->_container = $this->getObject('com:files.model.containers')->slug($this->_container)->fetch();
+            $alias = array_merge($this->getIdentifier()->toArray(), $alias);
 
-            if ($this->_container->isNew()) {
-                throw new RuntimeException('Invalid container ' . $this->_container);
+            if (!$manager->getClass($alias, false)) {
+                $manager->registerAlias($identifier, $alias);
+            }
+        }
+    }
+
+    protected function _afterAdd(KControllerContextInterface $context)
+    {
+        if ($context->getRequest()->isAjax() && $context->result->getStatus !== KDatabase::STATUS_FAILED) {
+            $context->getResponse()->setStatus(KHttpResponse::NO_CONTENT);
+        }
+    }
+
+    public function setView($view)
+    {
+        $view = parent::setView($view);
+
+        if ($view instanceof KObjectIdentifierInterface && $view->getPackage() !== 'files')
+        {
+            $manager = $this->getObject('manager');
+
+            if (!$manager->getClass($view, false))
+            {
+                $identifier = $view->toArray();
+                $identifier['package'] = 'files';
+                unset($identifier['domain']);
+
+                $manager->registerAlias($identifier, $view);
             }
         }
 
-        return $this->_container;
+        return $view;
     }
 }
