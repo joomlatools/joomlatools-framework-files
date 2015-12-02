@@ -65,14 +65,4 @@ class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
 
         return $entity;
     }
-
-    /**
-     * Defined by IteratorAggregate
-     *
-     * @return \RecursiveArrayIterator
-     */
-    public function getIterator()
-    {
-        return new \RecursiveArrayIterator($this->_data);
-    }
 }
