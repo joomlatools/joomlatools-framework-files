@@ -15,9 +15,37 @@
  */
 class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 {
+    protected $_row_column;
+
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->_row_column = $config->row_column;
+
+        $aliases = array('com:files.model.attachments' => array('path' => array('model'), 'name' => 'attachments'));
+
+        $manager = $this->getObject('manager');
+
+        foreach ($aliases as $identifier => $alias)
+        {
+            $alias = array_merge($this->getMixer()->getIdentifier()->toArray(), $alias);
+
+            if (!$manager->getClass($alias, false)) {
+                $manager->registerAlias($identifier, $alias);
+            }
+        }
+    }
+
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array('row_column' => 'id'));
+        parent::_initialize($config);
+    }
+
     protected function _afterDelete(KDatabaseContextInterface $context)
     {
-        $attachments = $this->_getAttachmentsModel()->table($this->_getTableName())->row($this->id)->fetch();
+        $attachments = $this->_getModel()->table($this->_getTableName())->row($this->id)->fetch();
 
         if ($attachments->delete()) {
             $this->_deleteFiles($attachments);
@@ -74,9 +102,7 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 
     protected function _getModel()
     {
-        $mixer = $this->getMixer();
-
-        $identifier = $mixer->getIdentifier()->toArray();
+        $identifier = $this->getMixer()->getIdentifier()->toArray();
 
         $identifier['path'] = array('model');
         $identifier['name'] = 'attachments';
