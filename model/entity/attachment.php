@@ -26,7 +26,6 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
 
         if ($result)
         {
-            // This is the best model guess there is ...
             $parts = $this->getIdentifier()->toArray();
 
             $parts['path'] = array('model');
