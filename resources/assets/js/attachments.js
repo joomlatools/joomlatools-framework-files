@@ -14,16 +14,17 @@
             var my = {
                 init: function (config)
                 {
+                    my.table = config.table;
+                    my.row = config.row;
                     my.template = $(config.template);
-                    my.get_url = config.get_url;
-                    my.post_url = config.post_url;
+                    my.urls = config.urls;
                     my.csrf_token = config.csrf_token;
                     my.table = config.table;
                 },
                 render: function(attachment)
                 {
                     var data = {
-                        url: this.route(attachment.name),
+                        url: this.url({view: "files", thumbnails: 1, name: attachment.name, format: "json", routed: 1}),
                         name: this.escape(attachment.name),
                         type: attachment.type,
                         thumbnail: attachment.thumbnail
@@ -49,12 +50,14 @@
                     this.template.trigger('before.insert', attachment);
 
                     var data = {
-                        attachments: [attachment],
-                        csrf_token: this.csrf_token
+                        name: attachment,
+                        csrf_token: this.csrf_token,
+                        table: this.table,
+                        row: this.row
                     };
 
                     $.ajax({
-                        url: this.post_url,
+                        url: this.url({view: "attachment"}),
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
@@ -67,13 +70,12 @@
                     this.template.trigger('before.remove', attachment);
 
                     var data = {
-                        attachments: [attachment],
                         csrf_token: this.csrf_token,
                         _action: 'delete'
                     };
 
                     $.ajax({
-                        url: this.post_url,
+                        url: this.url({view: "attachment", table: this.table, row: this.row, name: attachment}),
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
@@ -83,10 +85,28 @@
 
 
                 },
-                route: function(name, format)
+                url: function(params, decode)
                 {
-                    format = format ? format : 'html';
-                    return this.get_url.replace('%7Bname%7D', encodeURIComponent(name)).replace('%7Bformat%7D', format);
+                    var url = null;
+
+                    if (url = this.urls[params.view])
+                    {
+                        delete params.view;
+
+                        var params = $.param(params);
+
+                        if (decode) {
+                            params = decodeURIComponent(params);
+                        }
+
+                        if (params.length)
+                        {
+                            url += url.search('\\?') ? '&' : '?';
+                            url += params;
+                        }
+                    }
+
+                    return url;
                 },
                 bind: function(event, handler)
                 {
