@@ -111,24 +111,26 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <div class="files-node-shadow">
     <div class="imgOutline [%= typeof thumbnail === 'string' ? 'thumbnails' : 'nothumbnails' %] files-node files-image [%= typeof thumbnail === 'string' ? (client_cache ? 'load' : 'loading') : '' %]">
     	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
-    		<a class="navigate
-    		        [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
-    	 		data-filetype="[%=filetype%]"
-    	 		data-extension="[%=metadata.extension%]">
-    		[% if (typeof thumbnail === 'string') { %]
-    		    <div class="spinner"></div>
-    			<img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" style="max-width: [%=metadata.image? metadata.image.width : 512%]px" />
-    		[% } %]
-    		</a>
+      		<a class="navigate
+      		        [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
+      	 		data-filetype="[%=filetype%]"
+      	 		data-extension="[%=metadata.extension%]">
+      		[% if (typeof thumbnail === 'string') { %]
+      		    <div class="spinner"></div>
+      			<img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" style="max-width: [%=metadata.image? metadata.image.width : 512%]px" />
+      		[% } %]
+      		</a>
     	</div>
+
     	<div class="files-icons-controls">
-    	<div class="controls" style="display:none">
-    		<input type="checkbox" class="files-select" value="" />
+        	<div class="ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
+        		[%=name%]
+        	</div>
     	</div>
-    	<div class="ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-    		[%=name%]
-    	</div>
-    	</div>
+
+      <div class="files-icons-controls text-left">
+          <input type="checkbox" class="files-select" />
+      </div>
     </div>
 </div>
 </textarea>
