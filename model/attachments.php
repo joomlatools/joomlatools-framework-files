@@ -19,7 +19,7 @@ class ComFilesModelAttachments extends KModelDatabase
     {
         parent::__construct($config);
 
-        $this->getState()->insert('container', 'cmd');
+        $this->getState()->insert('container', 'int');
     }
 
     protected function _buildQueryColumns(KDatabaseQueryInterface $query)
