@@ -29,6 +29,29 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 	 */
 	protected $_parent   = null;
 
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        if(isset($config->parent)) {
+            $this->setParent($config->parent);
+        }
+
+        foreach($config->children as $child) {
+            $this->insertChild($child);
+        }
+    }
+
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array(
+            'children'  => array(),
+            'parent'	=> null,
+        ));
+
+        parent::_initialize($config);
+    }
+
 	public function save()
 	{
 		$context = $this->getContext();
@@ -51,17 +74,6 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 		else $this->setStatus($is_new ? KDatabase::STATUS_CREATED : KDatabase::STATUS_UPDATED);
 
 		return $context->result;
-	}
-
-	public function toArray()
-	{
-		$data = parent::toArray();
-
-		if ($this->hasChildren()) {
-			$data['children'] = array_values($this->getChildren()->toArray());
-		}
-
-		return $data;
 	}
 
 	public function getProperties($modified = false)
@@ -136,4 +148,15 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 
 		return $this;
 	}
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+
+        if ($this->hasChildren()) {
+            $data['children'] = array_values($this->getChildren()->toArray());
+        }
+
+        return $data;
+    }
 }
