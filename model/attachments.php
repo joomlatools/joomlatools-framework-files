@@ -63,4 +63,13 @@ class ComFilesModelAttachments extends KModelDatabase
             $query->bind(array('row' => $row, 'table' => $table, 'name' => $name));
         }
     }
+
+    protected function _actionCreate(KModelContext $context)
+    {
+        $context->entity->append(array(
+            'container' => $context->state->container,
+        ));
+
+        return parent::_actionCreate($context);
+    }
 }
