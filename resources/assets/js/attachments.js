@@ -17,14 +17,14 @@
                     my.table = config.table;
                     my.row = config.row;
                     my.template = $(config.template);
-                    my.urls = config.urls;
+                    my.url = config.url;
                     my.csrf_token = config.csrf_token;
                     my.table = config.table;
                 },
                 render: function(attachment)
                 {
                     var data = {
-                        url: this.url({view: "files", thumbnails: 1, name: attachment.name, format: "json", routed: 1}),
+                        url: this.route({view: "files", thumbnails: 1, name: attachment.name, format: "json", routed: 1}),
                         name: this.escape(attachment.name),
                         type: attachment.type,
                         thumbnail: attachment.thumbnail
@@ -57,7 +57,7 @@
                     };
 
                     $.ajax({
-                        url: this.url({view: "attachment"}),
+                        url: this.route({view: "attachment"}),
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
@@ -75,7 +75,7 @@
                     };
 
                     $.ajax({
-                        url: this.url({view: "attachment", table: this.table, row: this.row, name: attachment}),
+                        url: this.route({view: "attachment", table: this.table, row: this.row, name: attachment}),
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
@@ -85,11 +85,11 @@
 
 
                 },
-                url: function(params, decode)
+                route: function(params, decode)
                 {
                     var url = null;
 
-                    if (url = this.urls[params.view])
+                    if (url = this.url[params.view])
                     {
                         delete params.view;
 
