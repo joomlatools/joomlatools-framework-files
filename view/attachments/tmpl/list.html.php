@@ -23,7 +23,7 @@
                 {
                     table: <?= json_encode($entity->getTable()->getBase()) ?>,
                     row: <?= json_encode($entity->id) ?>,
-                    urls: {attachment: "<?= route('view=attachment', true, false) ?>", files: "<?= route('view=files', true, false) ?>"},
+                    url: {attachment: "<?= route('view=attachment', true, false) ?>", files: "<?= route('view=files', true, false) ?>"},
                     template: '#attachment-template',
                     csrf_token: <?= json_encode(object('user')->getSession()->getToken()) ?>
                 }
@@ -53,7 +53,7 @@
             Attachments.bind('after.insert', function(event, attachment)
             {
                 $.ajax({
-                    url: Attachments.url({view: "files", thumbnails: 1, format: "json", name: attachment, routed: 1}),
+                    url: Attachments.route({view: "files", thumbnails: 1, format: "json", name: attachment, routed: 1}),
                     success: function(data) {
                         render(data.entities.pop());
                     }
@@ -62,9 +62,9 @@
 
             var attachments = <?= json_encode(helper('com:files.attachments.fileinfo', array('entity' => $entity))) ?>
 
-                $.each(attachments, function (idx, attachment) {
-                    render(attachment);
-                });
+            $.each(attachments, function (idx, attachment) {
+                render(attachment);
+            });
         });
     </script>
 
