@@ -15,18 +15,26 @@
  */
 class ComFilesControllerAttachment extends ComKoowaControllerModel
 {
-    public function __construct(KObjectConfig $config)
+    protected function _initialize(KObjectConfig $config)
     {
-        parent::__construct($config);
+        $config->append(array('behaviors' => array('relatable')));
 
         $aliases = array(
             'com:files.model.attachments'                => array(
                 'path' => array('model'),
                 'name' => 'attachments'
             ),
+            'com:files.model.attachments_relations' => array(
+                'path' => array('model'),
+                'name' => 'attachments_relations'
+            ),
             'com:files.controller.permission.attachment' => array(
                 'path' => array('controller', 'permission'),
                 'name' => 'attachment'
+            ),
+            'com:files.controller.behavior.relatable' => array(
+                'path' => array('controller', 'behavior'),
+                'name' => 'relatable'
             )
         );
 
@@ -40,6 +48,8 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
                 $manager->registerAlias($identifier, $alias);
             }
         }
+
+        parent::_initialize($config);
     }
 
     protected function _afterAdd(KControllerContextInterface $context)
