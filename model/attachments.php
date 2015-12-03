@@ -19,7 +19,7 @@ class ComFilesModelAttachments extends KModelDatabase
     {
         parent::__construct($config);
 
-        $this->getState()->insert('container', 'int');
+        $this->getState()->insert('table', 'cmd')->insert('row', 'cmd');
     }
 
     protected function _buildQueryColumns(KDatabaseQueryInterface $query)
@@ -34,6 +34,12 @@ class ComFilesModelAttachments extends KModelDatabase
         parent::_buildQueryJoins($query);
 
         $query->join('files_containers AS containers', 'containers.files_container_id = tbl.files_container_id', 'INNER');
+
+        $state = $this->getState();
+
+        if ($state->row || $state->table) {
+            $query->join('files_attachments_relations AS relations', 'relations.files_attachment_id = tbl.files_attachment_id', 'INNER');
+        }
     }
 
     protected function _buildQueryWhere(KDatabaseQueryInterface $query)
@@ -42,25 +48,27 @@ class ComFilesModelAttachments extends KModelDatabase
 
         $state = $this->getState();
 
-        if ($container = $state->container) {
-            $query->where('tbl.files_container_id IN :container')->bind(array('container' => (array) $container));
-        }
-
         if (!$state->isUnique())
         {
-            if ($row = $state->row) {
-                $query->where('tbl.row = :row');
+            if ($container = $state->container) {
+                $query->where('tbl.files_container_id = :container');
             }
 
-            if ($table = $state->table) {
-                $query->where('tbl.table = :table');
-            }
-
-            if ($name = $state->name) {
+            if ($name = $state->name)
+            {
                 $query->where('tbl.name = :name');
             }
 
-            $query->bind(array('row' => $row, 'table' => $table, 'name' => $name));
+            $query->bind(array('container' => $container, 'name' => $name));
+
+        }
+
+        if ($row = $state->row) {
+            $query->where('relations.row = :row')->bind(array('row' => $row));
+        }
+
+        if ($table = $state->table) {
+            $query->where('relations.table = :table')->bind(array('table' => $table));
         }
     }
 
