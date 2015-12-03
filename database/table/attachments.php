@@ -22,7 +22,7 @@ class ComFilesDatabaseTableAttachments extends KDatabaseTableAbstract
                 'container' => 'files_container_id',
             ),
             'behaviors'  => array(
-                'identifiable'
+                'identifiable', 'creatable', 'modifiable', 'lockable'
             )
         ));
 
