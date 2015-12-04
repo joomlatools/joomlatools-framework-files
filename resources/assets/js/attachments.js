@@ -17,7 +17,6 @@
                     my.template = $(config.template);
                     my.url = config.url;
                     my.csrf_token = config.csrf_token;
-                    my.table = config.table;
                 },
                 render: function(attachment)
                 {
