@@ -74,7 +74,7 @@
 
     <div id="attachments-list" class="attachments">
         <div id="attachments-images" class="attachments__images"></div>
-        <div id="attachments-files" class="attachments__files"></div>
+        <ul id="attachments-files" class="attachments__files"></ul>
     </div>
 
     <!-- Attachment template begin -->
