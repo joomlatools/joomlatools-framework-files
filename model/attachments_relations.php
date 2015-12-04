@@ -15,8 +15,10 @@
  */
 class ComFilesModelAttachments_relations extends KModelDatabase
 {
-    protected function _buildQuerySelect(KDatabaseQueryInterface $query)
+    protected function _buildQueryWhere(KDatabaseQueryInterface $query)
     {
+        parent::_buildQueryWhere($query);
+
         $state = $this->getState();
 
         if (!$state->isUnique())
