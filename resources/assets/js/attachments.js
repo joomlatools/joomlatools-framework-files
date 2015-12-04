@@ -14,8 +14,6 @@
             var my = {
                 init: function (config)
                 {
-                    my.table = config.table;
-                    my.row = config.row;
                     my.template = $(config.template);
                     my.url = config.url;
                     my.csrf_token = config.csrf_token;
@@ -24,7 +22,7 @@
                 render: function(attachment)
                 {
                     var data = {
-                        url: this.route({view: "files", thumbnails: 1, name: attachment.name, format: "json", routed: 1}),
+                        url: attachment.url,
                         name: this.escape(attachment.name),
                         type: attachment.type,
                         thumbnail: attachment.thumbnail
@@ -50,14 +48,13 @@
                     this.template.trigger('before.insert', attachment);
 
                     var data = {
-                        name: attachment,
+                        attachment: attachment,
                         csrf_token: this.csrf_token,
-                        table: this.table,
-                        row: this.row
+                        _action: 'attach'
                     };
 
                     $.ajax({
-                        url: this.route({view: "attachment"}),
+                        url: this.url,
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
@@ -70,43 +67,27 @@
                     this.template.trigger('before.remove', attachment);
 
                     var data = {
+                        attachment: attachment,
                         csrf_token: this.csrf_token,
-                        _action: 'delete'
+                        _action: 'detach'
                     };
 
                     $.ajax({
-                        url: this.route({view: "attachment", table: this.table, row: this.row, name: attachment}),
+                        url: this.url,
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
                             my.template.trigger('after.remove', attachment);
                         }
                     });
-
-
                 },
-                route: function(params, decode)
+                replace: function(text, params)
                 {
-                    var url = null;
+                    $.each(params, function(key, value) {
+                        text = text.replace('%7B' + key + '%7D', value);
+                    });
 
-                    if (url = this.url[params.view])
-                    {
-                        delete params.view;
-
-                        var params = $.param(params);
-
-                        if (decode) {
-                            params = decodeURIComponent(params);
-                        }
-
-                        if (params.length)
-                        {
-                            url += url.search('\\?') ? '&' : '?';
-                            url += params;
-                        }
-                    }
-
-                    return url;
+                    return text;
                 },
                 bind: function(event, handler)
                 {
