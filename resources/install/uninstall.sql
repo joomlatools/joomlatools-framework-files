@@ -1,2 +1,4 @@
 DROP TABLE IF EXISTS `#__files_containers`;
 DROP TABLE IF EXISTS `#__files_thumbnails`;
+DROP TABLE IF EXISTS `#__files_attachments`;
+DROP TABLE IF EXISTS `#__files_attachments_relations`;
