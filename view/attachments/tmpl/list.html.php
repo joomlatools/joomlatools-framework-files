@@ -40,10 +40,10 @@
 
                 if (attachment.type == 'image')
                 {
-                    output = images.append(output)
+                    output = $(output).appendTo(images)
                     $('a.koowa-modal', output).magnificPopup({'type': 'image'});
                 }
-                else output = files.append(output);
+                else output = $(output).appendTo(files);
 
                 $('.delete', output).click(function()
                 {
