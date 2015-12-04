@@ -15,31 +15,6 @@
  */
 class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
 {
-    public function fileInfo($config = array())
-    {
-        $config = new KObjectConfig($config);
-
-        $entity = $config->entity;
-
-        $info = array();
-
-        if ($entity->isAttachable())
-        {
-            foreach ($entity->getAttachments() as $attachment)
-            {
-                $file = $attachment->file;
-
-                if ($file->isThumbnail() && ($thumbnail = $file->getThumbnail())) {
-                    $attachment->file->thumbnail = $thumbnail->thumbnail;
-                }
-
-                $info[] = current(array_values($attachment->file->toArray()));
-            }
-        }
-
-        return $info;
-    }
-
     public function select($config = array())
     {
         $config = new KObjectConfigJson($config);
