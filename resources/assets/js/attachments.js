@@ -25,7 +25,7 @@
                         url: attachment.url,
                         name: this.escape(attachment.name),
                         type: attachment.type,
-                        thumbnail: attachment.thumbnail
+                        thumbnail: attachment.thumbnail ? attachment.thumbnail.thumbnail : null
                     }
 
                     return output = new EJS({element: my.template.get(0)}).render(data);

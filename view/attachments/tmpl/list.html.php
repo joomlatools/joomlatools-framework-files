@@ -17,8 +17,7 @@
     <?= helper('behavior.modal') ?>
 
     <script>
-        kQuery(function($)
-        {
+        kQuery(function($) {
             Attachments = Attachments.getInstance(
                 {
                     url: "<?= route('', true, false) ?>",
@@ -27,8 +26,7 @@
                 }
             );
 
-            var render = function(attachment)
-            {
+            var render = function (attachment) {
                 var images = $('#attachments-images');
                 var files = $('#attachments-files');
 
@@ -38,33 +36,30 @@
 
                 var output = Attachments.render(attachment);
 
-                if (attachment.type == 'image')
-                {
+                if (attachment.type == 'image') {
                     output = $(output).appendTo(images)
                     $('a.koowa-modal', output).magnificPopup({'type': 'image'});
                 }
                 else output = $(output).appendTo(files);
 
-                $('.delete', output).click(function()
-                {
+                $('.delete', output).click(function () {
                     Attachments.remove(attachment.name);
                     $(this).closest('.attachment').remove();
                 });
             };
 
-            Attachments.bind('after.insert', function(event, attachment)
-            {
+            Attachments.bind('after.insert', function (event, attachment) {
                 var url = "<?= route('view=files&thumbnails=1&routed=1&name={name}&format=json', true, false) ?>";
 
                 $.ajax({
                     url: Attachments.replace(url, {name: attachment}),
                     success: function (data) {
-                        render(data.entities.pop())
+                        render(data.entities.pop());
                     }
                 });
             });
 
-            var attachments = <?= json_encode(helper('com:files.attachments.fileinfo', array('entity' => $entity))) ?>
+            var attachments = <?= json_encode(array_values($entity->getAttachments()->file->toArray())) ?>;
 
             $.each(attachments, function (idx, attachment) {
                 render(attachment);
