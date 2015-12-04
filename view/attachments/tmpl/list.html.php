@@ -21,9 +21,7 @@
         {
             Attachments = Attachments.getInstance(
                 {
-                    table: <?= json_encode($entity->getTable()->getBase()) ?>,
-                    row: <?= json_encode($entity->id) ?>,
-                    url: {attachment: "<?= route('view=attachment', true, false) ?>", files: "<?= route('view=files', true, false) ?>"},
+                    url: "<?= route('', true, false) ?>",
                     template: '#attachment-template',
                     csrf_token: <?= json_encode(object('user')->getSession()->getToken()) ?>
                 }
@@ -33,6 +31,10 @@
             {
                 var images = $('#attachments-images');
                 var files = $('#attachments-files');
+
+                var url = "<?= route('view=file&routed=1&name={name}', true, false) ?>";
+
+                attachment.url = Attachments.replace(url, {name: attachment.name});
 
                 var output = Attachments.render(attachment);
 
@@ -52,10 +54,12 @@
 
             Attachments.bind('after.insert', function(event, attachment)
             {
+                var url = "<?= route('view=files&thumbnails=1&routed=1&name={name}&format=json', true, false) ?>";
+
                 $.ajax({
-                    url: Attachments.route({view: "files", thumbnails: 1, format: "json", name: attachment, routed: 1}),
-                    success: function(data) {
-                        render(data.entities.pop());
+                    url: Attachments.replace(url, {name: attachment}),
+                    success: function (data) {
+                        render(data.entities.pop())
                     }
                 });
             });
