@@ -17,7 +17,14 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
 {
     public function getPropertyFile()
     {
-        return $this->getObject('com:files.model.files')->container($this->container_slug)->name($this->name)->fetch();
+        $model = $this->getObject('com:files.model.files');
+
+        $file = $model->container($this->container_slug)->name($this->name)->fetch();
+
+        // Populate the thumbnail property.
+        $file->thumbnail;
+
+        return $file;
     }
 
     public function delete()
