@@ -45,7 +45,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 
         parent::_initialize($config);
     }
-    
+
     public function setView($view)
     {
         $view = parent::setView($view);
