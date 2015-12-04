@@ -17,8 +17,6 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 {
     protected function _initialize(KObjectConfig $config)
     {
-        $config->append(array('behaviors' => array('relatable')));
-
         $aliases = array(
             'com:files.model.attachments'                => array(
                 'path' => array('model'),
@@ -31,10 +29,6 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
             'com:files.controller.permission.attachment' => array(
                 'path' => array('controller', 'permission'),
                 'name' => 'attachment'
-            ),
-            'com:files.controller.behavior.relatable' => array(
-                'path' => array('controller', 'behavior'),
-                'name' => 'relatable'
             )
         );
 
@@ -51,14 +45,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 
         parent::_initialize($config);
     }
-
-    protected function _afterAdd(KControllerContextInterface $context)
-    {
-        if ($context->getRequest()->isAjax() && $context->result->getStatus !== KDatabase::STATUS_FAILED) {
-            $context->getResponse()->setStatus(KHttpResponse::NO_CONTENT);
-        }
-    }
-
+    
     public function setView($view)
     {
         $view = parent::setView($view);
