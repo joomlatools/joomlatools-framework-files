@@ -123,14 +123,10 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     	</div>
 
     	<div class="files-icons-controls">
-        	<div class="ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-        		[%=name%]
-        	</div>
+        	<label class="checkbox ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
+        		<input type="checkbox" class="files-select" />[%=name%]
+        	</label>
     	</div>
-
-      <div class="files-icons-controls text-left">
-          <input type="checkbox" class="files-select" />
-      </div>
     </div>
 </div>
 </textarea>
