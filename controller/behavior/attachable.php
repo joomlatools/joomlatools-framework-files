@@ -17,22 +17,16 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
 {
     protected $_controller;
 
-    protected $_model;
-
-    protected $_auto_delete;
-
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
         $this->_controller  = $config->controller;
-        $this->_model       = $config->model;
-        $this->_auto_delete = $config->auto_delete;
     }
 
     protected function _initialize(KObjectConfig $config)
     {
-        $config->append(array('controller' => 'attachment', 'model' => 'attachments_relations', 'auto_delete' => true));
+        $config->append(array('controller' => 'attachment'));
 
         parent::_initialize($config);
     }
@@ -45,93 +39,12 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
             throw new RuntimeException('Entity does not exists');
         }
 
-        $data = $context->getRequest()->getData();
-
-        if (!$data->attachment) {
-            throw new RuntimeException('Attachment missing');
-        }
-
         $context->entity = $entity;
-    }
-
-    protected function _beforeDetach(KControllerContextInterface $context)
-    {
-        $this->_beforeAttach($context);
-
-        $data = $context->getRequest()->getData();
-
-        $controller= $this->_getController();
-
-        $attachment = $controller->getModel()->name($data->attachment)->fetch();
-
-        if ($attachment->isNew()) {
-            throw new RuntimeException('Attachment does not exists');
-        }
-
-        $context->attachment = $attachment;
     }
 
     protected function _actionAttach(KControllerContextInterface $context)
     {
-        $request = $context->getRequest();
-        $data    = $request->getData();
-        $entity  = $context->entity;
-
-        $controller = $this->_getController();
-
-        $attachment = $controller->getModel()->name($data->attachment)->fetch();
-
-        if ($attachment->isNew())
-        {
-            $attachment = $controller->getModel()->create();
-
-            if (!$attachment->save()) {
-                throw new RuntimeException('Attachment could not be saved');
-            }
-        }
-
-        $model = $this->_getModel();
-
-        $column = $controller->getModel()->getTable()->getIdentityColumn();
-
-        $relation = $model->create(array(
-            $column => $attachment->id,
-            'table' => $entity->getTable()->getBase(),
-            'row'   => $entity->id
-        ));
-
-        if ($relation->save() === false) {
-            throw new RuntimeException('Relation could not be saved');
-        }
-
-        return $relation;
-    }
-
-    protected function _actionDetach(KControllerContextInterface $context)
-    {
-        $identity_column = $this->_getController()->getModel()->getTable()->getIdentityColumn();
-        $model           = $this->_getModel();
-        $state           = $model->getState();
-        $entity          = $context->entity;
-
-        $state->setValues(array(
-            $identity_column => $context->attachment->id,
-            'table'          => $entity->getTable()->getBase(),
-            'row'            => $entity->id
-        ));
-
-        $relation = $model->fetch();
-
-        if (!$relation->isNew())
-        {
-            if ($relation->delete() === false) {
-                throw new RuntimeException(('Relation could not be deleted'));
-            }
-        }
-
-        $context->identity_column = $identity_column;
-
-        return $relation;
+        $this->_getController()->attach($this->_getData($context));
     }
 
     protected function _afterAttach(KControllerContextInterface $context)
@@ -139,22 +52,24 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         $context->getResponse()->setStatus(KHttpResponse::NO_CONTENT);
     }
 
+    protected function _beforeDetach(KControllerContextInterface $context)
+    {
+        $this->_beforeAttach($context);
+    }
+
+    protected function _actionDetach(KControllerContextInterface $context)
+    {
+        $controller = $this->_getController();
+        $data = $this->_getData($context);
+
+        $controller->getRequest()->getQuery()->add($data);
+        $controller->getModel()->getState()->setValues($data);
+
+        $controller->detach();
+    }
+
     protected function _afterDetach(KControllerContextInterface $context)
     {
-        if ($this->_auto_delete)
-        {
-            $model = $this->_getModel();
-
-            $model->getState()->reset();
-
-            if (!$model->{$context->identity_column}($context->attachment->id)->count())
-            {
-                if (!$context->attachment->delete()) {
-                    throw new RuntimeException(('Attachment could not be deleted'));
-                }
-            }
-        }
-
         $this->_afterAttach($context);
     }
 
@@ -175,9 +90,13 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
                 } else $identifier = $this->getIdentifier($this->_controller);
             } else $identifier = $this->_controller;
 
+            $query = $mixer->getRequest()->getQuery();
+            $data  = $mixer->getRequest()->getData();
+
             $request = $this->getObject('lib:controller.request', array(
                 'query' => array(
-                    'container' => $mixer->getRequest()->getQuery()->container
+                    'name'      => $data->attachment,
+                    'container' => $query->container
                 )
             ));
 
@@ -187,28 +106,10 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         return $this->_controller;
     }
 
-    protected function _getModel()
+    protected function _getData(KControllerContextInterface $context)
     {
-        if (!$this->_model instanceof KModelInterface)
-        {
-            $mixer = $this->getMixer();
+        $entity = $context->entity;
 
-            if (!$this->_model instanceof KObjectIdentifierInterface)
-            {
-                if (strpos($this->_model, '.') === false)
-                {
-                    $parts         = $mixer->getIdentifier()->toArray();
-                    $parts['path'] = array('model');
-                    $parts['name'] = $this->_model;
-
-                    $identifier = $this->getIdentifier($parts);
-                } else $identifier = $this->getIdentifier($this->_model);
-            } else $identifier = $this->_model;
-
-            $this->_model = $this->getObject($identifier);
-        }
-
-        return $this->_model;
+        return array('table' => $entity->getTable()->getBase(), 'row' => $entity->id);
     }
-
 }
