@@ -69,11 +69,17 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
     {
         $mixer = $this->getMixer();
 
-        $context->getRequest()->getQuery()->container = $this->_container;
-
         $aliases = array(
             'com:files.controller.permission.attachment' => array(
                 'path' => array('controller', 'permission'),
+                'name' => 'attachment'
+            ),
+            'com:files.controller.behavior.attachment'   => array(
+                'path' => array('controller', 'behavior'),
+                'name' => 'attachment'
+            ),
+            'com:files.controller.attachment'            => array(
+                'path' => array('controller'),
                 'name' => 'attachment'
             )
         );
@@ -95,13 +101,22 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
 
         $permission = $this->getIdentifier($parts)->toString();
 
+        $parts['path'] = array('controller', 'behavior');
+
+        $behavior = $this->getIdentifier($parts)->toString();
+
+        $parts['path'] = array('controller');
+
+        $controller = $this->getIdentifier($parts)->toString();
+
         // Push attachment permission to file controller.
         $this->getIdentifier('com:files.controller.file')
              ->getConfig()
-             ->append(array('behaviors' => array('permissible' => array('permission' => $permission))));
+             ->append(array('behaviors' => array($behavior => array('controller' => $controller), 'permissible' => array('permission' => $permission))));
 
         $context->getRequest()->getQuery()->container = $this->_container;
         $context->param = 'com:files.dispatcher.http';
+
         $this->forward($context);
     }
 }
