@@ -44,13 +44,13 @@
                 },
                 insert: function(attachment)
                 {
-                    this.template.trigger('before.insert', attachment);
-
                     var data = {
                         attachment: attachment,
                         csrf_token: this.csrf_token,
                         _action: 'attach'
                     };
+
+                    this.template.trigger('before.insert', data);
 
                     $.ajax({
                         url: this.url,
@@ -63,13 +63,13 @@
                 },
                 remove: function(attachment)
                 {
-                    this.template.trigger('before.remove', attachment);
-
                     var data = {
                         attachment: attachment,
                         csrf_token: this.csrf_token,
                         _action: 'detach'
                     };
+
+                    this.template.trigger('before.remove', data);
 
                     $.ajax({
                         url: this.url,
