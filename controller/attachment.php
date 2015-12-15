@@ -15,18 +15,32 @@
  */
 class ComFilesControllerAttachment extends ComKoowaControllerModel
 {
+    protected $_relations_model;
+
+    protected $_auto_delete;
+
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->_relations_model = $config->relations_model;
+        $this->_auto_delete     = $config->auto_delete;
+    }
+
     protected function _initialize(KObjectConfig $config)
     {
+        $config->append(array('relations_model' => 'attachments_relations', 'auto_delete' => true));
+
         $aliases = array(
-            'com:files.model.attachments'                => array(
+            'com:files.model.attachments'                 => array(
                 'path' => array('model'),
                 'name' => 'attachments'
             ),
-            'com:files.model.attachments_relations' => array(
+            'com:files.model.' . $config->relations_model => array(
                 'path' => array('model'),
-                'name' => 'attachments_relations'
+                'name' => $config->relations_model
             ),
-            'com:files.controller.permission.attachment' => array(
+            'com:files.controller.permission.attachment'  => array(
                 'path' => array('controller', 'permission'),
                 'name' => 'attachment'
             )
@@ -44,6 +58,97 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         }
 
         parent::_initialize($config);
+    }
+
+    protected function _getRelationsModel()
+    {
+        if (!$this->_relations_model instanceof KModelInterface)
+        {
+            $parts = $this->getIdentifier()->toArray();
+
+            $parts['path'] = array('model');
+            $parts['name'] = $this->_relations_model;
+
+            $this->_relations_model = $this->getObject($parts);
+        }
+
+        return $this->_relations_model;
+    }
+
+    protected function _beforeAttach(KControllerContextInterface $context)
+    {
+        $column = $this->getModel()->getTable()->getIdentityColumn();
+
+        $context->identity_column = $column;
+
+        if (!$context->attachment) {
+            $context->attachment = $this->getModel()->fetch();
+        }
+
+        if ($context->attachment->isNew()) {
+            throw new RuntimeException('Attachment does not exists');
+        }
+    }
+
+    protected function _actionAttach(KControllerContextInterface $context)
+    {
+        $model = $this->_getRelationsModel();
+
+        $data   = $context->getRequest()->getData();
+
+        $data[$context->identity_column] = $context->attachment->id;
+
+        $relation = $model->create($context->getRequest()->getData()->toArray());
+
+        if (!$relation->save()) {
+            throw new RuntimeException('Could not attach');
+        }
+    }
+
+    protected function _afterAttach(KControllerContextInterface $context)
+    {
+        $context->getResponse()->setStatus(KHttpResponse::NO_CONTENT);
+    }
+
+    protected function _beforeDetach(KControllerContextInterface $context)
+    {
+        $this->_beforeAttach($context);
+    }
+
+    protected function _actionDetach(KControllerContextInterface $context)
+    {
+        $model = $this->_getRelationsModel();
+
+        $relation = $model->{$context->identity_column}($context->attachment->id)
+                          ->setState($this->getRequest()
+                                          ->getQuery()
+                                          ->toArray())->fetch();
+
+        if (!$relation->isNew())
+        {
+            if (!$relation->delete()) {
+                throw new RuntimeException('Could not detach');
+            }
+        }
+    }
+
+    protected function _afterDetach(KControllerContextInterface $context)
+    {
+        if ($this->_auto_delete)
+        {
+            $model = $this->_getRelationsModel();
+
+            $model->getState()->reset();
+
+            if (!$model->{$context->identity_column}($context->attachment->id)->count())
+            {
+                if (!$context->attachment->delete()) {
+                    throw new RuntimeException(('Attachment could not be deleted'));
+                }
+            }
+        }
+
+        $this->_afterAttach($context);
     }
 
     public function setView($view)
