@@ -59,10 +59,12 @@
                 });
             });
 
-            var attachments = <?= json_encode(array_values($entity->getAttachments()->file->toArray())) ?>;
+            var attachments = <?= json_encode(array_values($entity->getAttachments()->getFiles()->toArray())) ?>;
 
             $.each(attachments, function (idx, attachment) {
-                render(attachment);
+                $.each(attachment, function(name, data) {
+                    render(data);
+                });
             });
         });
     </script>
