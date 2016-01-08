@@ -91,7 +91,14 @@
                 replace: function(text, params)
                 {
                     $.each(params, function(key, value) {
-                        text = text.replace('%7B' + key + '%7D', value);
+
+                        var search = '%7B' + key + '%7D';
+
+                        if (text.search(search) === -1) {
+                            search = '{' + key + '}';
+                        }
+
+                        text = text.replace(search, my.escape(value));
                     });
 
                     return text;
