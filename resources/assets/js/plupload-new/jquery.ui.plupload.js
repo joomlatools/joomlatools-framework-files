@@ -8,7 +8,6 @@
  * Contributing: http://www.plupload.com/contributing
  *
  * Depends:
- *	jquery.ui.core.js
  *	jquery.ui.widget.js
  *
  */
@@ -18,7 +17,7 @@
 /**
 jQuery UI based implementation of the Plupload API - multi-runtime file uploading API.
 
-To use the widget you must include _jQuery_ and _jQuery UI_ bundle (including `ui.core`, `ui.widget`).
+To use the widget you must include _jQuery_ and _jQuery UI_ `ui.widget`.
 
 In general the widget is designed the way that you do not usually need to do anything to it after you instantiate it. 
 But! You still can intervenue, to some extent, in case you need to. Although, due to the fact that widget is based on 
