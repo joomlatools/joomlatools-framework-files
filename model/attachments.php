@@ -37,8 +37,16 @@ class ComFilesModelAttachments extends KModelDatabase
 
         $state = $this->getState();
 
+        $identifier = $this->getTable()->getIdentifier();
+
+        $package = $identifier->getPackage();
+        $name    = $identifier->getName();
+
+        $table  = sprintf('%s_%s_relations', $package, $name);
+        $column = sprintf('%s_%s_id', $package, KStringInflector::singularize($name));
+
         if ($state->row || $state->table) {
-            $query->join('files_attachments_relations AS relations', 'relations.files_attachment_id = tbl.files_attachment_id', 'INNER');
+            $query->join($table . ' AS relations', 'relations.' . $column . ' = tbl.' . $column, 'INNER');
         }
     }
 
