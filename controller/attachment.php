@@ -64,10 +64,10 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     {
         if (!$this->_relations_model instanceof KModelInterface)
         {
-            $parts = $this->getIdentifier()->toArray();
+            // Attachments model and relations coexist within the same package.
+            $parts = $this->getModel()->getIdentifier()->toArray();
 
-            $parts['path'] = array('model');
-            $parts['name'] = $this->_relations_model;
+            $parts['name'] .= '_relations';
 
             $this->_relations_model = $this->getObject($parts);
         }
