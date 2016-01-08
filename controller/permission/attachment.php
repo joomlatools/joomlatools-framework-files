@@ -15,4 +15,13 @@
  */
 class ComFilesControllerPermissionAttachment extends KControllerPermissionAbstract
 {
+    public function canAttach()
+    {
+        return $this->canAdd();
+    }
+
+    public function canDetach()
+    {
+        return $this->canDelete();
+    }
 }
