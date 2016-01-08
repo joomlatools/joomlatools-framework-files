@@ -23,7 +23,11 @@
 
                     my.template.text(content);
 
-                    my.url = config.url;
+                    var url = config.url + (config.url.search(/\?/) ? '&' : '?');
+
+                    var column = config.column ? config.column : 'name';
+
+                    my.url = url + column + '={' + column + '}';
                     my.csrf_token = config.csrf_token;
                 },
                 render: function(attachment)
@@ -53,7 +57,6 @@
                 insert: function(attachment)
                 {
                     var data = {
-                        attachment: attachment,
                         csrf_token: this.csrf_token,
                         _action: 'attach'
                     };
@@ -61,7 +64,7 @@
                     this.template.trigger('before.insert', data);
 
                     $.ajax({
-                        url: this.url,
+                        url: this.replace(this.url, {name: attachment}),
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
@@ -72,7 +75,6 @@
                 remove: function(attachment)
                 {
                     var data = {
-                        attachment: attachment,
                         csrf_token: this.csrf_token,
                         _action: 'detach'
                     };
@@ -80,7 +82,7 @@
                     this.template.trigger('before.remove', data);
 
                     $.ajax({
-                        url: this.url,
+                        url: this.replace(this.url, {name: attachment}),
                         method: 'POST',
                         data: data,
                         success: function(event, data) {
