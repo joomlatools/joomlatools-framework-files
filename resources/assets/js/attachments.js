@@ -27,7 +27,7 @@
                         thumbnail: attachment.thumbnail ? attachment.thumbnail.thumbnail : null
                     }
 
-                    return output = new EJS({element: my.template.get(0)}).render(data);
+                    return new EJS({element: my.template.get(0)}).render(data);
                 },
                 escape: function(string)
                 {
