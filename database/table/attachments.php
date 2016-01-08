@@ -18,11 +18,14 @@ class ComFilesDatabaseTableAttachments extends KDatabaseTableAbstract
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
-            'column_map' => array(
+            'column_map'      => array(
                 'container' => 'files_container_id',
             ),
-            'behaviors'  => array(
-                'identifiable', 'creatable', 'modifiable', 'lockable'
+            'behaviors'       => array(
+                'identifiable',
+                'creatable',
+                'modifiable',
+                'lockable'
             )
         ));
 
