@@ -23,24 +23,19 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     {
         parent::__construct($config);
 
-        $this->_relations_model = $config->relations_model;
-        $this->_auto_delete     = $config->auto_delete;
+        $this->_auto_delete = $config->auto_delete;
     }
 
     protected function _initialize(KObjectConfig $config)
     {
-        $config->append(array('relations_model' => 'attachments_relations', 'auto_delete' => true));
+        $config->append(array('auto_delete' => true));
 
         $aliases = array(
-            'com:files.model.attachments'                 => array(
+            'com:files.model.attachments'                => array(
                 'path' => array('model'),
                 'name' => 'attachments'
             ),
-            'com:files.model.' . $config->relations_model => array(
-                'path' => array('model'),
-                'name' => $config->relations_model
-            ),
-            'com:files.controller.permission.attachment'  => array(
+            'com:files.controller.permission.attachment' => array(
                 'path' => array('controller', 'permission'),
                 'name' => 'attachment'
             )
