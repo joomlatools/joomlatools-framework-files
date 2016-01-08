@@ -15,6 +15,14 @@
                 init: function (config)
                 {
                     my.template = $(config.template);
+
+                    // Cleanup template content.
+                    var content = my.template.text();
+
+                    content = content.replace(/([href|src])="\/\[%=/g, "$1=\"[%=");
+
+                    my.template.text(content);
+
                     my.url = config.url;
                     my.csrf_token = config.csrf_token;
                 },
