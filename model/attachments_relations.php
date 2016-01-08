@@ -31,8 +31,10 @@ class ComFilesModelAttachments_relations extends KModelDatabase
                 $query->where('row = :row');
             }
 
-            if ($id = $state->files_attachment_id) {
-                $query->where('files_attachment_id = :id');
+            $id_column = sprintf('%s_attachment_id', $this->getTable()->getIdentifier()->getPackage());
+
+            if ($id = $state->{$id_column}) {
+                $query->where("{$id_column} = :id");
             }
 
             $query->bind(array('table' => $table, 'row' => $row, 'id' => $id));
