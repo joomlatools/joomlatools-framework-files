@@ -52,6 +52,11 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
             $request->query->name = $request->data->name;
         }
 
+        // This is used in Plupload to set the folder in the request payload instead of the URL
+        if (!$request->query->has('folder') && $request->data->has('folder')) {
+            $request->query->folder = $request->data->folder;
+        }
+
         return $request;
     }
 
