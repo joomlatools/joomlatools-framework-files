@@ -109,7 +109,7 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
 
         $controller = $this->getIdentifier($parts)->toString();
 
-        // Push attachment permission to file controller.
+        // Set controller on attachment behavior and push attachment permission to file controller.
         $this->getIdentifier('com:files.controller.file')
              ->getConfig()
              ->append(array('behaviors' => array($behavior => array('controller' => $controller), 'permissible' => array('permission' => $permission))));
