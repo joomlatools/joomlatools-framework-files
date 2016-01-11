@@ -26,6 +26,13 @@
                 }
             );
 
+            Attachments.bind('before.insert', function(event, context)  {setContext(context)});
+            Attachments.bind('before.remove', function(event, context) {setContext(context)});
+
+            var setContext = function(context) {
+                context.data.attachment = context.attachment;
+            };
+
             var render = function (attachment) {
                 var images = $('#attachments-images');
                 var files = $('#attachments-files');
@@ -48,11 +55,12 @@
                 });
             };
 
-            Attachments.bind('after.insert', function (event, attachment) {
+            Attachments.bind('after.insert', function (event, context)
+            {
                 var url = "<?= route('view=files&thumbnails=1&routed=1&name={name}&format=json', true, false) ?>";
 
                 $.ajax({
-                    url: Attachments.replace(url, {name: attachment}),
+                    url: Attachments.replace(url, {name: context.attachment}),
                     success: function (data) {
                         render(data.entities.pop());
                     }
