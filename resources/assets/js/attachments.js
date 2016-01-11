@@ -52,37 +52,45 @@
                 },
                 insert: function(attachment)
                 {
-                    var data = {
-                        csrf_token: this.csrf_token,
-                        _action: 'attach'
+                    var context = {
+                        data: {
+                            csrf_token: this.csrf_token,
+                            _action: 'attach'
+                        },
+                        url: this.url,
+                        attachment: attachment
                     };
 
-                    this.template.trigger('before.insert', data);
+                    this.template.trigger('before.insert', context);
 
                     $.ajax({
-                        url: this.replace(this.url, {name: attachment}),
+                        url: context.url,
                         method: 'POST',
-                        data: data,
+                        data: context.data,
                         success: function(event, data) {
-                            my.template.trigger('after.insert', attachment);
+                            my.template.trigger('after.insert', context);
                         }
                     });
                 },
                 remove: function(attachment)
                 {
-                    var data = {
-                        csrf_token: this.csrf_token,
-                        _action: 'detach'
+                    var context = {
+                        data: {
+                            csrf_token: this.csrf_token,
+                            _action: 'detach'
+                        },
+                        url: this.url,
+                        attachment: attachment
                     };
 
-                    this.template.trigger('before.remove', data);
+                    this.template.trigger('before.remove', context);
 
                     $.ajax({
-                        url: this.replace(this.url, {name: attachment}),
+                        url: context.url,
                         method: 'POST',
-                        data: data,
+                        data: context.data,
                         success: function(event, data) {
-                            my.template.trigger('after.remove', attachment);
+                            my.template.trigger('after.remove', context);
                         }
                     });
                 },
