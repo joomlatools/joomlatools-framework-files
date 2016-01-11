@@ -59,13 +59,7 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
 
     protected function _actionDetach(KControllerContextInterface $context)
     {
-        $controller = $this->_getController();
-        $data = $this->_getData($context);
-
-        $controller->getRequest()->getQuery()->add($data);
-        $controller->getModel()->getState()->setValues($data);
-
-        $controller->detach();
+        $this->_getController()->detach($this->_getData($context));
     }
 
     protected function _afterDetach(KControllerContextInterface $context)
