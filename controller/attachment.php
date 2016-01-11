@@ -115,9 +115,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         $model = $this->_getRelationsModel();
 
         $relation = $model->{$context->identity_column}($context->attachment->id)
-                          ->setState($this->getRequest()
-                                          ->getQuery()
-                                          ->toArray())->fetch();
+                          ->setState($this->getRequest()->getData()->toArray())->fetch();
 
         if (!$relation->isNew())
         {
