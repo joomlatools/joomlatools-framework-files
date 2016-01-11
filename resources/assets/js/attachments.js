@@ -23,11 +23,7 @@
 
                     my.template.text(content);
 
-                    var url = config.url + (config.url.search(/\?/) ? '&' : '?');
-
-                    var column = config.column ? config.column : 'name';
-
-                    my.url = url + column + '={' + column + '}';
+                    my.url = config.url;
                     my.csrf_token = config.csrf_token;
                 },
                 render: function(attachment)
