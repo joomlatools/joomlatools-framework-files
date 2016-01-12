@@ -36,7 +36,7 @@ CREATE TABLE `#__files_attachments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `#__files_attachments_relations` (
-  `files_attachment_id` bigint(20) NOT NULL,
+  `files_attachment_id` bigint(20) unsigned NOT NULL,
   `table` varchar(255) NOT NULL DEFAULT '',
   `row` bigint(20) unsigned NOT NULL,
   PRIMARY KEY (`files_attachment_id`,`table`,`row`),
