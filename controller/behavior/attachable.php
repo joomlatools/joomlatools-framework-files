@@ -24,13 +24,6 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         $this->_controller  = $config->controller;
     }
 
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(array('controller' => 'attachment'));
-
-        parent::_initialize($config);
-    }
-
     protected function _beforeAttach(KControllerContextInterface $context)
     {
         $entity = $context->getSubject()->getModel()->fetch();
@@ -73,16 +66,17 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         {
             $mixer = $this->getMixer();
 
-            if (!$this->_controller instanceof KObjectIdentifierInterface)
-            {
-                if (strpos($this->_controller, '.') === false)
-                {
-                    $parts         = $mixer->getIdentifier()->toArray();
-                    $parts['name'] = $this->_controller;
+            $parts = $mixer->getIdentifier()->toArray();
 
-                    $identifier = $this->getIdentifier($parts);
-                } else $identifier = $this->getIdentifier($this->_controller);
-            } else $identifier = $this->_controller;
+            $parts['name'] = 'attachment';
+
+            $manager = $this->getObject('manager');
+
+            if (!$manager->getClass($parts, false)) {
+                $manager->registerAlias('com:files.controller.attachment', $parts); // Fallback to files attachment controller
+            }
+
+            $identifier = $this->getIdentifier($parts);
 
             $query = $mixer->getRequest()->getQuery();
             $data  = $mixer->getRequest()->getData();
