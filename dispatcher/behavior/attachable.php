@@ -45,15 +45,13 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
 
         $query = $context->getRequest()->getQuery();
 
-        $action = $context->getRequest()->getData()->_action;
-
         if ($query->routed && in_array($query->view, array('file', 'files')))
         {
             $this->_forward($context);
             $this->send($context);
             $result = false;
-        } elseif (in_array($query->view, array('attachment', 'attachments')) ||
-                  in_array($action, array('attach', 'detach')))
+        }
+        elseif (in_array($query->view, array('attachment', 'attachments')))
         {
             $container = $this->getObject('com:files.model.containers')->slug($this->_container)->fetch();
 
