@@ -45,7 +45,7 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
 
         $query = $context->getRequest()->getQuery();
 
-        if ($query->routed && in_array($query->view, array('file', 'files')))
+        if ($query->routed && in_array($query->view, array('file', 'files', 'node', 'nodes')))
         {
             $this->_forward($context);
             $this->send($context);
