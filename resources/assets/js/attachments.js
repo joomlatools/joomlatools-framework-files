@@ -67,7 +67,9 @@
                         url: context.url,
                         method: 'POST',
                         data: context.data,
-                        success: function(event, data) {
+                        success: function(data)
+                        {
+                            context.result = data;
                             my.template.trigger('after.insert', context);
                         }
                     });
@@ -89,7 +91,9 @@
                         url: context.url,
                         method: 'POST',
                         data: context.data,
-                        success: function(event, data) {
+                        success: function(data)
+                        {
+                            context.result = data;
                             my.template.trigger('after.remove', context);
                         }
                     });
