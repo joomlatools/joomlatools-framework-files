@@ -19,10 +19,12 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
     {
         $model = $this->getObject('com:files.model.files');
 
-        $file = $model->container($this->container_slug)->name($this->name)->fetch();
+        $file = $model->container($this->container_slug)->name($this->name)->fetch()->getIterator()->current();
 
         // Populate the thumbnail property.
-        $file->thumbnail;
+        if ($file->isImage()) {
+            $file->thumbnail;
+        }
 
         return $file;
     }
