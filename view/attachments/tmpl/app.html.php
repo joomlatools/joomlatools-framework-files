@@ -32,6 +32,13 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
             };
         options = Object.append(options, config);
 
+        $('<div style="text-align: center; display: none"></div>').appendTo($('#insert-button-container'))
+            .append('<button class="btn btn-primary" type="button" id="insert-button" disabled>' + Koowa.translate('Attach') + '</button>');
+
+        $('<div style="text-align: center; display: none"></div>').appendTo($('#detach-button-container'))
+            .append('<button class="btn btn-danger" type="button" id="detach-button" disabled>'+Koowa.translate('Detach')+'</button>');
+
+
         Files.app = new Files.Attachments.App(options);
 
         var url = Files.app.createRoute({
@@ -67,12 +74,6 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 
             kQuery('#insert-button').trigger('click');
         });
-
-        $('<div style="text-align: center; display: none"></div>').appendTo($('#insert-button-container'))
-            .append('<button class="btn btn-primary" type="button" id="insert-button" disabled>' + Koowa.translate('Attach') + '</button>');
-
-        $('<div style="text-align: center; display: none"></div>').appendTo($('#detach-button-container'))
-            .append('<button class="btn btn-danger" type="button" id="detach-button" disabled>'+Koowa.translate('Detach')+'</button>');
 
         var onClickNode = function(e) {
             var row = document.id(e.target).getParent('.files-node').retrieve('row');
