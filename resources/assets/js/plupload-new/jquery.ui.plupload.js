@@ -254,14 +254,11 @@ $.widget("koowa.koowaUploader", {
 		// backup the elements initial state
 		this.contents_bak = this.element.html();
 		this.element.id = this.element.attr('id');
-		
-		// container, just in case
-		this.container = $('.plupload_container', this.element).attr('id', id + '_container');	
 
 		this.content = $('.plupload_content', this.element);
 		
 		// list of files, may become sortable
-		this.filelist = $('.plupload_filelist_content', this.container)
+		this.filelist = $('.plupload_filelist_content', this.element)
 			.attr({
 				id: id + '_filelist',
 				unselectable: 'on'
@@ -269,12 +266,12 @@ $.widget("koowa.koowaUploader", {
 		
 
 		// buttons
-		this.browse_button = $('.plupload_add', this.container).attr('id', id + '_browse').addClass('disabled');
-		this.start_button = $('.plupload_start', this.container).attr('id', id + '_start').addClass('disabled');
-		this.stop_button = $('.plupload_stop', this.container).attr('id', id + '_stop');
+		this.browse_button = $('.plupload_add', this.element).attr('id', id + '_browse').addClass('disabled');
+		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start').addClass('disabled');
+		this.stop_button = $('.plupload_stop', this.element).attr('id', id + '_stop');
 
 		// progressbar
-		this.progressbar = $('.bar', this.container);
+		this.progressbar = $('.bar', this.element);
 		
 		// counter
 		this.counter = $('.plupload_count', this.element)
@@ -372,12 +369,10 @@ $.widget("koowa.koowaUploader", {
 		, id = this.id
 		, uploader
 		, options = {
-			container: id + '_buttons',
+			container: id,
 			browse_button: id + '_browse'
 		}
 		;
-
-		$('.plupload_buttons', this.element).attr('id', id + '_buttons');
 
 		if (self.options.dragdrop) {
 			this.filelist.parent().attr('id', this.id + '_dropbox');
@@ -877,7 +872,7 @@ $.widget("koowa.koowaUploader", {
 				iconClass = 'plupload_action_icon ui-icon ui-icon-circle-arrow-w';
 				
 				// scroll uploading file into the view if its bottom boundary is out of it
-				var scroller = $('.plupload_scroll', this.container)
+				var scroller = $('.plupload_scroll', this.element)
 				, scrollTop = scroller.scrollTop()
 				, scrollerHeight = scroller.height()
 				, rowOffset = $file.position().top + $file.height()
