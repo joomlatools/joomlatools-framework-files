@@ -156,6 +156,29 @@ Files.Attachments.App = new Class({
 
 Files.Attachments.Grid = new Class({
     Extends: Files.Grid,
+    options: {
+        url: null
+    },
+    initialize: function(container,options) {
+        this.parent(container, options);
+
+        this.url = options.url;
+
+        if (this.url) {
+            this.refresh();
+        }
+    },
+    refresh: function() {
+        if (this.url) {
+            new Request.JSON({
+                url: this.url,
+                method: 'get',
+                onSuccess: function(response) {
+                    Files.app.attachments.grid.insertRows(response.entities);
+                }
+            }).send();
+        }
+    },
     insert: function(object, position) {
         this.fireEvent('beforeInsertNode', {object: object, position: position});
 
