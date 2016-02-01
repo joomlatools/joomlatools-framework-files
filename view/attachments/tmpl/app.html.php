@@ -41,24 +41,6 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 
         Files.app = new Files.Attachments.App(options);
 
-        var url = Files.app.createRoute({
-            view: 'attachments',
-            format: 'json',
-            table: Files.app.attachments.table,
-            row: Files.app.attachments.row,
-            routed: 0
-        });
-
-        kQuery.ajax(
-            {
-                url: url,
-                method: 'GET',
-                success: function(data) {
-                    Files.app.attachments.grid.insertRows(data.entities);
-                }
-            }
-        );
-
         var app = Files.app;
 
         app.attachments.grid.addEvent('afterDetachAttachment', function()
