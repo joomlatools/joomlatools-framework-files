@@ -51,6 +51,13 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                 .getParent().setStyle('display', 'none');
         });
 
+        app.addEvent('beforeNavigate', function() {
+            $('#files-preview').empty();
+
+            document.id('insert-button').set('disabled', true)
+                .getParent().setStyle('display', 'none');
+        });
+
         app.addEvent('uploadFile', function(row) {
             app.grid.selected = row.path;
 
