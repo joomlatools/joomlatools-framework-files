@@ -32,13 +32,6 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
             };
         options = Object.append(options, config);
 
-        $('<div style="text-align: center; display: none"></div>').appendTo($('#insert-button-container'))
-            .append('<button class="btn btn-primary" type="button" id="insert-button" disabled>' + Koowa.translate('Attach') + '</button>');
-
-        $('<div style="text-align: center; display: none"></div>').appendTo($('#detach-button-container'))
-            .append('<button class="btn btn-danger" type="button" id="detach-button" disabled>'+Koowa.translate('Detach')+'</button>');
-
-
         Files.app = new Files.Attachments.App(options);
 
         var app = Files.app;
@@ -54,22 +47,22 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
         app.addEvent('beforeNavigate', function() {
             $('#files-preview').empty();
 
-            document.id('insert-button').set('disabled', true)
+            document.id('attach-button').set('disabled', true)
                 .getParent().setStyle('display', 'none');
         });
 
         app.addEvent('uploadFile', function(row) {
             app.grid.selected = row.path;
 
-            kQuery('#insert-button').trigger('click');
+            kQuery('#attach-button').trigger('click');
         });
 
-        var onClickNode = function(e) {
+        var onClickFile = function(e) {
             var row = document.id(e.target).getParent('.files-node').retrieve('row');
 
             app.grid.selected = row.path;
 
-            document.id('insert-button').set('disabled', false)
+            document.id('attach-button').set('disabled', false)
                 .getParent().setStyle('display', 'block');
         };
 
@@ -82,44 +75,44 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                 .getParent().setStyle('display', 'block');
         }
 
-        app.grid.addEvent('clickFile', onClickNode);
-        app.grid.addEvent('clickImage', onClickNode);
+        app.grid.addEvent('clickFile', onClickFile);
+        app.grid.addEvent('clickImage', onClickFile);
         app.attachments.grid.addEvent('clickAttachment', onClickAttachment);
     });
 
     kQuery(function($) {
-        var insert_trigger = $('.koowa_dialog__menu__child--insert'),
-            upload_trigger = $('.koowa_dialog__menu__child--download'),
+        var files_trigger = $('.koowa_dialog__menu__child--files'),
+            upload_trigger = $('.koowa_dialog__menu__child--upload'),
             attachments_trigger = $('.koowa_dialog__menu__child--attachments'),
-            insert_dialog = $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_insert'),
+            files_dialog = $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_attach'),
             upload_dialog = $('.koowa_dialog__file_dialog_upload'),
             attachments_dialog = $('.koowa_dialog__file_dialog_attachments, .koowa_dialog__file_dialog_detach');
 
         // Set initially
         if (upload_dialog.length) {
-            insert_dialog.hide();
+            files_dialog.hide();
             attachments_dialog.hide();
             upload_trigger.addClass('active');
         } else {
             upload_dialog.hide();
             attachments_dialog.hide();
-            insert_trigger.addClass('active');
+            files_trigger.addClass('active');
         }
 
-        insert_trigger.click(function() {
+        files_trigger.click(function() {
             $(this).addClass('active')
                 .siblings().removeClass('active');
 
             upload_dialog.hide();
             attachments_dialog.hide();
-            insert_dialog.show();
+            files_dialog.show();
         });
 
         upload_trigger.click(function() {
             $(this).addClass('active')
                 .siblings().removeClass('active');
 
-            insert_dialog.hide();
+            files_dialog.hide();
             attachments_dialog.hide();
             upload_dialog.show();
         });
@@ -128,7 +121,7 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
             $(this).addClass('active')
                 .siblings().removeClass('active');
 
-            insert_dialog.hide();
+            files_dialog.hide();
             upload_dialog.hide();
             attachments_dialog.show();
         });
@@ -157,9 +150,9 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 <div class="koowa_dialog koowa_dialog--file_dialog">
     <div class="koowa_dialog__menu koowa_dialog__menu--fullwidth">
         <? if ($can_upload): ?>
-            <a class="koowa_dialog__menu__child--download"><?= translate('Upload'); ?></a>
+            <a class="koowa_dialog__menu__child--upload"><?= translate('Upload'); ?></a>
         <? endif; ?>
-        <a class="koowa_dialog__menu__child--insert"><?= translate('Select'); ?></a>
+        <a class="koowa_dialog__menu__child--files"><?= translate('Select'); ?></a>
         <a class="koowa_dialog__menu__child--attachments"><?= translate('Attachments'); ?></a>
     </div>
     <div class="koowa_dialog__layout">
@@ -188,14 +181,18 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                     </div>
                 </div>
             </div>
-            <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_insert koowa_dialog__file_dialog_insert--fullwidth">
+            <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_attach koowa_dialog__file_dialog_attach--fullwidth">
                 <h2 class="koowa_dialog__title">
                     <?= translate('Selected file info'); ?>
                 </h2>
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">
                         <div id="files-preview"></div>
-                        <div id="insert-button-container"></div>
+                        <div id="attach-button-container">
+                            <div style="text-align: center; display: none">
+                                <button class="btn btn-primary" type="button" id="attach-button" disabled><?= translate('Attach') ?></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -218,7 +215,11 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                 <div class="koowa_dialog__child__content">
                     <div class="koowa_dialog__child__content__box">
                         <div id="attachments-preview"></div>
-                        <div id="detach-button-container"></div>
+                        <div id="detach-button-container">
+                            <div style="text-align: center; display: none">
+                                <button class="btn btn-danger" type="button" id="detach-button" disabled><?= translate('Detach') ?></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
