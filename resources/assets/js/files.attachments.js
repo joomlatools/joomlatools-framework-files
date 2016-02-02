@@ -14,28 +14,36 @@
             var my = {
                 init: function (config)
                 {
-                    my.template = $(config.template);
-
-                    // Cleanup template content.
-                    var content = my.template.text();
-
-                    content = content.replace(/([href|src])="\/\[%=/g, "$1=\"[%=");
-
-                    my.template.text(content);
-
+                    my.template = config.template ? config.template : null;
+                    my.selector = $(config.selector);
                     my.url = config.url;
                     my.csrf_token = config.csrf_token;
                 },
-                render: function(attachment)
+                render: function(attachment, template)
                 {
-                    var data = {
-                        url: attachment.url,
-                        name: this.escape(attachment.name),
-                        type: attachment.type,
-                        thumbnail: attachment.thumbnail ? attachment.thumbnail.thumbnail : null
+                    var output = '';
+
+                    var template = template ? template : this.template;
+
+                    if (template)
+                    {
+                        var cleanup = function(content) {
+                            return content.replace(/([href|src])="\/\[%=/g, "$1=\"[%=");
+                        }
+
+                        var content = cleanup(template);
+
+                        var data = {
+                            url: attachment.url,
+                            name: this.escape(attachment.name),
+                            type: attachment.type,
+                            thumbnail: attachment.thumbnail ? attachment.thumbnail.thumbnail : null
+                        }
+
+                        output = new EJS({element: content}).render(data);
                     }
 
-                    return new EJS({element: my.template.get(0)}).render(data);
+                    return output;
                 },
                 escape: function(string)
                 {
@@ -50,7 +58,7 @@
 
                     return String(string).replace(/[&<>"'\/]/g, function (s) {return entityMap[s]});
                 },
-                insert: function(attachment)
+                attach: function(attachment)
                 {
                     var context = {
                         data: {
@@ -61,7 +69,7 @@
                         attachment: attachment
                     };
 
-                    this.template.trigger('before.insert', context);
+                    this.selector.trigger('before.attach', context);
 
                     $.ajax({
                         url: context.url,
@@ -70,11 +78,11 @@
                         success: function(data)
                         {
                             context.result = data;
-                            my.template.trigger('after.insert', context);
+                            my.selector.trigger('after.attach', context);
                         }
                     });
                 },
-                remove: function(attachment)
+                detach: function(attachment)
                 {
                     var context = {
                         data: {
@@ -85,7 +93,7 @@
                         attachment: attachment
                     };
 
-                    this.template.trigger('before.remove', context);
+                    this.selector.trigger('before.detach', context);
 
                     $.ajax({
                         url: context.url,
@@ -94,7 +102,7 @@
                         success: function(data)
                         {
                             context.result = data;
-                            my.template.trigger('after.remove', context);
+                            my.selector.trigger('after.detach', context);
                         }
                     });
                 },
@@ -115,7 +123,7 @@
                 },
                 bind: function(event, handler)
                 {
-                    this.template.on(event, handler);
+                    this.selector.on(event, handler);
                 }
             };
 
