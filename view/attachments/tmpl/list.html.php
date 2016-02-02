@@ -21,13 +21,14 @@
             Attachments = Attachments.getInstance(
                 {
                     url: "<?= route('', true, false) ?>",
-                    template: '#attachment-template',
+                    template: $('#attachment-template').text(),
+                    selector: '#attachment-template',
                     csrf_token: <?= json_encode(object('user')->getSession()->getToken()) ?>
                 }
             );
 
-            Attachments.bind('before.insert', function(event, context)  {setContext(context)});
-            Attachments.bind('before.remove', function(event, context) {setContext(context)});
+            Attachments.bind('before.attach', function(event, context)  {setContext(context)});
+            Attachments.bind('before.detach', function(event, context) {setContext(context)});
 
             var setContext = function(context) {
                 context.data.attachment = context.attachment;
@@ -55,7 +56,7 @@
                 });
             };
 
-            Attachments.bind('after.insert', function (event, context)
+            Attachments.bind('after.attach', function (event, context)
             {
                 var url = "<?= route('view=files&thumbnails=1&routed=1&name={name}&format=json', true, false) ?>";
 
@@ -116,7 +117,7 @@
             {
                 AttachmentsCallback = function(selected)
                 {
-                    Attachments.insert(selected);
+                    Attachments.attach(selected);
 
                     if (typeof $.magnificPopup !== 'undefined' && $.magnificPopup.instance) {
                         $.magnificPopup.close();
