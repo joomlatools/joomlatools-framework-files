@@ -903,7 +903,7 @@ $.widget("koowa.koowaUploader", {
 						.html(plupload.formatSize(file.size));			
 				break;
 		}
-		actionClass += ' ui-state-default plupload_file';
+		actionClass += ' plupload_file';
 
 		$file
 			.attr('class', actionClass)
