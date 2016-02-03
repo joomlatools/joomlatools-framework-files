@@ -273,6 +273,9 @@ $.widget("koowa.koowaUploader", {
 
 		// progressbar
 		this.progressbar = $('.bar', this.element);
+
+		// file template
+		this.file_template = $('.k-upload__file-template').text();
 		
 		// counter
 		this.counter = $('.plupload_count', this.element)
@@ -392,7 +395,7 @@ $.widget("koowa.koowaUploader", {
 		this.options = uploader.getOption();
 
 		if (self.options.views.thumbs) {
-			uploader.settings.required_features.display_media = true;
+			//uploader.settings.required_features.display_media = true;
 		}
 
 		// for backward compatibility
@@ -501,8 +504,6 @@ $.widget("koowa.koowaUploader", {
 			if (self.options.dragdrop && up.features.dragdrop) {
 				self.filelist.parent().addClass('plupload_dropbox');
 			}
-
-			self._displayThumbs();
 			
 			self.start_button.click(function(e) {
 				e.preventDefault();
@@ -936,157 +937,8 @@ $.widget("koowa.koowaUploader", {
 	},
 
 
-	_displayThumbs: function() {
-		var self = this
-		, tw, th // thumb width/height
-		, cols
-		, num = 0 // number of simultaneously visible thumbs
-		, thumbs = [] // array of thumbs to preload at any given moment
-		, loading = false
-		;
-
-		if (!this.options.views.thumbs) {
-			return;
-		}
-
-
-		function onLast(el, eventName, cb) {
-			var timer;
-			
-			el.on(eventName, function() {
-				clearTimeout(timer);
-				timer = setTimeout(function() {
-					clearTimeout(timer);
-					cb();
-				}, 300);
-			});
-		}
-
-
-		// calculate number of simultaneously visible thumbs
-		function measure() {
-			if (!tw || !th) {
-				var wrapper = $('.plupload_file:eq(0)', self.filelist);
-				tw = wrapper.outerWidth(true);
-				th = wrapper.outerHeight(true);
-			}
-
-			var aw = self.content.width(), ah = self.content.height();
-			cols = Math.floor(aw / tw);
-			num =  cols * (Math.ceil(ah / th) + 1);
-		}
-
-
-		function pickThumbsToLoad() {
-			// calculate index of virst visible thumb
-			var startIdx = Math.floor(self.content.scrollTop() / th) * cols;
-			// get potentially visible thumbs that are not yet visible
-			thumbs = $('.plupload_file .plupload_file_thumb', self.filelist)
-				.slice(startIdx, startIdx + num)
-				.filter('.plupload_thumb_toload')
-				.get();
-		}
-		
-
-		function init() {
-			function mpl() { // measure, pick, load
-				if (self.view_mode !== 'thumbs') {
-					return;
-				}
-				measure();
-				pickThumbsToLoad();
-				lazyLoad();
-			}
-
-			onLast(self.window, 'resize', mpl);
-			onLast(self.content, 'scroll',  mpl);
-
-			self.element.on('viewchanged selected', mpl);
-
-			mpl();
-		}
-
-
-		function preloadThumb(file, cb) {
-			var img = new o.Image();
-
-			img.onload = function() {
-				var thumb = $('#' + file.id + ' .plupload_file_thumb', self.filelist);
-				this.embed(thumb[0], { 
-					width: self.options.thumb_width, 
-					height: self.options.thumb_height, 
-					crop: true,
-					preserveHeaders: false,
-					swf_url: o.resolveUrl(self.options.flash_swf_url),
-					xap_url: o.resolveUrl(self.options.silverlight_xap_url)
-				});
-			};
-
-			img.bind("embedded error", function(e) {
-				$('#' + file.id, self.filelist)
-					.find('.plupload_file_thumb')
-						.removeClass('plupload_thumb_loading')
-						.addClass('plupload_thumb_' + e.type)
-					;
-				this.destroy();
-				setTimeout(cb, 1); // detach, otherwise ui might hang (in SilverLight for example)
-			});
-
-			$('#' + file.id, self.filelist)
-				.find('.plupload_file_thumb')
-					.removeClass('plupload_thumb_toload')
-					.addClass('plupload_thumb_loading')
-				;
-			img.load(file.getSource());
-		}
-
-
-		function lazyLoad() {
-			if (self.view_mode !== 'thumbs' || loading) {
-				return;
-			}	
-
-			pickThumbsToLoad();
-			if (!thumbs.length) {
-				return;
-			}
-
-			loading = true;
-
-			preloadThumb(self.getFile($(thumbs.shift()).closest('.plupload_file').attr('id')), function() {
-				loading = false;
-				lazyLoad();
-			});
-		}
-
-		// this has to run only once to measure structures and bind listeners
-		this.element.on('selected', function onselected() {
-			self.element.off('selected', onselected);
-			init();
-		});
-	},
-
-
 	_addFiles: function(files) {
 		var self = this, file_html, html = '';
-
-		file_html = '<li class="plupload_file ui-state-default plupload_delete" id="{id}" style="width:{thumb_width}px;">' +
-			'<div class="plupload_file_thumb plupload_thumb_toload" style="width: {thumb_width}px; height: {thumb_height}px;">' +
-				'<div class="plupload_file_dummy ui-widget-content" style="line-height: {thumb_height}px;"><span class="ui-state-disabled">{ext} </span></div>' +
-			'</div>' +
-			'<div class="plupload_file_status">' +
-				'<div class="plupload_file_progress ui-widget-header" style="width: 0%"> </div>' + 
-				'<span class="plupload_file_percent">{percent} </span>' +
-			'</div>' +
-			'<div class="plupload_file_name" title="{name}">' +
-				'<span class="plupload_file_name_wrapper">{name} </span>' +
-			'<div class="plupload_action_icon">delete</div>' +
-			'</div>' +						
-			'<div class="plupload_file_action">' +
-			'</div>' +
-			'<div class="plupload_file_size">{size} </div>' +
-			'<div class="plupload_file_fields"> </div>' +
-		'</li>';
 
 		if (plupload.typeOf(files) !== 'array') {
 			files = [files];
@@ -1095,7 +947,7 @@ $.widget("koowa.koowaUploader", {
 		$.each(files, function(i, file) {
 			var ext = o.Mime.getFileExtension(file.name) || 'none';
 
-			html += file_html.replace(/\{(\w+)\}/g, function($0, $1) {
+			html += self.file_template.replace(/\{(\w+)\}/g, function($0, $1) {
 				switch ($1) {
 					case 'thumb_width':
 					case 'thumb_height':
