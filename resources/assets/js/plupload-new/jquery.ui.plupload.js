@@ -267,8 +267,9 @@ $.widget("koowa.koowaUploader", {
 
 		// buttons
 		this.browse_button = $('.plupload_add', this.element).attr('id', id + '_browse').addClass('disabled');
-		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start').addClass('disabled');
 		this.stop_button = $('.plupload_stop', this.element).attr('id', id + '_stop');
+		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start')
+			.addClass('disabled').hide();
 
 		// progressbar
 		this.progressbar = $('.bar', this.element);
@@ -616,7 +617,9 @@ $.widget("koowa.koowaUploader", {
 				self.start_button.hide();
 			} else {
 				self._setButtonStatus(self.start_button, 'enable');
-				self.start_button.show();
+				if (!self.options.autostart) {
+					self.start_button.show();
+				}
 			}
 			
 			if (!value.stop) {
@@ -624,7 +627,9 @@ $.widget("koowa.koowaUploader", {
 				self.stop_button.hide();
 			} else {
 				self._setButtonStatus(self.start_button, 'enable');
-				self.start_button.show();
+				if (!self.options.autostart) {
+					self.start_button.show();
+				}
 			}
 		}
 		
