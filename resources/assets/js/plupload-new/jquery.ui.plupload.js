@@ -244,7 +244,8 @@ $.widget("koowa.koowaUploader", {
 	FILE_COUNT_ERROR: -9001,
 	
 	_create: function() {
-		var id = this.element.attr('id');
+		var self = this,
+			id = this.element.attr('id');
 		if (!id) {
 			id = plupload.guid();
 			this.element.attr('id', id);
@@ -282,6 +283,12 @@ $.widget("koowa.koowaUploader", {
 
 		// file template
 		this.file_template = $('.k-upload__file-template').text();
+
+		// error message
+		this.message = $('.k-upload__message', this.element);
+		this.message.find('button').click(function() {
+			self.element.removeClass('has-error');
+		});
 		
 		// counter
 		this.counter = $('.plupload_count', this.element)
@@ -773,7 +780,8 @@ $.widget("koowa.koowaUploader", {
 	@param {String} message The text message to display.
 	*/
 	notify: function(type, message) {
-		alert(message);
+		this.element.addClass('has-error');
+		this.message.find('.upload__message__body').html(message);
 	},
 
 	
