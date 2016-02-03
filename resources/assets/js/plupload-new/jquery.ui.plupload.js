@@ -271,6 +271,8 @@ $.widget("koowa.koowaUploader", {
 		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start')
 			.addClass('disabled').hide();
 
+		this.browse_button.data('caption-original', this.browse_button.text());
+
 		// progressbar
 		this.progressbar = $('.bar', this.element);
 
@@ -839,8 +841,18 @@ $.widget("koowa.koowaUploader", {
 			}
 
 			if (!up.files.length) {
+				this.browse_button.text(this.browse_button.data('caption-original'));
+
+				this.drop_message
+					.addClass('k-upload__drop-message__default')
+					.removeClass('k-upload__drop-message__uploaded');
 				this.drop_message.text(this.drop_message.data('caption-original'));
-			} else {
+			} else if (this.options.multi_selection === false) {
+				this.browse_button.text(this.browse_button.data('caption-update'));
+
+				this.drop_message
+					.removeClass('k-upload__drop-message__default')
+					.addClass('k-upload__drop-message__uploaded');
 				this.drop_message.text(this.drop_message.data('caption-update'));
 			}
 
