@@ -274,6 +274,10 @@ $.widget("koowa.koowaUploader", {
 		// progressbar
 		this.progressbar = $('.bar', this.element);
 
+		// drop files here message
+		this.drop_message = $('.k-upload__drop-message', this.element);
+		this.drop_message.data('caption-original', this.drop_message.text());
+
 		// file template
 		this.file_template = $('.k-upload__file-template').text();
 		
@@ -832,6 +836,12 @@ $.widget("koowa.koowaUploader", {
 			if (this.options.multiple_queues && maxCount && maxCount > filesPending) {
 				this._setButtonStatus(this.browse_button, 'enable');
 				up.disableBrowse(false);
+			}
+
+			if (!up.files.length) {
+				this.drop_message.text(this.drop_message.data('caption-original'));
+			} else {
+				this.drop_message.text(this.drop_message.data('caption-update'));
 			}
 
 			this._updateTotalProgress();
