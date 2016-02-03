@@ -413,8 +413,7 @@ $.widget("koowa.koowaUploader", {
 
 		plupload.addFileFilter('max_file_count', function(maxCount, file, cb) {
 			if (maxCount <= this.files.length - (this.total.uploaded + this.total.failed)) {
-				this._setButtonStatus(this.browse_button, 'disable');
-				this.disableBrowse();
+				self.disable();
 				
 				this.trigger('Error', {
 					code : self.FILE_COUNT_ERROR,
@@ -816,8 +815,7 @@ $.widget("koowa.koowaUploader", {
 			this._setButtonStatus(this.start_button, 'disable');
 
 			if (!this.options.multiple_queues) {
-				this._setButtonStatus(this.browse_button, 'disable');
-				up.disableBrowse();
+				this.disable();
 			}
 							
 			$('.plupload_upload_status', this.element).html(o.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
@@ -836,8 +834,7 @@ $.widget("koowa.koowaUploader", {
 
 			// if max_file_count defined, only that many files can be queued at once
 			if (this.options.multiple_queues && maxCount && maxCount > filesPending) {
-				this._setButtonStatus(this.browse_button, 'enable');
-				up.disableBrowse(false);
+				this.enable();
 			}
 
 			if (!up.files.length) {
