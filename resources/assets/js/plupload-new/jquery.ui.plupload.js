@@ -340,8 +340,7 @@ $.widget("koowa.koowaUploader", {
 			{
 				self.notify('error', response.error ? response.error : Koowa.translate('Unknown error'));
 
-				self.progressbar.removeClass('bar-success').addClass('bar-danger')
-					.parent().removeClass('active');
+				self.progressbar.removeClass('bar-success').addClass('bar-danger');
 
 				uploader.stop();
 			}
@@ -527,6 +526,10 @@ $.widget("koowa.koowaUploader", {
 		uploader.bind('FileFiltered', function(up, file) {
 			self._addFiles(file);
 		});
+
+		uploader.bind('BeforeUpload', function(up, file) {
+			self.progressbar.removeClass('bar-danger bar-success').parent().addClass('active is-uploading');
+		});
 		
 		uploader.bind('FilesAdded', function(up, files) {
 			self._trigger('selected', null, { up: up, files: files } );
@@ -582,13 +585,13 @@ $.widget("koowa.koowaUploader", {
 		});
 		
 		uploader.bind('UploadComplete', function(up, files) {
-
-			self.progressbar.css('width', '100%')
-				.parent().removeClass('active');
-
 			if (!self.progressbar.hasClass('bar-danger')) {
 				self.progressbar.addClass('bar-success');
 			}
+
+			setTimeout(function() {
+				self.progressbar.parent().removeClass('active is-uploading');
+			}, 500);
 
 			self._addFormFields();		
 			self._trigger('complete', null, { up: up, files: files } );
