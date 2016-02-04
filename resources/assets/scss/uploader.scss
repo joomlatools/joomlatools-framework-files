@@ -253,21 +253,11 @@
 }
 
 .k-upload__info__body {
-  table {
+  ul {
     margin: 0;
     padding: 0;
-    border: none;
+    list-style: none;
     font-size: 14px;
-  }
-
-  th {
-    text-align: left;
-    font-weight: bold;
-  }
-
-  td {
-    text-align: left;
-    vertical-align: top;
   }
 }
 
