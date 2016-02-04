@@ -24,6 +24,8 @@
   display: table;
   width: 100%;
   padding: 0 5px 0 15px;
+  min-height: 60px;
+  background: white;
 }
 
 .k-upload__content,
@@ -186,10 +188,19 @@
   .k-upload__files {
     opacity: 1;
     z-index: 0;
+    height: 21px;
+    overflow: hidden;
+
+    .plupload_file {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
 
-.k-upload__message {
+.k-upload__message,
+.k-upload__info {
   padding: 8px 12px;
   transition: all .2s ease-in-out;
   font-size: 15px;
@@ -228,100 +239,86 @@
   padding: 6px 4px 6px 10px;
 }
 
+.k-upload__info {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+
+
+/* Animations */
 .k-upload {
   min-height: 60px;
   max-height: 60px;
   position: relative;
-  overflow: hidden;
   transition: all .4s ease-in-out;
+  overflow: hidden;
 }
 
-.k-upload__content-wrapper,
-.k-upload__message,
-.k-upload__info {
+.k-upload__body-default,
+.k-upload__body-message,
+.k-upload__body-info {
   position: relative;
   transition: all .4s ease-in-out;
+  overflow: hidden;
 }
 
-.k-upload__content-wrapper {
-  margin-top: 0;
-  top: 0;
+/* Display content wrapper by default */
+.k-upload__body-default {
+  z-index: 1;
   opacity: 1;
   min-height: 60px;
   max-height: 100px;
+  top: 0;
 }
 
-.k-upload__message {
+.k-upload__body-message,
+.k-upload__body-info {
+  z-index: 0;
+  opacity: 0;
+  min-height: 60px;
+  max-height: 60px;
   margin-top: -60px;
   top: -60px;
-  opacity: 0;
-  min-height: 58px;
-  max-height: 0;
-  overflow: hidden;
 }
 
-.k-upload__info {
-  position: relative;
-  z-index: -1;
-  margin-top: -60px;
-  top: -60px;
-  opacity: 0;
-  min-height: 58px;
-  max-height: 0;
-  overflow: hidden;
-}
-
-.has-error {
-  max-height: 500px;
-
-  .k-upload__content-wrapper {
-    margin-top: -60px;
-    top: -60px;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-  }
-
-  .k-upload__message {
-    top: 0;
-    margin-top: 1px;
-    opacity: 1;
-    max-height: 500px;
-    overflow: auto;
-  }
-}
-
+.has-error,
 .has-open-info {
-  max-height: 500px;
+  max-height: 300px;
 
-  .k-upload__content-wrapper {
-    margin-top: -60px;
-    top: -60px;
+  /* Hide the default content wrapper */
+  .k-upload__body-default {
     opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-  }
-
-  .k-upload__info {
-    z-index: 0;
-    top: 0;
-    margin-top: 1px;
-    opacity: 1;
-    max-height: 500px;
-    overflow: auto;
+    max-height: 60px;
+    margin-top: -60px;
   }
 }
 
+/* Display error */
+.has-error {
+  .k-upload__body-message {
+    z-index: 1;
+    opacity: 1;
+    min-height: 60px;
+    max-height: 300px;
+    overflow: auto;
+    top: 0;
+    margin-top: 0px;
+  }
+}
 
-.has-file {
-  .k-upload__files {
-    height: 21px;
-    overflow: hidden;
-
-    .plupload_file {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
+/* Display info */
+.has-open-info {
+  .k-upload__body-info {
+    z-index: 1;
+    opacity: 1;
+    min-height: 60px;
+    max-height: 300px;
+    overflow: auto;
+    top: 0;
+    margin-top: 0px;
   }
 }

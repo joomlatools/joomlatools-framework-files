@@ -285,7 +285,7 @@ $.widget("koowa.koowaUploader", {
 		this.file_template = $('.k-upload__file-template').text();
 
 		// error message
-		this.message = $('.k-upload__message', this.element);
+		this.message = $('.k-upload__body-message', this.element);
 		this.message.find('button').click(function() {
 			self.element.removeClass('has-error');
 		});
@@ -781,7 +781,7 @@ $.widget("koowa.koowaUploader", {
 	*/
 	notify: function(type, message) {
 		this.element.addClass('has-error');
-		this.message.find('.upload__message__body').html(message);
+		this.message.find('.k-upload__message__body').html(message);
 	},
 
 	
