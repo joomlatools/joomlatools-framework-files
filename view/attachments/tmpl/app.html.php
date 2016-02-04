@@ -7,8 +7,8 @@
  * @link		http://github.com/nooku/nooku-files for the canonical source repository
  */
 defined('KOOWA') or die;
-
-$can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['can_upload'] : true;
+$can_attach = isset(parameters()->config['can_attach']) ? parameters()->config['can_attach'] : true;
+$can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['can_detach'] : true;
 ?>
 
 <?= import('com:files.files.scripts.html'); ?>
@@ -24,6 +24,12 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
             options = {
                 cookie: {
                     path: '<?=object('request')->getSiteUrl()?>'
+                },
+                attachments: {
+                    permissions: {
+                        attach: <?= json_encode($can_attach) ?>,
+                        detach: <?= json_encode($can_detach) ?>
+                    }
                 },
                 root_text: <?= json_encode(translate('Root folder')) ?>,
                 editor: <?= json_encode(parameters()->editor); ?>,
@@ -44,35 +50,43 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                 .getParent().setStyle('display', 'none');
         });
 
-        app.addEvent('beforeNavigate', function() {
+        app.addEvent('beforeNavigate', function()
+        {
             $('#files-preview').empty();
 
             document.id('attach-button').set('disabled', true)
                 .getParent().setStyle('display', 'none');
         });
 
-        app.addEvent('uploadFile', function(row) {
+        app.addEvent('uploadFile', function(row)
+        {
             app.grid.selected = row.path;
 
-            kQuery('#attach-button').trigger('click');
+            $('#attach-button').trigger('click');
         });
 
-        var onClickFile = function(e) {
+        var onClickFile = function(e)
+        {
             var row = document.id(e.target).getParent('.files-node').retrieve('row');
 
             app.grid.selected = row.path;
 
-            document.id('attach-button').set('disabled', false)
-                .getParent().setStyle('display', 'block');
+            if (app.attachments.permissions.attach) {
+                document.id('attach-button').set('disabled', false)
+                    .getParent().setStyle('display', 'block');
+            }
         };
 
-        var onClickAttachment = function(e) {
+        var onClickAttachment = function(e)
+        {
             var row = document.id(e.target).getParent('.files-node').retrieve('row');
 
             app.attachments.grid.selected = row.name;
 
-            document.id('detach-button').set('disabled', false)
-                .getParent().setStyle('display', 'block');
+            if (app.attachments.permissions.detach) {
+                document.id('detach-button').set('disabled', false)
+                    .getParent().setStyle('display', 'block');
+            }
         }
 
         app.grid.addEvent('clickFile', onClickFile);
@@ -89,14 +103,14 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
             attachments_dialog = $('.koowa_dialog__file_dialog_attachments, .koowa_dialog__file_dialog_detach');
 
         // Set initially
-        if (upload_dialog.length) {
+        if (<?= $can_attach ? 1 : 0 ?>) {
             files_dialog.hide();
             attachments_dialog.hide();
             upload_trigger.addClass('active');
         } else {
             upload_dialog.hide();
-            attachments_dialog.hide();
-            files_trigger.addClass('active');
+            files_dialog.hide();
+            attachments_trigger.addClass('active');
         }
 
         files_trigger.click(function() {
@@ -140,7 +154,6 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                 }, 1000);
             });
         }
-
     });
 </script>
 
@@ -149,15 +162,16 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 
 <div class="koowa_dialog koowa_dialog--file_dialog">
     <div class="koowa_dialog__menu koowa_dialog__menu--fullwidth">
-        <? if ($can_upload): ?>
-            <a class="koowa_dialog__menu__child--upload"><?= translate('Upload'); ?></a>
-        <? endif; ?>
-        <a class="koowa_dialog__menu__child--files"><?= translate('Select'); ?></a>
+        <a class="koowa_dialog__menu__child--upload" <?= ($can_attach) ? '' : 'style="display: none";' ?>>
+            <?= translate('Upload'); ?>
+        </a>
+        <a class="koowa_dialog__menu__child--files" <?= ($can_attach) ? '' : 'style="display: none";' ?>>
+            <?= translate('Select'); ?>
+        </a>
         <a class="koowa_dialog__menu__child--attachments"><?= translate('Attachments'); ?></a>
     </div>
     <div class="koowa_dialog__layout">
         <div class="koowa_dialog__wrapper">
-            <? if ($can_upload): ?>
                 <div id="koowa_dialog__file_dialog_upload" class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_upload koowa_dialog__file_dialog_upload--fullwidth">
                     <h2 class="koowa_dialog__title">
                         <?= translate('Upload a file to attach'); ?>
@@ -168,39 +182,38 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                         </div>
                     </div>
                 </div>
-            <? endif; ?>
-            <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_files">
-                <h2 class="koowa_dialog__title">
-                    <?= translate('Select a file to attach'); ?>
-                </h2>
-                <div class="koowa_dialog__child__content" id="spinner_container">
-                    <div class="koowa_dialog__child__content__box">
-                        <div id="files-grid" style="max-height:450px;">
+                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_files">
+                    <h2 class="koowa_dialog__title">
+                        <?= translate('Select a file to attach'); ?>
+                    </h2>
+                    <div class="koowa_dialog__child__content koowa_spinner_container" id="files-spinner">
+                        <div class="koowa_dialog__child__content__box">
+                            <div id="files-grid" style="max-height:450px;">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_attach koowa_dialog__file_dialog_attach--fullwidth">
-                <h2 class="koowa_dialog__title">
-                    <?= translate('Selected file info'); ?>
-                </h2>
-                <div class="koowa_dialog__child__content">
-                    <div class="koowa_dialog__child__content__box">
-                        <div id="files-preview"></div>
-                        <div id="attach-button-container">
-                            <div style="text-align: center; display: none">
-                                <button class="btn btn-primary" type="button" id="attach-button" disabled><?= translate('Attach') ?></button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_attach koowa_dialog__file_dialog_attach--fullwidth">
+                    <h2 class="koowa_dialog__title">
+                        <?= translate('Selected file info'); ?>
+                    </h2>
+                    <div class="koowa_dialog__child__content">
+                        <div class="koowa_dialog__child__content__box">
+                            <div id="files-preview"></div>
+                            <div id="attach-button-container">
+                                <div style="text-align: center; display: none">
+                                    <button class="btn btn-primary" type="button" id="attach-button" disabled><?= translate('Attach') ?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_attachments">
                 <h2 class="koowa_dialog__title">
                     <?= translate('Attached files'); ?>
                 </h2>
-                <div class="koowa_dialog__child__content" id="spinner_container">
+                <div class="koowa_dialog__child__content koowa_spinner_container" id="attachments-spinner">
                     <div class="koowa_dialog__child__content__box">
                         <div id="attachments-grid" style="max-height:450px;">
 
