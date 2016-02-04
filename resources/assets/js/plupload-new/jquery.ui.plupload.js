@@ -278,7 +278,7 @@ $.widget("koowa.koowaUploader", {
 		this.progressbar = $('.bar', this.element);
 
 		// drop files here message
-		this.drop_message = $('.k-upload__drop-message', this.element);
+		this.drop_message = $('.k-upload__content', this.element);
 		this.drop_message.data('caption-original', this.drop_message.text());
 
 		// file template

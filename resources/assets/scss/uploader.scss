@@ -1,4 +1,10 @@
 .k-upload {
+  /* Content-box so we don't get weird 1pixel jump error on IE (IE10 as well) */
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  transition: all .2s ease-in-out;
+  overflow: hidden;
   position: relative;
   background: white;
   color: #555;
@@ -6,30 +12,38 @@
   border-radius: 3px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   margin-bottom: 20px;
+
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
 }
 
-.k-upload__content {
+.k-upload__content-wrapper {
   display: table;
   width: 100%;
   padding: 0 5px 0 15px;
 }
 
-.k-upload__drop-message,
+.k-upload__content,
 .k-upload__buttons {
   display: table-cell;
   vertical-align: middle;
 }
 
-.k-upload__drop-message {
+.k-upload__content {
   font-size: 20px;
+  max-width: 0;
 }
 
 .k-upload__buttons {
   width: 1%;
   white-space: nowrap;
+  padding-left: 10px;
 }
 
-.button {
+.k-upload__button {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
@@ -40,13 +54,14 @@
   font-size: 14px;
   border-radius: 4px;
   background: white;
+
+  &:focus,
+  &:hover {
+    background: #f5f5f5;
+  }
 }
 
-.button:focus, .button:hover {
-  background: #f5f5f5;
-}
-
-.text {
+.k-upload__text-button {
   display: inline-block;
   border: none;
   background: transparent;
@@ -54,90 +69,11 @@
   white-space: nowrap;
   padding: 5px 10px;
   font-size: 14px;
-}
 
-.text:focus, .text:hover {
-  text-decoration: none;
-}
-
-#my_file,
-#my_files {
-  display: none;
-}
-
-.k-upload__loading,
-.k-upload__loading2 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: white;
-  z-index: 10;
-  text-align: right;
-  display: none;
-}
-
-.k-upload__loading__bar {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  background: #27AE60;
-  border: 1px solid white;
-  transition: all 1s ease-in-out;
-  width: 100%;
-  color: white;
-  overflow: hidden;
-}
-
-.k-upload__chosen,
-.k-upload__chosen2 {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background: white;
-  z-index: 10;
-  padding: 0 5px 0 15px;
-  display: none;
-  opacity: 0;
-  border-radius: 2px;
-}
-
-
-
-
-
-
-
-
-
-.k-upload.k-upload {
-  /* Content-box so we don't get weird 1pixel jump error on IE (IE10 as well) */
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  transition: all .2s ease-in-out;
-  overflow: hidden;
-
-  * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
+  &:focus,
+  &:hover {
+    text-decoration: none;
   }
-}
-
-.plupload_container.plupload_container {
-  min-height: 0;
-  height: auto;
-  position: static;
-}
-
-.plupload_view_thumbs .plupload_content.plupload_content {
-  bottom: 0;
-  top: 0;
 }
 
 .k-upload {
@@ -145,7 +81,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: 55px;
     left: 0;
     margin: 0;
     height: auto;
@@ -223,16 +159,16 @@
   }
 }
 
-.k-upload__drop-message__default {
+.k-upload__drop-message {
   transition: all .2s ease-in-out;
 }
 
-.k-upload__drop-message {
+.k-upload__content {
   min-height: 42px;
   transition: all .8s ease-in-out;
 }
 
-.k-upload__drop-message__uploaded {
+.k-upload__files {
   opacity: 0;
   z-index: -1;
   margin: 0;
@@ -241,13 +177,13 @@
   transition: all .2s ease-in-out;
 }
 
-.k-upload__drop-message.has-file {
-  .k-upload__drop-message__default {
+.k-upload__content.has-file {
+  .k-upload__drop-message {
     font-size: 14px;
     line-height: 21px;
   }
 
-  .k-upload__drop-message__uploaded {
+  .k-upload__files {
     opacity: 1;
     z-index: 0;
   }
@@ -296,13 +232,13 @@
   transition: all .4s ease-in-out;
 }
 
-.k-upload__content,
+.k-upload__content-wrapper,
 .k-upload__message {
   position: relative;
   transition: all .4s ease-in-out;
 }
 
-.k-upload__content {
+.k-upload__content-wrapper {
   margin-top: 0;
   top: 0;
   opacity: 1;
@@ -322,7 +258,7 @@
 .has-error {
   max-height: 500px;
 
-  .k-upload__content {
+  .k-upload__content-wrapper {
     margin-top: -60px;
     top: -60px;
     opacity: 0;
@@ -336,5 +272,19 @@
     opacity: 1;
     max-height: 500px;
     overflow: auto;
+  }
+}
+
+
+.has-file {
+  .k-upload__files {
+    height: 21px;
+    overflow: hidden;
+
+    .plupload_file {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
 }
