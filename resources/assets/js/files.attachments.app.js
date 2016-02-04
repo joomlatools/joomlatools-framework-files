@@ -25,13 +25,19 @@ Files.Attachments.App = new Class({
             }
         },
         grid: {
+            spinner_container: 'files-spinner',
             preview:  'files-preview',
             cookie: false,
             layout: 'compact',
             batch_delete: false
         },
         attachments: {
+            permissions: {
+                attach: false,
+                detach: false
+            },
             grid: {
+                spinner_container: 'attachments-spinner',
                 preview: 'attachments-preview',
                 cookie: false,
                 layout: 'attachments',
@@ -48,7 +54,10 @@ Files.Attachments.App = new Class({
     },
 
     initialize: function(options) {
+
         this.parent(options);
+
+        this.attachments.permissions = options.attachments.permissions;
 
         this.setAttachmentsGrid();
 
@@ -169,12 +178,20 @@ Files.Attachments.Grid = new Class({
         }
     },
     refresh: function() {
-        if (this.url) {
+        var that = this;
+
+        if (this.url)
+        {
+            this.spin();
+
             new Request.JSON({
                 url: this.url,
                 method: 'get',
-                onSuccess: function(response) {
+                onSuccess: function(response)
+                {
+                    that.reset(); // Flush current content.
                     Files.app.attachments.grid.insertRows(response.entities);
+                    that.unspin();
                 }
             }).send();
         }
