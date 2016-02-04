@@ -31,6 +31,18 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
         parent::_initialize($config);
     }
 
+    protected function _beforeRender(KControllerContextInterface $context)
+    {
+        $view = $context->getSubject()->getView();
+
+        $view->getConfig()->append(array(
+            'config' => array(
+                'can_attach' => $this->canAttach(),
+                'can_detach' => $this->canDetach()
+            )
+        ));
+    }
+
     protected function _afterAdd(KControllerContextInterface $context)
     {
         $entity = $context->result;

@@ -37,7 +37,7 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
                 )
             ),
             'initial_response' => true
-        ));
+        ))->append($this->getConfig()->config);
 
         if ($config->initial_response === true)
         {
