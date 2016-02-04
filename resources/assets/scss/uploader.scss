@@ -63,6 +63,13 @@
   }
 }
 
+.k-upload__button--upload {
+  background: #3071a9;
+  color: white;
+  border: 1px solid #1f496e;
+  display: none;
+}
+
 .k-upload__text-button {
   display: inline-block;
   border: none;
@@ -152,6 +159,18 @@
   }
 }
 
+.k-upload__details-button {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.k-upload__remove-button {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 5px;
+}
 
 .k-upload {
   .plupload_file {
