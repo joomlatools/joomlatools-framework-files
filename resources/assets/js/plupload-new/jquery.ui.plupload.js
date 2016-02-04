@@ -855,6 +855,8 @@ $.widget("koowa.koowaUploader", {
 
 				this.drop_message.addClass('has-file');
 				this.drop_message.text(this.drop_message.data('caption-update'));
+			} else {
+				this.drop_message.addClass('has-file');
 			}
 
 			this._updateTotalProgress();
