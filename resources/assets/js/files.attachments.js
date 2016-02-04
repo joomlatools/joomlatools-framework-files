@@ -14,25 +14,33 @@
             var my = {
                 init: function (config)
                 {
-                    my.template = config.template ? config.template : null;
+                    my.template = config.template ? $(config.template) : null;
                     my.selector = $(config.selector);
                     my.url = config.url;
                     my.csrf_token = config.csrf_token;
+
+                    if (my.template)  {
+                        my.template.text(my.templateCleanup(my.template.text()));
+                    }
+                },
+                templateCleanup: function(content)
+                {
+                    return content.replace(/([href|src])="\/\[%=/g, "$1=\"[%=");
                 },
                 render: function(attachment, template)
                 {
                     var output = '';
 
-                    var template = template ? template : this.template;
+                    if (template)
+                    {
+                        template = $(template);
+                        template.text(this.templateCleanup(template.text()));
+                    } else {
+                        template = this.template;
+                    }
 
                     if (template)
                     {
-                        var cleanup = function(content) {
-                            return content.replace(/([href|src])="\/\[%=/g, "$1=\"[%=");
-                        }
-
-                        var content = cleanup(template);
-
                         var data = {
                             url: attachment.url,
                             name: this.escape(attachment.name),
@@ -40,7 +48,7 @@
                             thumbnail: attachment.thumbnail ? attachment.thumbnail.thumbnail : null
                         }
 
-                        output = new EJS({element: content}).render(data);
+                        output = new EJS({element: template.get(0)}).render(data);
                     }
 
                     return output;
