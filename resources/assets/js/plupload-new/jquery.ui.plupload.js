@@ -393,8 +393,7 @@ $.widget("koowa.koowaUploader", {
 		;
 
 		if (self.options.dragdrop) {
-			this.filelist.parent().attr('id', this.id + '_dropbox');
-			options.drop_element = this.id + '_dropbox';
+			options.drop_element = this.id;
 		}
 
 		this.filelist.on('click', function(e) {
@@ -516,7 +515,7 @@ $.widget("koowa.koowaUploader", {
 			}
 
 			if (self.options.dragdrop && up.features.dragdrop) {
-				self.filelist.parent().addClass('plupload_dropbox');
+				//self.filelist.parent().addClass('plupload_dropbox');
 			}
 			
 			self.start_button.click(function(e) {
