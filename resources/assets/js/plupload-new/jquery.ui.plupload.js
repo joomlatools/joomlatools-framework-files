@@ -257,9 +257,14 @@ $.widget("koowa.koowaUploader", {
 		this.element.id = this.element.attr('id');
 
 		this.content = $('.plupload_content', this.element);
-		
-		// list of files, may become sortable
-		this.filelist = $('.plupload_filelist_content', this.element)
+
+		var suffix = this.options.multi_selection ? 'multiple' : 'single';
+
+		// file template
+		this.file_template = $('.js-file-template-'+suffix).text();
+
+		// list of files
+		this.filelist = $('.js-filelist-'+suffix, this.element)
 			.attr({
 				id: id + '_filelist',
 				unselectable: 'on'
@@ -280,9 +285,6 @@ $.widget("koowa.koowaUploader", {
 		// drop files here message
 		this.drop_message = $('.k-upload__content', this.element);
 		this.drop_message.data('caption-original', this.drop_message.text());
-
-		// file template
-		this.file_template = $('.k-upload__file-template').text();
 
 		// error message
 		this.message = $('.k-upload__body-message', this.element);
@@ -848,15 +850,15 @@ $.widget("koowa.koowaUploader", {
 			if (!up.files.length) {
 				this.browse_button.text(this.browse_button.data('caption-original'));
 
-				this.drop_message.removeClass('has-file');
+				this.element.removeClass('has-file');
 				this.drop_message.text(this.drop_message.data('caption-original'));
 			} else if (this.options.multi_selection === false) {
 				this.browse_button.text(this.browse_button.data('caption-update'));
 
-				this.drop_message.addClass('has-file');
+				this.element.addClass('has-file');
 				this.drop_message.text(this.drop_message.data('caption-update'));
 			} else {
-				this.drop_message.addClass('has-file');
+				this.element.addClass('has-file');
 			}
 
 			this._updateTotalProgress();
@@ -942,23 +944,37 @@ $.widget("koowa.koowaUploader", {
 		var up = this.uploader;
 
 		// Scroll to end of file list
-		this.filelist[0].scrollTop = this.filelist[0].scrollHeight;
+		//this.filelist[0].scrollTop = this.filelist[0].scrollHeight;
 
 		this.progressbar.css('width', up.total.percent + '%');
 
 		if (up.total.percent == 100) {
 			this.progressbar.parent().removeClass('active');
 		}
-		
-		this.element
-			.find('.plupload_total_status')
-				.html(up.total.percent + '%')
-				.end()
-			.find('.plupload_total_file_size')
-				.html(plupload.formatSize(up.total.size))
-				.end()
-			.find('.plupload_upload_status')
-				.html(o.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
+
+		if (this.options.multi_selection) {
+			var template = $('.js-file-details-template', this.element).text();
+			var html = template.replace(/\{(\w+)\}/g, function($0, $1) {
+				switch ($1) {
+					case 'percent':
+						return up.total.percent;
+
+					case 'size':
+						return plupload.formatSize(up.total.size);
+
+					case 'uploaded':
+						return up.total.uploaded;
+
+					case 'total':
+						return up.files.length;
+
+					default:
+						return up[$1] || '';
+				}
+			});
+
+			$('.js-filelist-single', this.element).html(html);
+		}
 	},
 
 
@@ -969,10 +985,12 @@ $.widget("koowa.koowaUploader", {
 			files = [files];
 		}
 
+		file_html = self.file_template;
+
 		$.each(files, function(i, file) {
 			var ext = o.Mime.getFileExtension(file.name) || 'none';
 
-			html += self.file_template.replace(/\{(\w+)\}/g, function($0, $1) {
+			html += file_html.replace(/\{(\w+)\}/g, function($0, $1) {
 				switch ($1) {
 					case 'thumb_width':
 					case 'thumb_height':
