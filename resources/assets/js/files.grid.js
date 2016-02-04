@@ -19,6 +19,7 @@ Files.Grid = new Class({
 		onSwitchLayout: function (){},
 		switchers: '.files-layout-switcher',
 		layout: false,
+		spinner_container: 'spinner_container',
 		batch_delete: false,
 		icon_size: 150,
 		types: null // null for all or array to filter for folder, file and image
@@ -26,6 +27,8 @@ Files.Grid = new Class({
 
 	initialize: function(container, options) {
 		this.setOptions(options);
+
+		this.spinner_container = options.spinner_container;
 
 		this.nodes = new Hash();
 		this.container = document.id(container);
@@ -522,7 +525,7 @@ Files.Grid = new Class({
             return;
         }
 
-        var target = document.getElementById('spinner_container');
+        var target = document.getElementById(this.spinner_container);
         var opts = {
             lines: 12, // The number of lines to draw
             length: 7, // The length of each line
