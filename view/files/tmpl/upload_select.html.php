@@ -112,7 +112,7 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
                 <h2 class="koowa_dialog__title">
                     <?= translate('Select a file'); ?>
                 </h2>
-                <div class="koowa_dialog__child__content" id="spinner_container">
+                <div class="koowa_dialog__child__content koowa_spinner_container" id="spinner_container">
                     <div class="koowa_dialog__child__content__box">
                         <div id="files-grid" style="max-height:450px;">
 
