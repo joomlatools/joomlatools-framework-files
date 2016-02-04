@@ -208,18 +208,22 @@
   color: white;
 }
 
-.upload__message__content {
+.k-upload__message__content,
+.k-upload__info__content {
   display: table;
   width: 100%;
 }
 
-.upload__message__body,
-.upload__message__button {
+.k-upload__message__body,
+.k-upload__message__button,
+.k-upload__info__body,
+.k-upload__info__button {
   display: table-cell;
   vertical-align: middle;
 }
 
-.upload__message__button {
+.k-upload__message__button,
+.k-upload__info__button {
   text-align: right;
   padding: 6px 4px 6px 10px;
 }
@@ -233,7 +237,8 @@
 }
 
 .k-upload__content-wrapper,
-.k-upload__message {
+.k-upload__message,
+.k-upload__info {
   position: relative;
   transition: all .4s ease-in-out;
 }
@@ -255,6 +260,17 @@
   overflow: hidden;
 }
 
+.k-upload__info {
+  position: relative;
+  z-index: -1;
+  margin-top: -60px;
+  top: -60px;
+  opacity: 0;
+  min-height: 58px;
+  max-height: 0;
+  overflow: hidden;
+}
+
 .has-error {
   max-height: 500px;
 
@@ -267,6 +283,27 @@
   }
 
   .k-upload__message {
+    top: 0;
+    margin-top: 1px;
+    opacity: 1;
+    max-height: 500px;
+    overflow: auto;
+  }
+}
+
+.has-open-info {
+  max-height: 500px;
+
+  .k-upload__content-wrapper {
+    margin-top: -60px;
+    top: -60px;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .k-upload__info {
+    z-index: 0;
     top: 0;
     margin-top: 1px;
     opacity: 1;
