@@ -239,13 +239,38 @@
   padding: 6px 4px 6px 10px;
 }
 
-.k-upload__info {
-  ul {
+.k-upload__message__button,
+.k-upload__info__button {
+  vertical-align: top;
+  width: 1%;
+  white-space: nowrap;
+}
+
+.k-upload__overflow {
+  width: 100%;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.k-upload__info__body {
+  table {
     margin: 0;
     padding: 0;
-    list-style: none;
+    border: none;
+    font-size: 14px;
+  }
+
+  th {
+    text-align: left;
+    font-weight: bold;
+  }
+
+  td {
+    text-align: left;
+    vertical-align: top;
   }
 }
+
 
 
 
