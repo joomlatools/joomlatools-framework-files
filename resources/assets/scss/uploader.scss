@@ -180,6 +180,14 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
     border-radius: 3px 3px 0 0;
     border-bottom-color: #ccc;
   }
+
+  .k-upload__details-button__view {
+    display: none;
+  }
+
+  .k-upload__details-button__close {
+    display: inline;
+  }
 }
 
 
