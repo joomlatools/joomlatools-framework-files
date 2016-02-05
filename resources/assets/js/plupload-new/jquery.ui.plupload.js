@@ -518,7 +518,7 @@ $.widget("koowa.koowaUploader", {
 			}
 
 			if (self.options.dragdrop && up.features.dragdrop) {
-				self.element.addClass('has-dragdrop');
+				self.element.addClass('has-dragdrop-support');
 			}
 			
 			self.start_button.click(function(e) {

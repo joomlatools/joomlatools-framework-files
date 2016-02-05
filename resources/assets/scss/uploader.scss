@@ -150,6 +150,7 @@ $k-uploader-max-height: 300px !default;
 .k-upload__content {
   font-size: 20px;
   max-width: 0;
+  display: none;
 }
 
 .k-upload__buttons {
@@ -415,5 +416,11 @@ $k-uploader-max-height: 300px !default;
     &:after {
       opacity: 1;
     }
+  }
+}
+
+.has-dragdrop-support {
+  .k-upload__content {
+    display: table-cell;
   }
 }
