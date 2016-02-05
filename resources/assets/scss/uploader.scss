@@ -85,7 +85,7 @@ $k-uploader-progressbar-height: 3px !default;
  */
 
 .k-upload__body-default {
-  z-index: 1; /* 1 */
+  z-index: 2; /* 1 */
   opacity: 1; /* 2 */
   min-height: $k-uploader-height; /* 3 */
   max-height: $k-uploader-height; /* 3 */
@@ -99,8 +99,7 @@ $k-uploader-progressbar-height: 3px !default;
  * 2. Move item out of "screen"
  */
 
-.has-error,
-.has-open-info {
+.has-error {
   .k-upload__body-default {
     opacity: 0; /* 1 */
     margin-top: -60px; /* 2 */
@@ -135,8 +134,7 @@ $k-uploader-progressbar-height: 3px !default;
  * 2. Set opacity to 1 to visually show item
  * 3. Minimum height should always be the same as the uploader
  * 4. Set the max-height
- * 5. Set overflowing to auto to get scrollbars when needed
- * 6. Move into "screen"
+ * 5. Move into "screen"
  */
 
 .has-error .k-upload__body-message,
@@ -145,9 +143,26 @@ $k-uploader-progressbar-height: 3px !default;
     opacity: 1; /* 2 */
     min-height: $k-uploader-height; /* 3 */
     max-height: $k-uploader-max-height; /* 4 */
-    overflow: auto; /* 5 */
-    top: 0; /* 6 */
-    margin-top: 0; /* 6 */
+    top: 0; /* 5 */
+    margin-top: 0; /* 5 */
+}
+
+
+/**
+ * Has error
+ *
+ * Hide the info container on displaying error
+ */
+
+.has-error {
+  .k-upload__body-info {
+    z-index: 0; /* 1 */
+    opacity: 0; /* 2 */
+    min-height: $k-uploader-height; /* 3 */
+    max-height: $k-uploader-height; /* 3 */
+    margin-top: -($k-uploader-height); /* 4 */
+    top: -($k-uploader-height); /* 4 */
+  }
 }
 
 
@@ -163,6 +178,8 @@ $k-uploader-progressbar-height: 3px !default;
   display: table; /* 1 */
   width: 100%; /* 2 */
   min-height: 60px; /* 3 */
+  border-radius: 3px;
+  background: white;
 }
 
 
@@ -446,6 +463,11 @@ $k-uploader-progressbar-height: 3px !default;
   line-height: 21px; /* 1 */
 }
 
+.k-upload__info__content {
+  background: #f3f3f3;
+  border-radius: 0 0 3px 3px;
+  border-top: 1px solid #ccc;
+}
 
 
 
@@ -475,7 +497,6 @@ $k-uploader-progressbar-height: 3px !default;
 
 .k-upload__info__body {
   padding: 10px;
-  padding-top: 50px;
 
   table {
     width: 100%;
@@ -499,7 +520,12 @@ $k-uploader-progressbar-height: 3px !default;
 
 .has-drag-hover {
   border-color: #29abe2;
-  background: #e9f8ff;
+
+  .k-upload__content-wrapper,
+  .k-upload__info__content {
+    background: #e9f8ff;
+    border-color: #29abe2;
+  }
 }
 
 
@@ -546,6 +572,7 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 .k-upload__remove-button {
+  background: white;
   border: 1px solid #ccc;
   border-radius: 2px;
   font-size: 12px;
@@ -675,23 +702,6 @@ td.k-upload__file-status-wrapper {
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 0;
-}
-
-
-.upload__info__actions {
-  border-bottom: 1px solid #ccc;
-  padding: 10px;
-  background: #eee;
-  height: 50px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  .k-upload__button {
-    font-size: 14px;
-    padding: 3px 8px;
-  }
 }
 
 .k-upload__info__content {
