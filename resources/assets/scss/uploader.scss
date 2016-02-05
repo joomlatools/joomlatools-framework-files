@@ -457,6 +457,16 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* ===================== Shame =============== */
 
 /**
@@ -536,11 +546,37 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 .k-upload__remove-button {
-  display: inline-block;
-  font-size: 16px;
-  font-weight: bold;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #555;
+  display: block;
+  width: 14px;
+  height: 14px;
+  line-height: 12px;
+  overflow: hidden;
+  text-align: center;
+  transition: all .5s ease-in-out;
+  text-decoration: none;
   cursor: pointer;
+  font-weight: bold;
+
+  &:focus,
+  &:hover {
+    background: #f1f1f1;
+    text-decoration: none;
+  }
+
+  @media (min-width: 600px) {
+    width: 100%;
+    overflow: auto;
+    padding: 0 5px;
+    height: 22px;
+    line-height: 20px;
+  }
 }
+
+
 
 .k-upload {
   .plupload_file {
