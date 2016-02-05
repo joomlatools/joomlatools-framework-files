@@ -294,6 +294,12 @@ $.widget("koowa.koowaUploader", {
 			self.clearQueue();
 		});
 
+		$('.js-trigger-upload').on('click', function(e) {
+			e.preventDefault();
+
+			self.start_button.trigger('click');
+		});
+
 		this.browse_button.data('caption-original', this.browse_button.text());
 
 		// progressbar
