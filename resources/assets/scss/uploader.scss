@@ -4,6 +4,7 @@
 
 $k-uploader-height: 60px !default;
 $k-uploader-max-height: 300px !default;
+$k-uploader-progressbar-height: 3px !default;
 
 /**
  * Uploader
@@ -233,10 +234,14 @@ $k-uploader-max-height: 300px !default;
   border-radius: 4px;
 
   /* Add spacing to left from second button */
-
   & + .k-upload__button,
   & + .k-upload__text-button {
     margin-left: 13px;
+  }
+
+  /* Disabled buttons should be invisible */
+  &.disabled {
+    display: none !important;
   }
 }
 
@@ -261,6 +266,12 @@ $k-uploader-max-height: 300px !default;
   background: #3071a9;
   color: white;
   border: 1px solid #1f496e;
+
+  &:focus,
+  &:hover {
+    background-color: #1f496e;
+    color: white;
+  }
 }
 
 
@@ -279,34 +290,36 @@ $k-uploader-max-height: 300px !default;
 }
 
 
+/**
+  * Progress bar
+  *
+  * 1. Double class to win over the plupload styling
+  * 2. Absolute positioning so it's not in the way of anything
+  * 3. Bottom set to height of container minus progressbar height
+  * 4. Hide container visually
+  */
 
-
-
-
-
-
-
-
-
-.k-upload__progress.progress {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: $k-uploader-height - 5px;
-  left: 0;
+.k-upload__progress.progress { /* 1 */
+  position: absolute; /* 2 */
+  top: 0; /* 2 */
+  right: 0; /* 2 */
+  bottom: $k-uploader-height - $k-uploader-progressbar-height; /* 3 */
+  left: 0; /* 2 */
   margin: 0;
   height: auto;
-  z-index: -1;
-  opacity: 0;
+  z-index: -1;  /* 4 */
+  opacity: 0; /* 4 */
   transition: all .2s ease-in-out;
 
+  /* Display container visually when files are uploading */
   &.is-uploading {
     z-index: 99;
     opacity: 1;
   }
 
+  /* Remove the 45deg gradient, just use a solid color */
   .bar {
-    background-repeat: repeat;
+    background-image: none;
   }
 }
 
