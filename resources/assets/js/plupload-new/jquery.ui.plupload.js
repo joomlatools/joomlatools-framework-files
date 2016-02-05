@@ -288,14 +288,16 @@ $.widget("koowa.koowaUploader", {
 		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start')
 			.hide();
 
+		this.clear_button = $('.js-clear-queue', this.element).click(function(event) {
+			event.preventDefault();
+
+			self.clearQueue();
+		});
+
 		this.browse_button.data('caption-original', this.browse_button.text());
 
 		// progressbar
 		this.progressbar = $('.bar', this.element);
-
-		// drop files here message
-		this.drop_message = $('.k-upload__content', this.element);
-		this.drop_message.data('caption-original', this.drop_message.text());
 
 		// error message
 		this.message = $('.k-upload__body-message', this.element);
@@ -322,7 +324,7 @@ $.widget("koowa.koowaUploader", {
 		if (this.options.chunking) {
 			this.options.preinit.Init = this._setChunking;
 		}
-					
+
 		// initialize uploader instance
 		this._initUploader();
 
@@ -768,6 +770,8 @@ $.widget("koowa.koowaUploader", {
 	*/
 	clearQueue: function() {
 		this.uploader.splice();
+
+		this.element.removeClass('has-open-info');
 	},
 
 
@@ -879,12 +883,10 @@ $.widget("koowa.koowaUploader", {
 				this.browse_button.text(this.browse_button.data('caption-original'));
 
 				this.element.removeClass('has-file');
-				//this.drop_message.text(this.drop_message.data('caption-original'));
 			} else if (this.options.multi_selection === false) {
 				this.browse_button.text(this.browse_button.data('caption-update'));
 
 				this.element.addClass('has-file');
-				//this.drop_message.text(this.drop_message.data('caption-update'));
 			} else {
 				if (!this.options.autostart) {
 					this.start_button.show();
