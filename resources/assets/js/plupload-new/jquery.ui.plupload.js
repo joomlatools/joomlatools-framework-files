@@ -277,7 +277,7 @@ $.widget("koowa.koowaUploader", {
 		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start');
 
 		if (!this.options.autostart) {
-			this.start_button.show();
+			this.start_button.hide();
 		}
 
 		this.browse_button.data('caption-original', this.browse_button.text());

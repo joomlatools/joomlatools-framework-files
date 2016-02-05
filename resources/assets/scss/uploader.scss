@@ -1,11 +1,22 @@
+/**
+ * Variables
+ */
+
+$k-uploader-height: 60px !default;
+$k-uploader-max-height: 300px !default;
+
+/**
+ * Uploader
+ *
+ * 1. Content-box so we don't get weird 1pixel jump error on IE (IE10 as well)
+ * 2. Hide overflowing content like messages and info
+ */
+
 .k-upload {
-  /* Content-box so we don't get weird 1pixel jump error on IE (IE10 as well) */
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  transition: all .2s ease-in-out;
-  overflow: hidden;
-  position: relative;
+  -webkit-box-sizing: content-box; /* 1 */
+  -moz-box-sizing: content-box; /* 1 */
+  box-sizing: content-box; /* 1 */
+  overflow: hidden; /* 2 */
   background: white;
   color: #555;
   border: 1px solid #ccc;
@@ -13,12 +24,114 @@
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   margin-bottom: 20px;
 
+  /* Border box size everything inside */
   * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
 }
+
+
+/**
+ * Uploader animations
+ *
+ * 1. Position relative for `top` to work properly
+ * 2. By default hide overflowing content
+ * 3. Smooth transitions
+ */
+
+.k-upload__body-default,
+.k-upload__body-message,
+.k-upload__body-info {
+  position: relative; /* 1 */
+  overflow: hidden; /* 2 */
+  transition: all .4s ease-in-out; /* 3 */
+}
+
+
+/**
+ * Default content wrapper
+ *
+ * 1. Higher z-index than message and info
+ * 2. Set opacity to 1, so we can transition to 0
+ * 3. Height should always be the same as the uploader
+ */
+
+.k-upload__body-default {
+  z-index: 1; /* 1 */
+  opacity: 1; /* 2 */
+  min-height: $k-uploader-height; /* 3 */
+  max-height: $k-uploader-height; /* 3 */
+}
+
+
+/**
+ * Default content wrapper when message or info is visible
+ *
+ * 1. Set opacity to 0 to hide the item visually
+ * 2. Move item out of "screen"
+ */
+
+.has-error,
+.has-open-info {
+  .k-upload__body-default {
+    opacity: 0; /* 1 */
+    margin-top: -60px; /* 2 */
+  }
+}
+
+
+/**
+ * Message and info containers, "hide" be default
+ *
+ * 1. Lower z-index to put behind the default content wrapper
+ * 2. Set opacity to 0 to hide the item visually
+ * 3. Height should always be the same as uploader
+ * 4. Position items above content wrapper to make them slide in from top
+ */
+
+.k-upload__body-message,
+.k-upload__body-info {
+  z-index: 0; /* 1 */
+  opacity: 0; /* 2 */
+  min-height: $k-uploader-height; /* 3 */
+  max-height: $k-uploader-height; /* 3 */
+  margin-top: -($k-uploader-height); /* 4 */
+  top: -($k-uploader-height); /* 4 */
+}
+
+
+/**
+ * Display error and info
+ *
+ * 1. Higher z-index than other container
+ * 2. Set opacity to 1 to visually show item
+ * 3. Minimum height should always be the same as the uploader
+ * 4. Set the max-height
+ * 5. Set overflowing to auto to get scrollbars when needed
+ * 6. Move into "screen"
+ */
+
+.has-error .k-upload__body-message,
+.has-open-info .k-upload__body-info {
+    z-index: 1; /* 1 */
+    opacity: 1; /* 2 */
+    min-height: $k-uploader-height; /* 3 */
+    max-height: $k-uploader-max-height; /* 4 */
+    overflow: auto; /* 5 */
+    top: 0; /* 6 */
+    margin-top: 0; /* 6 */
+}
+
+
+
+
+
+
+
+
+
 
 .k-upload__content-wrapper {
   display: table;
@@ -182,6 +295,13 @@
 
 .k-upload__drop-message {
   transition: all .2s ease-in-out;
+
+  &:after {
+    content: "Ready to catch it!";
+    font-weight: bold;
+    opacity: 0;
+    transition: all .6s ease-in-out;
+  }
 }
 
 .k-upload__content {
@@ -283,76 +403,17 @@
 
 
 
-/* Animations */
-.k-upload {
-  min-height: 60px;
-  max-height: 60px;
-  position: relative;
-  transition: all .4s ease-in-out;
-  overflow: hidden;
-}
 
-.k-upload__body-default,
-.k-upload__body-message,
-.k-upload__body-info {
-  position: relative;
-  transition: all .4s ease-in-out;
-  overflow: hidden;
-}
+.has-dragdrop {
+  border-color: #29abe2;
 
-/* Display content wrapper by default */
-.k-upload__body-default {
-  z-index: 1;
-  opacity: 1;
-  min-height: 60px;
-  max-height: 100px;
-  top: 0;
-}
-
-.k-upload__body-message,
-.k-upload__body-info {
-  z-index: 0;
-  opacity: 0;
-  min-height: 60px;
-  max-height: 60px;
-  margin-top: -60px;
-  top: -60px;
-}
-
-.has-error,
-.has-open-info {
-  max-height: 300px;
-
-  /* Hide the default content wrapper */
-  .k-upload__body-default {
-    opacity: 0;
-    max-height: 60px;
-    margin-top: -60px;
+  .k-upload__content-wrapper {
+    background: #e9f8ff;
   }
-}
 
-/* Display error */
-.has-error {
-  .k-upload__body-message {
-    z-index: 1;
-    opacity: 1;
-    min-height: 60px;
-    max-height: 300px;
-    overflow: auto;
-    top: 0;
-    margin-top: 0px;
-  }
-}
-
-/* Display info */
-.has-open-info {
-  .k-upload__body-info {
-    z-index: 1;
-    opacity: 1;
-    min-height: 60px;
-    max-height: 300px;
-    overflow: auto;
-    top: 0;
-    margin-top: 0px;
+  .k-upload__drop-message {
+    &:after {
+      opacity: 1;
+    }
   }
 }
