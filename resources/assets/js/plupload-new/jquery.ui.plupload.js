@@ -318,7 +318,6 @@ $.widget("koowa.koowaUploader", {
 		this.view_mode = 'thumbs';
 
 		this._setMaxCount(this.options.multi_selection ? 100 : 1);
-		this._handleUploadErrors();
 	},
 
 	_setChunking: function(uploader) {
@@ -346,26 +345,6 @@ $.widget("koowa.koowaUploader", {
 		if (limit > 0) {
 			uploader.setOption('max_file_size', limit);
 		}
-	},
-
-	_handleUploadErrors: function() {
-		var self = this, event;
-
-		event = function(uploader, file, result) {
-			var response = $.parseJSON(result.response);
-
-			if (response.status === false)
-			{
-				self.notify('error', response.error ? response.error : Koowa.translate('Unknown error'));
-
-				self.progressbar.removeClass('bar-success').addClass('bar-danger');
-
-				uploader.stop();
-			}
-		};
-
-		this.uploader.bind('FileUploaded', event);
-		this.uploader.bind('ChunkUploaded', event);
 	},
 
 	_setMaxCount: function(count) {
@@ -594,12 +573,32 @@ $.widget("koowa.koowaUploader", {
 				self._trigger('stopped', null, { up: self.uploader });
 			}
 		});
-		
+
+		var _handleUploadErrors = function(uploader, file, result) {
+			var response = $.parseJSON(result.response);
+
+			if (response.status === false)
+			{
+				var error = response.error ? response.error : Koowa.translate('Unknown error');
+				self.notify('error', error);
+
+				self.progressbar.removeClass('bar-success').addClass('bar-danger');
+
+				file.status = plupload.FAILED;
+				file.error_message = error;
+
+				uploader.stop();
+			}
+		};
+
+		uploader.bind('ChunkUploaded', _handleUploadErrors);
+
 		uploader.bind('UploadFile', function(up, file) {
 			self._handleFileStatus(file);
 		});
 		
 		uploader.bind('FileUploaded', function(up, file, result) {
+			_handleUploadErrors(up, file, result);
 			self._handleFileStatus(file);
 			self._trigger('uploaded', null, { up: up, file: file, result: result } );
 		});
@@ -894,7 +893,7 @@ $.widget("koowa.koowaUploader", {
 	},
 	
 	_handleFileStatus: function(file) {
-		var $file = $('#' + file.id), actionClass, iconClass, text;
+		var $file = $('#' + file.id), text;
 		
 		// since this method might be called asynchronously, file row might not yet be rendered
 		if (!$file.length) {
@@ -902,28 +901,20 @@ $.widget("koowa.koowaUploader", {
 		}
 
 		switch (file.status) {
-			case plupload.DONE: 
-				actionClass = 'plupload_done';
+			case plupload.DONE:
 				text = 'done';
-				iconClass = 'plupload_action_icon ui-icon ui-icon-circle-check';
 				break;
 			
 			case plupload.FAILED:
-				actionClass = 'ui-state-error plupload_failed';
 				text = 'failed';
-				iconClass = 'plupload_action_icon ui-icon ui-icon-alert';
 				break;
 
 			case plupload.QUEUED:
-				actionClass = 'plupload_delete';
 				text = 'delete';
-				iconClass = 'plupload_action_icon ui-icon ui-icon-circle-minus';
 				break;
 
 			case plupload.UPLOADING:
-				actionClass = 'ui-state-highlight plupload_uploading';
 				text = 'uploading';
-				iconClass = 'plupload_action_icon ui-icon ui-icon-circle-arrow-w';
 				
 				// scroll uploading file into the view if its bottom boundary is out of it
 				var scroller = $('.plupload_scroll', this.element)
@@ -948,13 +939,8 @@ $.widget("koowa.koowaUploader", {
 						.html(plupload.formatSize(file.size));			
 				break;
 		}
-		actionClass += ' plupload_file';
 
-		$file
-			.attr('class', actionClass)
-			.find('.plupload_action_icon')
-				.text(text)
-				.attr('class', iconClass);
+		$file.find('.plupload_file_status').text(text);
 	},
 	
 	
