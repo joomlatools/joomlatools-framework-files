@@ -397,8 +397,8 @@ $.widget("koowa.koowaUploader", {
 		}
 
 		this.filelist.on('click', function(e) {
-			if ($(e.target).hasClass('plupload_action_icon')) {
-				self.removeFile($(e.target).closest('.plupload_file').attr('id'));
+			if ($(e.target).hasClass('js-remove-file')) {
+				self.removeFile($(e.target).closest('.js-uploader-file').attr('id'));
 				e.preventDefault();
 			}
 		});
