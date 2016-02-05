@@ -424,3 +424,17 @@ $k-uploader-max-height: 300px !default;
     display: table-cell;
   }
 }
+
+.k-upload {
+  &:after {
+    display: block;
+    content: " ";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: white;
+    z-index: 999;
+  }
+}
