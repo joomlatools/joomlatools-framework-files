@@ -151,12 +151,12 @@ $k-uploader-max-height: 300px !default;
   font-size: 20px;
   max-width: 0;
   display: none;
+  padding-right: 10px;
 }
 
 .k-upload__buttons {
   width: 1%;
   white-space: nowrap;
-  padding-left: 10px;
 }
 
 .k-upload__button {
@@ -181,7 +181,6 @@ $k-uploader-max-height: 300px !default;
   background: #3071a9;
   color: white;
   border: 1px solid #1f496e;
-  display: none;
 }
 
 .k-upload__text-button {
@@ -296,13 +295,6 @@ $k-uploader-max-height: 300px !default;
 
 .k-upload__drop-message {
   transition: all .2s ease-in-out;
-
-  &:after {
-    content: "Ready to catch it!";
-    font-weight: bold;
-    opacity: 0;
-    transition: all .6s ease-in-out;
-  }
 }
 
 .k-upload__content {
@@ -443,6 +435,7 @@ $k-uploader-max-height: 300px !default;
 
   &.is-initialized {
     &:after {
+      z-index: 0;
       opacity: 0;
     }
   }
