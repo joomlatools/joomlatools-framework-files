@@ -258,26 +258,29 @@ $.widget("koowa.koowaUploader", {
 
 		this.content = $('.plupload_content', this.element);
 
-		var suffix = this.options.multi_selection ? 'multiple' : 'single';
-
 		this.templates = {
 			'file-single':   $('.js-file-single-template').text(),
 			'file-multiple': $('.js-file-multiple-template').text(),
 			'upload-pending': $('.js-upload-pending-template').text(),
 			'upload-uploading': $('.js-upload-uploading-template').text(),
-			'upload-finished': $('.js-upload-finished-template').text()
+			'upload-finished': $('.js-upload-finished-template').text(),
+			'upload-empty-single': $('.js-upload-empty-single-template').text(),
+			'upload-empty-multiple': $('.js-upload-empty-multiple-template').text()
 		};
+
+		var suffix = this.options.multi_selection ? 'multiple' : 'single';
+
+		$('.js-content', this.element).html(this._renderTemplate(this.templates['upload-empty-'+suffix]));
 
 		// file template
 		this.file_template = this.templates['file-'+suffix];
 
 		// list of files
-		this.filelist = $('.js-filelist-'+suffix, this.element)
+		this.filelist = $(suffix == 'single' ? '.js-content' : '.js-filelist-multiple', this.element)
 			.attr({
 				id: id + '_filelist',
 				unselectable: 'on'
 			});
-		
 
 		// buttons
 		this.browse_button = $('.plupload_add', this.element).attr('id', id + '_browse').addClass('disabled');
@@ -387,6 +390,10 @@ $.widget("koowa.koowaUploader", {
 			if ($(e.target).hasClass('js-remove-file')) {
 				self.removeFile($(e.target).closest('.js-uploader-file').attr('id'));
 				e.preventDefault();
+
+				if (!self.uploader.files.length) {
+					self.element.removeClass('has-open-info');
+				}
 			}
 		});
 
@@ -872,12 +879,12 @@ $.widget("koowa.koowaUploader", {
 				this.browse_button.text(this.browse_button.data('caption-original'));
 
 				this.element.removeClass('has-file');
-				this.drop_message.text(this.drop_message.data('caption-original'));
+				//this.drop_message.text(this.drop_message.data('caption-original'));
 			} else if (this.options.multi_selection === false) {
 				this.browse_button.text(this.browse_button.data('caption-update'));
 
 				this.element.addClass('has-file');
-				this.drop_message.text(this.drop_message.data('caption-update'));
+				//this.drop_message.text(this.drop_message.data('caption-update'));
 			} else {
 				if (!this.options.autostart) {
 					this.start_button.show();
@@ -973,8 +980,10 @@ $.widget("koowa.koowaUploader", {
 			else if (up.total.percent == 100) {
 				template = this.templates['upload-finished'];
 			}
-			else {
+			else if (up.files.length) {
 				template = this.templates['upload-pending'];
+			} else {
+				template = this.options.multi_selection ? this.templates['upload-empty-multiple'] : this.templates['upload-empty-single'];
 			}
 
 			var html = this._renderTemplate(template, {
@@ -986,7 +995,7 @@ $.widget("koowa.koowaUploader", {
 				'failed'  : up.total.failed
 			});
 
-			$('.js-filelist-single', this.element).html(html);
+			$('.js-content', this.element).html(html);
 		}
 	},
 
@@ -1030,6 +1039,10 @@ $.widget("koowa.koowaUploader", {
 				'size' : plupload.formatSize(file.size)
 			}, file);
 		});
+
+		if (!self.options.multi_selection) {
+			self.filelist.empty();
+		}
 
 		self.filelist.append(html);
 	},
