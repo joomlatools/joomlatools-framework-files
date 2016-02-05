@@ -274,11 +274,8 @@ $.widget("koowa.koowaUploader", {
 		// buttons
 		this.browse_button = $('.plupload_add', this.element).attr('id', id + '_browse').addClass('disabled');
 		this.stop_button = $('.plupload_stop', this.element).attr('id', id + '_stop');
-		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start');
-
-		if (!this.options.autostart) {
-			this.start_button.hide();
-		}
+		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start')
+			.hide();
 
 		this.browse_button.data('caption-original', this.browse_button.text());
 
@@ -875,6 +872,10 @@ $.widget("koowa.koowaUploader", {
 				this.element.addClass('has-file');
 				this.drop_message.text(this.drop_message.data('caption-update'));
 			} else {
+				if (!this.options.autostart) {
+					this.start_button.show();
+				}
+
 				this.element.addClass('has-file');
 			}
 
