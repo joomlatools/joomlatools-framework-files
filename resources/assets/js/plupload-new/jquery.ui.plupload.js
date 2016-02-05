@@ -260,8 +260,16 @@ $.widget("koowa.koowaUploader", {
 
 		var suffix = this.options.multi_selection ? 'multiple' : 'single';
 
+		this.templates = {
+			'file-single':   $('.js-file-single-template').text(),
+			'file-multiple': $('.js-file-multiple-template').text(),
+			'upload-pending': $('.js-upload-pending-template').text(),
+			'upload-uploading': $('.js-upload-uploading-template').text(),
+			'upload-finished': $('.js-upload-finished-template').text()
+		};
+
 		// file template
-		this.file_template = $('.js-file-template-'+suffix).text();
+		this.file_template = this.templates['file-'+suffix];
 
 		// list of files
 		this.filelist = $('.js-filelist-'+suffix, this.element)
@@ -960,13 +968,13 @@ $.widget("koowa.koowaUploader", {
 			var template = '';
 
 			if (plupload.STARTED === up.state) {
-				template = $('.js-upload-uploading-template', this.element).text();
+				template = this.templates['upload-uploading'];
 			}
 			else if (up.total.percent == 100) {
-				template = $('.js-upload-finished-template', this.element).text();
+				template = this.templates['upload-finished'];
 			}
 			else {
-				template = $('.js-upload-pending-template', this.element).text();
+				template = this.templates['upload-pending'];
 			}
 
 			var html = this._renderTemplate(template, {
