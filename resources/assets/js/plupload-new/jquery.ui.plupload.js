@@ -294,7 +294,13 @@ $.widget("koowa.koowaUploader", {
 			self.clearQueue();
 		});
 
-		$('.js-trigger-upload').on('click', function(e) {
+		this.element.on('click', '.js-open-info', function() {
+			$('.k-upload__details-button__view').toggle(0);
+			$('.k-upload__details-button__close').toggle(0);
+			$('.k-upload').toggleClass('has-open-info');
+		}).on('click', '.js-remove-file', function() {
+			$(this).closest('tr').children('td').slideUp('fast');
+		}).on('click', '.js-trigger-upload', function(e) {
 			e.preventDefault();
 
 			self.start_button.trigger('click');
