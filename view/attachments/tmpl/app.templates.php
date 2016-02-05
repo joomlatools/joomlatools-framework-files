@@ -68,7 +68,7 @@ if (is_image && file.metadata.image) {
             <td class="detail-label"><?= translate('Attached by') ?></td>
             <td>
                 <div class="koowa_wrapped_content">
-                    <div class="whitespace_preserver">[%=created_by_name%]</div>
+                    <div class="whitespace_preserver">[%=attached_by_name%]</div>
                 </div>
             </td>
         </tr>
