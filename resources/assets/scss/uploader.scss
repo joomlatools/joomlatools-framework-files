@@ -428,7 +428,7 @@ $k-uploader-max-height: 300px !default;
 .k-upload {
   &:after {
     display: block;
-    content: " ";
+    content: "Loading...";
     position: absolute;
     top: 0;
     right: 0;
@@ -436,5 +436,14 @@ $k-uploader-max-height: 300px !default;
     left: 0;
     background: white;
     z-index: 999;
+    text-align: center;
+    line-height: $k-uploader-height;
+    transition: all .4s ease-in-out;
+  }
+
+  &.is-initialized {
+    &:after {
+      opacity: 0;
+    }
   }
 }
