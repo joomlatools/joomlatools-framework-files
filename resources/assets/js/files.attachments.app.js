@@ -266,9 +266,9 @@ Files.Attachment = new Class({
         }
     },
     getAttachedDate: function(formatted) {
-        if (this.created_on_timestamp) {
+        if (this.attached_on_timestamp) {
             var date = new Date();
-            date.setTime(this.created_on_timestamp*1000);
+            date.setTime(this.attached_on_timestamp*1000);
             if (formatted) {
                 return date.getDate()+' '+Koowa.Date.getMonthName(date.getMonth()+1, true)+' '+date.getFullYear();
             } else {
