@@ -71,9 +71,7 @@
             var attachments = <?= json_encode(array_values($entity->getAttachments()->getFiles()->toArray())) ?>;
 
             $.each(attachments, function (idx, attachment) {
-                $.each(attachment, function(name, data) {
-                    render(data);
-                });
+                render(attachment);
             });
         });
     </script>
