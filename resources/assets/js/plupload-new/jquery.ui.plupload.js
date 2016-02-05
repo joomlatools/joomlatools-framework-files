@@ -894,7 +894,7 @@ $.widget("koowa.koowaUploader", {
 	
 	_handleFileStatus: function(file) {
 		var $file = $('#' + file.id), text;
-		
+
 		// since this method might be called asynchronously, file row might not yet be rendered
 		if (!$file.length) {
 			return;	
@@ -940,7 +940,7 @@ $.widget("koowa.koowaUploader", {
 				break;
 		}
 
-		$file.find('.plupload_file_status').text(text);
+		$file.find('.plupload_file_status').removeClass('is-uploading').addClass('is-' + text).text(text);
 	},
 	
 	

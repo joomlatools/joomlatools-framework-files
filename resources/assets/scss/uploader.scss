@@ -316,20 +316,18 @@ $k-uploader-progressbar-height: 3px !default;
   *
   * 1. Double class to win over the plupload styling
   * 2. Absolute positioning so it's not in the way of anything
-  * 3. Bottom set to height of container minus progressbar height
-  * 4. Hide container visually
+  * 3. Hide container visually
   */
 
 .k-upload__progress.progress { /* 1 */
   position: absolute; /* 2 */
   top: 0; /* 2 */
   right: 0; /* 2 */
-  bottom: $k-uploader-height - $k-uploader-progressbar-height; /* 3 */
   left: 0; /* 2 */
   margin: 0;
-  height: auto;
-  z-index: -1;  /* 4 */
-  opacity: 0; /* 4 */
+  height: $k-uploader-progressbar-height;
+  z-index: -1;  /* 3 */
+  opacity: 0; /* 3 */
   transition: all .2s ease-in-out;
 
   /* Display container visually when files are uploading */
@@ -458,11 +456,17 @@ $k-uploader-progressbar-height: 3px !default;
  */
 
 .k-upload__info__body {
-  ul {
+  table {
+    width: 100%;
     margin: 0;
     padding: 0;
-    list-style: none;
     font-size: 14px;
+  }
+
+  th, td {
+    text-align: left;
+    white-space: nowrap;
+    padding: 2px 5px;
   }
 }
 
@@ -534,7 +538,6 @@ $k-uploader-progressbar-height: 3px !default;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  padding: 0 5px;
 }
 
 .k-upload {
@@ -581,4 +584,48 @@ $k-uploader-progressbar-height: 3px !default;
       white-space: nowrap;
     }
   }
+}
+
+td.k-upload__file-status-wrapper {
+  padding-left: 0;
+}
+
+.k-upload__file-status {
+  border-radius: 2px;
+  font-size: 12px;
+  color: white;
+  display: block;
+  width: 14px;
+  height: 0;
+  overflow: hidden;
+  padding-top: 14px;
+  text-align: center;
+  transition: all .5s ease-in-out;
+
+  @media (min-width: 600px) {
+    width: 100%;
+    overflow: auto;
+    padding: 0 5px;
+    height: 22px;
+    line-height: 22px;
+  }
+}
+
+.k-upload__file-status.is-uploading {
+  background: #e67e22;
+}
+
+.k-upload__file-status.is-failed {
+  background: #c0392b;
+}
+
+.k-upload__file-status.is-done {
+  background: #27ae60;
+}
+
+.k-upload__overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 0;
 }
