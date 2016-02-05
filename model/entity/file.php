@@ -156,6 +156,7 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
 		if ($this->isImage())
         {
 			$data['type'] = 'image';
+            
             if (isset($this->thumbnail)) {
                 $data['thumbnail'] = current($this->thumbnail->toArray());
             }
