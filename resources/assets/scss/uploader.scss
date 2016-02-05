@@ -157,14 +157,12 @@ $k-uploader-progressbar-height: 3px !default;
  * 1. Display table to align drop text and buttons next to each other with easy vertical centering
  * 2. 100% width to stretch table even if content is not enough
  * 3. Min-height same as uploader container for vertical centering
- * 4. Set background color for this container
  */
 
 .k-upload__content-wrapper {
   display: table; /* 1 */
   width: 100%; /* 2 */
   min-height: 60px; /* 3 */
-  background: white; /* 4 */
 }
 
 
@@ -253,6 +251,8 @@ $k-uploader-progressbar-height: 3px !default;
   white-space: nowrap;
   font-size: 14px;
   border-radius: 4px;
+  text-decoration: none;
+  color: #333;
 
   /* Add spacing to left from second button */
   & + .k-upload__button,
@@ -277,6 +277,7 @@ $k-uploader-progressbar-height: 3px !default;
   &:focus,
   &:hover {
     background: #f5f5f5;
+    text-decoration: none;
   }
 }
 
@@ -292,6 +293,7 @@ $k-uploader-progressbar-height: 3px !default;
   &:hover {
     background-color: #1f496e;
     color: white;
+    text-decoration: none;
   }
 }
 
@@ -344,16 +346,15 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 /**
- * Message and info containers
+ * Message container
  *
  * 1. Set font styling
  * 2. Border-radius to fit in nicely within parent container
  * 3. 1px margin to set background aside from parent container
  */
 
-.k-upload__message,
-.k-upload__info {
-  padding: 8px 12px;
+.k-upload__message {
+  padding: 10px;
   transition: all .2s ease-in-out;
   font-size: 15px; /* 1 */
   line-height: 21px; /* 1 */
@@ -363,47 +364,43 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 /**
- * Message and info content
+ * Message content
  *
  * 1. Display table to align text and buttons next to each other with easy vertical centering
  * 2. 100% width to stretch table even if content is not enough
  */
 
-.k-upload__message__content,
-.k-upload__info__content {
+.k-upload__message__content  {
   display: table; /* 1 */
   width: 100%; /* 2 */
 }
 
 
 /**
- * Message and info body and button
+ * Message body and button
  *
  * 1. Display as table-cell to align items
  */
 
 .k-upload__message__body,
-.k-upload__message__button,
-.k-upload__info__body,
-.k-upload__info__button {
+.k-upload__message__button {
   display: table-cell; /* 1 */
 }
 
 
 /**
- * Message and info body
+ * Message body
  *
  * 1. Vertical align text to the middle
  */
 
-.k-upload__message__body,
-.k-upload__info__body {
+.k-upload__message__body {
   vertical-align: middle;
 }
 
 
 /**
- * Message and info button
+ * Message button
  *
  * 1. Align button right
  * 2. Align buttons to the top (for when there's a lot of content)
@@ -411,8 +408,7 @@ $k-uploader-progressbar-height: 3px !default;
  * 4. Make cell small but always big enough for it's content
  */
 
-.k-upload__message__button,
-.k-upload__info__button {
+.k-upload__message__button {
   text-align: right; /* 1 */
   vertical-align: top; /* 2 */
   padding: 6px 4px 6px 10px; /* 3 */
@@ -436,7 +432,19 @@ $k-uploader-progressbar-height: 3px !default;
 }
 
 
+/**
+ * Info container
+ *
+ * 1. Set font styling
+ * 2. Border-radius to fit in nicely within parent container
+ * 3. 1px margin to set background aside from parent container
+ */
 
+.k-upload__info {
+  transition: all .2s ease-in-out;
+  font-size: 15px; /* 1 */
+  line-height: 21px; /* 1 */
+}
 
 
 
@@ -456,6 +464,9 @@ $k-uploader-progressbar-height: 3px !default;
  */
 
 .k-upload__info__body {
+  padding: 10px;
+  padding-top: 50px;
+
   table {
     width: 100%;
     margin: 0;
@@ -478,17 +489,7 @@ $k-uploader-progressbar-height: 3px !default;
 
 .has-drag-hover {
   border-color: #29abe2;
-
-  .k-upload__content-wrapper,
-  .k-upload__info {
-    background: #e9f8ff;
-  }
-
-  .k-upload__drop-message {
-    &:after {
-      opacity: 1;
-    }
-  }
+  background: #e9f8ff;
 }
 
 
@@ -638,4 +639,26 @@ td.k-upload__file-status-wrapper {
   white-space: nowrap;
   text-overflow: ellipsis;
   max-width: 0;
+}
+
+
+.upload__info__actions {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  background: #eee;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .k-upload__button {
+    font-size: 14px;
+    padding: 3px 8px;
+  }
+}
+
+.k-upload__info__content {
+  max-height: $k-uploader-max-height;
+  overflow: auto;
 }
