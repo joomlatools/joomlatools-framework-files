@@ -264,15 +264,10 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
   &:focus {
     color: #1f496e; /* 2 */
     text-decoration: none; /* 2 */
-
-    span {
-      text-decoration: none;
-    }
   }
 
-  span {
-    display: inline;
-    text-decoration: underline;
+  .k-upload__details-button__close {
+    display: none;
   }
 }
 
@@ -745,10 +740,6 @@ td.k-upload__file-status-wrapper {
   max-height: $k-uploader-max-height;
   overflow: auto;
   transition: $k-uploader-transition-fast;
-}
-
-.k-upload__details-button .k-upload__details-button__close {
-  display: none;
 }
 
 th.k-upload__clear-queue {
