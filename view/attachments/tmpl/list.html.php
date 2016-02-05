@@ -93,7 +93,6 @@
                     <i class="icon-trash icon-white"></i>
                 </a>
             </div>
-            <input name="attachments[]" value="[%=name%]" type="hidden"/>
         </div>
         [% } else { %]
         <li class="attachment">
@@ -103,7 +102,6 @@
                     <i class="icon-trash icon-white"></i>
                 </a>
             </div>
-            <input name="attachments[]" value="[%=name%]" type="hidden"/>
         </li>
         [% } %]
     </textarea>
