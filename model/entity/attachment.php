@@ -35,24 +35,10 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
 
         if ($result)
         {
-            $parts = $this->getIdentifier()->toArray();
+            $file = $this->file;
 
-            $parts['path'] = array('model');
-            $parts['name'] = 'attachments';
-
-            $model =  $this->getObject($parts);
-
-            $attachments = $model->container($this->container)
-                                 ->name($this->name)
-                                 ->count();
-
-            if (!$attachments)
-            {
-                $file = $this->file;
-
-                if (!$file->isNew()) {
-                    $file->delete();
-                }
+            if (!$file->isNew()) {
+                $file->delete();
             }
         }
 
