@@ -21,7 +21,7 @@
             Attachments = Attachments.getInstance(
                 {
                     url: "<?= route('', true, false) ?>",
-                    template: $('#attachment-template').text(),
+                    template: '#attachment-template',
                     selector: '#attachment-template',
                     csrf_token: <?= json_encode(object('user')->getSession()->getToken()) ?>
                 }
