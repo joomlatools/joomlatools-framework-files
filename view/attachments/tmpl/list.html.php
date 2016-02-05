@@ -83,7 +83,7 @@
 
     <!-- Attachment template begin -->
     <textarea style="display: none" id="attachment-template">
-        [% if(type == 'image') { %]
+        [% if (type == 'image') { %]
         <div class="attachment attachment--thumbnail">
             <a class="koowa-modal mfp-iframe" href="[%=url%]">
                 <img src="[%=thumbnail%]" />
