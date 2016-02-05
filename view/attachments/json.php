@@ -19,8 +19,9 @@ class ComFilesViewAttachmentsJson extends ComFilesViewJson
     {
         $data = parent::_getEntity($entity);
 
-        $data['file'] = $entity->file->toArray();
-        $data['created_on_timestamp'] = strtotime($entity->created_on);
+        $data['file']                  = $entity->file->toArray();
+        $data['created_on_timestamp']  = strtotime($entity->created_on);
+        $data['attached_on_timestamp'] = strtotime($entity->attached_on);
 
         return $data;
     }
