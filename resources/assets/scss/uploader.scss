@@ -235,6 +235,15 @@ $k-uploader-progressbar-height: 3px !default;
   &:focus {
     color: #1f496e; /* 2 */
     text-decoration: none; /* 2 */
+
+    span {
+      text-decoration: none;
+    }
+  }
+
+  span {
+    display: inline;
+    text-decoration: underline;
   }
 }
 
@@ -707,4 +716,8 @@ td.k-upload__file-status-wrapper {
 .k-upload__info__content {
   max-height: $k-uploader-max-height;
   overflow: auto;
+}
+
+.k-upload__details-button .k-upload__details-button__close {
+  display: none;
 }
