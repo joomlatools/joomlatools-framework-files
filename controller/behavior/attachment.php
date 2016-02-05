@@ -49,13 +49,18 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
 
         if ($entity instanceof ComFilesModelEntityNode && $entity->getStatus() !== KModelEntityInterface::STATUS_FAILED)
         {
-            $container  = $entity->getContainer();
             $controller = $this->_getController();
+            $container  = $entity->getContainer();
 
-            $controller->getRequest()->getQuery()->set('container', $container->id);
-            $controller->getModel()->container($container->id);
+            $model = $controller->getModel();
 
-            $controller->add(array('name' => $entity->name));
+            if (!$model->name($entity->name)->container($container->id)->count())
+            {
+                $controller->getRequest()->getQuery()->set('container', $container->id);
+                $controller->getModel()->container($container->id);
+
+                $controller->add(array('name' => $entity->name));
+            }
         }
     }
 
