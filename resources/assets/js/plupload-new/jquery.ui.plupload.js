@@ -982,18 +982,22 @@ $.widget("koowa.koowaUploader", {
 		}
 	},
 
-	_renderTemplate: function(template, replacements) {
+	_renderTemplate: function(template, replacements, fallback) {
 		var html, replacement, self = this;
+
+		if (!fallback) {
+			fallback = self.uploader;
+		}
 
 		html = template.replace(/\{(\w+)\}/g, function($0, $1) {
 			if (replacements.hasOwnProperty($1)) {
 				replacement = replacements[$1];
 			} else {
-				replacement = self.uploader[$] || '';
+				replacement = fallback[$1] || '';
 			}
 
 			if (typeof replacement === 'function') {
-				replacement = replacement();
+				replacement = replacement($0, $1);
 			}
 
 			return replacement;
@@ -1004,33 +1008,19 @@ $.widget("koowa.koowaUploader", {
 
 
 	_addFiles: function(files) {
-		var self = this, file_html, html = '';
+		var self = this, html = '';
 
 		if (plupload.typeOf(files) !== 'array') {
 			files = [files];
 		}
 
-		file_html = self.file_template;
-
 		$.each(files, function(i, file) {
 			var ext = o.Mime.getFileExtension(file.name) || 'none';
 
-			html += file_html.replace(/\{(\w+)\}/g, function($0, $1) {
-				switch ($1) {
-					case 'thumb_width':
-					case 'thumb_height':
-						return self.options[$1];
-					
-					case 'size':
-						return plupload.formatSize(file.size);
-
-					case 'ext':
-						return ext;
-
-					default:
-						return file[$1] || '';
-				}
-			});
+			html += self._renderTemplate(self.file_template, {
+				'ext'  : ext,
+				'size' : plupload.formatSize(file.size)
+			}, file);
 		});
 
 		self.filelist.append(html);
