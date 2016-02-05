@@ -257,7 +257,7 @@ $k-uploader-progressbar-height: 3px !default;
   /* Add spacing to left from second button */
   & + .k-upload__button,
   & + .k-upload__text-button {
-    margin-left: 13px;
+    margin-left: 8px;
   }
 
   /* Disabled buttons should be invisible */
@@ -556,7 +556,7 @@ $k-uploader-progressbar-height: 3px !default;
   line-height: 12px;
   overflow: hidden;
   text-align: center;
-  transition: all .5s ease-in-out;
+  transition: all .2s ease-in-out;
   text-decoration: none;
   cursor: pointer;
   font-weight: bold;
