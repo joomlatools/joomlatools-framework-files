@@ -5,6 +5,8 @@
 $k-uploader-height: 60px !default;
 $k-uploader-max-height: 200px !default;
 $k-uploader-progressbar-height: 3px !default;
+$k-uploader-transition-fast: all .2s ease-in-out !default;
+$k-uploader-transition-slow: all .4s ease-in-out !default;
 
 /**
  * Uploader
@@ -24,6 +26,7 @@ $k-uploader-progressbar-height: 3px !default;
   border-radius: 3px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   margin-bottom: 20px;
+  transition: $k-uploader-transition-fast;
 
   /* Loading message on top */
   &:after {
@@ -39,7 +42,7 @@ $k-uploader-progressbar-height: 3px !default;
     text-align: left;
     padding-left: 15px;
     line-height: $k-uploader-height;
-    transition: all .4s ease-in-out;
+    transition: $k-uploader-transition-slow;
   }
 
   /* Hide laoding message on init */
@@ -72,7 +75,7 @@ $k-uploader-progressbar-height: 3px !default;
 .k-upload__body-info {
   position: relative; /* 1 */
   overflow: hidden; /* 2 */
-  transition: all .4s ease-in-out; /* 3 */
+  transition: $k-uploader-transition-slow; /* 3 */
 }
 
 
@@ -197,7 +200,7 @@ $k-uploader-progressbar-height: 3px !default;
   background: white;
   border-top: 1px solid white;
   border-bottom: 1px solid white;
-  transition: all .2s ease-in-out;
+  transition: $k-uploader-transition-fast;
 }
 
 
@@ -374,7 +377,7 @@ $k-uploader-progressbar-height: 3px !default;
   height: $k-uploader-progressbar-height;
   z-index: -1;  /* 3 */
   opacity: 0; /* 3 */
-  transition: all .2s ease-in-out;
+  transition: $k-uploader-transition-fast;
 
   /* Display container visually when files are uploading */
   &.is-uploading {
@@ -399,7 +402,7 @@ $k-uploader-progressbar-height: 3px !default;
 
 .k-upload__message {
   padding: 8px 10px;
-  transition: all .2s ease-in-out;
+  transition: $k-uploader-transition-fast;
   font-size: 15px; /* 1 */
   line-height: 21px; /* 1 */
   border-radius: 2px; /* 2 */
@@ -485,7 +488,7 @@ $k-uploader-progressbar-height: 3px !default;
  */
 
 .k-upload__info {
-  transition: all .2s ease-in-out;
+  transition: $k-uploader-transition-fast;
   font-size: 15px; /* 1 */
   line-height: 21px; /* 1 */
 }
@@ -550,7 +553,7 @@ $k-uploader-progressbar-height: 3px !default;
   .k-upload__content-wrapper,
   .k-upload__info__content {
     background: #e9f8ff;
-    border-color: #29abe2;
+    border-bottom-color: #29abe2;
   }
 }
 
@@ -609,7 +612,7 @@ $k-uploader-progressbar-height: 3px !default;
   line-height: 12px;
   overflow: hidden;
   text-align: center;
-  transition: all .2s ease-in-out;
+  transition: $k-uploader-transition-fast;
   text-decoration: none;
   cursor: pointer;
   font-weight: bold;
@@ -640,7 +643,7 @@ $k-uploader-progressbar-height: 3px !default;
 }
 
 .k-upload__drop-message {
-  transition: all .2s ease-in-out;
+  transition: $k-uploader-transition-fast;
 }
 
 .k-upload__content {
@@ -654,7 +657,7 @@ $k-uploader-progressbar-height: 3px !default;
   margin: 0;
   padding: 0;
   border: none;
-  transition: all .2s ease-in-out;
+  transition: $k-uploader-transition-fast;
 }
 
 .k-upload.has-file {
@@ -695,7 +698,7 @@ td.k-upload__file-status-wrapper {
   overflow: hidden;
   padding-top: 14px;
   text-align: center;
-  transition: all .5s ease-in-out;
+  transition: $k-uploader-transition-slow;
 
   @media (min-width: 600px) {
     width: 100%;
@@ -733,6 +736,7 @@ td.k-upload__file-status-wrapper {
 .k-upload__info__content {
   max-height: $k-uploader-max-height;
   overflow: auto;
+  transition: $k-uploader-transition-fast;
 }
 
 .k-upload__details-button .k-upload__details-button__close {
