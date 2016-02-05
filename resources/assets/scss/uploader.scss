@@ -553,7 +553,12 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
   .k-upload__content-wrapper,
   .k-upload__info__content {
     background: #e9f8ff;
-    border-bottom-color: #29abe2;
+  }
+
+  &.has-open-info {
+    .k-upload__content-wrapper {
+      border-bottom-color: #29abe2;
+    }
   }
 }
 
