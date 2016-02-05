@@ -204,6 +204,27 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 /**
+ * Details button
+ *
+ * 1. Smaller font-size
+ * 2. Styling as link
+ */
+
+.k-upload__details-button {
+  font-size: 16px; /* 1 */
+  cursor: pointer; /* 2 */
+  text-decoration: underline; /* 2 */
+  color: #3071a9; /* 2 */
+
+  &:hover,
+  &:focus {
+    color: #1f496e; /* 2 */
+    text-decoration: none; /* 2 */
+  }
+}
+
+
+/**
  * Buttons
  *
  * 1. Display as table-cell to align items
@@ -324,6 +345,14 @@ $k-uploader-progressbar-height: 3px !default;
 }
 
 
+
+
+
+
+
+
+
+
 .plupload_container {
   &.plupload_view_thumbs .plupload_file {
     margin: 0;
@@ -359,18 +388,7 @@ $k-uploader-progressbar-height: 3px !default;
   }
 }
 
-.k-upload__buttons {
-  .button,
-  .text {
-    position: relative;
-    z-index: 50;
-  }
-}
 
-.k-upload__details-button {
-  font-size: 16px;
-  cursor: pointer;
-}
 
 .k-upload__remove-button {
   display: inline-block;
@@ -490,7 +508,9 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 
-
+/**
+ * When dragging file over area
+ */
 
 .has-drag-hover {
   border-color: #29abe2;
