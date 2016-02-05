@@ -26,7 +26,20 @@ class ComFilesModelAttachments extends KModelDatabase
     {
         parent::_buildQueryColumns($query);
 
-        $query->columns(array('tbl.*', 'container_slug' => 'containers.slug'));
+        $columns = array('tbl.*', 'container_slug' => 'containers.slug');
+
+        $state = $this->getState();
+
+        if ($state->table && $state->row)
+        {
+            $columns = array_merge($columns, array(
+                'attached_by'      => 'relations.created_by',
+                'attached_on'      => 'relations.created_on',
+                'attached_by_name' => 'users.name'
+            ));
+        }
+
+        $query->columns($columns);
     }
 
     protected function _buildQueryJoins(KDatabaseQueryInterface $query)
@@ -45,8 +58,10 @@ class ComFilesModelAttachments extends KModelDatabase
         $table  = sprintf('%s_%s_relations', $package, $name);
         $column = sprintf('%s_%s_id', $package, KStringInflector::singularize($name));
 
-        if ($state->row || $state->table) {
-            $query->join($table . ' AS relations', 'relations.' . $column . ' = tbl.' . $column, 'INNER');
+        if ($state->row || $state->table)
+        {
+            $query->join($table . ' AS relations', 'relations.' . $column . ' = tbl.' . $column, 'INNER')
+                  ->join('users AS users', 'relations.created_by = users.id', 'LEFT');
         }
     }
 
