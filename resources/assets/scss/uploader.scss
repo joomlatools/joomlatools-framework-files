@@ -170,28 +170,6 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
 
 
 /**
- * Has info
- *
- * Hide the info container on displaying error
- */
-
-.has-open-info {
-  .k-upload__content-wrapper {
-    border-radius: 3px 3px 0 0;
-    border-bottom-color: #ccc;
-  }
-
-  .k-upload__details-button__view {
-    display: none;
-  }
-
-  .k-upload__details-button__close {
-    display: inline;
-  }
-}
-
-
-/**
  * Content wrapper
  *
  * 1. Display table to align drop text and buttons next to each other with easy vertical centering
@@ -502,7 +480,26 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
 }
 
 
+/**
+ * Has info
+ *
+ * Hide the info container on displaying error
+ */
 
+.has-open-info {
+  .k-upload__content-wrapper {
+    border-radius: 3px 3px 0 0;
+    border-bottom-color: #ccc;
+  }
+
+  .k-upload__details-button__view {
+    display: none;
+  }
+
+  .k-upload__details-button__close {
+    display: inline;
+  }
+}
 
 
 
