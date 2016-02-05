@@ -35,7 +35,8 @@ $k-uploader-max-height: 300px !default;
     left: 0;
     background: white;
     z-index: 9;
-    text-align: center;
+    text-align: left;
+    padding-left: 15px;
     line-height: $k-uploader-height;
     transition: all .4s ease-in-out;
   }
