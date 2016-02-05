@@ -167,11 +167,26 @@ $k-uploader-progressbar-height: 3px !default;
 
 
 /**
+ * Has info
+ *
+ * Hide the info container on displaying error
+ */
+
+.has-open-info {
+  .k-upload__content-wrapper {
+    border-radius: 3px 3px 0 0;
+    border-bottom-color: #ccc;
+  }
+}
+
+
+/**
  * Content wrapper
  *
  * 1. Display table to align drop text and buttons next to each other with easy vertical centering
  * 2. 100% width to stretch table even if content is not enough
  * 3. Min-height same as uploader container for vertical centering
+ * 4. Borders for the extra container
  */
 
 .k-upload__content-wrapper {
@@ -180,6 +195,9 @@ $k-uploader-progressbar-height: 3px !default;
   min-height: 60px; /* 3 */
   border-radius: 3px;
   background: white;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  transition: all .2s ease-in-out;
 }
 
 
@@ -380,7 +398,7 @@ $k-uploader-progressbar-height: 3px !default;
  */
 
 .k-upload__message {
-  padding: 10px;
+  padding: 8px 10px;
   transition: all .2s ease-in-out;
   font-size: 15px; /* 1 */
   line-height: 21px; /* 1 */
@@ -475,7 +493,6 @@ $k-uploader-progressbar-height: 3px !default;
 .k-upload__info__content {
   background: #f3f3f3;
   border-radius: 0 0 3px 3px;
-  border-top: 1px solid #ccc;
 }
 
 
@@ -720,4 +737,12 @@ td.k-upload__file-status-wrapper {
 
 .k-upload__details-button .k-upload__details-button__close {
   display: none;
+}
+
+th.k-upload__clear-queue {
+  padding-left: 0;
+
+  a {
+    font-weight: normal;
+  }
 }
