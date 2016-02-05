@@ -24,6 +24,30 @@ $k-uploader-max-height: 300px !default;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   margin-bottom: 20px;
 
+  /* Loading message on top */
+  &:after {
+    display: block;
+    content: "Loading...";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: white;
+    z-index: 9;
+    text-align: center;
+    line-height: $k-uploader-height;
+    transition: all .4s ease-in-out;
+  }
+
+  /* Hide laoding message on init */
+  &.is-initialized {
+    &:after {
+      z-index: 0;
+      opacity: 0;
+    }
+  }
+
   /* Border box size everything inside */
   * {
     -webkit-box-sizing: border-box;
@@ -125,51 +149,103 @@ $k-uploader-max-height: 300px !default;
 }
 
 
-
-
-
-
-
-
-
+/**
+ * Content wrapper
+ *
+ * 1. Display table to align drop text and buttons next to each other with easy vertical centering
+ * 2. 100% width to stretch table even if content is not enough
+ * 3. Min-height same as uploader container for vertical centering
+ * 4. Set background color for this container
+ */
 
 .k-upload__content-wrapper {
-  display: table;
-  width: 100%;
-  padding: 0 5px 0 15px;
-  min-height: 60px;
-  background: white;
+  display: table; /* 1 */
+  width: 100%; /* 2 */
+  min-height: 60px; /* 3 */
+  background: white; /* 4 */
 }
+
+
+/**
+ * Content & Buttons
+ *
+ * 1. Align content in vertical middle
+ */
 
 .k-upload__content,
 .k-upload__buttons {
-  display: table-cell;
-  vertical-align: middle;
+  vertical-align: middle; /* 1 */
 }
+
+
+/**
+ * Content
+ *
+ * 1. "Drop files here" in larger font
+ * 2. Set max-width to 0 for text-overflow: ellipsis to work properly
+ * 3. Hide by default for non-drag-drop capable browsers
+ * 4. Display as table-cell on drag-drop capable browser
+ */
 
 .k-upload__content {
-  font-size: 20px;
-  max-width: 0;
-  display: none;
-  padding-right: 10px;
+  font-size: 20px; /* 1 */
+  max-width: 0; /* 2 */
+  display: none; /* 3 */
+  padding: 0 15px;
 }
+
+.has-dragdrop-support {
+  .k-upload__content {
+    display: table-cell; /* 4 */
+  }
+}
+
+
+/**
+ * Buttons
+ *
+ * 1. Display as table-cell to align items
+ * 2. Make this cell as large as it's content
+ * 3. Don't wrap content to always align buttons
+ */
 
 .k-upload__buttons {
-  width: 1%;
-  white-space: nowrap;
+  display: table-cell; /* 1 */
+  width: 1%; /* 2 */
+  white-space: nowrap; /* 3 */
+  padding-right: 15px;
 }
 
-.k-upload__button {
+
+/**
+ * Buttons styling
+ */
+
+.k-upload__button,
+.k-upload__text-button {
   display: inline-block;
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  border: 1px solid #ddd;
   white-space: nowrap;
-  padding: 5px 10px;
   font-size: 14px;
   border-radius: 4px;
+
+  /* Add spacing to left from second button */
+
+  & + .k-upload__button,
+  & + .k-upload__text-button {
+    margin-left: 13px;
+  }
+}
+
+
+/* Default button styling */
+
+.k-upload__button {
+  border: 1px solid #ddd;
   background: white;
+  padding: 5px 10px;
 
   &:focus,
   &:hover {
@@ -177,20 +253,23 @@ $k-uploader-max-height: 300px !default;
   }
 }
 
+
+/* Upload button styling */
+
 .k-upload__button--upload {
   background: #3071a9;
   color: white;
   border: 1px solid #1f496e;
 }
 
+
+/* Text button styling */
+
 .k-upload__text-button {
-  display: inline-block;
   border: none;
   background: transparent;
   text-decoration: underline;
-  white-space: nowrap;
-  padding: 5px 10px;
-  font-size: 14px;
+  padding: 0;
 
   &:focus,
   &:hover {
@@ -198,36 +277,38 @@ $k-uploader-max-height: 300px !default;
   }
 }
 
-.k-upload {
-  .progress {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 55px;
-    left: 0;
-    margin: 0;
-    height: auto;
-    z-index: -1;
-    opacity: 0;
-    transition: all .2s ease-in-out;
 
-    &.is-uploading {
-      z-index: 99;
-      opacity: 1;
-    }
 
-    .bar {
-      background-repeat: repeat;
-    }
+
+
+
+
+
+
+
+
+.k-upload__progress.progress {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: $k-uploader-height - 5px;
+  left: 0;
+  margin: 0;
+  height: auto;
+  z-index: -1;
+  opacity: 0;
+  transition: all .2s ease-in-out;
+
+  &.is-uploading {
+    z-index: 99;
+    opacity: 1;
   }
 
-  .plupload_stop {
-    position: absolute;
-    z-index: 100;
-    display: block;
-    margin: 10px;
+  .bar {
+    background-repeat: repeat;
   }
 }
+
 
 .plupload_container {
   &.plupload_view_thumbs .plupload_file {
@@ -397,7 +478,7 @@ $k-uploader-max-height: 300px !default;
 
 
 
-.has-dragdrop {
+.has-drag-hover {
   border-color: #29abe2;
 
   .k-upload__content-wrapper {
@@ -411,32 +492,4 @@ $k-uploader-max-height: 300px !default;
   }
 }
 
-.has-dragdrop-support {
-  .k-upload__content {
-    display: table-cell;
-  }
-}
 
-.k-upload {
-  &:after {
-    display: block;
-    content: "Loading...";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: white;
-    z-index: 999;
-    text-align: center;
-    line-height: $k-uploader-height;
-    transition: all .4s ease-in-out;
-  }
-
-  &.is-initialized {
-    &:after {
-      z-index: 0;
-      opacity: 0;
-    }
-  }
-}
