@@ -30,25 +30,28 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     {
         $config->append(array('auto_delete' => true));
 
-        $aliases = array(
-            'com:files.model.attachments'                => array(
-                'path' => array('model'),
-                'name' => 'attachments'
-            ),
-            'com:files.controller.permission.attachment' => array(
-                'path' => array('controller', 'permission'),
-                'name' => 'attachment'
-            )
-        );
-
-        $manager = $this->getObject('manager');
-
-        foreach ($aliases as $identifier => $alias)
+        if ($this->getIdentifier()->package != 'files')
         {
-            $alias = array_merge($this->getIdentifier()->toArray(), $alias);
+            $aliases = array(
+                'com:files.model.attachments'                => array(
+                    'path' => array('model'),
+                    'name' => 'attachments'
+                ),
+                'com:files.controller.permission.attachment' => array(
+                    'path' => array('controller', 'permission'),
+                    'name' => 'attachment'
+                )
+            );
 
-            if (!$manager->getClass($alias, false)) {
-                $manager->registerAlias($identifier, $alias);
+            $manager = $this->getObject('manager');
+
+            foreach ($aliases as $identifier => $alias)
+            {
+                $alias = array_merge($this->getIdentifier()->toArray(), $alias);
+
+                if (!$manager->getClass($alias, false)) {
+                    $manager->registerAlias($identifier, $alias);
+                }
             }
         }
 
@@ -59,7 +62,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     {
         if (!$this->_relations_model instanceof KModelInterface)
         {
-            // Attachments model and relations coexist within the same package.
+            // Attachments and relations models MUST belong to the same package.
             $parts = $this->getModel()->getIdentifier()->toArray();
 
             $parts['name'] .= '_relations';
