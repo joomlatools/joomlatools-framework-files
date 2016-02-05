@@ -957,28 +957,49 @@ $.widget("koowa.koowaUploader", {
 		}
 
 		if (this.options.multi_selection) {
-			var template = $('.js-file-details-template', this.element).text();
-			var html = template.replace(/\{(\w+)\}/g, function($0, $1) {
-				switch ($1) {
-					case 'percent':
-						return up.total.percent;
+			var template = '';
 
-					case 'size':
-						return plupload.formatSize(up.total.size);
+			if (plupload.STARTED === up.state) {
+				template = $('.js-upload-uploading-template', this.element).text();
+			}
+			else if (up.total.percent == 100) {
+				template = $('.js-upload-finished-template', this.element).text();
+			}
+			else {
+				template = $('.js-upload-pending-template', this.element).text();
+			}
 
-					case 'uploaded':
-						return up.total.uploaded;
-
-					case 'total':
-						return up.files.length;
-
-					default:
-						return up[$1] || '';
-				}
+			var html = this._renderTemplate(template, {
+				'percent' : up.total.percent,
+				'size'    : plupload.formatSize(up.total.size),
+				'uploaded': up.total.uploaded,
+				'total'   : up.files.length,
+				'remaining': (up.files.length - (up.total.uploaded + up.total.failed)),
+				'failed'  : up.total.failed
 			});
 
 			$('.js-filelist-single', this.element).html(html);
 		}
+	},
+
+	_renderTemplate: function(template, replacements) {
+		var html, replacement, self = this;
+
+		html = template.replace(/\{(\w+)\}/g, function($0, $1) {
+			if (replacements.hasOwnProperty($1)) {
+				replacement = replacements[$1];
+			} else {
+				replacement = self.uploader[$] || '';
+			}
+
+			if (typeof replacement === 'function') {
+				replacement = replacement();
+			}
+
+			return replacement;
+		});
+
+		return html;
 	},
 
 
