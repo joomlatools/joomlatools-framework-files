@@ -11,7 +11,7 @@
     <!-- Only existing entities are attachable -->
 <? if (!$entity->isNew()): ?>
     <ktml:script src="media://koowa/com_files/js/ejs/ejs.js"/>
-    <ktml:script src="media://koowa/com_files/js/attachments.js"/>
+    <ktml:script src="media://koowa/com_files/js/files.attachments.js"/>
     <ktml:style src="media://koowa/com_files/css/files.css"/>
 
     <?= helper('behavior.modal') ?>
