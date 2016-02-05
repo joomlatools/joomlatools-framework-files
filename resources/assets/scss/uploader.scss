@@ -479,7 +479,8 @@ $k-uploader-progressbar-height: 3px !default;
 .has-drag-hover {
   border-color: #29abe2;
 
-  .k-upload__content-wrapper {
+  .k-upload__content-wrapper,
+  .k-upload__info {
     background: #e9f8ff;
   }
 
@@ -586,6 +587,10 @@ $k-uploader-progressbar-height: 3px !default;
   }
 }
 
+/**
+ * Upload status labels
+ */
+
 td.k-upload__file-status-wrapper {
   padding-left: 0;
 }
@@ -609,6 +614,11 @@ td.k-upload__file-status-wrapper {
     height: 22px;
     line-height: 22px;
   }
+}
+
+.k-upload__file-status.is-in-queue {
+  background: #95a5a6;
+  min-width: 80px;
 }
 
 .k-upload__file-status.is-uploading {

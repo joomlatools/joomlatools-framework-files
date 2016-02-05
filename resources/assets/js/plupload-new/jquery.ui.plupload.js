@@ -948,7 +948,7 @@ $.widget("koowa.koowaUploader", {
 				break;
 		}
 
-		$file.find('.plupload_file_status').removeClass('is-uploading').addClass('is-' + text).text(text);
+		$file.find('.plupload_file_status').removeClass('is-uploading is-in-queue').addClass('is-' + text).text(text);
 	},
 	
 	
