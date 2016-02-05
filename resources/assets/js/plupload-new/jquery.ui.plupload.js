@@ -520,6 +520,19 @@ $.widget("koowa.koowaUploader", {
 			}
 
 			if (self.options.dragdrop && up.features.dragdrop) {
+				var addHoverClass = function() {
+					self.element.addClass("has-drag-hover");
+				}, removeHoverClass = function() {
+					self.element.removeClass("has-drag-hover");
+				};
+
+				self.element.on('drop', removeHoverClass);
+				self.element.on('dragend', removeHoverClass);
+				self.element.on('dragleave', removeHoverClass);
+
+				self.element.on('dragenter', addHoverClass);
+				self.element.on('dragover', addHoverClass);
+
 				self.element.addClass('has-dragdrop-support');
 			}
 			
