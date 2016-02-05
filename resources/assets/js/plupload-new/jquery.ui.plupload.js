@@ -556,9 +556,6 @@ $.widget("koowa.koowaUploader", {
 			self._addFiles(file);
 		});
 
-		uploader.bind('BeforeUpload', function(up, file) {
-			self.progressbar.removeClass('bar-danger bar-success').parent().addClass('active is-uploading');
-		});
 		
 		uploader.bind('FilesAdded', function(up, files) {
 			self._trigger('selected', null, { up: up, files: files } );
@@ -617,10 +614,6 @@ $.widget("koowa.koowaUploader", {
 			if (!self.progressbar.hasClass('bar-danger')) {
 				self.progressbar.addClass('bar-success');
 			}
-
-			setTimeout(function() {
-				self.progressbar.parent().removeClass('active is-uploading');
-			}, 500);
 
 			self._addFormFields();		
 			self._trigger('complete', null, { up: up, files: files } );
@@ -825,12 +818,15 @@ $.widget("koowa.koowaUploader", {
 	
 	
 	_handleState: function() {
-		var up = this.uploader
+		var self = this
+		, up = this.uploader
 		, filesPending = up.files.length - (up.total.uploaded + up.total.failed)
 		, maxCount = up.getOption('filters').max_file_count || 0
 		;
 						
-		if (plupload.STARTED === up.state) {			
+		if (plupload.STARTED === up.state) {
+			this.progressbar.removeClass('bar-danger bar-success').parent().addClass('active is-uploading');
+
 			$([])
 				.add(this.stop_button)
 				.add('.plupload_started')
@@ -845,6 +841,10 @@ $.widget("koowa.koowaUploader", {
 			$('.plupload_upload_status', this.element).html(o.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
 		} 
 		else if (plupload.STOPPED === up.state) {
+			setTimeout(function() {
+				self.progressbar.parent().removeClass('active is-uploading');
+			}, 500);
+
 			$([])
 				.add(this.stop_button)
 				.add('.plupload_started')
