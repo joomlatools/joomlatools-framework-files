@@ -182,6 +182,8 @@ Files.Attachments.Grid = new Class({
 
         if (this.url)
         {
+            that.reset(); // Flush current content.
+
             this.spin();
 
             new Request.JSON({
@@ -189,7 +191,6 @@ Files.Attachments.Grid = new Class({
                 method: 'get',
                 onSuccess: function(response)
                 {
-                    that.reset(); // Flush current content.
                     Files.app.attachments.grid.insertRows(response.entities);
                     that.unspin();
                 }
