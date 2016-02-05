@@ -51,7 +51,7 @@
                 else output = $(output).appendTo(files);
 
                 $('.delete', output).click(function () {
-                    Attachments.remove(attachment.name);
+                    Attachments.detach(attachment.name);
                     $(this).closest('.attachment').remove();
                 });
             };
