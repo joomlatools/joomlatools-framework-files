@@ -493,7 +493,9 @@ $.widget("koowa.koowaUploader", {
 		});
 
 		
-		uploader.bind('PostInit', function(up) {	
+		uploader.bind('PostInit', function(up) {
+			self.element.addClass('is-initialized');
+
 			// all buttons are optional, so they can be disabled and hidden
 			if (!self.options.buttons.browse) {
 				self._setButtonStatus(self.browse_button, 'disable');
