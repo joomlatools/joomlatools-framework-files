@@ -256,8 +256,6 @@ $.widget("koowa.koowaUploader", {
 		this.contents_bak = this.element.html();
 		this.element.id = this.element.attr('id');
 
-		this.content = $('.plupload_content', this.element);
-
 		this.templates = {
 			'file-single':   $('.js-file-single-template').text(),
 			'file-multiple': $('.js-file-multiple-template').text(),
@@ -283,9 +281,9 @@ $.widget("koowa.koowaUploader", {
 			});
 
 		// buttons
-		this.browse_button = $('.plupload_add', this.element).attr('id', id + '_browse').addClass('disabled');
-		this.stop_button = $('.plupload_stop', this.element).attr('id', id + '_stop');
-		this.start_button = $('.plupload_start', this.element).attr('id', id + '_start')
+		this.browse_button = $('.js-choose-files', this.element).attr('id', id + '_browse').addClass('disabled');
+		this.stop_button = $('.js-stop-upload', this.element).attr('id', id + '_stop');
+		this.start_button = $('.js-start-upload', this.element).attr('id', id + '_start')
 			.hide();
 
 		this.clear_button = $('.js-clear-queue', this.element).click(function(event) {
@@ -310,13 +308,7 @@ $.widget("koowa.koowaUploader", {
 		this.message.find('button').click(function() {
 			self.element.removeClass('has-error');
 		});
-		
-		// counter
-		this.counter = $('.plupload_count', this.element)
-			.attr({
-				id: id + '_count',
-				name: id + '_count'
-			});
+
 
 		if (this.options.filters.extensions) {
 			var extensions = this.options.filters.extensions;
@@ -637,7 +629,6 @@ $.widget("koowa.koowaUploader", {
 				self.progressbar.addClass('bar-success');
 			}
 
-			self._addFormFields();		
 			self._trigger('complete', null, { up: up, files: files } );
 		});
 	},
@@ -826,10 +817,6 @@ $.widget("koowa.koowaUploader", {
 	destroy: function() {		
 		// destroy uploader instance
 		this.uploader.destroy();
-
-		// unbind all button events
-		$('.plupload_button', this.element).unbind();
-
 		
 		// restore the elements initial state
 		this.element
@@ -851,28 +838,19 @@ $.widget("koowa.koowaUploader", {
 		if (plupload.STARTED === up.state) {
 			this.progressbar.removeClass('bar-danger bar-success').parent().addClass('active is-uploading');
 
-			$([])
-				.add(this.stop_button)
-				.add('.plupload_started')
-					.removeClass('plupload_hidden');
-
 			this._setButtonStatus(this.start_button, 'disable');
+			this._setButtonStatus(this.stop_button, 'enable');
 
 			if (!this.options.multiple_queues) {
 				this.disable();
 			}
-							
-			$('.plupload_upload_status', this.element).html(o.sprintf(_('Uploaded %d/%d files'), up.total.uploaded, up.files.length));
 		} 
 		else if (plupload.STOPPED === up.state) {
 			setTimeout(function() {
 				self.progressbar.parent().removeClass('active is-uploading');
 			}, 500);
 
-			$([])
-				.add(this.stop_button)
-				.add('.plupload_started')
-					.addClass('plupload_hidden');
+			this._setButtonStatus(this.stop_button, 'disable');
 
 			if (filesPending) {
 				this._setButtonStatus(this.start_button, 'enable');
@@ -939,6 +917,7 @@ $.widget("koowa.koowaUploader", {
 			case plupload.UPLOADING:
 				text = 'uploading';
 
+				// @todo robin do we need this?
 				// scroll uploading file into the view if its bottom boundary is out of it
 				var scroller = $('.plupload_scroll', this.element)
 					, scrollTop = scroller.scrollTop()
@@ -963,7 +942,7 @@ $.widget("koowa.koowaUploader", {
 				break;
 		}
 
-		$file.find('.plupload_file_status')
+		$file.find('.js-file-status')
 			.removeClass('is-uploading is-in-queue')
 			.addClass('is-' + text)
 			.text(text);
@@ -1064,30 +1043,6 @@ $.widget("koowa.koowaUploader", {
 		}
 
 		self.filelist.append(html);
-	},
-
-
-	_addFormFields: function() {
-		var self = this;
-
-		// re-add from fresh
-		$('.plupload_file_fields', this.filelist).html('');
-
-		plupload.each(this.uploader.files, function(file, count) {
-			var fields = ''
-			, id = self.id + '_' + count
-			;
-
-			if (file.target_name) {
-				fields += '<input type="hidden" name="' + id + '_tmpname" value="'+plupload.xmlEncode(file.target_name)+'" />';
-			}
-			fields += '<input type="hidden" name="' + id + '_name" value="'+plupload.xmlEncode(file.name)+'" />';
-			fields += '<input type="hidden" name="' + id + '_status" value="' + (file.status === plupload.DONE ? 'done' : 'failed') + '" />';
-
-			$('#' + file.id).find('.plupload_file_fields').html(fields);
-		});
-
-		this.counter.val(this.uploader.files.length);
 	},
 	
 	_enableRenaming: function() {
