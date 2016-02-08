@@ -920,14 +920,14 @@ $.widget("koowa.koowaUploader", {
 
 		// since this method might be called asynchronously, file row might not yet be rendered
 		if (!$file.length) {
-			return;	
+			return;
 		}
 
 		switch (file.status) {
 			case plupload.DONE:
 				text = 'done';
 				break;
-			
+
 			case plupload.FAILED:
 				text = 'failed';
 				break;
@@ -938,32 +938,43 @@ $.widget("koowa.koowaUploader", {
 
 			case plupload.UPLOADING:
 				text = 'uploading';
-				
+
 				// scroll uploading file into the view if its bottom boundary is out of it
 				var scroller = $('.plupload_scroll', this.element)
-				, scrollTop = scroller.scrollTop()
-				, scrollerHeight = scroller.height()
-				, rowOffset = $file.position().top + $file.height()
-				;
-					
+					, scrollTop = scroller.scrollTop()
+					, scrollerHeight = scroller.height()
+					, rowOffset = $file.position().top + $file.height()
+					;
+
 				if (scrollerHeight < rowOffset) {
 					scroller.scrollTop(scrollTop + rowOffset - scrollerHeight);
-				}		
+				}
 
 				// Set file specific progress
 				$file
 					.find('.plupload_file_percent')
-						.html(file.percent + '%')
-						.end()
+					.html(file.percent + '%')
+					.end()
 					.find('.plupload_file_progress')
-						.css('width', file.percent + '%')
-						.end()
+					.css('width', file.percent + '%')
+					.end()
 					.find('.plupload_file_size')
-						.html(plupload.formatSize(file.size));			
+					.html(plupload.formatSize(file.size));
 				break;
 		}
 
-		$file.find('.plupload_file_status').removeClass('is-uploading is-in-queue').addClass('is-' + text).text(text);
+		$file.find('.plupload_file_status')
+			.removeClass('is-uploading is-in-queue')
+			.addClass('is-' + text)
+			.text(text);
+
+
+		if (file.error_message) {
+			$file.find('.is-failed').css('cursor', 'pointer').tooltip({
+				title: file.error_message,
+				placement: 'right'
+			});
+		}
 	},
 	
 	
