@@ -34,24 +34,24 @@
                 context.data.attachment = context.attachment;
             };
 
-            var render = function (attachment) {
+            var render = function (file) {
                 var images = $('#attachments-images');
                 var files = $('#attachments-files');
 
                 var url = "<?= route('view=file&routed=1&name={name}', true, false) ?>";
 
-                attachment.url = Attachments.replace(url, {name: attachment.name});
+                file.url = Attachments.replace(url, {name: file.name});
 
-                var output = Attachments.render(attachment);
+                var output = Attachments.render(file);
 
-                if (attachment.type == 'image') {
+                if (file.type == 'image') {
                     output = $(output).appendTo(images)
                     $('a.koowa-modal', output).magnificPopup({'type': 'image'});
                 }
                 else output = $(output).appendTo(files);
 
                 $('.delete', output).click(function () {
-                    Attachments.detach(attachment.name);
+                    Attachments.detach(file.name);
                     $(this).closest('.attachment').remove();
                 });
             };
@@ -68,10 +68,18 @@
                 });
             });
 
-            var attachments = <?= json_encode(array_values($entity->getAttachments()->getFiles()->toArray())) ?>;
+            <?
+                $files = array();
 
-            $.each(attachments, function (idx, attachment) {
-                render(attachment);
+                foreach ($entity->getAttachments() as $attachment):
+                        $files[] = $attachment->file->toArray();
+                endforeach;
+            ?>
+
+            var files = <?= json_encode($files) ?>;
+
+            $.each(files, function (idx, file) {
+                render(file);
             });
         });
     </script>
