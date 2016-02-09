@@ -39,9 +39,20 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
         parent::_initialize($config);
     }
 
+    /**
+     * Before Dispatch command handler.
+     *
+     * Makes sure to forward requests to com_files or set container data to the request depending on the view.
+     *
+     * @param KDispatcherContextInterface $context The context object.
+     *
+     * @return bool True if the request should be dispatched, false otherwise.
+     */
     protected function _beforeDispatch(KDispatcherContextInterface $context)
     {
         $result = true;
+
+        $this->_setAliases();
 
         $query = $context->getRequest()->getQuery();
 
@@ -63,7 +74,10 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
         return $result;
     }
 
-    protected function _forward(KDispatcherContextInterface $context)
+    /**
+     * Alias setter.
+     */
+    protected function _setAliases()
     {
         $mixer = $this->getMixer();
 
@@ -92,6 +106,16 @@ class ComFilesDispatcherBehaviorAttachable extends KBehaviorAbstract
                 $manager->registerAlias($identifier, $alias);
             }
         }
+    }
+
+    /**
+     * Forwards the request to com_files.
+     *
+     * @param KDispatcherContextInterface $context The context object.
+     */
+    protected function _forward(KDispatcherContextInterface $context)
+    {
+        $mixer = $this->getMixer();
 
         $parts = $mixer->getIdentifier()->toArray();
         $parts['path'] = array('controller', 'permission');

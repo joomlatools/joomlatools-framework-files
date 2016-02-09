@@ -15,8 +15,18 @@
  */
 class ComFilesControllerAttachment extends ComKoowaControllerModel
 {
+    /**
+     * Attachments Relations model.
+     *
+     * @var KModelInterface|null
+     */
     protected $_relations_model;
 
+    /**
+     * Tells if non-attached attachments should be deleted after a detach action.
+     *
+     * @var bool
+     */
     protected $_auto_delete;
 
     public function __construct(KObjectConfig $config)
@@ -58,6 +68,11 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         parent::_initialize($config);
     }
 
+    /**
+     * Attachments Relations model getter.
+     *
+     * @return KModelInterface
+     */
     protected function _getRelationsModel()
     {
         if (!$this->_relations_model instanceof KModelInterface)
@@ -73,6 +88,13 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         return $this->_relations_model;
     }
 
+    /**
+     * Before Attach command handler.
+     *
+     * Makes sure that there's an attachment and that this attachment exists.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _beforeAttach(KControllerContextInterface $context)
     {
         $column = $this->getModel()->getTable()->getIdentityColumn();
@@ -88,6 +110,13 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         }
     }
 
+    /**
+     * Attach action.
+     *
+     * Creates a relationship between a resource and an existing attachment.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _actionAttach(KControllerContextInterface $context)
     {
         $model = $this->_getRelationsModel();
@@ -113,6 +142,13 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         $this->_beforeAttach($context);
     }
 
+    /**
+     * Detach action.
+     *
+     * Removes a relationship between a resource and an existing attachment.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _actionDetach(KControllerContextInterface $context)
     {
         $model = $this->_getRelationsModel();
@@ -147,6 +183,9 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         $this->_afterAttach($context);
     }
 
+    /**
+     * Overriden for auto-aliasing views when the controller is extended.
+     */
     public function setView($view)
     {
         $view = parent::setView($view);

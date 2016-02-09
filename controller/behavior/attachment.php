@@ -15,6 +15,11 @@
  */
 class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
 {
+    /**
+     * Attachments Controller.
+     *
+     * @var KControllerInterface|null
+     */
     protected $_controller;
 
     public function __construct(KObjectConfig $config)
@@ -31,6 +36,13 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
         parent::_initialize($config);
     }
 
+    /**
+     * Before Render command handler.
+     *
+     * Pushes permissions to the view.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _beforeRender(KControllerContextInterface $context)
     {
         $view = $context->getSubject()->getView();
@@ -43,6 +55,13 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
         ));
     }
 
+    /**
+     * After Add command handler.
+     *
+     * Creates an attachment entity.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _afterAdd(KControllerContextInterface $context)
     {
         $entity = $context->result;
@@ -64,6 +83,11 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
         }
     }
 
+    /**
+     * Attachment Controller getter.
+     *
+     * @return KControllerInterface
+     */
     protected function _getController()
     {
         if (!$this->_controller instanceof KControllerInterface)

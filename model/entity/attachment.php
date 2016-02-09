@@ -21,6 +21,11 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
         parent::_initialize($config);
     }
 
+    /**
+     * Attachment file getter.
+     *
+     * @return KModelEntityInterface
+     */
     public function getPropertyFile()
     {
         $file =  $this->getObject('com:files.model.files')
@@ -37,6 +42,9 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
         return $file;
     }
 
+    /**
+     * Overridden for deleting the attached file.
+     */
     public function delete()
     {
         $result = parent::delete();

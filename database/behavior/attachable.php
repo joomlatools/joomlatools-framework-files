@@ -15,7 +15,26 @@
  */
 class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
 {
+    /**
+     * The identifiable column.
+     *
+     * @var mixed
+     */
     protected $_row_column;
+
+    /**
+     * The Attachments model.
+     *
+     * @var KModelInterface|null
+     */
+    protected $_model;
+
+    /**
+     * The Attachments Relations model.
+     *
+     * @var KModelInterface|null
+     */
+    protected $_relations_model;
 
     public function __construct(KObjectConfig $config)
     {
@@ -43,32 +62,40 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
         parent::_initialize($config);
     }
 
+    /**
+     * After Delete command handler.
+     *
+     * Removes all the attachments relations and the attachment if not attached to any other resource.
+     *
+     * @param KDatabaseContextInterface $context The context object.
+     */
     protected function _afterDelete(KDatabaseContextInterface $context)
     {
-        $attachments = $this->_getModel()->table($this->_getTableName())->row($this->id)->fetch();
+        $relations_model = $this->_getRelationsModel();
+        $model           = $this->_getModel();
 
-        if ($attachments->delete()) {
-            $this->_deleteFiles($attachments);
-        }
-    }
+        // Determine the attachments ID column name
+        $column = sprintf('%s_attachment_id', $relations_model->getIdentifier()->getPackage());
 
-    protected function _deleteFiles($attachments)
-    {
-        $model = $this->_getModel();
+        $relations = $relations_model->table($this->_getTableName())->row($this->{$this->_row_column})->fetch();
 
-        foreach ($attachments as $attachment)
+        foreach ($relations as $relation)
         {
-            if (!$model->container($attachment->container)->name($attachment->name)->count())
+            if ($relation->delete())
             {
-                $file = $attachment->file;
-
-                if (!$file->isNew()) {
-                    $file->delete();
+                // Check if the attched attachment is still attached to any other resource.
+                if (!$relations_model->reset()->{$column}($relation->{$column})->count()) {
+                    $model->reset()->{$column}($relation->{$column})->fetch()->delete(); // Delete the attachment
                 }
             }
         }
     }
 
+    /**
+     * Attachments getter.
+     *
+     * @return KModelEntityInterface The attachments
+     */
     public function getAttachments()
     {
         $model = $this->_getModel();
@@ -82,11 +109,21 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
         return $attachments;
     }
 
+    /**
+     * Resource table name getter.
+     *
+     * @return string The resource table name.
+     */
     protected function _getTableName()
     {
         return $this->_getTable()->getBase();
     }
 
+    /**
+     * Resource table getter.
+     *
+     * @return KDatabaseTableInterface The resource table object.
+     */
     protected function _getTable()
     {
         $mixer = $this->getMixer();
@@ -100,6 +137,11 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
         return $table;
     }
 
+    /**
+     * Attachments model getter.
+     *
+     * @return KModelInterface The attachments model object.
+     */
     protected function _getModel()
     {
         $identifier = $this->getMixer()->getIdentifier()->toArray();
@@ -108,5 +150,19 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
         $identifier['name'] = 'attachments';
 
         return $this->getObject($identifier);
+    }
+
+    /**
+     * Attachments Relations model getter.
+     *
+     * @return KModelInterface The attachments relations model object.
+     */
+    protected function _getRelationsModel()
+    {
+        $parts = $this->_getModel()->getIdentifier()->toArray();
+
+        $parts['name'] = 'attachments_relations';
+
+        return $this->getObject($parts);
     }
 }

@@ -15,6 +15,9 @@
  */
 class ComFilesViewAttachmentsJson extends ComFilesViewJson
 {
+    /**
+     * Overridden for setting from extra properties.
+     */
     protected function _getEntity(KModelEntityInterface $entity)
     {
         $data = parent::_getEntity($entity);

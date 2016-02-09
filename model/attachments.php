@@ -95,11 +95,13 @@ class ComFilesModelAttachments extends KModelDatabase
         }
     }
 
+    /**
+     * Overridden for pushing the container value.
+     */
     protected function _actionCreate(KModelContext $context)
     {
         $context->entity->append(array(
             'container' => $context->state->container,
-            'name'      => $context->state->name
         ));
 
         return parent::_actionCreate($context);

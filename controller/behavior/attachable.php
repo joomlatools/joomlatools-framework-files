@@ -15,6 +15,11 @@
  */
 class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
 {
+    /**
+     * The attachment controller.
+     *
+     * @var KControllerInterface|null
+     */
     protected $_controller;
 
     public function __construct(KObjectConfig $config)
@@ -24,6 +29,13 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         $this->_controller  = $config->controller;
     }
 
+    /**
+     * Before Attach command handler.
+     *
+     * Serves as a validation check.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _beforeAttach(KControllerContextInterface $context)
     {
         $entity = $context->getSubject()->getModel()->fetch();
@@ -35,6 +47,13 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         $context->entity = $entity;
     }
 
+    /**
+     * Attach action.
+     *
+     * Forwards the action to the attachment controller with formatted data.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _actionAttach(KControllerContextInterface $context)
     {
         $this->_getController()->attach($this->_getData($context));
@@ -50,6 +69,13 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         $this->_beforeAttach($context);
     }
 
+    /**
+     * Detach action.
+     *
+     * Forwards the action to the attachment controller with formatted data.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
     protected function _actionDetach(KControllerContextInterface $context)
     {
         $this->_getController()->detach($this->_getData($context));
@@ -60,21 +86,19 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         $this->_afterAttach($context);
     }
 
+    /**
+     * Attachment controller getter.
+     *
+     * @return KControllerInterface
+     */
     protected function _getController()
     {
         if (!$this->_controller instanceof KControllerInterface)
         {
             $mixer = $this->getMixer();
 
-            $parts = $mixer->getIdentifier()->toArray();
-
+            $parts         = $mixer->getIdentifier()->toArray();
             $parts['name'] = 'attachment';
-
-            $manager = $this->getObject('manager');
-
-            if (!$manager->getClass($parts, false)) {
-                $manager->registerAlias('com:files.controller.attachment', $parts); // Fallback to files attachment controller
-            }
 
             $identifier = $this->getIdentifier($parts);
 
@@ -94,6 +118,12 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
         return $this->_controller;
     }
 
+    /**
+     * POST data getter.
+     *
+     * @param KControllerContextInterface $context The context object.
+     * @return array The data
+     */
     protected function _getData(KControllerContextInterface $context)
     {
         $entity = $context->entity;
