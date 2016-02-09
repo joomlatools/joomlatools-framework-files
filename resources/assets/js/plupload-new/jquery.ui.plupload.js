@@ -471,7 +471,7 @@ $.widget("koowa.koowaUploader", {
 
 			message += " <br /><i>" + details + "</i>";
 
-			self._trigger('error', null, { up: up, error: err } );
+			self._trigger('error', null, { uploader: up, error: err } );
 
 			// do not show UI if no runtime can be initialized
 			if (err.code === plupload.INIT_ERROR) {
@@ -540,7 +540,7 @@ $.widget("koowa.koowaUploader", {
 				e.preventDefault();
 			});
 
-			self._trigger('ready', null, { up: up });
+			self._trigger('ready', null, { uploader: up });
 		});
 		
 		// uploader internal events must run first 
@@ -552,7 +552,7 @@ $.widget("koowa.koowaUploader", {
 
 		
 		uploader.bind('FilesAdded', function(up, files) {
-			self._trigger('selected', null, { up: up, files: files } );
+			self._trigger('selected', null, { uploader: up, files: files } );
 
 			self._trigger('updatelist', null, { filelist: self.filelist });
 			
@@ -573,7 +573,7 @@ $.widget("koowa.koowaUploader", {
 			});
 
 			self._trigger('updatelist', null, { filelist: self.filelist });
-			self._trigger('removed', null, { up: up, files: files } );
+			self._trigger('removed', null, { uploader: up, files: files } );
 		});
 		
 		uploader.bind('QueueChanged', function() {
@@ -583,9 +583,9 @@ $.widget("koowa.koowaUploader", {
 		uploader.bind('StateChanged', function(up) {
 			self._handleState();
 			if (plupload.STARTED === up.state) {
-				self._trigger('started', null, { up: self.uploader });
+				self._trigger('started', null, { uploader: self.uploader });
 			} else if (plupload.STOPPED === up.state) {
-				self._trigger('stopped', null, { up: self.uploader });
+				self._trigger('stopped', null, { uploader: self.uploader });
 			}
 		});
 
@@ -615,13 +615,13 @@ $.widget("koowa.koowaUploader", {
 		uploader.bind('FileUploaded', function(up, file, result) {
 			_handleUploadErrors(up, file, result);
 			self._handleFileStatus(file);
-			self._trigger('uploaded', null, { up: up, file: file, result: result } );
+			self._trigger('uploaded', null, { uploader: up, file: file, result: result } );
 		});
 		
 		uploader.bind('UploadProgress', function(up, file) {
 			self._handleFileStatus(file);
 			self._updateTotalProgress();
-			self._trigger('progress', null, { up: up, file: file } );
+			self._trigger('progress', null, { uploader: up, file: file } );
 		});
 		
 		uploader.bind('UploadComplete', function(up, files) {
@@ -629,7 +629,7 @@ $.widget("koowa.koowaUploader", {
 				self.progressbar.addClass('bar-success');
 			}
 
-			self._trigger('complete', null, { up: up, files: files } );
+			self._trigger('complete', null, { uploader: up, files: files } );
 		});
 	},
 
@@ -681,7 +681,11 @@ $.widget("koowa.koowaUploader", {
 	@method start
 	*/
 	start: function() {
-		this.uploader.start();
+		if (this._trigger('beforestart', null, {uploader: this.uploader, button: this.start_button}) !== false) {
+			this.uploader.start();
+
+			this._trigger('afterstart', null, {uploader: this.uploader, button: this.stop_button});
+		}
 	},
 
 	
@@ -691,7 +695,11 @@ $.widget("koowa.koowaUploader", {
 	@method stop
 	*/
 	stop: function() {
-		this.uploader.stop();
+		if (this._trigger('beforestop', null, {uploader: this.uploader, button: this.stop_button}) !== false) {
+			this.uploader.stop();
+
+			this._trigger('afterstop', null, {uploader: this.uploader, button: this.stop_button});
+		}
 	},
 
 
