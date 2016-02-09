@@ -15,14 +15,22 @@
  */
 class ComFilesModelEntityAttachment extends KModelEntityRow
 {
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array('fetch_thumbnails' => true));
+        parent::_initialize($config);
+    }
+
     public function getPropertyFile()
     {
-        $model = $this->getObject('com:files.model.files');
+        $file =  $this->getObject('com:files.model.files')
+                    ->container($this->container_slug)
+                    ->name($this->name)
+                    ->fetch()
+                    ->getIterator()
+                    ->current();
 
-        $file = $model->container($this->container_slug)->name($this->name)->fetch()->getIterator()->current();
-
-        // Populate the thumbnail property.
-        if ($file->isImage()) {
+        if ($this->getConfig()->fetch_thumbnails && $file->isImage()) {
             $file->thumbnail;
         }
 
