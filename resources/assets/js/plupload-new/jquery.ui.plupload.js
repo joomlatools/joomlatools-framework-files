@@ -19,8 +19,8 @@ jQuery UI based implementation of the Plupload API - multi-runtime file uploadin
 
 To use the widget you must include _jQuery_ and _jQuery UI_ `ui.widget`.
 
-In general the widget is designed the way that you do not usually need to do anything to it after you instantiate it. 
-But! You still can intervenue, to some extent, in case you need to. Although, due to the fact that widget is based on 
+In general the widget is designed the way that you do not usually need to do anything to it after you instantiate it.
+But! You still can intervenue, to some extent, in case you need to. Although, due to the fact that widget is based on
 _jQuery UI_ widget factory, there are some specifics. See examples below for more details.
 
 @example
@@ -51,7 +51,7 @@ _jQuery UI_ widget factory, there are some specifics. See examples below for mor
 @example
 	// Subscribing to the events...
 	// ... on initialization:
-	$('#uploader').plupload({ 
+	$('#uploader').plupload({
 		...
 		viewchanged: function(event, args) {
 			// stuff ...
@@ -94,10 +94,10 @@ _jQuery UI_ widget factory, there are some specifics. See examples below for mor
 	@param {Boolean} [settings.autostart=false] Whether to auto start uploading right after file selection.
 	@param {Boolean} [settings.dragdrop=true] Enable ability to add file to the queue by drag'n'dropping them from the desktop.
 	@param {Boolean} [settings.rename=false] Enable ability to rename files in the queue.
-	@param {Object} [settings.buttons] Control the visibility of functional buttons. 
+	@param {Object} [settings.buttons] Control the visibility of functional buttons.
 		@param {Boolean} [settings.buttons.browse=true] Display browse button.
 		@param {Boolean} [settings.buttons.start=true] Display start button.
-		@param {Boolean} [settings.buttons.stop=true] Display stop button. 
+		@param {Boolean} [settings.buttons.stop=true] Display stop button.
 	@param {Object} [settings.views] Control various views of the file queue.
 		@param {Boolean} [settings.views.list=true] Enable list view.
 		@param {Boolean} [settings.views.thumbs=false] Enable thumbs view.
@@ -190,8 +190,8 @@ Dispatched when error of some kind is detected.
 	@param {Enum} status Status constant matching the plupload states QUEUED, UPLOADING, FAILED, DONE.
 */
 
-var uploaders = {};	
-	
+var uploaders = {};
+
 function _(str) {
 	return plupload.translate(str) || str;
 }
@@ -200,21 +200,21 @@ function _(str) {
 $.widget("koowa.koowaUploader", {
 
 	widgetEventPrefix: '',
-	
+
 	contents_bak: '',
-		
+
 	options: {
 		filters: {
 			prevent_duplicates: true
 		},
-		
+
 		// widget specific
 		buttons: {
 			browse: true,
 			start: true,
-			stop: true	
+			stop: true
 		},
-		
+
 		views: {
 			list: false,
 			thumbs: true,
@@ -229,20 +229,20 @@ $.widget("koowa.koowaUploader", {
 			'X-Requested-With': 'XMLHttpRequest'
 		},
 
-		runtimes: 'html5',
+		runtimes: 'html4',
 		chunking: false,
 
 		multi_selection: true,
 		multiple_queues: true, // re-use widget by default
-		dragdrop : true, 
+		dragdrop : true,
 		autostart: false,
 		rename: true,
 
 		preinit: {}
 	},
-	
+
 	FILE_COUNT_ERROR: -9001,
-	
+
 	_create: function() {
 		var self = this,
 			id = this.element.attr('id');
@@ -251,7 +251,7 @@ $.widget("koowa.koowaUploader", {
 			this.element.attr('id', id);
 		}
 		this.id = id;
-				
+
 		// backup the elements initial state
 		this.contents_bak = this.element.html();
 		this.element.id = this.element.attr('id');
@@ -325,8 +325,6 @@ $.widget("koowa.koowaUploader", {
 
 		// initialize uploader instance
 		this._initUploader();
-
-		this.view_mode = 'thumbs';
 
 		this._setMaxCount(this.options.multi_selection ? 100 : 1);
 	},
@@ -416,7 +414,7 @@ $.widget("koowa.koowaUploader", {
 		plupload.addFileFilter('max_file_count', function(maxCount, file, cb) {
 			if (maxCount <= this.files.length - (this.total.uploaded + this.total.failed)) {
 				self.disable();
-				
+
 				this.trigger('Error', {
 					code : self.FILE_COUNT_ERROR,
 					message : _("File count error."),
@@ -429,16 +427,16 @@ $.widget("koowa.koowaUploader", {
 		});
 
 
-		uploader.bind('Error', function(up, err) {			
+		uploader.bind('Error', function(up, err) {
 			var message, details = "";
 
 			message = '<strong>' + err.message + '</strong>';
-				
+
 			switch (err.code) {
 				case plupload.FILE_EXTENSION_ERROR:
 					details = o.sprintf(_("File: %s"), err.file.name);
 					break;
-				
+
 				case plupload.FILE_SIZE_ERROR:
 					details = o.sprintf(_("File: %s, size: %d, max file size: %d"), err.file.name,  plupload.formatSize(err.file.size), plupload.formatSize(plupload.parseSize(up.getOption('filters').max_file_size)));
 					break;
@@ -446,24 +444,24 @@ $.widget("koowa.koowaUploader", {
 				case plupload.FILE_DUPLICATE_ERROR:
 					details = o.sprintf(_("%s already present in the queue."), err.file.name);
 					break;
-					
+
 				case self.FILE_COUNT_ERROR:
 					details = o.sprintf(_("Upload element accepts only %d file(s) at a time. Extra files were stripped."), up.getOption('filters').max_file_count || 0);
 					break;
-				
+
 				case plupload.IMAGE_FORMAT_ERROR :
 					details = _("Image format either wrong or not supported.");
-					break;	
-				
+					break;
+
 				case plupload.IMAGE_MEMORY_ERROR :
 					details = _("Runtime ran out of available memory.");
 					break;
-				
+
 				/* // This needs a review
 				case plupload.IMAGE_DIMENSIONS_ERROR :
 					details = o.sprintf(_('Resoultion out of boundaries! <b>%s</b> runtime supports images only up to %wx%hpx.'), up.runtime, up.features.maxWidth, up.features.maxHeight);
 					break;	*/
-											
+
 				case plupload.HTTP_ERROR:
 					details = _("Upload URL might be wrong or doesn't exist.");
 					break;
@@ -483,7 +481,7 @@ $.widget("koowa.koowaUploader", {
 			}
 		});
 
-		
+
 		uploader.bind('PostInit', function(up) {
 			self.element.addClass('is-initialized');
 
@@ -495,19 +493,19 @@ $.widget("koowa.koowaUploader", {
 			} else {
 				self._setButtonStatus(self.browse_button, 'enable');
 			}
-			
+
 			if (!self.options.buttons.start) {
 				self._setButtonStatus(self.start_button, 'disable');
 				self.start_button.hide();
-			} 
-			
+			}
+
 			if (!self.options.buttons.stop) {
 				self._setButtonStatus(self.stop_button, 'disable');
 				self.stop_button.hide();
 			}
-				
+
 			if (!self.options.unique_names && self.options.rename) {
-				self._enableRenaming();	
+				self._enableRenaming();
 			}
 
 			if (self.options.dragdrop && up.features.dragdrop) {
@@ -526,7 +524,7 @@ $.widget("koowa.koowaUploader", {
 
 				self.element.addClass('has-dragdrop-support');
 			}
-			
+
 			self.start_button.click(function(e) {
 				e.preventDefault();
 
@@ -542,20 +540,20 @@ $.widget("koowa.koowaUploader", {
 
 			self._trigger('ready', null, { uploader: up });
 		});
-		
-		// uploader internal events must run first 
+
+		// uploader internal events must run first
 		uploader.init();
 
 		uploader.bind('FileFiltered', function(up, file) {
 			self._addFiles(file);
 		});
 
-		
+
 		uploader.bind('FilesAdded', function(up, files) {
 			self._trigger('selected', null, { uploader: up, files: files } );
 
 			self._trigger('updatelist', null, { filelist: self.filelist });
-			
+
 			if (self.options.autostart) {
 				// set a little delay to make sure that QueueChanged triggered by the core has time to complete
 				setTimeout(function() {
@@ -563,7 +561,7 @@ $.widget("koowa.koowaUploader", {
 				}, 10);
 			}
 		});
-		
+
 		uploader.bind('FilesRemoved', function(up, files) {
 
 			$.each(files, function(i, file) {
@@ -575,7 +573,7 @@ $.widget("koowa.koowaUploader", {
 			self._trigger('updatelist', null, { filelist: self.filelist });
 			self._trigger('removed', null, { uploader: up, files: files } );
 		});
-		
+
 		uploader.bind('QueueChanged', function() {
 			self._handleState();
 		});
@@ -590,7 +588,8 @@ $.widget("koowa.koowaUploader", {
 		});
 
 		var _handleUploadErrors = function(uploader, file, result) {
-			var response = $.parseJSON(result.response);
+			// strip off <pre>..</pre> tags that might be enclosing the response (happens in HTML4 runtime)
+			var response = $.parseJSON(result.response.replace(/^\s*<pre[^>]*>/, '').replace(/<\/pre>\s*$/, ''));
 
 			if (response.status === false)
 			{
@@ -611,19 +610,19 @@ $.widget("koowa.koowaUploader", {
 		uploader.bind('UploadFile', function(up, file) {
 			self._handleFileStatus(file);
 		});
-		
+
 		uploader.bind('FileUploaded', function(up, file, result) {
 			_handleUploadErrors(up, file, result);
 			self._handleFileStatus(file);
 			self._trigger('uploaded', null, { uploader: up, file: file, result: result } );
 		});
-		
+
 		uploader.bind('UploadProgress', function(up, file) {
 			self._handleFileStatus(file);
 			self._updateTotalProgress();
 			self._trigger('progress', null, { uploader: up, file: file } );
 		});
-		
+
 		uploader.bind('UploadComplete', function(up, files) {
 			if (!self.progressbar.hasClass('bar-danger')) {
 				self.progressbar.addClass('bar-success');
@@ -633,13 +632,13 @@ $.widget("koowa.koowaUploader", {
 		});
 	},
 
-	
+
 	_setOption: function(key, value) {
 		var self = this;
 
-		if (key == 'buttons' && typeof(value) == 'object') {	
+		if (key == 'buttons' && typeof(value) == 'object') {
 			value = $.extend(self.options.buttons, value);
-			
+
 			if (!value.browse) {
 				self.browse_button.hide();
 				self._setButtonStatus(self.browse_button, 'disable');
@@ -649,7 +648,7 @@ $.widget("koowa.koowaUploader", {
 				self.browse_button.show();
 				self.uploader.disableBrowse(false);
 			}
-			
+
 			if (!value.start) {
 				self._setButtonStatus(self.start_button, 'disable');
 				self.start_button.hide();
@@ -659,7 +658,7 @@ $.widget("koowa.koowaUploader", {
 					self.start_button.show();
 				}
 			}
-			
+
 			if (!value.stop) {
 				self._setButtonStatus(self.stop_button, 'disable');
 				self.stop_button.hide();
@@ -670,11 +669,11 @@ $.widget("koowa.koowaUploader", {
 				}
 			}
 		}
-		
-		self.uploader.setOption(key, value);	
+
+		self.uploader.setOption(key, value);
 	},
 
-	
+
 	/**
 	Start upload. Triggers `start` event.
 
@@ -688,7 +687,7 @@ $.widget("koowa.koowaUploader", {
 		}
 	},
 
-	
+
 	/**
 	Stop upload. Triggers `stop` event.
 
@@ -724,7 +723,7 @@ $.widget("koowa.koowaUploader", {
 		this.uploader.disableBrowse(true);
 	},
 
-	
+
 	/**
 	Retrieve file by its unique id.
 
@@ -734,18 +733,18 @@ $.widget("koowa.koowaUploader", {
 	*/
 	getFile: function(id) {
 		var file;
-		
+
 		if (typeof id === 'number') {
-			file = this.uploader.files[id];	
+			file = this.uploader.files[id];
 		} else {
-			file = this.uploader.getFile(id);	
+			file = this.uploader.getFile(id);
 		}
 		return file;
 	},
 
 	/**
 	Return array of files currently in the queue.
-	
+
 	@method getFiles
 	@return {Array} Array of files in the queue represented by plupload.File objects
 	*/
@@ -753,7 +752,7 @@ $.widget("koowa.koowaUploader", {
 		return this.uploader.files;
 	},
 
-	
+
 	/**
 	Remove the file from the queue.
 
@@ -767,7 +766,7 @@ $.widget("koowa.koowaUploader", {
 		this.uploader.removeFile(file);
 	},
 
-	
+
 	/**
 	Clear the file queue.
 
@@ -816,16 +815,16 @@ $.widget("koowa.koowaUploader", {
 		this.message.find('.k-upload__message__body').html(message);
 	},
 
-	
+
 	/**
 	Destroy the widget, the uploader, free associated resources and bring back original html.
 
 	@method destroy
 	*/
-	destroy: function() {		
+	destroy: function() {
 		// destroy uploader instance
 		this.uploader.destroy();
-		
+
 		// restore the elements initial state
 		this.element
 			.empty()
@@ -834,15 +833,15 @@ $.widget("koowa.koowaUploader", {
 
 		$.Widget.prototype.destroy.apply(this);
 	},
-	
-	
+
+
 	_handleState: function() {
 		var self = this
 		, up = this.uploader
 		, filesPending = up.files.length - (up.total.uploaded + up.total.failed)
 		, maxCount = up.getOption('filters').max_file_count || 0
 		;
-						
+
 		if (plupload.STARTED === up.state) {
 			this.progressbar.removeClass('bar-danger bar-success').parent().addClass('active is-uploading');
 
@@ -852,7 +851,7 @@ $.widget("koowa.koowaUploader", {
 			if (!this.options.multiple_queues) {
 				this.disable();
 			}
-		} 
+		}
 		else if (plupload.STOPPED === up.state) {
 			setTimeout(function() {
 				self.progressbar.parent().removeClass('active is-uploading');
@@ -900,7 +899,7 @@ $.widget("koowa.koowaUploader", {
 			button.addClass('disabled');
 		}
 	},
-	
+
 	_handleFileStatus: function(file) {
 		var $file = $('#' + file.id), text;
 
@@ -963,8 +962,8 @@ $.widget("koowa.koowaUploader", {
 			});
 		}
 	},
-	
-	
+
+
 	_updateTotalProgress: function() {
 		var up = this.uploader;
 
@@ -1052,7 +1051,7 @@ $.widget("koowa.koowaUploader", {
 
 		self.filelist.append(html);
 	},
-	
+
 	_enableRenaming: function() {
 		var self = this;
 
@@ -1062,7 +1061,7 @@ $.widget("koowa.koowaUploader", {
 			if (!nameSpan.hasClass('plupload_file_name_wrapper')) {
 				return;
 			}
-		
+
 			// Get file name and split out name and extension
 			file = self.uploader.getFile(nameSpan.closest('.plupload_file')[0].id);
 			name = file.name;
