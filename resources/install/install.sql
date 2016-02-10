@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `#__files_thumbnails` (
   PRIMARY KEY (`files_thumbnail_id`)
 ) DEFAULT CHARSET=utf8;
 
-CREATE TABLE `#__files_attachments` (
+CREATE TABLE IF NOT EXISTS `#__files_attachments` (
   `files_attachment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `files_container_id` bigint(20) NOT NULL,
   `uuid` char(36) NOT NULL DEFAULT '',
@@ -35,7 +35,7 @@ CREATE TABLE `#__files_attachments` (
   UNIQUE KEY `files_container_id` (`files_container_id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `#__files_attachments_relations` (
+CREATE TABLE IF NOT EXISTS `#__files_attachments_relations` (
   `files_attachment_id` bigint(20) unsigned NOT NULL,
   `table` varchar(255) NOT NULL DEFAULT '',
   `row` bigint(20) unsigned NOT NULL,
