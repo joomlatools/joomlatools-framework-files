@@ -15,11 +15,47 @@
  */
 class ComFilesModelAttachments extends KModelDatabase
 {
+    protected $_relations_model;
+
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
+        $this->_relations_model = $config->relations_model;
+
         $this->getState()->insert('table', 'cmd')->insert('row', 'cmd');
+    }
+
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array('relations_model' => 'attachments_relations'));
+        parent::_initialize($config);
+    }
+
+    public function getRelationsModel()
+    {
+        if (!$this->_relations_model instanceof KModelInterface)
+        {
+            $identifier = $this->_relations_model;
+
+            if (is_string($identifier))
+            {
+                if (strpos($identifier, '.') === false)
+                {
+                    $identifier = $this->getIdentifier()->toArray();
+                    $identifier['name'] = $this->_relations_model;
+                }
+
+                $identifier = $this->getIdentifier($identifier);
+            }
+
+            $this->_relations_model = $this->getObject($identifier, array(
+                'relation_column' => $this->getTable()
+                                          ->getIdentityColumn()
+            ));
+        }
+
+        return $this->_relations_model;
     }
 
     protected function _buildQueryColumns(KDatabaseQueryInterface $query)
@@ -50,16 +86,11 @@ class ComFilesModelAttachments extends KModelDatabase
 
         $state = $this->getState();
 
-        $identifier = $this->getTable()->getIdentifier();
-
-        $package = $identifier->getPackage();
-        $name    = $identifier->getName();
-
-        $table  = sprintf('%s_%s_relations', $package, $name);
-        $column = sprintf('%s_%s_id', $package, KStringInflector::singularize($name));
-
         if ($state->row || $state->table)
         {
+            $table  = $this->getRelationsModel()->getTable()->getBase();
+            $column = $this->getTable()->getIdentityColumn();
+
             $query->join($table . ' AS relations', 'relations.' . $column . ' = tbl.' . $column, 'INNER')
                   ->join('users AS users', 'relations.created_by = users.id', 'LEFT');
         }
