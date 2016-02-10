@@ -53,17 +53,21 @@ class ComFilesModelBehaviorRelatable extends KModelBehaviorAbstract
     {
         $query = $context->query;
 
-        $table  = $this->getRelationsModel()->getTable()->getBase();
-        $column = $this->getTable()->getIdentityColumn();
-
-        $query->join($table . ' AS relations', 'relations.' . $column . ' = tbl.' . $column, 'INNER');
-
         $state = $context->getState();
 
-        foreach (array_keys($this->_columns) as $column)
+        if (array_intersect(array_keys($state->getValues()), array_keys($this->_columns)))
         {
-            if ($state->{$column}) {
-                $query->where(sprintf('relations.%1$s = :%1$s', $column))->bind(array($column => $state->{$column}));
+            $table  = $this->getRelationsModel()->getTable()->getBase();
+            $column = $this->getTable()->getIdentityColumn();
+
+            $query->join($table . ' AS relations', 'relations.' . $column . ' = tbl.' . $column, 'INNER');
+
+
+            foreach (array_keys($this->_columns) as $column)
+            {
+                if ($state->{$column}) {
+                    $query->where(sprintf('relations.%1$s = :%1$s', $column))->bind(array($column => $state->{$column}));
+                }
             }
         }
     }
