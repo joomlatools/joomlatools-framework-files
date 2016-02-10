@@ -47,6 +47,10 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
                     'path' => array('model'),
                     'name' => 'attachments'
                 ),
+                'com:files.model.behavior.attachable'        => array(
+                    'path' => array('model', 'behavior'),
+                    'name' => 'attachable'
+                ),
                 'com:files.controller.permission.attachment' => array(
                     'path' => array('controller', 'permission'),
                     'name' => 'attachment'
