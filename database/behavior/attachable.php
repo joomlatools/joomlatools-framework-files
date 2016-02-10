@@ -29,13 +29,6 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
      */
     protected $_model;
 
-    /**
-     * The Attachments Relations model.
-     *
-     * @var KModelInterface|null
-     */
-    protected $_relations_model;
-
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
@@ -71,13 +64,12 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
      */
     protected function _afterDelete(KDatabaseContextInterface $context)
     {
-        $relations_model = $this->_getRelationsModel();
         $model           = $this->_getModel();
-
-        // Determine the attachments ID column name
-        $column = sprintf('%s_attachment_id', $relations_model->getIdentifier()->getPackage());
+        $relations_model = $model->getRelationsModel();
 
         $relations = $relations_model->table($this->_getTableName())->row($this->{$this->_row_column})->fetch();
+
+        $column = $relations_model->getConfig()->relation_column;
 
         foreach ($relations as $relation)
         {
