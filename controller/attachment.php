@@ -69,26 +69,6 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     }
 
     /**
-     * Attachments Relations model getter.
-     *
-     * @return KModelInterface
-     */
-    protected function _getRelationsModel()
-    {
-        if (!$this->_relations_model instanceof KModelInterface)
-        {
-            // Attachments and relations models MUST belong to the same package.
-            $parts = $this->getModel()->getIdentifier()->toArray();
-
-            $parts['name'] .= '_relations';
-
-            $this->_relations_model = $this->getObject($parts);
-        }
-
-        return $this->_relations_model;
-    }
-
-    /**
      * Before Attach command handler.
      *
      * Makes sure that there's an attachment and that this attachment exists.
@@ -119,7 +99,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
      */
     protected function _actionAttach(KControllerContextInterface $context)
     {
-        $model = $this->_getRelationsModel();
+        $model = $this->getModel()->getRelationsModel();
 
         $data   = $context->getRequest()->getData();
 
@@ -151,7 +131,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
      */
     protected function _actionDetach(KControllerContextInterface $context)
     {
-        $model = $this->_getRelationsModel();
+        $model = $this->getModel()->getRelationsModel();
 
         $relation = $model->{$context->identity_column}($context->attachment->id)
                           ->setState($this->getRequest()->getData()->toArray())->fetch();
@@ -168,7 +148,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     {
         if ($this->_auto_delete)
         {
-            $model = $this->_getRelationsModel();
+            $model = $this->getModel()->getRelationsModel();
 
             $model->getState()->reset();
 
