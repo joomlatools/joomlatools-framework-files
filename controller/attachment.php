@@ -15,31 +15,8 @@
  */
 class ComFilesControllerAttachment extends ComKoowaControllerModel
 {
-    /**
-     * Attachments Relations model.
-     *
-     * @var KModelInterface|null
-     */
-    protected $_relations_model;
-
-    /**
-     * Tells if non-attached attachments should be deleted after a detach action.
-     *
-     * @var bool
-     */
-    protected $_auto_delete;
-
-    public function __construct(KObjectConfig $config)
-    {
-        parent::__construct($config);
-
-        $this->_auto_delete = $config->auto_delete;
-    }
-
     protected function _initialize(KObjectConfig $config)
     {
-        $config->append(array('auto_delete' => true));
-
         if ($this->getIdentifier()->package != 'files')
         {
             $aliases = array(
@@ -150,17 +127,14 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 
     protected function _afterDetach(KControllerContextInterface $context)
     {
-        if ($this->_auto_delete)
+        $model = $this->getModel()->getRelationsModel();
+
+        $model->getState()->reset();
+
+        if (!$model->{$context->identity_column}($context->attachment->id)->count())
         {
-            $model = $this->getModel()->getRelationsModel();
-
-            $model->getState()->reset();
-
-            if (!$model->{$context->identity_column}($context->attachment->id)->count())
-            {
-                if (!$context->attachment->delete()) {
-                    throw new RuntimeException(('Attachment could not be deleted'));
-                }
+            if (!$context->attachment->delete()) {
+                throw new RuntimeException(('Attachment could not be deleted'));
             }
         }
 
