@@ -1,5 +1,5 @@
 /**
- * jquery.ui.plupload.js
+ * koowa.uploader.js
  *
  * Copyright 2013, Moxiecode Systems AB
  * Released under GPL License.
@@ -18,11 +18,7 @@
 jQuery UI based implementation of the Plupload API - multi-runtime file uploading API.
 
 To use the widget you must include _jQuery_ and _jQuery UI_ `ui.widget`.
-
-In general the widget is designed the way that you do not usually need to do anything to it after you instantiate it.
-But! You still can intervenue, to some extent, in case you need to. Although, due to the fact that widget is based on
-_jQuery UI_ widget factory, there are some specifics. See examples below for more details.
-
+ 
 @example
 	<!-- Instantiating: -->
 	<div id="uploader">
@@ -30,28 +26,25 @@ _jQuery UI_ widget factory, there are some specifics. See examples below for mor
 	</div>
 
 	<script>
-		$('#uploader').plupload({
+		$('#uploader').koowaUploader({
 			url : '../upload.php',
 			filters : [
 				{title : "Image files", extensions : "jpg,gif,png"}
-			],
-			rename: true,
-			flash_swf_url : '../../js/Moxie.swf',
-			silverlight_xap_url : '../../js/Moxie.xap',
+			]
 		});
 	</script>
 
 @example
 	// Invoking methods:
-	$('#uploader').plupload(options);
+	$('#uploader').koowaUploader(options);
 
 	// Display welcome message in the notification area
-	$('#uploader').plupload('notify', 'info', "This might be obvious, but you need to click 'Add Files' to add some files.");
+	$('#uploader').koowaUploader('notify', 'info', "This might be obvious, but you need to click 'Add Files' to add some files.");
 
 @example
 	// Subscribing to the events...
 	// ... on initialization:
-	$('#uploader').plupload({
+	$('#uploader').koowaUploader({
 		...
 		viewchanged: function(event, args) {
 			// stuff ...
@@ -189,9 +182,10 @@ Dispatched when error of some kind is detected.
 var uploaders = {};
 
 function _(str) {
-	return plupload.translate(str) || str;
+	return Koowa.translate(str) || str;
 }
 
+plupload.translate = function(str) { return _(str)};
 
 $.widget("koowa.koowaUploader", {
 
@@ -465,11 +459,6 @@ $.widget("koowa.koowaUploader", {
 				case plupload.IMAGE_MEMORY_ERROR :
 					details = _("Runtime ran out of available memory.");
 					break;
-
-				/* // This needs a review
-				case plupload.IMAGE_DIMENSIONS_ERROR :
-					details = o.sprintf(_('Resoultion out of boundaries! <b>%s</b> runtime supports images only up to %wx%hpx.'), up.runtime, up.features.maxWidth, up.features.maxHeight);
-					break;	*/
 
 				case plupload.HTTP_ERROR:
 					details = _("Upload URL might be wrong or doesn't exist.");
@@ -910,7 +899,7 @@ $.widget("koowa.koowaUploader", {
 	},
 
 	_handleFileStatus: function(file) {
-		var $file = $('#' + file.id), text;
+		var $file = $('#' + file.id), klass, text;
 
 		// since this method might be called asynchronously, file row might not yet be rendered
 		if (!$file.length) {
@@ -919,19 +908,23 @@ $.widget("koowa.koowaUploader", {
 
 		switch (file.status) {
 			case plupload.DONE:
-				text = 'done';
+				text = _('done');
+				klass = 'is-done';
 				break;
 
 			case plupload.FAILED:
-				text = 'failed';
+				text = _('failed');
+				klass = 'is-failed';
 				break;
 
 			case plupload.QUEUED:
-				text = 'delete';
+				text = _('delete');
+				klass = 'is-delete';
 				break;
 
 			case plupload.UPLOADING:
-				text = 'uploading';
+				text = _('uploading');
+				klass = 'is-uploading';
 
 				// @todo robin do we need this?
 				// scroll uploading file into the view if its bottom boundary is out of it
@@ -960,7 +953,7 @@ $.widget("koowa.koowaUploader", {
 
 		$file.find('.js-file-status')
 			.removeClass('is-uploading is-in-queue')
-			.addClass('is-' + text)
+			.addClass(klass)
 			.text(text);
 
 
