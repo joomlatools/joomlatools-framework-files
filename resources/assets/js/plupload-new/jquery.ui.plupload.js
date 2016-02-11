@@ -69,6 +69,7 @@ _jQuery UI_ widget factory, there are some specifics. See examples below for mor
 	@param {Number|String} [settings.chunk_size=0] Chunk size in bytes to slice the file into. Shorcuts with b, kb, mb, gb, tb suffixes also supported. `e.g. 204800 or "204800b" or "200kb"`. By default - disabled.
 	@param {String} [settings.file_data_name="file"] Name for the file field in Multipart formated message.
 	@param {Object} [settings.filters={}] Set of file type filters.
+ 		@param {Boolean} [settings.filters.image_only=false] Only allow image extensions
 		@param {Array} [settings.filters.mime_types=[]] List of file types to accept, each one defined by title and list of extensions. `e.g. {title : "Image files", extensions : "jpg,jpeg,gif,png"}`. Dispatches `plupload.FILE_EXTENSION_ERROR`
 		@param {String|Number} [settings.filters.max_file_size=0] Maximum file size that the user can pick, in bytes. Optionally supports b, kb, mb, gb, tb suffixes. `e.g. "10mb" or "1gb"`. By default - not set. Dispatches `plupload.FILE_SIZE_ERROR`.
 		@param {Boolean} [settings.filters.prevent_duplicates=false] Do not let duplicates into the queue. Dispatches `plupload.FILE_DUPLICATE_ERROR`.
@@ -200,7 +201,8 @@ $.widget("koowa.koowaUploader", {
 
 	options: {
 		filters: {
-			prevent_duplicates: true
+			prevent_duplicates: true,
+			image_only: false
 		},
 
 		// widget specific
@@ -228,6 +230,8 @@ $.widget("koowa.koowaUploader", {
 
 		preinit: {}
 	},
+
+	IMAGE_EXTENSIONS: ['jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp'],
 
 	FILE_COUNT_ERROR: -9001,
 
@@ -297,9 +301,30 @@ $.widget("koowa.koowaUploader", {
 			self.element.removeClass('has-error');
 		});
 
+		if (this.options.container) {
+			var container = this.options.container;
+
+			if (typeof container.parameters === 'object') {
+				if (container.parameters.maximum_size) {
+					this.options.maximum_size = container.parameters.maximum_size;
+				}
+
+				if (typeof container.parameters.allowed_extensions === 'object') {
+					this.options.filters.extensions = container.parameters.allowed_extensions;
+				}
+			}
+
+			this.options.multipart_params.container = container.slug;
+		}
 
 		if (this.options.filters.extensions) {
 			var extensions = this.options.filters.extensions;
+
+			if (this.options.filters.image_only) {
+				extensions = extensions.filter(function(extension) {
+					return self.IMAGE_EXTENSIONS.indexOf(extension) != -1;
+				});
+			}
 
 			this.options.filters.mime_types = [{
 				title: Koowa.translate('All Files'),
