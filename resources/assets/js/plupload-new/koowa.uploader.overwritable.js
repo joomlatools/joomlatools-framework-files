@@ -7,9 +7,11 @@ $.widget('koowa.koowaUploader', $.koowa.koowaUploader, {
     _init: function() {
         var result = this._super();
 
-        this._on({
-            'koowauploaderbeforestart': this._handleBeforeStart
-        });
+        if (this.options.check_duplicates) {
+            this._on({
+                'koowauploaderbeforestart': this._handleBeforeStart
+            });
+        }
 
         return result;
     },
