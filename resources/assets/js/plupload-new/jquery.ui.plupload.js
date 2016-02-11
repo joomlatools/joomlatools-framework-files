@@ -98,11 +98,6 @@ _jQuery UI_ widget factory, there are some specifics. See examples below for mor
 		@param {Boolean} [settings.buttons.browse=true] Display browse button.
 		@param {Boolean} [settings.buttons.start=true] Display start button.
 		@param {Boolean} [settings.buttons.stop=true] Display stop button.
-	@param {Object} [settings.views] Control various views of the file queue.
-		@param {Boolean} [settings.views.list=true] Enable list view.
-		@param {Boolean} [settings.views.thumbs=false] Enable thumbs view.
-		@param {String} [settings.views.default='list'] Default view.
-		@param {Boolean} [settings.views.remember=true] Whether to remember the current view (requires jQuery Cookie plugin).
 	@param {Boolean} [settings.multiple_queues=true] Re-activate the widget after each upload procedure.
 */
 ;(function(window, document, plupload, o, $) {
@@ -215,13 +210,6 @@ $.widget("koowa.koowaUploader", {
 			stop: true
 		},
 
-		views: {
-			list: false,
-			thumbs: true,
-			active: 'thumbs',
-			remember: true // requires: https://github.com/carhartl/jquery-cookie, otherwise disabled even if set to true
-		},
-
 		thumb_width: 100,
 		thumb_height: 60,
 
@@ -229,7 +217,7 @@ $.widget("koowa.koowaUploader", {
 			'X-Requested-With': 'XMLHttpRequest'
 		},
 
-		runtimes: 'html4',
+		runtimes: 'html5,html4',
 		chunking: false,
 
 		multi_selection: true,
@@ -399,10 +387,6 @@ $.widget("koowa.koowaUploader", {
 
 		// retrieve full normalized set of options
 		this.options = uploader.getOption();
-
-		if (self.options.views.thumbs) {
-			//uploader.settings.required_features.display_media = true;
-		}
 
 		// for backward compatibility
 		if (self.options.max_file_count) {
