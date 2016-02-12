@@ -1008,7 +1008,7 @@ $.widget("koowa.koowaUploader", {
 			else if (up.files.length) {
 				template = 'upload-pending';
 			} else {
-				template = this.options.multi_selection ? 'upload-empty-multiple' : 'upload-empty-single';
+				template = this.options.multi_selection ? 'empty-multiple' : 'empty-single';
 			}
 
 			if (template) {
