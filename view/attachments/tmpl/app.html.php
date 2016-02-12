@@ -171,7 +171,7 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
                     </h2>
                     <div class="koowa_dialog__child__content">
                         <div class="koowa_dialog__child__content__box">
-                            <?= import('com:files.files.uploader.html', array('multi_selection' => false)); ?>
+                            <?= import('com:files.files.uploader.html', array('multi_selection' => true)); ?>
                         </div>
                     </div>
                 </div>
