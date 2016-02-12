@@ -1018,7 +1018,8 @@ $.widget("koowa.koowaUploader", {
 					'uploaded': up.total.uploaded,
 					'total'   : up.files.length,
 					'remaining': (up.files.length - (up.total.uploaded + up.total.failed)),
-					'failed'  : up.total.failed
+					'failed'  : up.total.failed,
+					'uploader': up
 				});
 			}
 
@@ -1059,7 +1060,9 @@ $.widget("koowa.koowaUploader", {
 				'ext'  : o.Mime.getFileExtension(file.name) || '',
 				'size' : plupload.formatSize(file.size),
 				'name' : file.name,
-				'id'   : file.id
+				'id'   : file.id,
+				'file' : file,
+				'uploader': self.getUploader()
 			});
 		});
 
