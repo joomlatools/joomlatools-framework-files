@@ -256,16 +256,16 @@ $.widget("koowa.koowaUploader", {
 			}
 		});
 
-		var html = this._renderTemplate('content-box');
-		html += this._renderTemplate('error-box');
-		html += this._renderTemplate('info-box');
-		html += this._renderTemplate('progress-bar');
+		var html = this.renderTemplate('content-box');
+		html += this.renderTemplate('error-box');
+		html += this.renderTemplate('info-box');
+		html += this.renderTemplate('progress-bar');
 
 		this.element.html(html);
 
 		var selection = this.options.multi_selection ? 'multiple' : 'single';
 
-		$('.js-content', this.element).html(this._renderTemplate('empty-'+selection));
+		$('.js-content', this.element).html(this.renderTemplate('empty-'+selection));
 
 		// list of files
 		this.filelist = $(selection == 'single' ? '.js-content' : '.js-filelist-multiple', this.element)
@@ -1012,7 +1012,7 @@ $.widget("koowa.koowaUploader", {
 			}
 
 			if (template) {
-				html = this._renderTemplate(template, {
+				html = this.renderTemplate(template, {
 					'percent' : up.total.percent,
 					'size'    : plupload.formatSize(up.total.size),
 					'uploaded': up.total.uploaded,
@@ -1027,7 +1027,7 @@ $.widget("koowa.koowaUploader", {
 		}
 	},
 
-	_renderTemplate: function(template, data) {
+	renderTemplate: function(template, data) {
 		if (typeof this.template_cache[template] === 'undefined') {
 			var source = this.options.templates[template];
 
@@ -1056,7 +1056,7 @@ $.widget("koowa.koowaUploader", {
 		$.each(files, function(i, file) {
 			var template = self.options.multi_selection ? 'multiple-files' : 'single-file';
 
-			html += self._renderTemplate(template, {
+			html += self.renderTemplate(template, {
 				'ext'  : o.Mime.getFileExtension(file.name) || '',
 				'size' : plupload.formatSize(file.size),
 				'name' : file.name,
