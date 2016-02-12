@@ -224,7 +224,10 @@ $.widget("koowa.koowaUploader", {
 		autostart: false,
 		rename: true,
 
-		preinit: {}
+		preinit: {},
+
+		templates: {}
+
 	},
 
 	IMAGE_EXTENSIONS: ['jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp'],
@@ -245,25 +248,29 @@ $.widget("koowa.koowaUploader", {
 		this.element.id = this.element.attr('id');
 		this.element.addClass('k-upload');
 
-		this.templates = {
-			'file-single':   $('.js-file-single-template').text(),
-			'file-multiple': $('.js-file-multiple-template').text(),
-			'upload-pending': $('.js-upload-pending-template').text(),
-			'upload-uploading': $('.js-upload-uploading-template').text(),
-			'upload-finished': $('.js-upload-finished-template').text(),
-			'upload-empty-single': $('.js-upload-empty-single-template').text(),
-			'upload-empty-multiple': $('.js-upload-empty-multiple-template').text()
-		};
+		$('.js-uploader-template').each(function(i, el) {
+			var $el = $(el),
+				name = $el.data('name');
 
-		var suffix = this.options.multi_selection ? 'multiple' : 'single';
+			self.options.templates[name] = $el;
+		});
+console.log(self.options.templates);
+		/*this.options.templates = {
+			'file-single':   $('.js-file-single-template'),
+			'file-multiple': $('.js-file-multiple-template'),
+			'upload-pending': $('.js-upload-pending-template'),
+			'upload-uploading': $('.js-upload-uploading-template'),
+			'upload-finished': $('.js-upload-finished-template'),
+			'upload-empty-single': $('.js-upload-empty-single-template'),
+			'upload-empty-multiple': $('.js-upload-empty-multiple-template')
+		};*/
 
-		$('.js-content', this.element).html(this._renderTemplate('upload-empty-'+suffix));
+		var selection = this.options.multi_selection ? 'multiple' : 'single';
 
-		// file template
-		this.file_template = 'file-'+suffix;
+		$('.js-content', this.element).html(this._renderTemplate('empty-'+selection));
 
 		// list of files
-		this.filelist = $(suffix == 'single' ? '.js-content' : '.js-filelist-multiple', this.element)
+		this.filelist = $(selection == 'single' ? '.js-content' : '.js-filelist-multiple', this.element)
 			.attr({
 				id: id + '_filelist',
 				unselectable: 'on'
@@ -991,7 +998,7 @@ $.widget("koowa.koowaUploader", {
 
 		if (this.options.multi_selection) {
 			if (plupload.STARTED === up.state) {
-				template = 'upload-uploading';
+				template = 'uploading';
 			}
 			else if (up.total.percent == 100) {
 				template = 'upload-finished';
@@ -1003,7 +1010,6 @@ $.widget("koowa.koowaUploader", {
 			}
 
 			if (template) {
-				console.log(up.total);
 				html = this._renderTemplate(template, {
 					'percent' : up.total.percent,
 					'size'    : plupload.formatSize(up.total.size),
@@ -1020,10 +1026,11 @@ $.widget("koowa.koowaUploader", {
 
 	_renderTemplate: function(template, data) {
 		if (typeof this.template_cache[template] === 'undefined') {
-			var source = this.templates[template];
+			var source = this.options.templates[template];
 
 			if (source instanceof $) {
 				source = source.text();
+
 			}
 			else if (typeof source === 'function') {
 				source = source();
@@ -1044,10 +1051,10 @@ $.widget("koowa.koowaUploader", {
 		}
 
 		$.each(files, function(i, file) {
-			var ext = o.Mime.getFileExtension(file.name) || 'none';
+			var template = self.options.multi_selection ? 'multiple-files' : 'single-file';
 
-			html += self._renderTemplate(self.file_template, {
-				'ext'  : ext,
+			html += self._renderTemplate(template, {
+				'ext'  : o.Mime.getFileExtension(file.name) || '',
 				'size' : plupload.formatSize(file.size),
 				'name' : file.name,
 				'id'   : file.id
