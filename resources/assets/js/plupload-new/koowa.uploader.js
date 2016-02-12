@@ -256,6 +256,13 @@ $.widget("koowa.koowaUploader", {
 			}
 		});
 
+		var html = this._renderTemplate('content-box');
+		html += this._renderTemplate('error-box');
+		html += this._renderTemplate('info-box');
+		html += this._renderTemplate('progress-bar');
+
+		this.element.html(html);
+
 		var selection = this.options.multi_selection ? 'multiple' : 'single';
 
 		$('.js-content', this.element).html(this._renderTemplate('empty-'+selection));
