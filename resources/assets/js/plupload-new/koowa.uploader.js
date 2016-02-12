@@ -227,7 +227,6 @@ $.widget("koowa.koowaUploader", {
 		preinit: {},
 
 		templates: {}
-
 	},
 
 	IMAGE_EXTENSIONS: ['jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp'],
@@ -252,18 +251,10 @@ $.widget("koowa.koowaUploader", {
 			var $el = $(el),
 				name = $el.data('name');
 
-			self.options.templates[name] = $el;
+			if (typeof self.options.templates[name] === 'undefined') {
+				self.options.templates[name] = $el;
+			}
 		});
-console.log(self.options.templates);
-		/*this.options.templates = {
-			'file-single':   $('.js-file-single-template'),
-			'file-multiple': $('.js-file-multiple-template'),
-			'upload-pending': $('.js-upload-pending-template'),
-			'upload-uploading': $('.js-upload-uploading-template'),
-			'upload-finished': $('.js-upload-finished-template'),
-			'upload-empty-single': $('.js-upload-empty-single-template'),
-			'upload-empty-multiple': $('.js-upload-empty-multiple-template')
-		};*/
 
 		var selection = this.options.multi_selection ? 'multiple' : 'single';
 
