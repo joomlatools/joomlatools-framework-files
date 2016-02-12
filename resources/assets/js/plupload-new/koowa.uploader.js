@@ -193,6 +193,8 @@ $.widget("koowa.koowaUploader", {
 
 	contents_bak: '',
 
+	template_cache: {},
+
 	options: {
 		filters: {
 			prevent_duplicates: true,
@@ -241,6 +243,7 @@ $.widget("koowa.koowaUploader", {
 		// backup the elements initial state
 		this.contents_bak = this.element.html();
 		this.element.id = this.element.attr('id');
+		this.element.addClass('k-upload');
 
 		this.templates = {
 			'file-single':   $('.js-file-single-template').text(),
@@ -254,10 +257,10 @@ $.widget("koowa.koowaUploader", {
 
 		var suffix = this.options.multi_selection ? 'multiple' : 'single';
 
-		$('.js-content', this.element).html(this._renderTemplate(this.templates['upload-empty-'+suffix]));
+		$('.js-content', this.element).html(this._renderTemplate('upload-empty-'+suffix));
 
 		// file template
-		this.file_template = this.templates['file-'+suffix];
+		this.file_template = 'file-'+suffix;
 
 		// list of files
 		this.filelist = $(suffix == 'single' ? '.js-content' : '.js-filelist-multiple', this.element)
@@ -272,28 +275,33 @@ $.widget("koowa.koowaUploader", {
 		this.start_button = $('.js-start-upload', this.element).attr('id', id + '_start')
 			.hide();
 
-		this.clear_button = $('.js-clear-queue', this.element).click(function(event) {
-			event.preventDefault();
+		this._on({
+			'click .js-clear-queue': function(event) {
+				event.preventDefault();
 
-			self.clearQueue();
-		});
+				self.clearQueue();
+			},
+			'click .js-open-info': function(event) {
+				event.preventDefault();
 
-		this.element.on('click', '.js-open-info', function() {
-			$('.k-upload').toggleClass('has-open-info');
-		}).on('click', '.js-remove-file', function() {
-			$(this).closest('tr').children('td').slideUp('fast');
+				self.element.toggleClass('has-open-info');
+			},
+			'click .js-remove-file': function(event) {
+				event.preventDefault();
+
+				$(this).closest('tr').children('td').slideUp('fast');
+			},
+			'click .js-close-error': function(event) {
+				event.preventDefault();
+
+				self.element.removeClass('has-error');
+			}
 		});
 
 		this.browse_button.data('caption-original', this.browse_button.text());
 
 		// progressbar
 		this.progressbar = $('.bar', this.element);
-
-		// error message
-		this.message = $('.k-upload__body-message', this.element);
-		this.message.find('button').click(function() {
-			self.element.removeClass('has-error');
-		});
 
 		if (this.options.container) {
 			var container = this.options.container;
@@ -596,8 +604,11 @@ $.widget("koowa.koowaUploader", {
 
 				self.progressbar.removeClass('bar-success').addClass('bar-danger');
 
-				file.status = plupload.FAILED;
 				file.error_message = error;
+				file.status = plupload.FAILED;
+
+				uploader.total.uploaded -= 1;
+				uploader.total.failed += 1;
 
 				uploader.stop();
 			}
@@ -810,7 +821,7 @@ $.widget("koowa.koowaUploader", {
 	*/
 	notify: function(type, message) {
 		this.element.addClass('has-error');
-		this.message.find('.k-upload__message__body').html(message);
+		this.element.find('.js-message-body').html(message);
 	},
 
 
@@ -967,7 +978,7 @@ $.widget("koowa.koowaUploader", {
 
 
 	_updateTotalProgress: function() {
-		var up = this.uploader;
+		var up = this.uploader, html = '', template;
 
 		// Scroll to end of file list
 		//this.filelist[0].scrollTop = this.filelist[0].scrollHeight;
@@ -979,55 +990,49 @@ $.widget("koowa.koowaUploader", {
 		}
 
 		if (this.options.multi_selection) {
-			var template = '';
-
 			if (plupload.STARTED === up.state) {
-				template = this.templates['upload-uploading'];
+				template = 'upload-uploading';
 			}
 			else if (up.total.percent == 100) {
-				template = this.templates['upload-finished'];
+				template = 'upload-finished';
 			}
 			else if (up.files.length) {
-				template = this.templates['upload-pending'];
+				template = 'upload-pending';
 			} else {
-				template = this.options.multi_selection ? this.templates['upload-empty-multiple'] : this.templates['upload-empty-single'];
+				template = this.options.multi_selection ? 'upload-empty-multiple' : 'upload-empty-single';
 			}
 
-			var html = this._renderTemplate(template, {
-				'percent' : up.total.percent,
-				'size'    : plupload.formatSize(up.total.size),
-				'uploaded': up.total.uploaded,
-				'total'   : up.files.length,
-				'remaining': (up.files.length - (up.total.uploaded + up.total.failed)),
-				'failed'  : up.total.failed
-			});
+			if (template) {
+				console.log(up.total);
+				html = this._renderTemplate(template, {
+					'percent' : up.total.percent,
+					'size'    : plupload.formatSize(up.total.size),
+					'uploaded': up.total.uploaded,
+					'total'   : up.files.length,
+					'remaining': (up.files.length - (up.total.uploaded + up.total.failed)),
+					'failed'  : up.total.failed
+				});
+			}
 
 			$('.js-content', this.element).html(html);
 		}
 	},
 
-	_renderTemplate: function(template, replacements, fallback) {
-		var html, replacement, self = this;
+	_renderTemplate: function(template, data) {
+		if (typeof this.template_cache[template] === 'undefined') {
+			var source = this.templates[template];
 
-		if (!fallback) {
-			fallback = self.uploader;
+			if (source instanceof $) {
+				source = source.text();
+			}
+			else if (typeof source === 'function') {
+				source = source();
+			}
+
+			this.template_cache[template] = doT.template(source);
 		}
 
-		html = template.replace(/\{(\w+)\}/g, function($0, $1) {
-			if (replacements.hasOwnProperty($1)) {
-				replacement = replacements[$1];
-			} else {
-				replacement = fallback[$1] || '';
-			}
-
-			if (typeof replacement === 'function') {
-				replacement = replacement($0, $1);
-			}
-
-			return replacement;
-		});
-
-		return html;
+		return this.template_cache[template](data);
 	},
 
 
@@ -1043,8 +1048,10 @@ $.widget("koowa.koowaUploader", {
 
 			html += self._renderTemplate(self.file_template, {
 				'ext'  : ext,
-				'size' : plupload.formatSize(file.size)
-			}, file);
+				'size' : plupload.formatSize(file.size),
+				'name' : file.name,
+				'id'   : file.id
+			});
 		});
 
 		if (!self.options.multi_selection) {
