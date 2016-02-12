@@ -58,13 +58,6 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
                 .getParent().setStyle('display', 'none');
         });
 
-        app.addEvent('uploadFile', function(row)
-        {
-            app.grid.selected = row.path;
-
-            $('#attach-button').trigger('click');
-        });
-
         var onClickFile = function(e)
         {
             var row = document.id(e.target).getParent('.files-node').retrieve('row');
