@@ -958,16 +958,6 @@ $.widget("koowa.koowaUploader", {
 					scroller.scrollTop(scrollTop + rowOffset - scrollerHeight);
 				}
 
-				// Set file specific progress
-				$file
-					.find('.plupload_file_percent')
-					.html(file.percent + '%')
-					.end()
-					.find('.plupload_file_progress')
-					.css('width', file.percent + '%')
-					.end()
-					.find('.plupload_file_size')
-					.html(plupload.formatSize(file.size));
 				break;
 		}
 
@@ -1058,7 +1048,7 @@ $.widget("koowa.koowaUploader", {
 
 			html += self.renderTemplate(template, {
 				'ext'  : o.Mime.getFileExtension(file.name) || '',
-				'size' : plupload.formatSize(file.size),
+				'size' : file.size ? plupload.formatSize(file.size) : '',
 				'name' : file.name,
 				'id'   : file.id,
 				'file' : file,

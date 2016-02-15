@@ -20,7 +20,7 @@ $.widget('koowa.koowaUploader', $.koowa.koowaUploader, {
             uploader = data.uploader;
 
         $.each(uploader.files, function (i, file) {
-            if (file.loaded == 0) {
+            if (file.loaded == 0 && file.status != plupload.DONE) {
                 names.push(file.name);
             }
         });
