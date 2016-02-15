@@ -98,6 +98,20 @@ class ComFilesDatabaseBehaviorAttachable extends KDatabaseBehaviorAbstract
             $attachments = $model->fetch();
         }
 
+        foreach ($attachments as $attachment)
+        {
+            $file = $attachment->file;
+
+            if (!$file->isNew())
+            {
+                $attachment->file = $file;
+
+                $thumbnail = $file->getThumbnail();
+
+                $attachment->thumbnail = !$thumbnail->isNew() ? $thumbnail->thumbnail : false;
+            }
+        }
+
         return $attachments;
     }
 
