@@ -128,17 +128,6 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
         return false;
     }
 
-    public function getPropertyThumbnail()
-    {
-        $thumbnail = null;
-
-        if ($this->isThumbnail()) {
-            $thumbnail = $this->getThumbnail();
-        }
-
-        return $thumbnail;
-    }
-
     public function getPropertyMetadata()
     {
         return $this->_adapter->getMetadata();
@@ -153,13 +142,8 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
 
 		$data['metadata'] = $this->metadata;
 
-		if ($this->isImage())
-        {
+		if ($this->isImage()) {
 			$data['type'] = 'image';
-            
-            if (isset($this->thumbnail)) {
-                $data['thumbnail'] = current($this->thumbnail->toArray());
-            }
 		}
 
         return $data;
