@@ -22,7 +22,20 @@ class ComFilesViewAttachmentsJson extends ComFilesViewJson
     {
         $data = parent::_getEntity($entity);
 
-        $data['file']                  = $entity->file->toArray();
+        $file = $entity->file;
+
+        if (!$file->isNew())
+        {
+            if ($file->isThumbnail())
+            {
+                $thumbnail = $file->getThumbnail();
+
+                $data['thumbnail'] = !$thumbnail->isNew() ? $thumbnail->thumbnail : false;
+            }
+
+            $data['file'] = $file->toArray();
+        }
+
         $data['created_on_timestamp']  = strtotime($entity->created_on);
         $data['attached_on_timestamp'] = strtotime($entity->attached_on);
 
