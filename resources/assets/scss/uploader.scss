@@ -7,6 +7,9 @@ $k-uploader-max-height: 200px !default;
 $k-uploader-progressbar-height: 3px !default;
 $k-uploader-transition-fast: all .2s ease-in-out !default;
 $k-uploader-transition-slow: all .4s ease-in-out !default;
+$k-uploader-querie: 600px !default;
+$k-uploader-list-button-mobile-size: 18px !default;
+$k-uploader-list-button-desktop-size: 23px !default;
 
 /**
  * Uploader
@@ -184,8 +187,7 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
   min-height: 60px; /* 3 */
   border-radius: 3px;
   background: white;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
+  border: 1px solid white;
   transition: $k-uploader-transition-fast;
 }
 
@@ -207,20 +209,26 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
  *
  * 1. "Drop files here" in larger font
  * 2. Set max-width to 0 for text-overflow: ellipsis to work properly
- * 3. Hide by default for non-drag-drop capable browsers
- * 4. Display as table-cell on drag-drop capable browser
+ * 3. Display as table-cell
  */
 
 .k-upload__content {
-  font-size: 20px; /* 1 */
+  font-size: 16px; /* 1 */
   max-width: 0; /* 2 */
-  display: none; /* 3 */
-  padding: 0 15px;
+  padding: 0 0 0 15px;
+  display: table-cell; /* 3 */
+
+  @media (min-width: $k-uploader-querie) {
+    font-size: 20px; /* 1 */
+  }
 }
 
-.has-dragdrop-support {
-  .k-upload__content {
-    display: table-cell; /* 4 */
+.has-dragdrop-supportz {
+  .k-upload__drop-message {
+    display: block;
+  }
+  .k-upload__select-message {
+    display: none;
   }
 }
 
@@ -263,6 +271,8 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
   width: 1%; /* 2 */
   white-space: nowrap; /* 3 */
   padding-right: 15px;
+  padding-left: 15px;
+  text-align: right;
 }
 
 
@@ -300,7 +310,11 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
 .k-upload__button {
   border: 1px solid #ddd;
   background: white;
-  padding: 5px 10px;
+  padding: 4px 8px;
+
+  @media (min-width: $k-uploader-querie) {
+    padding: 5px 10px;
+  }
 
   &:focus,
   &:hover {
@@ -532,12 +546,24 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
     margin: 0;
     padding: 0;
     font-size: 14px;
+    margin-top: 21px;
+
+    @media (min-width: $k-uploader-querie) {
+      margin-top: 0;
+    }
   }
 
   th, td {
+    position: relative;
     text-align: left;
     white-space: nowrap;
     padding: 2px 5px;
+  }
+
+  .k-uploader__clear-queue {
+    position: absolute;
+    top: -20px;
+    left: 0;
   }
 }
 
@@ -612,9 +638,9 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
   font-size: 12px;
   color: #555;
   display: block;
-  width: 14px;
-  height: 14px;
-  line-height: 12px;
+  width: $k-uploader-list-button-mobile-size;
+  height: $k-uploader-list-button-mobile-size;
+  line-height: $k-uploader-list-button-mobile-size - 2px;
   overflow: hidden;
   text-align: center;
   transition: $k-uploader-transition-fast;
@@ -628,12 +654,12 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
     text-decoration: none;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: $k-uploader-querie) {
     width: 100%;
     overflow: auto;
     padding: 0 5px;
-    height: 22px;
-    line-height: 20px;
+    height: $k-uploader-list-button-desktop-size;
+    line-height: $k-uploader-list-button-desktop-size - 2px;
   }
 }
 
@@ -649,6 +675,7 @@ $k-uploader-transition-slow: all .4s ease-in-out !default;
 
 .k-upload__drop-message {
   transition: $k-uploader-transition-fast;
+  display: none;
 }
 
 .k-upload__content {
@@ -698,10 +725,10 @@ td.k-upload__file-status-wrapper {
   font-size: 12px;
   color: white;
   display: block;
-  width: 14px;
+  width: $k-uploader-list-button-mobile-size;
   height: 0;
   overflow: hidden;
-  padding-top: 14px;
+  padding-top: $k-uploader-list-button-mobile-size;
   text-align: center;
   transition: $k-uploader-transition-slow;
 
@@ -709,14 +736,18 @@ td.k-upload__file-status-wrapper {
     width: 100%;
     overflow: auto;
     padding: 0 5px;
-    height: 22px;
-    line-height: 22px;
+    height: $k-uploader-list-button-desktop-size;
+    line-height: $k-uploader-list-button-desktop-size;
   }
 }
 
 .k-upload__file-status.is-in-queue {
   background: #95a5a6;
-  min-width: 80px;
+  min-width: $k-uploader-list-button-mobile-size;
+
+  @media (min-width: $k-uploader-querie) {
+    min-width: 80px;
+  }
 }
 
 .k-upload__file-status.is-uploading {
@@ -749,5 +780,13 @@ th.k-upload__clear-queue {
 
   a {
     font-weight: normal;
+  }
+}
+
+.k-hidden-mobile {
+  display: none;
+
+  @media (min-width: $k-uploader-querie) {
+    display: inline-block;
   }
 }
