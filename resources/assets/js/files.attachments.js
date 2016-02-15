@@ -44,8 +44,7 @@
                         var data = {
                             url: attachment.url,
                             name: this.escape(attachment.name),
-                            type: attachment.type,
-                            thumbnail: attachment.thumbnail ? attachment.thumbnail.thumbnail : null
+                            thumbnail: attachment.thumbnail ? attachment.thumbnail : null
                         }
 
                         output = new EJS({element: template.get(0)}).render(data);

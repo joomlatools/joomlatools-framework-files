@@ -97,8 +97,8 @@ Files.Attachments.App = new Class({
 
                 copy.render('attachments').inject(that.attachments.preview);
 
-                if (copy.file.thumbnail) {
-                    that.attachments.preview.getElement('img').set('src', copy.file.thumbnail.thumbnail).show();
+                if (copy.thumbnail) {
+                    that.attachments.preview.getElement('img').set('src', copy.thumbnail).show();
                 }
             },
             'onBeforeRenderObject': function(context) {
