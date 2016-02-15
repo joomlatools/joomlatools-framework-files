@@ -519,7 +519,7 @@ $.widget("koowa.koowaUploader", {
 				self._enableRenaming();
 			}
 
-			if (self.options.dragdrop && up.features.dragdrop) {
+			if (self.options.dragdrop && up.features.dragdrop && o.Env.os !== 'iOS') {
 				var addHoverClass = function() {
 					self.element.addClass("has-drag-hover");
 				}, removeHoverClass = function() {
