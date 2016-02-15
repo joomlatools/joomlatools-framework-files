@@ -564,6 +564,12 @@ $k-uploader-list-button-desktop-size: 23px !default;
     position: absolute;
     top: -20px;
     left: 0;
+
+    @media (min-width: $k-uploader-querie) {
+      position: static;
+      top: auto;
+      left: auto;
+    }
   }
 }
 
@@ -787,6 +793,6 @@ th.k-upload__clear-queue {
   display: none;
 
   @media (min-width: $k-uploader-querie) {
-    display: inline-block;
+    display: inline;
   }
 }
