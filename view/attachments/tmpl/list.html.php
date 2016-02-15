@@ -34,31 +34,31 @@
                 context.data.attachment = context.attachment;
             };
 
-            var render = function (file) {
+            var render = function (attachment) {
                 var images = $('#attachments-images');
                 var files = $('#attachments-files');
 
                 var url = "<?= route('view=file&routed=1&name={name}', true, false) ?>";
 
-                file.url = Attachments.replace(url, {name: file.name});
+                attachment.url = Attachments.replace(url, {name: attachment.name});
 
-                var output = Attachments.render(file);
+                var output = Attachments.render(attachment);
 
-                if (file.type == 'image') {
+                if (attachment.thumbnail) {
                     output = $(output).appendTo(images)
                     $('a.koowa-modal', output).magnificPopup({'type': 'image'});
                 }
                 else output = $(output).appendTo(files);
 
                 $('.delete', output).click(function () {
-                    Attachments.detach(file.name);
+                    Attachments.detach(attachment.name);
                     $(this).closest('.attachment').remove();
                 });
             };
 
             Attachments.bind('after.attach', function (event, context)
             {
-                var url = "<?= route('view=files&thumbnails=1&routed=1&name={name}&format=json', true, false) ?>";
+                var url = "<?= route('view=attachments&name={name}&format=json', true, false) ?>";
 
                 $.ajax({
                     url: Attachments.replace(url, {name: context.attachment}),
@@ -68,18 +68,10 @@
                 });
             });
 
-            <?
-                $files = array();
+            var attachments = <?= json_encode(array_values($entity->getAttachments()->toArray())) ?>;
 
-                foreach ($entity->getAttachments() as $attachment):
-                        $files[] = $attachment->file->toArray();
-                endforeach;
-            ?>
-
-            var files = <?= json_encode($files) ?>;
-
-            $.each(files, function (idx, file) {
-                render(file);
+            $.each(attachments, function (idx, attachment) {
+                render(attachment);
             });
         });
     </script>
@@ -91,7 +83,7 @@
 
     <!-- Attachment template begin -->
     <textarea style="display: none" id="attachment-template">
-        [% if (type == 'image') { %]
+        [% if (thumbnail) { %]
         <div class="attachment attachment--thumbnail">
             <a class="koowa-modal mfp-iframe" href="[%=url%]">
                 <img src="[%=thumbnail%]" />
