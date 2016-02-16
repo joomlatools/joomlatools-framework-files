@@ -84,6 +84,10 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
             self::$_loaded['uploader'] = true;
         }
 
+        if (is_object($config->options->url)) {
+            $config->options->url = (string) $config->options->url;
+        }
+
         $html .= '<script>
             kQuery(function($){
                 $("'.$config->selector.'").uploader('.$config->options.');
