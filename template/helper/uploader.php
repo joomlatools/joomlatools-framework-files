@@ -58,6 +58,9 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
         $config = new KObjectConfigJson($config);
         $config->append(array(
             'element'   => null,
+            'attributes' => array(
+                'class' => array('k-upload')
+            ),
             'options'   => array(
                 'url'       => null,
                 'multipart_params' => array(
@@ -87,10 +90,16 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
             });</script>';
 
         if ($config->element) {
-            $element = $config->element;
-            $attribute = $element[0] === '#' ? 'id' : 'class';
+            $element    = $config->element;
+            $attributes = $config->attributes->toArray();
 
-            $html .= sprintf('<div %s="%s"></div>', $attribute, substr($element, 1));
+            if ($element[0] === '#') {
+                $attributes['id'] = substr($element, 1);
+            } else {
+                $attributes['class'][] = substr($element, 1);
+            }
+
+            $html .= sprintf('<div %s></div>', $this->buildAttributes($attributes));
         }
 
         return $html;
