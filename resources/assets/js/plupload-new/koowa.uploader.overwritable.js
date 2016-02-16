@@ -1,15 +1,15 @@
 (function($) {
 
 /**
- * Adds file overwrite support to koowaUploader
+ * Adds file overwrite support to uploader
  */
-$.widget('koowa.koowaUploader', $.koowa.koowaUploader, {
+$.widget('koowa.uploader', $.koowa.uploader, {
     _init: function() {
         var result = this._super();
 
         if (this.options.check_duplicates) {
             this._on({
-                'koowauploaderbeforestart': this._handleBeforeStart
+                'uploader:beforestart': this._handleBeforeStart
             });
         }
 

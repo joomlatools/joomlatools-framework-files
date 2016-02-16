@@ -26,7 +26,7 @@ To use the widget you must include _jQuery_ and _jQuery UI_ `ui.widget`.
 	</div>
 
 	<script>
-		$('#uploader').koowaUploader({
+		$('#uploader').uploader({
 			url : '../upload.php',
 			filters : [
 				{title : "Image files", extensions : "jpg,gif,png"}
@@ -36,15 +36,15 @@ To use the widget you must include _jQuery_ and _jQuery UI_ `ui.widget`.
 
 @example
 	// Invoking methods:
-	$('#uploader').koowaUploader(options);
+	$('#uploader').uploader(options);
 
 	// Display welcome message in the notification area
-	$('#uploader').koowaUploader('notify', 'info', "This might be obvious, but you need to click 'Add Files' to add some files.");
+	$('#uploader').uploader('notify', 'info', "This might be obvious, but you need to click 'Add Files' to add some files.");
 
 @example
 	// Subscribing to the events...
 	// ... on initialization:
-	$('#uploader').koowaUploader({
+	$('#uploader').uploader({
 		...
 		viewchanged: function(event, args) {
 			// stuff ...
@@ -187,9 +187,9 @@ function _(str) {
 
 plupload.translate = function(str) { return _(str)};
 
-$.widget("koowa.koowaUploader", {
+$.widget("koowa.uploader", {
 
-	widgetEventPrefix: '',
+	widgetEventPrefix: 'uploader:',
 
 	contents_bak: '',
 
@@ -341,6 +341,10 @@ $.widget("koowa.koowaUploader", {
 
 		if (this.options.chunking) {
 			this.options.preinit.Init = this._setChunking;
+		}
+
+		if (!this.options.server_limit) {
+			this.options.server_limit = $.koowa.uploader.server_limit;
 		}
 
 		// initialize uploader instance
@@ -1103,5 +1107,7 @@ $.widget("koowa.koowaUploader", {
 		});
 	}
 });
+
+$.koowa.uploader.server_limit = 0;
 
 } (window, document, plupload, mOxie, kQuery));
