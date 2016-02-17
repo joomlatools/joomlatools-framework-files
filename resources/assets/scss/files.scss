@@ -1,22 +1,22 @@
 // Core variables and mixins
 // Core variables and mixins without output available outside .koowa scope
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/bootstrap/variables";
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/bootstrap/mixins";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/bootstrap/variables";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/bootstrap/mixins";
 
 // Path variable
 $koowaPath: '../../../koowa/com_koowa';
 
 // Import user interface
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/admin";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/admin";
 
 // Import icons
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/koowa/icons";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/koowa/icons";
 
 // Import Nooku
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/generic/mixins";
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/generic/general";
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/koowa";
-@import "../../../../koowa/code/media/koowa/com_koowa/scss/generic/dialog";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/mixins";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/general";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/koowa";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/dialog";
 
 @import "koowa/files";
 @import "koowa/attachments";
@@ -26,4 +26,7 @@ $koowaPath: '../../../koowa/com_koowa';
   @import "koowa/modal";
 }
 
-
+// Shame
+.koowa .koowa_dialog__menu a.koowa_dialog__menu__child--attachments {
+  width: 150px;
+}

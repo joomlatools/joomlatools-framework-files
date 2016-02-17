@@ -161,7 +161,7 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
         <a class="koowa_dialog__menu__child--files" <?= ($can_attach) ? '' : 'style="display: none";' ?>>
             <?= translate('Select'); ?>
         </a>
-        <a class="koowa_dialog__menu__child--attachments"><?= translate('Attachments'); ?></a>
+        <a class="koowa_dialog__menu__child--attachments"><?= translate('Attachments'); ?> <span>(22)</span></a>
     </div>
     <div class="koowa_dialog__layout">
         <div class="koowa_dialog__wrapper">
