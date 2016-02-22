@@ -67,7 +67,7 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
                     'csrf_token' => $this->getObject('user')->getSession()->getToken()
                 ),
                 'multi_selection' => false,
-                'autostart' =>  false
+                'autostart' =>  true
             )
         ))->append(array(
             'selector' => $config->element
