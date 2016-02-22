@@ -58,6 +58,22 @@
     max-height: 100%;
     overflow: hidden;
     vertical-align: top;
+
+    .koowa_dialog__title {
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+    }
+
+    .koowa_dialog__child__content {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      overflow: auto;
+    }
   }
 
   /* The lists can't be table cell but should be floating items instead */
@@ -89,8 +105,13 @@
   }
 
   .koowa_dialog__wrapper__child {
+    position: relative;
     width: 100%;
     border-left: none;
+  }
+
+  .koowa_dialog__doclink_insert {
+    position: absolute;
   }
 
   .koowa_dialog__child__content,
