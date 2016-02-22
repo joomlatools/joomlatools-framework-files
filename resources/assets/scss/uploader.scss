@@ -29,6 +29,7 @@ $k-uploader-list-button-desktop-size: 23px !default;
   border-radius: 3px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   margin-bottom: 20px;
+  min-height: $k-uploader-height;
   transition: $k-uploader-transition-fast;
 
   /* Loading message on top */
