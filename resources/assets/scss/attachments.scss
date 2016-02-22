@@ -1,0 +1,168 @@
+.koowa.com_files--attachments {
+  .koowa_dialog__layout {
+    padding-top: 0;
+  }
+
+  .koowa_dialog__child__content {
+    margin: 0;
+    padding-top: 0;
+  }
+
+  .koowa_dialog__doclink_insert {
+    text-align: right;
+  }
+
+
+  /* Add a top div to cover the whole modal except the selected file and insert areas */
+
+  .attachments-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 140px;
+    right: 0;
+    max-height: 100%;
+  }
+
+  /* Create a table so we can have table rows that stretch the full 100% height */
+
+  .attachments-table {
+    display: table;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* The first table row is for upload */
+
+  .attachments-upload {
+    height: 1%;
+    white-space: nowrap;
+    display: table-row;
+  }
+
+  /* Upload field */
+
+  .k-upload {
+    height: 60px;
+    background: #f5f5f5;
+    font-size: 1.25em;
+    padding: 20px;
+    color: #555;
+    border-bottom: 1px solid #CCCCCC;
+  }
+
+  /* Table row for the lists */
+
+  .attachments-lists {
+    display: table-row;
+    max-height: 100%;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  /* The lists can't be table cell but should be floating items instead */
+  .attachments-existing,
+  .attachments-files {
+    width: 50%;
+    height: 100%;
+    float: left;
+    overflow: auto;
+    max-height: 100%;
+  }
+
+  .attachments-existing {
+    border-right: 1px solid #ccc;
+  }
+
+  /* The selected file area */
+
+  .attachments-selected {
+    height: 100px;
+    background: #f5f5f5;
+    color: #555;
+    border-top: 1px solid #CCCCCC;
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    right: 0;
+    z-index: 15;
+  }
+
+  .koowa_dialog__wrapper__child {
+    width: 100%;
+    border-left: none;
+  }
+
+  .koowa_dialog__child__content,
+  .koowa_dialog__child__content__box {
+    height: auto;
+    min-height: 0;
+  }
+
+  .koowa_dialog {
+    #files-preview {
+      position: absolute;
+      top: 30px;
+      bottom: 0;
+      left: 0;
+      right: 100px;
+
+      .details {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 69px;
+
+        & > div {
+          padding: 1px;
+          height: 69px;
+          width: 69px;
+          overflow: hidden;
+          position: absolute;
+          top: 0;
+          left: -69px;
+          bottom: 0;
+
+          img {
+            max-height: 67px;
+          }
+        }
+
+        .table {
+          border-right: 1px solid #ccc;
+
+          td {
+            border-left: 1px solid #ccc;
+          }
+
+          tr:first-child {
+            display: none;
+          }
+
+          tr:nth-child(2) {
+            td {
+              border-top: none;
+            }
+          }
+        }
+      }
+    }
+
+    #attach-button-container {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      bottom: 0;
+      width: 100px;
+      padding: 20px 16px;
+      text-align: center;
+
+      button {
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+
+}

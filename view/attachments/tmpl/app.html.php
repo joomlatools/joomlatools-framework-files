@@ -14,6 +14,7 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
 <?= import('com:files.files.scripts.html'); ?>
 
 <ktml:script src="media://koowa/com_files/js/files.attachments.app.js" />
+<ktml:style src="media://koowa/com_files/css/attachments.css" />
 
 <script>
     Files.sitebase = '<?= $sitebase; ?>';
@@ -87,72 +88,143 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
         app.attachments.grid.addEvent('clickAttachment', onClickAttachment);
     });
 
-    kQuery(function($) {
-        var files_trigger = $('.koowa_dialog__menu__child--files'),
-            upload_trigger = $('.koowa_dialog__menu__child--upload'),
-            attachments_trigger = $('.koowa_dialog__menu__child--attachments'),
-            files_dialog = $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_attach'),
-            upload_dialog = $('.koowa_dialog__file_dialog_upload'),
-            attachments_dialog = $('.koowa_dialog__file_dialog_attachments, .koowa_dialog__file_dialog_detach');
+    // @TODO: this whole jQuery thing can be removed
 
-        // Set initially
-        if (<?= $can_attach ? 1 : 0 ?>) {
-            files_dialog.hide();
-            attachments_dialog.hide();
-            upload_trigger.addClass('active');
-        } else {
-            upload_dialog.hide();
-            files_dialog.hide();
-            attachments_trigger.addClass('active');
-        }
-
-        files_trigger.click(function() {
-            $(this).addClass('active')
-                .siblings().removeClass('active');
-
-            upload_dialog.hide();
-            attachments_dialog.hide();
-            files_dialog.show();
-        });
-
-        upload_trigger.click(function() {
-            $(this).addClass('active')
-                .siblings().removeClass('active');
-
-            files_dialog.hide();
-            attachments_dialog.hide();
-            upload_dialog.show();
-        });
-
-        attachments_trigger.click(function() {
-            $(this).addClass('active')
-                .siblings().removeClass('active');
-
-            files_dialog.hide();
-            upload_dialog.hide();
-            attachments_dialog.show();
-        });
-
-        // Scroll to upload or insert area after click
-        if ( $('body').width() <= '699' ) { // 699 is when colums go from stacked to aligned
-            upload_trigger.click(function() {
-                $('html, body').animate({
-                    scrollTop: upload_dialog.offset().top
-                }, 1000);
-            });
-
-            $('#files-grid').on('click', 'a.navigate', function() {
-                $('html, body').animate({
-                    scrollTop: '5000' // Scroll to highest amount so it will at least scroll to the bottom where the insert button is
-                }, 1000);
-            });
-        }
-    });
+//    kQuery(function($) {
+//        var files_trigger = $('.koowa_dialog__menu__child--files'),
+//            upload_trigger = $('.koowa_dialog__menu__child--upload'),
+//            attachments_trigger = $('.koowa_dialog__menu__child--attachments'),
+//            files_dialog = $('.koowa_dialog__file_dialog_files, .koowa_dialog__file_dialog_attach'),
+//            upload_dialog = $('.koowa_dialog__file_dialog_upload'),
+//            attachments_dialog = $('.koowa_dialog__file_dialog_attachments, .koowa_dialog__file_dialog_detach');
+//
+//        // Set initially
+//        if (<?//= $can_attach ? 1 : 0 ?>//) {
+//            files_dialog.hide();
+//            attachments_dialog.hide();
+//            upload_trigger.addClass('active');
+//        } else {
+//            upload_dialog.hide();
+//            files_dialog.hide();
+//            attachments_trigger.addClass('active');
+//        }
+//
+//        files_trigger.click(function() {
+//            $(this).addClass('active')
+//                .siblings().removeClass('active');
+//
+//            upload_dialog.hide();
+//            attachments_dialog.hide();
+//            files_dialog.show();
+//        });
+//
+//        upload_trigger.click(function() {
+//            $(this).addClass('active')
+//                .siblings().removeClass('active');
+//
+//            files_dialog.hide();
+//            attachments_dialog.hide();
+//            upload_dialog.show();
+//        });
+//
+//        attachments_trigger.click(function() {
+//            $(this).addClass('active')
+//                .siblings().removeClass('active');
+//
+//            files_dialog.hide();
+//            upload_dialog.hide();
+//            attachments_dialog.show();
+//        });
+//
+//        // Scroll to upload or insert area after click
+//        if ( $('body').width() <= '699' ) { // 699 is when colums go from stacked to aligned
+//            upload_trigger.click(function() {
+//                $('html, body').animate({
+//                    scrollTop: upload_dialog.offset().top
+//                }, 1000);
+//            });
+//
+//            $('#files-grid').on('click', 'a.navigate', function() {
+//                $('html, body').animate({
+//                    scrollTop: '5000' // Scroll to highest amount so it will at least scroll to the bottom where the insert button is
+//                }, 1000);
+//            });
+//        }
+//    });
 </script>
 
 <?= import('com:files.files.templates_compact.html');?>
 <?= import('com:files.attachments.app.templates');?>
 
+<? if ( 1 == 1 ) : ?>
+    <div class="koowa_dialog koowa_dialog--file_dialog">
+        <div class="koowa_dialog__layout">
+            <div class="koowa_dialog__wrapper">
+                <div class="attachments-top">
+                    <div class="attachments-table">
+                        <div class="attachments-upload">
+                            <div class="k-upload">Upload</div>
+                        </div>
+                        <div class="attachments-lists">
+                            <div class="attachments-existing">
+
+                                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_files">
+                                    <h2 class="koowa_dialog__title">
+                                        <?= translate('Select a file to attach'); ?>
+                                    </h2>
+                                    <div class="koowa_dialog__child__content koowa_spinner_container" id="files-spinner">
+                                        <div class="koowa_dialog__child__content__box">
+                                            <div id="files-grid" style="max-height:450px;">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="attachments-files">
+
+                                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_attachments">
+                                    <h2 class="koowa_dialog__title">
+                                        <?= translate('Attached files'); ?>
+                                    </h2>
+                                    <div class="koowa_dialog__child__content koowa_spinner_container" id="attachments-spinner">
+                                        <div class="koowa_dialog__child__content__box">
+                                            <div id="attachments-grid" style="max-height:450px;">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="attachments-selected">
+                    <h2 class="koowa_dialog__title">
+                        <?= translate('Selected file info'); ?>
+                    </h2>
+                    <div class="koowa_dialog__child__content">
+                        <div class="koowa_dialog__child__content__box">
+                            <div id="files-preview"></div>
+                            <div id="attach-button-container">
+                                <div style="display: none">
+                                    <button class="btn btn-primary" type="button" id="attach-button" disabled><?= translate('Attach') ?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="koowa_dialog__wrapper__child koowa_dialog__doclink_insert">
+                    <form class="form-horizontal" id="properties">
+                        <button type="button" id="insert-attachments" class="btn btn-primary input-append">Insert 12 attachments</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<? else :?>
 <div class="koowa_dialog koowa_dialog--file_dialog">
     <div class="koowa_dialog__menu koowa_dialog__menu--fullwidth">
         <a class="koowa_dialog__menu__child--upload" <?= ($can_attach) ? '' : 'style="display: none";' ?>>
@@ -232,3 +304,4 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
         </div>
     </div>
 </div>
+<? endif; ?>
