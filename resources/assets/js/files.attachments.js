@@ -41,13 +41,10 @@
 
                     if (template)
                     {
-                        var data = {
-                            url: attachment.url,
-                            name: this.escape(attachment.name),
-                            thumbnail: attachment.thumbnail ? attachment.thumbnail : null
-                        }
+                        attachment.name = this.escape(attachment.name);
+                        attachment.thumbnail = attachment.thumbnail || null;
 
-                        output = new EJS({element: template.get(0)}).render(data);
+                        output = new EJS({element: template.get(0)}).render(attachment);
                     }
 
                     return output;
