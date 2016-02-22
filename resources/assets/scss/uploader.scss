@@ -700,6 +700,7 @@ $k-uploader-list-button-desktop-size: 23px !default;
 }
 
 .k-upload.has-file {
+  .k-upload__files,
   .k-upload__drop-message {
     font-size: 14px;
     line-height: 21px;
