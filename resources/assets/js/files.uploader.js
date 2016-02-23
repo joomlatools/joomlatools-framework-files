@@ -10,7 +10,7 @@ if (!Files) var Files = {};
 
 (function($) {
 
-//We only want to run this once
+    //We only want to run this once
     var exposePlupload = function (uploader) {
         document.id('files-upload').addClass('uploader-files-queued').removeClass('uploader-files-empty');
         uploader.refresh();
@@ -152,25 +152,6 @@ if (!Files) var Files = {};
         uploader.bind('QueueChanged', exposePlupload);
     };
 
-    var getUniqueName = function (name, fileExists) {
-        // Get a unique file name by appending (1) (2) etc.
-        var i = 1,
-            extension = name.substr(name.lastIndexOf('.') + 1),
-            base = name.substr(0, name.lastIndexOf('.'));
-
-        while (true) {
-            name = base + ' (' + i + ').' + extension;
-
-            if (!fileExists(name)) {
-                break;
-            }
-
-            i++;
-        }
-
-        return name;
-    };
-
     Files.createUploader = function (options) {
         options = $.extend({}, {
             element: '#files-upload-multi',
@@ -258,7 +239,7 @@ if (!Files) var Files = {};
                     var chunk_size = Math.max(1048576, server_limit - 1048576);
 
                     if (chunk_size > 33554432) {
-                        chunk_size = 33554432; // use 512 mb chunks at the maximum
+                        chunk_size = 33554432; // use 32 mb chunks at the maximum
                     }
 
                     uploader.setOption('chunk_size', chunk_size);
@@ -291,6 +272,25 @@ if (!Files) var Files = {};
         var uploader = element.pluploadQueue();
 
         // Overwrite checker
+        var getUniqueName = function (name, fileExists) {
+            // Get a unique file name by appending (1) (2) etc.
+            var i = 1,
+                extension = name.substr(name.lastIndexOf('.') + 1),
+                base = name.substr(0, name.lastIndexOf('.'));
+
+            while (true) {
+                name = base + ' (' + i + ').' + extension;
+
+                if (!fileExists(name)) {
+                    break;
+                }
+
+                i++;
+            }
+
+            return name;
+        };
+
         var $start = $('.plupload_start', element),
             getNamesFromArray = function (array) {
                 var results = [];
