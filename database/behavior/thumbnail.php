@@ -58,12 +58,14 @@ class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
         return $result;
     }
 
-    public function deleteThumbnail()
+    public function deleteThumbnail(KDatabaseContext $context)
     {
+        $entity = $context->getSubject();
+
         $thumb = $this->getObject('com:files.model.thumbnails')
-            ->container($this->container)
-            ->folder($this->folder)
-            ->filename($this->name)
+            ->container($entity->container)
+            ->folder($entity->folder)
+            ->filename($entity->name)
             ->fetch();
 
         $result = $thumb->delete();
