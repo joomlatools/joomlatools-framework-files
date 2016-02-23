@@ -44,13 +44,13 @@ $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
 
 <ktml:style src="media://koowa/com_files/css/uploader.css" />
 
-<ktml:script src="media://koowa/com_files/js/plupload-new/moxie.js" />
-<ktml:script src="media://koowa/com_files/js/plupload-new/plupload.dev.js" />
-<!--<ktml:script src="media://koowa/com_files/js/plupload-new/plupload.full.min.js" />-->
-<ktml:script src="media://koowa/com_files/js/plupload-new/jquery-ui.js" />
-<ktml:script src="media://koowa/com_files/js/plupload-new/dot.js" />
-<ktml:script src="media://koowa/com_files/js/plupload-new/koowa.uploader.js" />
-<ktml:script src="media://koowa/com_files/js/plupload-new/koowa.uploader.overwritable.js" />
+<!--<ktml:script src="media://koowa/com_files/js/uploader/moxie.js" />
+<ktml:script src="media://koowa/com_files/js/uploader/plupload.dev.js" />-->
+<ktml:script src="media://koowa/com_files/js/uploader/plupload.full.min.js" />
+<ktml:script src="media://koowa/com_files/js/uploader/jquery-ui.js" />
+<ktml:script src="media://koowa/com_files/js/uploader/dot.js" />
+<ktml:script src="media://koowa/com_files/js/uploader/koowa.uploader.js" />
+<ktml:script src="media://koowa/com_files/js/uploader/koowa.uploader.overwritable.js" />
 
 <script>
 kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
