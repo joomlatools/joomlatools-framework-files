@@ -177,6 +177,15 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 		return (bool) $result;
 	}
 
+  public function readExifData()
+	{
+  		if ($this->_handle->isReadable()) {
+  		    return exif_read_data($this->_path, 'IFD0');
+  		}
+
+  		return;
+	}
+
 	public function exists()
 	{
 		return is_file($this->_path);
