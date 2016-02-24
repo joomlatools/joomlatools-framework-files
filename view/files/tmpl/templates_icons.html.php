@@ -64,14 +64,13 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
     			<a href="#" class="navigate koowa_icon--folder koowa_icon--48"></a>
     	</div>
-    	<div class="files-icons-controls">
-    	<div class="controls" style="display:none">
-    		<input type="checkbox" class="files-select" value="" />
-    	</div>
-    	<div class="ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-    		[%=name%]
-    	</div>
-    	</div>
+
+        <div class="files-icons-controls">
+            <label class="checkbox ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
+                <input type="checkbox" class="files-select" />[%=name%]
+            </label>
+        </div>
+
     </div>
 </div>
 </textarea>
@@ -95,14 +94,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     	 		data-filetype="[%=filetype%]"
     	 		data-extension="[%=metadata.extension%]"></a>
     	</div>
-    	<div class="files-icons-controls">
-    	<div class="controls" style="display:none">
-    		<input type="checkbox" class="files-select" value="" />
-    	</div>
-    	<div class="ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-    		[%=name%]
-    	</div>
-    	</div>
+
+        <div class="files-icons-controls">
+            <label class="checkbox ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
+                <input type="checkbox" class="files-select" />[%=name%]
+            </label>
+        </div>
     </div>
 </div>
 </textarea>
