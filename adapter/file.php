@@ -180,7 +180,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
   public function readExifData()
 	{
   		if ($this->_handle->isReadable()) {
-  		    return exif_read_data($this->_path, 'IFD0');
+  		    return @exif_read_data($this->_path, 'IFD0');
   		}
 
   		return;
