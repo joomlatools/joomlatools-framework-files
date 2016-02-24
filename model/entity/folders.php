@@ -55,10 +55,10 @@ class ComFilesModelEntityFolders extends ComFilesModelEntityNodes
             }
 
             if (!$node) {
-                throw new RuntimeException('Parent folder not found in the tree');
+                $this->insert($entity);
+            } else {
+                $node->insertChild($entity);
             }
-
-            $node->insertChild($entity);
         }
 
         $entity->removeProperty('hierarchy');
