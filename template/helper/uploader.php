@@ -66,7 +66,7 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
                 'multipart_params' => array(
                     'csrf_token' => $this->getObject('user')->getSession()->getToken()
                 ),
-                'multi_selection' => true,
+                'multi_selection' => false,
                 'autostart' =>  true
             )
         ))->append(array(
