@@ -652,6 +652,15 @@ $.widget("koowa.uploader", {
 
 			self._trigger('complete', null, { uploader: up, files: files } );
 		});
+
+		$(window).resize(function() {
+			var pos1 = $('.moxie-shim').position(),
+				pos2 = self.browse_button.position();
+
+			if (pos1 && pos2 && (Math.abs(pos1.left - pos2.left) > 2 || Math.abs(pos1.top - pos2.top) > 2)) {
+				uploader.refresh();
+			}
+		});
 	},
 
 
@@ -920,6 +929,9 @@ $.widget("koowa.uploader", {
 		} else {
 			button.addClass('disabled');
 		}
+
+		// re-position Moxie shim
+		this.getUploader().refresh();
 	},
 
 	_handleFileStatus: function(file) {
