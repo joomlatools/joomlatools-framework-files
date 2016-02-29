@@ -859,6 +859,7 @@ $.widget("koowa.uploader", {
 		// restore the elements initial state
 		this.element
 			.empty()
+			.removeClass('k-upload')
 			.html(this.contents_bak);
 		this.contents_bak = '';
 
