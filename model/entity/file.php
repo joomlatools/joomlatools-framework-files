@@ -133,6 +133,17 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
         return $this->_adapter->getMetadata();
     }
 
+		public function getPropertyExifComment()
+		{
+				if(!$this->isImage()){
+					 return false;
+				}
+
+				$exif = $this->_adapter->readExifData();
+
+				return isset($exif['COMMENT']) ? implode(' ', $exif['COMMENT']) : array();
+		}
+
     public function toArray()
     {
         $data = parent::toArray();

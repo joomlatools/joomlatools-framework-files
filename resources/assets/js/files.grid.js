@@ -77,8 +77,8 @@ Files.Grid = new Class({
 
 			that.checkNode(box.retrieve('row'));
 		};
-		this.container.addEvent('click:relay(div.imgOutline)', fireCheck.bind(this));
-        this.container.addEvent('click:relay(input.files-select)', fireCheck.bind(this));
+		//this.container.addEvent('click:relay(div.imgOutline)', fireCheck.bind(this));
+    this.container.addEvent('click:relay(input.files-select)', fireCheck.bind(this));
 
         // Check the box when user clicks on the row
         this.container.addEvent('click', function(event) {
@@ -156,7 +156,7 @@ Files.Grid = new Class({
 						if (el.checked) {
 							var box = el.getParent('.files-node-shadow') || el.getParent('.files-node'),
 								name = box.retrieve('row').name;
-							
+
 							if (el.getParent('.files-node').hasClass('files-folder')) {
 								folder_count++;
 								folders.push(name)
@@ -167,7 +167,7 @@ Files.Grid = new Class({
 							return true;
 						}
 					});
-				
+
 				var message = '';
 				// special case for single deletes
 				if (file_count+folder_count === 1) {
@@ -185,11 +185,11 @@ Files.Grid = new Class({
 					} else if (folder_count && !file_count) {
 						items = Koowa.translate('{count} folders');
 					}
-					
+
 					items   = items.replace('{count}', count);
 					message = message.replace('{items}', items);
 				}
-				
+
 				if (!checkboxes.length || !confirm(message)) {
 					return false;
 				}
