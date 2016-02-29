@@ -163,7 +163,10 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
                 <div class="attachments-top">
                     <div class="attachments-table">
                         <div class="attachments-upload">
-                            <div class="k-upload">Upload</div>
+                            <?= helper('uploader.container', array(
+                                'container' => 'fileman-attachments',
+                                'element' => '.fileman-attachments-uploader',
+                            )) ?>
                         </div>
                         <div class="attachments-lists">
                             <div class="attachments-existing">
