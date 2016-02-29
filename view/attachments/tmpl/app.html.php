@@ -153,6 +153,15 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
 //    });
 </script>
 
+<script>
+    kQuery(function($) {
+        $('.fileman-attachments-uploader').on('uploader:uploaded', function(uploader, file, result) {
+            // attach file
+        })
+    });
+
+</script>
+
 <?= import('com:files.files.templates_compact.html');?>
 <?= import('com:files.attachments.app.templates');?>
 
@@ -166,6 +175,10 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
                             <?= helper('uploader.container', array(
                                 'container' => 'fileman-attachments',
                                 'element' => '.fileman-attachments-uploader',
+                                'options'   => array(
+                                    'multi_selection' => true,
+                                    'url' => route('component=fileman&view=file&plupload=1&routed=1&format=json', false, false)
+                                )
                             )) ?>
                         </div>
                         <div class="attachments-lists">
