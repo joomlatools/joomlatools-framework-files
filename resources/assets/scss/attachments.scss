@@ -1,15 +1,28 @@
+/* ==========================================================================
+   Attachments
+   ========================================================================== */
+
+/**
+ * Attachments modal styling with included multi file uploader
+ *
+ * Namespaced so we win over the styling in default Nooku
+ */
+
 .koowa.com_files--attachments {
+
+
+  /* Reset top-padding, normally there for the tabs */
+
   .koowa_dialog__layout {
     padding-top: 0;
   }
 
+
+  /* Reset margin and padding, normally there for titles, but since these are longer titles we solved it another way */
+
   .koowa_dialog__child__content {
     margin: 0;
     padding-top: 0;
-  }
-
-  .koowa_dialog__doclink_insert {
-    text-align: right;
   }
 
 
@@ -22,7 +35,14 @@
     bottom: 140px;
     right: 0;
     max-height: 100%;
+
+
+    // @TODO: refactor so the <div> with these classes doesn't show up in the markup */
+    .full_height {
+      height: auto !important;
+    }
   }
+
 
   /* Create a table so we can have table rows that stretch the full 100% height */
 
@@ -32,7 +52,12 @@
     height: 100%;
   }
 
-  /* The first table row is for upload */
+
+  /**
+   * The first table row is for upload
+   *
+   * 1% height and nowrap so the other row(s) stretch all the way
+   */
 
   .attachments-upload {
     height: 1%;
@@ -40,43 +65,83 @@
     display: table-row;
   }
 
-  /* Upload field */
+
+  /**
+   * Upload field
+   *
+   * 1. Move 1 pixel back so drop highlight will light up all borders
+   * 2. Reset border-radius to fit in attachments view
+   * 3. High z-index to set upload on top of the rest
+   */
 
   .k-upload {
-    height: 60px;
-    background: #f5f5f5;
-    font-size: 1.25em;
-    padding: 20px;
-    color: #555;
-    border-bottom: 1px solid #CCCCCC;
+    margin: -1px -1px 0 -1px; /* 1 */
+    border-radius: 0; /* 2 */
+    z-index: 9; /* 3 */
   }
 
-  /* Table row for the lists */
+
+  /* Remove box-shadow which is only there to match other input fields in the form */
+
+  .k-upload__content-wrapper {
+    box-shadow: none;
+  }
+
+
+  /**
+   * Lists
+   *
+   * Table row for the `select files` and `attached files` lists
+   *
+   * 1. Max 100% height so we can have scrolling children
+   * 2. Hide overflowing content so we can have scrolling children
+   */
 
   .attachments-lists {
     display: table-row;
-    max-height: 100%;
-    overflow: hidden;
+    max-height: 100%; /* 1 */
+    overflow: hidden; /* 2 */
     vertical-align: top;
 
+
+    /**
+     * List title
+     *
+     * 1. Absolute positioned so content can have scrolling overflowing content
+     * 2. CSS text ellipsis overflow
+     */
+
     .koowa_dialog__title {
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
+      position: absolute; /* 1 */
+      top: 0; /* 1 */
+      right: 0; /* 1 */
+      left: 0; /* 1 */
+      overflow: hidden; /* 2 */
+      white-space: nowrap; /* 2 */
+      text-overflow: ellipsis; /* 2 */
     }
 
+
+    /**
+     * List content
+     *
+     * 1. Cover whole parent execept the title
+     * 2. scrollbars when overflowing
+     */
+
     .koowa_dialog__child__content {
-      position: absolute;
-      top: 30px;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      overflow: auto;
+      position: absolute; /* 1 */
+      top: 30px; /* 1 */
+      right: 0; /* 1 */
+      bottom: 0; /* 1 */
+      left: 0; /* 1 */
+      overflow: auto; /* 2 */
     }
   }
 
+
   /* The lists can't be table cell but should be floating items instead */
+
   .attachments-existing,
   .attachments-files {
     width: 50%;
@@ -86,19 +151,28 @@
     max-height: 100%;
   }
 
+
+  /* Separating the two lists */
+
   .attachments-existing {
     border-right: 1px solid #ccc;
   }
 
-  /* The selected file area */
+
+  /**
+   * The selected file area
+   *
+   * 1. Default set height
+   * 2. make room for the inset attachments button
+   */
 
   .attachments-selected {
-    height: 100px;
+    height: 100px; /* 1 */
     background: #f5f5f5;
     color: #555;
     border-top: 1px solid #CCCCCC;
     position: absolute;
-    bottom: 40px;
+    bottom: 40px; /* 2 */
     left: 0;
     right: 0;
     z-index: 15;
@@ -110,42 +184,68 @@
     border-left: none;
   }
 
-  .koowa_dialog__doclink_insert {
-    position: absolute;
-  }
-
   .koowa_dialog__child__content,
   .koowa_dialog__child__content__box {
     height: auto;
     min-height: 0;
   }
 
+
+  /**
+   * Preview area
+   *
+   * 1. Position to the bottom
+   * 2. Make room for the attach button on the right
+   */
+
   .koowa_dialog {
+
     #files-preview {
-      position: absolute;
-      top: 30px;
-      bottom: 0;
-      left: 0;
-      right: 100px;
+      position: absolute; /* 1 */
+      top: 30px; /* 1 */
+      bottom: 0; /* 1 */
+      left: 0; /* 1 */
+      right: 100px; /* 2 */
+
+
+      /**
+       * Details
+       *
+       * 1. Make room fo the image preview on the left
+       */
 
       .details {
         position: absolute;
         top: 0;
         right: 0;
         bottom: 0;
-        left: 69px;
+        left: 69px; /* 1 */
+
+
+        /**
+         * The preview image container
+         *
+         * 1. Add some padding to move image away from the borders
+         * 2. Square default max-size
+         * 3. Hide overflowing content when image doesnt fit
+         * 4. Move container 69px back from parent (which has 69px left)
+         */
 
         & > div {
-          padding: 1px;
-          height: 69px;
-          width: 69px;
-          overflow: hidden;
+          padding: 1px; /* 1 */
+          height: 69px; /* 2 */
+          width: 69px; /* 2 */
+          overflow: hidden; /* 3 */
           position: absolute;
           top: 0;
-          left: -69px;
+          left: -69px; /* 4 */
           bottom: 0;
 
+
+          /* Image max-width and max-height same as parent but minus the padding */
+
           img {
+            max-width: 67px;
             max-height: 67px;
           }
         }
@@ -157,6 +257,7 @@
             border-left: 1px solid #ccc;
           }
 
+          // @TODO: refactor so this row doesnt appear in the markup
           tr:first-child {
             display: none;
           }
@@ -170,8 +271,15 @@
       }
     }
 
+
+    /**
+     * The attach button
+     *
+     * 1. Position right of the details
+     */
+
     #attach-button-container {
-      position: absolute;
+      position: absolute; /* 1 */
       top: 30px;
       right: 0;
       bottom: 0;
@@ -186,4 +294,11 @@
     }
   }
 
+
+  /* Actually styling for doclink, borrowed here until we refactor the whole thing */
+
+  .koowa_dialog__doclink_insert {
+    text-align: right;
+    position: absolute;
+  }
 }
