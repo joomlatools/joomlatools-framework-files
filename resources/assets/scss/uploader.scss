@@ -65,7 +65,7 @@ $k-upload-list-button-desktop-size: 23px !default;
   /* Hide loading message on initializing */
   &.is-initialized {
     &:after {
-      z-index: 0;
+      z-index: -2;
       opacity: 0;
     }
   }
@@ -107,7 +107,7 @@ $k-upload-list-button-desktop-size: 23px !default;
  */
 
 .k-upload__body-default {
-  z-index: 2; /* 1 */
+  //z-index: 2; /* 1 */
   opacity: 1; /* 2 */
   min-height: $k-upload-height; /* 3 */
   max-height: $k-upload-height; /* 3 */
@@ -258,7 +258,8 @@ $k-upload-list-button-desktop-size: 23px !default;
   max-width: 0; /* 2 */
   padding: 0 0 0 15px;
   display: table-cell; /* 3 */
-  min-height: 42px;
+  height: 58px;
+  min-height: 58px;
   transition: all .8s ease-in-out;
 
   @media (min-width: $k-upload-querie) {
@@ -401,10 +402,21 @@ $k-upload-list-button-desktop-size: 23px !default;
     margin-left: 8px;
   }
 
-  /* Disabled buttons should be invisible */
-  &.disabled {
+  /* Disabled buttons should be invisible, but only after initializing */
+  @at-root .is-initialized &.disabled {
     display: none !important;
   }
+}
+
+
+/**
+ * Moxie shim button
+ *
+ * Always on top of the button container
+ */
+
+.moxie-shim {
+  z-index: 3;
 }
 
 
