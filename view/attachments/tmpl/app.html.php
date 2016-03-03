@@ -43,31 +43,17 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
 
         var app = Files.app;
 
-        app.attachments.grid.addEvent('afterDetachAttachment', function()
-        {
-            $('#attachments-preview').empty();
-
-            document.id('detach-button').set('disabled', true)
-                .getParent().setStyle('display', 'none');
-        });
-
-        app.addEvent('beforeNavigate', function()
-        {
-            $('#files-preview').empty();
-
-            document.id('attach-button').set('disabled', true)
-                .getParent().setStyle('display', 'none');
-        });
-
         var onClickFile = function(e)
         {
             var row = document.id(e.target).getParent('.files-node').retrieve('row');
 
             app.grid.selected = row.path;
 
+            $(app.attachments.grid.container).find('li.files-node').removeClass('active');
+
             if (app.attachments.permissions.attach) {
-                document.id('attach-button').set('disabled', false)
-                    .getParent().setStyle('display', 'block');
+                document.id('detach-button-container').setStyle('display', 'none');
+                document.id('attach-button-container').setStyle('display', 'block');
             }
         };
 
@@ -77,9 +63,11 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
 
             app.attachments.grid.selected = row.name;
 
+            $(app.grid.container).find('li.files-node').removeClass('active');
+
             if (app.attachments.permissions.detach) {
-                document.id('detach-button').set('disabled', false)
-                    .getParent().setStyle('display', 'block');
+                document.id('attach-button-container').setStyle('display', 'none');
+                document.id('detach-button-container').setStyle('display', 'block');
             }
         }
 
@@ -177,7 +165,8 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
                                 'element' => '.fileman-attachments-uploader',
                                 'options'   => array(
                                     'multi_selection' => true,
-                                    'url' => route('component=fileman&view=file&plupload=1&routed=1&format=json', false, false)
+                                    'url' => route('component=fileman&view=file&plupload=1&routed=1&format=json&container=' .
+                                                   (isset($container) ? $container->slug : ''), false, false)
                                 )
                             )) ?>
                         </div>
@@ -217,25 +206,21 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
                         </div>
                     </div>
                 </div>
-                <div class="attachments-selected">
+                <div id="preview" class="attachments-selected">
                     <h2 class="koowa_dialog__title">
                         <?= translate('Selected file info'); ?>
                     </h2>
                     <div class="koowa_dialog__child__content">
                         <div class="koowa_dialog__child__content__box">
                             <div id="files-preview"></div>
-                            <div id="attach-button-container">
-                                <div style="display: none">
-                                    <button class="btn btn-primary" type="button" id="attach-button" disabled><?= translate('Attach') ?></button>
-                                </div>
+                            <div id="attach-button-container" style="display: none">
+                                <button class="btn btn-primary" type="button" id="attach-button"><?= translate('Attach') ?></button>
+                            </div>
+                            <div id="detach-button-container" style="display: none">
+                                <button class="btn btn-danger" type="button" id="detach-button"><?= translate('Detach') ?></button>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="koowa_dialog__wrapper__child koowa_dialog__doclink_insert">
-                    <form class="form-horizontal" id="properties">
-                        <button type="button" id="insert-attachments" class="btn btn-primary input-append">Insert 12 attachments</button>
-                    </form>
                 </div>
             </div>
         </div>
@@ -290,33 +275,33 @@ $can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['
                         </div>
                     </div>
                 </div>
-            <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_attachments">
-                <h2 class="koowa_dialog__title">
-                    <?= translate('Attached files'); ?>
-                </h2>
-                <div class="koowa_dialog__child__content koowa_spinner_container" id="attachments-spinner">
-                    <div class="koowa_dialog__child__content__box">
-                        <div id="attachments-grid" style="max-height:450px;">
+                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_attachments">
+                    <h2 class="koowa_dialog__title">
+                        <?= translate('Attached files'); ?>
+                    </h2>
+                    <div class="koowa_dialog__child__content koowa_spinner_container" id="attachments-spinner">
+                        <div class="koowa_dialog__child__content__box">
+                            <div id="attachments-grid" style="max-height:450px;">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_detach koowa_dialog__file_dialog_detach--fullwidth">
-                <h2 class="koowa_dialog__title">
-                    <?= translate('Selected attachment info'); ?>
-                </h2>
-                <div class="koowa_dialog__child__content">
-                    <div class="koowa_dialog__child__content__box">
-                        <div id="attachments-preview"></div>
-                        <div id="detach-button-container">
-                            <div style="text-align: center; display: none">
-                                <button class="btn btn-danger" type="button" id="detach-button" disabled><?= translate('Detach') ?></button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_detach koowa_dialog__file_dialog_detach--fullwidth">
+                    <h2 class="koowa_dialog__title">
+                        <?= translate('Selected attachment info'); ?>
+                    </h2>
+                    <div class="koowa_dialog__child__content">
+                        <div class="koowa_dialog__child__content__box">
+                            <div id="attachments-preview"></div>
+                            <div id="detach-button-container">
+                                <div style="text-align: center; display: none">
+                                    <button class="btn btn-danger" type="button" id="detach-button" disabled><?= translate('Detach') ?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
