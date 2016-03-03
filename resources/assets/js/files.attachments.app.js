@@ -18,6 +18,7 @@ Files.Attachments.App = new Class({
         pathway: false,
         persistent: false,
         types: ['file', 'image'],
+        preview:  'files-preview',
         state: {
             defaults: {
                 limit: 0,
@@ -26,7 +27,6 @@ Files.Attachments.App = new Class({
         },
         grid: {
             spinner_container: 'files-spinner',
-            preview:  'files-preview',
             cookie: false,
             layout: 'compact',
             batch_delete: false
@@ -38,7 +38,6 @@ Files.Attachments.App = new Class({
             },
             grid: {
                 spinner_container: 'attachments-spinner',
-                preview: 'attachments-preview',
                 cookie: false,
                 layout: 'attachments',
                 element: 'attachments-grid'
@@ -61,7 +60,7 @@ Files.Attachments.App = new Class({
 
         this.setAttachmentsGrid();
 
-        this.preview = document.id(this.options.grid.preview);
+        this.preview = document.id(this.options.preview);
         this.attachments.preview = document.id(this.options.attachments.grid.preview);
 
         var app = this;
@@ -93,12 +92,12 @@ Files.Attachments.App = new Class({
                 var copy = Object.append({}, row);
                 copy.template = 'details_attachment';
 
-                that.attachments.preview.empty();
+                that.preview.empty();
 
-                copy.render('attachments').inject(that.attachments.preview);
+                copy.render('attachments').inject(that.preview);
 
                 if (copy.thumbnail) {
-                    that.attachments.preview.getElement('img').set('src', copy.thumbnail).show();
+                    that.preview.getElement('img').set('src', copy.thumbnail).show();
                 }
             },
             'onBeforeRenderObject': function(context) {
