@@ -278,7 +278,7 @@
      * 1. Position right of the details
      */
 
-    #attach-button-container {
+    #attach-button-container, #detach-button-container {
       position: absolute; /* 1 */
       top: 30px;
       right: 0;
