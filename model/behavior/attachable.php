@@ -22,18 +22,21 @@ class ComFilesModelBehaviorAttachable extends ComFilesModelBehaviorRelatable
     {
         parent::_beforeFetch($context);
 
-        $state = $context->getState();
-        $query = $context->query;
-
-        if ($state->table && $state->row)
+        if ($context->getName() != 'before.count')
         {
-            $query->join('users AS users', 'relations.created_by = users.id', 'LEFT');
+            $state = $context->getState();
+            $query = $context->query;
 
-            $query->columns(array(
-                'attached_by'      => 'relations.created_by',
-                'attached_on'      => 'relations.created_on',
-                'attached_by_name' => 'users.name'
-            ));
+            if ($state->table && $state->row)
+            {
+                $query->join('users AS users', 'relations.created_by = users.id', 'LEFT');
+
+                $query->columns(array(
+                    'attached_by'      => 'relations.created_by',
+                    'attached_on'      => 'relations.created_on',
+                    'attached_by_name' => 'users.name'
+                ));
+            }
         }
     }
 }
