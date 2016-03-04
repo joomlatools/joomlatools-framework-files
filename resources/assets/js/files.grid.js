@@ -11,6 +11,7 @@ if(!Files) var Files = {};
 Files.Grid = new Class({
 	Implements: [Events, Options],
 	layout: 'icons',
+	count: 0,
 	options: {
 		onClickFolder: function (){},
 		onClickFile: function (){},
@@ -339,6 +340,8 @@ Files.Grid = new Class({
 
 				this.nodes.erase(node.path);
 
+				this.count -= 1;
+
 				this.fireEvent('afterDeleteNode', {node: node});
 			}.bind(this),
 				failure = function(xhr) {
@@ -435,6 +438,8 @@ Files.Grid = new Class({
 			this.renderObject(object, position);
 
 			this.nodes.set(object.path, object);
+
+			this.count += 1;
 
 			this.fireEvent('afterInsertNode', {node: object, position: position});
 		}
