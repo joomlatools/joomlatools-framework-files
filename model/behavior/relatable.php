@@ -73,6 +73,18 @@ class ComFilesModelBehaviorRelatable extends KModelBehaviorAbstract
     }
 
     /**
+     * Before Count command handler.
+     *
+     * Adds joins and where statements.
+     *
+     * @param KModelContextInterface $context The context object.
+     */
+    protected function _beforeCount(KModelContextInterface $context)
+    {
+        $this->_beforeFetch($context); // Same as fetch.
+    }
+
+    /**
      * Insert the model states
      *
      * @param KObjectMixable $mixer
