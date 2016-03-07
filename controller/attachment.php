@@ -70,9 +70,21 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 
         if ($context->attachment->isNew())
         {
-            $controller = $this->getObject($this->getIdentifier());
-            $controller->getRequest()->getQuery()->container = $this->getRequest()->getQuery()->container;
-            $context->attachment = $controller->add(array('name' => $model->getState()->name));
+            $state = $model->getState();
+
+            $container = $this->getObject('com:files.model.containers')->id($state->container)->fetch();
+
+            $file = $this->getObject('com:files.model.files')->container($container->slug)->name($state->name)->fetch();
+
+            // Check if a file in the given container exists.
+            if (!$file->isNew())
+            {
+                // Create the attachment entry.
+                $controller = $this->getObject($this->getIdentifier());
+                $controller->getRequest()->getQuery()->container = $this->getRequest()->getQuery()->container;
+                $context->attachment = $controller->add(array('name' => $model->getState()->name));
+            }
+            else throw new RuntimeException('Attachment does not exists');
         }
     }
 
