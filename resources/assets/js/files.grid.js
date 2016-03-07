@@ -448,9 +448,11 @@ Files.Grid = new Class({
 	 * Insert multiple rows, possibly coming from a JSON request
 	 */
 	insertRows: function(rows) {
-		this.fireEvent('beforeInsertRows', {rows: rows});
+		var data = {rows: rows};
 
-        Object.each(rows, function(row) {
+		this.fireEvent('beforeInsertRows', data);
+
+        Object.each(data.rows, function(row) {
 			var cls = Files[row.type.capitalize()];
 			var item = new cls(row);
 			this.insert(item, 'last');
@@ -460,7 +462,7 @@ Files.Grid = new Class({
 			this.setIconSize(this.options.icon_size);
 		}
 
-		this.fireEvent('afterInsertRows', {rows: rows});
+		this.fireEvent('afterInsertRows', data);
 	},
 	renew: function() {
 		this.fireEvent('beforeRenew');
