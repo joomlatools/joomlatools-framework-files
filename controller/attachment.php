@@ -81,12 +81,11 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     protected function _actionAttach(KControllerContextInterface $context)
     {
         $model = $this->getModel()->getRelationsModel();
-
-        $data   = $context->getRequest()->getData();
+        $data  = $context->getRequest()->getData();
 
         $data[$context->identity_column] = $context->attachment->id;
 
-        $relation = $model->create($context->getRequest()->getData()->toArray());
+        $relation = $model->create($data->toArray());
 
         if (!$relation->save()) {
             throw new RuntimeException('Could not attach');
