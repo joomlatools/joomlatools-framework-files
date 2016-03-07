@@ -58,7 +58,9 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
      */
     protected function _beforeAttach(KControllerContextInterface $context)
     {
-        $column = $this->getModel()->getTable()->getIdentityColumn();
+        $model = $this->getModel();
+
+        $column = $model->getTable()->getIdentityColumn();
 
         $context->identity_column = $column;
 
@@ -66,8 +68,11 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
             $context->attachment = $this->getModel()->fetch();
         }
 
-        if ($context->attachment->isNew()) {
-            throw new RuntimeException('Attachment does not exists');
+        if ($context->attachment->isNew())
+        {
+            $controller = $this->getObject($this->getIdentifier());
+            $controller->getRequest()->getQuery()->container = $this->getRequest()->getQuery()->container;
+            $context->attachment = $controller->add(array('name' => $model->getState()->name));
         }
     }
 
