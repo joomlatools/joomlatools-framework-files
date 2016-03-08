@@ -1,38 +1,42 @@
 // Attachments
-.attachment--thumbnail {
+.attachments__image {
   margin: 0 12px 12px 0;
   float: left;
-  width: 130px;
   padding: 6px;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+
+  &--thumbnail {
+    width: 130px;
+    img {
+      border-radius: 4px 4px 0 0;
+    }
+  }
 }
 
-.attachment--thumbnail img {
-  border-radius: 4px 4px 0 0;
-}
-
-.attachment__caption {
+.attachments__caption {
   padding: 6px 0 0;
+
+  .label {
+    width: auto;
+    float: none;
+
+    &:after {
+      content: none;
+    }
+  }
 }
 
-.attachment__caption label {
-  width: auto;
-  float: none;
-}
-
-.attachment__caption label:after {
-  content: none;
-}
-
-.attachment__select, .attachments__files {
+.attachments__select {
   clear: both;
 }
 
-.button__group {
+.attachments__buttons {
   position: relative;
   display: inline-block;
   vertical-align: middle;
   white-space: nowrap;
 }
+
+
