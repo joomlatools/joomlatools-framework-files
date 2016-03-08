@@ -46,9 +46,9 @@
 
                 if (attachment.thumbnail) {
                     output = $(output).appendTo(images)
-                    $('a.koowa-modal', output).magnificPopup({'type': 'image'});
+                } else {
+                    output = $(output).appendTo(files);
                 }
-                else output = $(output).appendTo(files);
 
                 $('.delete', output).click(function () {
                     Attachments.detach(attachment.name);
