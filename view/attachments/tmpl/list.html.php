@@ -76,28 +76,28 @@
         });
     </script>
 
-    <div id="attachments-list" class="attachments">
-        <div id="attachments-images" class="attachments__images"></div>
-        <ul id="attachments-files" class="attachments__files"></ul>
+    <div id="attachments-list">
+        <div id="attachments-images"></div>
+        <ul id="attachments-files" style="clear: both"></ul>
     </div>
 
     <!-- Attachment template begin -->
     <textarea style="display: none" id="attachment-template">
         [% if (thumbnail) { %]
-        <div class="attachment attachment--thumbnail">
-            <a class="koowa-modal mfp-iframe" href="[%=url%]">
+        <div class="attachments__image attachments__image--thumbnail">
+            <a href="[%=url%]">
                 <img src="[%=thumbnail%]" />
             </a>
-            <div class="attachment__caption">
+            <div class="attachments__caption">
                 <a class="btn btn-mini btn-danger delete" href="#">
                     <i class="icon-trash icon-white"></i>
                 </a>
             </div>
         </div>
         [% } else { %]
-        <li class="attachment">
+        <li>
             <a href="[%=url%]">[%=name%]</a>
-            <div class="button__group">
+            <div class="attachments__buttons">
                 <a class="btn btn-mini btn-danger delete" href="#">
                     <i class="icon-trash icon-white"></i>
                 </a>
@@ -111,6 +111,13 @@
         <script>
             kQuery(function($)
             {
+                $('.attachments__image > a').magnificPopup({
+                    type: 'image',
+                    gallery:{
+                        enabled:true
+                    }
+                });
+
                 AttachmentsCallback = function(selected)
                 {
                     Attachments.attach(selected);
@@ -121,7 +128,7 @@
                 }
             });
         </script>
-        <div class="attachment__select">
+        <div class="attachments__select">
             <?= helper('com:files.attachments.select', array('name' => 'attachments', 'callback' => 'AttachmentsCallback')) ?>
         </div>
     <? endif ?>
