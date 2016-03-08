@@ -84,7 +84,7 @@
     <!-- Attachment template begin -->
     <textarea style="display: none" id="attachment-template">
         [% if (thumbnail) { %]
-        <div class="attachments__image attachments__image--thumbnail">
+        <div class="attachment attachments__image attachments__image--thumbnail">
             <a href="[%=url%]">
                 <img src="[%=thumbnail%]" />
             </a>
@@ -95,7 +95,7 @@
             </div>
         </div>
         [% } else { %]
-        <li>
+        <li class="attachment">
             <a href="[%=url%]">[%=name%]</a>
             <div class="attachments__buttons">
                 <a class="btn btn-mini btn-danger delete" href="#">
