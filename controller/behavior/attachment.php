@@ -47,10 +47,12 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
     {
         $view = $context->getSubject()->getView();
 
+        $controller = $this->_getController();
+
         $view->getConfig()->append(array(
             'config' => array(
-                'can_attach' => $this->canAttach(),
-                'can_detach' => $this->canDetach()
+                'can_attach' => $controller->canAttach(),
+                'can_detach' => $controller->canDetach()
             )
         ));
     }
