@@ -1,42 +1,42 @@
 // Attachments
-.attachments__image {
-  margin: 0 12px 12px 0;
-  float: left;
-  padding: 6px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+.attachments {
+  .attachments__image, .attachments__file {
+    margin: 0 12px 12px 0;
+    float: left;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
 
-  &--thumbnail {
-    width: 130px;
-    img {
-      border-radius: 4px 4px 0 0;
+    &--thumbnail {
+      width: 130px;
+      img {
+        border-radius: 4px 4px 0 0;
+      }
     }
+  }
+
+  .attachments__caption {
+    padding: 6px 0 0;
+  }
+
+  .attachments__select {
+    clear: both;
+  }
+
+  .attachments__buttons {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
   }
 }
 
-.attachments__caption {
-  padding: 6px 0 0;
-
-  .label {
-    width: auto;
-    float: none;
-
-    &:after {
-      content: none;
-    }
-  }
-}
-
-.attachments__select {
-  clear: both;
-}
-
-.attachments__buttons {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-  white-space: nowrap;
-}
 
 
