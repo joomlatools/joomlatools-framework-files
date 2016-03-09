@@ -30,3 +30,36 @@ $koowaPath: '../../../koowa/com_koowa';
 .koowa .koowa_dialog__menu a.koowa_dialog__menu__child--attachments {
   width: 150px;
 }
+
+/* Frontend */
+
+.attachments {
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+// Attachments
+.attachments__image {
+  width: 128px;
+  height: 96px;
+  text-align: center;
+  line-height: 94px;
+
+  &--thumbnail {
+    width: 128px;
+
+    img {
+      max-width: 130px;
+      max-height: 96px;
+      vertical-align: middle;
+    }
+  }
+}
+
