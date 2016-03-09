@@ -41,7 +41,7 @@ $k-upload-list-button-desktop-size: 23px !default;
   color: #555;
   border: 1px solid $k-upload-border-color;
   border-radius: $k-upload-radius;
-  margin-bottom: 20px;
+  //margin-bottom: 20px; @todo do we need this?
   min-height: $k-upload-height;
   transition: $k-upload-transition-fast;
 

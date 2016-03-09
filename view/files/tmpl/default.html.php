@@ -66,6 +66,13 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 )) ?>
             </div>
         </div>
+
+        <? if (!isset(parameters()->config->can_upload) || parameters()->config->can_upload): ?>
+
+            <?= import('uploader.html');?>
+
+        <? endif; ?>
+
         <div class="view">
             <div id="files-grid"></div>
         </div>
@@ -76,10 +83,14 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             </td></tr>
             </tfoot>
         </table>
-
-        <?= import('uploader.html');?>
     </div>
     <div style="clear: both"></div>
+</div>
+
+<div class="js-open-folder-modal-container" style="border-left: 1px solid #ccc; display: none">
+    <button type="button" class="k-upload__button js-open-folder-modal" style="position: relative; z-index: 1;">
+        <?= translate('New folder'); ?>
+    </button>
 </div>
 
 <div id="files-new-folder-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">

@@ -589,6 +589,10 @@ $.widget("koowa.uploader", {
 			self._trigger('removed', null, { uploader: up, files: files } );
 		});
 
+		uploader.bind('BeforeUpload', function (uploader, file) {
+			self._trigger('beforeupload', null, { uploader: uploader, file: file });
+		});
+
 		uploader.bind('QueueChanged', function() {
 			self._handleState();
 		});

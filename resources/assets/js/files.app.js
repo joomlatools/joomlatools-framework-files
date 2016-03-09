@@ -50,7 +50,7 @@ Files.App = new Class({
         folder_dialog: {
             view: '#files-new-folder-modal',
             input: '#files-new-folder-input',
-            open_button: '#toolbar-newfolder a',
+            open_button: '.js-open-folder-modal',
             create_button: '#files-new-folder-create',
             //Fires when the form for creating a new folder is submitted
             onSubmit: function(){},

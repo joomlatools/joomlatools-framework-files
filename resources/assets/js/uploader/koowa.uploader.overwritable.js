@@ -17,7 +17,8 @@ $.widget('koowa.uploader', $.koowa.uploader, {
     },
     _handleBeforeStart: function(event, data) {
         var names = [],
-            uploader = data.uploader;
+            uploader = data.uploader,
+            self = this;
 
         $.each(uploader.files, function (i, file) {
             if (file.loaded == 0 && file.status != plupload.DONE) {
@@ -41,7 +42,7 @@ $.widget('koowa.uploader', $.koowa.uploader, {
                     name: names
                 }
             }).done(function(response) {
-                checkDuplicates(response, uploader);
+                checkDuplicates(response, uploader, self.options);
             }).fail(function() {
                 uploader.start();
             });
@@ -131,14 +132,15 @@ function makeUnique(file, similar, uploader) {
 }
 
 
-function checkDuplicates(response, uploader) {
+function checkDuplicates(response, uploader, options) {
     uploader.settings.multipart_params.overwrite = 0;
 
     if (typeof response.entities === 'object' && response.entities.length) {
         var existing = getNamesFromArray(response.entities),
-            promises = [];
+            promises = [],
+            mode = typeof options.duplicate_mode === 'undefined' ? 'confirm' : options.duplicate_mode;
 
-        if (confirm(getConfirmationMessage(existing))) {
+        if (mode === 'confirm' && confirm(getConfirmationMessage(existing))) {
             uploader.settings.multipart_params.overwrite = 1;
 
             return uploader.start();
