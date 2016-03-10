@@ -54,14 +54,14 @@
   .k-upload.is-initialized:after {
     z-index: -2;
     opacity: 0; }
-  .k-upload.k-upload--inline {
+  .k-upload.k-upload--boxed-top {
     margin: -1px -1px 0 -1px;
     /* 1 */
     border-radius: 0;
     /* 2 */
     z-index: 9;
     /* 3 */ }
-    .k-upload.k-upload--inline .k-upload__content-wrapper {
+    .k-upload.k-upload--boxed-top .k-upload__content-wrapper {
       box-shadow: none; }
   .k-upload * {
     -webkit-box-sizing: border-box;
