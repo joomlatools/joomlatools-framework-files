@@ -1,12 +1,23 @@
 // Attachments
 .attachments {
   .attachments__image, .attachments__file {
+    width: 128px;
+    height: 96px;
+    text-align: center;
+    line-height: 94px;
     margin: 0 12px 12px 0;
     float: left;
     padding: 6px;
     border: 1px solid #ddd;
     border-radius: 5px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+
+    a {
+      display: inline-block;
+      line-height: 1em;
+      vertical-align: middle;
+      max-width: 100%;
+    }
 
     &--thumbnail {
       width: 130px;
@@ -16,8 +27,26 @@
     }
   }
 
+  .attachments__image {
+    &--thumbnail {
+      width: 128px;
+
+      img {
+        max-width: 130px;
+        max-height: 96px;
+        vertical-align: middle;
+      }
+    }
+  }
+
   .attachments__caption {
     padding: 6px 0 0;
+    display: block;
+    max-height: 1em;
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .attachments__select {
@@ -31,9 +60,13 @@
     white-space: nowrap;
   }
 
+  &:before,
   &:after {
-    content: '';
-    display: block;
+    display: table;
+    content: " ";
+  }
+
+  &:after {
     clear: both;
   }
 }

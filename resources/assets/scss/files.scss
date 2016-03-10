@@ -1,62 +1,27 @@
-// Separate file so we can include the _files-core.scss in FILEman
+// Core variables and mixins
+// Core variables and mixins without output available outside .koowa scope
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/bootstrap/variables";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/bootstrap/mixins";
 
-@import "files-core";
+// Path variable
+$koowaPath: '../../../koowa/com_koowa';
 
+// Import user interface
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/admin";
 
+// Import icons
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/koowa/icons";
 
+// Import Nooku
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/mixins";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/general";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/koowa";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/dialog";
 
-// Shame
-.koowa .koowa_dialog__menu a.koowa_dialog__menu__child--attachments {
-  width: 150px;
-}
+@import "koowa/general";
+@import "koowa/attachments";
 
-/* Frontend */
-
-.attachments {
-  &:before,
-  &:after {
-    display: table;
-    content: " ";
-  }
-
-  &:after {
-    clear: both;
-  }
-}
-
-// Attachments
-.attachments__image,
-.attachments__file {
-  width: 128px;
-  height: 96px;
-  text-align: center;
-  line-height: 94px;
-
-  a {
-    display: inline-block;
-    line-height: 1em;
-    vertical-align: middle;
-    max-width: 100%;
-  }
-}
-
-.attachments__image {
-  &--thumbnail {
-    width: 128px;
-
-    img {
-      max-width: 130px;
-      max-height: 96px;
-      vertical-align: middle;
-    }
-  }
-}
-
-.attachments__caption {
-  display: block;
-  max-height: 1em;
-  overflow: hidden;
-  max-width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.koowa {
+  @import "koowa/dialog";
+  @import "koowa/modal";
 }
