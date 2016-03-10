@@ -48,4 +48,29 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
 
         return $result;
     }
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+
+        $file = $this->file;
+
+        if (!$file->isNew())
+        {
+            $data['file'] = $file->toArray();
+
+            if ($file->isThumbnail())
+            {
+                $thumbnail = $file->getThumbnail();
+                $data['thumbnail'] = !$thumbnail->isNew() ? $thumbnail->thumbnail : false;
+            }
+
+            $data['file'] = $file->toArray();
+        }
+
+        $data['created_on_timestamp']  = strtotime($this->created_on);
+        $data['attached_on_timestamp'] = strtotime($this->attached_on);
+
+        return $data;
+    }
 }
