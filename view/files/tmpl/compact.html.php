@@ -121,9 +121,9 @@ kQuery(function($) {
                                     <div class="koowa_dialog__block" id="files-new-folder-modal">
                                         <div class="input-group" style="margin:0;">
                                             <input type="text" class="input-group-form-control" id="files-new-folder-input" />
-                            <span class="input-group-btn">
-                                <button id="files-new-folder-create" class="btn" disabled><?= translate('Add folder'); ?></button>
-                            </span>
+                                            <span class="input-group-btn">
+                                                <button id="files-new-folder-create" class="btn" disabled><?= translate('Add folder'); ?></button>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

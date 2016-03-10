@@ -10,7 +10,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <?= import('com:files.files.uploader_koowa.html') ?>
 
-<div id="files-upload-multi"></div>
+<div id="files-upload-multi" class="k-upload--boxed-top"></div>
 
 <script>
     window.addEvent('domready', function() {
