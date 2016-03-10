@@ -35,8 +35,6 @@
             };
 
             var render = function (attachment) {
-                var images = $('#attachments-images');
-                var files = $('#attachments-files');
 
                 var url = "<?= route('view=file&routed=1&name={name}', true, false) ?>";
 
@@ -44,11 +42,7 @@
 
                 var output = Attachments.render(attachment);
 
-                if (attachment.thumbnail) {
-                    output = $(output).appendTo(images)
-                } else {
-                    output = $(output).appendTo(files);
-                }
+                output = $(output).appendTo($('.attachments'));
 
                 $('.delete', output).click(function () {
                     Attachments.detach(attachment.name);
@@ -76,33 +70,42 @@
         });
     </script>
 
-    <div id="attachments-list">
-        <div id="attachments-images"></div>
-        <ul id="attachments-files" style="clear: both"></ul>
-    </div>
+    <div class="attachments"></div>
 
     <!-- Attachment template begin -->
     <textarea style="display: none" id="attachment-template">
-        [% if (thumbnail) { %]
-        <div class="attachment attachments__image attachments__image--thumbnail">
-            <a href="[%=url%]">
-                <img src="[%=thumbnail%]" />
-            </a>
-            <div class="attachments__caption">
-                <a class="btn btn-mini btn-danger delete" href="#">
-                    <i class="icon-trash icon-white"></i>
+        [% if (file.type == 'image') { %]
+            <div class="attachments__image [% if (thumbnail) { %]attachments__image--thumbnail[% } %]">
+                <a href="[%=url%]">
+                    [% if (thumbnail) { %]
+                        <img src="[%=thumbnail%]"/>
+                    [% } else { %]
+                        <span class="koowa_icon--image koowa_icon--48"></span>
+                        <div class="attachments__caption">
+                            [%=name%]
+                        </div>
+                    [% } %]
                 </a>
+                <div class="attachments__caption">
+                    <a class="btn btn-mini btn-danger delete" href="#">
+                        <i class="icon-trash icon-white"></i>
+                    </a>
+                </div>
             </div>
-        </div>
         [% } else { %]
-        <li class="attachment">
-            <a href="[%=url%]">[%=name%]</a>
-            <div class="attachments__buttons">
-                <a class="btn btn-mini btn-danger delete" href="#">
-                    <i class="icon-trash icon-white"></i>
-                </a>
-            </div>
-        </li>
+         <div class="attachments__file">
+             <a href="[%=url%]">
+                 <span class="koowa_icon--default koowa_icon--48 koowa_icon--[%=file.extension%]"></span>
+                 <div class="attachments__caption">
+                     [%=name%]
+                 </div>
+             </a>
+             <div class="attachments__buttons">
+                 <a class="btn btn-mini btn-danger delete" href="#">
+                     <i class="icon-trash icon-white"></i>
+                 </a>
+             </div>
+         </div>
         [% } %]
     </textarea>
     <!-- Attachment template end -->
