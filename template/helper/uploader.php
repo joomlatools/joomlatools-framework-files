@@ -78,7 +78,7 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
         if(!isset(static::$_loaded['uploader']))
         {
             $html .= $this->getTemplate()
-                ->loadFile('com:files.files.uploader_koowa.html')
+                ->loadFile('com:files.files.uploader_scripts.html')
                 ->render();
 
             self::$_loaded['uploader'] = true;

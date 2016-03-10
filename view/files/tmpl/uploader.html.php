@@ -8,7 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<?= import('com:files.files.uploader_koowa.html') ?>
+<?= import('com:files.files.uploader_scripts.html') ?>
 
 <div id="files-upload-multi" class="k-upload--boxed-top"></div>
 
