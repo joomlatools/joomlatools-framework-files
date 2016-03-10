@@ -51,3 +51,8 @@
   }
 }
 
+.attachments__caption {
+  display: inline-block;
+  max-height: 3em;
+  overflow: hidden;
+}

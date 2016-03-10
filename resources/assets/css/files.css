@@ -6748,4 +6748,9 @@ table th.file-count {
     max-height: 96px;
     vertical-align: middle; }
 
+.attachments__caption {
+  display: inline-block;
+  max-height: 3em;
+  overflow: hidden; }
+
 /*# sourceMappingURL=files.css.map */
