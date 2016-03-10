@@ -46,12 +46,21 @@ $koowaPath: '../../../koowa/com_koowa';
 }
 
 // Attachments
-.attachments__image {
+.attachments__image,
+.attachments__file {
   width: 128px;
   height: 96px;
   text-align: center;
   line-height: 94px;
 
+  a {
+    display: inline-block;
+    line-height: 1em;
+    vertical-align: middle;
+  }
+}
+
+.attachments__image {
   &--thumbnail {
     width: 128px;
 
@@ -62,4 +71,6 @@ $koowaPath: '../../../koowa/com_koowa';
     }
   }
 }
+
+
 
