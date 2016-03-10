@@ -6739,7 +6739,8 @@ table th.file-count {
   .attachments__file a {
     display: inline-block;
     line-height: 1em;
-    vertical-align: middle; }
+    vertical-align: middle;
+    max-width: 100%; }
 
 .attachments__image--thumbnail {
   width: 128px; }
@@ -6749,8 +6750,11 @@ table th.file-count {
     vertical-align: middle; }
 
 .attachments__caption {
-  display: inline-block;
-  max-height: 3em;
-  overflow: hidden; }
+  display: block;
+  max-height: 1em;
+  overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
 
 /*# sourceMappingURL=files.css.map */

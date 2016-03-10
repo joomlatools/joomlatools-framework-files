@@ -36,6 +36,7 @@
     display: inline-block;
     line-height: 1em;
     vertical-align: middle;
+    max-width: 100%;
   }
 }
 
@@ -52,7 +53,10 @@
 }
 
 .attachments__caption {
-  display: inline-block;
-  max-height: 3em;
+  display: block;
+  max-height: 1em;
   overflow: hidden;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
