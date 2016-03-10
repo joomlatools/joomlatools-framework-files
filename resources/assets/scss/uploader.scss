@@ -70,6 +70,24 @@ $k-upload-list-button-desktop-size: 23px !default;
     }
   }
 
+  /**
+   * Inline styling
+   *
+   * 1. Move 1 pixel back so drop highlight will light up all borders (except bottom border)
+   * 2. Reset border-radius to fit in parent view
+   * 3. High z-index to set upload on top of the rest
+   */
+
+  &.k-upload--inline {
+    margin: -1px -1px 0 -1px; /* 1 */
+    border-radius: 0; /* 2 */
+    z-index: 9; /* 3 */
+
+    .k-upload__content-wrapper {
+      box-shadow: none;
+    }
+  }
+
   /* Border box size everything inside */
   * {
     -webkit-box-sizing: border-box;
