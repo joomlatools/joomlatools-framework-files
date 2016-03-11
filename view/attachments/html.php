@@ -32,5 +32,7 @@ class ComFilesViewAttachmentsHtml extends ComKoowaViewHtml
         $context->data->container = $container->getIterator()->current();
 
         parent::_fetchData($context);
+
+        $context->parameters->config = $this->getConfig()->config;
     }
 }
