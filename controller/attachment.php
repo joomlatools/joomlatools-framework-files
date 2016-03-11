@@ -50,6 +50,25 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
     }
 
     /**
+     * Before Render command handler.
+     *
+     * Pushes permissions to the view.
+     *
+     * @param KControllerContextInterface $context The context object.
+     */
+    protected function _beforeRender(KControllerContextInterface $context)
+    {
+        $view = $this->getView();
+
+        $view->getConfig()->append(array(
+            'config' => array(
+                'can_attach' => $this->canAttach(),
+                'can_detach' => $this->canDetach()
+            )
+        ));
+    }
+
+    /**
      * Before Attach command handler.
      *
      * Makes sure that there's an attachment and that this attachment exists.

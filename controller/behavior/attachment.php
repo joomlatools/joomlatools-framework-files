@@ -37,27 +37,6 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
     }
 
     /**
-     * Before Render command handler.
-     *
-     * Pushes permissions to the view.
-     *
-     * @param KControllerContextInterface $context The context object.
-     */
-    protected function _beforeRender(KControllerContextInterface $context)
-    {
-        $view = $context->getSubject()->getView();
-
-        $controller = $this->_getController();
-
-        $view->getConfig()->append(array(
-            'config' => array(
-                'can_attach' => $controller->canAttach(),
-                'can_detach' => $controller->canDetach()
-            )
-        ));
-    }
-
-    /**
      * After Add command handler.
      *
      * Creates an attachment entity.
