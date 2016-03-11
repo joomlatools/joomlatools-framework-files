@@ -191,6 +191,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                             'element' => '.attachments-uploader',
                             'options'   => array(
                                 'multi_selection' => true,
+                                'duplicate_mode' => 'unique',
                                 'url' => route('component=' . urlencode($component) . '&view=file&plupload=1&routed=1&format=json&container=' .
                                                (isset($container) ? $container->slug : ''), false, false)
                             )
