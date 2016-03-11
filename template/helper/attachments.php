@@ -15,28 +15,30 @@
  */
 class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
 {
-    public function select($config = array())
+    public function manage($config = array())
     {
         $config = new KObjectConfigJson($config);
 
+        if ($entity = $config->entity)
+        {
+            $table = $entity->getTable();
+            $config->append(array('table' => $table->getBase(), 'row' => $entity->id));
+        }
+
         $config->append(array(
-            'name'     => 'attachments',
             'attribs'  => '',
             'value'    => array(),
+            'callback' => 'attachmentsCallback',
             'multiple' => true,
-            'callback' => 'attachmentSelectCallback',
-            'link'     => $this->getTemplate()->route('view=files&routed=1&layout=select&tmpl=koowa'),
-            'text'     => $this->getObject('translator')->translate('Select'),
+            'text'     => $this->getObject('translator')->translate('Manage'),
             'attribs'  => array(
                 'data-koowa-modal' => htmlentities(json_encode(array('mainClass' => 'koowa_dialog_modal koowa_dialog_modal--halfheight'))),
             )
         ))->append(array(
-            'id'    => $config->name
+            'link' => $this->getTemplate()->route('view=attachments&layout=manage&tmpl=koowa&table=' .
+                                                  urlencode($config->table) . '&row=' . urlencode($config->row) .
+                                                  '&callback=' . urlencode($config->callback))
         ));
-
-        if ($config->callback) {
-            $config->link .= '&callback='.urlencode($config->callback);
-        }
 
         $html = '<span class="input-group-btn">';
         $html .= sprintf('<a class="koowa-modal btn mfp-iframe" %s href="%s">%s</a>', $config->attribs, $config->link, $config->text);
