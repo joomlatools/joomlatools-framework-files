@@ -34,7 +34,17 @@
                 context.data.attachment = context.attachment;
             };
 
-            var render = function (attachment) {
+            initPopup = function()
+            {
+                $('.attachments__image > a').magnificPopup({
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    }
+                });
+            }
+
+            renderAttachment = function (attachment) {
 
                 var url = "<?= route('view=file&routed=1&name={name}', true, false) ?>";
 
@@ -43,30 +53,15 @@
                 var output = Attachments.render(attachment);
 
                 output = $(output).appendTo($('.attachments'));
-
-                $('.delete', output).click(function () {
-                    Attachments.detach(attachment.name);
-                    $(this).closest('.attachment').remove();
-                });
             };
-
-            Attachments.bind('after.attach', function (event, context)
-            {
-                var url = "<?= route('view=attachments&name={name}&format=json', true, false) ?>";
-
-                $.ajax({
-                    url: Attachments.replace(url, {name: context.attachment}),
-                    success: function (data) {
-                        render(data.entities.pop());
-                    }
-                });
-            });
 
             var attachments = <?= json_encode(array_values($entity->getAttachments()->toArray())) ?>;
 
             $.each(attachments, function (idx, attachment) {
-                render(attachment);
+                renderAttachment(attachment);
             });
+
+            initPopup();
         });
     </script>
 
@@ -75,7 +70,7 @@
     <!-- Attachment template begin -->
     <textarea style="display: none" id="attachment-template">
         [% if (file.type == 'image') { %]
-            <div class="attachments__image [% if (thumbnail) { %]attachments__image--thumbnail[% } %]">
+            <div id="[%=Attachments.escape(name)%]" class="attachments__image [% if (thumbnail) { %]attachments__image--thumbnail[% } %]">
                 <a href="[%=url%]">
                     [% if (thumbnail) { %]
                         <img src="[%=thumbnail%]"/>
@@ -86,53 +81,57 @@
                         </div>
                     [% } %]
                 </a>
-                <div class="attachments__caption">
-                    <a class="btn btn-mini btn-danger delete" href="#">
-                        <i class="icon-trash icon-white"></i>
-                    </a>
-                </div>
             </div>
         [% } else { %]
-         <div class="attachments__file">
+         <div id="[%=Attachments.escape(name)%]" class="attachments__file">
              <a href="[%=url%]">
                  <span class="koowa_icon--default koowa_icon--48 koowa_icon--[%=file.extension%]"></span>
                  <div class="attachments__caption">
                      [%=name%]
                  </div>
              </a>
-             <div class="attachments__buttons">
-                 <a class="btn btn-mini btn-danger delete" href="#">
-                     <i class="icon-trash icon-white"></i>
-                 </a>
-             </div>
          </div>
         [% } %]
     </textarea>
     <!-- Attachment template end -->
 
-    <? if (isset($select) && $select == true): ?>
+    <? if (isset($manage) && $manage == true): ?>
+
         <script>
-            kQuery(function($)
-            {
-                $('.attachments__image > a').magnificPopup({
-                    type: 'image',
-                    gallery:{
-                        enabled:true
-                    }
-                });
-
-                AttachmentsCallback = function(selected)
+            kQuery(function($) {
+                attachmentsCallback = function(app)
                 {
-                    Attachments.attach(selected);
+                    app.grid.addEvent('afterAttachAttachment', function(data)
+                    {
+                        var attachment = data.attachment;
 
-                    if (typeof $.magnificPopup !== 'undefined' && $.magnificPopup.instance) {
-                        $.magnificPopup.close();
-                    }
+                        if (attachment.entity)  {
+                            renderAttachment(attachment.entity);
+                        } else {
+                            var url = "<?= route('view=attachments&name={name}&format=json', true, false) ?>";
+
+                            $.ajax({
+                                url: Attachments.replace(url, {name: attachment.name}),
+                                success: function (data) {
+                                    renderAttachment(data.entities.pop());
+                                }
+                            });
+                        }
+
+                        initPopup();
+                    });
+
+                    app.grid.addEvent('afterDetachAttachment', function(data)
+                    {
+                        $('div[id="' + Attachments.escape(data.node.name) + '"]').remove();
+                        initPopup();
+                    });
                 }
             });
         </script>
+
         <div class="attachments__select">
-            <?= helper('com:files.attachments.select', array('name' => 'attachments', 'callback' => 'AttachmentsCallback')) ?>
+            <?= helper('com:files.attachments.manage', array('entity' => $entity)) ?>
         </div>
     <? endif ?>
 <? endif ?>
