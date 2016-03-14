@@ -17,7 +17,7 @@ defined('KOOWA') or die; ?>
 <textarea style="display: none"  id="attachments_attachment">
 <li class="files-node files-attachment">
     <? if ($can_detach): ?>
-        <button class="detach_button" type="button">x</button>
+        <span class="detach_button" tabindex="0">x</span>
     <? endif ?>
     <a class="navigate" href="#" title="[%= name %]">
         [%= name %]
