@@ -160,10 +160,6 @@ kQuery(function($) {
                     <? // @TODO: Ercan: We need to fix the uploader; ?>
                     <?= import('compact_upload.html'); ?>
 
-                    <? // @TODO: Ercan: We need to fix the scopebar; ?>
-                    <?= import('compact_scopebar.html'); ?>
-
-                    <? // @TODO: Ercan: We need to fix the file picker so it's a table; ?>
                     <?= import('compact_select.html'); ?>
 
                 </div><!-- .k-list-layout -->

@@ -21,10 +21,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 <div class="k-upload__drop__message">
                     <p>Drop file here <small>(max 10MB)</small></p>
                 </div>
-                <? // @TODO: @Ercan: Make sure that the name of the selected file will be visible here before you click upload
-                   // Also make sure that the upload info (percentage thing) is visible while uploading. This is currently hidden by CSS
-                   // We also need to make the upload button appear when a file is selected (or upload automatically)
-                   // Last but not least; we should create a better visual loading bar when uploading. remove .visuall-hidden class from .k-upload__loading div below ?>
                 <div class="k-upload__drop__uploader" id="files-upload-multi"></div>
                 <div class="k-upload__loading" style="display: none">
                     <div class="k-upload__loading__bar"></div>
