@@ -66,9 +66,12 @@ window.addEvent('domready', function() {
             var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
 
             folder.add(function(response, responseText) {
-                var el = response.entities[0],
-                    cls = Files[el.type.capitalize()],
-                    row = new cls(el);
+                if (response.status === false) {
+                    return alert(response.error);
+                }
+                var el = response.data.attributes;
+                var cls = Files[el.type.capitalize()];
+                var row = new cls(el);
 
                 element.set('value', '');
                 $('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
