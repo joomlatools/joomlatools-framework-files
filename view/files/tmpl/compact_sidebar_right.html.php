@@ -15,7 +15,6 @@ defined('KOOWA') or die;
         <div class="k-sidebar__header">
             <?= translate('Selected file info'); ?>
         </div>
-        <? // @TODO: @Ercan: add placeholder message to select a file on the left ?>
         <div class="k-sidebar__content ercan-todo">
             <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_insert">
                 <div class="koowa_dialog__child__content">
