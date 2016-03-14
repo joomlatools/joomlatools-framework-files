@@ -60,21 +60,7 @@ For debugging:
 <ktml:script src="media://koowa/com_files/js/files.copymove.js" />
  */ ?>
 
-<ktml:script src="media://koowa/com_files/js/spin.min.js" />
-
-<ktml:script src="media://koowa/com_files/js/files.utilities.js" />
-<ktml:script src="media://koowa/com_files/js/files.state.js" />
-<ktml:script src="media://koowa/com_files/js/files.template.js" />
-<ktml:script src="media://koowa/com_files/js/files.grid.js" />
-<ktml:script src="media://koowa/com_files/js/files.tree.js" />
-<ktml:script src="media://koowa/com_files/js/files.row.js" />
-<ktml:script src="media://koowa/com_files/js/files.paginator.js" />
-<ktml:script src="media://koowa/com_files/js/files.pathway.js" />
-
-<ktml:script src="media://koowa/com_files/js/files.app.js" />
-<ktml:script src="media://koowa/com_files/js/files.uploader.js" />
-
-<ktml:script src="media://koowa/com_files/js/files.copymove.js" />
+<ktml:script src="media://koowa/com_files/js/files.min.js" />
 
 <!--[if lte IE 9]>
 <script data-inline src="media://koowa/com_files/js/jquery.placeholder.js" type="text/javascript"></script>
