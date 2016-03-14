@@ -77,9 +77,20 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
 
         if(!isset(static::$_loaded['uploader']))
         {
-            $html .= $this->getTemplate()
-                ->loadFile('com:files.files.uploader_scripts.html')
-                ->render();
+            $template = $this->getTemplate();
+
+            if ($template->hasFilter('wrapper'))
+            {
+                $filter = $template->getFilter('wrapper');
+                $wrapper = $filter->getWrapper();
+                $filter->setWrapper(null);
+            }
+
+            $html .= $template->loadFile('com:files.files.uploader_scripts.html')->render();
+
+            if ($template->hasFilter('wrapper')) {
+                $filter->setWrapper($wrapper);
+            }
 
             self::$_loaded['uploader'] = true;
         }
