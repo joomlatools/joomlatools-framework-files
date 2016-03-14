@@ -584,9 +584,12 @@ Files.App = new Class({
                     this.container.removeClass('k-'+remove).addClass('k-'+layout);
                     kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
 
-                    if (layout !== 'table') {
+                    /*if (layout !== 'table') {
+                        kQuery('.k-table-container').floatThead('destroy');
                         kQuery('.k-files-table').floatThead('destroy');
-                    }
+                    } else {
+                        kQuery('.k-table-container').floatThead('reflow');
+                    }*/
                 }
 
                 if (key) {
@@ -594,13 +597,14 @@ Files.App = new Class({
                 }
             },
             onAfterRender: function() {
+                // @todo: ercan fix the floating thead
                 // Instantiate floatThead for table views
-                kQuery('.k-files-table').floatThead({
+                /*kQuery('.k-files-table').floatThead({
                     scrollContainer: function($table){
                         return $table.closest('.k-table');
                     },
                     enableAria: true
-                });
+                });*/
 
                 this.setState(that.state.data);
             },
