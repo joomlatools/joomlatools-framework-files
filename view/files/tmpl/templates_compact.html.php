@@ -65,32 +65,46 @@ if (metadata.image) {
 </textarea>
 
 <textarea style="display: none" id="compact_container">
-<ul>
-
-</ul>
+    <!-- @todo robin: table styling is missing -->
+<table class="k-table robin-todo">
+<tbody></tbody>
+</table>
 </textarea>
 
 
 <textarea style="display: none"  id="compact_folder">
-    <li class="files-node files-folder">
-        <a class="navigate" href="#" title="[%= name %]">
-            [%= name %]
-        </a>
-    </li>
+    <tr>
+        <td>
+            <span class="files-node files-folder">
+                <a class="navigate" href="#" title="[%= name %]">
+                    [%= name %]
+                </a>
+            </span>
+        </td>
+    </tr>
 </textarea>
 
 <textarea style="display: none"  id="compact_image">
-    <li class="files-node files-image">
-        <a class="navigate" href="#" title="[%= name %]">
-            [%= name %]
-        </a>
-    </li>
+    <tr>
+        <td>
+            <span class="files-node files-image">
+                <a class="navigate" href="#" title="[%= name %]">
+                    [%= name %]
+                </a>
+            </span>
+        </td>
+    </tr>
+
 </textarea>
 
 <textarea style="display: none"  id="compact_file">
-    <li class="files-node files-file">
-        <a class="navigate" href="#" title="[%= name %]">
-            [%= name %]
-        </a>
-    </li>
+    <tr>
+        <td>
+            <span class="files-node files-file">
+                <a class="navigate" href="#" title="[%= name %]">
+                    [%= name %]
+                </a>
+            </span>
+        </td>
+    </tr>
 </textarea>
