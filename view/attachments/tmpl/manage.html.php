@@ -67,7 +67,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
         {
             var that = this;
 
-            $(object.object.element).find('button').click(function()
+            $(object.object.element).find('span').click(function()
             {
                 var attachment = object.object.name;
                 that.select(attachment);
