@@ -45,7 +45,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
             };
         options = Object.append(options, config);
 
-        Files.app = new Attachments.App(options);
+        Files.app = new Files.Attachments.App(options);
 
         var app = Files.app;
 
