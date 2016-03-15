@@ -26,7 +26,6 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
 <ktml:script src="media://koowa/com_files/js/files.attachments.js"/>
 <ktml:style src="media://koowa/com_files/css/files.css"/>
-<ktml:script src="media://koowa/com_files/js/files.attachments.app.js" />
 
 <script>
     Files.sitebase = '<?= $sitebase; ?>';
