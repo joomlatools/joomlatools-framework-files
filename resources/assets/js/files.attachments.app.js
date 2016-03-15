@@ -6,9 +6,9 @@
  * @link		http://github.com/nooku/nooku-files for the canonical source repository
  */
 
-if (!Attachments) Attachments = {};
+if (!Files.Attachments) Files.Attachments = {};
 
-Attachments.App = new Class({
+Files.Attachments.App = new Class({
     Extends: Files.App,
     Implements: [Events, Options],
     cookie: false,
@@ -111,12 +111,12 @@ Attachments.App = new Class({
             }
         });
 
-        this.grid = new Attachments.Grid(this.options.grid.element, opts);
+        this.grid = new Files.Attachments.Grid(this.options.grid.element, opts);
 
     }
 });
 
-Attachments.Grid = new Class({
+Files.Attachments.Grid = new Class({
     Extends: Files.Grid,
     select: function(node) {
         if (typeof node === 'string') {
