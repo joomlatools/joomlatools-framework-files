@@ -65,10 +65,13 @@ if (metadata.image) {
 </textarea>
 
 <textarea style="display: none" id="compact_container">
-    <!-- @todo robin: table styling is missing -->
-<table class="k-table robin-todo">
-<tbody></tbody>
-</table>
+    <div class="k-table-container">
+        <div class="k-table">
+            <table>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 </textarea>
 
 
