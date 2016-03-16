@@ -13,11 +13,12 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
+class ComFilesTemplateHelperModal extends KTemplateHelperAbstract implements KTemplateHelperParameterizable
 {
 	public function select($config = array())
 	{
         $config = new KObjectConfigJson($config);
+
         $config->append(array(
             'name' => '',
             'attribs' => array(),
@@ -25,7 +26,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
             'visible' => true,
             'link' => '',
             'link_text' => $this->getObject('translator')->translate('Select'),
-            'callback' => ''
+            'callback' => '',
         ))->append(array(
             'id' => $config->name,
             'value' => $config->name
@@ -42,10 +43,11 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract
 
         $input = '<input name="%1$s" id="%2$s" value="%3$s" %4$s size="40" %5$s />';
 
-        $link = '<span class="input-group-btn"><a class="koowa-modal btn mfp-iframe" %s href="%s">%s</a></span>';
-
         $html = sprintf($input, $config->name, $config->id, $this->getTemplate()->escape($config->value), $config->visible ? 'type="text" readonly' : 'type="hidden"', $attribs);
-        $html .= sprintf($link, $button_attribs, $config->link, $config->link_text);
+
+        $html .= '<span class="input-group-btn">';
+        $html .= sprintf('<a class="koowa-modal btn mfp-iframe" %s href="%s">%s</a>', $button_attribs, $config->link, $config->link_text);
+        $html .= '</span>';
 
         $html .= $this->getTemplate()->createHelper('behavior')->modal();
 

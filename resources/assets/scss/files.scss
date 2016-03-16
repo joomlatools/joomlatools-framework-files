@@ -4,9 +4,24 @@
 @import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/bootstrap/mixins";
 
 // Path variable
-$koowaPath: '../../koowa/com_koowa';
+$koowaPath: '../../../koowa/com_koowa';
+
+// Import user interface
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/admin";
 
 // Import icons
 @import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/koowa/icons";
 
-@import "koowa/files";
+// Import Nooku
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/mixins";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/general";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/koowa";
+@import "../../../../nooku-framework/code/media/koowa/com_koowa/scss/generic/dialog";
+
+@import "koowa/general";
+@import "koowa/attachments";
+
+.koowa {
+  @import "koowa/dialog";
+  @import "koowa/modal";
+}

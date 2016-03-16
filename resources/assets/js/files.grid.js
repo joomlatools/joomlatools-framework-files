@@ -19,6 +19,7 @@ Files.Grid = new Class({
 		onSwitchLayout: function (){},
 		switchers: '.files-layout-switcher',
 		layout: false,
+		spinner_container: 'spinner_container',
 		batch_delete: false,
 		icon_size: 150,
 		types: null // null for all or array to filter for folder, file and image
@@ -26,6 +27,8 @@ Files.Grid = new Class({
 
 	initialize: function(container, options) {
 		this.setOptions(options);
+
+		this.spinner_container = options.spinner_container;
 
 		this.nodes = new Hash();
 		this.container = document.id(container);
@@ -413,6 +416,9 @@ Files.Grid = new Class({
 
 		return object.element;
 	},
+	getCount: function() {
+		return this.nodes.getLength();
+	},
 	reset: function() {
 		this.fireEvent('beforeReset');
 
@@ -440,9 +446,11 @@ Files.Grid = new Class({
 	 * Insert multiple rows, possibly coming from a JSON request
 	 */
 	insertRows: function(rows) {
-		this.fireEvent('beforeInsertRows', {rows: rows});
+		var data = {rows: rows};
 
-        Object.each(rows, function(row) {
+		this.fireEvent('beforeInsertRows', data);
+
+        Object.each(data.rows, function(row) {
 			var cls = Files[row.type.capitalize()];
 			var item = new cls(row);
 			this.insert(item, 'last');
@@ -452,7 +460,7 @@ Files.Grid = new Class({
 			this.setIconSize(this.options.icon_size);
 		}
 
-		this.fireEvent('afterInsertRows', {rows: rows});
+		this.fireEvent('afterInsertRows', data);
 	},
 	renew: function() {
 		this.fireEvent('beforeRenew');
@@ -522,7 +530,7 @@ Files.Grid = new Class({
             return;
         }
 
-        var target = document.getElementById('spinner_container');
+        var target = document.getElementById(this.spinner_container);
         var opts = {
             lines: 12, // The number of lines to draw
             length: 7, // The length of each line

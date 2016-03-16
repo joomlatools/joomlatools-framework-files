@@ -1,0 +1,309 @@
+// Attachments list
+.attachments {
+  .attachments__image, .attachments__file {
+    width: 128px;
+    height: 96px;
+    text-align: center;
+    line-height: 94px;
+    margin: 0 12px 12px 0;
+    float: left;
+    padding: 6px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055);
+
+    a {
+      display: inline-block;
+      line-height: 1em;
+      vertical-align: middle;
+      max-width: 100%;
+    }
+
+    &--thumbnail {
+      width: 130px;
+      img {
+        border-radius: 4px 4px 0 0;
+      }
+    }
+  }
+
+  .attachments__image {
+    &--thumbnail {
+      width: 128px;
+
+      img {
+        max-width: 130px;
+        max-height: 96px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .attachments__caption {
+    padding: 6px 0 0;
+    display: block;
+    max-height: 1em;
+    overflow: hidden;
+    max-width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .attachments__select {
+    clear: both;
+  }
+
+  .attachments__buttons {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+/* ==========================================================================
+   Attachments
+   ========================================================================== */
+
+/**
+ * Attachments modal styling with included multi file uploader
+ *
+ * Namespaced so we win over the styling in default Nooku
+ */
+
+.koowa.com_files--attachments {
+
+  // Shame
+  .koowa .koowa_dialog__menu a.koowa_dialog__menu__child--attachments {
+    width: 150px;
+  }
+
+
+  /* Reset top-padding, normally there for the tabs */
+
+  .koowa_dialog__layout {
+    padding-top: 0;
+  }
+
+
+  /* Reset margin and padding, normally there for titles, but since these are longer titles we solved it another way */
+
+  .koowa_dialog__child__content {
+    margin: 0;
+    padding-top: 0;
+  }
+
+
+  /* Create a table so we can have table rows that stretch the full 100% height */
+
+  .attachments-table {
+    display: table;
+    width: 100%;
+    height: 100%;
+  }
+
+
+  /**
+   * The first table row is for upload
+   *
+   * 1% height and nowrap so the other row(s) stretch all the way
+   */
+
+  .attachments-upload {
+    height: 1%;
+    white-space: nowrap;
+    display: table-row;
+  }
+
+
+  /**
+   * List
+   *
+   * Table row for the `attached files` list
+   *
+   * 1. Max 100% height so we can have scrolling children
+   * 2. Hide overflowing content so we can have scrolling children
+   */
+
+  .attachments-list {
+    display: table-row;
+    height: 100%; /* 1 */
+    overflow: hidden; /* 2 */
+    vertical-align: top;
+
+
+    /**
+     * List title
+     *
+     * 1. Absolute positioned so content can have scrolling overflowing content
+     * 2. CSS text ellipsis overflow
+     */
+
+    .koowa_dialog__title {
+      position: absolute; /* 1 */
+      top: 0; /* 1 */
+      right: 0; /* 1 */
+      left: 0; /* 1 */
+      overflow: hidden; /* 2 */
+      white-space: nowrap; /* 2 */
+      text-overflow: ellipsis; /* 2 */
+    }
+
+
+    /**
+     * List content
+     *
+     * 1. Cover whole parent execept the title
+     * 2. scrollbars when overflowing
+     */
+
+    .koowa_dialog__child__content {
+      position: absolute; /* 1 */
+      top: 30px; /* 1 */
+      right: 0; /* 1 */
+      bottom: 0; /* 1 */
+      left: 0; /* 1 */
+      overflow: auto; /* 2 */
+      height: auto;
+    }
+
+    .detach_button {
+      cursor: pointer;
+      display: block;
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      border: 1px solid #ccc;
+      background: #f5f5f5;
+      border-radius: 50%;
+      padding: 0;
+      width: 21px;
+      height: 21px;
+      line-height: 17px;
+      font-size: 13px;
+      text-align: center;
+      color: #777;
+
+      &:hover,
+      &:focus {
+        border-color: #e74c3c;
+        background: lighten(#e74c3c,25%);
+        color: #c0392b;
+      }
+    }
+  }
+
+
+  /* The lists can't be table cell but should be floating items instead */
+
+  .attachments-attached,
+  .attachments-preview {
+    height: 100%;
+    float: left;
+    overflow: auto;
+    max-height: 100%;
+  }
+
+
+  /* Separating the two lists */
+
+  .attachments-attached {
+    width: 66%;
+    border-right: 1px solid #ccc;
+
+    .sidebar-nav {
+      li {
+        position: relative;
+
+        &:hover a {
+          color: white;
+          border-top-color: #33bbff;
+          background-color: #39bdff;
+          background-image: -moz-linear-gradient(top, #4dc4ff, #1ab3ff);
+          background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4dc4ff), to(#1ab3ff));
+          background-image: -webkit-linear-gradient(top, #4dc4ff, #1ab3ff);
+          background-image: -o-linear-gradient(top, #4dc4ff, #1ab3ff);
+          background-image: linear-gradient(to bottom, #4dc4ff, #1ab3ff);
+          background-repeat: repeat-x;
+          filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF4DC4FF', endColorstr='#FF1AB3FF', GradientType=0);
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+
+  /**
+   * The selected file area
+   *
+   * 1. Default set height
+   * 2. make room for the inset attachments button
+   */
+
+  .attachments-preview {
+    width: 34%;
+  }
+
+  .koowa_dialog__wrapper__child {
+    position: relative;
+    width: 100%;
+    border-left: none;
+  }
+
+  .koowa_dialog__child__content,
+  .koowa_dialog__child__content__box {
+    min-height: 0;
+  }
+
+  #files-grid {
+    max-height: none !important;
+  }
+
+
+  /* Actually styling for doclink, borrowed here until we refactor the whole thing */
+
+  .koowa_dialog__insert {
+    text-align: right;
+    position: absolute;
+    background: #ddd;
+    border: none;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    clear: both;
+    height: 40px;
+    bottom: 0;
+    z-index: 15;
+    padding: 5px;
+  }
+
+
+  /* Extra icon size for the preview */
+
+  .koowa_icon--32 {
+    width: 32px;
+    height: 32px;
+    font-size: 32px;
+    line-height: 32px;
+
+    &:before {
+      width: 32px;
+      height: 32px;
+      font-size: 32px;
+      line-height: 32px;
+    }
+  }
+}
+
+
+
+

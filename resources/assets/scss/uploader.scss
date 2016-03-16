@@ -41,7 +41,7 @@ $k-upload-list-button-desktop-size: 23px !default;
   color: #555;
   border: 1px solid $k-upload-border-color;
   border-radius: $k-upload-radius;
-  margin-bottom: 20px;
+  //margin-bottom: 20px; @todo do we need this?
   min-height: $k-upload-height;
   transition: $k-upload-transition-fast;
 
@@ -67,6 +67,24 @@ $k-upload-list-button-desktop-size: 23px !default;
     &:after {
       z-index: -2;
       opacity: 0;
+    }
+  }
+
+  /**
+   * Inline styling
+   *
+   * 1. Move 1 pixel back so drop highlight will light up all borders (except bottom border)
+   * 2. Reset border-radius to fit in parent view
+   * 3. High z-index to set upload on top of the rest
+   */
+
+  &.k-upload--boxed-top {
+    margin: -1px -1px 0 -1px; /* 1 */
+    border-radius: 0; /* 2 */
+    z-index: 9; /* 3 */
+
+    .k-upload__content-wrapper {
+      box-shadow: none;
     }
   }
 
@@ -107,7 +125,7 @@ $k-upload-list-button-desktop-size: 23px !default;
  */
 
 .k-upload__body-default {
-  //z-index: 2; /* 1 */
+  z-index: 2; /* 1 */
   opacity: 1; /* 2 */
   min-height: $k-upload-height; /* 3 */
   max-height: $k-upload-height; /* 3 */
