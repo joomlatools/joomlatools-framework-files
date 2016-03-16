@@ -38,11 +38,17 @@ if (is_image && file.metadata.image) {
 %]
 <div class="details">
     [% if (is_image) { %]
-    <div style="text-align: center">
-        <img class="icon" src="" alt="[%=name%]" border="0"
-             onerror="kQuery(this).hide();"
-             width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
-    </div>
+        [% if (thumbnail) { %]
+        <div style="text-align: center">
+            <img class="icon" src="" alt="[%=name%]" border="0"
+                 onerror="kQuery(this).hide();"
+                 width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+        </div>
+        [% } else { %]
+        <div style="text-align: center">
+            <span class="koowa_icon--image koowa_icon--32"><i>[%=name%]</i></span>
+        </div>
+        [% } %]
     [% } else { %]
     <div style="text-align: center">
         <span class="koowa_icon--document koowa_icon--32"><i>[%=name%]</i></span>
