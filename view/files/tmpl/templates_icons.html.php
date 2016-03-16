@@ -57,9 +57,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </textarea>
 
 <textarea style="display: none" id="icons_folder">
-<div class="k-grid__item k-grid__item--folder">
+<div class="k-grid__item k-grid__item--folder files-node files-folder">
     <div class="k-grid__item__title">
-        [%=name%]
+        <a href="#" class="navigate">[%=name%]</a>
     </div>
     <div class="controls hidden">
         <input type="checkbox" class="files-select" value="" />
@@ -68,8 +68,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </textarea>
 
 <textarea style="display: none" id="icons_file">
-<div class="k-grid__item k-grid__item--file">
-    <div class="imgOutline files-node files-file">
+<div class="k-grid__item k-grid__item--file files-node files-file">
+    <div class="imgOutline">
     	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
 
             [%
@@ -99,7 +99,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </textarea>
 
 <textarea style="display: none" id="icons_image">
-    <div class="k-grid__item k-grid__item--file">
+    <div class="k-grid__item k-grid__item--file  files-node files-image ">
 
         <div class="k-grid__item__content">
             <div class="k-grid__file-wrapper">
