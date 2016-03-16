@@ -55,6 +55,7 @@ For debugging:
 <ktml:script src="media://koowa/com_files/js/files.pathway.js" />
 
 <ktml:script src="media://koowa/com_files/js/files.app.js" />
+<ktml:script src="media://koowa/com_files/js/files.attachments.app.js" />
 <ktml:script src="media://koowa/com_files/js/files.uploader.js" />
 
 <ktml:script src="media://koowa/com_files/js/files.copymove.js" />
