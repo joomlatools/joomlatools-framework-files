@@ -1,2 +1,768 @@
-.k-upload{-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;overflow:hidden;background:white;color:#555;border:1px solid #ccc;border-radius:3px;min-height:60px;transition:all 0.2s ease-in-out}.k-upload:after{display:block;content:"Loading...";position:absolute;top:0;right:0;bottom:0;left:0;background:white;z-index:9;text-align:left;padding-left:15px;line-height:60px;transition:all 0.4s ease-in-out}.k-upload.is-initialized:after{z-index:-2;opacity:0}.k-upload.k-upload--boxed-top{margin:-1px -1px 0 -1px;border-radius:0;z-index:9}.k-upload.k-upload--boxed-top .k-upload__content-wrapper{box-shadow:none}.k-upload *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.k-upload__body-default,.k-upload__body-message,.k-upload__body-info{position:relative;overflow:hidden;transition:all 0.4s ease-in-out}.k-upload__body-default{z-index:2;opacity:1;min-height:60px;max-height:60px}.has-error .k-upload__body-default{opacity:0;margin-top:-60px}.k-upload__body-message,.k-upload__body-info{z-index:0;opacity:0;min-height:60px;max-height:60px;margin-top:-60px;top:-60px}.has-error .k-upload__body-message,.has-open-info .k-upload__body-info{z-index:1;opacity:1;min-height:60px;max-height:200px;top:0;margin-top:0}.has-error .k-upload__body-info{z-index:0;opacity:0;min-height:60px;max-height:60px;margin-top:-60px;top:-60px}.has-drag-hover{border-color:#29abe2}.has-drag-hover .k-upload__content-wrapper,.has-drag-hover .k-upload__info__content{background:#e9f8ff}.has-drag-hover.has-open-info .k-upload__content-wrapper{border-bottom-color:#29abe2}.k-upload__content-wrapper{display:table;width:100%;min-height:60px;border-radius:3px;background:white;border-top:1px solid rgba(0,0,0,0.075);border-bottom:1px solid white;box-shadow:inset 0 0 1px rgba(0,0,0,0.075);transition:all 0.2s ease-in-out}.k-upload__content,.k-upload__buttons{vertical-align:middle}.k-upload__content{font-size:16px;max-width:0;padding:0 0 0 15px;display:table-cell;height:58px;min-height:58px;transition:all .8s ease-in-out}@media (min-width: 600px){.k-upload__content{font-size:20px}}.k-upload__drop-message{transition:all 0.2s ease-in-out;display:none}.has-dragdrop-support .k-upload__drop-message{display:block}.has-dragdrop-support .k-upload__select-message{display:none}.k-upload__details-button{font-size:16px;cursor:pointer;text-decoration:underline;color:#3071a9}.k-upload__details-button:hover,.k-upload__details-button:focus{color:#1f496e;text-decoration:none}.k-upload__details-button .k-upload__details-button__close{display:none}.k-upload__files{opacity:0;z-index:-1;margin:0;padding:0;border:none;transition:all 0.2s ease-in-out}.k-upload.has-file .k-upload__files,.k-upload.has-file .k-upload__drop-message{font-size:14px;line-height:21px}.k-upload.has-file .k-upload__files{opacity:1;z-index:0}.k-upload__file-list{height:21px;overflow:hidden}.k-upload__file-list div{height:21px;display:inline-block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%}.k-upload__buttons{display:table-cell;width:1%;white-space:nowrap;padding-right:15px;padding-left:15px;text-align:right}.k-upload__button,.k-upload__text-button{display:inline-block;text-align:center;vertical-align:middle;cursor:pointer;white-space:nowrap;font-size:14px;border-radius:3px;text-decoration:none;color:#333}.k-upload__button+.k-upload__button,.k-upload__button+.k-upload__text-button,.k-upload__text-button+.k-upload__button,.k-upload__text-button+.k-upload__text-button{margin-left:8px}.is-initialized .k-upload__button.disabled,.is-initialized .k-upload__text-button.disabled{display:none !important}.moxie-shim{z-index:3}.k-upload__button{border:1px solid #ddd;background:white;padding:4px 8px}@media (min-width: 600px){.k-upload__button{padding:5px 10px}}.k-upload__button:focus,.k-upload__button:hover{background:#f5f5f5;text-decoration:none}.k-upload__button--upload{background:#3071a9;color:white;border:1px solid #1f496e}.k-upload__button--upload:focus,.k-upload__button--upload:hover{background-color:#1f496e;color:white;text-decoration:none}.k-upload__text-button{border:none;background:transparent;text-decoration:underline;padding:0}.k-upload__text-button:focus,.k-upload__text-button:hover{text-decoration:none}.k-upload__progress.progress{position:absolute;top:0;right:0;left:0;margin:0;height:3px;z-index:-1;opacity:0;transition:all 0.2s ease-in-out}.k-upload__progress.progress.is-uploading{z-index:99;opacity:1}.k-upload__progress.progress .bar{background-image:none}.k-upload__message{padding:8px 10px;transition:all 0.2s ease-in-out;font-size:15px;line-height:21px;border-radius:2px;margin:1px}.k-upload__message__content{display:table;width:100%}.k-upload__message__body,.k-upload__message__button{display:table-cell}.k-upload__message__body{vertical-align:middle}.k-upload__message__button{text-align:right;vertical-align:top;padding:6px 4px 6px 10px;white-space:nowrap;width:1%}.k-upload__message--error{background:#e74c3c;color:white}.k-upload__message--info{background:#2980b9;color:white}.k-upload__info{transition:all 0.2s ease-in-out;font-size:15px;line-height:21px}.k-upload__info__content{background:#f3f3f3;border-radius:0 0 3px 3px;max-height:200px;overflow:auto;transition:all 0.2s ease-in-out}.has-open-info .k-upload__content-wrapper{border-radius:3px 3px 0 0;border-bottom-color:#ccc}.has-open-info .k-upload__details-button__view{display:none}.has-open-info .k-upload__details-button__close{display:inline}.k-upload__info__body{padding:10px}.k-upload__info__body table{width:100%;margin:21px 0 0;padding:0;font-size:14px}@media (min-width: 600px){.k-upload__info__body table{margin-top:0}}.k-upload__info__body th,.k-upload__info__body td{position:relative;text-align:left;white-space:nowrap;padding:2px 5px}.k-upload__info__body .k-uploader__clear-queue{position:absolute;top:-20px;left:0}@media (min-width: 600px){.k-upload__info__body .k-uploader__clear-queue{position:static;top:auto;left:auto}}.k-upload__overflow{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:0}.k-upload__remove-button{background:white;border:1px solid #ccc;border-radius:2px;font-size:12px;color:#555;display:block;width:18px;height:18px;line-height:16px;overflow:hidden;text-align:center;transition:all 0.2s ease-in-out;text-decoration:none;cursor:pointer;font-weight:bold}.k-upload__remove-button:focus,.k-upload__remove-button:hover{background:#f1f1f1;text-decoration:none}@media (min-width: 600px){.k-upload__remove-button{width:100%;overflow:auto;padding:0 5px;height:23px;line-height:21px}}th.k-upload__clear-queue{padding-left:0}th.k-upload__clear-queue a{font-weight:normal}td.k-upload__file-status-wrapper{padding-left:0}.k-upload__file-status{border-radius:2px;font-size:12px;color:white;display:block;width:18px;height:0;overflow:hidden;padding-top:18px;text-align:center;transition:all 0.4s ease-in-out}@media (min-width: 600px){.k-upload__file-status{width:100%;overflow:auto;padding:0 5px;height:23px;line-height:23px}}.k-upload__file-status.is-in-queue{background:#95a5a6;min-width:18px}@media (min-width: 600px){.k-upload__file-status.is-in-queue{min-width:80px}}.k-upload__file-status.is-uploading{background:#e67e22}.k-upload__file-status.is-failed{background:#c0392b}.k-upload__file-status.is-done{background:#27ae60}.k-hidden-mobile{display:none}@media (min-width: 600px){.k-hidden-mobile{display:inline}}
+/* ==========================================================================
+   Uploader
+   ========================================================================== */
+/**
+ * A single and multi file uploader
+ */
+/* Variables
+   ========================================================================== */
+/* The parent container
+   ========================================================================== */
+/**
+ * 1. Content-box so we don't get weird 1pixel jump error on IE (IE10 as well)
+ * 2. Hide overflowing content like messages and info
+ */
+.k-upload {
+  -webkit-box-sizing: content-box;
+  /* 1 */
+  -moz-box-sizing: content-box;
+  /* 1 */
+  box-sizing: content-box;
+  /* 1 */
+  overflow: hidden;
+  /* 2 */
+  background: white;
+  color: #555;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  min-height: 60px;
+  transition: all 0.2s ease-in-out;
+  /* Loading message on top */
+  /* Hide loading message on initializing */
+  /**
+   * Inline styling
+   *
+   * 1. Move 1 pixel back so drop highlight will light up all borders (except bottom border)
+   * 2. Reset border-radius to fit in parent view
+   * 3. High z-index to set upload on top of the rest
+   */
+  /* Border box size everything inside */ }
+  .k-upload:after {
+    display: block;
+    content: "Loading...";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: white;
+    z-index: 9;
+    text-align: left;
+    padding-left: 15px;
+    line-height: 60px;
+    transition: all 0.4s ease-in-out; }
+  .k-upload.is-initialized:after {
+    z-index: -2;
+    opacity: 0; }
+  .k-upload.k-upload--boxed-top {
+    margin: -1px -1px 0 -1px;
+    /* 1 */
+    border-radius: 0;
+    /* 2 */
+    z-index: 9;
+    /* 3 */ }
+    .k-upload.k-upload--boxed-top .k-upload__content-wrapper {
+      box-shadow: none; }
+  .k-upload * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+/* Uploader animations
+   ========================================================================== */
+/**
+ * 1. Position relative for `top` to work properly
+ * 2. By default hide overflowing content
+ * 3. Smooth transitions
+ */
+.k-upload__body-default,
+.k-upload__body-message,
+.k-upload__body-info {
+  position: relative;
+  /* 1 */
+  overflow: hidden;
+  /* 2 */
+  transition: all 0.4s ease-in-out;
+  /* 3 */ }
+
+/**
+ * Default content wrapper
+ *
+ * 1. Higher z-index than message and info
+ * 2. Set opacity to 1, so we can transition to 0
+ * 3. Height should always be the same as the uploader
+ */
+.k-upload__body-default {
+  z-index: 2;
+  /* 1 */
+  opacity: 1;
+  /* 2 */
+  min-height: 60px;
+  /* 3 */
+  max-height: 60px;
+  /* 3 */ }
+
+/**
+ * Default content wrapper when message or info is visible
+ *
+ * 1. Set opacity to 0 to hide the item visually
+ * 2. Move item out of "screen"
+ */
+.has-error .k-upload__body-default {
+  opacity: 0;
+  /* 1 */
+  margin-top: -60px;
+  /* 2 */ }
+
+/**
+ * Message and info containers, "hide" by default
+ *
+ * 1. Lower z-index to put behind the default content wrapper
+ * 2. Set opacity to 0 to hide the item visually
+ * 3. Height should always be the same as uploader
+ * 4. Position items above content wrapper to make them slide in from top
+ */
+.k-upload__body-message,
+.k-upload__body-info {
+  z-index: 0;
+  /* 1 */
+  opacity: 0;
+  /* 2 */
+  min-height: 60px;
+  /* 3 */
+  max-height: 60px;
+  /* 3 */
+  margin-top: -60px;
+  /* 4 */
+  top: -60px;
+  /* 4 */ }
+
+/**
+ * Display error and info
+ *
+ * 1. Higher z-index than other container
+ * 2. Set opacity to 1 to visually show item
+ * 3. Minimum height should always be the same as the uploader
+ * 4. Set the max-height
+ * 5. Move into "screen"
+ */
+.has-error .k-upload__body-message,
+.has-open-info .k-upload__body-info {
+  z-index: 1;
+  /* 1 */
+  opacity: 1;
+  /* 2 */
+  min-height: 60px;
+  /* 3 */
+  max-height: 200px;
+  /* 4 */
+  top: 0;
+  /* 5 */
+  margin-top: 0;
+  /* 5 */ }
+
+/**
+ * Has error
+ *
+ * Hide the info container on displaying error
+ */
+.has-error .k-upload__body-info {
+  z-index: 0;
+  /* 1 */
+  opacity: 0;
+  /* 2 */
+  min-height: 60px;
+  /* 3 */
+  max-height: 60px;
+  /* 3 */
+  margin-top: -60px;
+  /* 4 */
+  top: -60px;
+  /* 4 */ }
+
+/**
+ * When dragging file over area
+ */
+.has-drag-hover {
+  border-color: #29abe2; }
+  .has-drag-hover .k-upload__content-wrapper,
+  .has-drag-hover .k-upload__info__content {
+    background: #e9f8ff; }
+  .has-drag-hover.has-open-info .k-upload__content-wrapper {
+    border-bottom-color: #29abe2;
+    /* Also color the queue list border */ }
+
+/* Content wrapper
+   ========================================================================== */
+/**
+ * 1. Display table to align drop text and buttons next to each other with easy vertical centering
+ * 2. 100% width to stretch table even if content is not enough
+ * 3. Min-height same as uploader container for vertical centering
+ * 4. Borders for the extra container
+ */
+.k-upload__content-wrapper {
+  display: table;
+  /* 1 */
+  width: 100%;
+  /* 2 */
+  min-height: 60px;
+  /* 3 */
+  border-radius: 3px;
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.075);
+  border-bottom: 1px solid white;
+  box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.075);
+  transition: all 0.2s ease-in-out; }
+
+/**
+ * Content & Buttons
+ *
+ * 1. Align content in vertical middle
+ */
+.k-upload__content,
+.k-upload__buttons {
+  vertical-align: middle;
+  /* 1 */ }
+
+/**
+ * Content
+ *
+ * 1. "Drop files here" in larger font
+ * 2. Set max-width to 0 for text-overflow: ellipsis to work properly
+ * 3. Display as table-cell
+ */
+.k-upload__content {
+  font-size: 16px;
+  /* 1 */
+  max-width: 0;
+  /* 2 */
+  padding: 0 0 0 15px;
+  display: table-cell;
+  /* 3 */
+  height: 58px;
+  min-height: 58px;
+  transition: all .8s ease-in-out; }
+  @media (min-width: 600px) {
+    .k-upload__content {
+      font-size: 20px;
+      /* 1 */ } }
+
+/* Hide drop message by default */
+.k-upload__drop-message {
+  transition: all 0.2s ease-in-out;
+  display: none; }
+
+/**
+ * Define which content should be visible based on if drag and drop is supported
+ */
+.has-dragdrop-support .k-upload__drop-message {
+  display: block; }
+.has-dragdrop-support .k-upload__select-message {
+  display: none; }
+
+/**
+ * Details button
+ *
+ * Opens the queue
+ *
+ * 1. Smaller font-size
+ * 2. Styling as link
+ */
+.k-upload__details-button {
+  font-size: 16px;
+  /* 1 */
+  cursor: pointer;
+  /* 2 */
+  text-decoration: underline;
+  /* 2 */
+  color: #3071a9;
+  /* 2 */ }
+  .k-upload__details-button:hover, .k-upload__details-button:focus {
+    color: #1f496e;
+    /* 2 */
+    text-decoration: none;
+    /* 2 */ }
+  .k-upload__details-button .k-upload__details-button__close {
+    display: none; }
+
+/**
+ * Files message
+ *
+ * 1. Hide container when no files are uploaded yet
+ * 2. Smaller font when both file and drop message are visible
+ * 3. Display files when file is selected
+ */
+.k-upload__files {
+  opacity: 0;
+  /* 1 */
+  z-index: -1;
+  /* 1 */
+  margin: 0;
+  padding: 0;
+  border: none;
+  transition: all 0.2s ease-in-out; }
+
+.k-upload.has-file .k-upload__files,
+.k-upload.has-file .k-upload__drop-message {
+  font-size: 14px;
+  /* 2 */
+  line-height: 21px;
+  /* 2 */ }
+.k-upload.has-file .k-upload__files {
+  opacity: 1;
+  /* 3 */
+  z-index: 0;
+  /* 3 */ }
+
+.k-upload__file-list {
+  height: 21px;
+  overflow: hidden; }
+  .k-upload__file-list div {
+    height: 21px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%; }
+
+/* Buttons
+   ========================================================================== */
+/**
+ * 1. Display as table-cell to align items
+ * 2. Make this cell as large as it's content
+ * 3. Don't wrap content to always align buttons
+ */
+.k-upload__buttons {
+  display: table-cell;
+  /* 1 */
+  width: 1%;
+  /* 2 */
+  white-space: nowrap;
+  /* 3 */
+  padding-right: 15px;
+  padding-left: 15px;
+  text-align: right; }
+
+/**
+ * Buttons styling
+ */
+.k-upload__button,
+.k-upload__text-button {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  white-space: nowrap;
+  font-size: 14px;
+  border-radius: 3px;
+  text-decoration: none;
+  color: #333;
+  /* Add spacing to left from second button */
+  /* Disabled buttons should be invisible, but only after initializing */ }
+  .k-upload__button + .k-upload__button, .k-upload__button + .k-upload__text-button,
+  .k-upload__text-button + .k-upload__button,
+  .k-upload__text-button + .k-upload__text-button {
+    margin-left: 8px; }
+  .is-initialized .k-upload__button.disabled, .is-initialized
+  .k-upload__text-button.disabled {
+    display: none !important; }
+
+/**
+ * Moxie shim button
+ *
+ * Always on top of the button container
+ */
+.moxie-shim {
+  z-index: 3; }
+
+/* Default button styling */
+.k-upload__button {
+  border: 1px solid #ddd;
+  background: white;
+  padding: 4px 8px; }
+  @media (min-width: 600px) {
+    .k-upload__button {
+      padding: 5px 10px; } }
+  .k-upload__button:focus, .k-upload__button:hover {
+    background: #f5f5f5;
+    text-decoration: none; }
+
+/* Upload button styling */
+.k-upload__button--upload {
+  background: #3071a9;
+  color: white;
+  border: 1px solid #1f496e; }
+  .k-upload__button--upload:focus, .k-upload__button--upload:hover {
+    background-color: #1f496e;
+    color: white;
+    text-decoration: none; }
+
+/* Text button styling */
+.k-upload__text-button {
+  border: none;
+  background: transparent;
+  text-decoration: underline;
+  padding: 0; }
+  .k-upload__text-button:focus, .k-upload__text-button:hover {
+    text-decoration: none; }
+
+/* Progress bar
+   ========================================================================== */
+/**
+  * 1. Double class to win over the plupload styling
+  * 2. Absolute positioning so it's not in the way of anything
+  * 3. Hide container visually
+  */
+.k-upload__progress.progress {
+  /* 1 */
+  position: absolute;
+  /* 2 */
+  top: 0;
+  /* 2 */
+  right: 0;
+  /* 2 */
+  left: 0;
+  /* 2 */
+  margin: 0;
+  height: 3px;
+  z-index: -1;
+  /* 3 */
+  opacity: 0;
+  /* 3 */
+  transition: all 0.2s ease-in-out;
+  /* Display container visually when files are uploading */
+  /* Remove the 45deg gradient from plupload, just use a solid color */ }
+  .k-upload__progress.progress.is-uploading {
+    z-index: 99;
+    opacity: 1; }
+  .k-upload__progress.progress .bar {
+    background-image: none; }
+
+/* Message container
+   ========================================================================== */
+/**
+ * For displaying errors, warnings and info
+ *
+ * 1. Set font styling
+ * 2. Border-radius to fit in nicely within parent container
+ * 3. 1px margin to set background aside from parent container
+ */
+.k-upload__message {
+  padding: 8px 10px;
+  transition: all 0.2s ease-in-out;
+  font-size: 15px;
+  /* 1 */
+  line-height: 21px;
+  /* 1 */
+  border-radius: 2px;
+  /* 2 */
+  margin: 1px;
+  /* 3 */ }
+
+/**
+ * Message content
+ *
+ * 1. Display table to align text and buttons next to each other with easy vertical centering
+ * 2. 100% width to stretch table even if content is not enough
+ */
+.k-upload__message__content {
+  display: table;
+  /* 1 */
+  width: 100%;
+  /* 2 */ }
+
+/**
+ * Message body and button
+ *
+ * 1. Display as table-cell to align items
+ */
+.k-upload__message__body,
+.k-upload__message__button {
+  display: table-cell;
+  /* 1 */ }
+
+/**
+ * Message body
+ *
+ * 1. Vertical align text to the middle
+ */
+.k-upload__message__body {
+  vertical-align: middle; }
+
+/**
+ * Message button
+ *
+ * 1. Align button right
+ * 2. Align buttons to the top (for when there's a lot of content)
+ * 3. Add default padding to optically vertical align middle
+ * 4. Make cell small but always big enough for it's content
+ */
+.k-upload__message__button {
+  text-align: right;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */
+  padding: 6px 4px 6px 10px;
+  /* 3 */
+  white-space: nowrap;
+  /* 4 */
+  width: 1%;
+  /* 4 */ }
+
+/**
+ * Message styling
+ */
+.k-upload__message--error {
+  background: #e74c3c;
+  color: white; }
+
+.k-upload__message--info {
+  background: #2980b9;
+  color: white; }
+
+/* Info / queue container
+   ========================================================================== */
+/**
+ * 1. Set font styling
+ * 2. Border-radius to fit in nicely within parent container
+ * 3. 1px margin to set background aside from parent container
+ */
+.k-upload__info {
+  transition: all 0.2s ease-in-out;
+  font-size: 15px;
+  /* 1 */
+  line-height: 21px;
+  /* 1 */ }
+
+.k-upload__info__content {
+  background: #f3f3f3;
+  border-radius: 0 0 3px 3px;
+  max-height: 200px;
+  overflow: auto;
+  transition: all 0.2s ease-in-out; }
+
+/**
+ * Has open info
+ */
+.has-open-info .k-upload__content-wrapper {
+  border-radius: 3px 3px 0 0;
+  border-bottom-color: #ccc; }
+.has-open-info .k-upload__details-button__view {
+  display: none; }
+.has-open-info .k-upload__details-button__close {
+  display: inline; }
+
+/**
+ * The file list
+ *
+ * 1. Add some spacing to move from the sides
+ * 2. Make some room for the clear queue message on mobile
+ * 3. Remove top margin on desktop screens
+ * 4. Position "clear queue" button outside the table on mobile
+ * 5. Set "clear queue" button inline in the table on desktop
+ */
+.k-upload__info__body {
+  padding: 10px;
+  /* 1 */ }
+  .k-upload__info__body table {
+    width: 100%;
+    margin: 21px 0 0;
+    /* 2 */
+    padding: 0;
+    font-size: 14px; }
+    @media (min-width: 600px) {
+      .k-upload__info__body table {
+        margin-top: 0;
+        /* 3 */ } }
+  .k-upload__info__body th, .k-upload__info__body td {
+    position: relative;
+    text-align: left;
+    white-space: nowrap;
+    padding: 2px 5px; }
+  .k-upload__info__body .k-uploader__clear-queue {
+    position: absolute;
+    /* 4 */
+    top: -20px;
+    /* 4 */
+    left: 0;
+    /* 4 */ }
+    @media (min-width: 600px) {
+      .k-upload__info__body .k-uploader__clear-queue {
+        position: static;
+        /* 5 */
+        top: auto;
+        /* 5 */
+        left: auto;
+        /* 5 */ } }
+
+/**
+ * Overflowing td
+ */
+.k-upload__overflow {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 0;
+  /* Needed for text ellipsis to work */ }
+
+/**
+ * Remove files from the queue button
+ */
+.k-upload__remove-button {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  font-size: 12px;
+  color: #555;
+  display: block;
+  width: 18px;
+  height: 18px;
+  line-height: 16px;
+  overflow: hidden;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: bold; }
+  .k-upload__remove-button:focus, .k-upload__remove-button:hover {
+    background: #f1f1f1;
+    text-decoration: none; }
+  @media (min-width: 600px) {
+    .k-upload__remove-button {
+      width: 100%;
+      overflow: auto;
+      padding: 0 5px;
+      height: 23px;
+      line-height: 21px; } }
+
+/**
+ * Clear queue button
+ */
+th.k-upload__clear-queue {
+  padding-left: 0; }
+  th.k-upload__clear-queue a {
+    font-weight: normal; }
+
+/**
+ * Upload status labels
+ *
+ * 1. No padding left on the label wrapper so labels align to the left of the table nicely
+ */
+td.k-upload__file-status-wrapper {
+  padding-left: 0; }
+
+.k-upload__file-status {
+  border-radius: 2px;
+  font-size: 12px;
+  color: white;
+  display: block;
+  width: 18px;
+  height: 0;
+  overflow: hidden;
+  padding-top: 18px;
+  text-align: center;
+  transition: all 0.4s ease-in-out; }
+  @media (min-width: 600px) {
+    .k-upload__file-status {
+      width: 100%;
+      overflow: auto;
+      padding: 0 5px;
+      height: 23px;
+      line-height: 23px; } }
+
+.k-upload__file-status.is-in-queue {
+  background: #95a5a6;
+  min-width: 18px; }
+  @media (min-width: 600px) {
+    .k-upload__file-status.is-in-queue {
+      min-width: 80px; } }
+
+.k-upload__file-status.is-uploading {
+  background: #e67e22; }
+
+.k-upload__file-status.is-failed {
+  background: #c0392b; }
+
+.k-upload__file-status.is-done {
+  background: #27ae60; }
+
+/**
+ * Hide parts of strings on mobile to make everything fit nicely
+ */
+.k-hidden-mobile {
+  display: none; }
+  @media (min-width: 600px) {
+    .k-hidden-mobile {
+      display: inline; } }
+
+/* Quick and dirty fixes for the filelink modal, will be better when we have the new UI */
+.koowa_dialog-table {
+  display: table;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; }
+
+/**
+ * The first table row is for upload
+ *
+ * 1% height and nowrap so the other row(s) stretch all the way
+ */
+.koowa_dialog-table__top {
+  height: 1%;
+  white-space: nowrap;
+  display: table-row; }
+
+/**
+ * List
+ *
+ * Table row for the `attached files` list
+ *
+ * 1. Max 100% height so we can have scrolling children
+ * 2. Hide overflowing content so we can have scrolling children
+ */
+.koowa_dialog-table__bottom {
+  display: table-row;
+  height: 100%;
+  /* 1 */
+  overflow: hidden;
+  /* 2 */
+  vertical-align: top;
+  max-height: 100%; }
+
+.filelink .koowa_dialog__wrapper__child.koowa_dialog__wrapper__child.koowa_dialog__wrapper__child.koowa_dialog__wrapper__child {
+  position: relative; }
+.filelink .koowa_dialog__child__content.koowa_dialog__child__content.koowa_dialog__child__content.koowa_dialog__child__content {
+  position: relative;
+  padding: 0;
+  margin: 0; }
+.filelink .koowa_dialog__title.koowa_dialog__title.koowa_dialog__title.koowa_dialog__title {
+  position: absolute;
+  left: 0;
+  right: 0; }
+.filelink .koowa_dialog__child__content__box.koowa_dialog__child__content__box.koowa_dialog__child__content__box.koowa_dialog__child__content__box {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: auto; }
+.filelink .koowa_dialog__folders_files.koowa_dialog__folders_files.koowa_dialog__folders_files.koowa_dialog__folders_files .koowa_dialog__child__content__box {
+  position: absolute;
+  top: 30px;
+  bottom: 68px;
+  left: 0;
+  right: 0;
+  overflow: auto;
+  height: auto; }
+.filelink .koowa_dialog__new_folder.koowa_dialog__new_folder.koowa_dialog__new_folder.koowa_dialog__new_folder {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 68px; }
+  .filelink .koowa_dialog__new_folder.koowa_dialog__new_folder.koowa_dialog__new_folder.koowa_dialog__new_folder .koowa_dialog__title.koowa_dialog__title.koowa_dialog__title.koowa_dialog__title {
+    position: static;
+    left: auto;
+    right: auto; }
+
 /*# sourceMappingURL=uploader.css.map */

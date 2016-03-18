@@ -98,13 +98,13 @@ kQuery(function($) {
 <div class="koowa_dialog koowa_dialog--file_dialog" >
     <div class="koowa_dialog__layout" style="padding-top: 0">
         <div class="koowa_dialog__wrapper">
-            <div class="attachments-top">
-                <div class="attachments-table">
-                    <? if ($can_upload): ?>
-                        <div class="attachments-upload">
-                            <?= import('com:files.files.uploader.html') ?>
-                        </div>
-                    <? endif ?>
+            <div class="koowa_dialog-table">
+                <? if ($can_upload): ?>
+                    <div class="koowa_dialog-table__top">
+                        <?= import('com:files.files.uploader.html') ?>
+                    </div>
+                <? endif ?>
+                <div class="koowa_dialog-table__bottom">
                     <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_categories">
                         <h2 class="koowa_dialog__title">
                             <?= translate('Select a folder'); ?>
