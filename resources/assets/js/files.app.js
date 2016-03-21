@@ -155,6 +155,8 @@ Files.App = new Class({
 
         this.setOptions(options);
 
+        this.fireEvent('onInitialize', this);
+
         if (this.options.persistent && this.options.container) {
             var container = typeof this.options.container === 'string' ? this.options.container : this.options.container.slug;
             this.cookie = 'com.files.container.'+container;
