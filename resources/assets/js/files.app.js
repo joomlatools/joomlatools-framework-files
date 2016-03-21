@@ -148,6 +148,11 @@ Files.App = new Class({
         }
     },
     initialize: function(options) {
+
+        if (Files.Config) {
+            Object.merge(options, Files.Config);
+        }
+
         this.setOptions(options);
 
         if (this.options.persistent && this.options.container) {
