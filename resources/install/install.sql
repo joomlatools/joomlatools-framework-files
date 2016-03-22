@@ -15,4 +15,4 @@ CREATE TABLE IF NOT EXISTS `#__files_thumbnails` (
   `filename` varchar(255) NOT NULL,
   `thumbnail` mediumtext NOT NULL,
   PRIMARY KEY (`files_thumbnail_id`)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
