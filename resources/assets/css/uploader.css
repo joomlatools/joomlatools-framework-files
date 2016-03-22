@@ -467,6 +467,11 @@
   margin: 1px;
   /* 3 */ }
 
+.k-upload--boxed-top .k-upload__message {
+  margin-top: 0;
+  margin-right: 0;
+  margin-left: 0; }
+
 /**
  * Message content
  *
@@ -516,6 +521,8 @@
   /* 4 */
   width: 1%;
   /* 4 */ }
+  .k-upload__message__button .k-upload__button {
+    color: #000; }
 
 /**
  * Message styling

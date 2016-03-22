@@ -554,6 +554,14 @@ $k-upload-list-button-desktop-size: 23px !default;
   margin: 1px; /* 3 */
 }
 
+.k-upload--boxed-top {
+  .k-upload__message {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
 
 /**
  * Message content
@@ -606,6 +614,10 @@ $k-upload-list-button-desktop-size: 23px !default;
   padding: 6px 4px 6px 10px; /* 3 */
   white-space: nowrap; /* 4 */
   width: 1%; /* 4 */
+
+  .k-upload__button {
+    color: #000;
+  }
 }
 
 
