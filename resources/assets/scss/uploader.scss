@@ -47,13 +47,13 @@ $k-upload-list-button-desktop-size: 23px !default;
 
   /* Loading message on top */
   &:after {
-    display: block;
-    content: "Loading...";
     position: absolute;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    display: block;
+    content: "Loading...";
     background: white;
     z-index: 9;
     text-align: left;
@@ -70,23 +70,30 @@ $k-upload-list-button-desktop-size: 23px !default;
     }
   }
 
+
   /**
-   * Inline styling
+   * Inline styling - modals
    *
-   * 1. Move 1 pixel back so drop highlight will light up all borders (except bottom border)
-   * 2. Reset border-radius to fit in parent view
-   * 3. High z-index to set upload on top of the rest
+   * 1. Reset border-radius to fit in parent view
+   * 2. High z-index to set upload on top of the rest
    */
 
   &.k-upload--boxed-top {
-    margin: -1px -1px 0 -1px; /* 1 */
-    border-radius: 0; /* 2 */
-    z-index: 9; /* 3 */
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-radius: 0; /* 1 */
+    z-index: 9; /* 2 */
+    box-shadow: none;
+    margin: 0;
 
     .k-upload__content-wrapper {
+      border-radius: 0; /* 1 */
+      border-top: none;
       box-shadow: none;
     }
   }
+
 
   /* Border box size everything inside */
   * {
@@ -223,6 +230,10 @@ $k-upload-list-button-desktop-size: 23px !default;
     .k-upload__content-wrapper {
       border-bottom-color: #29abe2; /* Also color the queue list border */
     }
+  }
+
+  &.k-upload--boxed-top {
+    border-color: #29abe2;
   }
 }
 

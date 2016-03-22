@@ -15,7 +15,7 @@
 
         list.getChildren().each(function(folder, index){
             if(index > 0 && index < last) {
-                folder.setStyle('width', sizes[index].value);
+                //folder.setStyle('width', sizes[index].value);
                 if(sizes[index].value <= 48) {
                     folder.removeClass('overflow-ellipsis');
                 } else {
@@ -84,7 +84,7 @@
 
 
             var root = wrap(app, '<span class="k-breadcrumb_root-text">'+app.container.title+'</span>', '', false)
-                        .addClass('home')
+                        .addClass('k-breadcrumb__home')
                         .getElement('a').addClass('k-icon-home').getParent();
 
             list.adopt(root);
@@ -98,7 +98,7 @@
                 }
             });
 
-            list.getLast().addClass('active');
+            list.getLast().addClass('k-breadcrumb__active');
 
             pathway.setStyle('visibility', 'hidden');
             pathway.adopt(list);
