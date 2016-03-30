@@ -21,7 +21,7 @@ defined('KOOWA') or die;
     </div>
 
     <!-- Search -->
-    <div class="k-scopebar__item k-scopebar__search">
+    <div class="k-scopebar__item k-scopebar__item--search">
         <?= helper('grid.search', array(
             'submit_on_clear' => false,
             'placeholder' => translate('Find by file or folder name&hellip;')
