@@ -62,6 +62,10 @@ $k-upload-list-button-desktop-size: 23px !default;
     }
   }
 
+  @include flexbox {
+    flex: 0 0 auto;
+  }
+
   /* Hide loading message on initializing */
   &.is-initialized {
     &:after {
