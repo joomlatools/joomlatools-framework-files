@@ -4,7 +4,7 @@
  *
  * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
- * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
+ * @link		http://github.com/nooku/nooku-files for the canonical source repository
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
@@ -53,31 +53,23 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </textarea>
 
 <textarea style="display: none" id="icons_container">
-<div>
-
-</div>
+<div class="k-grid__items"></div>
 </textarea>
 
 <textarea style="display: none" id="icons_folder">
-<div class="files-node-shadow">
-    <div class="imgOutline files-node files-folder">
-    	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
-    			<a href="#" class="navigate koowa_icon--folder koowa_icon--48"></a>
-    	</div>
-
-        <div class="files-icons-controls">
-            <label class="checkbox ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-                <input type="checkbox" class="files-select" />[%=name%]
-            </label>
-        </div>
-
+<div class="k-grid__item k-grid__item--folder files-node files-folder">
+    <div class="k-grid__item__title">
+        <a href="#" class="navigate">[%=name%]</a>
+    </div>
+    <div class="controls hidden">
+        <input type="checkbox" class="files-select" value="" />
     </div>
 </div>
 </textarea>
 
 <textarea style="display: none" id="icons_file">
-<div class="files-node-shadow">
-    <div class="imgOutline files-node files-file">
+<div class="k-grid__item k-grid__item--file files-node files-file">
+    <div class="imgOutline">
     	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
 
             [%
@@ -94,36 +86,39 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     	 		data-filetype="[%=filetype%]"
     	 		data-extension="[%=metadata.extension%]"></a>
     	</div>
-
-        <div class="files-icons-controls">
-            <label class="checkbox ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-                <input type="checkbox" class="files-select" />[%=name%]
-            </label>
-        </div>
+    	<div class="files-icons-controls">
+    	<div class="controls" style="display:none">
+    		<input type="checkbox" class="files-select" value="" />
+    	</div>
+    	<div class="ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
+    		[%=name%]
+    	</div>
+    	</div>
     </div>
 </div>
 </textarea>
 
 <textarea style="display: none" id="icons_image">
-<div class="files-node-shadow">
-    <div class="imgOutline [%= typeof thumbnail === 'string' ? 'thumbnails' : 'nothumbnails' %] files-node files-image [%= typeof thumbnail === 'string' ? (client_cache ? 'load' : 'loading') : '' %]">
-    	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
-      		<a class="navigate
-      		        [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
-      	 		data-filetype="[%=filetype%]"
-      	 		data-extension="[%=metadata.extension%]">
-      		[% if (typeof thumbnail === 'string') { %]
-      		    <div class="spinner"></div>
-      			<img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" style="max-width: [%=metadata.image? metadata.image.width : 512%]px" />
-      		[% } %]
-      		</a>
-    	</div>
+    <div class="k-grid__item k-grid__item--file  files-node files-image ">
 
-    	<div class="files-icons-controls">
-        	<label class="checkbox ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-        		<input type="checkbox" class="files-select" />[%=name%]
-        	</label>
-    	</div>
+        <div class="k-grid__item__content">
+            <div class="k-grid__file-wrapper">
+                <a class="k-grid__file navigate
+                    [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
+                   data-filetype="[%=filetype%]"
+                   data-extension="[%=metadata.extension%]">
+                    [% if (typeof thumbnail === 'string') { %]
+                    <div class="spinner"></div>
+                    <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
+                    [% } %]
+                </a>
+            </div>
+        </div>
+        <div class="k-grid__item__title">
+            [%=name%]
+        </div>
+        <div class="controls hidden">
+            <input type="checkbox" class="files-select" value="" />
+        </div>
     </div>
-</div>
 </textarea>

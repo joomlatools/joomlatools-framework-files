@@ -15,7 +15,7 @@
 
         list.getChildren().each(function(folder, index){
             if(index > 0 && index < last) {
-                folder.setStyle('width', sizes[index].value);
+                //folder.setStyle('width', sizes[index].value);
                 if(sizes[index].value <= 48) {
                     folder.removeClass('overflow-ellipsis');
                 } else {
@@ -49,42 +49,56 @@
             this.element.getParent().setStyle('position', 'relative');
             var pathway = this.element;
             pathway.setStyles({
-                'overflow': 'visible',
+                'overflow': 'auto',
                 'text-overflow': 'ellipsis',
                 'white-space': 'nowrap',
-                bottom: 0,
-                top: 0,
-                left: (pathway.getPrevious() ? pathway.getPrevious().getSize().x : 0) + this.options.offset,
-                right: pathway.getNext().getSize().x + this.options.offset,
-                'position': 'absolute'
+                'bottom': 'auto',
+                'top': 'auto',
+                'position': 'static'
             });
             pathway.empty();
-            var list = new Element('ul', {'class': 'breadcrumb breadcrumb-resizable'}), wrap = function(app, title, path, icon){
-                var result = new Element('li', {
-                        title: title,
+            var list = new Element('ul'),
+                wrap = function(app, title, path, icon){
+                    var result, link;
+
+                    result = new Element('li', {
                         events: {
                             click: function(){
                                 app.navigate(path);
                             }
                         }
-                    }),
-                    link = new Element('span', {text: title});
-                result.grab(link);
-                if(icon) {
-                    link.grab(new Element('span', {'class': 'divider'}), 'top');
-                }
-                return result;
-            };
-            var root = wrap(app, ' '+app.container.title, '', false).getElement('span').grab(new Element('i', {'class': 'icon-database icon-hdd'}), 'top').getParent();
+                    });
+
+                    link = new Element('a', {
+                        'class': 'k-breadcrumb__item',
+                        html: title
+                    });
+
+                    result.grab(link);
+
+                    if(icon) {
+                       // link.grab(new Element('span', {'class': 'divider'}), 'top');
+                    }
+                    return result;
+                };
+
+
+            var root = wrap(app, '<span class="k-breadcrumb_root-text">'+app.container.title+'</span>', '', false)
+                        .addClass('k-breadcrumb__home')
+                        .getElement('a').addClass('k-icon-home').getParent();
+
             list.adopt(root);
+
             var folders = app.getPath().split('/'), path = '';
+
             folders.each(function(title){
                 if(title.trim()) {
                     path += path ? '/'+title : title;
                     list.adopt(wrap(app, title, path, true));
                 }
             });
-            list.getLast().addClass('active');
+
+            list.getLast().addClass('k-breadcrumb__active');
 
             pathway.setStyle('visibility', 'hidden');
             pathway.adopt(list);

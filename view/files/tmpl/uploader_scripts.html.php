@@ -38,19 +38,22 @@ $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
     "File extension error."
 ))); ?>
 
-<?= helper('bootstrap.javascript'); ?>
+<?= helper('behavior.bootstrap', array(
+    'javascript' => true,
+    'css' => false
+)); ?>
 <?= helper('behavior.koowa'); ?>
 <?= helper('behavior.jquery'); ?>
 
-<ktml:style src="media://koowa/com_files/css/uploader.css" />
+<ktml:style src="assets://files/css/uploader.css" />
 
-<!--<ktml:script src="media://koowa/com_files/js/uploader/moxie.js" />
-<ktml:script src="media://koowa/com_files/js/uploader/plupload.dev.js" />-->
-<ktml:script src="media://koowa/com_files/js/uploader/plupload.full.min.js" />
-<ktml:script src="media://koowa/com_files/js/uploader/jquery-ui.js" />
-<ktml:script src="media://koowa/com_files/js/uploader/dot.js" />
-<ktml:script src="media://koowa/com_files/js/uploader/koowa.uploader.js" />
-<ktml:script src="media://koowa/com_files/js/uploader/koowa.uploader.overwritable.js" />
+<!--<ktml:script src="assets://files/js/uploader/moxie.js" />
+<ktml:script src="assets://files/js/uploader/plupload.dev.js" />-->
+<ktml:script src="assets://files/js/uploader/plupload.full.min.js" />
+<ktml:script src="assets://files/js/uploader/jquery-ui.js" />
+<ktml:script src="assets://files/js/uploader/dot.js" />
+<ktml:script src="assets://files/js/uploader/koowa.uploader.js" />
+<ktml:script src="assets://files/js/uploader/koowa.uploader.overwritable.js" />
 
 <script>
 kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;

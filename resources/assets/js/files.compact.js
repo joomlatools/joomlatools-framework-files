@@ -14,7 +14,6 @@ Files.Compact.App = new Class({
 	Implements: [Events, Options],
     cookie: false,
 	options: {
-        pathway: false,
         persistent: false,
 		types: ['file', 'image'],
 		editor: null,
@@ -80,7 +79,15 @@ Files.Compact.App = new Class({
 				that.preview.empty();
 
 				copy.render('compact').inject(that.preview);
-			}
+			},
+			onAfterRender: function() {
+				this.setState(that.state.data);
+			},
+			onSetState: function(state) {
+				this.state.set(state);
+
+				this.navigate();
+			}.bind(this)
 		});
 		this.grid = new Files.Grid(this.options.grid.element, opts);
 	}
