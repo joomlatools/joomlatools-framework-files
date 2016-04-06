@@ -6,6 +6,7 @@
  * A single and multi file uploader
  */
 
+@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/admin/core/tools";
 
 
 /* Variables
@@ -33,33 +34,35 @@ $k-upload-list-button-desktop-size: 23px !default;
  */
 
 .k-upload {
-  -webkit-box-sizing: content-box; /* 1 */
-  -moz-box-sizing: content-box; /* 1 */
   box-sizing: content-box; /* 1 */
   overflow: hidden; /* 2 */
   background: white;
   color: #555;
   border: 1px solid $k-upload-border-color;
   border-radius: $k-upload-radius;
-  //margin-bottom: 20px; @todo do we need this?
+  margin-bottom: 20px;
   min-height: $k-upload-height;
   transition: $k-upload-transition-fast;
 
   /* Loading message on top */
   &:after {
+    @include coverall;
     display: block;
     content: "Loading...";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
     background: white;
     z-index: 9;
     text-align: left;
-    padding-left: 15px;
+    padding: 0 15px;
     line-height: $k-upload-height;
     transition: $k-upload-transition-slow;
+
+    @include rtl-outside-koowa {
+      text-align: right;
+    }
+  }
+
+  @include flexbox {
+    flex: 0 0 auto;
   }
 
   /* Hide loading message on initializing */
@@ -70,28 +73,33 @@ $k-upload-list-button-desktop-size: 23px !default;
     }
   }
 
+
   /**
-   * Inline styling
+   * Inline styling - modals
    *
-   * 1. Move 1 pixel back so drop highlight will light up all borders (except bottom border)
-   * 2. Reset border-radius to fit in parent view
-   * 3. High z-index to set upload on top of the rest
+   * 1. Reset border-radius to fit in parent view
+   * 2. High z-index to set upload on top of the rest
    */
 
   &.k-upload--boxed-top {
-    margin: -1px -1px 0 -1px; /* 1 */
-    border-radius: 0; /* 2 */
-    z-index: 9; /* 3 */
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-left-color: transparent;
+    border-radius: 0; /* 1 */
+    z-index: 9; /* 2 */
+    box-shadow: none;
+    margin: 0;
 
     .k-upload__content-wrapper {
+      border-radius: 0; /* 1 */
+      border-top: none;
       box-shadow: none;
     }
   }
 
+
   /* Border box size everything inside */
   * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
     box-sizing: border-box;
   }
 }
@@ -179,12 +187,12 @@ $k-upload-list-button-desktop-size: 23px !default;
 
 .has-error .k-upload__body-message,
 .has-open-info .k-upload__body-info {
-    z-index: 1; /* 1 */
-    opacity: 1; /* 2 */
-    min-height: $k-upload-height; /* 3 */
-    max-height: $k-upload-max-height; /* 4 */
-    top: 0; /* 5 */
-    margin-top: 0; /* 5 */
+  z-index: 1; /* 1 */
+  opacity: 1; /* 2 */
+  min-height: $k-upload-height; /* 3 */
+  max-height: $k-upload-max-height; /* 4 */
+  top: 0; /* 5 */
+  margin-top: 0; /* 5 */
 }
 
 
@@ -223,6 +231,10 @@ $k-upload-list-button-desktop-size: 23px !default;
     .k-upload__content-wrapper {
       border-bottom-color: #29abe2; /* Also color the queue list border */
     }
+  }
+
+  &.k-upload--boxed-top {
+    border-color: #29abe2;
   }
 }
 
@@ -279,6 +291,10 @@ $k-upload-list-button-desktop-size: 23px !default;
   height: 58px;
   min-height: 58px;
   transition: all .8s ease-in-out;
+
+  @include rtl-outside-koowa {
+    padding: 0 15px 0 0;
+  }
 
   @media (min-width: $k-upload-querie) {
     font-size: 20px; /* 1 */
@@ -418,6 +434,11 @@ $k-upload-list-button-desktop-size: 23px !default;
   & + .k-upload__button,
   & + .k-upload__text-button {
     margin-left: 8px;
+
+    @include rtl-outside-koowa {
+      margin-left: auto;
+      margin-right: 8px;
+    }
   }
 
   /* Disabled buttons should be invisible, but only after initializing */
@@ -543,6 +564,14 @@ $k-upload-list-button-desktop-size: 23px !default;
   margin: 1px; /* 3 */
 }
 
+.k-upload--boxed-top {
+  .k-upload__message {
+    margin-top: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}
+
 
 /**
  * Message content
@@ -595,6 +624,14 @@ $k-upload-list-button-desktop-size: 23px !default;
   padding: 6px 4px 6px 10px; /* 3 */
   white-space: nowrap; /* 4 */
   width: 1%; /* 4 */
+
+  @include rtl-outside-koowa {
+    padding: 6px 10px 6px 4px;
+  }
+
+  .k-upload__button {
+    color: #000;
+  }
 }
 
 
@@ -687,6 +724,10 @@ $k-upload-list-button-desktop-size: 23px !default;
     text-align: left;
     white-space: nowrap;
     padding: 2px 5px;
+
+    @include rtl-outside-koowa {
+      text-align: right;
+    }
   }
 
   .k-uploader__clear-queue {
@@ -694,10 +735,19 @@ $k-upload-list-button-desktop-size: 23px !default;
     top: -20px; /* 4 */
     left: 0; /* 4 */
 
+    @include rtl-outside-koowa {
+      left: auto;
+      right: 0;
+    }
+
     @media (min-width: $k-upload-querie) {
       position: static; /* 5 */
       top: auto; /* 5 */
       left: auto; /* 5 */
+
+      @include rtl-outside-koowa {
+        right: auto;
+      }
     }
   }
 }
@@ -759,6 +809,11 @@ $k-upload-list-button-desktop-size: 23px !default;
 th.k-upload__clear-queue {
   padding-left: 0;
 
+  @include rtl-outside-koowa {
+    padding-left: 5px;
+    padding-right: 0;
+  }
+
   a {
     font-weight: normal;
   }
@@ -773,6 +828,11 @@ th.k-upload__clear-queue {
 
 td.k-upload__file-status-wrapper {
   padding-left: 0;
+
+  @include rtl-outside-koowa {
+    padding-left: 5px;
+    padding-right: 0;
+  }
 }
 
 .k-upload__file-status {
@@ -827,114 +887,5 @@ td.k-upload__file-status-wrapper {
 
   @media (min-width: $k-upload-querie) {
     display: inline;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Quick and dirty fixes for the filelink modal, will be better when we have the new UI */
-
-
-.koowa_dialog-table {
-  display: table;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-
-/**
- * The first table row is for upload
- *
- * 1% height and nowrap so the other row(s) stretch all the way
- */
-
-.koowa_dialog-table__top {
-  height: 1%;
-  white-space: nowrap;
-  display: table-row;
-}
-
-
-/**
- * List
- *
- * Table row for the `attached files` list
- *
- * 1. Max 100% height so we can have scrolling children
- * 2. Hide overflowing content so we can have scrolling children
- */
-
-.koowa_dialog-table__bottom {
-  display: table-row;
-  height: 100%; /* 1 */
-  overflow: hidden; /* 2 */
-  vertical-align: top;
-  max-height: 100%;
-}
-
-
-.filelink {
-  .koowa_dialog__wrapper__child.koowa_dialog__wrapper__child.koowa_dialog__wrapper__child.koowa_dialog__wrapper__child {
-    position: relative;
-  }
-
-  .koowa_dialog__child__content.koowa_dialog__child__content.koowa_dialog__child__content.koowa_dialog__child__content {
-    position: relative;
-    padding: 0;
-    margin: 0;
-  }
-
-  .koowa_dialog__title.koowa_dialog__title.koowa_dialog__title.koowa_dialog__title {
-    position: absolute;
-    left: 0;
-    right: 0;
-  }
-
-  .koowa_dialog__child__content__box.koowa_dialog__child__content__box.koowa_dialog__child__content__box.koowa_dialog__child__content__box {
-    position: absolute;
-    top: 30px;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: auto;
-  }
-
-  .koowa_dialog__folders_files.koowa_dialog__folders_files.koowa_dialog__folders_files.koowa_dialog__folders_files {
-    .koowa_dialog__child__content__box {
-      position: absolute;
-      top: 30px;
-      bottom: 68px;
-      left: 0;
-      right: 0;
-      overflow: auto;
-      height: auto;
-    }
-  }
-
-  .koowa_dialog__new_folder.koowa_dialog__new_folder.koowa_dialog__new_folder.koowa_dialog__new_folder {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 68px;
-
-    .koowa_dialog__title.koowa_dialog__title.koowa_dialog__title.koowa_dialog__title {
-      position: static;
-      left: auto;
-      right: auto;
-    }
   }
 }
