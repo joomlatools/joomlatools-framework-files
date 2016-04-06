@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesTemplateHelperPaginator extends ComKoowaTemplateHelperPaginator
+class ComFilesTemplateHelperPaginator extends KTemplateHelperPaginator
 {
     /**
      * Render item pagination
