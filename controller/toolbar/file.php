@@ -17,6 +17,28 @@ class ComFilesControllerToolbarFile extends KControllerToolbarActionbar
 {
 	public function getCommands()
 	{
-		return array();
+        $this->addUpload(array(
+            'label' => 'Upload',
+            'attribs' => array(
+                'class' => array('btn-success')
+            )
+        ));
+
+        $this->addNewfolder(array(
+            'label' => 'New Folder',
+            'icon' => 'icon-new'
+        ));
+
+        $this->addSeparator();
+
+        $this->addCopy();
+        $this->addMove();
+        $this->addDelete();
+
+        $this->addSeparator();
+
+        $this->addRefresh();
+
+        return parent::getCommands();
 	}
 }

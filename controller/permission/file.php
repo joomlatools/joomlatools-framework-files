@@ -7,10 +7,15 @@
  * @link		http://github.com/nooku/nooku-files for the canonical source repository
  */
 
-// Include autoloader for Imagine
-if (!class_exists('\Imagine\Gd\Imagine') && is_file(dirname(dirname(__DIR__)).'/vendor/autoload.php')) {
-    require_once dirname(dirname(__DIR__)).'/vendor/autoload.php';
-}
+class ComFilesControllerPermissionFile extends KControllerPermissionAbstract
+{
+    public function canMove()
+    {
+        return $this->canDelete() && $this->canAdd();
+    }
 
-return array(
-);
+    public function canCopy()
+    {
+        return $this->canAdd();
+    }
+}

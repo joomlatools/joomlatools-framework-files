@@ -21,17 +21,20 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 
 		if (is_array($mimetypes))
 		{
-			$mimetype = $entity->mimetype;
+            $mimetype = null;
 
-			if (empty($mimetype))
+            try
             {
-				if (is_uploaded_file($entity->file)) {
-                    $mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($entity->file);
-				}
+                $resolver = $this->getObject('filesystem.mimetype.fileinfo');
+
+                if (is_uploaded_file($entity->file)) {
+                    $mimetype = $resolver->fromPath($entity->file);
+                }
                 elseif ($entity->file instanceof SplFileInfo) {
-					$mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($entity->file->getPathname());
-				}
-			}
+                    $mimetype = $resolver->fromPath($entity->file->getPathname());
+                }
+            }
+            catch (Exception $e) {}
 
 			if ($mimetype && !in_array($mimetype, $mimetypes)) {
 				return $this->addError($this->getObject('translator')->translate('Invalid Mimetype'));

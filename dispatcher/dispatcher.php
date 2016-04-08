@@ -13,13 +13,15 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
+class ComFilesDispatcher extends ComKoowaDispatcher
 {
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
-            'limit' => array(
-                'max' => 2000 // Used in tree view
+            'behaviors' => array(
+                'limitable' => array(
+                    'max' => 2000 // Used in tree view
+                )
             )
         ));
 

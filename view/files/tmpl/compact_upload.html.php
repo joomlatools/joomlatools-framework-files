@@ -10,7 +10,7 @@ defined('KOOWA') or die; ?>
 
 <?= import('com:files.files.scripts.html'); ?>
 
-<ktml:script src="media://koowa/com_files/js/files.compact.js" />
+<ktml:script src="assets://files/js/files.compact.js" />
 
 <script>
     Files.sitebase = '<?= $sitebase; ?>';

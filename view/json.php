@@ -15,22 +15,24 @@
  */
 class ComFilesViewJson extends KViewJson
 {
-    protected function _renderData()
+    protected function _fetchData(KViewContext $context)
     {
-        $output = parent::_renderData();
+        parent::_fetchData($context);
+
+        $output = $this->getContent();
 
         if (!$this->isCollection())
         {
             $entity    = $this->getModel()->fetch();
-            $status = $entity->getStatus() !== KDatabase::STATUS_FAILED;
+            $status    = $entity->getStatus() !== KDatabase::STATUS_FAILED;
 
             $output['status'] = $status;
 
             if ($status === false){
                 $output['error'] = $entity->getStatusMessage();
             }
-        }
 
-        return $output;
+            $this->setContent($output);
+        }
     }
 }

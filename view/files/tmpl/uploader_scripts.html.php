@@ -34,11 +34,11 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <? /*
 For debugging:
-<ktml:script src="media://koowa/com_files/js/plupload/moxie.js" />
-<ktml:script src="media://koowa/com_files/js/plupload/plupload.dev.js" />
-<ktml:script src="media://koowa/com_files/js/plupload/plupload.queue.js" />
+<ktml:script src="assets://files/js/plupload/moxie.js" />
+<ktml:script src="assets://files/js/plupload/plupload.dev.js" />
+<ktml:script src="assets://files/js/plupload/plupload.queue.js" />
 */ ?>
-<ktml:script src="media://koowa/com_files/js/uploader.min.js" />
+<ktml:script src="assets://files/js/uploader.min.js" />
 
 <script>
 window.addEvent('domready', function() {

@@ -34,19 +34,22 @@ if(!Files) var Files = {};
             return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
         },
         filterData: function(response) {
-            var data = response.entities,
+            var data = response.data,
                 parse = function(item, parent) {
+                    if (typeof item.attributes !== 'undefined') {
+                        item = item.attributes;
+                    }
+
+                    delete item.attributes;
+
                     var path = (parent && parent.path) ? parent.path+'/' : '';
                     path += item.name;
 
                     //Parse attributes
-                    //@TODO check if 'type' is necessary
-                    item = $.extend(item, {
-                        id: path,
-                        path: path,
-                        url: '#'+path,
-                        type: 'folder'
-                    });
+                    item.id = path;
+                    item.path = path;
+                    item.url = '#'+path;
+                    item.type = 'folder';
 
                     if (item.children) {
                         var children = [];
@@ -61,7 +64,8 @@ if(!Files) var Files = {};
 
             if (response.meta.total) {
                 Object.each(data, function(item, key) {
-                    parse(item);
+
+                    data[key] = parse(item);
                 });
             }
 

@@ -17,10 +17,15 @@
         }
     ],
     "require": {
-        "nooku/nooku-framework": "~2.0",
+        "nooku/nooku-framework": "~3.0",
         "imagine/imagine": "~0.6"
     },
     "autoload": {
         "files": ["autoload.php"]
+    },
+    "nooku-component": {
+        "identifier": "com:files",
+        "name": "files",
+        "version": "3.0-beta1"
     }
 }
