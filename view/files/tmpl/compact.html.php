@@ -68,7 +68,7 @@ window.addEvent('domready', function() {
                 if (response.status === false) {
                     return alert(response.error);
                 }
-                var el = response.data.attributes;
+                var el = response.entities[0];
                 var cls = Files[el.type.capitalize()];
                 var row = new cls(el);
 
