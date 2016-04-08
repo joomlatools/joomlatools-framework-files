@@ -64,14 +64,6 @@ if (!Files) var Files = {};
                     }
                     Files.app.fireEvent('uploadFile', [row]);
                 }
-            },
-            create: function() {
-                var new_folder = $('.js-open-folder-modal-container');
-
-                if (new_folder.length) {
-                    $('.k-upload__buttons').parent().append(new_folder);
-                    new_folder.addClass('k-upload__buttons').show();
-                }
             }
 
         }, options);

@@ -107,12 +107,6 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <?= import('templates_icons.html'); ?>
     <?= import('templates_details.html'); ?>
 
-    <div class="js-open-folder-modal-container" style="border-left: 1px solid #ccc; display: none">
-        <button type="button" class="k-upload__button js-open-folder-modal" style="position: relative; z-index: 1;">
-            <?= translate('New folder'); ?>
-        </button>
-    </div>
-
     <div id="files-new-folder-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
         <form class="files-modal well">
             <div style="text-align: center;">
