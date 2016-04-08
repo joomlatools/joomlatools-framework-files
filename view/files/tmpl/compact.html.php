@@ -32,7 +32,7 @@ window.addEvent('domready', function() {
             container: <?= json_encode($container ? $container->toArray() : null); ?>,
             tree: {
                 dataFilter: function(response){
-                    if (response.data.length === 0) {
+                    if (response.entities.length === 0) {
                         return [];
                     }
 
@@ -45,11 +45,10 @@ window.addEvent('domready', function() {
         },
         app = new Class({
             Extends: Files.Compact.App,
-            // TODO: ercan: fix lazy loading
-            /*fetch: function() {
+            fetch: function() {
                 this.grid.unspin();
                 return kQuery.Deferred();
-            }*/
+            }
         });
     options = Object.append(options, config);
 
@@ -145,7 +144,6 @@ kQuery(function($) {
 
                     <div class="k-breadcrumb" id="files-pathway"></div>
 
-                    <? // @TODO: Ercan: We need to fix the uploader; ?>
                     <?= import('compact_upload.html'); ?>
 
                     <?= import('compact_select.html'); ?>

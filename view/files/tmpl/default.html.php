@@ -91,7 +91,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
         </div>
 
-        <div class="k-grid-table-container ercan-todo">
+        <div class="k-grid-table-container">
             <div id="files-grid-container">
                 <div id="files-grid"></div>
                 <div class="k-table-pagination">
