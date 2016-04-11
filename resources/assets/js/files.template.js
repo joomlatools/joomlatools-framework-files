@@ -61,7 +61,16 @@ Files.Template.Icons = new Class({
 
 Files.Template.Compact = new Class({
 	initialize: function(html) {
-		return new Element('div', {html: html}).getFirst();
+		var el = new Element('div', {html: html}).getElement('div');
+		if (el) {
+			return el;
+		}
+		else {
+			var str = '<table><tbody>'+html+'</tbody></table>';
+			return new Element('div', {html: str}).getElement('tr');
+		}
+
+		//return new Element('div', {html: html}).getFirst();
 	}
 });
 

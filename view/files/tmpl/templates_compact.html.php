@@ -76,9 +76,9 @@ if (metadata.image) {
 
 
 <textarea style="display: none"  id="compact_folder">
-    <tr>
+    <tr class="files-node files-folder">
         <td>
-            <span class="files-node files-folder">
+            <span>
                 <a class="navigate" href="#" title="[%= name %]">
                     [%= name %]
                 </a>
@@ -88,9 +88,9 @@ if (metadata.image) {
 </textarea>
 
 <textarea style="display: none"  id="compact_image">
-    <tr>
+    <tr class="files-node files-image">
         <td>
-            <span class="files-node files-image">
+            <span>
                 <a class="navigate" href="#" title="[%= name %]">
                     [%= name %]
                 </a>
@@ -101,9 +101,9 @@ if (metadata.image) {
 </textarea>
 
 <textarea style="display: none"  id="compact_file">
-    <tr>
+    <tr class="files-node files-file">
         <td>
-            <span class="files-node files-file">
+            <span >
                 <a class="navigate" href="#" title="[%= name %]">
                     [%= name %]
                 </a>

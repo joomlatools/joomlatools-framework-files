@@ -44,11 +44,11 @@ window.addEvent('domready', function() {
             }
         },
         app = new Class({
-            Extends: Files.Compact.App,
-            fetch: function() {
+            Extends: Files.Compact.App
+            /*fetch: function() {
                 this.grid.unspin();
                 return kQuery.Deferred();
-            }
+            }*/
         });
     options = Object.append(options, config);
 
@@ -146,7 +146,6 @@ kQuery(function($) {
 
                     <?= import('compact_upload.html'); ?>
 
-                    <?php // @TODO: Ercan: View is creating a list of spans. Should be a <table> instead ; ?>
                     <?php // @TODO: Ercan: On selecting an item we should programmatically open the right sidebar so the insert button shows on mobile :) ; ?>
                     <?= import('compact_select.html'); ?>
 

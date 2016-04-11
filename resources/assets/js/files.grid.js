@@ -350,6 +350,7 @@ Files.Grid = new Class({
 
 		this.container.empty();
 		this.root = new Files.Grid.Root(this.layout);
+
 		this.container.adopt(this.root.element);
 
 		this.renew();
@@ -574,7 +575,13 @@ Files.Grid.Root = new Class({
 	},
 	adopt: function(element, position) {
 		position = position || 'top';
-		var parent = this.element;
+		var parent = this.element,
+			table  = parent.getElement('tbody');
+
+		if (table) {
+			parent = table;
+		}
+
 		if (this.element.get('tag') == 'table') {
 			parent = this.element.getElement('tbody');
 		}
