@@ -65,6 +65,8 @@ Files.Compact.App = new Class({
 				copy.render('compact').inject(that.preview);
 
 				that.preview.getElement('img').set('src', copy.image).show();
+
+				kQuery('.off-canvas-menu-toggle-holder--right').trigger('click')
 			},
 			'onClickFile': function(e) {
 				var target = document.id(e.target),
@@ -79,6 +81,8 @@ Files.Compact.App = new Class({
 				that.preview.empty();
 
 				copy.render('compact').inject(that.preview);
+
+				kQuery('.off-canvas-menu-toggle-holder--right').trigger('click')
 			},
 			onAfterRender: function() {
 				this.setState(that.state.data);

@@ -146,7 +146,6 @@ kQuery(function($) {
 
                     <?= import('compact_upload.html'); ?>
 
-                    <?php // @TODO: Ercan: On selecting an item we should programmatically open the right sidebar so the insert button shows on mobile :) ; ?>
                     <?= import('compact_select.html'); ?>
 
                 </div><!-- .k-list-layout -->
