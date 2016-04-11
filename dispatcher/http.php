@@ -54,7 +54,7 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
     		$response->error  = $e->getMessage();
     		$response->code   = $e->getCode();
 
-    		$status_code = $this->getRequest()->query->plupload ? 200 : ($e->getCode() ?: 500);
+    		$status_code = $this->getRequest()->query->plupload ? 200 : ($e->getCode() <= 505 ? $e->getCode() : 500);
 
             $this->getResponse()
                 ->setStatus($status_code)
