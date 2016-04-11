@@ -11,18 +11,14 @@ $koowaPath: '../../../koowa/framework';
 @import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/admin";
 
 // Import icons
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/koowa/icons";
+@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/molecules/icons";
 
 // Import Nooku
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/generic/mixins";
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/generic/general";
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/koowa/koowa";
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/generic/dialog";
+@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/molecules/general";
 
 @import "koowa/general";
 @import "koowa/attachments";
 
 .koowa {
-  @import "koowa/dialog";
   @import "koowa/modal";
 }
