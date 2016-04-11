@@ -517,7 +517,7 @@
 
 [dir="rtl"] .k-upload:after { text-align: right; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .k-upload, .k-flexboxlegacy .k-upload { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-upload, .k-flexboxlegacy .k-upload { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .k-upload.is-initialized:after { z-index: -2; opacity: 0; }
 

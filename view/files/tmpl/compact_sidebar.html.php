@@ -17,12 +17,8 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
         <div class="k-sidebar__header">
             <?= translate('Select a folder'); ?>
         </div>
-        <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_categories">
-            <div class="koowa_dialog__child__content koowa_dialog__folders_files">
-                <div class="koowa_dialog__child__content__box">
-                    <div class="koowa_dialog__files_tree" id="files-tree" style="overflow: auto; height: auto;"></div>
-                </div>
-            </div>
+        <div class="k-tree">
+            <div id="files-tree"></div>
         </div>
     </div>
 

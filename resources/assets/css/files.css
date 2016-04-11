@@ -1302,7 +1302,7 @@ html { min-height: 100%; height: 100%; padding: 0; margin: 0; }
 /** BODY By using 100% for `height` and `min-height` we can work with full-height auto overflowing flexbox pages */
 body { min-height: 100%; height: 100%; padding: 0; margin: 0; /* Setup flexbox */ }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox body, .k-flexboxlegacy body { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox body, .k-flexboxlegacy body { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
 body.k-resizing { overflow: hidden; }
 
@@ -1311,7 +1311,7 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 400px) { .koowa-container { max-width: none; /* 2 */ } }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa-container, .k-flexboxlegacy .koowa-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa-container, .k-flexboxlegacy .koowa-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
 .koowa--rtl.koowa-container { direction: rtl; }
 
@@ -2053,7 +2053,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa--rtl.koowa .input-group-btn:last-child > .btn, .koowa--rtl.koowa .input-group-btn:last-child > .btn-group { margin-left: 0; margin-right: -1px; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-component, .k-flexboxlegacy .koowa .k-component { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-component, .k-flexboxlegacy .koowa .k-component { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
 
 .k-is-resizing .koowa .k-component { overflow: hidden; }
 
@@ -2063,7 +2063,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa--rtl.koowa .k-content { direction: rtl; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-content, .k-flexboxlegacy .koowa .k-content { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; width: auto; /* 1 */ overflow: hidden; /* 2 */ } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-content, .k-flexboxlegacy .koowa .k-content { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; width: auto; /* 1 */ overflow: hidden; /* 2 */ } }
 
 .koowa .show-left-menu .k-content, .koowa .show-left-menu .k-titlebar { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); /* 1 */ }
 
@@ -2101,11 +2101,11 @@ body.k-resizing { overflow: hidden; }
 
 .koowa--rtl.koowa .k-content-wrapper { direction: rtl; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-content-wrapper, .k-flexboxlegacy .koowa .k-content-wrapper { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; border-bottom: none; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-content-wrapper, .k-flexboxlegacy .koowa .k-content-wrapper { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; border-bottom: none; } }
 
 .koowa .k-form-layout { margin: 0; background: #fafafa; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-form-layout, .k-flexboxlegacy .koowa .k-form-layout { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-form-layout, .k-flexboxlegacy .koowa .k-form-layout { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
 
 .k-is-resizing .koowa .k-form-layout { overflow: hidden; }
 
@@ -2113,7 +2113,7 @@ body.k-resizing { overflow: hidden; }
 
 .k-template .koowa-container { margin: 0 auto; max-width: 1020px; height: 100%; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .k-template .koowa, .k-flexboxlegacy .k-template .koowa, .k-flexbox .k-template .koowa .k-wrapper, .k-flexboxlegacy .k-template .koowa .k-wrapper, .k-flexbox .k-template .koowa .k-content-wrapper, .k-flexboxlegacy .k-template .koowa .k-content-wrapper, .k-flexbox .k-template .koowa .k-content, .k-flexboxlegacy .k-template .koowa .k-content, .k-flexbox .k-template .koowa .k-component, .k-flexboxlegacy .k-template .koowa .k-component, .k-flexbox .k-template .koowa .k-form-layout, .k-flexboxlegacy .k-template .koowa .k-form-layout { overflow: visible; height: auto; max-height: none; display: block; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-template .koowa, .k-flexboxlegacy .k-template .koowa, .k-flexbox .k-template .koowa .k-wrapper, .k-flexboxlegacy .k-template .koowa .k-wrapper, .k-flexbox .k-template .koowa .k-content-wrapper, .k-flexboxlegacy .k-template .koowa .k-content-wrapper, .k-flexbox .k-template .koowa .k-content, .k-flexboxlegacy .k-template .koowa .k-content, .k-flexbox .k-template .koowa .k-component, .k-flexboxlegacy .k-template .koowa .k-component, .k-flexbox .k-template .koowa .k-form-layout, .k-flexboxlegacy .k-template .koowa .k-form-layout { overflow: visible; height: auto; max-height: none; display: block; } }
 
 .k-template .k-toolbar { position: fixed; z-index: 999; top: 0; left: auto; right: auto; width: 100%; margin: 0 auto; float: none; border-top: 15px solid #333; max-width: 1020px; }
 
@@ -2123,7 +2123,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-container:after { clear: both; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-container, .k-flexboxlegacy .koowa .k-container { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-container, .k-flexboxlegacy .koowa .k-container { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .k-is-resizing .koowa .k-container { overflow: hidden; }
 
@@ -2155,7 +2155,7 @@ body.k-resizing { overflow: hidden; }
 @media screen and (min-width: 768px) { .koowa--rtl.koowa .k-container__sub { float: none; margin-right: 0; float: right; display: block; margin-left: 2.4590413082%; width: 31.6939724612%; }
   .koowa--rtl.koowa .k-container__sub:last-child { margin-left: 0; } }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-grid-table-container, .k-flexboxlegacy .koowa .k-grid-table-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex-grow: 1; -ms-flex-positive: 1; flex-grow: 1; -webkit-flex-shrink: 1; -ms-flex-negative: 1; flex-shrink: 1; overflow: hidden; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-grid-table-container, .k-flexboxlegacy .koowa .k-grid-table-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex-grow: 1; -ms-flex-positive: 1; flex-grow: 1; -webkit-flex-shrink: 1; -ms-flex-negative: 1; flex-shrink: 1; overflow: hidden; } }
 
 .koowa .files-layout-switcher { margin: 0; padding: 0; list-style: none; border: none; background: transparent; display: block; float: left; width: 31px; height: 31px; margin: 4px; margin-left: 0; border-radius: 2px; text-align: center; line-height: 31px; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; border: 1px solid transparent; }
 
@@ -2171,7 +2171,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-list-layout { margin: 0; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-list-layout, .k-flexboxlegacy .koowa .k-list-layout { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-list-layout, .k-flexboxlegacy .koowa .k-list-layout { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
 
 .k-is-resizing .koowa .k-list-layout { overflow: hidden; }
 
@@ -2181,11 +2181,11 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 768px) { .koowa .k-mobile-title { display: none; } }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-mobile-title, .k-flexboxlegacy .koowa .k-mobile-title { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-mobile-title, .k-flexboxlegacy .koowa .k-mobile-title { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa .overflowing { overflow: hidden; /* 1 */ position: relative; /* 2 */ -webkit-overflow-scrolling: touch; /* 3 */ width: 100%; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; /* 4 */ /** When flexbox is in use 1. When the child has flexbox, the parent needs it as well 2. Don't grow item by default, only shrink if it doesn't fit */ /* Set default settings for all shadow boxes */ }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .overflowing--flex, .k-flexboxlegacy .koowa .overflowing--flex { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; /* 1 */ -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .overflowing--flex, .k-flexboxlegacy .koowa .overflowing--flex { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; /* 1 */ -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; } }
 
 .koowa .overflowing--top, .koowa .overflowing--right, .koowa .overflowing--bottom, .koowa .overflowing--left { position: absolute; /* 2 */ z-index: 99; background: transparent; margin: 0; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
@@ -2225,7 +2225,7 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 1024px) { .k-js-enabled .koowa .k-sidebar, .k-js-enabled .koowa .k-sidebar-right { min-width: 270px; width: 270px; max-width: 270px; } }
 
-@media (min-width: 768px) and (min-height: 460px) { .k-flexbox .koowa .k-sidebar, .k-flexboxlegacy .koowa .k-sidebar, .k-flexbox .koowa .k-sidebar-right, .k-flexboxlegacy .koowa .k-sidebar-right { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; }
+@media (min-width: 768px) and (min-height: 391px) { .k-flexbox .koowa .k-sidebar, .k-flexboxlegacy .koowa .k-sidebar, .k-flexbox .koowa .k-sidebar-right, .k-flexboxlegacy .koowa .k-sidebar-right { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; }
   .k-flexbox .koowa .k-sidebar .k-sidebar__navigation, .k-flexbox .koowa .k-sidebar .k-sidebar__footer, .k-flexboxlegacy .koowa .k-sidebar .k-sidebar__navigation, .k-flexboxlegacy .koowa .k-sidebar .k-sidebar__footer, .k-flexbox .koowa .k-sidebar-right .k-sidebar__navigation, .k-flexbox .koowa .k-sidebar-right .k-sidebar__footer, .k-flexboxlegacy .koowa .k-sidebar-right .k-sidebar__navigation, .k-flexboxlegacy .koowa .k-sidebar-right .k-sidebar__footer { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa--rtl.koowa .k-sidebar, .koowa--rtl.koowa .k-sidebar-right { direction: rtl; }
@@ -2254,7 +2254,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-sidebar__item + .koowa .k-sidebar__item { margin-top: 20px; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-sidebar__item, .k-flexboxlegacy .koowa .k-sidebar__item { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-sidebar__item, .k-flexboxlegacy .koowa .k-sidebar__item { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; }
   .k-flexbox .koowa .k-sidebar__item--flex, .k-flexboxlegacy .koowa .k-sidebar__item--flex { -webkit-box-flex: 1; -webkit-flex: 1 0 auto; -ms-flex: 1 0 auto; flex: 1 0 auto; } }
 
 .koowa .k-sidebar__header { padding: 20px 20px 0; font-weight: 700; text-transform: uppercase; font-size: 12px; }
@@ -2263,7 +2263,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-sidebar__item--overflow { overflow: auto; /* 1 */ /** Box shadow for overflowing containers 1. Set as same color as background to make it look like text is fading */ }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-sidebar__item--overflow, .k-flexboxlegacy .koowa .k-sidebar__item--overflow { -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-sidebar__item--overflow, .k-flexboxlegacy .koowa .k-sidebar__item--overflow { -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; } }
 
 .k-is-resizing .koowa .k-sidebar__item--overflow { overflow: hidden; }
 
@@ -2275,7 +2275,7 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 768px) { .koowa .k-titlebar:before { display: none; /* 4 */ } }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-titlebar, .k-flexboxlegacy .koowa .k-titlebar { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-titlebar, .k-flexboxlegacy .koowa .k-titlebar { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa .show-left-menu .k-titlebar { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); /* 1 */ }
 
@@ -2308,7 +2308,7 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 768px) { .koowa .k-toolbar { width: 100%; display: table; } }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-toolbar, .k-flexboxlegacy .koowa .k-toolbar { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-toolbar, .k-flexboxlegacy .koowa .k-toolbar { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa .k-toolbar { /** Alternative button colors If the button colors don't fit the toolbar you can have alternative colors */ /** Position the icons Only position them if media queries are supported By default we just want them aligned normally */ }
 
@@ -2330,7 +2330,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa--rtl.koowa .k-wrapper { direction: rtl; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-wrapper, .k-flexboxlegacy .koowa .k-wrapper { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: hidden; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-wrapper, .k-flexboxlegacy .koowa .k-wrapper { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: hidden; } }
 
 .koowa .opened--left, .koowa .opened--right { overflow: hidden; /* 1 */ }
 
@@ -2525,7 +2525,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .floatThead-wrapper { z-index: 1 !important; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .floatThead-wrapper, .k-flexboxlegacy .koowa .floatThead-wrapper { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; overflow: auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .floatThead-wrapper, .k-flexboxlegacy .koowa .floatThead-wrapper { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; overflow: auto; } }
 
 .k-is-resizing .koowa .floatThead-wrapper { overflow: hidden; }
 
@@ -2655,7 +2655,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .no-items-container.alert p:last-child { margin-bottom: 0; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .no-items-container.alert, .k-flexboxlegacy .koowa .no-items-container.alert { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .no-items-container.alert, .k-flexboxlegacy .koowa .no-items-container.alert { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .k-checked .koowa .k-option-list { position: relative; z-index: 1; display: table; margin: 0; border: 1px solid #ccc; padding: 1px; width: 100%; height: 32px; border-radius: 4px; background: white; /* Hiding the input but keeping accessible */ /** Label styling 1. Display as table cell so the labels line up next to each other 2. Set height to input height minus border and spacing 3. Take one pixel off the radius to look smooth 4. Don't let the user select */ /** Styling label when checked 1. White text on colored labels 2. Display colored background when item is :checked */ /** Fake focus We need to create a separate element for the fake focus since we're dealing with more than two items here 1. Position it on top of the parent element but behind the labels 2. Hide by default 3. Display on focus 4. Set border-radius same as parent */ }
 
@@ -2673,7 +2673,7 @@ body.k-resizing { overflow: hidden; }
 
 .k-is-resizing .koowa .k-breadcrumb { overflow: hidden; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-breadcrumb, .k-flexboxlegacy .koowa .k-breadcrumb { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-breadcrumb, .k-flexboxlegacy .koowa .k-breadcrumb { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa .k-breadcrumb { /** Links 1. Full background hover */ /** List 1. Reset unordered list styling */ /** Styling list items 1. Set z-index to 0 so the :after psuedo element will be on top 2. Make room for the psuedo element separator 3. Make each item at least one breadcrumb size wide 4. Hide by default so we can show only a few on mobile 5. Hide overflowing content 6. Proper spacing for non-flexbox use */ /** Home and last elements 1. Always display these items 2. No flexing for these items so the are readable */ /** Root element 1. Hide root text by default 2. Show and position it when root is the active item to show more then just a home icon */ /** One but last item Show this item on mobile to get a sense of where you are 1. Set 'missing' content 2. Reset to default content on wider screens */ /* Active item */ }
 
@@ -2683,7 +2683,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-breadcrumb ul { margin: 0; padding: 0; list-style: none; border: none; background: transparent; /* 1 */ /* Flexing items to get overflow ellipsis */ }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-breadcrumb ul, .k-flexboxlegacy .koowa .k-breadcrumb ul { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-breadcrumb ul, .k-flexboxlegacy .koowa .k-breadcrumb ul { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; } }
 
 .koowa .k-breadcrumb li { position: relative; /* 1 */ z-index: 0; /* 1 */ padding-left: 20px; /* 2 */ min-width: 39px; /* 3 */ display: none; /* 4 */ overflow: hidden; /* 5 */ vertical-align: middle; /* 6 */ /* Display on larger screens */ /* Flexing items to get overflow ellipsis */ /* List item separator */ position: relative; /* No separator on first item */ /** Hover 1. Reset flexbox so the whole item is visible */ }
 
@@ -2691,7 +2691,7 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 768px) { .koowa .k-breadcrumb li { display: inline-block; } }
 
-@media (min-width: 768px) and (min-height: 460px) { .k-flexbox .koowa .k-breadcrumb li, .k-flexboxlegacy .koowa .k-breadcrumb li { display: block; -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; } }
+@media (min-width: 768px) and (min-height: 391px) { .k-flexbox .koowa .k-breadcrumb li, .k-flexboxlegacy .koowa .k-breadcrumb li { display: block; -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; } }
 
 .koowa .k-breadcrumb li:before { display: block; position: absolute; top: 0; bottom: 0; left: 0; width: 20px; padding-top: 9.75px; padding-bottom: 9.75px; text-align: center; line-height: 19.5px; content: "»"; }
 
@@ -2705,11 +2705,11 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-breadcrumb li:hover { overflow: visible; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-breadcrumb li:hover, .k-flexboxlegacy .koowa .k-breadcrumb li:hover { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; /* 1 */ } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-breadcrumb li:hover, .k-flexboxlegacy .koowa .k-breadcrumb li:hover { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; /* 1 */ } }
 
 .koowa .k-breadcrumb .k-breadcrumb__active, .koowa .k-breadcrumb .k-breadcrumb__home { display: inline-block; /* 1 */ overflow: visible; /* 1 */ }
 
-@media (min-width: 768px) and (min-height: 460px) { .k-flexbox .koowa .k-breadcrumb .k-breadcrumb__active, .k-flexboxlegacy .koowa .k-breadcrumb .k-breadcrumb__active, .k-flexbox .koowa .k-breadcrumb .k-breadcrumb__home, .k-flexboxlegacy .koowa .k-breadcrumb .k-breadcrumb__home { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; /* 2 */ } }
+@media (min-width: 768px) and (min-height: 391px) { .k-flexbox .koowa .k-breadcrumb .k-breadcrumb__active, .k-flexboxlegacy .koowa .k-breadcrumb .k-breadcrumb__active, .k-flexbox .koowa .k-breadcrumb .k-breadcrumb__home, .k-flexboxlegacy .koowa .k-breadcrumb .k-breadcrumb__home { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; /* 2 */ } }
 
 .koowa .k-breadcrumb .k-breadcrumb_root-text { /* 1 */ }
 
@@ -2727,7 +2727,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-breadcrumb__item { position: relative; z-index: 2; display: block; padding: 10px; min-width: 39px; min-height: 39px; overflow: hidden; text-align: center; line-height: 19px; text-decoration: none; white-space: nowrap; text-overflow: ellipsis; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-grid-container, .k-flexboxlegacy .koowa .k-grid-container { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-grid-container, .k-flexboxlegacy .koowa .k-grid-container { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
 .koowa .k-grid { background: #ffffff; padding: 8px; }
 
@@ -2817,15 +2817,15 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 1024px) { .koowa .k-scopebar { display: table; width: 100%; } }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-scopebar, .k-flexboxlegacy .koowa .k-scopebar { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-scopebar, .k-flexboxlegacy .koowa .k-scopebar { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
-@media (min-width: 1024px) and (min-height: 460px) { .k-flexbox .koowa .k-scopebar, .k-flexboxlegacy .koowa .k-scopebar { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; width: auto; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 1024px) and (min-height: 391px) { .k-flexbox .koowa .k-scopebar, .k-flexboxlegacy .koowa .k-scopebar { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; width: auto; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa .k-scopebar .k-breadcrumb { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; }
 
 .koowa .k-scopebar__item { border-bottom: 1px solid #d2d2d2; vertical-align: middle; /** When flexbox is in use */ }
 
-@media (min-width: 1024px) and (min-height: 460px) { .k-flexbox .koowa .k-scopebar__item, .k-flexboxlegacy .koowa .k-scopebar__item { display: block; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; /* Search item */ }
+@media (min-width: 1024px) and (min-height: 391px) { .k-flexbox .koowa .k-scopebar__item, .k-flexboxlegacy .koowa .k-scopebar__item { display: block; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; /* Search item */ }
   .k-flexbox .koowa .k-scopebar__item.k-scopebar__item--search, .k-flexboxlegacy .koowa .k-scopebar__item.k-scopebar__item--search { display: block; -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa .k-scopebar__item--fluid:before, .koowa .k-scopebar__item--fluid:after { display: table; content: " "; }
@@ -2834,7 +2834,7 @@ body.k-resizing { overflow: hidden; }
 
 @media screen and (min-width: 1024px) { .koowa .k-scopebar__item--fluid { display: table-cell; width: 99%; } }
 
-@media (min-width: 1024px) and (min-height: 460px) { .k-flexbox .koowa .k-scopebar__item--fluid, .k-flexboxlegacy .koowa .k-scopebar__item--fluid { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; width: auto; } }
+@media (min-width: 1024px) and (min-height: 391px) { .k-flexbox .koowa .k-scopebar__item--fluid, .k-flexboxlegacy .koowa .k-scopebar__item--fluid { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; width: auto; } }
 
 .koowa .k-scopebar__filters { /* 1 */ border-left: 1px solid #d2d2d2; position: relative; /* 2 */ z-index: 2; /* 2 */ }
 
@@ -2957,13 +2957,13 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-table-container { /* Table container */ /** Cells 1. Position checkbox 2. Remove default margin and set negative top margin to visually align vertically */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ /** Table classes Classes to add to table cells */ /** Table levels Indented levels for a clearer overview */ /** Selected When rows are selected they are highlighted 1. Coloring Links and extra elements that don't color automatically with it's parent */ /* Sub headings */ /** Sorting arrows 1. Display table to line them up horizontally while: - We keep everything vertically centered - We keep it all on one line but don't have to deal with inline-block spacing trouble 2. Set base line-height to 16px to keep it all vertically centered 3. Set min-width to 16px so icons and placeholder have the same width, lining all arrows perfectly below each other 4. Aligning items in center 5. Min-width for text larger to fit 3 digits by default. Icons will line up nice to at least 999 6. Set a little padding for when text item gets 4 digits */ }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-table-container, .k-flexboxlegacy .koowa .k-table-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; overflow: auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-container, .k-flexboxlegacy .koowa .k-table-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; overflow: auto; } }
 
 .k-is-resizing .koowa .k-table-container { overflow: hidden; }
 
 .koowa .k-table-container .k-table { overflow: auto; background: #ffffff; min-height: 170px; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-table-container .k-table, .k-flexboxlegacy .koowa .k-table-container .k-table { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; background: #ffffff; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-container .k-table, .k-flexboxlegacy .koowa .k-table-container .k-table { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; background: #ffffff; } }
 
 .k-is-resizing .koowa .k-table-container .k-table { overflow: hidden; }
 
@@ -2971,7 +2971,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa--rtl.koowa .k-table-container table { text-align: right; }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-table-container table, .k-flexboxlegacy .koowa .k-table-container table { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-container table, .k-flexboxlegacy .koowa .k-table-container table { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
 .k-is-resizing .koowa .k-table-container table { overflow: hidden; }
 
@@ -3137,7 +3137,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-table-pagination { padding: 7px; background: #fafafa; border-top: 1px solid #d2d2d2; box-shadow: 0 1px 0 #dbdbdb; /* 1 */ /* Flexbox */ /** Pagination contents 1. Align vertically 2. Remove standard Bootstrap margin 3. Style <select> to be as large as the pagination 4. Make sure <select> is always as small as possible 5. Separate <select> from pagination */ }
 
-@media (min-width: 300px) and (min-height: 460px) { .k-flexbox .koowa .k-table-pagination, .k-flexboxlegacy .koowa .k-table-pagination { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-pagination, .k-flexboxlegacy .koowa .k-table-pagination { -webkit-box-flex: 0; -webkit-flex: 0 0 auto; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
 .koowa .k-table-pagination .limit, .koowa .k-table-pagination .pagination { display: inline-block; /* 1 */ vertical-align: middle; /* 1 */ }
 
@@ -3211,18 +3211,22 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-quick-filters { padding-bottom: 13px; }
 
-@media (min-height: 460px) { .k-js-enabled .koowa .k-quick-filters .k-list { display: none; } }
+@media (min-height: 391px) { .k-js-enabled .koowa .k-quick-filters .k-list { display: none; } }
 
 @media (min-height: 550px) { .koowa .k-quick-filters .k-list { display: block !important; } }
 
 .koowa .k-quick-filters .k-sidebar__header { position: relative; }
 
-@media (min-height: 460px) { .k-js-enabled .koowa .k-quick-filters .k-sidebar__toggle:after { content: ""; background: white; border: 1px solid #ddd; border-radius: 10px; width: 20px; height: 20px; position: absolute; top: 20px; right: 20px; display: block; text-align: center; line-height: 20px; vertical-align: middle; font-size: 10px; cursor: pointer; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+@media (min-height: 391px) { .k-js-enabled .koowa .k-quick-filters .k-sidebar__toggle:after { content: ""; background: white; border: 1px solid #ddd; border-radius: 10px; width: 20px; height: 20px; position: absolute; top: 20px; right: 20px; display: block; text-align: center; line-height: 20px; vertical-align: middle; font-size: 10px; cursor: pointer; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
   .k-js-enabled .koowa .k-quick-filters .k-sidebar__toggle.is-active:after { -webkit-transform: rotate(180deg); transform: rotate(180deg); } }
 
 @media (min-height: 550px) { .k-js-enabled .koowa .k-quick-filters .k-sidebar__toggle { display: none; } }
 
 .k-js-enabled .koowa--rtl.koowa .k-quick-filters .k-sidebar__toggle { right: auto; left: 20px; }
+
+.koowa select, .koowa textarea, .koowa input[type="text"], .koowa input[type="password"], .koowa input[type="datetime"], .koowa input[type="datetime-local"], .koowa input[type="date"], .koowa input[type="month"], .koowa input[type="time"], .koowa input[type="week"], .koowa input[type="number"], .koowa input[type="email"], .koowa input[type="url"], .koowa input[type="search"], .koowa input[type="tel"], .koowa input[type="color"], .koowa .uneditable-input { height: 32px; }
+
+.koowa .k-button-container { margin-bottom: 20px; }
 
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */

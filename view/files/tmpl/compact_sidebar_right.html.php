@@ -16,17 +16,10 @@ defined('KOOWA') or die;
             <?= translate('Selected file info'); ?>
         </div>
         <div class="k-sidebar__content">
-            <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_insert">
-                <div class="koowa_dialog__child__content">
-                    <div class="koowa_dialog__child__content__box">
-
-                        <div id="files-preview">
-                            <?= translate('Select a file from the list'); ?>
-                        </div>
-                        <div id="insert-button-container"></div>
-                    </div>
-                </div>
+            <div id="files-preview">
+                <?= translate('Select a file from the list'); ?>
             </div>
+            <div id="insert-button-container" class="k-button-container"></div>
         </div>
     </div>
 </div><!-- .k-sidebar-right -->
