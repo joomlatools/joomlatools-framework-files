@@ -1192,7 +1192,7 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 
 .select2-container--bootstrap .select2-search { float: none; }
 
-.select2-container--bootstrap .select2-search .select2-search__field { width: 100% !important; margin: 0; height: 32px; line-height: 1.428571429; -webkit-appearance: none; display: block; }
+.select2-container--bootstrap .select2-search .select2-search__field { width: 100% !important; margin: 0; height: 32px; line-height: 32px; -webkit-appearance: none; display: block; }
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__rendered { cursor: text; }
 
