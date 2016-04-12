@@ -19,8 +19,7 @@ $component = isset($component) ? $component : substr($query['option'], 4);
 $callback  = isset($query['callback']) ? $query['callback'] : null;
 ?>
 
-<?= helper('bootstrap.load', array('class' => array('full_height', 'com_files--attachments'))); ?>
-<?= helper('behavior.jquery'); ?>
+<?= helper('behavior.ui', array('wrapper_class' => array('com_files--attachments'))); ?>
 
 <?= import('com:files.files.scripts.html'); ?>
 
