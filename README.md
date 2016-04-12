@@ -5,7 +5,7 @@ This is a re-usable component that provides file management functionality for [J
 ## Requirements
 
 - Joomlatools Framework 2 or newer.
-- PHP 5.2 or newer.
+- PHP 5.3 or newer.
 - MySQL 5.
 
 ## Installation
