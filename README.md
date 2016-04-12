@@ -1,7 +1,6 @@
-# Files for Joomlatools Framework
+# Files Component for Joomlatools Framework
 
-This is a re-usable component that provides file management functionality. This component is built on top of 
-[Joomlatools Framework](https://github.com/joomlatools/joomlatools-framework).
+This is a re-usable component that provides file management functionality for [Joomlatools Framework]
 
 ## Requirements
 
@@ -43,3 +42,5 @@ Keep track of development and community news.
 * Join [joomlatools/dev on Gitter](http://gitter.im/joomlatools/dev)
 * Read the [Joomlatools Developer Blog](https://www.joomlatools.com/developer/blog/)
 * Subscribe to the [Joomlatools Developer Newsletter](https://www.joomlatools.com/developer/newsletter/)
+
+[Joomlatools Framework]: http://www.joomlatools.com/developer/framework/
