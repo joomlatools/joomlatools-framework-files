@@ -269,8 +269,8 @@ $k-upload-list-button-desktop-size: 23px !default;
  * 1. Align content in vertical middle
  */
 
-.k-upload__content,
-.k-upload__buttons {
+.k-upload__buttons,
+.k-upload__content {
   vertical-align: middle; /* 1 */
 }
 
@@ -286,15 +286,11 @@ $k-upload-list-button-desktop-size: 23px !default;
 .k-upload__content {
   font-size: 16px; /* 1 */
   max-width: 0; /* 2 */
-  padding: 0 0 0 15px;
+  padding: 0 15px;
   display: table-cell; /* 3 */
   height: 58px;
   min-height: 58px;
   transition: all .8s ease-in-out;
-
-  @include rtl-outside-koowa {
-    padding: 0 15px 0 0;
-  }
 
   @media (min-width: $k-upload-querie) {
     font-size: 20px; /* 1 */
@@ -408,9 +404,23 @@ $k-upload-list-button-desktop-size: 23px !default;
   display: table-cell; /* 1 */
   width: 1%; /* 2 */
   white-space: nowrap; /* 3 */
-  padding-right: 15px;
   padding-left: 15px;
   text-align: right;
+
+  @include rtl-outside-koowa {
+    padding-left: 0;
+    padding-right: 15px;
+  }
+
+  &--right {
+    padding-left: 0;
+    padding-right: 15px;
+
+    @include rtl-outside-koowa {
+      padding-left: 15px;
+      padding-right: 0;
+    }
+  }
 }
 
 
@@ -506,6 +516,17 @@ $k-upload-list-button-desktop-size: 23px !default;
   &:hover {
     text-decoration: none;
   }
+}
+
+
+
+/* The '/' divider */
+
+.k-upload__divider {
+  display: inline-block;
+  padding-left: 15px;
+  font-size: 20px;
+  vertical-align: middle;
 }
 
 

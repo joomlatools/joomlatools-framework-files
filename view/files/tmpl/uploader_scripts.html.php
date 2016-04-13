@@ -63,13 +63,10 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
 <script data-inline type="text/html" class="js-uploader-template" data-name="content-box">
     <div class="k-upload__body-default">
         <div class="k-upload__content-wrapper">
-            <div class="k-upload__content">
-                <div class="js-content"></div>
-            </div>
             <div class="k-upload__buttons">
                 <button type="button" class="k-upload__button js-choose-files"
                         data-caption-update="<?= escape(translate('Update')) ?>">
-                    <?= translate('Choose') ?>
+                    <?= translate('Upload') ?>
                 </button>
                 <button type="button" class="k-upload__button k-upload__button--upload js-start-upload">
                     <?= translate('Upload') ?>
@@ -77,6 +74,10 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
                 <button class="k-upload__button js-stop-upload disabled">
                     <?= translate('Stop') ?>
                 </button>
+                <span class="k-upload__divider">/</span>
+            </div>
+            <div class="k-upload__content">
+                <div class="js-content"></div>
             </div>
         </div>
     </div>

@@ -560,12 +560,10 @@
 .k-upload__content-wrapper { display: table; /* 1 */ width: 100%; /* 2 */ min-height: 60px; /* 3 */ border-radius: 3px; background: white; border-top: 1px solid rgba(0, 0, 0, 0.075); border-bottom: 1px solid white; box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.075); -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; }
 
 /** Content & Buttons 1. Align content in vertical middle */
-.k-upload__content, .k-upload__buttons { vertical-align: middle; /* 1 */ }
+.k-upload__buttons, .k-upload__content { vertical-align: middle; /* 1 */ }
 
 /** Content 1. "Drop files here" in larger font 2. Set max-width to 0 for text-overflow: ellipsis to work properly 3. Display as table-cell */
-.k-upload__content { font-size: 16px; /* 1 */ max-width: 0; /* 2 */ padding: 0 0 0 15px; display: table-cell; /* 3 */ height: 58px; min-height: 58px; -webkit-transition: all .8s ease-in-out; transition: all .8s ease-in-out; }
-
-[dir="rtl"] .k-upload__content { padding: 0 15px 0 0; }
+.k-upload__content { font-size: 16px; /* 1 */ max-width: 0; /* 2 */ padding: 0 15px; display: table-cell; /* 3 */ height: 58px; min-height: 58px; -webkit-transition: all .8s ease-in-out; transition: all .8s ease-in-out; }
 
 @media (min-width: 600px) { .k-upload__content { font-size: 20px; /* 1 */ } }
 
@@ -597,7 +595,13 @@
 
 /* Buttons ========================================================================== */
 /** 1. Display as table-cell to align items 2. Make this cell as large as it's content 3. Don't wrap content to always align buttons */
-.k-upload__buttons { display: table-cell; /* 1 */ width: 1%; /* 2 */ white-space: nowrap; /* 3 */ padding-right: 15px; padding-left: 15px; text-align: right; }
+.k-upload__buttons { display: table-cell; /* 1 */ width: 1%; /* 2 */ white-space: nowrap; /* 3 */ padding-left: 15px; text-align: right; }
+
+[dir="rtl"] .k-upload__buttons { padding-left: 0; padding-right: 15px; }
+
+.k-upload__buttons--right { padding-left: 0; padding-right: 15px; }
+
+[dir="rtl"] .k-upload__buttons--right { padding-left: 15px; padding-right: 0; }
 
 /** Buttons styling */
 .k-upload__button, .k-upload__text-button { display: inline-block; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; font-size: 14px; border-radius: 3px; text-decoration: none; color: #333; /* Add spacing to left from second button */ /* Disabled buttons should be invisible, but only after initializing */ }
@@ -627,6 +631,9 @@
 .k-upload__text-button { border: none; background: transparent; text-decoration: underline; padding: 0; }
 
 .k-upload__text-button:focus, .k-upload__text-button:hover { text-decoration: none; }
+
+/* The '/' divider */
+.k-upload__divider { display: inline-block; padding-left: 15px; font-size: 20px; vertical-align: middle; }
 
 /* Progress bar ========================================================================== */
 /** 1. Double class to win over the plupload styling 2. Absolute positioning so it's not in the way of anything 3. Hide container visually */
