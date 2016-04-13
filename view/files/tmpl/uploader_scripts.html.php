@@ -59,12 +59,6 @@ $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
 kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
 </script>
 
-<script type="text/javascript">
-    kQuery(function ($) {
-        $('body').append('<div class="k-uploader-drop-visual"><span>Drop files here</span></div>')
-    });
-</script>
-
 <!-- Uploader content box -->
 <script data-inline type="text/html" class="js-uploader-template" data-name="content-box">
     <div class="k-upload__body-default">
@@ -233,5 +227,17 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
     </div>
     <div class="k-upload__select-message">
         <?= translate('Select files to upload') ?>
+    </div>
+</script>
+
+<script data-inline type="text/html" class="js-uploader-template" data-name="drop-message-single">
+    <div class="k-uploader-drop-visual">
+        <span><?= translate('Drop a file here') ?></span>
+    </div>
+</script>
+
+<script data-inline type="text/html" class="js-uploader-template" data-name="drop-message-multiple">
+    <div class="k-uploader-drop-visual">
+        <span><?= translate('Drop files here') ?></span>
     </div>
 </script>
