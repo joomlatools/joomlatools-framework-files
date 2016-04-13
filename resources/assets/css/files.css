@@ -1181,24 +1181,14 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 .k-modal__title { margin: 0 0 20px 0; text-transform: uppercase; font-weight: bold; }
 
 /* ========================================================================== Select2 ========================================================================== */
-/* 100% wide by default instead of just 200px */
-.koowa .select2 { width: auto !important; min-width: 120px; max-width: 100% !important; }
+/* 100% wide by default instead of just 220px making it responsive */
+.select2-container.select2-container--bootstrap { width: 100% !important; max-width: 100% !important; /* Set proper line-height so text is vertically centered */ /* Set proper height so arrow is vertically centered */ /* Set proper styling for the search */ }
 
-/* Setting a min-width now the width is 100% by default */
-.select2-dropdown { min-width: 120px; }
+.select2-container.select2-container--bootstrap .select2-selection--single .select2-selection__rendered { line-height: 1.428571429; }
 
-/* Properly styling the search input */
-.select2-container--bootstrap { /* Single select box */ /* Multiple select box */ }
+.select2-container.select2-container--bootstrap .select2-selection--single .select2-selection__arrow { height: 32px; }
 
-.select2-container--bootstrap .select2-search { float: none; }
-
-.select2-container--bootstrap .select2-search .select2-search__field { width: 100% !important; margin: 0; height: 32px; line-height: 32px; -webkit-appearance: none; display: block; }
-
-.select2-container--bootstrap .select2-selection--multiple .select2-selection__rendered { cursor: text; }
-
-.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { box-shadow: none; margin: 0; width: 20px !important; min-width: 0; }
-
-.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { margin: 5px 0 0 5px; }
+.select2-container.select2-container--bootstrap .select2-search__field { height: 32px; margin: 0; }
 
 /** Datepicker for Bootstrap Copyright 2012 Stefan Petre Improvements by Andrew Rowls Licensed under the Apache License v2.0 http://www.apache.org/licenses/LICENSE-2.0 */
 .datepicker { font-family: sans-serif; font-size: 13px; line-height: 19px; direction: ltr; }
@@ -3241,6 +3231,12 @@ body.k-resizing { overflow: hidden; }
 .koowa a.-koowa-asc:after { content: ""; margin-left: .5em; vertical-align: middle; }
 
 .koowa a.-koowa-desc:after { content: ""; margin-left: .5em; vertical-align: middle; }
+
+.koowa .k-grid__items__folders, .koowa .k-grid__items__files { clear: both; }
+
+.koowa .k-grid__items__folders:before, .koowa .k-grid__items__folders:after, .koowa .k-grid__items__files:before, .koowa .k-grid__items__files:after { display: table; content: " "; }
+
+.koowa .k-grid__items__folders:after, .koowa .k-grid__items__files:after { clear: both; }
 
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */
