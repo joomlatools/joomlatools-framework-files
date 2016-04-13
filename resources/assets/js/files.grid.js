@@ -589,9 +589,7 @@ Files.Grid.Root = new Class({
 		}
 
 		if (this.layout === 'icons') {
-			console.log(element);
 			var type = element.hasClass('files-folder') ? 'folders' : 'files';
-			console.log(type);
 			parent = parent.getElement('.k-grid__items__'+type);
 		}
 
