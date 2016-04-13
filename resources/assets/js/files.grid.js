@@ -570,7 +570,9 @@ Files.Grid = new Class({
 Files.Grid.Root = new Class({
 	Implements: Files.Template,
 	template: 'container',
+	layout: null,
 	initialize: function(layout) {
+		this.layout  = layout;
 		this.element = this.render(layout);
 	},
 	adopt: function(element, position) {
@@ -585,6 +587,14 @@ Files.Grid.Root = new Class({
 		if (this.element.get('tag') == 'table') {
 			parent = this.element.getElement('tbody');
 		}
+
+		if (this.layout === 'icons') {
+			console.log(element);
+			var type = element.hasClass('files-folder') ? 'folders' : 'files';
+			console.log(type);
+			parent = parent.getElement('.k-grid__items__'+type);
+		}
+
         //Legacy
         if (!element.injectInside) element.injectInside = element.inject;
 		element.injectInside(parent, position);

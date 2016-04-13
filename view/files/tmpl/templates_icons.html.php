@@ -53,7 +53,10 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </textarea>
 
 <textarea style="display: none" id="icons_container">
-<div class="k-grid__items"></div>
+<div class="k-grid__items">
+    <div class="k-grid__items__folders"></div>
+    <div class="k-grid__items__files"></div>
+</div>
 </textarea>
 
 <textarea style="display: none" id="icons_folder">
