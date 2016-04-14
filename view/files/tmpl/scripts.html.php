@@ -35,9 +35,6 @@ JHtml::_('behavior.framework', true);
 ))); ?>
 
 <ktml:script src="assets://files/js/history/history.js" />
-<? if (JBrowser::getInstance()->getBrowser() === 'msie'): ?>
-<ktml:script src="assets://files/js/history/history.html4.js" />
-<? endif; ?>
 
 <ktml:script src="assets://files/js/ejs/ejs.js" />
 
