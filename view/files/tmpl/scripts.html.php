@@ -77,13 +77,4 @@ For debugging:
 
 <ktml:script src="assets://files/js/files.copymove.js" />
 
-<!--[if lte IE 9]>
-<script data-inline src="assets://files/js/jquery.placeholder.js" type="text/javascript"></script>
-<script data-inline type="text/javascript">
-kQuery(function($) {
-    $('input, textarea').placeholder();
-});
-</script>
-<![endif]-->
-
 <?= helper('icon.icon_map'); ?>
