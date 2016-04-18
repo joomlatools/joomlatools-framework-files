@@ -12,7 +12,7 @@
  */
 defined('KOOWA') or die; ?>
 
-<?= helper('behavior.ui'); ?>
+<?= helper('ui.load'); ?>
 
 <ktml:module position="submenu">
     <ktml:toolbar type="menubar">

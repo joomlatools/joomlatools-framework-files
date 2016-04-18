@@ -19,7 +19,7 @@ $component = isset($component) ? $component : substr($query['option'], 4);
 $callback  = isset($query['callback']) ? $query['callback'] : null;
 ?>
 
-<?= helper('behavior.ui', array('wrapper_class' => array('com_files--attachments'))); ?>
+<?= helper('ui.load', array('wrapper_class' => array('com_files--attachments'))); ?>
 
 <?= import('com:files.files.scripts.html'); ?>
 
