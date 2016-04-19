@@ -57,7 +57,6 @@ Files.Grid = new Class({
 				});
 			};
 		createEvent('click:relay(.files-folder a.navigate)', 'clickFolder');
-		createEvent('click:relay(.files-folder .js-navigate-folder)', 'clickFolder');
 		createEvent('click:relay(.files-file a.navigate)', 'clickFile');
 		createEvent('click:relay(.files-image a.navigate)', 'clickImage');
 
