@@ -56,9 +56,9 @@ Files.Grid = new Class({
 					that.fireEvent(event_name, arguments);
 				});
 			};
-		createEvent('click:relay(.files-folder)', 'clickFolder');
-		createEvent('click:relay(.files-file)', 'clickFile');
-		createEvent('click:relay(.files-image)', 'clickImage');
+		createEvent('click:relay(.files-folder a.navigate)', 'clickFolder');
+		createEvent('click:relay(.files-file a.navigate)', 'clickFile');
+		createEvent('click:relay(.files-image a.navigate)', 'clickImage');
 
 		/*
 		 * Checkbox events
@@ -246,7 +246,7 @@ Files.Grid = new Class({
 			that.fireEvent('setState', state);
 		});
 
-		var input = kQuery('.k-scopebar__item .k-search__field'),
+		var input = kQuery('.search_button', '#files-canvas'),
 			send = function(value) {
 				var state = {search: typeof value === 'undefined' ? input.val() : value};
 
@@ -254,14 +254,16 @@ Files.Grid = new Class({
 				that.fireEvent('setState', state);
 			};
 
-		input.keypress(function(event) {
+		input.blur(function() {
+			send();
+		})
+		.keypress(function(event) {
 			if (event.which === 13) { // enter key
 				send();
 			}
 		});
 
-		kQuery('.k-scopebar__item .k-search__button-empty').click(function(event) {
-			event.preventDefault();
+		kQuery('.search_button--empty', '#files-canvas').click(function() {
 			if (input.val()) {
 				send('');
 			}
@@ -269,7 +271,7 @@ Files.Grid = new Class({
 	},
 	setState: function(state) {
 		if (typeof state.search !== 'undefined') {
-			var search = document.getElement('.k-scopebar__item .k-search__field');
+			var search = document.id('files-canvas').getElement('.search_button');
 			if (search) {
 				search.set('value', state.search);
 			}
@@ -350,7 +352,6 @@ Files.Grid = new Class({
 
 		this.container.empty();
 		this.root = new Files.Grid.Root(this.layout);
-
 		this.container.adopt(this.root.element);
 
 		this.renew();
@@ -570,27 +571,21 @@ Files.Grid = new Class({
 Files.Grid.Root = new Class({
 	Implements: Files.Template,
 	template: 'container',
-	layout: null,
 	initialize: function(layout) {
-		this.layout  = layout;
 		this.element = this.render(layout);
 	},
 	adopt: function(element, position) {
 		position = position || 'top';
-		var parent = this.element,
-			table  = parent.getElement('tbody');
-
-		if (table) {
-			parent = table;
-		}
-
+		var parent = this.element;
 		if (this.element.get('tag') == 'table') {
 			parent = this.element.getElement('tbody');
 		}
 
-		if (this.layout === 'icons') {
-			var type = element.hasClass('files-folder') ? 'folders' : 'files';
-			parent = parent.getElement('.k-grid__items__'+type);
+		if (element.get('tag') === 'tr') {
+			var tbody = parent.getElement('tbody');
+			if (tbody) {
+				parent = tbody;
+			}
 		}
 
         //Legacy
