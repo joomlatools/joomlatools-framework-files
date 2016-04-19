@@ -41,7 +41,7 @@ Files.App = new Class({
         },
         grid: {
             element: 'files-grid',
-            batch_delete: '#toolbar-delete a',
+            batch_delete: '#toolbar-delete',
             icon_size: 150
         },
         paginator: {
@@ -99,7 +99,7 @@ Files.App = new Class({
         },
         uploader_dialog: {
             view: '#files-upload',
-            button: '#toolbar-upload a'
+            button: '#toolbar-upload'
         },
         move_dialog: {
             view: '#files-move-modal',
@@ -579,11 +579,36 @@ Files.App = new Class({
                 row.download_link = that.createRoute({view: 'file', format: 'html', name: row.name, folder: row.folder});
             }.bind(this),
             'onAfterSetLayout': function(context) {
+
+                if (context.layout === 'icons' || context.layout === 'details') {
+                    var layout = context.layout === 'icons' ? 'grid' : 'table',
+                        remove = layout === 'grid' ? 'table' : 'grid';
+
+                    this.container.removeClass('k-'+remove).addClass('k-'+layout);
+                    kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
+
+                    /*if (layout !== 'table') {
+                        kQuery('.k-table-container').floatThead('destroy');
+                        kQuery('.k-files-table').floatThead('destroy');
+                    } else {
+                        kQuery('.k-table-container').floatThead('reflow');
+                    }*/
+                }
+
                 if (key) {
                     Cookie.write(key, context.layout, that.options.cookie);
                 }
             },
             onAfterRender: function() {
+                // @todo: ercan fix the floating thead
+                // Instantiate floatThead for table views
+                /*kQuery('.k-files-table').floatThead({
+                    scrollContainer: function($table){
+                        return $table.closest('.k-table');
+                    },
+                    enableAria: true
+                });*/
+
                 this.setState(that.state.data);
             },
             onSetState: function(state) {

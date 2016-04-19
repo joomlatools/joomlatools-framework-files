@@ -57,6 +57,7 @@ Files.Grid = new Class({
 				});
 			};
 		createEvent('click:relay(.files-folder a.navigate)', 'clickFolder');
+		createEvent('click:relay(.files-folder .js-navigate-folder)', 'clickFolder');
 		createEvent('click:relay(.files-file a.navigate)', 'clickFile');
 		createEvent('click:relay(.files-image a.navigate)', 'clickImage');
 
@@ -77,8 +78,9 @@ Files.Grid = new Class({
 
 			that.checkNode(box.retrieve('row'));
 		};
-		//this.container.addEvent('click:relay(div.imgOutline)', fireCheck.bind(this));
-    this.container.addEvent('click:relay(input.files-select)', fireCheck.bind(this));
+
+		this.container.addEvent('click:relay(div.js-select-node)', fireCheck.bind(this));
+    	this.container.addEvent('click:relay(input.files-select)', fireCheck.bind(this));
 
         // Check the box when user clicks on the row
         this.container.addEvent('click', function(event) {
@@ -580,6 +582,14 @@ Files.Grid.Root = new Class({
 		if (this.element.get('tag') == 'table') {
 			parent = this.element.getElement('tbody');
 		}
+
+		if (element.get('tag') === 'tr') {
+			var tbody = parent.getElement('tbody');
+			if (tbody) {
+				parent = tbody;
+			}
+		}
+
         //Legacy
         if (!element.injectInside) element.injectInside = element.inject;
 		element.injectInside(parent, position);

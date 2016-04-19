@@ -18,7 +18,7 @@ class ComFilesModelEntityContainer extends KModelEntityRow
     public function getPropertyRelativePath()
     {
         $path = $this->fullpath;
-        $root = str_replace('\\', '/', JPATH_ROOT);
+        $root = str_replace('\\', '/', Koowa::getInstance()->getRootPath());
 
         return str_replace($root.'/', '', $path);
     }
@@ -29,7 +29,7 @@ class ComFilesModelEntityContainer extends KModelEntityRow
 
         // Prepend with site root if it is a relative path
         if (!preg_match('#^(?:[a-z]\:|~*/)#i', $result)) {
-            $result = JPATH_ROOT.'/'.$result;
+            $result = Koowa::getInstance()->getRootPath().'/'.$result;
         }
 
         $result = rtrim(str_replace('\\', '/', $result), '\\');

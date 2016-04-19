@@ -221,6 +221,7 @@ $.widget("koowa.uploader", {
 		multi_selection: true,
 		multiple_queues: true, // re-use widget by default
 		dragdrop : true,
+		drop_element: 'body',
 		autostart: false,
 		rename: true,
 
@@ -405,7 +406,13 @@ $.widget("koowa.uploader", {
 		;
 
 		if (self.options.dragdrop) {
-			options.drop_element = this.id;
+			if (self.options.drop_element === 'element') {
+				self.options.drop_element = self.id;
+			} else if (self.options.drop_element === 'body') {
+				self.options.drop_element = document.body;
+			}
+
+			options.drop_element = self.options.drop_element || document.body;
 		}
 
 		this.filelist.on('click', function(e) {
@@ -524,20 +531,50 @@ $.widget("koowa.uploader", {
 			}
 
 			if (self.options.dragdrop && up.features.dragdrop && o.Env.os !== 'iOS') {
-				var addHoverClass = function() {
-					self.element.addClass("has-drag-hover");
-				}, removeHoverClass = function() {
-					self.element.removeClass("has-drag-hover");
-				};
-
-				self.element.on('drop', removeHoverClass);
-				self.element.on('dragend', removeHoverClass);
-				self.element.on('dragleave', removeHoverClass);
-
-				self.element.on('dragenter', addHoverClass);
-				self.element.on('dragover', addHoverClass);
 
 				self.element.addClass('has-dragdrop-support');
+
+				var addHoverClass, removeHoverClass, drop_element;
+
+				drop_element = $(self.options.drop_element);
+
+				if (drop_element.is('body')) {
+					var selection = self.options.multi_selection ? 'multiple' : 'single',
+						element   = $($.trim(self.renderTemplate('drop-message-'+selection)));
+
+					drop_element.append(element);
+
+					addHoverClass = function() {
+						element.addClass('is-active');
+					};
+
+					removeHoverClass = function() {
+						element.removeClass('is-active');
+					};
+
+					drop_element.on('drop', removeHoverClass);
+					drop_element.on('dragend', removeHoverClass);
+					drop_element.on('dragleave', removeHoverClass);
+
+					drop_element.on('dragenter', addHoverClass);
+					drop_element.on('dragover', addHoverClass);
+				}
+				else {
+					addHoverClass = function() {
+						drop_element.addClass("has-drag-hover");
+					};
+
+					removeHoverClass = function() {
+						drop_element.removeClass("has-drag-hover");
+					};
+
+					drop_element.on('drop', removeHoverClass);
+					drop_element.on('dragend', removeHoverClass);
+					drop_element.on('dragleave', removeHoverClass);
+
+					drop_element.on('dragenter', addHoverClass);
+					drop_element.on('dragover', addHoverClass);
+				}
 			}
 
 			self.start_button.click(function(e) {

@@ -12,27 +12,47 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 ?>
 
 <?= import('com:files.files.scripts.html'); ?>
+<ktml:script src="assets://files/js/files.compact.js" />
+<?= import('templates_compact.html');?>
 
-<ktml:script src="media://koowa/com_files/js/files.compact.js" />
 
 <script>
 Files.sitebase = '<?= $sitebase; ?>';
 Files.token = '<?= $token; ?>';
 
 window.addEvent('domready', function() {
-	var config = <?= json_encode(KObjectConfig::unbox(parameters()->config)); ?>,
-		options = {
+    var config = <?= json_encode(KObjectConfig::unbox(parameters()->config)); ?>,
+        options = {
             cookie: {
                 path: '<?=object('request')->getSiteUrl()?>'
             },
             root_text: <?= json_encode(translate('Root folder')) ?>,
-			editor: <?= json_encode(parameters()->editor); ?>,
-			types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
-			container: <?= json_encode($container ? $container->toArray() : null); ?>
-		};
-	options = Object.append(options, config);
+            editor: <?= json_encode(parameters()->editor); ?>,
+            types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
+            container: <?= json_encode($container ? $container->toArray() : null); ?>,
+            tree: {
+                dataFilter: function(response){
+                    if (response.entities.length === 0) {
+                        return [];
+                    }
 
-	Files.app = new Files.Compact.App(options);
+                    kQuery('.koowa_dialog__file_dialog_categories').css('display', 'block');
+                    kQuery('.koowa_dialog--file_dialog').removeClass('koowa_dialog--no_categories');
+
+                    return Files.app.tree.filterData(response);
+                }
+            }
+        },
+        app = new Class({
+            Extends: Files.Compact.App
+            /*fetch: function() {
+                this.grid.unspin();
+                return kQuery.Deferred();
+            }*/
+        });
+    options = Object.append(options, config);
+
+    Files.app = new app(options);
 
     <? if ($can_upload): ?>
     $('files-new-folder-create').addEvent('click', function(e){
@@ -45,9 +65,12 @@ window.addEvent('domready', function() {
             var folder = new Files.Folder({name: value, folder: Files.app.getPath()});
 
             folder.add(function(response, responseText) {
-                var el = response.entities[0],
-                    cls = Files[el.type.capitalize()],
-                    row = new cls(el);
+                if (response.status === false) {
+                    return alert(response.error);
+                }
+                var el = response.entities[0];
+                var cls = Files[el.type.capitalize()];
+                var row = new cls(el);
 
                 element.set('value', '');
                 $('files-new-folder-create').removeClass('valid').setProperty('disabled', 'disabled');
@@ -92,70 +115,48 @@ kQuery(function($) {
 });
 </script>
 
-<?= import('com:files.files.templates_compact.html');?>
 
+<!-- Wrapper -->
+<div class="k-wrapper">
 
-<div class="koowa_dialog koowa_dialog--file_dialog" >
-    <div class="koowa_dialog__layout" style="padding-top: 0">
-        <div class="koowa_dialog__wrapper">
-            <div class="koowa_dialog-table">
-                <? if ($can_upload): ?>
-                    <div class="koowa_dialog-table__top">
-                        <?= import('com:files.files.uploader.html') ?>
-                    </div>
-                <? endif ?>
-                <div class="koowa_dialog-table__bottom">
-                    <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_categories">
-                        <h2 class="koowa_dialog__title">
-                            <?= translate('Select a folder'); ?>
-                        </h2>
-                        <div class="koowa_dialog__child__content koowa_dialog__folders_files">
-                            <div class="koowa_dialog__child__content__box">
-                                <div class="koowa_dialog__files_tree" id="files-tree" style="overflow: auto; height: auto;"></div>
-                            </div>
-                            <? if ($can_upload): ?>
-                                <div class="koowa_dialog__new_folder">
-                                    <h2 class="koowa_dialog__title koowa_dialog__title--child">
-                                        <?= translate('Create a new folder'); ?>
-                                    </h2>
-                                    <div class="koowa_dialog__block" id="files-new-folder-modal">
-                                        <div class="input-group" style="margin:0;">
-                                            <input type="text" class="input-group-form-control" id="files-new-folder-input" />
-                                            <span class="input-group-btn">
-                                                <button id="files-new-folder-create" class="btn" disabled><?= translate('Add folder'); ?></button>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            <? endif; ?>
-                        </div>
-                    </div>
+    <!-- Titlebar -->
+    <div class="k-titlebar">
 
-                    <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_files">
-                        <h2 class="koowa_dialog__title">
-                            <?= translate('Select a file'); ?>
-                        </h2>
-                        <div class="koowa_dialog__child__content koowa_spinner_container" id="spinner_container">
-                            <div class="koowa_dialog__child__content__box">
-                                <div id="files-grid" style="max-height:450px;">
+        <!-- Title -->
+        <h2><?= translate('Insert / Upload file'); ?></h2>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="koowa_dialog__wrapper__child koowa_dialog__file_dialog_insert">
-                        <h2 class="koowa_dialog__title">
-                            <?= translate('Selected file info'); ?>
-                        </h2>
-                        <div class="koowa_dialog__child__content">
-                            <div class="koowa_dialog__child__content__box">
-                                <div id="files-preview"></div>
-                                <div id="insert-button-container"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    </div><!-- .k-titlebar -->
+
+    <!-- Content wrapper -->
+    <div class="k-content-wrapper">
+
+        <!-- Sidebar -->
+        <?= import('compact_sidebar.html'); ?>
+
+        <!-- Content -->
+        <div class="k-content">
+
+          <!-- Component -->
+            <div class="k-component">
+
+                <!-- List layout -->
+                <div class="k-list-layout">
+
+                    <div class="k-breadcrumb" id="files-pathway"></div>
+
+                    <?= import('compact_upload.html'); ?>
+
+                    <?= import('compact_select.html'); ?>
+
+                </div><!-- .k-list-layout -->
+
+            </div><!-- .k-component -->
+
+        </div><!-- k-content -->
+
+        <!-- Sidebar -->
+        <?= import('compact_sidebar_right.html'); ?>
+
+    </div><!-- .k-content-wrapper -->
+
+</div><!-- .k-wrapper -->
