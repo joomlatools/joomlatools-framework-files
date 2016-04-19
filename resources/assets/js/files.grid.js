@@ -56,9 +56,9 @@ Files.Grid = new Class({
 					that.fireEvent(event_name, arguments);
 				});
 			};
-		createEvent('click:relay(.files-folder a.navigate)', 'clickFolder');
-		createEvent('click:relay(.files-file a.navigate)', 'clickFile');
-		createEvent('click:relay(.files-image a.navigate)', 'clickImage');
+		createEvent('click:relay(.files-folder)', 'clickFolder');
+		createEvent('click:relay(.files-file)', 'clickFile');
+		createEvent('click:relay(.files-image)', 'clickImage');
 
 		/*
 		 * Checkbox events
