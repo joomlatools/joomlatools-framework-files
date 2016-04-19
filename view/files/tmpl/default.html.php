@@ -45,7 +45,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
         <!-- Title when sidebar is inivisible -->
         <div class="k-mobile-title">
-            <ktml:toolbar type="actionbar" render_buttons="false">
+            <ktml:toolbar type="actionbar" no-buttons>
         </div>
 
         <? if (!isset(parameters()->config->can_upload) || parameters()->config->can_upload): ?>
