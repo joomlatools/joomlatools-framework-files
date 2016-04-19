@@ -61,43 +61,43 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="icons_folder">
 <div class="k-grid__item k-grid__item--folder files-node files-folder">
-    <div class="k-grid__item__title">
+    <div class="k-grid__item__title js-navigate-folder">
+        <div class="controls" style="display: inline-block">
+            <input type="checkbox" class="files-select" value="" />
+        </div>
         <a href="#" class="navigate">[%=name%]</a>
-    </div>
-    <div class="controls hidden">
-        <input type="checkbox" class="files-select" value="" />
     </div>
 </div>
 </textarea>
 
 <textarea style="display: none" id="icons_file">
 <div class="k-grid__item k-grid__item--file files-node files-file">
-    <div class="imgOutline">
-    	<div class="imgTotal files-node-thumbnail" style="width:[%= icon_size%]px; height: [%= icon_size*0.75%]px">
-
+    <div class="k-grid__item__content">
+        <div class="k-grid__file-wrapper" style="min-height: 108px">
             [%
             var icon = 'default',
             extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
 
             kQuery.each(Files.icon_map, function(key, value) {
-                if (kQuery.inArray(extension, value) !== -1) {
-                    icon = key;
-                }
+            if (kQuery.inArray(extension, value) !== -1) {
+            icon = key;
+            }
             });
             %]
-    	 	<a class="navigate koowa_icon--[%=icon%] koowa_icon--48 extension-label" href="#"
-    	 		data-filetype="[%=filetype%]"
-    	 		data-extension="[%=metadata.extension%]"></a>
-    	</div>
-    	<div class="files-icons-controls">
-    	<div class="controls" style="display:none">
-    		<input type="checkbox" class="files-select" value="" />
-    	</div>
-    	<div class="ellipsis" style="width:[%= icon_size%]px" title="[%=name%]">
-    		[%=name%]
-    	</div>
-    	</div>
+            <a class="k-grid__file navigate koowa_icon--[%=icon%] koowa_icon--48 extension-label" href="#"
+               style="padding: 30px 0"
+               data-filetype="[%=filetype%]"
+               data-extension="[%=metadata.extension%]"></a>
+
+        </div>
     </div>
+    <div class="k-grid__item__title js-select-node">
+        <div class="controls" style="display: inline-block">
+            <input type="checkbox" class="files-select" value="" />
+        </div>
+        [%=name%]
+    </div>
+
 </div>
 </textarea>
 
@@ -105,8 +105,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="k-grid__item k-grid__item--file  files-node files-image ">
 
         <div class="k-grid__item__content">
-            <div class="k-grid__file-wrapper">
-                <a class="k-grid__file navigate
+            <div class="k-grid__file-wrapper" style="min-height: 108px">
+                <a  class="k-grid__file navigate
                     [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
                    data-filetype="[%=filetype%]"
                    data-extension="[%=metadata.extension%]">
@@ -117,11 +117,11 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 </a>
             </div>
         </div>
-        <div class="k-grid__item__title">
+        <div class="k-grid__item__title js-select-node">
+            <div class="controls" style="display: inline-block">
+                <input type="checkbox" class="files-select" value="" />
+            </div>
             [%=name%]
-        </div>
-        <div class="controls hidden">
-            <input type="checkbox" class="files-select" value="" />
         </div>
     </div>
 </textarea>
