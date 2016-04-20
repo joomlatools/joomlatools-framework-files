@@ -25,7 +25,7 @@
                 },
                 templateCleanup: function(content)
                 {
-                    return content.replace(/([href|src])="\/\[%=/g, "$1=\"[%=");
+                    return content.replace(/(href|src)=".+?\[%=/g, "$1=\"[%=");
                 },
                 render: function(attachment, template)
                 {
