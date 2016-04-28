@@ -29,42 +29,32 @@ window.addEvent('domready', function() {
 </script>
 
 <textarea style="display: none" id="details_container">
-<div class="manager">
-	<table class="table table-striped"  style="clear: both;">
-		<thead>
-			<tr>
-                <th width="10">
-                    <div class="btn-group">
-                        <label class="btn dropdown-toggle" style="
-                        padding-top: 6px;
-                        padding-bottom: 6px;
-                        border-bottom: none;
-                        padding-left: 10px;
-                        border-top: none;
-                        border-left: none;
-                        border-radius: 0;
-                        ">
-                            <input type="checkbox" class="-check-all" id="select-check-all" />
-                        </label>
-                    </div>
-                </th>
-                <th width="32"></th>
-				<th data-name="name" class="files__sortable">
-                    <?= translate('Name'); ?>
-                    <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
-                </th>
-                <th width="100" style="text-align: center;"><?= translate('Size'); ?></th>
-                <th width="100" style="text-align: center;" data-name="modified_on"  class="files__sortable">
-                    <?= translate('Last Modified'); ?>
-                    <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
-                </th>
-                <th width="1" style="text-align: center;"><i class="icon-download"></i></th>
-			</tr>
-		</thead>
-		<tbody>
-		</tbody>
-	</table>
-</div>
+    <table class="k-files-table footable">
+        <thead>
+        <tr>
+            <th width="1%">
+                <input type="checkbox" class="-check-all" id="select-check-all" />
+            </th>
+            <th width="1%" data-toggle="true"></th>
+            <th class="files__sortable" data-name="name">
+                <?= translate('Name'); ?>
+                <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
+            </th>
+            <th width="1%" data-hide="phone">
+                <?= translate('Size'); ?>
+            </th>
+            <th class="files__sortable" width="1%" data-hide="phone,tablet,desktop" data-name="modified_on">
+                <?= translate('Last Modified'); ?>
+                <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
+            </th>
+            <th class="k-table-data--center" width="1%" data-hide="phone,tablet">
+                <span class="k-icon-data-transfer-download"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 </textarea>
 
 <textarea style="display: none" id="details_folder">
