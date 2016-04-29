@@ -43,6 +43,7 @@ $k-upload-list-button-desktop-size: 23px !default;
   margin-bottom: 20px;
   min-height: $k-upload-height;
   transition: $k-upload-transition-fast;
+  max-width: 100%;
 
   /* Loading message on top */
   &:after {
