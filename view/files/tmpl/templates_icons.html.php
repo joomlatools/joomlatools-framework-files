@@ -73,7 +73,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 <textarea style="display: none" id="icons_file">
 <div class="k-grid__item k-grid__item--file files-node files-file">
     <div class="k-grid__item__content">
-        <div class="k-grid__file-wrapper" style="min-height: 108px">
+        <div class="k-grid__file-wrapper">
             [%
             var icon = 'default',
             extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
@@ -84,10 +84,13 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             }
             });
             %]
-            <a class="k-grid__file navigate koowa_icon--[%=icon%] koowa_icon--48 extension-label" href="#"
-               style="padding: 30px 0"
+            <a class="k-grid__file navigate" href="#"
                data-filetype="[%=filetype%]"
-               data-extension="[%=metadata.extension%]"></a>
+               data-extension="[%=metadata.extension%]">
+                <div class="k-grid__item__cell">
+                    <span class="koowa_icon--[%=icon%] koowa_icon--48 extension-label"></span>
+                </div>
+            </a>
 
         </div>
     </div>
@@ -105,14 +108,16 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="k-grid__item k-grid__item--file  files-node files-image ">
 
         <div class="k-grid__item__content">
-            <div class="k-grid__file-wrapper" style="min-height: 108px">
+            <div class="k-grid__file-wrapper">
                 <a  class="k-grid__file navigate
                     [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
                    data-filetype="[%=filetype%]"
                    data-extension="[%=metadata.extension%]">
                     [% if (typeof thumbnail === 'string') { %]
-                    <div class="spinner"></div>
-                    <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
+                    <div class="k-grid__item__cell">
+                        <div class="spinner"></div>
+                        <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
+                    </div>
                     [% } %]
                 </a>
             </div>

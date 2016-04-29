@@ -100,21 +100,21 @@ window.addEvent('domready', function() {
                 </div>
             </div>
 		</td>
-		<td style="text-align: center;">
+		<td class="k-table-data--nowrap">
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
                     [%=size.humanize()%]
                 </div>
             </div>
 		</td>
-		<td style="text-align: center;">
+		<td class="k-table-data--nowrap">
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
                     [%=getModifiedDate(true)%]
                 </div>
             </div>
 		</td>
-        <td align="right">
+        <td>
             <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
         </td>
 	</tr>
@@ -139,22 +139,22 @@ window.addEvent('domready', function() {
                 </div>
             </div>
 		</td>
-		<td style="text-align: center;">
+		<td class="k-table-data--nowrap">
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
                     [%=size.humanize()%][% if (metadata.image) { %]<br />
-                    ([%=metadata.image.width%] x [%=metadata.image.height%])[% } %]
+                    <small>([%=metadata.image.width%] x [%=metadata.image.height%])[% } %]</small>
                 </div>
             </div>
 		</td>
-		<td style="text-align: center;">
+		<td class="k-table-data--nowrap">
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
                     [%=getModifiedDate(true)%]
                 </div>
             </div>
 		</td>
-        <td align="right">
+        <td>
             <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
         </td>
 	</tr>
