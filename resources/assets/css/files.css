@@ -3346,6 +3346,36 @@ body.k-resizing { overflow: hidden; }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-migrator-container, .k-flexboxlegacy .koowa .k-migrator-container { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
+.koowa .form-group.warning .help-block, .koowa .form-group.warning .control-label, .koowa .form-group.warning .radio, .koowa .form-group.warning .checkbox, .koowa .form-group.warning .radio-inline, .koowa .form-group.warning .checkbox-inline, .koowa .form-group.warning.radio label, .koowa .form-group.warning.checkbox label, .koowa .form-group.warning.radio-inline label, .koowa .form-group.warning.checkbox-inline label { color: #8a6d3b; }
+
+.koowa .form-group.warning .form-control { border-color: #8a6d3b; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+
+.koowa .form-group.warning .form-control:focus { border-color: #66512c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b; }
+
+.koowa .form-group.warning .input-group-addon { color: #8a6d3b; border-color: #8a6d3b; background-color: #fcf8e3; }
+
+.koowa .form-group.warning .form-control-feedback { color: #8a6d3b; }
+
+.koowa .form-group.error .help-block, .koowa .form-group.error .control-label, .koowa .form-group.error .radio, .koowa .form-group.error .checkbox, .koowa .form-group.error .radio-inline, .koowa .form-group.error .checkbox-inline, .koowa .form-group.error.radio label, .koowa .form-group.error.checkbox label, .koowa .form-group.error.radio-inline label, .koowa .form-group.error.checkbox-inline label { color: #a94442; }
+
+.koowa .form-group.error .form-control { border-color: #a94442; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+
+.koowa .form-group.error .form-control:focus { border-color: #843534; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
+
+.koowa .form-group.error .input-group-addon { color: #a94442; border-color: #a94442; background-color: #f2dede; }
+
+.koowa .form-group.error .form-control-feedback { color: #a94442; }
+
+.koowa .form-group.success .help-block, .koowa .form-group.success .control-label, .koowa .form-group.success .radio, .koowa .form-group.success .checkbox, .koowa .form-group.success .radio-inline, .koowa .form-group.success .checkbox-inline, .koowa .form-group.success.radio label, .koowa .form-group.success.checkbox label, .koowa .form-group.success.radio-inline label, .koowa .form-group.success.checkbox-inline label { color: #3c763d; }
+
+.koowa .form-group.success .form-control { border-color: #3c763d; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+
+.koowa .form-group.success .form-control:focus { border-color: #2b542c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168; }
+
+.koowa .form-group.success .input-group-addon { color: #3c763d; border-color: #3c763d; background-color: #dff0d8; }
+
+.koowa .form-group.success .form-control-feedback { color: #3c763d; }
+
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */
 /** Set font-size to selectable elements to 16px to avoid iOs to zoom automatically This way the user is still able to zoom manually Acknowledgements: Doesn't work within framed content. The whole body will zoom regardless */

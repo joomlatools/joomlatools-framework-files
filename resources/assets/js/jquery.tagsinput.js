@@ -89,7 +89,7 @@
 					var skipTag = $(tagslist).tagExist(value);
 					if(skipTag == true && options.mark_input) {
 					    //Marks fake input as not_valid to let styling it
-    				    $('#'+id+'_tag').closest('.control-group').addClass('error');
+    				    $('#'+id+'_tag').closest('.form-group').addClass('error');
     				}
 				} else {
 					var skipTag = false; 
@@ -335,7 +335,7 @@
 				if(data.unique) {
 				    $(data.fake_input).keydown(function(event){
 				        if(event.keyCode == 8 || String.fromCharCode(event.which).match(/\w+|[���������,/]+/)) {
-	    				    $(this).closest('.control-group').removeClass('error');
+	    				    $(this).closest('.form-group').removeClass('error');
 				        }
 				    });
 				}
