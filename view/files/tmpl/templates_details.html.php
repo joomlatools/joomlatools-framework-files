@@ -68,7 +68,7 @@ window.addEvent('domready', function() {
 		<td colspan="4">
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
-                    <a href="#" class="navigate">[%=name%]</a>
+                    <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('Open folder') ?>">[%=name%]</a>
                 </div>
             </div>
 		</td>
@@ -96,7 +96,7 @@ window.addEvent('domready', function() {
 		<td>
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
-                    <a href="#" class="navigate">[%=name%]</a>
+                    <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View file info') ?>">[%=name%]</a>
                 </div>
             </div>
 		</td>
@@ -115,7 +115,7 @@ window.addEvent('domready', function() {
             </div>
 		</td>
         <td>
-            <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
+            <a href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
         </td>
 	</tr>
 </textarea>
@@ -135,7 +135,7 @@ window.addEvent('domready', function() {
 		<td>
             <div class="koowa_wrapped_content">
                 <div class="whitespace_preserver">
-                    <a href="#" class="navigate">[%=name%]</a>
+                    <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View image') ?>">[%=name%]</a>
                 </div>
             </div>
 		</td>
@@ -155,7 +155,7 @@ window.addEvent('domready', function() {
             </div>
 		</td>
         <td>
-            <a class="btn btn-mini" href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
+            <a href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
         </td>
 	</tr>
 </textarea>

@@ -9,104 +9,115 @@
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="file_preview">
-<div style="position: relative;background-color: white;margin: 20px auto;max-width: 300px;">
-<div class="preview extension-[%=metadata.extension%]">
-    [% var view_path = Files.app.createRoute({view: 'file', format: 'html', name: name, folder: folder}); %]
-    <span class="koowa_icon--document"><i>[%=name%]</i></span>
-
-    <div class="btn-toolbar">
-        [% if (typeof image !== 'undefined') { %]
-        <a class="btn btn-mini" href="[%=view_path%]" target="_blank">
-            <i class="icon-eye-open"></i> <?= translate('View'); ?>
-        </a>
-        [% } else { %]
-        <a class="btn btn-mini" href="[%=view_path%]" target="_blank" download="[%=name%]">
-            <i class="icon-download"></i> <?= translate('Download'); ?>
-        </a>
-        [% } %]
+<div class="well extension-[%=metadata.extension%]">
+    <div class="k-file-info">
+        [% var view_path = Files.app.createRoute({view: 'file', format: 'html', name: name, folder: folder}); %]
+        <p>
+            <span class="koowa_icon--document"></span><strong style="display: inline-block;vertical-align: top;margin-left: 10px;">[%=name%]</strong>
+        </p>
+        <p>
+            [% if (typeof image !== 'undefined') { %]
+            <a class="btn btn-mini" href="[%=view_path%]" target="_blank">
+                <i class="icon-eye-open"></i> <?= translate('View'); ?>
+            </a>
+            [% } else { %]
+            <a class="btn btn-mini" href="[%=view_path%]" target="_blank" download="[%=name%]">
+                <i class="icon-download"></i> <?= translate('Download'); ?>
+            </a>
+            [% } %]
+        </p>
+        <div class="k-mini-table">
+            <table>
+                <tbody>
+                <tr>
+                    <td class="detail-label"><?= translate('Name'); ?></td>
+                    <td>
+                        <div class="koowa_wrapped_content">
+                            <div class="whitespace_preserver">[%=name%]</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="detail-label"><?= translate('Size'); ?></td>
+                    <td>[%=size.humanize()%]</td>
+                </tr>
+                <tr>
+                    <td class="detail-label"><?= translate('Modified'); ?></td>
+                    <td>[%=getModifiedDate(true)%]</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <? // @TODO: Robin: move this to scss files; ?>
+        <style type="text/css">
+            .k-mini-table table {
+                width: 100%;
+            }
+            .k-mini-table td {
+                padding: 5px 5px 5px 0;
+                border-bottom: 1px solid #ccc;
+            }
+            .k-mini-table tr:last-child td {
+                border-bottom: none;
+            }
+        </style>
     </div>
-</div>
-<hr />
-<div class="details">
-    <table class="table table-condensed parameters">
-        <tbody>
-        <tr>
-            <td class="detail-label"><?= translate('Name'); ?></td>
-            <td>
-                <div class="koowa_wrapped_content">
-                    <div class="whitespace_preserver">[%=name%]</div>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="detail-label"><?= translate('Size'); ?></td>
-            <td>[%=size.humanize()%]</td>
-        </tr>
-        <tr>
-            <td class="detail-label"><?= translate('Modified'); ?></td>
-            <td>[%=getModifiedDate(true)%]</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 </div>
 </textarea>
 
 <textarea style="display: none" id="icons_container">
-<div class="k-grid__items">
-    <div class="k-grid__items__folders"></div>
-    <div class="k-grid__items__files"></div>
-</div>
+    <div class="k-grid__items">
+        <div class="k-grid__items__folders"></div>
+        <div class="k-grid__items__files"></div>
+    </div>
 </textarea>
 
 <textarea style="display: none" id="icons_folder">
-<div class="k-grid__item k-grid__item--folder files-node files-folder">
-    <div class="k-grid__item__title js-navigate-folder">
-        <div class="controls" style="display: inline-block">
-            <input type="checkbox" class="files-select" value="" />
+    <div class="k-grid__item k-grid__item--folder files-node files-folder">
+        <div class="k-grid__item__title js-navigate-folder">
+            <div class="controls" style="display: inline-block">
+                <input type="checkbox" class="files-select" value="" />
+            </div>
+            <a href="#" class="navigate">[%=name%]</a>
         </div>
-        <a href="#" class="navigate">[%=name%]</a>
     </div>
-</div>
 </textarea>
 
 <textarea style="display: none" id="icons_file">
-<div class="k-grid__item k-grid__item--file files-node files-file">
-    <div class="k-grid__item__content">
-        <div class="k-grid__file-wrapper">
-            [%
-            var icon = 'default',
-            extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
+    <div class="k-grid__item k-grid__item--file files-node files-file">
+        <div class="k-grid__item__content">
+            <div class="k-grid__file-wrapper">
+                [%
+                var icon = 'default',
+                extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
 
-            kQuery.each(Files.icon_map, function(key, value) {
-            if (kQuery.inArray(extension, value) !== -1) {
-            icon = key;
-            }
-            });
-            %]
-            <a class="k-grid__file navigate" href="#"
-               data-filetype="[%=filetype%]"
-               data-extension="[%=metadata.extension%]">
-                <div class="k-grid__item__cell">
-                    <span class="koowa_icon--[%=icon%] koowa_icon--48 extension-label"></span>
-                </div>
-            </a>
+                kQuery.each(Files.icon_map, function(key, value) {
+                if (kQuery.inArray(extension, value) !== -1) {
+                icon = key;
+                }
+                });
+                %]
+                <a class="k-grid__file navigate" href="#"
+                   data-filetype="[%=filetype%]"
+                   data-extension="[%=metadata.extension%]">
+                    <div class="k-grid__item__cell">
+                        <span class="koowa_icon--[%=icon%] koowa_icon--48 extension-label"></span>
+                    </div>
+                </a>
 
+            </div>
+        </div>
+        <div class="k-grid__item__title js-select-node">
+            <div class="controls" style="display: inline-block">
+                <input type="checkbox" class="files-select" value="" />
+            </div>
+            [%=name%]
         </div>
     </div>
-    <div class="k-grid__item__title js-select-node">
-        <div class="controls" style="display: inline-block">
-            <input type="checkbox" class="files-select" value="" />
-        </div>
-        [%=name%]
-    </div>
-
-</div>
 </textarea>
 
 <textarea style="display: none" id="icons_image">
     <div class="k-grid__item k-grid__item--file  files-node files-image ">
-
         <div class="k-grid__item__content">
             <div class="k-grid__file-wrapper">
                 <a  class="k-grid__file navigate
