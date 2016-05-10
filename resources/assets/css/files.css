@@ -3101,6 +3101,8 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-table-container a { -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
+.koowa .k-table-container [class^="koowa_icon"] { vertical-align: middle; line-height: 0; }
+
 .koowa .k-table-container .k-table-data--right { text-align: right; }
 
 .koowa--rtl.koowa .k-table-container .k-table-data--right { text-align: left; }
@@ -3267,7 +3269,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .footable.breakpoint .footable-row-detail-name { font-weight: 700; }
 
-.koowa .k-table__item--state { cursor: pointer; }
+.koowa .k-table__item--state { cursor: pointer; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
 .koowa .k-table__item--state:focus, .koowa .k-table__item--state:hover { text-decoration: underline; }
 
@@ -3375,6 +3377,16 @@ body.k-resizing { overflow: hidden; }
 .koowa .form-group.success .input-group-addon { color: #3c763d; border-color: #3c763d; background-color: #dff0d8; }
 
 .koowa .form-group.success .form-control-feedback { color: #3c763d; }
+
+.koowa .k-positioner { display: inline-block; vertical-align: middle; width: 16px; height: 4px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; cursor: move; counter-increment: positioner-counter; position: relative; }
+
+.koowa .k-positioner:before { display: block; position: absolute; content: " "; width: 16px; height: 10px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; top: -4px; }
+
+.koowa .k-positioner:after { position: absolute; width: 32px; height: 32px; top: -15px; left: -8px; content: counter(positioner-counter); font-size: 10px; line-height: 44px; text-indent: 3px; vertical-align: bottom; color: #333; text-shadow: 0 0 3px white; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+
+.koowa .k-table { counter-reset: positioner-counter; }
+
+.koowa tr.selected .k-positioner:after { color: white; text-shadow: none; }
 
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */
