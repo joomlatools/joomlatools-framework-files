@@ -109,6 +109,8 @@ Files.CopyDialog = CopyMoveDialog.extend({
 
         this.options.button.prop('disabled', true);
 
+        Files.app.grid.fireEvent('beforeCopyNodes', {nodes: nodes});
+
         $.ajax(url, {
             type: 'POST',
             data: {
@@ -127,6 +129,8 @@ Files.CopyDialog = CopyMoveDialog.extend({
                     refresh_tree = true;
                 }
             });
+
+            Files.app.grid.fireEvent('afterCopyNodes', {nodes: nodes});
 
             if (refresh_tree) {
                 Files.app.tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
@@ -154,6 +158,8 @@ Files.MoveDialog = CopyMoveDialog.extend({
 
         this.options.button.prop('disabled', true);
 
+        Files.app.grid.fireEvent('beforeMoveNodes', {nodes: nodes});
+
         $.ajax(url, {
             type: 'POST',
             data: {
@@ -178,6 +184,8 @@ Files.MoveDialog = CopyMoveDialog.extend({
                     refresh_tree = true;
                 }
             });
+
+            Files.app.grid.fireEvent('afterMoveNodes', {nodes: nodes});
 
             if (refresh_tree) {
                 Files.app.tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
