@@ -690,7 +690,7 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 .select2-container.select2-container--bootstrap .select2-search__field { height: 32px; margin: 0; }
 
 /** Datepicker for Bootstrap Copyright 2012 Stefan Petre Improvements by Andrew Rowls Licensed under the Apache License v2.0 http://www.apache.org/licenses/LICENSE-2.0 */
-.datepicker { font-family: sans-serif; font-size: 13px; line-height: 19px; direction: ltr; }
+.datepicker { font-family: "Helvetica", "Arial", sans-serif; font-size: 13px; line-height: 19px; direction: ltr; }
 
 .datepicker.datepicker-inline { width: 220px; }
 
@@ -786,17 +786,17 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 
 /* Setup html, body and .koowa-container ========================================================================== */
 /** HTML By using 100% for `height` and `min-height` we can work with full-height auto overflowing flexbox pages */
-html { min-height: 100%; height: 100%; padding: 0; margin: 0; }
+html { min-height: 100%; height: 100%; padding: 0; margin: 0; font-family: "Helvetica", "Arial", sans-serif; }
 
 /** BODY By using 100% for `height` and `min-height` we can work with full-height auto overflowing flexbox pages */
-body { min-height: 100%; height: 100%; padding: 0; margin: 0; font-family: sans-serif; /* Setup flexbox */ }
+body { min-height: 100%; height: 100%; padding: 0; margin: 0; /* Setup flexbox */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox body, .k-flexboxlegacy body { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
 body.k-resizing { overflow: hidden; }
 
 /** Koowa container 1. By using a max-width we essentially set a min-width when the contents are to large for the koowa container. The reason we don't use min-width is because if the content is only 300px we don't need horizontal scrollbars 2. Reset the max-width when viewport is as large as minwidth 3. Use z-index to be able to talk with JavaScript 4. Needed for webkit / blink for JS to read zindex value 5. Default font settings 6. Default styling */
-.koowa-container { position: relative; /* 4 */ z-index: 0; /* 3 */ max-width: 400px; /* 1 */ margin: 0; /* 6 */ border: none; /* 6 */ width: 100%; overflow: hidden; padding: 0; font-family: sans-serif; /* 5 */ font-size: 13px; /* 5 */ line-height: 19px; /* 5 */ background: white; /* 6 */ color: #333333; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-overflow-scrolling: touch; /* When flexbox is enabled */ /* RTL */ /* On 'desktop' view */ }
+.koowa-container { position: relative; /* 4 */ z-index: 0; /* 3 */ max-width: 400px; /* 1 */ margin: 0; /* 6 */ border: none; /* 6 */ width: 100%; overflow: hidden; padding: 0; font-size: 13px; /* 5 */ line-height: 19px; /* 5 */ background: white; /* 6 */ color: #333333; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-overflow-scrolling: touch; /* When flexbox is enabled */ /* RTL */ /* On 'desktop' view */ }
 
 @media screen and (min-width: 400px) { .koowa-container { max-width: none; /* 2 */ } }
 
