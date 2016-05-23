@@ -2560,6 +2560,18 @@ body.k-resizing { overflow: hidden; }
 
 .k-appearance.k-checked .koowa--rtl.koowa .k-checkbox-toggle input:checked + label span:after { right: auto; left: 2px; }
 
+.koowa .k-details { margin-bottom: 20px; }
+
+.koowa .k-details p { margin-bottom: 7px; }
+
+.koowa .k-details-image-placeholder { position: relative; border: 1px solid grey; background: white; position: relative; margin-bottom: 20px; }
+
+.koowa .k-details-image-placeholder:before { display: block; content: " "; padding-top: 56.25%; }
+
+.koowa .k-details-image-placeholder__content { position: absolute; top: 1px; right: 1px; bottom: 1px; left: 1px; text-align: center; overflow: hidden; }
+
+.koowa .k-details-image-placeholder__content img { position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); }
+
 .koowa .k-dropdown { overflow: hidden; }
 
 @media screen and (min-width: 600px) { .koowa .k-dropdown { position: relative; z-index: 2; } }
@@ -3963,7 +3975,7 @@ table th.file-count { text-align: right; padding-right: 20px; }
 
 .modal-inspector h3 { font-size: 12px; color: #595959; margin: 0; line-height: 27px; }
 
-.com_files { font-family: sans-serif; font-size: 14px; /* fixing a width problem */ }
+.com_files { font-family: sans-serif; /* fixing a width problem */ }
 
 .com_files h3 { font-size: 16px; line-height: 20px; }
 

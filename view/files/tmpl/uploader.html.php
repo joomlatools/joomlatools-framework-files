@@ -14,25 +14,26 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <div id="files-upload-multi" class="k-upload--boxed-top"></div>
 
-<script>
-    window.addEvent('domready', function() {
-        var timeout = null,
-            createUploader = function() {
-                if (Files.app) {
-                    Files.createUploader({
-                        multi_selection: <?= json_encode((!isset($multi_selection) || $multi_selection !== false) ? true : false) ?>
-                    });
+<div class="k-dynamic-content-holder">
+    <script>
+        window.addEvent('domready', function() {
+            var timeout = null,
+                createUploader = function() {
+                    if (Files.app) {
+                        Files.createUploader({
+                            multi_selection: <?= json_encode((!isset($multi_selection) || $multi_selection !== false) ? true : false) ?>
+                        });
 
-                    if (timeout) {
-                        clearTimeout(timeout);
+                        if (timeout) {
+                            clearTimeout(timeout);
+                        }
+                    } else {
+                        timeout = setTimeout(createUploader, 100);
                     }
-                } else {
-                    timeout = setTimeout(createUploader, 100);
-                }
-            };
+                };
 
-        createUploader();
+            createUploader();
 
-    });
-</script>
-
+        });
+    </script>
+</div>

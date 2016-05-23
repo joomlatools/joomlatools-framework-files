@@ -36,16 +36,18 @@ if (is_image && file.metadata.image) {
     ratio  = 150 / (width > height ? width : height);
 }
 %]
-<div class="details">
+<div class="k-details">
     [% if (is_image) { %]
         [% if (thumbnail) { %]
-        <div style="text-align: center">
-            <img class="icon" src="" alt="[%=name%]" border="0"
-                 onerror="kQuery(this).hide();"
-                 width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+        <div class="k-details-image-placeholder">
+            <div class="k-details-image-placeholder__content">
+                <img class="icon" src="" alt="[%=name%]" border="0"
+                     onerror="kQuery(this).hide();"
+                     width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+            </div>
         </div>
         [% } else { %]
-        <div style="text-align: center">
+        <div>
             <span class="koowa_icon--image koowa_icon--32"><i>[%=name%]</i></span>
         </div>
         [% } %]
@@ -54,23 +56,19 @@ if (is_image && file.metadata.image) {
         <span class="koowa_icon--document koowa_icon--32"><i>[%=name%]</i></span>
     </div>
     [% } %]
-    <table class="table table-condensed parameters">
-        <tbody>
-        [% if (is_image) { %]
-        <tr>
-            <td class="detail-label"><?= translate('Dimensions'); ?></td>
-            <td>[%=width%] x [%=height%]</td>
-        </tr>
-        [% } %]
-        <tr>
-            <td class="detail-label"><?= translate('Size'); ?></td>
-            <td>[%=size.humanize()%]</td>
-        </tr>
-        <tr>
-            <td class="detail-label"><?= translate('Attached by'); ?></td>
-            <td>[%=attached_by_name%] <small><?= translate('on') ?> [%=getAttachedDate(true)%]</small></td>
-        </tr>
-        </tbody>
-    </table>
+    [% if (is_image) { %]
+    <p>
+        <strong class="labl"><?= translate('Dimensions'); ?></strong>
+        [%=width%] x [%=height%]
+    </p>
+    [% } %]
+    <p>
+        <strong class="labl"><?= translate('Size'); ?></strong>
+        [%=size.humanize()%]
+    </p>
+    <p>
+        <strong class="labl"><?= translate('Attached by'); ?></strong>
+        [%=attached_by_name%] <small><?= translate('on') ?> [%=getAttachedDate(true)%]</small>
+    </p>
 </div>
 </textarea>
