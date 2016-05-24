@@ -87,7 +87,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
             Attachments = Attachments.getInstance(
                 {
                     url: "<?= route('component=' . urlencode($component) . '&view=attachment&container=' . urlencode($container->slug), true, false) ?>",
-                    selector: '.koowa_dialog',
+                    selector: '#document_list',
                     csrf_token: <?= json_encode(object('user')->getSession()->getToken()) ?>
                 }
             );
