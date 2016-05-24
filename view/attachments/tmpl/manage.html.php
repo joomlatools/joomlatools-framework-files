@@ -112,30 +112,29 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
             // After attach logic.
             Attachments.bind('after.attach', function (event, context)
-                {
-                    var url = "<?= route('component=' . urlencode($component) . '&view=attachments&container=' . urlencode($container->slug) . '&format=json&name={name}&table={table}&row={row}', true, false) ?>";
+            {
+                var url = "<?= route('component=' . urlencode($component) . '&view=attachments&container=' . urlencode($container->slug) . '&format=json&name={name}&table={table}&row={row}', true, false) ?>";
 
-                    url = Attachments.replace(url, {
-                        name: context.attachment,
-                        table: <?= json_encode($table) ?>,
-                        row: <?= json_encode($row) ?>
-                    });
+                url = Attachments.replace(url, {
+                    name: context.attachment,
+                    table: <?= json_encode($table) ?>,
+                    row: <?= json_encode($row) ?>
+                });
 
-                    var that = this;
+                var that = this;
 
-                    $.ajax({
-                        url: url,
-                        method: 'get',
-                        success: function (data) {
-                            that.insertRows(data.entities);
-                            that.fireEvent('afterAttachAttachment', {attachment: {name: context.attachment, entity: data.entities.pop()}});
-                        },
-                        error: function() {
-                            that.fireEvent('afterAttachAttachment', {attachment: {name: context.attachment}});
-                        }
-                    });
-                }.bind(app.grid)
-            );
+                $.ajax({
+                    url: url,
+                    method: 'get',
+                    success: function (data) {
+                        that.insertRows(data.entities);
+                        that.fireEvent('afterAttachAttachment', {attachment: {name: context.attachment, entity: data.entities.pop()}});
+                    },
+                    error: function() {
+                        that.fireEvent('afterAttachAttachment', {attachment: {name: context.attachment}});
+                    }
+                });
+            }.bind(app.grid));
 
             var setContext = function (context) {
                 context.url += (context.url.search(/\?/) ? '&' : '?');
