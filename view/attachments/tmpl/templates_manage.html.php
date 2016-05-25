@@ -9,22 +9,27 @@
 defined('KOOWA') or die; ?>
 
 <textarea style="display: none" id="attachments_container">
-<ul class="sidebar-nav">
-
-</ul>
+    <table class="sidebar-nav">
+        <tbody></tbody>
+    </table>
 </textarea>
 
-<textarea style="display: none"  id="attachments_attachment">
-<li class="files-node files-attachment">
-    <? if ($can_detach): ?>
-        <span class="detach_button" tabindex="0">x</span>
-    <? endif ?>
-    <a class="navigate" href="#" title="[%= name %]">
-        [%= name %]
-    </a>
-</li>
+<textarea style="display: none" id="attachments_attachment">
+    <table>
+        <tbody class="template-item">
+            <tr class="files-node files-attachment">
+                <td>
+                    <? if ($can_detach): ?>
+                        <span class="detach_button" tabindex="0">x</span>
+                    <? endif ?>
+                    <a class="navigate" href="#" title="[%= name %]">
+                        [%= name %]
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </textarea>
-
 
 <textarea style="display: none" id="attachments_details_attachment">
 [%
