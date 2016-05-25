@@ -225,13 +225,6 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <? // @TODO: Arunas: All this <tr> and <td> stuff should move to templates_manage.html.php but when I move it it stops working :) ?>
-                                <tr>
-                                    <td><a href="#">Example item, remove when markup works properly</a></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">Example item, remove when markup works properly</a></td>
-                                </tr>
                                 <tr>
                                     <td><div id="attachments-grid"></div></td>
                                 </tr>
