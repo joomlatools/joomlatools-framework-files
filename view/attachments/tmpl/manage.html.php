@@ -213,14 +213,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                     <!-- Attachments list -->
                     <div class="k-table-container" id="spinner_container">
 
-                        <div class="k-table" id="attachments-spinner">
-                            <div id="document_list">
-                                <div class="koowa_dialog__title">
-                                    <?= translate('Attached files'); ?>
-                                    <span class="count"></span>
-                                </div>
-                                <div id="attachments-grid"></div>
-                            </div>
+                        <div class="k-table" id="attachments-container">
                         </div><!-- .k-table -->
 
                     </div><!-- .k-table-container -->
