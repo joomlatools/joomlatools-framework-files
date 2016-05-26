@@ -60,12 +60,12 @@ defined('KOOWA') or die; ?>
                 </div>
             </div>
             [% } else { %]
-            <div>
+            <div class="k-details-icon-holder">
                 <span class="koowa_icon--image koowa_icon--32"><i>[%=name%]</i></span>
             </div>
             [% } %]
         [% } else { %]
-        <div style="text-align: center">
+        <div class="k-details-icon-holder">
             <span class="koowa_icon--document koowa_icon--32"><i>[%=name%]</i></span>
         </div>
         [% } %]
