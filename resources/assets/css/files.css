@@ -3079,7 +3079,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa--rtl.koowa .k-scopebar__group--right__item { float: right; }
 
-.koowa .k-table-container { /* Table container */ /** Cells 1. Position checkbox 2. Remove default margin and set negative top margin to visually align vertically */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ /** Table classes Classes to add to table cells */ /** Table levels Indented levels for a clearer overview */ /** Selected When rows are selected they are highlighted 1. Coloring Links and extra elements that don't color automatically with it's parent */ /* Sub headings */ /** Sorting arrows 1. Display table to line them up horizontally while: - We keep everything vertically centered - We keep it all on one line but don't have to deal with inline-block spacing trouble 2. Set base line-height to 16px to keep it all vertically centered 3. Set min-width to 16px so icons and placeholder have the same width, lining all arrows perfectly below each other 4. Aligning items in center 5. Min-width for text larger to fit 3 digits by default. Icons will line up nice to at least 999 6. Set a little padding for when text item gets 4 digits */ }
+.koowa .k-table-container { /* Table container */ /** Cells 1. Position checkbox 2. Remove default margin and set negative top margin to visually align vertically */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ /** Table classes Classes to add to table cells */ /** Table levels Indented levels for a clearer overview */ /** Table elements */ /** Selected When rows are selected they are highlighted 1. Coloring Links and extra elements that don't color automatically with it's parent */ /* Sub headings */ /** Sorting arrows 1. Display table to line them up horizontally while: - We keep everything vertically centered - We keep it all on one line but don't have to deal with inline-block spacing trouble 2. Set base line-height to 16px to keep it all vertically centered 3. Set min-width to 16px so icons and placeholder have the same width, lining all arrows perfectly below each other 4. Aligning items in center 5. Min-width for text larger to fit 3 digits by default. Icons will line up nice to at least 999 6. Set a little padding for when text item gets 4 digits */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-container, .k-flexboxlegacy .koowa .k-table-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; overflow: auto; } }
 
@@ -3319,9 +3319,19 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-table-container .k-table__item-level1:before { display: none; }
 
+.koowa .k-table-container .k-table-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: white; border: 1px solid #ccc; border-radius: 2px; font-size: 12px; padding: 0; color: #555; display: inline-block; vertical-align: middle; width: 18px; height: 18px; line-height: 16px; overflow: hidden; text-align: center; -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; cursor: pointer; font-weight: bold; margin-right: 6px; }
+
+.koowa .k-table-container .k-table-button:focus, .koowa .k-table-container .k-table-button:hover { color: #c0392b; border-color: #aaa; background: #eee; }
+
+.koowa .k-table-container .k-table-button + a { display: inline-block; vertical-align: middle; }
+
 .koowa .k-table-container tr.active td, .koowa .k-table-container tr.selected td { background: #3071a9; color: white; }
 
 .koowa .k-table-container tr.active td a, .koowa .k-table-container tr.active td i, .koowa .k-table-container tr.active td span, .koowa .k-table-container tr.selected td a, .koowa .k-table-container tr.selected td i, .koowa .k-table-container tr.selected td span { color: white; /* 1 */ }
+
+.koowa .k-table-container tr.active td .k-table-button, .koowa .k-table-container tr.selected td .k-table-button { border-color: white; background: transparent; }
+
+.koowa .k-table-container tr.active td .k-table-button:focus, .koowa .k-table-container tr.active td .k-table-button:hover, .koowa .k-table-container tr.selected td .k-table-button:focus, .koowa .k-table-container tr.selected td .k-table-button:hover { border-color: white; background: white; }
 
 .koowa .k-table-container tr.active:hover td, .koowa .k-table-container tr.active:focus td, .koowa .k-table-container tr.selected:hover td, .koowa .k-table-container tr.selected:focus td { background-color: #255681; }
 
@@ -3505,8 +3515,6 @@ body.k-resizing { overflow: hidden; }
 .koowa .k-link-coverall:after { display: block; content: " "; position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
 
 .koowa .k-link-ontop { position: relative; z-index: 2; }
-
-.koowa .k-detach-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: white; border: 1px solid #ccc; border-radius: 2px; font-size: 12px; padding: 0; color: #555; display: inline-block; vertical-align: baseline; width: 18px; height: 18px; line-height: 16px; overflow: hidden; text-align: center; -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; cursor: pointer; font-weight: bold; margin-right: 6px; }
 
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */
