@@ -3502,6 +3502,8 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .tooltip-inner { white-space: normal; word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: none; -ms-hyphens: none; hyphens: none; max-width: 320px; }
 
+.koowa .k-link-coverall:after { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */
 /** Set font-size to selectable elements to 16px to avoid iOs to zoom automatically This way the user is still able to zoom manually Acknowledgements: Doesn't work within framed content. The whole body will zoom regardless */
