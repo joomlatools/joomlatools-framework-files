@@ -9,8 +9,16 @@
 defined('KOOWA') or die; ?>
 
 <textarea style="display: none" id="attachments_container">
-    <table class="k-files-table">
-        <tbody></tbody>
+    <table id="document_list">
+        <thead>
+        <tr>
+            <th class="koowa_dialog__title">
+                <?= translate('Attached files'); ?>
+                <span class="count"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody id="attachments-grid"></tbody>
     </table>
 </textarea>
 
