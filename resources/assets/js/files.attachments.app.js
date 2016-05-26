@@ -26,10 +26,10 @@ Files.Attachments.App = new Class({
             }
         },
         grid: {
-            spinner_container: 'attachments-spinner',
+            spinner_container: 'attachments-container',
             cookie: false,
             layout: 'attachments',
-            element: 'attachments-grid'
+            element: 'attachments-container'
         },
         history: {
             enabled: false
