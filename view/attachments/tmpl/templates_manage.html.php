@@ -9,7 +9,7 @@
 defined('KOOWA') or die; ?>
 
 <textarea style="display: none" id="attachments_container">
-    <table class="sidebar-nav">
+    <table class="k-files-table">
         <tbody></tbody>
     </table>
 </textarea>
