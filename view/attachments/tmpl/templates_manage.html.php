@@ -32,48 +32,48 @@ defined('KOOWA') or die; ?>
 </textarea>
 
 <textarea style="display: none" id="attachments_details_attachment">
-[%
-var width = 0, height = 0, ratio = 0,
-    is_image = (file.type == 'image');
-if (is_image && file.metadata.image) {
-    width  = file.metadata.image.width;
-    height = file.metadata.image.height;
-    ratio  = 150 / (width > height ? width : height);
-}
-%]
-<div class="k-details">
-    [% if (is_image) { %]
-        [% if (thumbnail) { %]
-        <div class="k-details-image-placeholder">
-            <div class="k-details-image-placeholder__content">
-                <img class="icon" src="" alt="[%=name%]" border="0"
-                     onerror="kQuery(this).hide();"
-                     width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+    [%
+    var width = 0, height = 0, ratio = 0,
+        is_image = (file.type == 'image');
+    if (is_image && file.metadata.image) {
+        width  = file.metadata.image.width;
+        height = file.metadata.image.height;
+        ratio  = 150 / (width > height ? width : height);
+    }
+    %]
+    <div class="k-details">
+        [% if (is_image) { %]
+            [% if (thumbnail) { %]
+            <div class="k-details-image-placeholder">
+                <div class="k-details-image-placeholder__content">
+                    <img class="icon" src="" alt="[%=name%]" border="0"
+                         onerror="kQuery(this).hide();"
+                         width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+                </div>
             </div>
-        </div>
+            [% } else { %]
+            <div>
+                <span class="koowa_icon--image koowa_icon--32"><i>[%=name%]</i></span>
+            </div>
+            [% } %]
         [% } else { %]
-        <div>
-            <span class="koowa_icon--image koowa_icon--32"><i>[%=name%]</i></span>
+        <div style="text-align: center">
+            <span class="koowa_icon--document koowa_icon--32"><i>[%=name%]</i></span>
         </div>
         [% } %]
-    [% } else { %]
-    <div style="text-align: center">
-        <span class="koowa_icon--document koowa_icon--32"><i>[%=name%]</i></span>
+        [% if (is_image) { %]
+        <p>
+            <strong class="labl"><?= translate('Dimensions'); ?></strong>
+            [%=width%] x [%=height%]
+        </p>
+        [% } %]
+        <p>
+            <strong class="labl"><?= translate('Size'); ?></strong>
+            [%=size.humanize()%]
+        </p>
+        <p>
+            <strong class="labl"><?= translate('Attached by'); ?></strong>
+            [%=attached_by_name%] <small><?= translate('on') ?> [%=getAttachedDate(true)%]</small>
+        </p>
     </div>
-    [% } %]
-    [% if (is_image) { %]
-    <p>
-        <strong class="labl"><?= translate('Dimensions'); ?></strong>
-        [%=width%] x [%=height%]
-    </p>
-    [% } %]
-    <p>
-        <strong class="labl"><?= translate('Size'); ?></strong>
-        [%=size.humanize()%]
-    </p>
-    <p>
-        <strong class="labl"><?= translate('Attached by'); ?></strong>
-        [%=attached_by_name%] <small><?= translate('on') ?> [%=getAttachedDate(true)%]</small>
-    </p>
-</div>
 </textarea>

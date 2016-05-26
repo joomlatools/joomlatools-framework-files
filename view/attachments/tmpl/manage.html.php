@@ -224,11 +224,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
-                                    <td><div id="attachments-grid"></div></td>
-                                </tr>
-                                </tbody>
+                                <tbody id="attachments-grid"></tbody>
                             </table>
 
                         </div><!-- .k-table -->
