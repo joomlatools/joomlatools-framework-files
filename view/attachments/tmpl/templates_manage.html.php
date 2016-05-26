@@ -20,7 +20,7 @@ defined('KOOWA') or die; ?>
             <tr class="files-node files-attachment">
                 <td>
                     <? if ($can_detach): ?>
-                        <span class="detach_button k-link-ontop" tabindex="0">x</span>
+                        <span class="detach_button k-table-button k-link-ontop" tabindex="0">x</span>
                     <? endif ?>
                     <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                         [%= name %]

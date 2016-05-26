@@ -3502,7 +3502,11 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .tooltip-inner { white-space: normal; word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: none; -ms-hyphens: none; hyphens: none; max-width: 320px; }
 
-.koowa .k-link-coverall:after { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+.koowa .k-link-coverall:after { display: block; content: " "; position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+
+.koowa .k-link-ontop { position: relative; z-index: 2; }
+
+.koowa .k-detach-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: white; border: 1px solid #ccc; border-radius: 2px; font-size: 12px; padding: 0; color: #555; display: inline-block; vertical-align: baseline; width: 18px; height: 18px; line-height: 16px; overflow: hidden; text-align: center; -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; cursor: pointer; font-weight: bold; margin-right: 6px; }
 
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */
