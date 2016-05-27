@@ -50,7 +50,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
             var app = Files.app;
 
             var updateGridCount = function() {
-                $('.koowa_dialog__file_dialog_attachments .count').html('(' + this.getCount() + ')');
+                $('#document_list .count').html('(' + this.getCount() + ')');
             }.bind(app.grid);
 
             // Update attachements label count.
