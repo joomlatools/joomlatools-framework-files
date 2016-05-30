@@ -26,10 +26,10 @@ Files.Attachments.App = new Class({
             }
         },
         grid: {
-            spinner_container: 'attachments-spinner',
+            spinner_container: 'attachments-container',
             cookie: false,
             layout: 'attachments',
-            element: 'attachments-grid'
+            element: 'attachments-container'
         },
         history: {
             enabled: false
@@ -158,8 +158,15 @@ Files.Attachments.Grid = new Class({
 });
 
 Files.Template.Attachments = new Class({
-    initialize: function(html) {
-        return new Element('div', {html: html}).getFirst();
+    initialize: function(html)
+    {
+        var el = new Element('div', {html: html}).getFirst();
+
+        if (el.getElement('.template-item'))  {
+            el = el.getElement('.template-item').getFirst();
+        }
+
+        return el;
     }
 });
 

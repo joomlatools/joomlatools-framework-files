@@ -1309,7 +1309,7 @@ body.k-resizing { overflow: hidden; }
 
 /* ========================================================================== Koowa namespaced styling ========================================================================== */
 /** By namespacing we make sure our styles never interfere with other styles on the page For example when using Nooku inside of another framework or CMS like Joomla or Wordpress */
-.koowa { /* Border-box size everything */ /* Namespaced Normalize */ /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ /* Namespaced Twitter Bootstrap */ /* Koowa */ /** JQTree */ /* Bootstrap overrides / extensions */ /** Default button styles 1. Right floating buttons 2. Remove underline when button is an <a> element */ /* Remove all shadows for a more flat looking button */ /** Control groups Remove the bottom margin of the last child This way the groups don't add large spacing in bordered boxes */ /* ========================================================================== Bootstrap input group ========================================================================== */ /** Align to top so we can add a help message below the field */ /** Position the dropdown toggles properly */ /** Position the dropdown toggles properly */ /* Multiple buttons in a row */ /* RTL */ /* Layout */ /* ========================================================================== Component ========================================================================== */ /* ========================================================================== The content div ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /** Overlay when toggled 1. Set opacity 2. Set z-index to 1 so it will become visible */ /* ========================================================================== The content wrapper ========================================================================== */ /** The default content wrapper layout 1. Left sidebar 2. Toggle button 3. Toolbar 4. Breadcrumbs 5. Upload area 6. Scopebar 7. Table / grid / content 8. Right sidebar _____________________________ |  1  |_2_|_3_________|  8  | |     |_4_____________|     | |     |_5_____________|     | |     |_6_____________|     | |     | 7             |     | |     |               |     | |     |               |     | |     |               |     | |     |               |     | |_____|_______________|_____| */ /** 1. Clearing toolbar floats when flexbox is not in use */ /* ========================================================================== Form layout ========================================================================== */ /* ========================================================================== Frontend UI ========================================================================== */ /* ========================================================================== Grid ========================================================================== */ /** <!-- Container --> <div class="k-container"> <!-- Main information --> <div class="k-container__main"> Main </div><!-- .k-container__main --> <!-- Other information --> <div class="k-container__sub"> Sub </div><!-- .k-container__sub --> </div><!-- .k-container --> */ /* Container */ /* -------------------------------------------------------------------------- Grid children -------------------------------------------------------------------------- */ /** Main container */ /* When a sidebar is active next to it */ /** Sub container */ /* When a sidebar is active next to it */ /** Full container */ /* RTL */ /* Parent container surrounding the toggling table and grid in files view */ /** Files layout switcher Switches layout from grid to list view */ /* ========================================================================== List layout ========================================================================== */ /* ========================================================================== Mobile title ========================================================================== */ /* ========================================================================== Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /* ========================================================================== Sidebars ========================================================================== */ /** The left and right sidebar */ /* RTL */ /* Left sidebar specific styling */ /* When sidebar is toggled */ /* Right sidebar specific styling */ /* When sidebar is toggled */ /* Sidebar contents ========================================================================== */ /* Sidebar item */ /* Sidebar header */ /* Sidebar content */ /** Overflowing items 1. Set container to overflow it's items */ /* ========================================================================== Titlebar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Titlebar when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** Fake Overlay when toggled 1. Set opacity 2. Set z-index so it will become visible */ /* Titlebar contents */ /* ========================================================================== Toolbar ========================================================================== */ /* Toolbar contents */ /* Text on the toolbar buttons */ /* ========================================================================== The wrapper ========================================================================== */ /** The default wrapper layout */ /* Faking flexbox on older browsers by using table styling */ /** Wrapper when toggled 1. Hide overflowing when menu is toggled 2. Set back to auto when screen is wide enough */ /* Atoms */ /** Default link style */ /** Default fieldset style 1. Default bottom-margin of 1.5 times the font-size 2. Using single colon so it works in IE8 as well 3. No bottom-margin for all the last-childs so parents can have bottom padding */ /** Default img style 1. Responsive images 2. Eliminating line-height bug when used alone in container */ /** Default legend style */ /** Default paragraph style 1. Remove default top-margin 2. Default bottom-margin of 1.5 times the font-size 3. Using single colon so it works in IE8 as well 4. No bottom-margin for all the last-childs so parents can have bottom padding */ /* Molecules */ /* ========================================================================== ACL tabs ========================================================================== */ /** Styled dropdown grid in add / edit document form */ /* ========================================================================== CSS only animated boolean list ========================================================================== */ /** Default booleanlist ========================================================================= <div class="k-booleanlist"> <input type="radio" name="name" id="id1" value="1" checked="checked"> <label for="id1">True</label> <input type="radio" name="name" id="id0" value="0"> <label for="id0">False</label> </div> */ /** Neutral booleanlist ========================================================================= <div class="k-booleanlist k-booleanlist--neutral"> <input type="radio" name="name" id="id1" value="1" checked="checked"> <label for="id1">Option 1</label> <input type="radio" name="name" id="id0" value="0"> <label for="id0">Option 2</label> </div> */ /** Check if :checked is supported using modernizr */ /* ========================================================================== CSS only styled checkboxes and radio boxes ========================================================================== */ /** Shared styling between radio boxes and checkboxes Handles following markup styles: Markup example 1: <input id="input1"> <label for="input1">Label 1</label> <input id="input2"> <label for="input2">Label 2</label> Markup example 2: <label><input id="input1"> Label 1</label> <label><input id="input2"> Label 2</label> */ /* RTL */ /* ========================================================================== CSS only styled checkbox ========================================================================== */ /** 1. Remove rounded corners by default 2. Display a check icon in the psuedo before element 3. Height of the box minus the border size 4. Height of the psuedo element minus a 1px padding/margin to move icon away from the side of the box 5. Set the color of the check icon */ /* ========================================================================== CSS only styled radio box ========================================================================== */ /** 1. Making the radio box round 2. Adding content to display the psuedo element 3. Small inner circle, scaling with the box itself 4. positioning the inner circle 5. Making inner circle actually round */ /* ========================================================================== CSS only animated checkbox toggle styling ========================================================================== */ /** Default checkbox toggle ========================================================================= <div class="k-checkbox-toggle"> <input type="checkbox" name="group1" id="group1a" value="1"> <label for="group1a"> <span data-true="✓" data-false="✖">Do something?</span> </label> </div> */ /** Neutral checkbox toggle ========================================================================= <div class="k-checkbox-toggle k-checkbox-toggle--neutral"> <input type="checkbox" name="group1" id="group1a" value="1"> <label for="group1a"> <span data-true="✓" data-false="✖">Do something?</span> </label> </div> */ /* RTL */ /* Simple dropdowns */ /* ========================================================================== Extensions groups ========================================================================== */ /** FloatThead Should have flexbox as well to be able to work properly */ /* ========================================================================== Form block ========================================================================== */ /** To be used in sidebar of forms Data in these boxes should be non-required info */ /** <!-- Breadcrumbs --> <fieldset class="k-form-block"> <div class="k-form-block__header"> Block header </div> <div class="k-form-block__content"> Block content </div> </fieldset> */ /* The block itself */ /* The header */ /* The content */ /* ========================================================================== Animated hamburger button ========================================================================== */ /** 1. Hide when JS is disabled, we don't need a toggle when there's no JS 2. Show when JS is enabled 3. Hide when the sidebar is visible */ /** <button id="k-toggle-button" class="off-canvas-menu-toggle" type="button"> <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span> </button> */ /** Positioning the toggle button(s) */ /** Transform hamburger into a cross when the sidebar is opened */ /* Simple heading styling */ /* ========================================================================== Toolbar icons ========================================================================== */ /** Re-setting the Joomla default icons with our icons */ /** JQTree */ /* ========================================================================== Sidebar list ========================================================================== */ /** <!-- List --> <ul class="k-list"> <!-- Active item --> <li class="active"> <a href="..."> <span class="k-icon-person"></span> My documents </a> </li> <!-- Other items --> <li> <a href="..."> <span class="k-icon-star"></span> Most popular </a> </li> </ul> */ /** 1. Reset default <ul> styling */ /* ========================================================================== Sidebar navigation ========================================================================== */ /** <!-- Navigation --> <ul class="k-navigation"> <!-- Active item --> <li class="active"> <a class="k-icon-activities" href="#"> Activities </a> </li> <!-- Other items --> <li> <a class="k-icon-tasks" href="#"> Tasks </a> </li> </ul> */ /** 1. Reset default <ul> styling */ /** Styled warning for when there are no categories yet 1. Reset border styling from Bootstrap */ /* ========================================================================== CSS only animated option list ========================================================================== */ /** Default option list ========================================================================= <div class="k-option-list"> <input type="radio" name="name" id="id0" value="0" checked="checked"> <label for="id0">Option 1</label> <input type="radio" name="name" id="id1" value="1"> <label for="id1">Option 2</label> <input type="radio" name="name" id="id2" value="2"> <label for="id2">Option 3</label> <div class="faux-focus"></div> </div> */ /** Check if :checked is supported using modernizr */ /* Organisms */ /* ========================================================================== Breadcrumbs ========================================================================== */ /** <!-- Breadcrumbs --> <div class="k-breadcrumb"> <ul> <!-- Home item --> <li class="k-breadcrumb__home"> <a class="k-breadcrumb__item k-icon-home" href="..."> <span class="visually-hidden">Home</span> </a> </li> <!-- All items but last --> <li> <a class="k-breadcrumb__item" href="..."> Some menu item </a> </li> <!-- last / active item --> <li class="k-breadcrumb__last"> <span class="k-breadcrumb__item">Active menu item</span> </li> </ul> </div><!-- .k-breadcrumb --> */ /* Parent element ========================================================================== */ /** 1. Scroll when items don't fit parent anymore */ /* When flexbox is in use ========================================================================== */ /* Breadcrumb contents ========================================================================== */ /* Single breadcrumb items */ /* ========================================================================== Scopebar ========================================================================== */ /**
+.koowa { /* Border-box size everything */ /* Namespaced Normalize */ /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ /* Namespaced Twitter Bootstrap */ /* Koowa */ /** JQTree */ /* Bootstrap overrides / extensions */ /** Default button styles 1. Right floating buttons 2. Remove underline when button is an <a> element */ /* Remove all shadows for a more flat looking button */ /** Control groups Remove the bottom margin of the last child This way the groups don't add large spacing in bordered boxes */ /* ========================================================================== Bootstrap input group ========================================================================== */ /** Align to top so we can add a help message below the field */ /** Position the dropdown toggles properly */ /** Position the dropdown toggles properly */ /* Multiple buttons in a row */ /* RTL */ /* Layout */ /* ========================================================================== Component ========================================================================== */ /* ========================================================================== The content div ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /** Overlay when toggled 1. Set opacity 2. Set z-index to 1 so it will become visible */ /* ========================================================================== The content wrapper ========================================================================== */ /** The default content wrapper layout 1. Left sidebar 2. Toggle button 3. Toolbar 4. Breadcrumbs 5. Upload area 6. Scopebar 7. Table / grid / content 8. Right sidebar _____________________________ |  1  |_2_|_3_________|  8  | |     |_4_____________|     | |     |_5_____________|     | |     |_6_____________|     | |     | 7             |     | |     |               |     | |     |               |     | |     |               |     | |     |               |     | |_____|_______________|_____| */ /** 1. Clearing toolbar floats when flexbox is not in use */ /* ========================================================================== Form layout ========================================================================== */ /* ========================================================================== Frontend UI ========================================================================== */ /* ========================================================================== Grid ========================================================================== */ /** <!-- Container --> <div class="k-container"> <!-- Main information --> <div class="k-container__main"> Main </div><!-- .k-container__main --> <!-- Other information --> <div class="k-container__sub"> Sub </div><!-- .k-container__sub --> </div><!-- .k-container --> */ /* Container */ /* -------------------------------------------------------------------------- Grid children -------------------------------------------------------------------------- */ /** Main container */ /* When a sidebar is active next to it */ /** Sub container */ /* When a sidebar is active next to it */ /** Full container */ /* RTL */ /* Parent container surrounding the toggling table and grid in files view */ /** Files layout switcher Switches layout from grid to list view */ /* ========================================================================== List layout ========================================================================== */ /* ========================================================================== Mobile title ========================================================================== */ /* ========================================================================== Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /* ========================================================================== Sidebars ========================================================================== */ /** The left and right sidebar */ /* RTL */ /* Left sidebar specific styling */ /* When sidebar is toggled */ /* Right sidebar specific styling */ /* When sidebar is toggled */ /* Sidebar contents ========================================================================== */ /* Sidebar item */ /* Sidebar header */ /* Sidebar content */ /** Overflowing items 1. Set container to overflow it's items */ /* ========================================================================== Titlebar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Titlebar when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** Fake Overlay when toggled 1. Set opacity 2. Set z-index so it will become visible */ /* Titlebar contents */ /* ========================================================================== Toolbar ========================================================================== */ /* Toolbar contents */ /* Text on the toolbar buttons */ /* ========================================================================== The wrapper ========================================================================== */ /** The default wrapper layout */ /* Faking flexbox on older browsers by using table styling */ /** Wrapper when toggled 1. Hide overflowing when menu is toggled 2. Set back to auto when screen is wide enough */ /* Atoms */ /** Default link style markup: <li> <a class="{$modifiers}">Item</a> </li> Styleguide 1.1 */ /** Default fieldset style 1. Default bottom-margin of 1.5 times the font-size 2. Using single colon so it works in IE8 as well 3. No bottom-margin for all the last-childs so parents can have bottom padding */ /** Default img style 1. Responsive images 2. Eliminating line-height bug when used alone in container */ /** Default legend style */ /** Default paragraph style 1. Remove default top-margin 2. Default bottom-margin of 1.5 times the font-size 3. Using single colon so it works in IE8 as well 4. No bottom-margin for all the last-childs so parents can have bottom padding */ /* Molecules */ /* ========================================================================== ACL tabs ========================================================================== */ /** Styled dropdown grid in add / edit document form */ /* ========================================================================== CSS only animated boolean list ========================================================================== */ /** Default booleanlist ========================================================================= <div class="k-booleanlist"> <input type="radio" name="name" id="id1" value="1" checked="checked"> <label for="id1">True</label> <input type="radio" name="name" id="id0" value="0"> <label for="id0">False</label> </div> */ /** Neutral booleanlist ========================================================================= <div class="k-booleanlist k-booleanlist--neutral"> <input type="radio" name="name" id="id1" value="1" checked="checked"> <label for="id1">Option 1</label> <input type="radio" name="name" id="id0" value="0"> <label for="id0">Option 2</label> </div> */ /** Check if :checked is supported using modernizr */ /* ========================================================================== CSS only styled checkboxes and radio boxes ========================================================================== */ /** Shared styling between radio boxes and checkboxes Handles following markup styles: Markup example 1: <input id="input1"> <label for="input1">Label 1</label> <input id="input2"> <label for="input2">Label 2</label> Markup example 2: <label><input id="input1"> Label 1</label> <label><input id="input2"> Label 2</label> */ /* RTL */ /* ========================================================================== CSS only styled checkbox ========================================================================== */ /** 1. Remove rounded corners by default 2. Display a check icon in the psuedo before element 3. Height of the box minus the border size 4. Height of the psuedo element minus a 1px padding/margin to move icon away from the side of the box 5. Set the color of the check icon */ /* ========================================================================== CSS only styled radio box ========================================================================== */ /** 1. Making the radio box round 2. Adding content to display the psuedo element 3. Small inner circle, scaling with the box itself 4. positioning the inner circle 5. Making inner circle actually round */ /* ========================================================================== CSS only animated checkbox toggle styling ========================================================================== */ /** Default checkbox toggle ========================================================================= <div class="k-checkbox-toggle"> <input type="checkbox" name="group1" id="group1a" value="1"> <label for="group1a"> <span data-true="✓" data-false="✖">Do something?</span> </label> </div> */ /** Neutral checkbox toggle ========================================================================= <div class="k-checkbox-toggle k-checkbox-toggle--neutral"> <input type="checkbox" name="group1" id="group1a" value="1"> <label for="group1a"> <span data-true="✓" data-false="✖">Do something?</span> </label> </div> */ /* RTL */ /* Simple dropdowns */ /* ========================================================================== Extensions groups ========================================================================== */ /** FloatThead Should have flexbox as well to be able to work properly */ /* ========================================================================== Form block ========================================================================== */ /** To be used in sidebar of forms Data in these boxes should be non-required info */ /** <!-- Breadcrumbs --> <fieldset class="k-form-block"> <div class="k-form-block__header"> Block header </div> <div class="k-form-block__content"> Block content </div> </fieldset> */ /* The block itself */ /* The header */ /* The content */ /* ========================================================================== Animated hamburger button ========================================================================== */ /** 1. Hide when JS is disabled, we don't need a toggle when there's no JS 2. Show when JS is enabled 3. Hide when the sidebar is visible */ /** <button id="k-toggle-button" class="off-canvas-menu-toggle" type="button"> <span class="bar1"></span> <span class="bar2"></span> <span class="bar3"></span> </button> */ /** Positioning the toggle button(s) */ /** Transform hamburger into a cross when the sidebar is opened */ /* Simple heading styling */ /* ========================================================================== Toolbar icons ========================================================================== */ /** Re-setting the Joomla default icons with our icons */ /** JQTree */ /* ========================================================================== Sidebar list ========================================================================== */ /** <!-- List --> <ul class="k-list"> <!-- Active item --> <li class="active"> <a href="..."> <span class="k-icon-person"></span> My documents </a> </li> <!-- Other items --> <li> <a href="..."> <span class="k-icon-star"></span> Most popular </a> </li> </ul> */ /** 1. Reset default <ul> styling */ /* ========================================================================== Sidebar navigation ========================================================================== */ /** <!-- Navigation --> <ul class="k-navigation"> <!-- Active item --> <li class="active"> <a class="k-icon-activities" href="#"> Activities </a> </li> <!-- Other items --> <li> <a class="k-icon-tasks" href="#"> Tasks </a> </li> </ul> */ /** 1. Reset default <ul> styling */ /** Styled warning for when there are no categories yet 1. Reset border styling from Bootstrap */ /* ========================================================================== CSS only animated option list ========================================================================== */ /** Default option list ========================================================================= <div class="k-option-list"> <input type="radio" name="name" id="id0" value="0" checked="checked"> <label for="id0">Option 1</label> <input type="radio" name="name" id="id1" value="1"> <label for="id1">Option 2</label> <input type="radio" name="name" id="id2" value="2"> <label for="id2">Option 3</label> <div class="faux-focus"></div> </div> */ /** Check if :checked is supported using modernizr */ /* Organisms */ /* ========================================================================== Breadcrumbs ========================================================================== */ /** <!-- Breadcrumbs --> <div class="k-breadcrumb"> <ul> <!-- Home item --> <li class="k-breadcrumb__home"> <a class="k-breadcrumb__item k-icon-home" href="..."> <span class="visually-hidden">Home</span> </a> </li> <!-- All items but last --> <li> <a class="k-breadcrumb__item" href="..."> Some menu item </a> </li> <!-- last / active item --> <li class="k-breadcrumb__last"> <span class="k-breadcrumb__item">Active menu item</span> </li> </ul> </div><!-- .k-breadcrumb --> */ /* Parent element ========================================================================== */ /** 1. Scroll when items don't fit parent anymore */ /* When flexbox is in use ========================================================================== */ /* Breadcrumb contents ========================================================================== */ /* Single breadcrumb items */ /* ========================================================================== Scopebar ========================================================================== */ /**
 <!-- Scopebar -->
 <div class="k-scopebar">
 
@@ -2560,6 +2560,20 @@ body.k-resizing { overflow: hidden; }
 
 .k-appearance.k-checked .koowa--rtl.koowa .k-checkbox-toggle input:checked + label span:after { right: auto; left: 2px; }
 
+.koowa .k-details { margin-bottom: 20px; }
+
+.koowa .k-details p { margin-bottom: 7px; }
+
+.koowa .k-details-image-placeholder { position: relative; border: 1px solid grey; background: white; position: relative; margin-bottom: 20px; }
+
+.koowa .k-details-image-placeholder:before { display: block; content: " "; padding-top: 56.25%; }
+
+.koowa .k-details-image-placeholder__content { position: absolute; top: 1px; right: 1px; bottom: 1px; left: 1px; text-align: center; overflow: hidden; }
+
+.koowa .k-details-image-placeholder__content img { position: absolute; top: 50%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); }
+
+.koowa .k-details-icon-holder { margin-bottom: 20px; }
+
 .koowa .k-dropdown { overflow: hidden; }
 
 @media screen and (min-width: 600px) { .koowa .k-dropdown { position: relative; z-index: 2; } }
@@ -2660,6 +2674,8 @@ body.k-resizing { overflow: hidden; }
 .koowa .show-left-menu .off-canvas-menu-toggle .bar3, .koowa .show-right-menu .off-canvas-menu-toggle .bar3 { top: 15px; -webkit-transform: rotate(-135deg); transform: rotate(-135deg); }
 
 .koowa .k-heading { font-size: 21px; line-height: 32px; margin: 0 0 20px; }
+
+.koowa [class^="icon-"], .koowa [class*=" icon-"] { margin: 0; }
 
 .koowa .icon-new:before { content: ""; }
 
@@ -3065,7 +3081,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa--rtl.koowa .k-scopebar__group--right__item { float: right; }
 
-.koowa .k-table-container { /* Table container */ /** Cells 1. Position checkbox 2. Remove default margin and set negative top margin to visually align vertically */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ /** Table classes Classes to add to table cells */ /** Table levels Indented levels for a clearer overview */ /** Selected When rows are selected they are highlighted 1. Coloring Links and extra elements that don't color automatically with it's parent */ /* Sub headings */ /** Sorting arrows 1. Display table to line them up horizontally while: - We keep everything vertically centered - We keep it all on one line but don't have to deal with inline-block spacing trouble 2. Set base line-height to 16px to keep it all vertically centered 3. Set min-width to 16px so icons and placeholder have the same width, lining all arrows perfectly below each other 4. Aligning items in center 5. Min-width for text larger to fit 3 digits by default. Icons will line up nice to at least 999 6. Set a little padding for when text item gets 4 digits */ }
+.koowa .k-table-container { /* Table container */ /** Cells 1. Position checkbox 2. Remove default margin and set negative top margin to visually align vertically */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ /** Table classes Classes to add to table cells */ /** Table levels Indented levels for a clearer overview */ /** Table elements */ /** Selected When rows are selected they are highlighted 1. Coloring Links and extra elements that don't color automatically with it's parent */ /* Sub headings */ /** Sorting arrows 1. Display table to line them up horizontally while: - We keep everything vertically centered - We keep it all on one line but don't have to deal with inline-block spacing trouble 2. Set base line-height to 16px to keep it all vertically centered 3. Set min-width to 16px so icons and placeholder have the same width, lining all arrows perfectly below each other 4. Aligning items in center 5. Min-width for text larger to fit 3 digits by default. Icons will line up nice to at least 999 6. Set a little padding for when text item gets 4 digits */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-container, .k-flexboxlegacy .koowa .k-table-container { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -webkit-flex-direction: column; -ms-flex-direction: column; flex-direction: column; overflow: auto; } }
 
@@ -3075,15 +3091,11 @@ body.k-resizing { overflow: hidden; }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-container .k-table, .k-flexboxlegacy .koowa .k-table-container .k-table { display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; -webkit-box-flex: 0; -webkit-flex: 0 1 auto; -ms-flex: 0 1 auto; flex: 0 1 auto; background: #ffffff; } }
 
-.k-is-resizing .koowa .k-table-container .k-table { overflow: hidden; }
-
 .koowa .k-table-container table { width: 100%; text-align: left; border-collapse: separate; }
 
 .koowa--rtl.koowa .k-table-container table { text-align: right; }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-container table, .k-flexboxlegacy .koowa .k-table-container table { -webkit-box-flex: 1; -webkit-flex: 1 1 auto; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
-
-.k-is-resizing .koowa .k-table-container table { overflow: hidden; }
 
 .koowa .k-table-container th, .koowa .k-table-container td { position: relative; height: 39px; vertical-align: middle; text-align: left; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
@@ -3105,7 +3117,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-table-container tr:focus td, .koowa .k-table-container tr:hover td, .koowa .k-table-container tr:nth-child(n):focus td, .koowa .k-table-container tr:nth-child(n):hover td { background: #fafafa; }
 
-.koowa .k-table-container small { display: block; /* 1 */ font-size: 11px; line-height: 11px; }
+.koowa .k-table-container small { display: block; /* 1 */ font-size: 11px; line-height: 11px; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .koowa .k-table-container a { text-decoration: none; }
 
@@ -3113,7 +3125,7 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-table-container a { -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
-.koowa .k-table-container [class^="koowa_icon"] { vertical-align: middle; line-height: 0; }
+.koowa .k-table-container [class^="koowa_icon"] { vertical-align: baseline; font-size: 16px; line-height: 23px; }
 
 .koowa .k-table-container .k-table-data--right { text-align: right; }
 
@@ -3125,105 +3137,203 @@ body.k-resizing { overflow: hidden; }
 
 .koowa .k-table-container .k-table-data--wrap { word-break: break-all; }
 
-.koowa .k-table-container .k-table-data--toggle { white-space: nowrap; padding-left: 0; }
+.koowa .k-table-container .k-table-data--toggle { white-space: nowrap; padding-left: 0; padding-right: 0; }
 
-.koowa--rtl.koowa .k-table-container .k-table-data--toggle { padding-left: 10px; padding-right: 0; }
+.koowa .k-table-container .k-table-data--ellipsis { max-width: 0; overflow: hidden; }
 
-.koowa .k-table-container .k-table-data--ellipsis { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 1px; }
+.koowa .k-table-container .k-table-data--ellipsis .k-ellipsis-item { vertical-align: middle; }
+
+.koowa .k-table-container .k-table__item-level { white-space: nowrap; }
+
+.koowa .k-table-container .k-table__item-level .k-table__item-cell-ellipsis { display: table; width: 100%; }
+
+.koowa .k-table-container .k-table__item-level .k-table__item-cell-ellipsis .k-table__item-cell-visual, .koowa .k-table-container .k-table__item-level .k-table__item-cell-ellipsis .k-table__item-cell-text { display: table-cell; vertical-align: middle; width: 1%; }
+
+.koowa .k-table-container .k-table__item-level .k-table__item-cell-ellipsis .k-table__item-cell-text { display: table-cell; width: 99%; max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.koowa .k-table-container .k-table__item-level:before { content: " "; display: block; width: 6px; height: 6px; border-left: 1px solid #bbb; border-bottom: 1px solid #bbb; position: absolute; top: 50%; margin-top: -.25em; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level:before { border-left: none; border-right: 1px solid #bbb; }
 
 .koowa .k-table-container .k-table__item-level1 { padding-left: 0px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level1 { padding-left: 0; padding-right: 0px; }
 
+.koowa .k-table-container .k-table__item-level1:before { left: -18px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level1:before { left: auto; right: -18px; }
+
 .koowa .k-table-container .k-table__item-level2 { padding-left: 24px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level2 { padding-left: 0; padding-right: 24px; }
+
+.koowa .k-table-container .k-table__item-level2:before { left: 6px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level2:before { left: auto; right: 6px; }
 
 .koowa .k-table-container .k-table__item-level3 { padding-left: 48px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level3 { padding-left: 0; padding-right: 48px; }
 
+.koowa .k-table-container .k-table__item-level3:before { left: 30px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level3:before { left: auto; right: 30px; }
+
 .koowa .k-table-container .k-table__item-level4 { padding-left: 72px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level4 { padding-left: 0; padding-right: 72px; }
+
+.koowa .k-table-container .k-table__item-level4:before { left: 54px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level4:before { left: auto; right: 54px; }
 
 .koowa .k-table-container .k-table__item-level5 { padding-left: 96px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level5 { padding-left: 0; padding-right: 96px; }
 
+.koowa .k-table-container .k-table__item-level5:before { left: 78px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level5:before { left: auto; right: 78px; }
+
 .koowa .k-table-container .k-table__item-level6 { padding-left: 120px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level6 { padding-left: 0; padding-right: 120px; }
+
+.koowa .k-table-container .k-table__item-level6:before { left: 102px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level6:before { left: auto; right: 102px; }
 
 .koowa .k-table-container .k-table__item-level7 { padding-left: 144px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level7 { padding-left: 0; padding-right: 144px; }
 
+.koowa .k-table-container .k-table__item-level7:before { left: 126px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level7:before { left: auto; right: 126px; }
+
 .koowa .k-table-container .k-table__item-level8 { padding-left: 168px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level8 { padding-left: 0; padding-right: 168px; }
+
+.koowa .k-table-container .k-table__item-level8:before { left: 150px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level8:before { left: auto; right: 150px; }
 
 .koowa .k-table-container .k-table__item-level9 { padding-left: 192px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level9 { padding-left: 0; padding-right: 192px; }
 
+.koowa .k-table-container .k-table__item-level9:before { left: 174px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level9:before { left: auto; right: 174px; }
+
 .koowa .k-table-container .k-table__item-level10 { padding-left: 216px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level10 { padding-left: 0; padding-right: 216px; }
+
+.koowa .k-table-container .k-table__item-level10:before { left: 198px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level10:before { left: auto; right: 198px; }
 
 .koowa .k-table-container .k-table__item-level11 { padding-left: 240px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level11 { padding-left: 0; padding-right: 240px; }
 
+.koowa .k-table-container .k-table__item-level11:before { left: 222px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level11:before { left: auto; right: 222px; }
+
 .koowa .k-table-container .k-table__item-level12 { padding-left: 264px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level12 { padding-left: 0; padding-right: 264px; }
+
+.koowa .k-table-container .k-table__item-level12:before { left: 246px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level12:before { left: auto; right: 246px; }
 
 .koowa .k-table-container .k-table__item-level13 { padding-left: 288px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level13 { padding-left: 0; padding-right: 288px; }
 
+.koowa .k-table-container .k-table__item-level13:before { left: 270px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level13:before { left: auto; right: 270px; }
+
 .koowa .k-table-container .k-table__item-level14 { padding-left: 312px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level14 { padding-left: 0; padding-right: 312px; }
+
+.koowa .k-table-container .k-table__item-level14:before { left: 294px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level14:before { left: auto; right: 294px; }
 
 .koowa .k-table-container .k-table__item-level15 { padding-left: 336px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level15 { padding-left: 0; padding-right: 336px; }
 
+.koowa .k-table-container .k-table__item-level15:before { left: 318px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level15:before { left: auto; right: 318px; }
+
 .koowa .k-table-container .k-table__item-level16 { padding-left: 360px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level16 { padding-left: 0; padding-right: 360px; }
+
+.koowa .k-table-container .k-table__item-level16:before { left: 342px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level16:before { left: auto; right: 342px; }
 
 .koowa .k-table-container .k-table__item-level17 { padding-left: 384px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level17 { padding-left: 0; padding-right: 384px; }
 
+.koowa .k-table-container .k-table__item-level17:before { left: 366px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level17:before { left: auto; right: 366px; }
+
 .koowa .k-table-container .k-table__item-level18 { padding-left: 408px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level18 { padding-left: 0; padding-right: 408px; }
+
+.koowa .k-table-container .k-table__item-level18:before { left: 390px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level18:before { left: auto; right: 390px; }
 
 .koowa .k-table-container .k-table__item-level19 { padding-left: 432px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level19 { padding-left: 0; padding-right: 432px; }
 
+.koowa .k-table-container .k-table__item-level19:before { left: 414px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level19:before { left: auto; right: 414px; }
+
 .koowa .k-table-container .k-table__item-level20 { padding-left: 456px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level20 { padding-left: 0; padding-right: 456px; }
 
-.koowa .k-table-container .k-table__item-level__title { position: relative; padding-left: 5px; }
+.koowa .k-table-container .k-table__item-level20:before { left: 438px; }
+
+.koowa--rtl.koowa .k-table-container .k-table__item-level20:before { left: auto; right: 438px; }
+
+.koowa .k-table-container .k-table__item-level__title { padding-left: 5px; }
 
 .koowa--rtl.koowa .k-table-container .k-table__item-level__title { padding-left: 0; padding-right: 5px; }
 
-.koowa .k-table-container .k-table__item-level__title:before { content: " "; display: block; width: 6px; height: 6px; border-left: 1px solid #bbb; border-bottom: 1px solid #bbb; position: absolute; top: 50%; left: -36px; margin-top: -.25em; }
+.koowa .k-table-container .k-table__item-level1:before { display: none; }
 
-.koowa--rtl.koowa .k-table-container .k-table__item-level__title:before { left: auto; right: -36px; border-left: none; border-right: 1px solid #bbb; }
+.koowa .k-table-container .k-table-button { -webkit-appearance: none; -moz-appearance: none; appearance: none; background: white; border: 1px solid #ccc; border-radius: 2px; font-size: 12px; padding: 0; color: #555; display: inline-block; vertical-align: middle; width: 18px; height: 18px; line-height: 16px; overflow: hidden; text-align: center; -webkit-transition: all 0.2s ease-in-out; transition: all 0.2s ease-in-out; cursor: pointer; font-weight: bold; margin-right: 6px; }
 
-.koowa .k-table-container .k-table__item-level1 .k-table__item-level__title:before { display: none; }
+.koowa .k-table-container .k-table-button:focus, .koowa .k-table-container .k-table-button:hover { color: #c0392b; border-color: #aaa; background: #eee; }
+
+.koowa .k-table-container .k-table-button + a { display: inline-block; vertical-align: middle; }
 
 .koowa .k-table-container tr.active td, .koowa .k-table-container tr.selected td { background: #3071a9; color: white; }
 
 .koowa .k-table-container tr.active td a, .koowa .k-table-container tr.active td i, .koowa .k-table-container tr.active td span, .koowa .k-table-container tr.selected td a, .koowa .k-table-container tr.selected td i, .koowa .k-table-container tr.selected td span { color: white; /* 1 */ }
+
+.koowa .k-table-container tr.active td .k-table-button, .koowa .k-table-container tr.selected td .k-table-button { border-color: white; background: transparent; }
+
+.koowa .k-table-container tr.active td .k-table-button:focus, .koowa .k-table-container tr.active td .k-table-button:hover, .koowa .k-table-container tr.selected td .k-table-button:focus, .koowa .k-table-container tr.selected td .k-table-button:hover { border-color: white; background: white; }
 
 .koowa .k-table-container tr.active:hover td, .koowa .k-table-container tr.active:focus td, .koowa .k-table-container tr.selected:hover td, .koowa .k-table-container tr.selected:focus td { background-color: #255681; }
 
@@ -3399,6 +3509,14 @@ body.k-resizing { overflow: hidden; }
 .koowa .k-table { counter-reset: positioner-counter; }
 
 .koowa tr.selected .k-positioner:after { color: white; text-shadow: none; }
+
+.koowa .k-ellipsis-item { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.koowa .tooltip-inner { white-space: normal; word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: none; -ms-hyphens: none; hyphens: none; max-width: 320px; }
+
+.koowa .k-link-coverall:after { display: block; content: " "; position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+
+.koowa .k-link-ontop { position: relative; z-index: 2; }
 
 /* ========================================================================== Fixes ========================================================================== */
 /** iOs autozzom fix iOs zooms automatically when an input or select is focused Making the font size 16px fixes this behaviour since iOs believes the input is readable enough */
@@ -3963,7 +4081,7 @@ table th.file-count { text-align: right; padding-right: 20px; }
 
 .modal-inspector h3 { font-size: 12px; color: #595959; margin: 0; line-height: 27px; }
 
-.com_files { font-family: sans-serif; font-size: 14px; /* fixing a width problem */ }
+.com_files { font-family: sans-serif; /* fixing a width problem */ }
 
 .com_files h3 { font-size: 16px; line-height: 20px; }
 
@@ -3992,74 +4110,6 @@ table th.file-count { text-align: right; padding-right: 20px; }
 .com_files #files-app:after { clear: both; }
 
 .com_files #files-paginator-container { width: auto; }
-
-.attachments .attachments__image, .attachments .attachments__file { width: 128px; height: 96px; text-align: center; line-height: 94px; margin: 0 12px 12px 0; float: left; padding: 6px; border: 1px solid #ddd; border-radius: 5px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055); }
-
-.attachments .attachments__image a, .attachments .attachments__file a { display: inline-block; line-height: 1em; vertical-align: middle; max-width: 100%; }
-
-.attachments .attachments__image--thumbnail, .attachments .attachments__file--thumbnail { width: 130px; }
-
-.attachments .attachments__image--thumbnail img, .attachments .attachments__file--thumbnail img { border-radius: 4px 4px 0 0; }
-
-.attachments .attachments__image--thumbnail { width: 128px; }
-
-.attachments .attachments__image--thumbnail img { max-width: 130px; max-height: 96px; vertical-align: middle; }
-
-.attachments .attachments__caption { padding: 6px 0 0; display: block; max-height: 1em; overflow: hidden; max-width: 100%; text-overflow: ellipsis; white-space: nowrap; }
-
-.attachments .attachments__select { clear: both; }
-
-.attachments .attachments__buttons { position: relative; display: inline-block; vertical-align: middle; white-space: nowrap; }
-
-.attachments:before, .attachments:after { display: table; content: " "; }
-
-.attachments:after { clear: both; }
-
-/* ========================================================================== Attachments ========================================================================== */
-/** Attachments modal styling with included multi file uploader Namespaced so we win over the styling in default Nooku */
-.koowa.com_files--attachments { /* Reset top-padding, normally there for the tabs */ /* Reset margin and padding, normally there for titles, but since these are longer titles we solved it another way */ /* Create a table so we can have table rows that stretch the full 100% height */ /** The first table row is for upload 1% height and nowrap so the other row(s) stretch all the way */ /** List Table row for the `attached files` list 1. Max 100% height so we can have scrolling children 2. Hide overflowing content so we can have scrolling children */ /* The lists can't be table cell but should be floating items instead */ /* Separating the two lists */ /** The selected file area 1. Default set height 2. make room for the inset attachments button */ /* Actually styling for doclink, borrowed here until we refactor the whole thing */ /* Extra icon size for the preview */ }
-
-.koowa.com_files--attachments .koowa .koowa_dialog__menu a.koowa_dialog__menu__child--attachments { width: 150px; }
-
-.koowa.com_files--attachments .koowa_dialog__layout { padding-top: 0; }
-
-.koowa.com_files--attachments .koowa_dialog__child__content { margin: 0; padding-top: 0; }
-
-.koowa.com_files--attachments .attachments-table { display: table; width: 100%; height: 100%; }
-
-.koowa.com_files--attachments .attachments-upload { height: 1%; white-space: nowrap; display: table-row; }
-
-.koowa.com_files--attachments .attachments-list { display: table-row; height: 100%; /* 1 */ overflow: hidden; /* 2 */ vertical-align: top; /** List title 1. Absolute positioned so content can have scrolling overflowing content 2. CSS text ellipsis overflow */ /** List content 1. Cover whole parent execept the title 2. scrollbars when overflowing */ }
-
-.koowa.com_files--attachments .attachments-list .koowa_dialog__title { position: absolute; /* 1 */ top: 0; /* 1 */ right: 0; /* 1 */ left: 0; /* 1 */ overflow: hidden; /* 2 */ white-space: nowrap; /* 2 */ text-overflow: ellipsis; /* 2 */ }
-
-.koowa.com_files--attachments .attachments-list .koowa_dialog__child__content { position: absolute; /* 1 */ top: 30px; /* 1 */ right: 0; /* 1 */ bottom: 0; /* 1 */ left: 0; /* 1 */ overflow: auto; /* 2 */ height: auto; }
-
-.koowa.com_files--attachments .attachments-list .detach_button { cursor: pointer; display: block; position: absolute; top: 4px; right: 4px; border: 1px solid #ccc; background: #f5f5f5; border-radius: 50%; padding: 0; width: 21px; height: 21px; line-height: 17px; font-size: 13px; text-align: center; color: #777; }
-
-.koowa.com_files--attachments .attachments-list .detach_button:hover, .koowa.com_files--attachments .attachments-list .detach_button:focus { border-color: #e74c3c; background: #f5b4ae; color: #c0392b; }
-
-.koowa.com_files--attachments .attachments-attached, .koowa.com_files--attachments .attachments-preview { height: 100%; float: left; overflow: auto; max-height: 100%; }
-
-.koowa.com_files--attachments .attachments-attached { width: 66%; border-right: 1px solid #ccc; }
-
-.koowa.com_files--attachments .attachments-attached .sidebar-nav li { position: relative; }
-
-.koowa.com_files--attachments .attachments-attached .sidebar-nav li:hover a { color: white; border-top-color: #33bbff; background-color: #39bdff; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4dc4ff), to(#1ab3ff)); background-image: -webkit-linear-gradient(top, #4dc4ff, #1ab3ff); background-image: linear-gradient(to bottom, #4dc4ff, #1ab3ff); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF4DC4FF', endColorstr='#FF1AB3FF', GradientType=0); text-decoration: none; }
-
-.koowa.com_files--attachments .attachments-preview { width: 34%; }
-
-.koowa.com_files--attachments .koowa_dialog__wrapper__child { position: relative; width: 100%; border-left: none; }
-
-.koowa.com_files--attachments .koowa_dialog__child__content, .koowa.com_files--attachments .koowa_dialog__child__content__box { min-height: 0; }
-
-.koowa.com_files--attachments #files-grid { max-height: none !important; }
-
-.koowa.com_files--attachments .koowa_dialog__insert { text-align: right; position: absolute; background: #ddd; border: none; border-top: 1px solid #ccc; width: 100%; clear: both; height: 40px; bottom: 0; z-index: 15; padding: 5px; }
-
-.koowa.com_files--attachments .koowa_icon--32 { width: 32px; height: 32px; font-size: 32px; line-height: 32px; }
-
-.koowa.com_files--attachments .koowa_icon--32:before { width: 32px; height: 32px; font-size: 32px; line-height: 32px; }
 
 .koowa .koowa_dialog_modal--halfwidth .mfp-content { max-height: 50%; }
 
