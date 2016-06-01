@@ -55,7 +55,6 @@ defined('KOOWA') or die; ?>
             <div class="k-details-image-placeholder">
                 <div class="k-details-image-placeholder__content">
                     <img class="icon" src="" alt="[%=name%]" border="0"
-                         onerror="kQuery(this).hide();"
                          width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
                 </div>
             </div>
