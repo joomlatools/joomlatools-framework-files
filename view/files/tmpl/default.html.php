@@ -53,10 +53,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <div class="k-scopebar">
 
             <!-- Breadcrumb -->
-            <div id="files-pathway" class="k-breadcrumb"></div><!-- .k-breadcrumb -->
+            <div class="k-scopebar__item k-scopebar__item--fluid">
+                <div id="files-pathway" class="k-breadcrumb" style="border-bottom:none;"></div>
+            </div>
 
             <!-- Filters -->
-            <div class="k-scopebar__item k-scopebar__item--fluid">
+            <div class="k-scopebar__item">
 
                 <!-- Right floating group -->
                 <div class="k-scopebar__group--right">
