@@ -247,25 +247,45 @@ Files.Grid = new Class({
 			that.fireEvent('setState', state);
 		});
 
-		var input = kQuery('.search_button', '#files-canvas'),
+		var input = kQuery('.k-search__field', '#files-canvas'),
+			empty_button = kQuery(".k-search__button-empty"),
 			send = function(value) {
 				var state = {search: typeof value === 'undefined' ? input.val() : value};
 
 				that.setState(state);
 				that.fireEvent('setState', state);
+
+				if (!state.search || state.search === '') {
+					empty_button.removeClass("is-visible");
+				}
 			};
 
 		input.blur(function() {
 			send();
 		})
-		.keypress(function(event) {
+		.on('input', function(event) {
+			var v = kQuery(this).val();
+
+			if (v) {
+				empty_button.addClass("is-visible");
+			} else {
+				empty_button.removeClass("is-visible");
+			}
+
 			if (event.which === 13) { // enter key
 				send();
 			}
 		});
 
-		kQuery('.search_button--empty', '#files-canvas').click(function() {
+		if (input.val()) {
+			empty_button.addClass("is-visible");
+		}
+
+		kQuery('.k-search__button-empty', '#files-canvas').click(function() {
+			event.preventDefault();
+
 			if (input.val()) {
+				input.val('');
 				send('');
 			}
 		});
