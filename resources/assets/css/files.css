@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* Kodekit UI ========================================================================== */
 /* Global tools ========================================================================== */
 /** Containing different libraries, variables, mixins and functions */
 /* ========================================================================== Tools ========================================================================== */
@@ -86,8 +85,6 @@
 .select2-container--default .select2-selection--multiple { background-color: white; border: 1px solid #aaa; border-radius: 4px; cursor: text; }
 
 .select2-container--default .select2-selection--multiple .select2-selection__rendered { box-sizing: border-box; list-style: none; margin: 0; padding: 0 5px; width: 100%; }
-
-.select2-container--default .select2-selection--multiple .select2-selection__rendered li { list-style: none; }
 
 .select2-container--default .select2-selection--multiple .select2-selection__placeholder { color: #999; margin-top: 5px; float: left; }
 
@@ -318,37 +315,37 @@
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 5px; }
 
-.select2-container--bootstrap.input-sm, .koowa .input-group-sm > .select2-container--bootstrap.form-control, .koowa .input-group-sm > select.select2-container--bootstrap, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn, .select2-container--bootstrap.input-lg, .koowa .input-group-lg > .select2-container--bootstrap.form-control, .koowa .input-group-lg > select.select2-container--bootstrap, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn { border-radius: 0; font-size: 12px; height: auto; line-height: 1; padding: 0; }
+.select2-container--bootstrap.input-sm, .koowa .input-group-sm > .select2-container--bootstrap.form-control, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn, .select2-container--bootstrap.input-lg, .koowa .input-group-lg > .select2-container--bootstrap.form-control, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn { border-radius: 0; font-size: 12px; height: auto; line-height: 1; padding: 0; }
 
-.select2-container--bootstrap.input-sm .select2-selection--single, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--single, .koowa .input-group-sm > select.select2-container--bootstrap .select2-selection--single, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--single, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single, .input-group-sm .select2-container--bootstrap .select2-selection--single, .form-group-sm .select2-container--bootstrap .select2-selection--single { border-radius: 3px; font-size: 12px; height: 30px; line-height: 1.5; padding: 5px 22px 5px 10px; /* 2 */ }
+.select2-container--bootstrap.input-sm .select2-selection--single, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--single, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--single, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single, .input-group-sm .select2-container--bootstrap .select2-selection--single, .form-group-sm .select2-container--bootstrap .select2-selection--single { border-radius: 3px; font-size: 12px; height: 30px; line-height: 1.5; padding: 5px 22px 5px 10px; /* 2 */ }
 
-.select2-container--bootstrap.input-sm .select2-selection--single .select2-selection__arrow b, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--single .select2-selection__arrow b, .koowa .input-group-sm > select.select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--single .select2-selection__arrow b, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single .select2-selection__arrow b, .input-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { margin-left: -5px; }
+.select2-container--bootstrap.input-sm .select2-selection--single .select2-selection__arrow b, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--single .select2-selection__arrow b, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--single .select2-selection__arrow b, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single .select2-selection__arrow b, .input-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { margin-left: -5px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple, .koowa .input-group-sm > select.select2-container--bootstrap .select2-selection--multiple, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple, .input-group-sm .select2-container--bootstrap .select2-selection--multiple, .form-group-sm .select2-container--bootstrap .select2-selection--multiple { min-height: 30px; }
+.select2-container--bootstrap.input-sm .select2-selection--multiple, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple, .input-group-sm .select2-container--bootstrap .select2-selection--multiple, .form-group-sm .select2-container--bootstrap .select2-selection--multiple { min-height: 30px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__choice, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__choice, .koowa .input-group-sm > select.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__choice, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__choice, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 12px; line-height: 1.5; margin: 4px 0 0 5px; padding: 0 5px; }
+.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__choice, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__choice, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__choice, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__choice, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 12px; line-height: 1.5; margin: 4px 0 0 5px; padding: 0 5px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-sm > select.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 10px; font-size: 12px; height: 28px; line-height: 1.5; }
+.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 10px; font-size: 12px; height: 28px; line-height: 1.5; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__clear, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__clear, .koowa .input-group-sm > select.select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__clear, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__clear, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 5px; }
+.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__clear, .koowa .input-group-sm > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__clear, .koowa .input-group-sm > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__clear, .koowa .input-group-sm > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__clear, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 5px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--single, .koowa .input-group-lg > select.select2-container--bootstrap .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--single, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single, .input-group-lg .select2-container--bootstrap .select2-selection--single, .form-group-lg .select2-container--bootstrap .select2-selection--single { border-radius: 6px; font-size: 18px; height: 46px; line-height: 1.3333333; padding: 10px 31px 10px 16px; /* 1 */ }
+.select2-container--bootstrap.input-lg .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--single, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single, .input-group-lg .select2-container--bootstrap .select2-selection--single, .form-group-lg .select2-container--bootstrap .select2-selection--single { border-radius: 6px; font-size: 18px; height: 46px; line-height: 1.3333333; padding: 10px 31px 10px 16px; /* 1 */ }
 
-.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--single .select2-selection__arrow, .koowa .input-group-lg > select.select2-container--bootstrap .select2-selection--single .select2-selection__arrow, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--single .select2-selection__arrow, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single .select2-selection__arrow, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow { width: 5px; }
+.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--single .select2-selection__arrow, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--single .select2-selection__arrow, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single .select2-selection__arrow, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow { width: 5px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > select.select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single .select2-selection__arrow b, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { border-width: 5px 5px 0 5px; margin-left: -5px; margin-left: -10px; margin-top: -2.5px; }
+.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--single .select2-selection__arrow b, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { border-width: 5px 5px 0 5px; margin-left: -5px; margin-left: -10px; margin-top: -2.5px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple, .koowa .input-group-lg > select.select2-container--bootstrap .select2-selection--multiple, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple, .input-group-lg .select2-container--bootstrap .select2-selection--multiple, .form-group-lg .select2-container--bootstrap .select2-selection--multiple { min-height: 46px; }
+.select2-container--bootstrap.input-lg .select2-selection--multiple, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple, .input-group-lg .select2-container--bootstrap .select2-selection--multiple, .form-group-lg .select2-container--bootstrap .select2-selection--multiple { min-height: 46px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__choice, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__choice, .koowa .input-group-lg > select.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__choice, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__choice, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 18px; line-height: 1.3333333; border-radius: 4px; margin: 9px 0 0 8px; padding: 0 10px; }
+.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__choice, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__choice, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__choice, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__choice, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 18px; line-height: 1.3333333; border-radius: 4px; margin: 9px 0 0 8px; padding: 0 10px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-lg > select.select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 16px; font-size: 18px; height: 44px; line-height: 1.3333333; }
+.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-search--inline .select2-search__field, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 16px; font-size: 18px; height: 44px; line-height: 1.3333333; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__clear, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__clear, .koowa .input-group-lg > select.select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__clear, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__clear, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 10px; }
+.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__clear, .koowa .input-group-lg > .select2-container--bootstrap.form-control .select2-selection--multiple .select2-selection__clear, .koowa .input-group-lg > .select2-container--bootstrap.input-group-addon .select2-selection--multiple .select2-selection__clear, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.btn .select2-selection--multiple .select2-selection__clear, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 10px; }
 
-.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.form-control .select2-selection--single, .koowa .input-group-lg > select.select2-container--bootstrap.select2-container--open .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.input-group-addon .select2-selection--single, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.select2-container--open.btn .select2-selection--single { /** Make the dropdown arrow point up while the dropdown is visible. */ }
+.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.form-control .select2-selection--single, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.input-group-addon .select2-selection--single, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.select2-container--open.btn .select2-selection--single { /** Make the dropdown arrow point up while the dropdown is visible. */ }
 
-.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.form-control .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > select.select2-container--bootstrap.select2-container--open .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.input-group-addon .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.select2-container--open.btn .select2-selection--single .select2-selection__arrow b { border-color: transparent transparent #999 transparent; border-width: 0 5px 5px 5px; }
+.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.form-control .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .select2-container--bootstrap.select2-container--open.input-group-addon .select2-selection--single .select2-selection__arrow b, .koowa .input-group-lg > .input-group-btn > .select2-container--bootstrap.select2-container--open.btn .select2-selection--single .select2-selection__arrow b { border-color: transparent transparent #999 transparent; border-width: 0 5px 5px 5px; }
 
 .input-group-lg .select2-container--bootstrap.select2-container--open .select2-selection--single { /** Make the dropdown arrow point up while the dropdown is visible. */ }
 
@@ -411,12 +408,12 @@
 .select2-bootstrap-append .select2-container--bootstrap, .select2-bootstrap-append .input-group-btn, .select2-bootstrap-append .input-group-btn .btn, .select2-bootstrap-prepend .select2-container--bootstrap, .select2-bootstrap-prepend .input-group-btn, .select2-bootstrap-prepend .input-group-btn .btn { vertical-align: top; }
 
 /** Temporary fix for https://github.com/select2/select2-bootstrap-theme/issues/9 Provides `!important` for certain properties of the class applied to the original `<select>` element to hide it. @see https://github.com/select2/select2/pull/3301 @see https://github.com/fk/select2/commit/31830c7b32cb3d8e1b12d5b434dee40a6e753ada */
-.form-control.select2-hidden-accessible, select.select2-hidden-accessible { position: absolute !important; width: 1px !important; }
+.form-control.select2-hidden-accessible { position: absolute !important; width: 1px !important; }
 
 /** Display override for inline forms */
 .form-inline .select2-container--bootstrap { display: inline-block; }
 
-.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid \9; border-right: 4px solid transparent; border-left: 4px solid transparent; }
+.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-right: 4px solid transparent; border-left: 4px solid transparent; }
 
 .dropup, .dropdown { position: relative; }
 
@@ -452,7 +449,7 @@
 
 .pull-right > .dropdown-menu { right: 0; left: auto; }
 
-.dropup .caret, .navbar-fixed-bottom .dropdown .caret { border-top: 0; border-bottom: 4px dashed; border-bottom: 4px solid \9; content: ""; }
+.dropup .caret, .navbar-fixed-bottom .dropdown .caret { border-top: 0; border-bottom: 4px solid; content: ""; }
 
 .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu { top: auto; bottom: 100%; margin-bottom: 2px; }
 
@@ -684,13 +681,15 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 
 /* ========================================================================== Select2 ========================================================================== */
 /* 100% wide by default instead of just 220px making it responsive */
-.select2-container.select2-container--bootstrap { width: 100% !important; max-width: 100% !important; /* Set proper line-height so text is vertically centered */ /* Set proper height so arrow is vertically centered */ /* Set proper styling for the search */ }
+.select2.select2-container.select2-container--bootstrap { width: 100% !important; max-width: 100% !important; /* Set proper line-height so text is vertically centered */ /* Set proper height so arrow is vertically centered */ /* Set proper styling for the search */ }
 
-.select2-container.select2-container--bootstrap .select2-selection--single .select2-selection__rendered { line-height: 1.428571429; }
+.select2.select2-container.select2-container--bootstrap .select2-selection--single .select2-selection__rendered { line-height: 1.428571429; }
 
-.select2-container.select2-container--bootstrap .select2-selection--single .select2-selection__arrow { height: 32px; }
+.select2.select2-container.select2-container--bootstrap .select2-selection--single .select2-selection__arrow { height: 32px; }
 
-.select2-container.select2-container--bootstrap .select2-search__field { height: 32px; margin: 0; }
+.select2.select2-container.select2-container--bootstrap .select2-search__field { height: 32px; margin: 0; }
+
+.select2.select2-container.select2-container--bootstrap input[type]:focus { box-shadow: none; }
 
 /** Datepicker for Bootstrap Copyright 2012 Stefan Petre Improvements by Andrew Rowls Licensed under the Apache License v2.0 http://www.apache.org/licenses/LICENSE-2.0 */
 .datepicker { font-family: "Helvetica", "Arial", sans-serif; font-size: 13px; line-height: 19px; direction: ltr; }
@@ -817,9 +816,9 @@ body.k-resizing { overflow: hidden; }
 /** Use SVG Always use SVG on touch / mobile */
 @media screen and (-webkit-min-device-pixel-ratio: 0) { @font-face { font-family: "koowa-icons"; src: url("../fonts/koowa-icons/koowa-icons.svg#koowa-icons") format("svg"); } }
 
-.k-icon-account-login, .k-icon-account-logout, .k-icon-action-redo, .k-icon-action-undo, .k-icon-align-center, .k-icon-align-left, .k-icon-align-right, .k-icon-aperture, .k-icon-arrow-bottom, .k-icon-arrow-circle-bottom, .k-icon-arrow-circle-left, .k-icon-arrow-circle-right, .k-icon-arrow-circle-top, .k-icon-arrow-left, .k-icon-arrow-right, .k-icon-arrow-thick-bottom, .k-icon-arrow-thick-left, .k-icon-arrow-thick-right, .k-icon-arrow-thick-top, .k-icon-arrow-top, .k-icon-audio-spectrum, .k-icon-audio, .k-icon-badge, .k-icon-ban, .k-icon-bar-chart, .k-icon-basket, .k-icon-battery-empty, .k-icon-battery-full, .k-icon-beaker, .k-icon-bell, .k-icon-bluetooth, .k-icon-bold, .k-icon-bolt, .k-icon-book, .k-icon-bookmark, .k-icon-box, .k-icon-briefcase, .k-icon-british-pound, .k-icon-browser, .k-icon-brush, .k-icon-bug, .k-icon-bullhorn, .k-icon-calculator, .k-icon-calendar, .k-icon-camera-slr, .k-icon-caret-bottom, .k-icon-caret-left, .k-icon-caret-right, .k-icon-caret-top, .k-icon-cart, .k-icon-chat, .k-icon-check, .k-icon-chevron-bottom, .k-icon-chevron-left, .k-icon-chevron-right, .k-icon-chevron-top, .k-icon-circle-check, .k-icon-circle-x, .k-icon-clipboard, .k-icon-clock, .k-icon-cloud-download, .k-icon-cloud-upload, .k-icon-cloud, .k-icon-cloudy, .k-icon-code, .k-icon-cog, .k-icon-collapse-down, .k-icon-collapse-left, .k-icon-collapse-right, .k-icon-collapse-up, .k-icon-command, .k-icon-comment-square, .k-icon-compass, .k-icon-contrast, .k-icon-copywriting, .k-icon-credit-card, .k-icon-crop, .k-icon-dashboard, .k-icon-data-transfer-download, .k-icon-data-transfer-upload, .k-icon-delete, .k-icon-dial, .k-icon-document, .k-icon-dollar, .k-icon-double-quote-sans-left, .k-icon-double-quote-sans-right, .k-icon-double-quote-serif-left, .k-icon-double-quote-serif-right, .k-icon-droplet, .k-icon-eject, .k-icon-elevator, .k-icon-ellipses, .k-icon-envelope-closed, .k-icon-envelope-open, .k-icon-euro, .k-icon-excerpt, .k-icon-expand-down, .k-icon-expand-left, .k-icon-expand-right, .k-icon-expand-up, .k-icon-external-link, .k-icon-eye, .k-icon-eyedropper, .k-icon-file, .k-icon-fire, .k-icon-flag, .k-icon-flash, .k-icon-folder, .k-icon-fork, .k-icon-fullscreen-enter, .k-icon-fullscreen-exit, .k-icon-globe, .k-icon-graph, .k-icon-grid-four-up, .k-icon-grid-three-up, .k-icon-grid-two-up, .k-icon-hard-drive, .k-icon-header, .k-icon-headphones, .k-icon-heart, .k-icon-home, .k-icon-image, .k-icon-inbox, .k-icon-infinity, .k-icon-info, .k-icon-italic, .k-icon-justify-center, .k-icon-justify-left, .k-icon-justify-right, .k-icon-key, .k-icon-laptop, .k-icon-layers, .k-icon-lightbulb, .k-icon-link-broken, .k-icon-link-intact, .k-icon-list-rich, .k-icon-list, .k-icon-location, .k-icon-lock-locked, .k-icon-lock-unlocked, .k-icon-loop-circular, .k-icon-loop-square, .k-icon-loop, .k-icon-magnifying-glass, .k-icon-map-marker, .k-icon-map, .k-icon-media-pause, .k-icon-media-play, .k-icon-media-record, .k-icon-media-skip-backward, .k-icon-media-skip-forward, .k-icon-media-step-backward, .k-icon-media-step-forward, .k-icon-media-stop, .k-icon-medical-cross, .k-icon-menu, .k-icon-microphone, .k-icon-minus, .k-icon-monitor, .k-icon-moon, .k-icon-move, .k-icon-musical-note, .k-icon-paperclip, .k-icon-pencil, .k-icon-people, .k-icon-person, .k-icon-phone, .k-icon-pie-chart, .k-icon-pin, .k-icon-play-circle, .k-icon-plus, .k-icon-power-standby, .k-icon-print, .k-icon-project, .k-icon-pulse, .k-icon-puzzle-piece, .k-icon-question-mark, .k-icon-rain, .k-icon-random, .k-icon-reload, .k-icon-resize-both, .k-icon-resize-height, .k-icon-resize-width, .k-icon-rss-alt, .k-icon-rss, .k-icon-script, .k-icon-share-boxed, .k-icon-share, .k-icon-shield, .k-icon-signal, .k-icon-signpost, .k-icon-sort-ascending, .k-icon-sort-descending, .k-icon-spreadsheet, .k-icon-star, .k-icon-sun, .k-icon-tablet, .k-icon-tag, .k-icon-tags, .k-icon-target, .k-icon-task, .k-icon-terminal, .k-icon-text, .k-icon-thumb-down, .k-icon-thumb-up, .k-icon-timer, .k-icon-transfer, .k-icon-trash, .k-icon-underline, .k-icon-vertical-align-bottom, .k-icon-vertical-align-center, .k-icon-vertical-align-top, .k-icon-video, .k-icon-volume-high, .k-icon-volume-low, .k-icon-volume-off, .k-icon-warning, .k-icon-wifi, .k-icon-wrench, .k-icon-x, .k-icon-yen, .k-icon-zoom-in, .k-icon-zoom-out, .k-icon-k-archive, .k-icon-k-audio, .k-icon-k-calendar, .k-icon-k-close, .k-icon-k-default, .k-icon-k-disabled, .k-icon-k-document, .k-icon-k-enabled, .k-icon-k-filter, .k-icon-k-folder, .k-icon-k-folder_open, .k-icon-k-image, .k-icon-k-locked, .k-icon-k-menu, .k-icon-k-menu_open, .k-icon-k-open, .k-icon-k-pdf, .k-icon-k-spreadsheet, .k-icon-k-unlocked, .k-icon-k-video, .koowa .k-icon-folder:before, .koowa .k-icon-folder--open:before, .k-appearance.k-checked .koowa input[type="checkbox"]:before, .koowa .icon-new:before, .koowa .icon-download:before, .koowa .icon-options:before, .koowa .icon-delete:before, .koowa .icon-purge:before, .koowa .icon-publish:before, .koowa .icon-unpublish:before, .koowa .icon-apply:before, .koowa .icon-save:before, .koowa .icon-cancel:before, .koowa .k-icon-config:before, .koowa .k-icon-content:before, .koowa .k-icon-menus:before, .koowa .k-icon-users:before, .koowa .koowa_icon--archive:before, .koowa .koowa_icon--audio:before, .koowa .koowa_icon--default:before, .koowa .koowa_icon--document:before, .koowa .koowa_icon--folder:before, .koowa .koowa_icon--image:before, .koowa .koowa_icon--pdf:before, .koowa .koowa_icon--spreadsheet:before, .koowa .koowa_icon--video:before, .koowa .koowa_icon--folder_open:before, .koowa .k-grid__item--folder .k-grid__item__title:before, .koowa .footable.breakpoint .footable-toggle:after, .k-js-enabled .koowa .k-quick-filters .k-sidebar__toggle:after, .koowa .files__sortable--sorted:after, .koowa a.-koowa-asc:after, .koowa .files__sortable--sorted-desc:after, .koowa a.-koowa-desc:after, .koowa_icon--default:before, .koowa_icon--image:before, .koowa_icon--video:before, .koowa_icon--archive:before, .koowa_icon--folder:before, .koowa_icon--pdf:before, .koowa_icon--audio:before, .koowa_icon--document:before, .koowa_icon--spreadsheet:before, .koowa_icon--locked:before, .koowa_icon--unlocked:before, .koowa_icon--disabled:before, .koowa_icon--enabled:before, .koowa_icon--open:before, .koowa_icon--close:before, .koowa_icon--folder_open:before, .koowa_icon--calendar:before, .koowa_icon--menu:before, .koowa_icon--menu_open:before { speak: none; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-smoothing: antialiased; text-transform: none; line-height: 1; font-style: normal; font-variant: normal; font-weight: normal; font-family: 'koowa-icons'; }
+.k-icon-account-login, .k-icon-account-logout, .k-icon-action-redo, .k-icon-action-undo, .k-icon-align-center, .k-icon-align-left, .k-icon-align-right, .k-icon-aperture, .k-icon-arrow-bottom, .k-icon-arrow-circle-bottom, .k-icon-arrow-circle-left, .k-icon-arrow-circle-right, .k-icon-arrow-circle-top, .k-icon-arrow-left, .k-icon-arrow-right, .k-icon-arrow-thick-bottom, .k-icon-arrow-thick-left, .k-icon-arrow-thick-right, .k-icon-arrow-thick-top, .k-icon-arrow-top, .k-icon-audio-spectrum, .k-icon-audio, .k-icon-badge, .k-icon-ban, .k-icon-bar-chart, .k-icon-basket, .k-icon-battery-empty, .k-icon-battery-full, .k-icon-beaker, .k-icon-bell, .k-icon-bluetooth, .k-icon-bold, .k-icon-bolt, .k-icon-book, .k-icon-bookmark, .k-icon-box, .k-icon-briefcase, .k-icon-british-pound, .k-icon-browser, .k-icon-brush, .k-icon-bug, .k-icon-bullhorn, .k-icon-calculator, .k-icon-calendar, .k-icon-camera-slr, .k-icon-caret-bottom, .k-icon-caret-left, .k-icon-caret-right, .k-icon-caret-top, .k-icon-cart, .k-icon-chat, .k-icon-check, .k-icon-chevron-bottom, .k-icon-chevron-left, .k-icon-chevron-right, .k-icon-chevron-top, .k-icon-circle-check, .k-icon-circle-x, .k-icon-clipboard, .k-icon-clock, .k-icon-cloud-download, .k-icon-cloud-upload, .k-icon-cloud, .k-icon-cloudy, .k-icon-code, .k-icon-cog, .k-icon-collapse-down, .k-icon-collapse-left, .k-icon-collapse-right, .k-icon-collapse-up, .k-icon-command, .k-icon-comment-square, .k-icon-compass, .k-icon-contrast, .k-icon-copywriting, .k-icon-credit-card, .k-icon-crop, .k-icon-dashboard, .k-icon-data-transfer-download, .k-icon-data-transfer-upload, .k-icon-delete, .k-icon-dial, .k-icon-document, .k-icon-dollar, .k-icon-double-quote-sans-left, .k-icon-double-quote-sans-right, .k-icon-double-quote-serif-left, .k-icon-double-quote-serif-right, .k-icon-droplet, .k-icon-eject, .k-icon-elevator, .k-icon-ellipses, .k-icon-envelope-closed, .k-icon-envelope-open, .k-icon-euro, .k-icon-excerpt, .k-icon-expand-down, .k-icon-expand-left, .k-icon-expand-right, .k-icon-expand-up, .k-icon-external-link, .k-icon-eye, .k-icon-eyedropper, .k-icon-file, .k-icon-fire, .k-icon-flag, .k-icon-flash, .k-icon-folder, .k-icon-fork, .k-icon-fullscreen-enter, .k-icon-fullscreen-exit, .k-icon-globe, .k-icon-graph, .k-icon-grid-four-up, .k-icon-grid-three-up, .k-icon-grid-two-up, .k-icon-hard-drive, .k-icon-header, .k-icon-headphones, .k-icon-heart, .k-icon-home, .k-icon-image, .k-icon-inbox, .k-icon-infinity, .k-icon-info, .k-icon-italic, .k-icon-justify-center, .k-icon-justify-left, .k-icon-justify-right, .k-icon-k-archive, .k-icon-k-audio, .k-icon-k-calendar, .k-icon-k-close, .k-icon-k-default, .k-icon-k-disabled, .k-icon-k-document, .k-icon-k-enabled, .k-icon-k-filter, .k-icon-k-folder, .k-icon-k-folder_open, .k-icon-k-image, .k-icon-k-locked, .k-icon-k-menu, .k-icon-k-menu_open, .k-icon-k-open, .k-icon-k-pdf, .k-icon-k-spreadsheet, .k-icon-k-unlocked, .k-icon-k-video, .k-icon-key, .k-icon-laptop, .k-icon-layers, .k-icon-lightbulb, .k-icon-link-broken, .k-icon-link-intact, .k-icon-list-rich, .k-icon-list, .k-icon-location, .k-icon-lock-locked, .k-icon-lock-unlocked, .k-icon-loop-circular, .k-icon-loop-square, .k-icon-loop, .k-icon-magnifying-glass, .k-icon-map-marker, .k-icon-map, .k-icon-media-pause, .k-icon-media-play, .k-icon-media-record, .k-icon-media-skip-backward, .k-icon-media-skip-forward, .k-icon-media-step-backward, .k-icon-media-step-forward, .k-icon-media-stop, .k-icon-medical-cross, .k-icon-menu, .k-icon-microphone, .k-icon-minus, .k-icon-monitor, .k-icon-moon, .k-icon-move, .k-icon-musical-note, .k-icon-paperclip, .k-icon-pencil, .k-icon-people, .k-icon-person, .k-icon-phone, .k-icon-pie-chart, .k-icon-pin, .k-icon-play-circle, .k-icon-plus, .k-icon-power-standby, .k-icon-print, .k-icon-project, .k-icon-pulse, .k-icon-puzzle-piece, .k-icon-question-mark, .k-icon-rain, .k-icon-random, .k-icon-reload, .k-icon-resize-both, .k-icon-resize-height, .k-icon-resize-width, .k-icon-rss-alt, .k-icon-rss, .k-icon-script, .k-icon-share-boxed, .k-icon-share, .k-icon-shield, .k-icon-signal, .k-icon-signpost, .k-icon-sort-ascending, .k-icon-sort-descending, .k-icon-sorting, .k-icon-spreadsheet, .k-icon-star, .k-icon-sun, .k-icon-tablet, .k-icon-tag, .k-icon-tags, .k-icon-target, .k-icon-task, .k-icon-terminal, .k-icon-text, .k-icon-thumb-down, .k-icon-thumb-up, .k-icon-timer, .k-icon-transfer, .k-icon-trash, .k-icon-underline, .k-icon-vertical-align-bottom, .k-icon-vertical-align-center, .k-icon-vertical-align-top, .k-icon-video, .k-icon-volume-high, .k-icon-volume-low, .k-icon-volume-off, .k-icon-warning, .k-icon-wifi, .k-icon-wrench, .k-icon-x, .k-icon-yen, .k-icon-zoom-in, .k-icon-zoom-out, .koowa .k-icon-folder:before, .koowa .k-icon-folder--open:before, .k-appearance.k-checked .koowa input[type="checkbox"]:before, .koowa .icon-new:before, .koowa .icon-download:before, .koowa .icon-options:before, .koowa .icon-delete:before, .koowa .icon-purge:before, .koowa .icon-publish:before, .koowa .icon-unpublish:before, .koowa .icon-apply:before, .koowa .icon-save:before, .koowa .icon-preview:before, .koowa .icon-cancel:before, .koowa .k-icon-config:before, .koowa .k-icon-content:before, .koowa .k-icon-menus:before, .koowa .k-icon-users:before, .koowa .koowa_icon--archive:before, .koowa .koowa_icon--audio:before, .koowa .koowa_icon--default:before, .koowa .koowa_icon--document:before, .koowa .koowa_icon--folder:before, .koowa .koowa_icon--image:before, .koowa .koowa_icon--pdf:before, .koowa .koowa_icon--spreadsheet:before, .koowa .koowa_icon--video:before, .koowa .koowa_icon--folder_open:before, .koowa .k-grid__item--folder .k-grid__item__title:before, .koowa .footable.breakpoint .footable-toggle:after, .k-js-enabled .koowa .k-quick-filters .k-sidebar__toggle:after, .koowa .files__sortable--sorted:after, .koowa a.-koowa-asc:after, .koowa .files__sortable--sorted-desc:after, .koowa a.-koowa-desc:after, .koowa_icon--default:before, .koowa_icon--image:before, .koowa_icon--video:before, .koowa_icon--archive:before, .koowa_icon--folder:before, .koowa_icon--pdf:before, .koowa_icon--audio:before, .koowa_icon--document:before, .koowa_icon--spreadsheet:before, .koowa_icon--locked:before, .koowa_icon--unlocked:before, .koowa_icon--disabled:before, .koowa_icon--enabled:before, .koowa_icon--open:before, .koowa_icon--close:before, .koowa_icon--folder_open:before, .koowa_icon--calendar:before, .koowa_icon--menu:before, .koowa_icon--menu_open:before { speak: none; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-smoothing: antialiased; text-transform: none; line-height: 1; font-style: normal; font-variant: normal; font-weight: normal; font-family: 'koowa-icons'; }
 
-.k-icon-account-login:before, .k-icon-account-logout:before, .k-icon-action-redo:before, .k-icon-action-undo:before, .k-icon-align-center:before, .k-icon-align-left:before, .k-icon-align-right:before, .k-icon-aperture:before, .k-icon-arrow-bottom:before, .k-icon-arrow-circle-bottom:before, .k-icon-arrow-circle-left:before, .k-icon-arrow-circle-right:before, .k-icon-arrow-circle-top:before, .k-icon-arrow-left:before, .k-icon-arrow-right:before, .k-icon-arrow-thick-bottom:before, .k-icon-arrow-thick-left:before, .k-icon-arrow-thick-right:before, .k-icon-arrow-thick-top:before, .k-icon-arrow-top:before, .k-icon-audio-spectrum:before, .k-icon-audio:before, .k-icon-badge:before, .k-icon-ban:before, .k-icon-bar-chart:before, .k-icon-basket:before, .k-icon-battery-empty:before, .k-icon-battery-full:before, .k-icon-beaker:before, .k-icon-bell:before, .k-icon-bluetooth:before, .k-icon-bold:before, .k-icon-bolt:before, .k-icon-book:before, .k-icon-bookmark:before, .k-icon-box:before, .k-icon-briefcase:before, .k-icon-british-pound:before, .k-icon-browser:before, .k-icon-brush:before, .k-icon-bug:before, .k-icon-bullhorn:before, .k-icon-calculator:before, .k-icon-calendar:before, .k-icon-camera-slr:before, .k-icon-caret-bottom:before, .k-icon-caret-left:before, .k-icon-caret-right:before, .k-icon-caret-top:before, .k-icon-cart:before, .k-icon-chat:before, .k-icon-check:before, .k-icon-chevron-bottom:before, .k-icon-chevron-left:before, .k-icon-chevron-right:before, .k-icon-chevron-top:before, .k-icon-circle-check:before, .k-icon-circle-x:before, .k-icon-clipboard:before, .k-icon-clock:before, .k-icon-cloud-download:before, .k-icon-cloud-upload:before, .k-icon-cloud:before, .k-icon-cloudy:before, .k-icon-code:before, .k-icon-cog:before, .k-icon-collapse-down:before, .k-icon-collapse-left:before, .k-icon-collapse-right:before, .k-icon-collapse-up:before, .k-icon-command:before, .k-icon-comment-square:before, .k-icon-compass:before, .k-icon-contrast:before, .k-icon-copywriting:before, .k-icon-credit-card:before, .k-icon-crop:before, .k-icon-dashboard:before, .k-icon-data-transfer-download:before, .k-icon-data-transfer-upload:before, .k-icon-delete:before, .k-icon-dial:before, .k-icon-document:before, .k-icon-dollar:before, .k-icon-double-quote-sans-left:before, .k-icon-double-quote-sans-right:before, .k-icon-double-quote-serif-left:before, .k-icon-double-quote-serif-right:before, .k-icon-droplet:before, .k-icon-eject:before, .k-icon-elevator:before, .k-icon-ellipses:before, .k-icon-envelope-closed:before, .k-icon-envelope-open:before, .k-icon-euro:before, .k-icon-excerpt:before, .k-icon-expand-down:before, .k-icon-expand-left:before, .k-icon-expand-right:before, .k-icon-expand-up:before, .k-icon-external-link:before, .k-icon-eye:before, .k-icon-eyedropper:before, .k-icon-file:before, .k-icon-fire:before, .k-icon-flag:before, .k-icon-flash:before, .k-icon-folder:before, .k-icon-fork:before, .k-icon-fullscreen-enter:before, .k-icon-fullscreen-exit:before, .k-icon-globe:before, .k-icon-graph:before, .k-icon-grid-four-up:before, .k-icon-grid-three-up:before, .k-icon-grid-two-up:before, .k-icon-hard-drive:before, .k-icon-header:before, .k-icon-headphones:before, .k-icon-heart:before, .k-icon-home:before, .k-icon-image:before, .k-icon-inbox:before, .k-icon-infinity:before, .k-icon-info:before, .k-icon-italic:before, .k-icon-justify-center:before, .k-icon-justify-left:before, .k-icon-justify-right:before, .k-icon-key:before, .k-icon-laptop:before, .k-icon-layers:before, .k-icon-lightbulb:before, .k-icon-link-broken:before, .k-icon-link-intact:before, .k-icon-list-rich:before, .k-icon-list:before, .k-icon-location:before, .k-icon-lock-locked:before, .k-icon-lock-unlocked:before, .k-icon-loop-circular:before, .k-icon-loop-square:before, .k-icon-loop:before, .k-icon-magnifying-glass:before, .k-icon-map-marker:before, .k-icon-map:before, .k-icon-media-pause:before, .k-icon-media-play:before, .k-icon-media-record:before, .k-icon-media-skip-backward:before, .k-icon-media-skip-forward:before, .k-icon-media-step-backward:before, .k-icon-media-step-forward:before, .k-icon-media-stop:before, .k-icon-medical-cross:before, .k-icon-menu:before, .k-icon-microphone:before, .k-icon-minus:before, .k-icon-monitor:before, .k-icon-moon:before, .k-icon-move:before, .k-icon-musical-note:before, .k-icon-paperclip:before, .k-icon-pencil:before, .k-icon-people:before, .k-icon-person:before, .k-icon-phone:before, .k-icon-pie-chart:before, .k-icon-pin:before, .k-icon-play-circle:before, .k-icon-plus:before, .k-icon-power-standby:before, .k-icon-print:before, .k-icon-project:before, .k-icon-pulse:before, .k-icon-puzzle-piece:before, .k-icon-question-mark:before, .k-icon-rain:before, .k-icon-random:before, .k-icon-reload:before, .k-icon-resize-both:before, .k-icon-resize-height:before, .k-icon-resize-width:before, .k-icon-rss-alt:before, .k-icon-rss:before, .k-icon-script:before, .k-icon-share-boxed:before, .k-icon-share:before, .k-icon-shield:before, .k-icon-signal:before, .k-icon-signpost:before, .k-icon-sort-ascending:before, .k-icon-sort-descending:before, .k-icon-spreadsheet:before, .k-icon-star:before, .k-icon-sun:before, .k-icon-tablet:before, .k-icon-tag:before, .k-icon-tags:before, .k-icon-target:before, .k-icon-task:before, .k-icon-terminal:before, .k-icon-text:before, .k-icon-thumb-down:before, .k-icon-thumb-up:before, .k-icon-timer:before, .k-icon-transfer:before, .k-icon-trash:before, .k-icon-underline:before, .k-icon-vertical-align-bottom:before, .k-icon-vertical-align-center:before, .k-icon-vertical-align-top:before, .k-icon-video:before, .k-icon-volume-high:before, .k-icon-volume-low:before, .k-icon-volume-off:before, .k-icon-warning:before, .k-icon-wifi:before, .k-icon-wrench:before, .k-icon-x:before, .k-icon-yen:before, .k-icon-zoom-in:before, .k-icon-zoom-out:before, .k-icon-k-archive:before, .k-icon-k-audio:before, .k-icon-k-calendar:before, .k-icon-k-close:before, .k-icon-k-default:before, .k-icon-k-disabled:before, .k-icon-k-document:before, .k-icon-k-enabled:before, .k-icon-k-filter:before, .k-icon-k-folder:before, .k-icon-k-folder_open:before, .k-icon-k-image:before, .k-icon-k-locked:before, .k-icon-k-menu:before, .k-icon-k-menu_open:before, .k-icon-k-open:before, .k-icon-k-pdf:before, .k-icon-k-spreadsheet:before, .k-icon-k-unlocked:before, .k-icon-k-video:before, .koowa .k-icon-folder:before, .koowa .k-icon-folder--open:before, .k-appearance.k-checked .koowa input[type="checkbox"]:before, .koowa .icon-new:before, .koowa .icon-download:before, .koowa .icon-options:before, .koowa .icon-delete:before, .koowa .icon-purge:before, .koowa .icon-publish:before, .koowa .icon-unpublish:before, .koowa .icon-apply:before, .koowa .icon-save:before, .koowa .icon-cancel:before, .koowa .k-icon-config:before, .koowa .k-icon-content:before, .koowa .k-icon-menus:before, .koowa .k-icon-users:before, .koowa .koowa_icon--archive:before, .koowa .koowa_icon--audio:before, .koowa .koowa_icon--default:before, .koowa .koowa_icon--document:before, .koowa .koowa_icon--folder:before, .koowa .koowa_icon--image:before, .koowa .koowa_icon--pdf:before, .koowa .koowa_icon--spreadsheet:before, .koowa .koowa_icon--video:before, .koowa .koowa_icon--folder_open:before, .koowa .k-grid__item--folder .k-grid__item__title:before, .koowa_icon--default:before, .koowa_icon--image:before, .koowa_icon--video:before, .koowa_icon--archive:before, .koowa_icon--folder:before, .koowa_icon--pdf:before, .koowa_icon--audio:before, .koowa_icon--document:before, .koowa_icon--spreadsheet:before, .koowa_icon--locked:before, .koowa_icon--unlocked:before, .koowa_icon--disabled:before, .koowa_icon--enabled:before, .koowa_icon--open:before, .koowa_icon--close:before, .koowa_icon--folder_open:before, .koowa_icon--calendar:before, .koowa_icon--menu:before, .koowa_icon--menu_open:before { display: inline-block; margin: auto; }
+.k-icon-account-login:before, .k-icon-account-logout:before, .k-icon-action-redo:before, .k-icon-action-undo:before, .k-icon-align-center:before, .k-icon-align-left:before, .k-icon-align-right:before, .k-icon-aperture:before, .k-icon-arrow-bottom:before, .k-icon-arrow-circle-bottom:before, .k-icon-arrow-circle-left:before, .k-icon-arrow-circle-right:before, .k-icon-arrow-circle-top:before, .k-icon-arrow-left:before, .k-icon-arrow-right:before, .k-icon-arrow-thick-bottom:before, .k-icon-arrow-thick-left:before, .k-icon-arrow-thick-right:before, .k-icon-arrow-thick-top:before, .k-icon-arrow-top:before, .k-icon-audio-spectrum:before, .k-icon-audio:before, .k-icon-badge:before, .k-icon-ban:before, .k-icon-bar-chart:before, .k-icon-basket:before, .k-icon-battery-empty:before, .k-icon-battery-full:before, .k-icon-beaker:before, .k-icon-bell:before, .k-icon-bluetooth:before, .k-icon-bold:before, .k-icon-bolt:before, .k-icon-book:before, .k-icon-bookmark:before, .k-icon-box:before, .k-icon-briefcase:before, .k-icon-british-pound:before, .k-icon-browser:before, .k-icon-brush:before, .k-icon-bug:before, .k-icon-bullhorn:before, .k-icon-calculator:before, .k-icon-calendar:before, .k-icon-camera-slr:before, .k-icon-caret-bottom:before, .k-icon-caret-left:before, .k-icon-caret-right:before, .k-icon-caret-top:before, .k-icon-cart:before, .k-icon-chat:before, .k-icon-check:before, .k-icon-chevron-bottom:before, .k-icon-chevron-left:before, .k-icon-chevron-right:before, .k-icon-chevron-top:before, .k-icon-circle-check:before, .k-icon-circle-x:before, .k-icon-clipboard:before, .k-icon-clock:before, .k-icon-cloud-download:before, .k-icon-cloud-upload:before, .k-icon-cloud:before, .k-icon-cloudy:before, .k-icon-code:before, .k-icon-cog:before, .k-icon-collapse-down:before, .k-icon-collapse-left:before, .k-icon-collapse-right:before, .k-icon-collapse-up:before, .k-icon-command:before, .k-icon-comment-square:before, .k-icon-compass:before, .k-icon-contrast:before, .k-icon-copywriting:before, .k-icon-credit-card:before, .k-icon-crop:before, .k-icon-dashboard:before, .k-icon-data-transfer-download:before, .k-icon-data-transfer-upload:before, .k-icon-delete:before, .k-icon-dial:before, .k-icon-document:before, .k-icon-dollar:before, .k-icon-double-quote-sans-left:before, .k-icon-double-quote-sans-right:before, .k-icon-double-quote-serif-left:before, .k-icon-double-quote-serif-right:before, .k-icon-droplet:before, .k-icon-eject:before, .k-icon-elevator:before, .k-icon-ellipses:before, .k-icon-envelope-closed:before, .k-icon-envelope-open:before, .k-icon-euro:before, .k-icon-excerpt:before, .k-icon-expand-down:before, .k-icon-expand-left:before, .k-icon-expand-right:before, .k-icon-expand-up:before, .k-icon-external-link:before, .k-icon-eye:before, .k-icon-eyedropper:before, .k-icon-file:before, .k-icon-fire:before, .k-icon-flag:before, .k-icon-flash:before, .k-icon-folder:before, .k-icon-fork:before, .k-icon-fullscreen-enter:before, .k-icon-fullscreen-exit:before, .k-icon-globe:before, .k-icon-graph:before, .k-icon-grid-four-up:before, .k-icon-grid-three-up:before, .k-icon-grid-two-up:before, .k-icon-hard-drive:before, .k-icon-header:before, .k-icon-headphones:before, .k-icon-heart:before, .k-icon-home:before, .k-icon-image:before, .k-icon-inbox:before, .k-icon-infinity:before, .k-icon-info:before, .k-icon-italic:before, .k-icon-justify-center:before, .k-icon-justify-left:before, .k-icon-justify-right:before, .k-icon-k-archive:before, .k-icon-k-audio:before, .k-icon-k-calendar:before, .k-icon-k-close:before, .k-icon-k-default:before, .k-icon-k-disabled:before, .k-icon-k-document:before, .k-icon-k-enabled:before, .k-icon-k-filter:before, .k-icon-k-folder:before, .k-icon-k-folder_open:before, .k-icon-k-image:before, .k-icon-k-locked:before, .k-icon-k-menu:before, .k-icon-k-menu_open:before, .k-icon-k-open:before, .k-icon-k-pdf:before, .k-icon-k-spreadsheet:before, .k-icon-k-unlocked:before, .k-icon-k-video:before, .k-icon-key:before, .k-icon-laptop:before, .k-icon-layers:before, .k-icon-lightbulb:before, .k-icon-link-broken:before, .k-icon-link-intact:before, .k-icon-list-rich:before, .k-icon-list:before, .k-icon-location:before, .k-icon-lock-locked:before, .k-icon-lock-unlocked:before, .k-icon-loop-circular:before, .k-icon-loop-square:before, .k-icon-loop:before, .k-icon-magnifying-glass:before, .k-icon-map-marker:before, .k-icon-map:before, .k-icon-media-pause:before, .k-icon-media-play:before, .k-icon-media-record:before, .k-icon-media-skip-backward:before, .k-icon-media-skip-forward:before, .k-icon-media-step-backward:before, .k-icon-media-step-forward:before, .k-icon-media-stop:before, .k-icon-medical-cross:before, .k-icon-menu:before, .k-icon-microphone:before, .k-icon-minus:before, .k-icon-monitor:before, .k-icon-moon:before, .k-icon-move:before, .k-icon-musical-note:before, .k-icon-paperclip:before, .k-icon-pencil:before, .k-icon-people:before, .k-icon-person:before, .k-icon-phone:before, .k-icon-pie-chart:before, .k-icon-pin:before, .k-icon-play-circle:before, .k-icon-plus:before, .k-icon-power-standby:before, .k-icon-print:before, .k-icon-project:before, .k-icon-pulse:before, .k-icon-puzzle-piece:before, .k-icon-question-mark:before, .k-icon-rain:before, .k-icon-random:before, .k-icon-reload:before, .k-icon-resize-both:before, .k-icon-resize-height:before, .k-icon-resize-width:before, .k-icon-rss-alt:before, .k-icon-rss:before, .k-icon-script:before, .k-icon-share-boxed:before, .k-icon-share:before, .k-icon-shield:before, .k-icon-signal:before, .k-icon-signpost:before, .k-icon-sort-ascending:before, .k-icon-sort-descending:before, .k-icon-sorting:before, .k-icon-spreadsheet:before, .k-icon-star:before, .k-icon-sun:before, .k-icon-tablet:before, .k-icon-tag:before, .k-icon-tags:before, .k-icon-target:before, .k-icon-task:before, .k-icon-terminal:before, .k-icon-text:before, .k-icon-thumb-down:before, .k-icon-thumb-up:before, .k-icon-timer:before, .k-icon-transfer:before, .k-icon-trash:before, .k-icon-underline:before, .k-icon-vertical-align-bottom:before, .k-icon-vertical-align-center:before, .k-icon-vertical-align-top:before, .k-icon-video:before, .k-icon-volume-high:before, .k-icon-volume-low:before, .k-icon-volume-off:before, .k-icon-warning:before, .k-icon-wifi:before, .k-icon-wrench:before, .k-icon-x:before, .k-icon-yen:before, .k-icon-zoom-in:before, .k-icon-zoom-out:before, .koowa .k-icon-folder:before, .koowa .k-icon-folder--open:before, .k-appearance.k-checked .koowa input[type="checkbox"]:before, .koowa .icon-new:before, .koowa .icon-download:before, .koowa .icon-options:before, .koowa .icon-delete:before, .koowa .icon-purge:before, .koowa .icon-publish:before, .koowa .icon-unpublish:before, .koowa .icon-apply:before, .koowa .icon-save:before, .koowa .icon-preview:before, .koowa .icon-cancel:before, .koowa .k-icon-config:before, .koowa .k-icon-content:before, .koowa .k-icon-menus:before, .koowa .k-icon-users:before, .koowa .koowa_icon--archive:before, .koowa .koowa_icon--audio:before, .koowa .koowa_icon--default:before, .koowa .koowa_icon--document:before, .koowa .koowa_icon--folder:before, .koowa .koowa_icon--image:before, .koowa .koowa_icon--pdf:before, .koowa .koowa_icon--spreadsheet:before, .koowa .koowa_icon--video:before, .koowa .koowa_icon--folder_open:before, .koowa .k-grid__item--folder .k-grid__item__title:before, .koowa_icon--default:before, .koowa_icon--image:before, .koowa_icon--video:before, .koowa_icon--archive:before, .koowa_icon--folder:before, .koowa_icon--pdf:before, .koowa_icon--audio:before, .koowa_icon--document:before, .koowa_icon--spreadsheet:before, .koowa_icon--locked:before, .koowa_icon--unlocked:before, .koowa_icon--disabled:before, .koowa_icon--enabled:before, .koowa_icon--open:before, .koowa_icon--close:before, .koowa_icon--folder_open:before, .koowa_icon--calendar:before, .koowa_icon--menu:before, .koowa_icon--menu_open:before { display: inline-block; margin: auto; }
 
 /** Icon classes Creating a class name for each individual icon to be used in markup like: <span class="k-icon-circle"></span> */
 .k-icon-account-login:before { content: ""; }
@@ -1080,238 +1079,240 @@ body.k-resizing { overflow: hidden; }
 
 .k-icon-justify-right:before { content: ""; }
 
-.k-icon-key:before { content: ""; }
+.k-icon-k-archive:before { content: ""; }
 
-.k-icon-laptop:before { content: ""; }
+.k-icon-k-audio:before { content: ""; }
 
-.k-icon-layers:before { content: ""; }
+.k-icon-k-calendar:before { content: ""; }
 
-.k-icon-lightbulb:before { content: ""; }
+.k-icon-k-close:before { content: ""; }
 
-.k-icon-link-broken:before { content: ""; }
+.k-icon-k-default:before { content: ""; }
 
-.k-icon-link-intact:before { content: ""; }
+.k-icon-k-disabled:before { content: ""; }
 
-.k-icon-list-rich:before { content: ""; }
+.k-icon-k-document:before { content: ""; }
 
-.k-icon-list:before { content: ""; }
+.k-icon-k-enabled:before { content: ""; }
 
-.k-icon-location:before { content: ""; }
+.k-icon-k-filter:before { content: ""; }
 
-.k-icon-lock-locked:before { content: ""; }
+.k-icon-k-folder:before { content: ""; }
 
-.k-icon-lock-unlocked:before { content: ""; }
+.k-icon-k-folder_open:before { content: ""; }
 
-.k-icon-loop-circular:before { content: ""; }
+.k-icon-k-image:before { content: ""; }
 
-.k-icon-loop-square:before { content: ""; }
+.k-icon-k-locked:before { content: ""; }
 
-.k-icon-loop:before { content: ""; }
+.k-icon-k-menu:before { content: ""; }
 
-.k-icon-magnifying-glass:before { content: ""; }
+.k-icon-k-menu_open:before { content: ""; }
 
-.k-icon-map-marker:before { content: ""; }
+.k-icon-k-open:before { content: ""; }
 
-.k-icon-map:before { content: ""; }
+.k-icon-k-pdf:before { content: ""; }
 
-.k-icon-media-pause:before { content: ""; }
+.k-icon-k-spreadsheet:before { content: ""; }
 
-.k-icon-media-play:before { content: ""; }
+.k-icon-k-unlocked:before { content: ""; }
 
-.k-icon-media-record:before { content: ""; }
+.k-icon-k-video:before { content: ""; }
 
-.k-icon-media-skip-backward:before { content: ""; }
+.k-icon-key:before { content: ""; }
 
-.k-icon-media-skip-forward:before { content: ""; }
+.k-icon-laptop:before { content: ""; }
 
-.k-icon-media-step-backward:before { content: ""; }
+.k-icon-layers:before { content: ""; }
 
-.k-icon-media-step-forward:before { content: ""; }
+.k-icon-lightbulb:before { content: ""; }
 
-.k-icon-media-stop:before { content: ""; }
+.k-icon-link-broken:before { content: ""; }
 
-.k-icon-medical-cross:before { content: ""; }
+.k-icon-link-intact:before { content: ""; }
 
-.k-icon-menu:before { content: ""; }
+.k-icon-list-rich:before { content: ""; }
 
-.k-icon-microphone:before { content: ""; }
+.k-icon-list:before { content: ""; }
 
-.k-icon-minus:before { content: ""; }
+.k-icon-location:before { content: ""; }
 
-.k-icon-monitor:before { content: ""; }
+.k-icon-lock-locked:before { content: ""; }
 
-.k-icon-moon:before { content: ""; }
+.k-icon-lock-unlocked:before { content: ""; }
 
-.k-icon-move:before { content: ""; }
+.k-icon-loop-circular:before { content: ""; }
 
-.k-icon-musical-note:before { content: ""; }
+.k-icon-loop-square:before { content: ""; }
 
-.k-icon-paperclip:before { content: ""; }
+.k-icon-loop:before { content: ""; }
 
-.k-icon-pencil:before { content: ""; }
+.k-icon-magnifying-glass:before { content: ""; }
 
-.k-icon-people:before { content: ""; }
+.k-icon-map-marker:before { content: ""; }
 
-.k-icon-person:before { content: ""; }
+.k-icon-map:before { content: ""; }
 
-.k-icon-phone:before { content: ""; }
+.k-icon-media-pause:before { content: ""; }
 
-.k-icon-pie-chart:before { content: ""; }
+.k-icon-media-play:before { content: ""; }
 
-.k-icon-pin:before { content: ""; }
+.k-icon-media-record:before { content: ""; }
 
-.k-icon-play-circle:before { content: ""; }
+.k-icon-media-skip-backward:before { content: ""; }
 
-.k-icon-plus:before { content: ""; }
+.k-icon-media-skip-forward:before { content: ""; }
 
-.k-icon-power-standby:before { content: ""; }
+.k-icon-media-step-backward:before { content: ""; }
 
-.k-icon-print:before { content: ""; }
+.k-icon-media-step-forward:before { content: ""; }
 
-.k-icon-project:before { content: ""; }
+.k-icon-media-stop:before { content: ""; }
 
-.k-icon-pulse:before { content: ""; }
+.k-icon-medical-cross:before { content: ""; }
 
-.k-icon-puzzle-piece:before { content: ""; }
+.k-icon-menu:before { content: ""; }
 
-.k-icon-question-mark:before { content: ""; }
+.k-icon-microphone:before { content: ""; }
 
-.k-icon-rain:before { content: ""; }
+.k-icon-minus:before { content: ""; }
 
-.k-icon-random:before { content: ""; }
+.k-icon-monitor:before { content: ""; }
 
-.k-icon-reload:before { content: ""; }
+.k-icon-moon:before { content: ""; }
 
-.k-icon-resize-both:before { content: ""; }
+.k-icon-move:before { content: ""; }
 
-.k-icon-resize-height:before { content: ""; }
+.k-icon-musical-note:before { content: ""; }
 
-.k-icon-resize-width:before { content: ""; }
+.k-icon-paperclip:before { content: ""; }
 
-.k-icon-rss-alt:before { content: ""; }
+.k-icon-pencil:before { content: ""; }
 
-.k-icon-rss:before { content: ""; }
+.k-icon-people:before { content: ""; }
 
-.k-icon-script:before { content: ""; }
+.k-icon-person:before { content: ""; }
 
-.k-icon-share-boxed:before { content: ""; }
+.k-icon-phone:before { content: ""; }
 
-.k-icon-share:before { content: ""; }
+.k-icon-pie-chart:before { content: ""; }
 
-.k-icon-shield:before { content: ""; }
+.k-icon-pin:before { content: ""; }
 
-.k-icon-signal:before { content: ""; }
+.k-icon-play-circle:before { content: ""; }
 
-.k-icon-signpost:before { content: ""; }
+.k-icon-plus:before { content: ""; }
 
-.k-icon-sort-ascending:before { content: ""; }
+.k-icon-power-standby:before { content: ""; }
 
-.k-icon-sort-descending:before { content: ""; }
+.k-icon-print:before { content: ""; }
 
-.k-icon-spreadsheet:before { content: ""; }
+.k-icon-project:before { content: ""; }
 
-.k-icon-star:before { content: ""; }
+.k-icon-pulse:before { content: ""; }
 
-.k-icon-sun:before { content: ""; }
+.k-icon-puzzle-piece:before { content: ""; }
 
-.k-icon-tablet:before { content: ""; }
+.k-icon-question-mark:before { content: ""; }
 
-.k-icon-tag:before { content: ""; }
+.k-icon-rain:before { content: ""; }
 
-.k-icon-tags:before { content: ""; }
+.k-icon-random:before { content: ""; }
 
-.k-icon-target:before { content: ""; }
+.k-icon-reload:before { content: ""; }
 
-.k-icon-task:before { content: ""; }
+.k-icon-resize-both:before { content: ""; }
 
-.k-icon-terminal:before { content: ""; }
+.k-icon-resize-height:before { content: ""; }
 
-.k-icon-text:before { content: ""; }
+.k-icon-resize-width:before { content: ""; }
 
-.k-icon-thumb-down:before { content: ""; }
+.k-icon-rss-alt:before { content: ""; }
 
-.k-icon-thumb-up:before { content: ""; }
+.k-icon-rss:before { content: ""; }
 
-.k-icon-timer:before { content: ""; }
+.k-icon-script:before { content: ""; }
 
-.k-icon-transfer:before { content: ""; }
+.k-icon-share-boxed:before { content: ""; }
 
-.k-icon-trash:before { content: ""; }
+.k-icon-share:before { content: ""; }
 
-.k-icon-underline:before { content: ""; }
+.k-icon-shield:before { content: ""; }
 
-.k-icon-vertical-align-bottom:before { content: ""; }
+.k-icon-signal:before { content: ""; }
 
-.k-icon-vertical-align-center:before { content: ""; }
+.k-icon-signpost:before { content: ""; }
 
-.k-icon-vertical-align-top:before { content: ""; }
+.k-icon-sort-ascending:before { content: ""; }
 
-.k-icon-video:before { content: ""; }
+.k-icon-sort-descending:before { content: ""; }
 
-.k-icon-volume-high:before { content: ""; }
+.k-icon-sorting:before { content: ""; }
 
-.k-icon-volume-low:before { content: ""; }
+.k-icon-spreadsheet:before { content: ""; }
 
-.k-icon-volume-off:before { content: ""; }
+.k-icon-star:before { content: ""; }
 
-.k-icon-warning:before { content: ""; }
+.k-icon-sun:before { content: ""; }
 
-.k-icon-wifi:before { content: ""; }
+.k-icon-tablet:before { content: ""; }
 
-.k-icon-wrench:before { content: ""; }
+.k-icon-tag:before { content: ""; }
 
-.k-icon-x:before { content: ""; }
+.k-icon-tags:before { content: ""; }
 
-.k-icon-yen:before { content: ""; }
+.k-icon-target:before { content: ""; }
 
-.k-icon-zoom-in:before { content: ""; }
+.k-icon-task:before { content: ""; }
 
-.k-icon-zoom-out:before { content: ""; }
+.k-icon-terminal:before { content: ""; }
 
-.k-icon-k-archive:before { content: ""; }
+.k-icon-text:before { content: ""; }
 
-.k-icon-k-audio:before { content: ""; }
+.k-icon-thumb-down:before { content: ""; }
 
-.k-icon-k-calendar:before { content: ""; }
+.k-icon-thumb-up:before { content: ""; }
 
-.k-icon-k-close:before { content: ""; }
+.k-icon-timer:before { content: ""; }
 
-.k-icon-k-default:before { content: ""; }
+.k-icon-transfer:before { content: ""; }
 
-.k-icon-k-disabled:before { content: ""; }
+.k-icon-trash:before { content: ""; }
 
-.k-icon-k-document:before { content: ""; }
+.k-icon-underline:before { content: ""; }
 
-.k-icon-k-enabled:before { content: ""; }
+.k-icon-vertical-align-bottom:before { content: ""; }
 
-.k-icon-k-filter:before { content: ""; }
+.k-icon-vertical-align-center:before { content: ""; }
 
-.k-icon-k-folder:before { content: ""; }
+.k-icon-vertical-align-top:before { content: ""; }
 
-.k-icon-k-folder_open:before { content: ""; }
+.k-icon-video:before { content: ""; }
 
-.k-icon-k-image:before { content: ""; }
+.k-icon-volume-high:before { content: ""; }
 
-.k-icon-k-locked:before { content: ""; }
+.k-icon-volume-low:before { content: ""; }
 
-.k-icon-k-menu:before { content: ""; }
+.k-icon-volume-off:before { content: ""; }
 
-.k-icon-k-menu_open:before { content: ""; }
+.k-icon-warning:before { content: ""; }
 
-.k-icon-k-open:before { content: ""; }
+.k-icon-wifi:before { content: ""; }
 
-.k-icon-k-pdf:before { content: ""; }
+.k-icon-wrench:before { content: ""; }
 
-.k-icon-k-spreadsheet:before { content: ""; }
+.k-icon-x:before { content: ""; }
 
-.k-icon-k-unlocked:before { content: ""; }
+.k-icon-yen:before { content: ""; }
 
-.k-icon-k-video:before { content: ""; }
+.k-icon-zoom-in:before { content: ""; }
+
+.k-icon-zoom-out:before { content: ""; }
 
 /* ========================================================================== Koowa namespaced styling ========================================================================== */
 /** By namespacing we make sure our styles never interfere with other styles on the page For example when using Nooku inside of another framework or CMS like Joomla or Wordpress */
-/** List view Complete list view markup: <!-- Wrapper --> <div class="k-wrapper"> <!-- Overview --> <div class="k-content-wrapper"> <!-- Sidebar --> <div class="k-sidebar"> <sg-insert>2.15-all</sg-insert> </div> <!-- Content --> <div class="k-content"> <!-- Title when sidebar is inivisible --> <div class="k-mobile-title"> Title </div> <!-- Toolbar --> <sg-insert>4.1</sg-insert> <!-- Component --> <div class="k-component"> <!-- Form --> <form class="k-list-layout -koowa-grid" id="k-offcanvas-container" action="" method="get"> <sg-insert>3.1</sg-insert> <sg-insert>3.4</sg-insert> <sg-insert>3.5</sg-insert> </form><!-- .k-list-layout --> </div><!-- .k-component --> </div><!-- k-content --> </div><!-- .k-content-wrapper --> </div><!-- .k-wrapper --> Styleguide 5.1 */
-.koowa { /* Border-box size everything */ /* Namespaced Normalize */ /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ /* Namespaced Twitter Bootstrap */ /* Koowa */ /** JQTree */ /* Bootstrap overrides / extensions */ /** Default button styles 1. Right floating buttons 2. Remove underline when button is an <a> element */ /* Remove all shadows for a more flat looking button */ /** Control groups Remove the bottom margin of the last child This way the groups don't add large spacing in bordered boxes */ /* ========================================================================== Bootstrap input group ========================================================================== */ /** Align to top so we can add a help message below the field */ /** Position the dropdown toggles properly */ /** Position the dropdown toggles properly */ /* Multiple buttons in a row */ /* RTL */ /* Layout */ /* ========================================================================== Component ========================================================================== */ /* ========================================================================== The content div ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /** Overlay when toggled 1. Set opacity 2. Set z-index to 1 so it will become visible */ /* ========================================================================== The content wrapper ========================================================================== */ /** The default content wrapper layout 1. Left sidebar 2. Toggle button 3. Toolbar 4. Breadcrumbs 5. Upload area 6. Scopebar 7. Table / grid / content 8. Right sidebar _____________________________ |  1  |_2_|_3_________|  8  | |     |_4_____________|     | |     |_5_____________|     | |     |_6_____________|     | |     | 7             |     | |     |               |     | |     |               |     | |     |               |     | |     |               |     | |_____|_______________|_____| */ /** 1. Clearing toolbar floats when flexbox is not in use */ /* ========================================================================== Form layout ========================================================================== */ /* ========================================================================== Frontend UI ========================================================================== */ /* ========================================================================== Grid ========================================================================== */ /** <!-- Container --> <div class="k-container"> <!-- Main information --> <div class="k-container__main"> Main </div><!-- .k-container__main --> <!-- Other information --> <div class="k-container__sub"> Sub </div><!-- .k-container__sub --> </div><!-- .k-container --> */ /* Container */ /* -------------------------------------------------------------------------- Grid children -------------------------------------------------------------------------- */ /** Main container */ /* When a sidebar is active next to it */ /** Sub container */ /* When a sidebar is active next to it */ /** Full container */ /* RTL */ /* Parent container surrounding the toggling table and grid in files view */ /** Files layout switcher Switches layout from grid to list view */ /* ========================================================================== List layout ========================================================================== */ /* ========================================================================== Mobile title ========================================================================== */ /* ========================================================================== Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /* ========================================================================== Sidebars ========================================================================== */ /** The left and right sidebar */ /* RTL */ /* Left sidebar specific styling */ /* When sidebar is toggled */ /* Right sidebar specific styling */ /* When sidebar is toggled */ /* Sidebar contents ========================================================================== */ /* Sidebar item */ /* Sidebar header */ /* Sidebar content */ /** Overflowing items 1. Set container to overflow it's items */ /* ========================================================================== Titlebar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Titlebar when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** Fake Overlay when toggled 1. Set opacity 2. Set z-index so it will become visible */ /* Titlebar contents */ /* ========================================================================== Toolbar ========================================================================== */ /*
+/** List view Complete list view markup: <!-- Wrapper --> <div class="k-wrapper"> <!-- Overview --> <div class="k-content-wrapper"> <!-- Sidebar --> <div class="k-sidebar"> <sg-insert>2.15-all</sg-insert> </div> <!-- Content --> <div class="k-content"> <!-- Title when sidebar is inivisible --> <div class="k-mobile-title"> Title </div> <!-- Toolbar --> <sg-insert>4.1</sg-insert> <!-- Component --> <div class="k-component"> <!-- Form --> <form class="k-list-layout k-js-grid-controller" id="k-offcanvas-container" action="" method="get"> <sg-insert>3.1</sg-insert> <sg-insert>3.4</sg-insert> <sg-insert>3.5</sg-insert> </form><!-- .k-list-layout --> </div><!-- .k-component --> </div><!-- k-content --> </div><!-- .k-content-wrapper --> </div><!-- .k-wrapper --> Styleguide 5.1 */
+.koowa { /* Border-box size everything */ /* Namespaced Normalize */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */ /* Namespaced Twitter Bootstrap */ /* Koowa */ /** JQTree */ /* Bootstrap overrides / extensions */ /** Default button styles 1. Right floating buttons 2. Remove underline when button is an <a> element */ /* Remove all shadows for a more flat looking button */ /** Control groups Remove the bottom margin of the last child This way the groups don't add large spacing in bordered boxes */ /* ========================================================================== Bootstrap input group ========================================================================== */ /** Align to top so we can add a help message below the field */ /** Position the dropdown toggles properly */ /** Position the dropdown toggles properly */ /* Multiple buttons in a row */ /* RTL */ /* Layout */ /* ========================================================================== Component ========================================================================== */ /* ========================================================================== The content div ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /** Overlay when toggled 1. Set opacity 2. Set z-index to 1 so it will become visible */ /* ========================================================================== The content wrapper ========================================================================== */ /** The default content wrapper layout 1. Left sidebar 2. Toggle button 3. Toolbar 4. Breadcrumbs 5. Upload area 6. Scopebar 7. Table / grid / content 8. Right sidebar _____________________________ |  1  |_2_|_3_________|  8  | |     |_4_____________|     | |     |_5_____________|     | |     |_6_____________|     | |     | 7             |     | |     |               |     | |     |               |     | |     |               |     | |     |               |     | |_____|_______________|_____| */ /** 1. Clearing toolbar floats when flexbox is not in use */ /* ========================================================================== Form layout ========================================================================== */ /* ========================================================================== Frontend UI ========================================================================== */ /* ========================================================================== Grid ========================================================================== */ /** <!-- Container --> <div class="k-container"> <!-- Main information --> <div class="k-container__main"> Main </div><!-- .k-container__main --> <!-- Other information --> <div class="k-container__sub"> Sub </div><!-- .k-container__sub --> </div><!-- .k-container --> */ /* Container */ /* -------------------------------------------------------------------------- Grid children -------------------------------------------------------------------------- */ /** Main container */ /* When a sidebar is active next to it */ /** Sub container */ /* When a sidebar is active next to it */ /** Full container */ /* RTL */ /* Parent container surrounding the toggling table and grid in files view */ /** Files layout switcher Switches layout from grid to list view */ /* ========================================================================== List layout ========================================================================== */ /* ========================================================================== Mobile title ========================================================================== */ /* ========================================================================== Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /* ========================================================================== Sidebars ========================================================================== */ /** The left and right sidebar */ /* RTL */ /* Left sidebar specific styling */ /* When sidebar is toggled */ /* Right sidebar specific styling */ /* When sidebar is toggled */ /* Sidebar contents ========================================================================== */ /* Sidebar item */ /* Sidebar header */ /* Sidebar content */ /** Overflowing items 1. Set container to overflow it's items */ /* ========================================================================== Titlebar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Titlebar when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** Fake Overlay when toggled 1. Set opacity 2. Set z-index so it will become visible */ /* Titlebar contents */ /* ========================================================================== Toolbar ========================================================================== */ /*
 Toolbar
 
 Default toolbar
@@ -1480,29 +1481,29 @@ markup:
         <table>
         <thead>
             <tr>
-                <th width="1%"><input type="checkbox" class="-koowa-grid-checkall"></th>
+                <th width="1%"><input type="checkbox" class="k-js-grid-checkall"></th>
                 <th>{content}</th>
                 <th>{content}</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
@@ -1643,103 +1644,65 @@ Styleguide 3.5
 
 .koowa .btn:active, .koowa .btn.active { outline: 0; background-image: none; box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
 
-.koowa .btn.disabled, .koowa .btn[disabled], fieldset[disabled] .koowa .btn { cursor: not-allowed; opacity: 0.65; filter: alpha(opacity=65); box-shadow: none; }
+.koowa .btn.disabled, .koowa .btn[disabled], fieldset[disabled] .koowa .btn { cursor: not-allowed; pointer-events: none; opacity: 0.65; filter: alpha(opacity=65); box-shadow: none; }
 
-.koowa a.btn.disabled, fieldset[disabled] .koowa a.btn { pointer-events: none; }
+.koowa .btn-default { color: #333; background-color: #fff; border-color: #ccc; }
 
-.koowa .btn-default, .koowa .btn { color: #333; background-color: #fff; border-color: #ccc; }
+.koowa .btn-default:hover, .koowa .btn-default:focus, .koowa .btn-default.focus, .koowa .btn-default:active, .koowa .btn-default.active, .open > .koowa .btn-default.dropdown-toggle { color: #333; background-color: #e6e6e6; border-color: #adadad; }
 
-.koowa .btn-default:focus, .koowa .btn:focus, .koowa .btn-default.focus, .koowa .focus.btn { color: #333; background-color: #e6e6e6; border-color: #8c8c8c; }
+.koowa .btn-default:active, .koowa .btn-default.active, .open > .koowa .btn-default.dropdown-toggle { background-image: none; }
 
-.koowa .btn-default:hover, .koowa .btn:hover { color: #333; background-color: #e6e6e6; border-color: #adadad; }
+.koowa .btn-default.disabled, .koowa .btn-default.disabled:hover, .koowa .btn-default.disabled:focus, .koowa .btn-default.disabled.focus, .koowa .btn-default.disabled:active, .koowa .btn-default.disabled.active, .koowa .btn-default[disabled], .koowa .btn-default[disabled]:hover, .koowa .btn-default[disabled]:focus, .koowa .btn-default[disabled].focus, .koowa .btn-default[disabled]:active, .koowa .btn-default[disabled].active, fieldset[disabled] .koowa .btn-default, fieldset[disabled] .koowa .btn-default:hover, fieldset[disabled] .koowa .btn-default:focus, fieldset[disabled] .koowa .btn-default.focus, fieldset[disabled] .koowa .btn-default:active, fieldset[disabled] .koowa .btn-default.active { background-color: #fff; border-color: #ccc; }
 
-.koowa .btn-default:active, .koowa .btn:active, .koowa .btn-default.active, .koowa .active.btn, .open > .koowa .btn-default.dropdown-toggle, .open > .koowa .dropdown-toggle.btn { color: #333; background-color: #e6e6e6; border-color: #adadad; }
-
-.koowa .btn-default:active:hover, .koowa .btn:active:hover, .koowa .btn-default:active:focus, .koowa .btn:active:focus, .koowa .btn-default:active.focus, .koowa .btn:active.focus, .koowa .btn-default.active:hover, .koowa .active.btn:hover, .koowa .btn-default.active:focus, .koowa .active.btn:focus, .koowa .btn-default.active.focus, .koowa .active.focus.btn, .open > .koowa .btn-default.dropdown-toggle:hover, .open > .koowa .dropdown-toggle.btn:hover, .open > .koowa .btn-default.dropdown-toggle:focus, .open > .koowa .dropdown-toggle.btn:focus, .open > .koowa .btn-default.dropdown-toggle.focus, .open > .koowa .dropdown-toggle.focus.btn { color: #333; background-color: #d4d4d4; border-color: #8c8c8c; }
-
-.koowa .btn-default:active, .koowa .btn:active, .koowa .btn-default.active, .koowa .active.btn, .open > .koowa .btn-default.dropdown-toggle, .open > .koowa .dropdown-toggle.btn { background-image: none; }
-
-.koowa .btn-default.disabled:hover, .koowa .disabled.btn:hover, .koowa .btn-default.disabled:focus, .koowa .disabled.btn:focus, .koowa .btn-default.disabled.focus, .koowa .disabled.focus.btn, .koowa .btn-default[disabled]:hover, .koowa [disabled].btn:hover, .koowa .btn-default[disabled]:focus, .koowa [disabled].btn:focus, .koowa .btn-default[disabled].focus, .koowa [disabled].focus.btn, fieldset[disabled] .koowa .btn-default:hover, fieldset[disabled] .koowa .btn:hover, fieldset[disabled] .koowa .btn-default:focus, fieldset[disabled] .koowa .btn:focus, fieldset[disabled] .koowa .btn-default.focus, fieldset[disabled] .koowa .focus.btn { background-color: #fff; border-color: #ccc; }
-
-.koowa .btn-default .badge, .koowa .btn .badge { color: #fff; background-color: #333; }
+.koowa .btn-default .badge { color: #fff; background-color: #333; }
 
 .koowa .btn-primary { color: #fff; background-color: #337ab7; border-color: #2e6da4; }
 
-.koowa .btn-primary:focus, .koowa .btn-primary.focus { color: #fff; background-color: #286090; border-color: #122b40; }
-
-.koowa .btn-primary:hover { color: #fff; background-color: #286090; border-color: #204d74; }
-
-.koowa .btn-primary:active, .koowa .btn-primary.active, .open > .koowa .btn-primary.dropdown-toggle { color: #fff; background-color: #286090; border-color: #204d74; }
-
-.koowa .btn-primary:active:hover, .koowa .btn-primary:active:focus, .koowa .btn-primary:active.focus, .koowa .btn-primary.active:hover, .koowa .btn-primary.active:focus, .koowa .btn-primary.active.focus, .open > .koowa .btn-primary.dropdown-toggle:hover, .open > .koowa .btn-primary.dropdown-toggle:focus, .open > .koowa .btn-primary.dropdown-toggle.focus { color: #fff; background-color: #204d74; border-color: #122b40; }
+.koowa .btn-primary:hover, .koowa .btn-primary:focus, .koowa .btn-primary.focus, .koowa .btn-primary:active, .koowa .btn-primary.active, .open > .koowa .btn-primary.dropdown-toggle { color: #fff; background-color: #286090; border-color: #204d74; }
 
 .koowa .btn-primary:active, .koowa .btn-primary.active, .open > .koowa .btn-primary.dropdown-toggle { background-image: none; }
 
-.koowa .btn-primary.disabled:hover, .koowa .btn-primary.disabled:focus, .koowa .btn-primary.disabled.focus, .koowa .btn-primary[disabled]:hover, .koowa .btn-primary[disabled]:focus, .koowa .btn-primary[disabled].focus, fieldset[disabled] .koowa .btn-primary:hover, fieldset[disabled] .koowa .btn-primary:focus, fieldset[disabled] .koowa .btn-primary.focus { background-color: #337ab7; border-color: #2e6da4; }
+.koowa .btn-primary.disabled, .koowa .btn-primary.disabled:hover, .koowa .btn-primary.disabled:focus, .koowa .btn-primary.disabled.focus, .koowa .btn-primary.disabled:active, .koowa .btn-primary.disabled.active, .koowa .btn-primary[disabled], .koowa .btn-primary[disabled]:hover, .koowa .btn-primary[disabled]:focus, .koowa .btn-primary[disabled].focus, .koowa .btn-primary[disabled]:active, .koowa .btn-primary[disabled].active, fieldset[disabled] .koowa .btn-primary, fieldset[disabled] .koowa .btn-primary:hover, fieldset[disabled] .koowa .btn-primary:focus, fieldset[disabled] .koowa .btn-primary.focus, fieldset[disabled] .koowa .btn-primary:active, fieldset[disabled] .koowa .btn-primary.active { background-color: #337ab7; border-color: #2e6da4; }
 
 .koowa .btn-primary .badge { color: #337ab7; background-color: #fff; }
 
 .koowa .btn-success { color: white; background-color: #27ae60; border-color: #229955; }
 
-.koowa .btn-success:focus, .koowa .btn-success.focus { color: white; background-color: #1e8449; border-color: #0b311b; }
-
-.koowa .btn-success:hover { color: white; background-color: #1e8449; border-color: #176739; }
-
-.koowa .btn-success:active, .koowa .btn-success.active, .open > .koowa .btn-success.dropdown-toggle { color: white; background-color: #1e8449; border-color: #176739; }
-
-.koowa .btn-success:active:hover, .koowa .btn-success:active:focus, .koowa .btn-success:active.focus, .koowa .btn-success.active:hover, .koowa .btn-success.active:focus, .koowa .btn-success.active.focus, .open > .koowa .btn-success.dropdown-toggle:hover, .open > .koowa .btn-success.dropdown-toggle:focus, .open > .koowa .btn-success.dropdown-toggle.focus { color: white; background-color: #176739; border-color: #0b311b; }
+.koowa .btn-success:hover, .koowa .btn-success:focus, .koowa .btn-success.focus, .koowa .btn-success:active, .koowa .btn-success.active, .open > .koowa .btn-success.dropdown-toggle { color: white; background-color: #1e8449; border-color: #176739; }
 
 .koowa .btn-success:active, .koowa .btn-success.active, .open > .koowa .btn-success.dropdown-toggle { background-image: none; }
 
-.koowa .btn-success.disabled:hover, .koowa .btn-success.disabled:focus, .koowa .btn-success.disabled.focus, .koowa .btn-success[disabled]:hover, .koowa .btn-success[disabled]:focus, .koowa .btn-success[disabled].focus, fieldset[disabled] .koowa .btn-success:hover, fieldset[disabled] .koowa .btn-success:focus, fieldset[disabled] .koowa .btn-success.focus { background-color: #27ae60; border-color: #229955; }
+.koowa .btn-success.disabled, .koowa .btn-success.disabled:hover, .koowa .btn-success.disabled:focus, .koowa .btn-success.disabled.focus, .koowa .btn-success.disabled:active, .koowa .btn-success.disabled.active, .koowa .btn-success[disabled], .koowa .btn-success[disabled]:hover, .koowa .btn-success[disabled]:focus, .koowa .btn-success[disabled].focus, .koowa .btn-success[disabled]:active, .koowa .btn-success[disabled].active, fieldset[disabled] .koowa .btn-success, fieldset[disabled] .koowa .btn-success:hover, fieldset[disabled] .koowa .btn-success:focus, fieldset[disabled] .koowa .btn-success.focus, fieldset[disabled] .koowa .btn-success:active, fieldset[disabled] .koowa .btn-success.active { background-color: #27ae60; border-color: #229955; }
 
 .koowa .btn-success .badge { color: #27ae60; background-color: white; }
 
 .koowa .btn-info { color: #fff; background-color: #5bc0de; border-color: #46b8da; }
 
-.koowa .btn-info:focus, .koowa .btn-info.focus { color: #fff; background-color: #31b0d5; border-color: #1b6d85; }
-
-.koowa .btn-info:hover { color: #fff; background-color: #31b0d5; border-color: #269abc; }
-
-.koowa .btn-info:active, .koowa .btn-info.active, .open > .koowa .btn-info.dropdown-toggle { color: #fff; background-color: #31b0d5; border-color: #269abc; }
-
-.koowa .btn-info:active:hover, .koowa .btn-info:active:focus, .koowa .btn-info:active.focus, .koowa .btn-info.active:hover, .koowa .btn-info.active:focus, .koowa .btn-info.active.focus, .open > .koowa .btn-info.dropdown-toggle:hover, .open > .koowa .btn-info.dropdown-toggle:focus, .open > .koowa .btn-info.dropdown-toggle.focus { color: #fff; background-color: #269abc; border-color: #1b6d85; }
+.koowa .btn-info:hover, .koowa .btn-info:focus, .koowa .btn-info.focus, .koowa .btn-info:active, .koowa .btn-info.active, .open > .koowa .btn-info.dropdown-toggle { color: #fff; background-color: #31b0d5; border-color: #269abc; }
 
 .koowa .btn-info:active, .koowa .btn-info.active, .open > .koowa .btn-info.dropdown-toggle { background-image: none; }
 
-.koowa .btn-info.disabled:hover, .koowa .btn-info.disabled:focus, .koowa .btn-info.disabled.focus, .koowa .btn-info[disabled]:hover, .koowa .btn-info[disabled]:focus, .koowa .btn-info[disabled].focus, fieldset[disabled] .koowa .btn-info:hover, fieldset[disabled] .koowa .btn-info:focus, fieldset[disabled] .koowa .btn-info.focus { background-color: #5bc0de; border-color: #46b8da; }
+.koowa .btn-info.disabled, .koowa .btn-info.disabled:hover, .koowa .btn-info.disabled:focus, .koowa .btn-info.disabled.focus, .koowa .btn-info.disabled:active, .koowa .btn-info.disabled.active, .koowa .btn-info[disabled], .koowa .btn-info[disabled]:hover, .koowa .btn-info[disabled]:focus, .koowa .btn-info[disabled].focus, .koowa .btn-info[disabled]:active, .koowa .btn-info[disabled].active, fieldset[disabled] .koowa .btn-info, fieldset[disabled] .koowa .btn-info:hover, fieldset[disabled] .koowa .btn-info:focus, fieldset[disabled] .koowa .btn-info.focus, fieldset[disabled] .koowa .btn-info:active, fieldset[disabled] .koowa .btn-info.active { background-color: #5bc0de; border-color: #46b8da; }
 
 .koowa .btn-info .badge { color: #5bc0de; background-color: #fff; }
 
 .koowa .btn-warning { color: #fff; background-color: #f0ad4e; border-color: #eea236; }
 
-.koowa .btn-warning:focus, .koowa .btn-warning.focus { color: #fff; background-color: #ec971f; border-color: #985f0d; }
-
-.koowa .btn-warning:hover { color: #fff; background-color: #ec971f; border-color: #d58512; }
-
-.koowa .btn-warning:active, .koowa .btn-warning.active, .open > .koowa .btn-warning.dropdown-toggle { color: #fff; background-color: #ec971f; border-color: #d58512; }
-
-.koowa .btn-warning:active:hover, .koowa .btn-warning:active:focus, .koowa .btn-warning:active.focus, .koowa .btn-warning.active:hover, .koowa .btn-warning.active:focus, .koowa .btn-warning.active.focus, .open > .koowa .btn-warning.dropdown-toggle:hover, .open > .koowa .btn-warning.dropdown-toggle:focus, .open > .koowa .btn-warning.dropdown-toggle.focus { color: #fff; background-color: #d58512; border-color: #985f0d; }
+.koowa .btn-warning:hover, .koowa .btn-warning:focus, .koowa .btn-warning.focus, .koowa .btn-warning:active, .koowa .btn-warning.active, .open > .koowa .btn-warning.dropdown-toggle { color: #fff; background-color: #ec971f; border-color: #d58512; }
 
 .koowa .btn-warning:active, .koowa .btn-warning.active, .open > .koowa .btn-warning.dropdown-toggle { background-image: none; }
 
-.koowa .btn-warning.disabled:hover, .koowa .btn-warning.disabled:focus, .koowa .btn-warning.disabled.focus, .koowa .btn-warning[disabled]:hover, .koowa .btn-warning[disabled]:focus, .koowa .btn-warning[disabled].focus, fieldset[disabled] .koowa .btn-warning:hover, fieldset[disabled] .koowa .btn-warning:focus, fieldset[disabled] .koowa .btn-warning.focus { background-color: #f0ad4e; border-color: #eea236; }
+.koowa .btn-warning.disabled, .koowa .btn-warning.disabled:hover, .koowa .btn-warning.disabled:focus, .koowa .btn-warning.disabled.focus, .koowa .btn-warning.disabled:active, .koowa .btn-warning.disabled.active, .koowa .btn-warning[disabled], .koowa .btn-warning[disabled]:hover, .koowa .btn-warning[disabled]:focus, .koowa .btn-warning[disabled].focus, .koowa .btn-warning[disabled]:active, .koowa .btn-warning[disabled].active, fieldset[disabled] .koowa .btn-warning, fieldset[disabled] .koowa .btn-warning:hover, fieldset[disabled] .koowa .btn-warning:focus, fieldset[disabled] .koowa .btn-warning.focus, fieldset[disabled] .koowa .btn-warning:active, fieldset[disabled] .koowa .btn-warning.active { background-color: #f0ad4e; border-color: #eea236; }
 
 .koowa .btn-warning .badge { color: #f0ad4e; background-color: #fff; }
 
 .koowa .btn-danger { color: #fff; background-color: #d9534f; border-color: #d43f3a; }
 
-.koowa .btn-danger:focus, .koowa .btn-danger.focus { color: #fff; background-color: #c9302c; border-color: #761c19; }
-
-.koowa .btn-danger:hover { color: #fff; background-color: #c9302c; border-color: #ac2925; }
-
-.koowa .btn-danger:active, .koowa .btn-danger.active, .open > .koowa .btn-danger.dropdown-toggle { color: #fff; background-color: #c9302c; border-color: #ac2925; }
-
-.koowa .btn-danger:active:hover, .koowa .btn-danger:active:focus, .koowa .btn-danger:active.focus, .koowa .btn-danger.active:hover, .koowa .btn-danger.active:focus, .koowa .btn-danger.active.focus, .open > .koowa .btn-danger.dropdown-toggle:hover, .open > .koowa .btn-danger.dropdown-toggle:focus, .open > .koowa .btn-danger.dropdown-toggle.focus { color: #fff; background-color: #ac2925; border-color: #761c19; }
+.koowa .btn-danger:hover, .koowa .btn-danger:focus, .koowa .btn-danger.focus, .koowa .btn-danger:active, .koowa .btn-danger.active, .open > .koowa .btn-danger.dropdown-toggle { color: #fff; background-color: #c9302c; border-color: #ac2925; }
 
 .koowa .btn-danger:active, .koowa .btn-danger.active, .open > .koowa .btn-danger.dropdown-toggle { background-image: none; }
 
-.koowa .btn-danger.disabled:hover, .koowa .btn-danger.disabled:focus, .koowa .btn-danger.disabled.focus, .koowa .btn-danger[disabled]:hover, .koowa .btn-danger[disabled]:focus, .koowa .btn-danger[disabled].focus, fieldset[disabled] .koowa .btn-danger:hover, fieldset[disabled] .koowa .btn-danger:focus, fieldset[disabled] .koowa .btn-danger.focus { background-color: #d9534f; border-color: #d43f3a; }
+.koowa .btn-danger.disabled, .koowa .btn-danger.disabled:hover, .koowa .btn-danger.disabled:focus, .koowa .btn-danger.disabled.focus, .koowa .btn-danger.disabled:active, .koowa .btn-danger.disabled.active, .koowa .btn-danger[disabled], .koowa .btn-danger[disabled]:hover, .koowa .btn-danger[disabled]:focus, .koowa .btn-danger[disabled].focus, .koowa .btn-danger[disabled]:active, .koowa .btn-danger[disabled].active, fieldset[disabled] .koowa .btn-danger, fieldset[disabled] .koowa .btn-danger:hover, fieldset[disabled] .koowa .btn-danger:focus, fieldset[disabled] .koowa .btn-danger.focus, fieldset[disabled] .koowa .btn-danger:active, fieldset[disabled] .koowa .btn-danger.active { background-color: #d9534f; border-color: #d43f3a; }
 
 .koowa .btn-danger .badge { color: #d9534f; background-color: #fff; }
 
@@ -1779,7 +1742,7 @@ Styleguide 3.5
 
 .koowa .btn-toolbar:after { clear: both; }
 
-.koowa .btn-toolbar .btn, .koowa .btn-toolbar .btn-group, .koowa .btn-toolbar .input-group { float: left; }
+.koowa .btn-toolbar .btn-group, .koowa .btn-toolbar .input-group { float: left; }
 
 .koowa .btn-toolbar > .btn, .koowa .btn-toolbar > .btn-group, .koowa .btn-toolbar > .input-group { margin-left: 5px; }
 
@@ -1827,9 +1790,9 @@ Styleguide 3.5
 
 .koowa .btn-group-vertical > .btn:not(:first-child):not(:last-child) { border-radius: 0; }
 
-.koowa .btn-group-vertical > .btn:first-child:not(:last-child) { border-top-right-radius: 4px; border-top-left-radius: 4px; border-bottom-right-radius: 0; border-bottom-left-radius: 0; }
+.koowa .btn-group-vertical > .btn:first-child:not(:last-child) { border-top-right-radius: 4px; border-bottom-right-radius: 0; border-bottom-left-radius: 0; }
 
-.koowa .btn-group-vertical > .btn:last-child:not(:first-child) { border-top-right-radius: 0; border-top-left-radius: 0; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; }
+.koowa .btn-group-vertical > .btn:last-child:not(:first-child) { border-bottom-left-radius: 4px; border-top-right-radius: 0; border-top-left-radius: 0; }
 
 .koowa .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn { border-radius: 0; }
 
@@ -1875,27 +1838,25 @@ Styleguide 3.5
 
 .koowa output { display: block; padding-top: 6px; font-size: 14px; line-height: 1.428571429; color: #555; }
 
-.koowa .form-control, .koowa select { display: block; width: 100%; height: 32px; padding: 5px 10px; font-size: 14px; line-height: 1.428571429; color: #555; background-color: #fff; background-image: none; border: 1px solid #ccc; border-radius: 4px; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -webkit-transition: border-color ease-in-out 0.15s box-shadow ease-in-out 0.15s cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: border-color ease-in-out 0.15s box-shadow ease-in-out 0.15s cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.koowa .form-control { display: block; width: 100%; height: 32px; padding: 5px 10px; font-size: 14px; line-height: 1.428571429; color: #555; background-color: #fff; background-image: none; border: 1px solid #ccc; border-radius: 4px; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); -webkit-transition: border-color ease-in-out 0.15s box-shadow ease-in-out 0.15s cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: border-color ease-in-out 0.15s box-shadow ease-in-out 0.15s cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
-.koowa .form-control:focus, .koowa select:focus { border-color: #66afe9; outline: 0; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
+.koowa .form-control:focus { border-color: #66afe9; outline: 0; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
 
-.koowa .form-control::-moz-placeholder, .koowa select::-moz-placeholder { color: #999; opacity: 1; }
+.koowa .form-control::-moz-placeholder { color: #999; opacity: 1; }
 
-.koowa .form-control:-ms-input-placeholder, .koowa select:-ms-input-placeholder { color: #999; }
+.koowa .form-control:-ms-input-placeholder { color: #999; }
 
-.koowa .form-control::-webkit-input-placeholder, .koowa select::-webkit-input-placeholder { color: #999; }
+.koowa .form-control::-webkit-input-placeholder { color: #999; }
 
-.koowa .form-control::-ms-expand, .koowa select::-ms-expand { border: 0; background-color: transparent; }
+.koowa .form-control[disabled], .koowa .form-control[readonly], fieldset[disabled] .koowa .form-control { background-color: #eeeeee; opacity: 1; }
 
-.koowa .form-control[disabled], .koowa select[disabled], .koowa .form-control[readonly], .koowa select[readonly], fieldset[disabled] .koowa .form-control, fieldset[disabled] .koowa select { background-color: #eeeeee; opacity: 1; }
-
-.koowa .form-control[disabled], .koowa select[disabled], fieldset[disabled] .koowa .form-control, fieldset[disabled] .koowa select { cursor: not-allowed; }
+.koowa .form-control[disabled], fieldset[disabled] .koowa .form-control { cursor: not-allowed; }
 
 .koowa textarea.form-control { height: auto; }
 
 .koowa input[type="search"] { -webkit-appearance: none; }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) { .koowa input[type="date"].form-control, .koowa input[type="time"].form-control, .koowa input[type="datetime-local"].form-control, .koowa input[type="month"].form-control { line-height: 32px; }
+@media screen and (-webkit-min-device-pixel-ratio: 0) { .koowa input[type="date"], .koowa input[type="time"], .koowa input[type="datetime-local"], .koowa input[type="month"] { line-height: 32px; }
   .koowa input[type="date"].input-sm, .koowa .input-group-sm > input[type="date"].form-control, .koowa .input-group-sm > input[type="date"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="date"].btn, .input-group-sm .koowa input[type="date"], .koowa input[type="time"].input-sm, .koowa .input-group-sm > input[type="time"].form-control, .koowa .input-group-sm > input[type="time"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="time"].btn, .input-group-sm .koowa input[type="time"], .koowa input[type="datetime-local"].input-sm, .koowa .input-group-sm > input[type="datetime-local"].form-control, .koowa .input-group-sm > input[type="datetime-local"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="datetime-local"].btn, .input-group-sm .koowa input[type="datetime-local"], .koowa input[type="month"].input-sm, .koowa .input-group-sm > input[type="month"].form-control, .koowa .input-group-sm > input[type="month"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="month"].btn, .input-group-sm .koowa input[type="month"] { line-height: 30px; }
   .koowa input[type="date"].input-lg, .koowa .input-group-lg > input[type="date"].form-control, .koowa .input-group-lg > input[type="date"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="date"].btn, .input-group-lg .koowa input[type="date"], .koowa input[type="time"].input-lg, .koowa .input-group-lg > input[type="time"].form-control, .koowa .input-group-lg > input[type="time"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="time"].btn, .input-group-lg .koowa input[type="time"], .koowa input[type="datetime-local"].input-lg, .koowa .input-group-lg > input[type="datetime-local"].form-control, .koowa .input-group-lg > input[type="datetime-local"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="datetime-local"].btn, .input-group-lg .koowa input[type="datetime-local"], .koowa input[type="month"].input-lg, .koowa .input-group-lg > input[type="month"].form-control, .koowa .input-group-lg > input[type="month"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="month"].btn, .input-group-lg .koowa input[type="month"] { line-height: 46px; } }
 
@@ -1921,51 +1882,51 @@ Styleguide 3.5
 
 .koowa .form-control-static { padding-top: 6px; padding-bottom: 6px; margin-bottom: 0; min-height: 34px; }
 
-.koowa .form-control-static.input-lg, .koowa .input-group-lg > .form-control-static.form-control, .koowa .input-group-lg > select.form-control-static, .koowa .input-group-lg > .form-control-static.input-group-addon, .koowa .input-group-lg > .input-group-btn > .form-control-static.btn, .koowa .form-control-static.input-sm, .koowa .input-group-sm > .form-control-static.form-control, .koowa .input-group-sm > select.form-control-static, .koowa .input-group-sm > .form-control-static.input-group-addon, .koowa .input-group-sm > .input-group-btn > .form-control-static.btn { padding-left: 0; padding-right: 0; }
+.koowa .form-control-static.input-lg, .koowa .input-group-lg > .form-control-static.form-control, .koowa .input-group-lg > .form-control-static.input-group-addon, .koowa .input-group-lg > .input-group-btn > .form-control-static.btn, .koowa .form-control-static.input-sm, .koowa .input-group-sm > .form-control-static.form-control, .koowa .input-group-sm > .form-control-static.input-group-addon, .koowa .input-group-sm > .input-group-btn > .form-control-static.btn { padding-left: 0; padding-right: 0; }
 
-.koowa .input-sm, .koowa .input-group-sm > .form-control, .koowa .input-group-sm > select, .koowa .input-group-sm > .input-group-addon, .koowa .input-group-sm > .input-group-btn > .btn { height: 30px; padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px; }
+.koowa .input-sm, .koowa .input-group-sm > .form-control, .koowa .input-group-sm > .input-group-addon, .koowa .input-group-sm > .input-group-btn > .btn { height: 30px; padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px; }
 
-.koowa select.input-sm, .koowa .input-group-sm > select.form-control, .koowa .input-group-sm > select, .koowa .input-group-sm > select.input-group-addon, .koowa .input-group-sm > .input-group-btn > select.btn { height: 30px; line-height: 30px; }
+.koowa select.input-sm, .koowa .input-group-sm > select.form-control, .koowa .input-group-sm > select.input-group-addon, .koowa .input-group-sm > .input-group-btn > select.btn { height: 30px; line-height: 30px; }
 
-.koowa textarea.input-sm, .koowa .input-group-sm > textarea.form-control, .koowa .input-group-sm > textarea.input-group-addon, .koowa .input-group-sm > .input-group-btn > textarea.btn, .koowa select[multiple].input-sm, .koowa .input-group-sm > select[multiple], .koowa .input-group-sm > .input-group-btn > select[multiple].btn { height: auto; }
+.koowa textarea.input-sm, .koowa .input-group-sm > textarea.form-control, .koowa .input-group-sm > textarea.input-group-addon, .koowa .input-group-sm > .input-group-btn > textarea.btn, .koowa select[multiple].input-sm, .koowa .input-group-sm > select[multiple].form-control, .koowa .input-group-sm > select[multiple].input-group-addon, .koowa .input-group-sm > .input-group-btn > select[multiple].btn { height: auto; }
 
-.koowa .form-group-sm .form-control, .koowa .form-group-sm select { height: 30px; padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px; }
+.koowa .form-group-sm .form-control { height: 30px; padding: 5px 10px; font-size: 12px; line-height: 1.5; border-radius: 3px; }
 
-.koowa .form-group-sm select.form-control, .koowa .form-group-sm select { height: 30px; line-height: 30px; }
+.koowa .form-group-sm select.form-control { height: 30px; line-height: 30px; }
 
-.koowa .form-group-sm textarea.form-control, .koowa .form-group-sm select[multiple].form-control, .koowa .form-group-sm select[multiple] { height: auto; }
+.koowa .form-group-sm textarea.form-control, .koowa .form-group-sm select[multiple].form-control { height: auto; }
 
-.koowa .form-group-sm .form-control-static { height: 30px; min-height: 32px; padding: 6px 10px; font-size: 12px; line-height: 1.5; }
+.koowa .form-group-sm .form-control-static { height: 30px; padding: 5px 10px; font-size: 12px; line-height: 1.5; min-height: 32px; }
 
-.koowa .input-lg, .koowa .input-group-lg > .form-control, .koowa .input-group-lg > select, .koowa .input-group-lg > .input-group-addon, .koowa .input-group-lg > .input-group-btn > .btn { height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; border-radius: 6px; }
+.koowa .input-lg, .koowa .input-group-lg > .form-control, .koowa .input-group-lg > .input-group-addon, .koowa .input-group-lg > .input-group-btn > .btn { height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; border-radius: 6px; }
 
-.koowa select.input-lg, .koowa .input-group-lg > select.form-control, .koowa .input-group-lg > select, .koowa .input-group-lg > select.input-group-addon, .koowa .input-group-lg > .input-group-btn > select.btn { height: 46px; line-height: 46px; }
+.koowa select.input-lg, .koowa .input-group-lg > select.form-control, .koowa .input-group-lg > select.input-group-addon, .koowa .input-group-lg > .input-group-btn > select.btn { height: 46px; line-height: 46px; }
 
-.koowa textarea.input-lg, .koowa .input-group-lg > textarea.form-control, .koowa .input-group-lg > textarea.input-group-addon, .koowa .input-group-lg > .input-group-btn > textarea.btn, .koowa select[multiple].input-lg, .koowa .input-group-lg > select[multiple], .koowa .input-group-lg > .input-group-btn > select[multiple].btn { height: auto; }
+.koowa textarea.input-lg, .koowa .input-group-lg > textarea.form-control, .koowa .input-group-lg > textarea.input-group-addon, .koowa .input-group-lg > .input-group-btn > textarea.btn, .koowa select[multiple].input-lg, .koowa .input-group-lg > select[multiple].form-control, .koowa .input-group-lg > select[multiple].input-group-addon, .koowa .input-group-lg > .input-group-btn > select[multiple].btn { height: auto; }
 
-.koowa .form-group-lg .form-control, .koowa .form-group-lg select { height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; border-radius: 6px; }
+.koowa .form-group-lg .form-control { height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; border-radius: 6px; }
 
-.koowa .form-group-lg select.form-control, .koowa .form-group-lg select { height: 46px; line-height: 46px; }
+.koowa .form-group-lg select.form-control { height: 46px; line-height: 46px; }
 
-.koowa .form-group-lg textarea.form-control, .koowa .form-group-lg select[multiple].form-control, .koowa .form-group-lg select[multiple] { height: auto; }
+.koowa .form-group-lg textarea.form-control, .koowa .form-group-lg select[multiple].form-control { height: auto; }
 
-.koowa .form-group-lg .form-control-static { height: 46px; min-height: 38px; padding: 11px 16px; font-size: 18px; line-height: 1.3333333; }
+.koowa .form-group-lg .form-control-static { height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; min-height: 38px; }
 
 .koowa .has-feedback { position: relative; }
 
-.koowa .has-feedback .form-control, .koowa .has-feedback select { padding-right: 40px; }
+.koowa .has-feedback .form-control { padding-right: 40px; }
 
 .koowa .form-control-feedback { position: absolute; top: 0; right: 0; z-index: 2; display: block; width: 32px; height: 32px; line-height: 32px; text-align: center; pointer-events: none; }
 
-.koowa .input-lg + .form-control-feedback, .koowa .input-group-lg > .form-control + .form-control-feedback, .koowa .input-group-lg > select + .form-control-feedback, .koowa .input-group-lg > .input-group-addon + .form-control-feedback, .koowa .input-group-lg > .input-group-btn > .btn + .form-control-feedback, .koowa .input-group-lg + .form-control-feedback, .koowa .form-group-lg .form-control + .form-control-feedback, .koowa .form-group-lg select + .form-control-feedback { width: 46px; height: 46px; line-height: 46px; }
+.koowa .input-lg + .form-control-feedback, .koowa .input-group-lg > .form-control + .form-control-feedback, .koowa .input-group-lg > .input-group-addon + .form-control-feedback, .koowa .input-group-lg > .input-group-btn > .btn + .form-control-feedback { width: 46px; height: 46px; line-height: 46px; }
 
-.koowa .input-sm + .form-control-feedback, .koowa .input-group-sm > .form-control + .form-control-feedback, .koowa .input-group-sm > select + .form-control-feedback, .koowa .input-group-sm > .input-group-addon + .form-control-feedback, .koowa .input-group-sm > .input-group-btn > .btn + .form-control-feedback, .koowa .input-group-sm + .form-control-feedback, .koowa .form-group-sm .form-control + .form-control-feedback, .koowa .form-group-sm select + .form-control-feedback { width: 30px; height: 30px; line-height: 30px; }
+.koowa .input-sm + .form-control-feedback, .koowa .input-group-sm > .form-control + .form-control-feedback, .koowa .input-group-sm > .input-group-addon + .form-control-feedback, .koowa .input-group-sm > .input-group-btn > .btn + .form-control-feedback { width: 30px; height: 30px; line-height: 30px; }
 
 .koowa .has-success .help-block, .koowa .has-success .control-label, .koowa .has-success .radio, .koowa .has-success .checkbox, .koowa .has-success .radio-inline, .koowa .has-success .checkbox-inline, .koowa .has-success.radio label, .koowa .has-success.checkbox label, .koowa .has-success.radio-inline label, .koowa .has-success.checkbox-inline label { color: #3c763d; }
 
-.koowa .has-success .form-control, .koowa .has-success select { border-color: #3c763d; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+.koowa .has-success .form-control { border-color: #3c763d; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
-.koowa .has-success .form-control:focus, .koowa .has-success select:focus { border-color: #2b542c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168; }
+.koowa .has-success .form-control:focus { border-color: #2b542c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168; }
 
 .koowa .has-success .input-group-addon { color: #3c763d; border-color: #3c763d; background-color: #dff0d8; }
 
@@ -1973,9 +1934,9 @@ Styleguide 3.5
 
 .koowa .has-warning .help-block, .koowa .has-warning .control-label, .koowa .has-warning .radio, .koowa .has-warning .checkbox, .koowa .has-warning .radio-inline, .koowa .has-warning .checkbox-inline, .koowa .has-warning.radio label, .koowa .has-warning.checkbox label, .koowa .has-warning.radio-inline label, .koowa .has-warning.checkbox-inline label { color: #8a6d3b; }
 
-.koowa .has-warning .form-control, .koowa .has-warning select { border-color: #8a6d3b; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+.koowa .has-warning .form-control { border-color: #8a6d3b; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
-.koowa .has-warning .form-control:focus, .koowa .has-warning select:focus { border-color: #66512c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b; }
+.koowa .has-warning .form-control:focus { border-color: #66512c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b; }
 
 .koowa .has-warning .input-group-addon { color: #8a6d3b; border-color: #8a6d3b; background-color: #fcf8e3; }
 
@@ -1983,9 +1944,9 @@ Styleguide 3.5
 
 .koowa .has-error .help-block, .koowa .has-error .control-label, .koowa .has-error .radio, .koowa .has-error .checkbox, .koowa .has-error .radio-inline, .koowa .has-error .checkbox-inline, .koowa .has-error.radio label, .koowa .has-error.checkbox label, .koowa .has-error.radio-inline label, .koowa .has-error.checkbox-inline label { color: #a94442; }
 
-.koowa .has-error .form-control, .koowa .has-error select { border-color: #a94442; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+.koowa .has-error .form-control { border-color: #a94442; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
-.koowa .has-error .form-control:focus, .koowa .has-error select:focus { border-color: #843534; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
+.koowa .has-error .form-control:focus { border-color: #843534; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
 
 .koowa .has-error .input-group-addon { color: #a94442; border-color: #a94442; background-color: #f2dede; }
 
@@ -1998,11 +1959,11 @@ Styleguide 3.5
 .koowa .help-block { display: block; margin-top: 5px; margin-bottom: 10px; color: #737373; }
 
 @media (min-width: 768px) { .koowa .form-inline .form-group { display: inline-block; margin-bottom: 0; vertical-align: middle; }
-  .koowa .form-inline .form-control, .koowa .form-inline select { display: inline-block; width: auto; vertical-align: middle; }
+  .koowa .form-inline .form-control { display: inline-block; width: auto; vertical-align: middle; }
   .koowa .form-inline .form-control-static { display: inline-block; }
   .koowa .form-inline .input-group { display: inline-table; vertical-align: middle; }
-  .koowa .form-inline .input-group .input-group-addon, .koowa .form-inline .input-group .input-group-btn, .koowa .form-inline .input-group .form-control, .koowa .form-inline .input-group select { width: auto; }
-  .koowa .form-inline .input-group > .form-control, .koowa .form-inline .input-group > select { width: 100%; }
+  .koowa .form-inline .input-group .input-group-addon, .koowa .form-inline .input-group .input-group-btn, .koowa .form-inline .input-group .form-control { width: auto; }
+  .koowa .form-inline .input-group > .form-control { width: 100%; }
   .koowa .form-inline .control-label { margin-bottom: 0; vertical-align: middle; }
   .koowa .form-inline .radio, .koowa .form-inline .checkbox { display: inline-block; margin-top: 0; margin-bottom: 0; vertical-align: middle; }
   .koowa .form-inline .radio label, .koowa .form-inline .checkbox label { padding-left: 0; }
@@ -2023,21 +1984,19 @@ Styleguide 3.5
 
 .koowa .form-horizontal .has-feedback .form-control-feedback { right: 15px; }
 
-@media (min-width: 768px) { .koowa .form-horizontal .form-group-lg .control-label { padding-top: 11px; font-size: 18px; } }
+@media (min-width: 768px) { .koowa .form-horizontal .form-group-lg .control-label { padding-top: 14.333333px; } }
 
-@media (min-width: 768px) { .koowa .form-horizontal .form-group-sm .control-label { padding-top: 6px; font-size: 12px; } }
+@media (min-width: 768px) { .koowa .form-horizontal .form-group-sm .control-label { padding-top: 6px; } }
 
 .koowa .input-group { position: relative; display: table; border-collapse: separate; }
 
 .koowa .input-group[class*="col-"] { float: none; padding-left: 0; padding-right: 0; }
 
-.koowa .input-group .form-control, .koowa .input-group select { position: relative; z-index: 2; float: left; width: 100%; margin-bottom: 0; }
+.koowa .input-group .form-control { position: relative; z-index: 2; float: left; width: 100%; margin-bottom: 0; }
 
-.koowa .input-group .form-control:focus, .koowa .input-group select:focus { z-index: 3; }
+.koowa .input-group-addon, .koowa .input-group-btn, .koowa .input-group .form-control { display: table-cell; }
 
-.koowa .input-group-addon, .koowa .input-group-btn, .koowa .input-group .form-control, .koowa .input-group select { display: table-cell; }
-
-.koowa .input-group-addon:not(:first-child):not(:last-child), .koowa .input-group-btn:not(:first-child):not(:last-child), .koowa .input-group .form-control:not(:first-child):not(:last-child), .koowa .input-group select:not(:first-child):not(:last-child) { border-radius: 0; }
+.koowa .input-group-addon:not(:first-child):not(:last-child), .koowa .input-group-btn:not(:first-child):not(:last-child), .koowa .input-group .form-control:not(:first-child):not(:last-child) { border-radius: 0; }
 
 .koowa .input-group-addon, .koowa .input-group-btn { width: 1%; white-space: nowrap; vertical-align: middle; }
 
@@ -2049,11 +2008,11 @@ Styleguide 3.5
 
 .koowa .input-group-addon input[type="radio"], .koowa .input-group-addon input[type="checkbox"] { margin-top: 0; }
 
-.koowa .input-group .form-control:first-child, .koowa .input-group select:first-child, .koowa .input-group-addon:first-child, .koowa .input-group-btn:first-child > .btn, .koowa .input-group-btn:first-child > .btn-group > .btn, .koowa .input-group-btn:first-child > .dropdown-toggle, .koowa .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), .koowa .input-group-btn:last-child > .btn-group:not(:last-child) > .btn { border-bottom-right-radius: 0; border-top-right-radius: 0; }
+.koowa .input-group .form-control:first-child, .koowa .input-group-addon:first-child, .koowa .input-group-btn:first-child > .btn, .koowa .input-group-btn:first-child > .btn-group > .btn, .koowa .input-group-btn:first-child > .dropdown-toggle, .koowa .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), .koowa .input-group-btn:last-child > .btn-group:not(:last-child) > .btn { border-bottom-right-radius: 0; border-top-right-radius: 0; }
 
 .koowa .input-group-addon:first-child { border-right: 0; }
 
-.koowa .input-group .form-control:last-child, .koowa .input-group select:last-child, .koowa .input-group-addon:last-child, .koowa .input-group-btn:last-child > .btn, .koowa .input-group-btn:last-child > .btn-group > .btn, .koowa .input-group-btn:last-child > .dropdown-toggle, .koowa .input-group-btn:first-child > .btn:not(:first-child), .koowa .input-group-btn:first-child > .btn-group:not(:first-child) > .btn { border-bottom-left-radius: 0; border-top-left-radius: 0; }
+.koowa .input-group .form-control:last-child, .koowa .input-group-addon:last-child, .koowa .input-group-btn:last-child > .btn, .koowa .input-group-btn:last-child > .btn-group > .btn, .koowa .input-group-btn:last-child > .dropdown-toggle, .koowa .input-group-btn:first-child > .btn:not(:first-child), .koowa .input-group-btn:first-child > .btn-group:not(:first-child) > .btn { border-bottom-left-radius: 0; border-top-left-radius: 0; }
 
 .koowa .input-group-addon:last-child { border-left: 0; }
 
@@ -2067,7 +2026,7 @@ Styleguide 3.5
 
 .koowa .input-group-btn:first-child > .btn, .koowa .input-group-btn:first-child > .btn-group { margin-right: -1px; }
 
-.koowa .input-group-btn:last-child > .btn, .koowa .input-group-btn:last-child > .btn-group { z-index: 2; margin-left: -1px; }
+.koowa .input-group-btn:last-child > .btn, .koowa .input-group-btn:last-child > .btn-group { margin-left: -1px; }
 
 .koowa .pagination { display: inline-block; padding-left: 0; margin: 20px 0; border-radius: 4px; }
 
@@ -2079,25 +2038,25 @@ Styleguide 3.5
 
 .koowa .pagination > li:last-child > a, .koowa .pagination > li:last-child > span { border-bottom-right-radius: 4px; border-top-right-radius: 4px; }
 
-.koowa .pagination > li > a:hover, .koowa .pagination > li > a:focus, .koowa .pagination > li > span:hover, .koowa .pagination > li > span:focus { z-index: 2; color: #23527c; background-color: #eeeeee; border-color: #ddd; }
+.koowa .pagination > li > a:hover, .koowa .pagination > li > a:focus, .koowa .pagination > li > span:hover, .koowa .pagination > li > span:focus { color: #23527c; background-color: #eeeeee; border-color: #ddd; }
 
-.koowa .pagination > .active > a, .koowa .pagination > .active > a:hover, .koowa .pagination > .active > a:focus, .koowa .pagination > .active > span, .koowa .pagination > .active > span:hover, .koowa .pagination > .active > span:focus { z-index: 3; color: #fff; background-color: #3071a9; border-color: #285e8d; cursor: default; }
+.koowa .pagination > .active > a, .koowa .pagination > .active > a:hover, .koowa .pagination > .active > a:focus, .koowa .pagination > .active > span, .koowa .pagination > .active > span:hover, .koowa .pagination > .active > span:focus { z-index: 2; color: #fff; background-color: #3071a9; border-color: #285e8d; cursor: default; }
 
 .koowa .pagination > .disabled > span, .koowa .pagination > .disabled > span:hover, .koowa .pagination > .disabled > span:focus, .koowa .pagination > .disabled > a, .koowa .pagination > .disabled > a:hover, .koowa .pagination > .disabled > a:focus { color: #777777; background-color: #fff; border-color: #ddd; cursor: not-allowed; }
 
-.koowa .pagination-lg > li > a, .koowa .pagination-lg > li > span { padding: 10px 16px; font-size: 18px; line-height: 1.3333333; }
+.koowa .pagination-lg > li > a, .koowa .pagination-lg > li > span { padding: 10px 16px; font-size: 18px; }
 
 .koowa .pagination-lg > li:first-child > a, .koowa .pagination-lg > li:first-child > span { border-bottom-left-radius: 6px; border-top-left-radius: 6px; }
 
 .koowa .pagination-lg > li:last-child > a, .koowa .pagination-lg > li:last-child > span { border-bottom-right-radius: 6px; border-top-right-radius: 6px; }
 
-.koowa .pagination-sm > li > a, .koowa .pagination-sm > li > span { padding: 5px 10px; font-size: 12px; line-height: 1.5; }
+.koowa .pagination-sm > li > a, .koowa .pagination-sm > li > span { padding: 5px 10px; font-size: 12px; }
 
 .koowa .pagination-sm > li:first-child > a, .koowa .pagination-sm > li:first-child > span { border-bottom-left-radius: 3px; border-top-left-radius: 3px; }
 
 .koowa .pagination-sm > li:last-child > a, .koowa .pagination-sm > li:last-child > span { border-bottom-right-radius: 3px; border-top-right-radius: 3px; }
 
-.koowa .tooltip { position: absolute; z-index: 1070; display: block; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-style: normal; font-weight: normal; letter-spacing: normal; line-break: auto; line-height: 1.428571429; text-align: left; text-align: start; text-decoration: none; text-shadow: none; text-transform: none; white-space: normal; word-break: normal; word-spacing: normal; word-wrap: normal; font-size: 12px; opacity: 0; filter: alpha(opacity=0); }
+.koowa .tooltip { position: absolute; z-index: 1070; display: block; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; line-height: 1.4; opacity: 0; filter: alpha(opacity=0); }
 
 .koowa .tooltip.in { opacity: 0.9; filter: alpha(opacity=90); }
 
@@ -2109,7 +2068,7 @@ Styleguide 3.5
 
 .koowa .tooltip.left { margin-left: -3px; padding: 0 5px; }
 
-.koowa .tooltip-inner { max-width: 200px; padding: 3px 8px; color: #fff; text-align: center; background-color: #000; border-radius: 4px; }
+.koowa .tooltip-inner { max-width: 200px; padding: 3px 8px; color: #fff; text-align: center; text-decoration: none; background-color: #000; border-radius: 4px; }
 
 .koowa .tooltip-arrow { position: absolute; width: 0; height: 0; border-color: transparent; border-style: solid; }
 
@@ -2171,9 +2130,9 @@ Styleguide 3.5
 
 .koowa .jqtree-whitespace, .koowa .jqtree-toggler, .koowa .jqtree-icon { width: 18px; text-align: center; }
 
-.koowa .k-icon-folder:before { content: ""; font-size: 16px; margin-bottom: -1px; }
+.koowa .k-icon-folder:before { content: ""; font-size: 16px; margin-bottom: -1px; }
 
-.koowa .k-icon-folder--open:before { content: ""; font-size: 16px; margin-bottom: -1px; }
+.koowa .k-icon-folder--open:before { content: ""; font-size: 16px; margin-bottom: -1px; }
 
 .koowa .jqtree-title { padding: 0 0 0 5px; }
 
@@ -2211,7 +2170,7 @@ Styleguide 3.5
 
 .koowa .form-group--small-margin { margin-bottom: 13px; }
 
-.koowa .input-group-input, .koowa .input-group-btn, .koowa .input-group-btn .btn, .koowa .input-group-content, .koowa .input-group-input, .koowa .form-control, .koowa select { vertical-align: top; }
+.koowa .input-group-input, .koowa .input-group-btn, .koowa .input-group-btn .btn, .koowa .input-group-content, .koowa .input-group-input, .koowa .form-control { vertical-align: top; }
 
 .koowa .input-group ul { top: auto; }
 
@@ -2223,13 +2182,13 @@ Styleguide 3.5
 
 .koowa--rtl.koowa .input-group { direction: rtl; }
 
-.koowa--rtl.koowa .input-group .form-control, .koowa--rtl.koowa .input-group select { float: right; }
+.koowa--rtl.koowa .input-group .form-control { float: right; }
 
-.koowa--rtl.koowa .input-group .form-control:first-child, .koowa--rtl.koowa .input-group select:first-child, .koowa--rtl.koowa .input-group-addon:first-child, .koowa--rtl.koowa .input-group-btn:first-child > .btn, .koowa--rtl.koowa .input-group-btn:first-child > .btn-group > .btn, .koowa--rtl.koowa .input-group-btn:first-child > .dropdown-toggle, .koowa--rtl.koowa .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), .koowa--rtl.koowa .input-group-btn:last-child > .btn-group:not(:last-child) > .btn { border-bottom-right-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 0; border-top-left-radius: 0; }
+.koowa--rtl.koowa .input-group .form-control:first-child, .koowa--rtl.koowa .input-group-addon:first-child, .koowa--rtl.koowa .input-group-btn:first-child > .btn, .koowa--rtl.koowa .input-group-btn:first-child > .btn-group > .btn, .koowa--rtl.koowa .input-group-btn:first-child > .dropdown-toggle, .koowa--rtl.koowa .input-group-btn:last-child > .btn:not(:last-child):not(.dropdown-toggle), .koowa--rtl.koowa .input-group-btn:last-child > .btn-group:not(:last-child) > .btn { border-bottom-right-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 0; border-top-left-radius: 0; }
 
 .koowa--rtl.koowa .input-group-addon:first-child { border-right: 1px solid #ccc; border-left: 0; }
 
-.koowa--rtl.koowa .input-group .form-control:last-child, .koowa--rtl.koowa .input-group select:last-child, .koowa--rtl.koowa .input-group-addon:last-child, .koowa--rtl.koowa .input-group-btn:last-child > .btn, .koowa--rtl.koowa .input-group-btn:last-child > .btn-group > .btn, .koowa--rtl.koowa .input-group-btn:last-child > .dropdown-toggle, .koowa--rtl.koowa .input-group-btn:first-child > .btn:not(:first-child), .koowa--rtl.koowa .input-group-btn:first-child > .btn-group:not(:first-child) > .btn { border-bottom-left-radius: 4px; border-top-left-radius: 4px; border-bottom-right-radius: 0; border-top-right-radius: 0; }
+.koowa--rtl.koowa .input-group .form-control:last-child, .koowa--rtl.koowa .input-group-addon:last-child, .koowa--rtl.koowa .input-group-btn:last-child > .btn, .koowa--rtl.koowa .input-group-btn:last-child > .btn-group > .btn, .koowa--rtl.koowa .input-group-btn:last-child > .dropdown-toggle, .koowa--rtl.koowa .input-group-btn:first-child > .btn:not(:first-child), .koowa--rtl.koowa .input-group-btn:first-child > .btn-group:not(:first-child) > .btn { border-bottom-left-radius: 4px; border-top-left-radius: 4px; border-bottom-right-radius: 0; border-top-right-radius: 0; }
 
 .koowa--rtl.koowa .input-group-addon:last-child { border-left: 1px solid #ccc; border-right: 0; }
 
@@ -2281,9 +2240,9 @@ Styleguide 3.5
 
 .koowa .opened--left .k-off-canvas-overlay, .koowa .opened--right .k-off-canvas-overlay { z-index: 9; /* 2 */ }
 
-.koowa .k-content-wrapper { clear: both; /* 1 */ margin: 0; overflow: hidden; border-bottom: 1px solid #cfcfcf; /* Faking flexbox on older browsers by using table styling */ /* RTL */ /* When flexbox is in use */ }
+.koowa .k-content-wrapper { clear: both; /* 1 */ margin: 0; overflow: hidden; /* Faking flexbox on older browsers by using table styling */ /* RTL */ /* When flexbox is in use */ }
 
-@media screen and (min-width: 768px) { .koowa .k-content-wrapper { display: table; width: 100%; } }
+@media screen and (min-width: 768px) { .koowa .k-content-wrapper { display: table; width: 100%; border-bottom: 1px solid #cfcfcf; } }
 
 .koowa--rtl.koowa .k-content-wrapper { direction: rtl; }
 
@@ -2603,7 +2562,7 @@ Styleguide 3.5
 
 @media screen and (min-width: 600px) { .koowa .k-batch-list .k-batch-list__item--field { padding: 5px; } }
 
-.koowa .k-batch-list .form-control, .koowa .k-batch-list select { margin: 0; }
+.koowa .k-batch-list .form-control { margin: 0; }
 
 .koowa .k-batch-list .k-batch-list__continue a { display: block; padding: 10px; }
 
@@ -2908,13 +2867,13 @@ Styleguide 3.5
 
 .koowa [class^="icon-"], .koowa [class*=" icon-"] { margin: 0; }
 
-.koowa .icon-new:before { content: ""; }
+.koowa .icon-new:before { content: ""; }
 
 .koowa .icon-download:before { content: ""; }
 
 .koowa .icon-options:before { content: ""; }
 
-.koowa .icon-delete:before { content: ""; }
+.koowa .icon-delete:before { content: ""; }
 
 .koowa .icon-purge:before { content: ""; }
 
@@ -2926,11 +2885,13 @@ Styleguide 3.5
 
 .koowa .icon-unpublish:before { content: ""; }
 
-.koowa .icon-apply:before { content: ""; }
+.koowa .icon-apply:before { content: ""; }
 
 .koowa .icon-save { color: #27ae60; }
 
 .koowa .icon-save:before { content: ""; }
+
+.koowa .icon-preview:before { content: ""; }
 
 .koowa .icon-cancel { color: #c0392b; }
 
@@ -2938,35 +2899,35 @@ Styleguide 3.5
 
 .koowa .k-icon-config:before { content: ""; }
 
-.koowa .k-icon-content:before { content: ""; }
+.koowa .k-icon-content:before { content: ""; }
 
-.koowa .k-icon-menus:before { content: ""; }
+.koowa .k-icon-menus:before { content: ""; }
 
-.koowa .k-icon-users:before { content: ""; }
+.koowa .k-icon-users:before { content: ""; }
 
 .koowa .logman-icon { display: inline-block; margin-right: 7px; }
 
 .koowa .koowa_icon--archive, .koowa .koowa_icon--audio, .koowa .koowa_icon--default, .koowa .koowa_icon--document, .koowa .koowa_icon--folder, .koowa .koowa_icon--image, .koowa .koowa_icon--pdf, .koowa .koowa_icon--spreadsheet, .koowa .koowa_icon--video, .koowa .koowa_icon--folder_open { font-size: 16px; }
 
-.koowa .koowa_icon--archive:before { content: ""; }
+.koowa .koowa_icon--archive:before { content: ""; }
 
-.koowa .koowa_icon--audio:before { content: ""; }
+.koowa .koowa_icon--audio:before { content: ""; }
 
-.koowa .koowa_icon--default:before { content: ""; }
+.koowa .koowa_icon--default:before { content: ""; }
 
-.koowa .koowa_icon--document:before { content: ""; }
+.koowa .koowa_icon--document:before { content: ""; }
 
-.koowa .koowa_icon--folder:before { content: ""; }
+.koowa .koowa_icon--folder:before { content: ""; }
 
-.koowa .koowa_icon--image:before { content: ""; }
+.koowa .koowa_icon--image:before { content: ""; }
 
-.koowa .koowa_icon--pdf:before { content: ""; }
+.koowa .koowa_icon--pdf:before { content: ""; }
 
-.koowa .koowa_icon--spreadsheet:before { content: ""; }
+.koowa .koowa_icon--spreadsheet:before { content: ""; }
 
-.koowa .koowa_icon--video:before { content: ""; }
+.koowa .koowa_icon--video:before { content: ""; }
 
-.koowa .koowa_icon--folder_open:before { content: ""; }
+.koowa .koowa_icon--folder_open:before { content: ""; }
 
 .koowa .k-tree { margin: 7px 0; }
 
@@ -3192,7 +3153,7 @@ Styleguide 3.5
 
 .koowa .k-grid__item--folder .k-grid__item__title { padding: 10px; border: 1px solid #ddd; background: #fafafa; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
-.koowa .k-grid__item--folder .k-grid__item__title:before { content: ""; padding-right: 5px; }
+.koowa .k-grid__item--folder .k-grid__item__title:before { content: ""; padding-right: 5px; }
 
 .koowa--rtl.koowa .k-grid__item--folder .k-grid__item__title:before { padding-right: 0; padding-left: 5px; }
 
@@ -3622,9 +3583,9 @@ Styleguide 3.5
 
 .koowa .footable.breakpoint .footable-row-detail-name { font-weight: 700; }
 
-.koowa .k-table__item--state { cursor: pointer; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.koowa .k-table__item--state { -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
-.koowa .k-table__item--state:focus, .koowa .k-table__item--state:hover { text-decoration: underline; }
+.koowa .k-table__item--state a.koowa .k-table__item--state:focus, .koowa .k-table__item--state a.koowa .k-table__item--state:hover { text-decoration: underline; }
 
 .koowa .k-table__item--state.k-pending { color: #c09853; }
 
@@ -3687,9 +3648,9 @@ Styleguide 3.5
 
 .koowa .files__sortable:focus, .koowa .files__sortable:hover, .koowa .files__sortable--sorted:focus, .koowa .files__sortable--sorted:hover, .koowa .files__sortable--sorted-desc:focus, .koowa .files__sortable--sorted-desc:hover, .koowa a.-koowa-asc:focus, .koowa a.-koowa-asc:hover, .koowa a.-koowa-desc:focus, .koowa a.-koowa-desc:hover { text-decoration: none; }
 
-.koowa .files__sortable--sorted:after, .koowa a.-koowa-asc:after { content: ""; margin-left: .5em; vertical-align: middle; }
+.koowa .files__sortable--sorted:after, .koowa a.-koowa-asc:after { content: ""; margin-left: .5em; vertical-align: middle; }
 
-.koowa .files__sortable--sorted-desc:after, .koowa a.-koowa-desc:after { content: ""; margin-left: .5em; vertical-align: middle; }
+.koowa .files__sortable--sorted-desc:after, .koowa a.-koowa-desc:after { content: ""; margin-left: .5em; vertical-align: middle; }
 
 .koowa .k-grid__items__folders, .koowa .k-grid__items__files { clear: both; }
 
@@ -3705,9 +3666,9 @@ Styleguide 3.5
 
 .koowa .form-group.warning .help-block, .koowa .form-group.warning .control-label, .koowa .form-group.warning .radio, .koowa .form-group.warning .checkbox, .koowa .form-group.warning .radio-inline, .koowa .form-group.warning .checkbox-inline, .koowa .form-group.warning.radio label, .koowa .form-group.warning.checkbox label, .koowa .form-group.warning.radio-inline label, .koowa .form-group.warning.checkbox-inline label { color: #8a6d3b; }
 
-.koowa .form-group.warning .form-control, .koowa .form-group.warning select { border-color: #8a6d3b; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+.koowa .form-group.warning .form-control { border-color: #8a6d3b; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
-.koowa .form-group.warning .form-control:focus, .koowa .form-group.warning select:focus { border-color: #66512c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b; }
+.koowa .form-group.warning .form-control:focus { border-color: #66512c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #c0a16b; }
 
 .koowa .form-group.warning .input-group-addon { color: #8a6d3b; border-color: #8a6d3b; background-color: #fcf8e3; }
 
@@ -3715,9 +3676,9 @@ Styleguide 3.5
 
 .koowa .form-group.error .help-block, .koowa .form-group.error .control-label, .koowa .form-group.error .radio, .koowa .form-group.error .checkbox, .koowa .form-group.error .radio-inline, .koowa .form-group.error .checkbox-inline, .koowa .form-group.error.radio label, .koowa .form-group.error.checkbox label, .koowa .form-group.error.radio-inline label, .koowa .form-group.error.checkbox-inline label { color: #a94442; }
 
-.koowa .form-group.error .form-control, .koowa .form-group.error select { border-color: #a94442; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+.koowa .form-group.error .form-control { border-color: #a94442; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
-.koowa .form-group.error .form-control:focus, .koowa .form-group.error select:focus { border-color: #843534; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
+.koowa .form-group.error .form-control:focus { border-color: #843534; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #ce8483; }
 
 .koowa .form-group.error .input-group-addon { color: #a94442; border-color: #a94442; background-color: #f2dede; }
 
@@ -3725,81 +3686,21 @@ Styleguide 3.5
 
 .koowa .form-group.success .help-block, .koowa .form-group.success .control-label, .koowa .form-group.success .radio, .koowa .form-group.success .checkbox, .koowa .form-group.success .radio-inline, .koowa .form-group.success .checkbox-inline, .koowa .form-group.success.radio label, .koowa .form-group.success.checkbox label, .koowa .form-group.success.radio-inline label, .koowa .form-group.success.checkbox-inline label { color: #3c763d; }
 
-.koowa .form-group.success .form-control, .koowa .form-group.success select { border-color: #3c763d; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
+.koowa .form-group.success .form-control { border-color: #3c763d; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
 
-.koowa .form-group.success .form-control:focus, .koowa .form-group.success select:focus { border-color: #2b542c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168; }
+.koowa .form-group.success .form-control:focus { border-color: #2b542c; box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #67b168; }
 
 .koowa .form-group.success .input-group-addon { color: #3c763d; border-color: #3c763d; background-color: #dff0d8; }
 
 .koowa .form-group.success .form-control-feedback { color: #3c763d; }
 
-.koowa .k-positioner { display: inline-block; vertical-align: middle; width: 16px; height: 4px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; cursor: move; counter-increment: positioner-counter; position: relative; }
+.koowa .k-positioner { display: inline-block; vertical-align: middle; width: 16px; height: 4px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; cursor: no-drop; position: relative; }
+
+.koowa .k-positioner.is-active { cursor: move; }
 
 .koowa .k-positioner:before { display: block; position: absolute; content: " "; width: 16px; height: 10px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; top: -4px; }
 
-.koowa .k-positioner:after { position: absolute; width: 32px; height: 32px; top: -15px; left: -8px; content: counter(positioner-counter); font-size: 10px; line-height: 44px; text-indent: 3px; vertical-align: bottom; color: #333; text-shadow: 0 0 3px white; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
-
-.koowa .k-positioner--level1 { counter-increment: positioner-counter1; }
-
-.koowa .k-positioner--level1:after { content: counter(positioner-counter1); }
-
-.koowa .k-positioner--level2 { counter-increment: positioner-counter2; }
-
-.koowa .k-positioner--level2:after { content: counter(positioner-counter2); }
-
-.koowa .k-positioner--level3 { counter-increment: positioner-counter3; }
-
-.koowa .k-positioner--level3:after { content: counter(positioner-counter3); }
-
-.koowa .k-positioner--level4 { counter-increment: positioner-counter4; }
-
-.koowa .k-positioner--level4:after { content: counter(positioner-counter4); }
-
-.koowa .k-positioner--level5 { counter-increment: positioner-counter5; }
-
-.koowa .k-positioner--level5:after { content: counter(positioner-counter5); }
-
-.koowa .k-positioner--level6 { counter-increment: positioner-counter6; }
-
-.koowa .k-positioner--level6:after { content: counter(positioner-counter6); }
-
-.koowa .k-positioner--level7 { counter-increment: positioner-counter7; }
-
-.koowa .k-positioner--level7:after { content: counter(positioner-counter7); }
-
-.koowa .k-positioner--level8 { counter-increment: positioner-counter8; }
-
-.koowa .k-positioner--level8:after { content: counter(positioner-counter8); }
-
-.koowa .k-positioner--level9 { counter-increment: positioner-counter9; }
-
-.koowa .k-positioner--level9:after { content: counter(positioner-counter9); }
-
-.koowa .k-positioner--level10 { counter-increment: positioner-counter10; }
-
-.koowa .k-positioner--level10:after { content: counter(positioner-counter10); }
-
-.koowa .k-positioner--level11 { counter-increment: positioner-counter11; }
-
-.koowa .k-positioner--level11:after { content: counter(positioner-counter11); }
-
-.koowa .k-positioner--level12 { counter-increment: positioner-counter12; }
-
-.koowa .k-positioner--level12:after { content: counter(positioner-counter12); }
-
-.koowa .k-positioner--level13 { counter-increment: positioner-counter13; }
-
-.koowa .k-positioner--level13:after { content: counter(positioner-counter13); }
-
-.koowa .k-positioner--level14 { counter-increment: positioner-counter14; }
-
-.koowa .k-positioner--level14:after { content: counter(positioner-counter14); }
-
-.koowa .k-positioner--level15 { counter-increment: positioner-counter15; }
-
-.koowa .k-positioner--level15:after { content: counter(positioner-counter15); }
-
-.koowa .k-table-container { counter-reset: positioner-counter positioner-counter-level1 positioner-counter-level2 positioner-counter-level3 positioner-counter-level4 positioner-counter-level5 positioner-counter-level6 positioner-counter-level7 positioner-counter-level8 positioner-counter-level9 positioner-counter-level10 positioner-counter-level11 positioner-counter-level12 positioner-counter-level13 positioner-counter-level14 positioner-counter-level15; }
+.koowa .k-positioner:after { position: absolute; width: 32px; height: 32px; top: -15px; left: -8px; content: attr(data-position); font-size: 10px; line-height: 44px; text-indent: 3px; vertical-align: bottom; color: #333; text-shadow: 0 0 3px white; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
 .koowa tr.selected .k-positioner:after { color: white; text-shadow: none; }
 
@@ -3832,58 +3733,10 @@ Styleguide 3.5
 /* iPad 3 and 4 */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) { select, textarea, input { font-size: 16px !important; } }
 
-/* Joomla styling ========================================================================== */
-/** Default select is not styled outside Joomla scope (for example in koowa template) */
-/** 1. No text-decoration for buttons 2. Bootstrap 2 uses .btn as default button. Bootstrap 3 uses .btn-default as default Extending the bootstrap 3 default btn styling to the regular .btn class */
-.btn { text-decoration: none; }
+/* Disable styleguide CSS view ========================================================================== */
+[ng-if="section.css"] { display: none; }
 
-/** Joomla utilities ---------------- these are not available outside Joomla scope (for example in koowa template) */
-.btn-toolbar { margin: 1em 0 0; }
-
-.pull-left { float: left; }
-
-[dir="rtl"] .pull-left { float: right; }
-
-.pull-right { float: right; }
-
-[dir="rtl"] .pull-right { float: left; }
-
-@font-face { font-family: 'IcoMoon'; src: url("../../../media/jui/fonts/IcoMoon.eot"); src: url("../../../media/jui/fonts/IcoMoon.eot?#iefix") format("embedded-opentype"), url("../../../media/jui/fonts/IcoMoon.woff") format("woff"), url("../../../media/jui/fonts/IcoMoon.ttf") format("truetype"), url("../../../media/jui/fonts/IcoMoon.svg#IcoMoon") format("svg"); font-weight: normal; font-style: normal; }
-
-.icon-file-add:before, .icon-file-plus:before, .icon-pictures:before, .icon-images:before, .icon-chevron-down:before, .icon-downarrow:before, .icon-arrow-down:before, .icon-picture:before, .icon-image:before { font-family: 'IcoMoon'; speak: none; font-weight: normal; display: inline-block; width: 14px; height: 14px; margin-right: .25em; line-height: 14px; }
-
-.icon-file-add:before, .icon-file-plus:before { content: "\29"; }
-
-.icon-pictures:before, .icon-images:before { content: "\30"; }
-
-.icon-chevron-down:before, .icon-downarrow:before, .icon-arrow-down:before { content: "\e007"; }
-
-.icon-picture:before, .icon-image:before { content: "\2f"; }
-
-/** Style the new Joomla modals =========================== By default we only get a very small modal window Overriding styles make sure we get the most space out of it (at least on our views) */
-.mce-window.mce-in { opacity: 1; width: 90% !important; height: auto !important; left: 5% !important; top: 50px !important; bottom: 5% !important; padding: 1px !important; }
-
-[dir="rtl"] .mce-window.mce-in { left: auto !important; right: 5% !important; }
-
-#mce-modal-block.mce-in.mce-in { opacity: .8; }
-
-.mce-reset, .mce-window-body.mce-window-body { width: 100% !important; height: 100% !important; }
-
-.mce-reset { display: table; width: 100%; height: 100%; }
-
-[dir="rtl"] .mce-reset { direction: rtl; }
-
-.mce-reset .mce-window-head.mce-window-head { display: table-row; padding: 0; white-space: nowrap; height: 0; overflow: hidden; text-overflow: ellipsis; }
-
-.mce-reset .mce-window-head.mce-window-head .mce-close { right: 10px; top: -35px; }
-
-.mce-reset .mce-title { display: none; }
-
-.mce-reset .mce-window-body.mce-window-body { display: table-row; padding-top: 0; padding-left: 0; }
-
-.mce-reset .mce-foot.mce-foot { display: none; }
-
-.mce-dragh { display: none !important; }
+sg-common-class-wrapper .k-wrapper { min-height: 400px; }
 
 [class^="koowa_icon--"], [class*=" koowa_icon--"], .koowa_icon_font, #files-app #files-grid table > thead > tr > th.files__sortable--sorted > span.files__sortable--indicator, #files-app #files-grid table > thead > tr > th.files__sortable--sorted-desc > span.files__sortable--indicator { speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; /* Styling the span element */ vertical-align: middle; display: inline-block; width: 16px; height: 16px; font-size: 16px; line-height: 16px; /* Styling the before element */ /* Hiding the i element */ }
 
@@ -3903,43 +3756,43 @@ Styleguide 3.5
 
 [class^="koowa_icon--"].koowa_icon--48:before, [class*=" koowa_icon--"].koowa_icon--48:before, .koowa_icon_font.koowa_icon--48:before, #files-app #files-grid table > thead > tr > th.files__sortable--sorted > span.koowa_icon--48.files__sortable--indicator:before, #files-app #files-grid table > thead > tr > th.files__sortable--sorted-desc > span.koowa_icon--48.files__sortable--indicator:before { width: 48px; height: 48px; font-size: 48px; line-height: 48px; }
 
-.koowa_icon--default:before { content: ""; }
+.koowa_icon--default:before { content: ""; }
 
-.koowa_icon--image:before { content: ""; }
+.koowa_icon--image:before { content: ""; }
 
-.koowa_icon--video:before { content: ""; }
+.koowa_icon--video:before { content: ""; }
 
-.koowa_icon--archive:before { content: ""; }
+.koowa_icon--archive:before { content: ""; }
 
-.koowa_icon--folder:before { content: ""; }
+.koowa_icon--folder:before { content: ""; }
 
-.koowa_icon--pdf:before { content: ""; }
+.koowa_icon--pdf:before { content: ""; }
 
-.koowa_icon--audio:before { content: ""; }
+.koowa_icon--audio:before { content: ""; }
 
-.koowa_icon--document:before { content: ""; }
+.koowa_icon--document:before { content: ""; }
 
-.koowa_icon--spreadsheet:before { content: ""; }
+.koowa_icon--spreadsheet:before { content: ""; }
 
-.koowa_icon--locked:before { content: ""; }
+.koowa_icon--locked:before { content: ""; }
 
-.koowa_icon--unlocked:before { content: ""; }
+.koowa_icon--unlocked:before { content: ""; }
 
-.koowa_icon--disabled:before { content: ""; }
+.koowa_icon--disabled:before { content: ""; }
 
-.koowa_icon--enabled:before { content: ""; }
+.koowa_icon--enabled:before { content: ""; }
 
-.koowa_icon--open:before { content: ""; }
+.koowa_icon--open:before { content: ""; }
 
-.koowa_icon--close:before { content: ""; }
+.koowa_icon--close:before { content: ""; }
 
 .koowa_icon--folder_open:before { content: ""; }
 
-.koowa_icon--calendar:before { content: ""; }
+.koowa_icon--calendar:before { content: ""; }
 
-.koowa_icon--menu:before { content: ""; }
+.koowa_icon--menu:before { content: ""; }
 
-.koowa_icon--menu_open:before { content: ""; }
+.koowa_icon--menu_open:before { content: ""; }
 
 .koowa_icon--sort:before { content: "\e611"; }
 

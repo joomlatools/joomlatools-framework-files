@@ -8,7 +8,6 @@
  */
 defined('KOOWA') or die( 'Restricted access' );
 
-JHtml::_('behavior.modal');
 JHtml::_('behavior.framework', true);
 ?>
 
@@ -34,26 +33,7 @@ JHtml::_('behavior.framework', true);
     'Insert'
 ))); ?>
 
-<ktml:script src="assets://files/js/history/history.js" />
-
 <ktml:script src="assets://files/js/ejs/ejs.js" />
-
-
-<ktml:script src="assets://files/js/spin.min.js" />
-
-<ktml:script src="assets://files/js/files.utilities.js" />
-<ktml:script src="assets://files/js/files.state.js" />
-<ktml:script src="assets://files/js/files.template.js" />
-<ktml:script src="assets://files/js/files.grid.js" />
-<ktml:script src="assets://files/js/files.tree.js" />
-<ktml:script src="assets://files/js/files.row.js" />
-<ktml:script src="assets://files/js/files.paginator.js" />
-<ktml:script src="assets://files/js/files.pathway.js" />
-
-<ktml:script src="assets://files/js/files.app.js" />
-<ktml:script src="assets://files/js/files.attachments.app.js" />
-<ktml:script src="assets://files/js/files.uploader.js" />
-
-<ktml:script src="assets://files/js/files.copymove.js" />
+<ktml:script src="assets://files/js/<?= !empty($debug) ? 'build' : 'min' ?>/files.js" />
 
 <?= helper('icon.icon_map'); ?>

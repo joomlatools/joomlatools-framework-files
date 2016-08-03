@@ -6,12 +6,28 @@ module.exports = function(grunt) {
     // load time-grunt and all grunt plugins found in the package.json
     require('jit-grunt')(grunt);
 
+    var jsFiles = [
+        '<%= assetsPath %>/js/history/history.js',
+        '<%= assetsPath %>/js/spin.min.js',
+        '<%= assetsPath %>/js/files.utilities.js',
+        '<%= assetsPath %>/js/files.state.js',
+        '<%= assetsPath %>/js/files.template.js',
+        '<%= assetsPath %>/js/files.grid.js',
+        '<%= assetsPath %>/js/files.tree.js',
+        '<%= assetsPath %>/js/files.row.js',
+        '<%= assetsPath %>/js/files.paginator.js',
+        '<%= assetsPath %>/js/files.pathway.js',
+        '<%= assetsPath %>/js/files.app.js',
+        '<%= assetsPath %>/js/files.attachments.app.js',
+        '<%= assetsPath %>/js/files.uploader.js',
+        '<%= assetsPath %>/js/files.copymove.js'
+    ];
+
     // grunt config
     grunt.initConfig({
 
         // Grunt variables
         assetsPath: 'resources/assets',
-
 
         // Compile sass files
         sass: {
@@ -22,6 +38,27 @@ module.exports = function(grunt) {
                 files: {
                     '<%= assetsPath %>/css/files.css': '<%= assetsPath %>/scss/files.scss',
                     '<%= assetsPath %>/css/uploader.css': '<%= assetsPath %>/scss/uploader.scss'
+                }
+            }
+        },
+
+        // Concatenate files
+        concat: {
+            js: {
+                files: {
+                    '<%= assetsPath %>/js/build/files.js': jsFiles
+                }
+            }
+        },
+
+        uglify: {
+            options: {
+                sourceMap: true,
+                preserveComments: 'some' // preserve @license tags
+            },
+            build: {
+                files: {
+                    '<%= assetsPath %>/js/min/files.js': jsFiles
                 }
             }
         },
@@ -62,9 +99,17 @@ module.exports = function(grunt) {
                     atBegin: true
                 }
             }
+            ,javascript: {
+               files: [
+                   '<%= assetsPath %>/js/*.js'
+               ],
+               tasks: ['uglify', 'concat'],
+               options: {
+                   interrupt: true,
+                   atBegin: true
+               }
+            }
         }
-
-
     });
 
     // The dev task will be used during development

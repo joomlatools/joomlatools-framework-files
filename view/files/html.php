@@ -67,6 +67,7 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 		$context->data->sitebase  = trim(JURI::root(), '/');
         $context->data->token     = $this->getObject('user')->getSession()->getToken();
 		$context->data->container = $container;
+        $context->data->debug     = KClassLoader::getInstance()->isDebug();
 
 		parent::_fetchData($context);
 

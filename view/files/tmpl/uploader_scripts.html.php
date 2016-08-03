@@ -163,12 +163,12 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
 
 <script data-inline type="text/html" class="js-uploader-template" data-name="upload-pending">
     <div>
-        <?= translate('{total} files<span class="k-hidden-mobile"> in the queue</span>', array(
+        <?= translate('{total} files in the queue', array(
             'total' => '{{=it.total}}'
         )) ?>
         <a class="k-upload__details-button js-open-info">
-            <span class="k-upload__details-button__view"><?= translate('show<span class="k-hidden-mobile"> queue</span>') ?></span>
-            <span class="k-upload__details-button__close"><?= translate('hide<span class="k-hidden-mobile"> queue</span>') ?></span>
+            <span class="k-upload__details-button__view"><?= translate('show queue') ?></span>
+            <span class="k-upload__details-button__close"><?= translate('hide queue') ?></span>
         </a>
     </div>
     <div class="k-upload__drop-message">
@@ -178,7 +178,7 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
 
 <script data-inline type="text/html" class="js-uploader-template" data-name="uploading">
     <div>
-        <?= translate('Uploading<span class="k-hidden-mobile"> {total} files, {remaining} to go', array(
+        <?= translate('Uploading {total} files, {remaining} to go', array(
             'total' => '{{=it.total}}',
             'remaining' => '{{=it.remaining}}'
         ), '</span>') ?>
@@ -189,8 +189,8 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
         )) ?>
         {{?}}
         <a class="k-upload__details-button js-open-info">
-            <span class="k-upload__details-button__view"><?= translate('show<span class="k-hidden-mobile"> queue</span>') ?></span>
-            <span class="k-upload__details-button__close"><?= translate('hide<span class="k-hidden-mobile"> queue</span>') ?></span>
+            <span class="k-upload__details-button__view"><?= translate('show queue') ?></span>
+            <span class="k-upload__details-button__close"><?= translate('hide queue') ?></span>
         </a>
     </div>
 </script>
@@ -207,8 +207,8 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
         )) ?>
         {{?}}
         <a class="k-upload__details-button js-open-info">
-            <span class="k-upload__details-button__view"><?= translate('show<span class="k-hidden-mobile"> queue</span>') ?></span>
-            <span class="k-upload__details-button__close"><?= translate('hide<span class="k-hidden-mobile"> queue</span>') ?></span>
+            <span class="k-upload__details-button__view"><?= translate('show queue') ?></span>
+            <span class="k-upload__details-button__close"><?= translate('hide queue') ?></span>
         </a>
     </div>
     <div class="k-upload__drop-message">

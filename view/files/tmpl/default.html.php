@@ -48,19 +48,17 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             <ktml:toolbar type="actionbar" no-buttons>
         </div>
 
-        <? if (!isset(parameters()->config->can_upload) || parameters()->config->can_upload): ?>
-            <?= import('uploader.html');?>
-        <? endif; ?>
-
 
         <!-- Scopebar -->
         <div class="k-scopebar">
 
             <!-- Breadcrumb -->
-            <div id="files-pathway" class="k-breadcrumb"></div><!-- .k-breadcrumb -->
+            <div class="k-scopebar__item k-scopebar__item--fluid">
+                <div id="files-pathway" class="k-breadcrumb" style="border-bottom:none;"></div>
+            </div>
 
             <!-- Filters -->
-            <div class="k-scopebar__item k-scopebar__item--fluid">
+            <div class="k-scopebar__item">
 
                 <!-- Right floating group -->
                 <div class="k-scopebar__group--right">
@@ -90,6 +88,11 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             </div>
 
         </div>
+
+        <? if (!isset(parameters()->config->can_upload) || parameters()->config->can_upload): ?>
+            <?= import('uploader.html');?>
+        <? endif; ?>
+
 
         <div class="k-grid-table-container">
             <div id="files-grid-container">
