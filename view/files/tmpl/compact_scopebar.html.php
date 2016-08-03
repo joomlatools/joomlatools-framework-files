@@ -10,15 +10,7 @@ defined('KOOWA') or die;
 ?>
 
 <!-- Scopebar -->
-<div class="k-scopebar">
-
-    <!-- Filters -->
-    <div class="k-scopebar__item k-scopebar__item--fluid">
-
-        <!-- Search toggle button -->
-        <button type="button" class="k-toggle-search"><span class="k-icon-magnifying-glass"></span><span class="visually-hidden"><?= translate('Search'); ?></span></button>
-
-    </div>
+<div class="k-scopebar k-js-scopebar">
 
     <!-- Search -->
     <div class="k-scopebar__item k-scopebar__item--search">

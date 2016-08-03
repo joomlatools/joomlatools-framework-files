@@ -9,17 +9,17 @@
 defined('KOOWA') or die;
 ?>
 
-<div id="k-sidebar-right" class="k-sidebar-right">
+<div class="k-sidebar-right k-js-sidebar-right">
 
-    <div class="k-sidebar__item">
-        <div class="k-sidebar__header">
+    <div class="k-sidebar-item">
+        <div class="k-sidebar-item__header">
             <?= translate('Selected file info'); ?>
         </div>
-        <div class="k-sidebar__content">
+        <div class="k-sidebar-item__content">
             <div id="files-preview">
                 <?= translate('Select a file from the list'); ?>
             </div>
-            <div id="insert-button-container" class="k-button-container"></div>
+            <div id="insert-button-container"></div>
         </div>
     </div>
 </div><!-- .k-sidebar-right -->
