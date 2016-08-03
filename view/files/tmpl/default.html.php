@@ -38,48 +38,35 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     });
 </script>
 
+<!-- Component -->
+<div class="k-component" id="files-app">
 
-<div id="files-app" class="k-list-layout">
+    <div class="k-flex-wrapper" id="files-canvas">
 
-    <div id="files-canvas" class="k-list-layout">
-
-        <!-- Title when sidebar is inivisible -->
-        <div class="k-mobile-title">
+        <!-- Title when sidebar is invisible -->
+        <div class="k-title-bar k-title-bar--mobile k-js-title-bar">
             <ktml:toolbar type="actionbar" no-buttons>
         </div>
 
-
         <!-- Scopebar -->
-        <div class="k-scopebar">
+        <div class="k-scopebar k-js-scopebar">
 
             <!-- Breadcrumb -->
-            <div class="k-scopebar__item k-scopebar__item--fluid">
-                <div id="files-pathway" class="k-breadcrumb" style="border-bottom:none;"></div>
+            <div class="k-scopebar__item k-scopebar__item--breadcrumbs">
+                <div id="files-pathway" class="k-breadcrumb"></div>
             </div>
 
-            <!-- Filters -->
-            <div class="k-scopebar__item">
-
-                <!-- Right floating group -->
-                <div class="k-scopebar__group--right">
-
-                    <!-- Layout style buttons -->
-                    <div class="k-scopebar__group--right__item files-layout-controls" data-toggle="buttons-radio">
-                        <button class="files-layout-switcher" data-layout="icons" title="<?= translate('Show files as icons'); ?>">
-                            <span class="k-icon-grid-three-up"></span>
-                        </button>
-                        <button class="files-layout-switcher" data-layout="details" title="<?= translate('Show files in a list'); ?>">
-                            <span class="k-icon-list"></span>
-                        </button>
-                    </div>
-
-                    <!-- Search toggle button -->
-                    <div class="k-scopebar__search-toggle-wrapper">
-                        <button type="button" class="k-scopebar-icon-button k-toggle-search js-toggle-search"><span class="k-icon-magnifying-glass"></span><span class="visually-hidden"><?= translate('Search'); ?></span></button>
-                    </div><!-- .k-scopebar__search-toggle-wrapper -->
-
-                </div><!-- .kscopebar__group-right -->
-
+            <!-- Buttons -->
+            <? // @TODO: Ercan: Doesn't seem to be working anymore even though I changed the JS as well; ?>
+            <div class="k-scopebar__item k-scopebar__item--buttons">
+                <button class="k-scopebar__button k-js-layout-switcher" data-layout="icons" title="<?= translate('Show files as icons'); ?>">
+                    <span class="k-icon-grid-four-up" aria-hidden="true"></span>
+                    <span class="k-visually-hidden">Grid icon</span>
+                </button>
+                <button class="k-scopebar__button k-js-layout-switcher" data-layout="details" title="<?= translate('Show files in a list'); ?>">
+                    <span class="k-icon-list" aria-hidden="true"></span>
+                    <span class="k-visually-hidden">List icon</span>
+                </button>
             </div>
 
             <!-- Search -->
@@ -87,24 +74,25 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 <?= helper('grid.search', array('submit_on_clear' => false, 'placeholder' => @translate('Find by file or folder name&hellip;'))) ?>
             </div>
 
-        </div>
+        </div><!-- .k-scopebar -->
 
         <? if (!isset(parameters()->config->can_upload) || parameters()->config->can_upload): ?>
             <?= import('uploader.html');?>
         <? endif; ?>
 
-
-        <div class="k-grid-table-container">
+        <div class="k-flex-wrapper">
             <div id="files-grid-container">
                 <div id="files-grid"></div>
-                <div class="k-table-pagination">
+                <div class="k-table-pagination" id="files-paginator-container">
                     <?= helper('paginator.pagination') ?>
                 </div>
             </div>
         </div>
 
-    </div>
-</div>
+    </div><!-- .k-flex-wrapper -->
+
+</div><!-- .k-component -->
+
 
 <div class="k-dynamic-content-holder">
     <?= import('templates_icons.html'); ?>

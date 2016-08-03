@@ -17,7 +17,7 @@ Files.Grid = new Class({
 		onClickImage: function (){},
 		onDeleteNode: function (){},
 		onSwitchLayout: function (){},
-		switchers: '.files-layout-switcher',
+		switchers: '.k-js-layout-switcher',
 		layout: false,
 		spinner_container: 'spinner_container',
 		batch_delete: false,

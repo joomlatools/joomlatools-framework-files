@@ -28,6 +28,8 @@ window.addEvent('domready', function() {
 })
 </script>
 
+<? // @TODO: Ercan: Make these `<script>`s instead of `<textarea>`s please; ?>
+
 <textarea style="display: none" id="details_container">
     <table class="k-files-table footable">
         <thead>

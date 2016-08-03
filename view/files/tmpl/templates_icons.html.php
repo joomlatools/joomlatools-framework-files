@@ -8,6 +8,8 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
+<? // @TODO: Ercan: Make these `<script>`s instead of `<textarea>`s please; ?>
+
 <textarea style="display: none" id="file_preview">
 <div class="well extension-[%=metadata.extension%]">
     <div class="k-file-info">
@@ -66,78 +68,78 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </textarea>
 
 <textarea style="display: none" id="icons_container">
-    <div class="k-grid__items">
-        <div class="k-grid__items__folders"></div>
-        <div class="k-grid__items__files"></div>
-    </div>
+    <div class="k-gallery__items"></div>
 </textarea>
 
 <textarea style="display: none" id="icons_folder">
-    <div class="k-grid__item k-grid__item--folder files-node files-folder">
-        <div class="k-grid__item__title js-navigate-folder">
-            <div class="controls" style="display: inline-block">
-                <input type="checkbox" class="files-select" value="" />
+    <div class="k-gallery__item k-gallery__item--folder files-node files-folder">
+        <div class="k-card js-navigate-folder">
+            <div class="k-card__body">
+                <div class="k-card__title">
+                    <input type="checkbox" class="files-select" value="" />
+                    <a href="javascript:void(0)" class="navigate">[%=name%]</a>
+                </div>
             </div>
-            <a href="#" class="navigate">[%=name%]</a>
         </div>
     </div>
 </textarea>
 
 <textarea style="display: none" id="icons_file">
-    <div class="k-grid__item k-grid__item--file files-node files-file">
-        <div class="k-grid__item__content">
-            <div class="k-grid__file-wrapper">
-                [%
-                var icon = 'default',
-                extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
+    <div class="k-gallery__item k-gallery__item--file files-node files-file">
+        <div class="k-card">
+            [%
+            var icon = 'default',
+            extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
 
-                kQuery.each(Files.icon_map, function(key, value) {
-                if (kQuery.inArray(extension, value) !== -1) {
-                icon = key;
-                }
-                });
-                %]
-                <a class="k-grid__file navigate" href="#"
-                   data-filetype="[%=filetype%]"
-                   data-extension="[%=metadata.extension%]">
-                    <div class="k-grid__item__cell">
-                        <span class="koowa_icon--[%=icon%] koowa_icon--48 extension-label"></span>
+            kQuery.each(Files.icon_map, function(key, value) {
+            if (kQuery.inArray(extension, value) !== -1) {
+            icon = key;
+            }
+            });
+            %]
+            <a href="javascript:void(0)"
+               class="k-card__body k-card__body--preview"
+               data-filetype="[%=filetype%]"
+               data-extension="[%=metadata.extension%]">
+                <div class="k-card__preview-content-wrapper">
+                    <div class="k-card__preview-content">
+                        <div class="k-card__preview">
+                            <span class="k-icon-document-[%=icon%] k-icon--size-large k-icon--accent extension-label"></span>
+                        </div>
                     </div>
-                </a>
-
-            </div>
-        </div>
-        <div class="k-grid__item__title js-select-node">
-            <div class="controls" style="display: inline-block">
+                </div>
+            </a>
+            <div class="k-card__title js-select-node">
                 <input type="checkbox" class="files-select" value="" />
+                [%=name%]
             </div>
-            [%=name%]
         </div>
     </div>
 </textarea>
 
 <textarea style="display: none" id="icons_image">
-    <div class="k-grid__item k-grid__item--file  files-node files-image ">
-        <div class="k-grid__item__content">
-            <div class="k-grid__file-wrapper">
-                <a  class="k-grid__file navigate
-                    [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
-                   data-filetype="[%=filetype%]"
-                   data-extension="[%=metadata.extension%]">
-                    [% if (typeof thumbnail === 'string') { %]
-                    <div class="k-grid__item__cell">
-                        <div class="spinner"></div>
-                        <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
+    <div class="k-gallery__item k-gallery__item--file files-node files-image">
+        <div class="k-card">
+            <a href="javascript:void(0)"
+               class="k-card__body k-card__body--preview [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"
+               title="[%=name%]"
+               data-filetype="[%=filetype%]"
+               data-extension="[%=metadata.extension%]">
+                [% if (typeof thumbnail === 'string') { %]
+                <div class="k-card__preview-content-wrapper">
+                    <div class="k-card__preview-content">
+                        <div class="k-card__preview">
+                            <div class="spinner"></div>
+                            <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
+                        </div>
                     </div>
-                    [% } %]
-                </a>
-            </div>
-        </div>
-        <div class="k-grid__item__title js-select-node">
-            <div class="controls" style="display: inline-block">
+                </div>
+                [% } %]
+            </a>
+            <div class="k-card__title js-select-node">
                 <input type="checkbox" class="files-select" value="" />
+                [%=name%]
             </div>
-            [%=name%]
         </div>
     </div>
 </textarea>

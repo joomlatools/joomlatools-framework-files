@@ -2245,7 +2245,7 @@ Files.Grid = new Class({
 		onClickImage: function (){},
 		onDeleteNode: function (){},
 		onSwitchLayout: function (){},
-		switchers: '.files-layout-switcher',
+		switchers: '.k-js-layout-switcher',
 		layout: false,
 		spinner_container: 'spinner_container',
 		batch_delete: false,
@@ -3525,16 +3525,8 @@ Files.Paginator = new Class({
                 this.element = document.id(this.options.element);
             }
 
-            this.element.getParent().setStyle('position', 'relative');
+            this.element.getParent();
             var pathway = this.element;
-            pathway.setStyles({
-                'overflow': 'auto',
-                'text-overflow': 'ellipsis',
-                'white-space': 'nowrap',
-                'bottom': 'auto',
-                'top': 'auto',
-                'position': 'static'
-            });
             pathway.empty();
             var list = new Element('ul'),
                 wrap = function(app, title, path, icon){
@@ -3549,7 +3541,7 @@ Files.Paginator = new Class({
                     });
 
                     link = new Element('a', {
-                        'class': 'k-breadcrumb__item',
+                        'class': 'k-breadcrumb__content',
                         html: title
                     });
 
@@ -3562,9 +3554,9 @@ Files.Paginator = new Class({
                 };
 
 
-            var root = wrap(app, '<span class="k-breadcrumb_root-text">'+app.container.title+'</span>', '', false)
+            var root = wrap(app, '<span class="k-icon-home" aria-hidden="true"></span><span class="k-visually-hidden">'+app.container.title+'</span>', '', false)
                         .addClass('k-breadcrumb__home')
-                        .getElement('a').addClass('k-icon-home').getParent();
+                        .getElement('a').getParent();
 
             list.adopt(root);
 
@@ -4218,8 +4210,8 @@ Files.App = new Class({
             'onAfterSetLayout': function(context) {
 
                 if (context.layout === 'icons' || context.layout === 'details') {
-                    var layout = context.layout === 'icons' ? 'grid' : 'table',
-                        remove = layout === 'grid' ? 'table' : 'grid';
+                    var layout = context.layout === 'icons' ? 'gallery' : 'table',
+                        remove = layout === 'gallery' ? 'table' : 'gallery';
 
                     this.container.removeClass('k-'+remove).addClass('k-'+layout);
                     kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
@@ -4231,6 +4223,7 @@ Files.App = new Class({
                         kQuery('.k-table-container').floatThead('reflow');
                     }*/
                 }
+
 
                 if (key) {
                     Cookie.write(key, context.layout, that.options.cookie);

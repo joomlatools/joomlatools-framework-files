@@ -46,16 +46,8 @@
                 this.element = document.id(this.options.element);
             }
 
-            this.element.getParent().setStyle('position', 'relative');
+            this.element.getParent();
             var pathway = this.element;
-            pathway.setStyles({
-                'overflow': 'auto',
-                'text-overflow': 'ellipsis',
-                'white-space': 'nowrap',
-                'bottom': 'auto',
-                'top': 'auto',
-                'position': 'static'
-            });
             pathway.empty();
             var list = new Element('ul'),
                 wrap = function(app, title, path, icon){
@@ -70,7 +62,7 @@
                     });
 
                     link = new Element('a', {
-                        'class': 'k-breadcrumb__item',
+                        'class': 'k-breadcrumb__content',
                         html: title
                     });
 
@@ -83,9 +75,9 @@
                 };
 
 
-            var root = wrap(app, '<span class="k-breadcrumb_root-text">'+app.container.title+'</span>', '', false)
+            var root = wrap(app, '<span class="k-icon-home" aria-hidden="true"></span><span class="k-visually-hidden">'+app.container.title+'</span>', '', false)
                         .addClass('k-breadcrumb__home')
-                        .getElement('a').addClass('k-icon-home').getParent();
+                        .getElement('a').getParent();
 
             list.adopt(root);
 

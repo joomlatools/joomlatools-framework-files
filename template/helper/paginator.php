@@ -29,23 +29,22 @@ class ComFilesTemplateHelperPaginator extends KTemplateHelperPaginator
             'limit'   => 0,
         ));
 
+        // @TODO: Ercan: Needs to be like the pagiantion in DOCman. But as soon as I remove things the functionality breaks..
+
         $translator = $this->getObject('translator');
 
-        $html  = '<div id="files-paginator-container">';
+        $html = '<div class="k-pagination" id="files-paginator">';
 
-        $html .= '<div class="k-pagination" id="files-paginator">';
-
-        $html .= '<div class="limit">'.$this->limit($config->toArray()).'</div>';
+        $html .= '<div class="k-pagination__limit limit">'.$this->limit($config->toArray()).'</div>';
 
         $html .= '<span class="start hidden"><a></a></span>';
-        $html .= '<ul class="pagination">';
+        $html .= '<ul class="k-pagination__pages pagination">';
         $html .=  $this->_pages(array());
         $html .= '</ul>';
         $html .= '<span class="end hidden"><a></a></span>';
 
         $html .= '<div class="k-pagination-pages"> ';
         $html .= sprintf($translator->translate('JLIB_HTML_PAGE_CURRENT_OF_TOTAL'), '<strong class="page-current">1</strong>', '<strong class="page-total">1</strong></div>');
-        $html .= '</div>';
         $html .= '</div>';
 
         return $html;
