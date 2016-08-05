@@ -57,15 +57,14 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             </div>
 
             <!-- Buttons -->
-            <? // @TODO: Ercan: Doesn't seem to be working anymore even though I changed the JS as well; ?>
             <div class="k-scopebar__item k-scopebar__item--buttons">
                 <button class="k-scopebar__button k-js-layout-switcher" data-layout="icons" title="<?= translate('Show files as icons'); ?>">
                     <span class="k-icon-grid-four-up" aria-hidden="true"></span>
-                    <span class="k-visually-hidden">Grid icon</span>
+                    <span class="k-visually-hidden"><?= translate('Grid icon'); ?></span>
                 </button>
                 <button class="k-scopebar__button k-js-layout-switcher" data-layout="details" title="<?= translate('Show files in a list'); ?>">
                     <span class="k-icon-list" aria-hidden="true"></span>
-                    <span class="k-visually-hidden">List icon</span>
+                    <span class="k-visually-hidden"><?= translate('List icon'); ?></span>
                 </button>
             </div>
 

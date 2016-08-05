@@ -8,8 +8,6 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<? // @TODO: Ercan: Make these `<script>`s instead of `<textarea>`s please; ?>
-
 <textarea style="display: none" id="file_preview">
 <div class="well extension-[%=metadata.extension%]">
     <div class="k-file-info">
