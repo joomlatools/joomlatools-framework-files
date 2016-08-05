@@ -413,7 +413,7 @@
 /** Display override for inline forms */
 .form-inline .select2-container--bootstrap { display: inline-block; }
 
-.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-top: 4px solid \9; border-right: 4px solid transparent; border-left: 4px solid transparent; }
+.caret { display: inline-block; width: 0; height: 0; margin-left: 2px; vertical-align: middle; border-top: 4px dashed; border-right: 4px solid transparent; border-left: 4px solid transparent; }
 
 .dropup, .dropdown { position: relative; }
 
@@ -449,7 +449,7 @@
 
 .pull-right > .dropdown-menu { right: 0; left: auto; }
 
-.dropup .caret, .navbar-fixed-bottom .dropdown .caret { border-top: 0; border-bottom: 4px dashed; border-bottom: 4px solid \9; content: ""; }
+.dropup .caret, .navbar-fixed-bottom .dropdown .caret { border-top: 0; border-bottom: 4px solid; content: ""; }
 
 .dropup .dropdown-menu, .navbar-fixed-bottom .dropdown .dropdown-menu { top: auto; bottom: 100%; margin-bottom: 2px; }
 
@@ -1311,8 +1311,8 @@ body.k-resizing { overflow: hidden; }
 
 /* ========================================================================== Koowa namespaced styling ========================================================================== */
 /** By namespacing we make sure our styles never interfere with other styles on the page For example when using Nooku inside of another framework or CMS like Joomla or Wordpress */
-/** List view Complete list view markup: <!-- Wrapper --> <div class="k-wrapper"> <!-- Overview --> <div class="k-content-wrapper"> <!-- Sidebar --> <div class="k-sidebar"> <sg-insert>2.15-all</sg-insert> </div> <!-- Content --> <div class="k-content"> <!-- Title when sidebar is inivisible --> <div class="k-mobile-title"> Title </div> <!-- Toolbar --> <sg-insert>4.1</sg-insert> <!-- Component --> <div class="k-component"> <!-- Form --> <form class="k-list-layout -koowa-grid" id="k-offcanvas-container" action="" method="get"> <sg-insert>3.1</sg-insert> <sg-insert>3.4</sg-insert> <sg-insert>3.5</sg-insert> </form><!-- .k-list-layout --> </div><!-- .k-component --> </div><!-- k-content --> </div><!-- .k-content-wrapper --> </div><!-- .k-wrapper --> Styleguide 5.1 */
-.koowa { /* Border-box size everything */ /* Namespaced Normalize */ /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */ /* Namespaced Twitter Bootstrap */ /* Koowa */ /** JQTree */ /* Bootstrap overrides / extensions */ /** Default button styles 1. Right floating buttons 2. Remove underline when button is an <a> element */ /* Remove all shadows for a more flat looking button */ /** Control groups Remove the bottom margin of the last child This way the groups don't add large spacing in bordered boxes */ /* ========================================================================== Bootstrap input group ========================================================================== */ /** Align to top so we can add a help message below the field */ /** Position the dropdown toggles properly */ /** Position the dropdown toggles properly */ /* Multiple buttons in a row */ /* RTL */ /* Layout */ /* ========================================================================== Component ========================================================================== */ /* ========================================================================== The content div ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /** Overlay when toggled 1. Set opacity 2. Set z-index to 1 so it will become visible */ /* ========================================================================== The content wrapper ========================================================================== */ /** The default content wrapper layout 1. Left sidebar 2. Toggle button 3. Toolbar 4. Breadcrumbs 5. Upload area 6. Scopebar 7. Table / grid / content 8. Right sidebar _____________________________ |  1  |_2_|_3_________|  8  | |     |_4_____________|     | |     |_5_____________|     | |     |_6_____________|     | |     | 7             |     | |     |               |     | |     |               |     | |     |               |     | |     |               |     | |_____|_______________|_____| */ /** 1. Clearing toolbar floats when flexbox is not in use */ /* ========================================================================== Form layout ========================================================================== */ /* ========================================================================== Frontend UI ========================================================================== */ /* ========================================================================== Grid ========================================================================== */ /** <!-- Container --> <div class="k-container"> <!-- Main information --> <div class="k-container__main"> Main </div><!-- .k-container__main --> <!-- Other information --> <div class="k-container__sub"> Sub </div><!-- .k-container__sub --> </div><!-- .k-container --> */ /* Container */ /* -------------------------------------------------------------------------- Grid children -------------------------------------------------------------------------- */ /** Main container */ /* When a sidebar is active next to it */ /** Sub container */ /* When a sidebar is active next to it */ /** Full container */ /* RTL */ /* Parent container surrounding the toggling table and grid in files view */ /** Files layout switcher Switches layout from grid to list view */ /* ========================================================================== List layout ========================================================================== */ /* ========================================================================== Mobile title ========================================================================== */ /* ========================================================================== Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /* ========================================================================== Sidebars ========================================================================== */ /** The left and right sidebar */ /* RTL */ /* Left sidebar specific styling */ /* When sidebar is toggled */ /* Right sidebar specific styling */ /* When sidebar is toggled */ /* Sidebar contents ========================================================================== */ /* Sidebar item */ /* Sidebar header */ /* Sidebar content */ /** Overflowing items 1. Set container to overflow it's items */ /* ========================================================================== Titlebar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Titlebar when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** Fake Overlay when toggled 1. Set opacity 2. Set z-index so it will become visible */ /* Titlebar contents */ /* ========================================================================== Toolbar ========================================================================== */ /*
+/** List view Complete list view markup: <!-- Wrapper --> <div class="k-wrapper"> <!-- Overview --> <div class="k-content-wrapper"> <!-- Sidebar --> <div class="k-sidebar"> <sg-insert>2.15-all</sg-insert> </div> <!-- Content --> <div class="k-content"> <!-- Title when sidebar is inivisible --> <div class="k-mobile-title"> Title </div> <!-- Toolbar --> <sg-insert>4.1</sg-insert> <!-- Component --> <div class="k-component"> <!-- Form --> <form class="k-list-layout k-js-grid-controller" id="k-offcanvas-container" action="" method="get"> <sg-insert>3.1</sg-insert> <sg-insert>3.4</sg-insert> <sg-insert>3.5</sg-insert> </form><!-- .k-list-layout --> </div><!-- .k-component --> </div><!-- k-content --> </div><!-- .k-content-wrapper --> </div><!-- .k-wrapper --> Styleguide 5.1 */
+.koowa { /* Border-box size everything */ /* Namespaced Normalize */ /*! normalize.css v3.0.2 | MIT License | git.io/normalize */ /* Namespaced Twitter Bootstrap */ /* Koowa */ /** JQTree */ /* Bootstrap overrides / extensions */ /** Default button styles 1. Right floating buttons 2. Remove underline when button is an <a> element */ /* Remove all shadows for a more flat looking button */ /** Control groups Remove the bottom margin of the last child This way the groups don't add large spacing in bordered boxes */ /* ========================================================================== Bootstrap input group ========================================================================== */ /** Align to top so we can add a help message below the field */ /** Position the dropdown toggles properly */ /** Position the dropdown toggles properly */ /* Multiple buttons in a row */ /* RTL */ /* Layout */ /* ========================================================================== Component ========================================================================== */ /* ========================================================================== The content div ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /** Overlay when toggled 1. Set opacity 2. Set z-index to 1 so it will become visible */ /* ========================================================================== The content wrapper ========================================================================== */ /** The default content wrapper layout 1. Left sidebar 2. Toggle button 3. Toolbar 4. Breadcrumbs 5. Upload area 6. Scopebar 7. Table / grid / content 8. Right sidebar _____________________________ |  1  |_2_|_3_________|  8  | |     |_4_____________|     | |     |_5_____________|     | |     |_6_____________|     | |     | 7             |     | |     |               |     | |     |               |     | |     |               |     | |     |               |     | |_____|_______________|_____| */ /** 1. Clearing toolbar floats when flexbox is not in use */ /* ========================================================================== Form layout ========================================================================== */ /* ========================================================================== Frontend UI ========================================================================== */ /* ========================================================================== Grid ========================================================================== */ /** <!-- Container --> <div class="k-container"> <!-- Main information --> <div class="k-container__main"> Main </div><!-- .k-container__main --> <!-- Other information --> <div class="k-container__sub"> Sub </div><!-- .k-container__sub --> </div><!-- .k-container --> */ /* Container */ /* -------------------------------------------------------------------------- Grid children -------------------------------------------------------------------------- */ /** Main container */ /* When a sidebar is active next to it */ /** Sub container */ /* When a sidebar is active next to it */ /** Full container */ /* RTL */ /* Parent container surrounding the toggling table and grid in files view */ /** Files layout switcher Switches layout from grid to list view */ /* ========================================================================== List layout ========================================================================== */ /* ========================================================================== Mobile title ========================================================================== */ /* ========================================================================== Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /* ========================================================================== Sidebars ========================================================================== */ /** The left and right sidebar */ /* RTL */ /* Left sidebar specific styling */ /* When sidebar is toggled */ /* Right sidebar specific styling */ /* When sidebar is toggled */ /* Sidebar contents ========================================================================== */ /* Sidebar item */ /* Sidebar header */ /* Sidebar content */ /** Overflowing items 1. Set container to overflow it's items */ /* ========================================================================== Titlebar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Titlebar when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** Fake Overlay when toggled 1. Set opacity 2. Set z-index so it will become visible */ /* Titlebar contents */ /* ========================================================================== Toolbar ========================================================================== */ /*
 Toolbar
 
 Default toolbar
@@ -1481,29 +1481,29 @@ markup:
         <table>
         <thead>
             <tr>
-                <th width="1%"><input type="checkbox" class="-koowa-grid-checkall"></th>
+                <th width="1%"><input type="checkbox" class="k-js-grid-checkall"></th>
                 <th>{content}</th>
                 <th>{content}</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
             <tr>
-                <td><input type="checkbox" class="-koowa-grid-checkbox"></td>
+                <td><input type="checkbox" class="k-js-grid-checkbox"></td>
                 <td>{content}</td>
                 <td>{content}</td>
             </tr>
@@ -1644,103 +1644,65 @@ Styleguide 3.5
 
 .koowa .btn:active, .koowa .btn.active { outline: 0; background-image: none; box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125); }
 
-.koowa .btn.disabled, .koowa .btn[disabled], fieldset[disabled] .koowa .btn { cursor: not-allowed; opacity: 0.65; filter: alpha(opacity=65); box-shadow: none; }
-
-.koowa a.btn.disabled, fieldset[disabled] .koowa a.btn { pointer-events: none; }
+.koowa .btn.disabled, .koowa .btn[disabled], fieldset[disabled] .koowa .btn { cursor: not-allowed; pointer-events: none; opacity: 0.65; filter: alpha(opacity=65); box-shadow: none; }
 
 .koowa .btn-default { color: #333; background-color: #fff; border-color: #ccc; }
 
-.koowa .btn-default:focus, .koowa .btn-default.focus { color: #333; background-color: #e6e6e6; border-color: #8c8c8c; }
-
-.koowa .btn-default:hover { color: #333; background-color: #e6e6e6; border-color: #adadad; }
-
-.koowa .btn-default:active, .koowa .btn-default.active, .open > .koowa .btn-default.dropdown-toggle { color: #333; background-color: #e6e6e6; border-color: #adadad; }
-
-.koowa .btn-default:active:hover, .koowa .btn-default:active:focus, .koowa .btn-default:active.focus, .koowa .btn-default.active:hover, .koowa .btn-default.active:focus, .koowa .btn-default.active.focus, .open > .koowa .btn-default.dropdown-toggle:hover, .open > .koowa .btn-default.dropdown-toggle:focus, .open > .koowa .btn-default.dropdown-toggle.focus { color: #333; background-color: #d4d4d4; border-color: #8c8c8c; }
+.koowa .btn-default:hover, .koowa .btn-default:focus, .koowa .btn-default.focus, .koowa .btn-default:active, .koowa .btn-default.active, .open > .koowa .btn-default.dropdown-toggle { color: #333; background-color: #e6e6e6; border-color: #adadad; }
 
 .koowa .btn-default:active, .koowa .btn-default.active, .open > .koowa .btn-default.dropdown-toggle { background-image: none; }
 
-.koowa .btn-default.disabled:hover, .koowa .btn-default.disabled:focus, .koowa .btn-default.disabled.focus, .koowa .btn-default[disabled]:hover, .koowa .btn-default[disabled]:focus, .koowa .btn-default[disabled].focus, fieldset[disabled] .koowa .btn-default:hover, fieldset[disabled] .koowa .btn-default:focus, fieldset[disabled] .koowa .btn-default.focus { background-color: #fff; border-color: #ccc; }
+.koowa .btn-default.disabled, .koowa .btn-default.disabled:hover, .koowa .btn-default.disabled:focus, .koowa .btn-default.disabled.focus, .koowa .btn-default.disabled:active, .koowa .btn-default.disabled.active, .koowa .btn-default[disabled], .koowa .btn-default[disabled]:hover, .koowa .btn-default[disabled]:focus, .koowa .btn-default[disabled].focus, .koowa .btn-default[disabled]:active, .koowa .btn-default[disabled].active, fieldset[disabled] .koowa .btn-default, fieldset[disabled] .koowa .btn-default:hover, fieldset[disabled] .koowa .btn-default:focus, fieldset[disabled] .koowa .btn-default.focus, fieldset[disabled] .koowa .btn-default:active, fieldset[disabled] .koowa .btn-default.active { background-color: #fff; border-color: #ccc; }
 
 .koowa .btn-default .badge { color: #fff; background-color: #333; }
 
 .koowa .btn-primary { color: #fff; background-color: #337ab7; border-color: #2e6da4; }
 
-.koowa .btn-primary:focus, .koowa .btn-primary.focus { color: #fff; background-color: #286090; border-color: #122b40; }
-
-.koowa .btn-primary:hover { color: #fff; background-color: #286090; border-color: #204d74; }
-
-.koowa .btn-primary:active, .koowa .btn-primary.active, .open > .koowa .btn-primary.dropdown-toggle { color: #fff; background-color: #286090; border-color: #204d74; }
-
-.koowa .btn-primary:active:hover, .koowa .btn-primary:active:focus, .koowa .btn-primary:active.focus, .koowa .btn-primary.active:hover, .koowa .btn-primary.active:focus, .koowa .btn-primary.active.focus, .open > .koowa .btn-primary.dropdown-toggle:hover, .open > .koowa .btn-primary.dropdown-toggle:focus, .open > .koowa .btn-primary.dropdown-toggle.focus { color: #fff; background-color: #204d74; border-color: #122b40; }
+.koowa .btn-primary:hover, .koowa .btn-primary:focus, .koowa .btn-primary.focus, .koowa .btn-primary:active, .koowa .btn-primary.active, .open > .koowa .btn-primary.dropdown-toggle { color: #fff; background-color: #286090; border-color: #204d74; }
 
 .koowa .btn-primary:active, .koowa .btn-primary.active, .open > .koowa .btn-primary.dropdown-toggle { background-image: none; }
 
-.koowa .btn-primary.disabled:hover, .koowa .btn-primary.disabled:focus, .koowa .btn-primary.disabled.focus, .koowa .btn-primary[disabled]:hover, .koowa .btn-primary[disabled]:focus, .koowa .btn-primary[disabled].focus, fieldset[disabled] .koowa .btn-primary:hover, fieldset[disabled] .koowa .btn-primary:focus, fieldset[disabled] .koowa .btn-primary.focus { background-color: #337ab7; border-color: #2e6da4; }
+.koowa .btn-primary.disabled, .koowa .btn-primary.disabled:hover, .koowa .btn-primary.disabled:focus, .koowa .btn-primary.disabled.focus, .koowa .btn-primary.disabled:active, .koowa .btn-primary.disabled.active, .koowa .btn-primary[disabled], .koowa .btn-primary[disabled]:hover, .koowa .btn-primary[disabled]:focus, .koowa .btn-primary[disabled].focus, .koowa .btn-primary[disabled]:active, .koowa .btn-primary[disabled].active, fieldset[disabled] .koowa .btn-primary, fieldset[disabled] .koowa .btn-primary:hover, fieldset[disabled] .koowa .btn-primary:focus, fieldset[disabled] .koowa .btn-primary.focus, fieldset[disabled] .koowa .btn-primary:active, fieldset[disabled] .koowa .btn-primary.active { background-color: #337ab7; border-color: #2e6da4; }
 
 .koowa .btn-primary .badge { color: #337ab7; background-color: #fff; }
 
 .koowa .btn-success { color: white; background-color: #27ae60; border-color: #229955; }
 
-.koowa .btn-success:focus, .koowa .btn-success.focus { color: white; background-color: #1e8449; border-color: #0b311b; }
-
-.koowa .btn-success:hover { color: white; background-color: #1e8449; border-color: #176739; }
-
-.koowa .btn-success:active, .koowa .btn-success.active, .open > .koowa .btn-success.dropdown-toggle { color: white; background-color: #1e8449; border-color: #176739; }
-
-.koowa .btn-success:active:hover, .koowa .btn-success:active:focus, .koowa .btn-success:active.focus, .koowa .btn-success.active:hover, .koowa .btn-success.active:focus, .koowa .btn-success.active.focus, .open > .koowa .btn-success.dropdown-toggle:hover, .open > .koowa .btn-success.dropdown-toggle:focus, .open > .koowa .btn-success.dropdown-toggle.focus { color: white; background-color: #176739; border-color: #0b311b; }
+.koowa .btn-success:hover, .koowa .btn-success:focus, .koowa .btn-success.focus, .koowa .btn-success:active, .koowa .btn-success.active, .open > .koowa .btn-success.dropdown-toggle { color: white; background-color: #1e8449; border-color: #176739; }
 
 .koowa .btn-success:active, .koowa .btn-success.active, .open > .koowa .btn-success.dropdown-toggle { background-image: none; }
 
-.koowa .btn-success.disabled:hover, .koowa .btn-success.disabled:focus, .koowa .btn-success.disabled.focus, .koowa .btn-success[disabled]:hover, .koowa .btn-success[disabled]:focus, .koowa .btn-success[disabled].focus, fieldset[disabled] .koowa .btn-success:hover, fieldset[disabled] .koowa .btn-success:focus, fieldset[disabled] .koowa .btn-success.focus { background-color: #27ae60; border-color: #229955; }
+.koowa .btn-success.disabled, .koowa .btn-success.disabled:hover, .koowa .btn-success.disabled:focus, .koowa .btn-success.disabled.focus, .koowa .btn-success.disabled:active, .koowa .btn-success.disabled.active, .koowa .btn-success[disabled], .koowa .btn-success[disabled]:hover, .koowa .btn-success[disabled]:focus, .koowa .btn-success[disabled].focus, .koowa .btn-success[disabled]:active, .koowa .btn-success[disabled].active, fieldset[disabled] .koowa .btn-success, fieldset[disabled] .koowa .btn-success:hover, fieldset[disabled] .koowa .btn-success:focus, fieldset[disabled] .koowa .btn-success.focus, fieldset[disabled] .koowa .btn-success:active, fieldset[disabled] .koowa .btn-success.active { background-color: #27ae60; border-color: #229955; }
 
 .koowa .btn-success .badge { color: #27ae60; background-color: white; }
 
 .koowa .btn-info { color: #fff; background-color: #5bc0de; border-color: #46b8da; }
 
-.koowa .btn-info:focus, .koowa .btn-info.focus { color: #fff; background-color: #31b0d5; border-color: #1b6d85; }
-
-.koowa .btn-info:hover { color: #fff; background-color: #31b0d5; border-color: #269abc; }
-
-.koowa .btn-info:active, .koowa .btn-info.active, .open > .koowa .btn-info.dropdown-toggle { color: #fff; background-color: #31b0d5; border-color: #269abc; }
-
-.koowa .btn-info:active:hover, .koowa .btn-info:active:focus, .koowa .btn-info:active.focus, .koowa .btn-info.active:hover, .koowa .btn-info.active:focus, .koowa .btn-info.active.focus, .open > .koowa .btn-info.dropdown-toggle:hover, .open > .koowa .btn-info.dropdown-toggle:focus, .open > .koowa .btn-info.dropdown-toggle.focus { color: #fff; background-color: #269abc; border-color: #1b6d85; }
+.koowa .btn-info:hover, .koowa .btn-info:focus, .koowa .btn-info.focus, .koowa .btn-info:active, .koowa .btn-info.active, .open > .koowa .btn-info.dropdown-toggle { color: #fff; background-color: #31b0d5; border-color: #269abc; }
 
 .koowa .btn-info:active, .koowa .btn-info.active, .open > .koowa .btn-info.dropdown-toggle { background-image: none; }
 
-.koowa .btn-info.disabled:hover, .koowa .btn-info.disabled:focus, .koowa .btn-info.disabled.focus, .koowa .btn-info[disabled]:hover, .koowa .btn-info[disabled]:focus, .koowa .btn-info[disabled].focus, fieldset[disabled] .koowa .btn-info:hover, fieldset[disabled] .koowa .btn-info:focus, fieldset[disabled] .koowa .btn-info.focus { background-color: #5bc0de; border-color: #46b8da; }
+.koowa .btn-info.disabled, .koowa .btn-info.disabled:hover, .koowa .btn-info.disabled:focus, .koowa .btn-info.disabled.focus, .koowa .btn-info.disabled:active, .koowa .btn-info.disabled.active, .koowa .btn-info[disabled], .koowa .btn-info[disabled]:hover, .koowa .btn-info[disabled]:focus, .koowa .btn-info[disabled].focus, .koowa .btn-info[disabled]:active, .koowa .btn-info[disabled].active, fieldset[disabled] .koowa .btn-info, fieldset[disabled] .koowa .btn-info:hover, fieldset[disabled] .koowa .btn-info:focus, fieldset[disabled] .koowa .btn-info.focus, fieldset[disabled] .koowa .btn-info:active, fieldset[disabled] .koowa .btn-info.active { background-color: #5bc0de; border-color: #46b8da; }
 
 .koowa .btn-info .badge { color: #5bc0de; background-color: #fff; }
 
 .koowa .btn-warning { color: #fff; background-color: #f0ad4e; border-color: #eea236; }
 
-.koowa .btn-warning:focus, .koowa .btn-warning.focus { color: #fff; background-color: #ec971f; border-color: #985f0d; }
-
-.koowa .btn-warning:hover { color: #fff; background-color: #ec971f; border-color: #d58512; }
-
-.koowa .btn-warning:active, .koowa .btn-warning.active, .open > .koowa .btn-warning.dropdown-toggle { color: #fff; background-color: #ec971f; border-color: #d58512; }
-
-.koowa .btn-warning:active:hover, .koowa .btn-warning:active:focus, .koowa .btn-warning:active.focus, .koowa .btn-warning.active:hover, .koowa .btn-warning.active:focus, .koowa .btn-warning.active.focus, .open > .koowa .btn-warning.dropdown-toggle:hover, .open > .koowa .btn-warning.dropdown-toggle:focus, .open > .koowa .btn-warning.dropdown-toggle.focus { color: #fff; background-color: #d58512; border-color: #985f0d; }
+.koowa .btn-warning:hover, .koowa .btn-warning:focus, .koowa .btn-warning.focus, .koowa .btn-warning:active, .koowa .btn-warning.active, .open > .koowa .btn-warning.dropdown-toggle { color: #fff; background-color: #ec971f; border-color: #d58512; }
 
 .koowa .btn-warning:active, .koowa .btn-warning.active, .open > .koowa .btn-warning.dropdown-toggle { background-image: none; }
 
-.koowa .btn-warning.disabled:hover, .koowa .btn-warning.disabled:focus, .koowa .btn-warning.disabled.focus, .koowa .btn-warning[disabled]:hover, .koowa .btn-warning[disabled]:focus, .koowa .btn-warning[disabled].focus, fieldset[disabled] .koowa .btn-warning:hover, fieldset[disabled] .koowa .btn-warning:focus, fieldset[disabled] .koowa .btn-warning.focus { background-color: #f0ad4e; border-color: #eea236; }
+.koowa .btn-warning.disabled, .koowa .btn-warning.disabled:hover, .koowa .btn-warning.disabled:focus, .koowa .btn-warning.disabled.focus, .koowa .btn-warning.disabled:active, .koowa .btn-warning.disabled.active, .koowa .btn-warning[disabled], .koowa .btn-warning[disabled]:hover, .koowa .btn-warning[disabled]:focus, .koowa .btn-warning[disabled].focus, .koowa .btn-warning[disabled]:active, .koowa .btn-warning[disabled].active, fieldset[disabled] .koowa .btn-warning, fieldset[disabled] .koowa .btn-warning:hover, fieldset[disabled] .koowa .btn-warning:focus, fieldset[disabled] .koowa .btn-warning.focus, fieldset[disabled] .koowa .btn-warning:active, fieldset[disabled] .koowa .btn-warning.active { background-color: #f0ad4e; border-color: #eea236; }
 
 .koowa .btn-warning .badge { color: #f0ad4e; background-color: #fff; }
 
 .koowa .btn-danger { color: #fff; background-color: #d9534f; border-color: #d43f3a; }
 
-.koowa .btn-danger:focus, .koowa .btn-danger.focus { color: #fff; background-color: #c9302c; border-color: #761c19; }
-
-.koowa .btn-danger:hover { color: #fff; background-color: #c9302c; border-color: #ac2925; }
-
-.koowa .btn-danger:active, .koowa .btn-danger.active, .open > .koowa .btn-danger.dropdown-toggle { color: #fff; background-color: #c9302c; border-color: #ac2925; }
-
-.koowa .btn-danger:active:hover, .koowa .btn-danger:active:focus, .koowa .btn-danger:active.focus, .koowa .btn-danger.active:hover, .koowa .btn-danger.active:focus, .koowa .btn-danger.active.focus, .open > .koowa .btn-danger.dropdown-toggle:hover, .open > .koowa .btn-danger.dropdown-toggle:focus, .open > .koowa .btn-danger.dropdown-toggle.focus { color: #fff; background-color: #ac2925; border-color: #761c19; }
+.koowa .btn-danger:hover, .koowa .btn-danger:focus, .koowa .btn-danger.focus, .koowa .btn-danger:active, .koowa .btn-danger.active, .open > .koowa .btn-danger.dropdown-toggle { color: #fff; background-color: #c9302c; border-color: #ac2925; }
 
 .koowa .btn-danger:active, .koowa .btn-danger.active, .open > .koowa .btn-danger.dropdown-toggle { background-image: none; }
 
-.koowa .btn-danger.disabled:hover, .koowa .btn-danger.disabled:focus, .koowa .btn-danger.disabled.focus, .koowa .btn-danger[disabled]:hover, .koowa .btn-danger[disabled]:focus, .koowa .btn-danger[disabled].focus, fieldset[disabled] .koowa .btn-danger:hover, fieldset[disabled] .koowa .btn-danger:focus, fieldset[disabled] .koowa .btn-danger.focus { background-color: #d9534f; border-color: #d43f3a; }
+.koowa .btn-danger.disabled, .koowa .btn-danger.disabled:hover, .koowa .btn-danger.disabled:focus, .koowa .btn-danger.disabled.focus, .koowa .btn-danger.disabled:active, .koowa .btn-danger.disabled.active, .koowa .btn-danger[disabled], .koowa .btn-danger[disabled]:hover, .koowa .btn-danger[disabled]:focus, .koowa .btn-danger[disabled].focus, .koowa .btn-danger[disabled]:active, .koowa .btn-danger[disabled].active, fieldset[disabled] .koowa .btn-danger, fieldset[disabled] .koowa .btn-danger:hover, fieldset[disabled] .koowa .btn-danger:focus, fieldset[disabled] .koowa .btn-danger.focus, fieldset[disabled] .koowa .btn-danger:active, fieldset[disabled] .koowa .btn-danger.active { background-color: #d9534f; border-color: #d43f3a; }
 
 .koowa .btn-danger .badge { color: #d9534f; background-color: #fff; }
 
@@ -1780,7 +1742,7 @@ Styleguide 3.5
 
 .koowa .btn-toolbar:after { clear: both; }
 
-.koowa .btn-toolbar .btn, .koowa .btn-toolbar .btn-group, .koowa .btn-toolbar .input-group { float: left; }
+.koowa .btn-toolbar .btn-group, .koowa .btn-toolbar .input-group { float: left; }
 
 .koowa .btn-toolbar > .btn, .koowa .btn-toolbar > .btn-group, .koowa .btn-toolbar > .input-group { margin-left: 5px; }
 
@@ -1828,9 +1790,9 @@ Styleguide 3.5
 
 .koowa .btn-group-vertical > .btn:not(:first-child):not(:last-child) { border-radius: 0; }
 
-.koowa .btn-group-vertical > .btn:first-child:not(:last-child) { border-top-right-radius: 4px; border-top-left-radius: 4px; border-bottom-right-radius: 0; border-bottom-left-radius: 0; }
+.koowa .btn-group-vertical > .btn:first-child:not(:last-child) { border-top-right-radius: 4px; border-bottom-right-radius: 0; border-bottom-left-radius: 0; }
 
-.koowa .btn-group-vertical > .btn:last-child:not(:first-child) { border-top-right-radius: 0; border-top-left-radius: 0; border-bottom-right-radius: 4px; border-bottom-left-radius: 4px; }
+.koowa .btn-group-vertical > .btn:last-child:not(:first-child) { border-bottom-left-radius: 4px; border-top-right-radius: 0; border-top-left-radius: 0; }
 
 .koowa .btn-group-vertical > .btn-group:not(:first-child):not(:last-child) > .btn { border-radius: 0; }
 
@@ -1886,8 +1848,6 @@ Styleguide 3.5
 
 .koowa .form-control::-webkit-input-placeholder { color: #999; }
 
-.koowa .form-control::-ms-expand { border: 0; background-color: transparent; }
-
 .koowa .form-control[disabled], .koowa .form-control[readonly], fieldset[disabled] .koowa .form-control { background-color: #eeeeee; opacity: 1; }
 
 .koowa .form-control[disabled], fieldset[disabled] .koowa .form-control { cursor: not-allowed; }
@@ -1896,7 +1856,7 @@ Styleguide 3.5
 
 .koowa input[type="search"] { -webkit-appearance: none; }
 
-@media screen and (-webkit-min-device-pixel-ratio: 0) { .koowa input[type="date"].form-control, .koowa input[type="time"].form-control, .koowa input[type="datetime-local"].form-control, .koowa input[type="month"].form-control { line-height: 32px; }
+@media screen and (-webkit-min-device-pixel-ratio: 0) { .koowa input[type="date"], .koowa input[type="time"], .koowa input[type="datetime-local"], .koowa input[type="month"] { line-height: 32px; }
   .koowa input[type="date"].input-sm, .koowa .input-group-sm > input[type="date"].form-control, .koowa .input-group-sm > input[type="date"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="date"].btn, .input-group-sm .koowa input[type="date"], .koowa input[type="time"].input-sm, .koowa .input-group-sm > input[type="time"].form-control, .koowa .input-group-sm > input[type="time"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="time"].btn, .input-group-sm .koowa input[type="time"], .koowa input[type="datetime-local"].input-sm, .koowa .input-group-sm > input[type="datetime-local"].form-control, .koowa .input-group-sm > input[type="datetime-local"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="datetime-local"].btn, .input-group-sm .koowa input[type="datetime-local"], .koowa input[type="month"].input-sm, .koowa .input-group-sm > input[type="month"].form-control, .koowa .input-group-sm > input[type="month"].input-group-addon, .koowa .input-group-sm > .input-group-btn > input[type="month"].btn, .input-group-sm .koowa input[type="month"] { line-height: 30px; }
   .koowa input[type="date"].input-lg, .koowa .input-group-lg > input[type="date"].form-control, .koowa .input-group-lg > input[type="date"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="date"].btn, .input-group-lg .koowa input[type="date"], .koowa input[type="time"].input-lg, .koowa .input-group-lg > input[type="time"].form-control, .koowa .input-group-lg > input[type="time"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="time"].btn, .input-group-lg .koowa input[type="time"], .koowa input[type="datetime-local"].input-lg, .koowa .input-group-lg > input[type="datetime-local"].form-control, .koowa .input-group-lg > input[type="datetime-local"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="datetime-local"].btn, .input-group-lg .koowa input[type="datetime-local"], .koowa input[type="month"].input-lg, .koowa .input-group-lg > input[type="month"].form-control, .koowa .input-group-lg > input[type="month"].input-group-addon, .koowa .input-group-lg > .input-group-btn > input[type="month"].btn, .input-group-lg .koowa input[type="month"] { line-height: 46px; } }
 
@@ -1936,7 +1896,7 @@ Styleguide 3.5
 
 .koowa .form-group-sm textarea.form-control, .koowa .form-group-sm select[multiple].form-control { height: auto; }
 
-.koowa .form-group-sm .form-control-static { height: 30px; min-height: 32px; padding: 6px 10px; font-size: 12px; line-height: 1.5; }
+.koowa .form-group-sm .form-control-static { height: 30px; padding: 5px 10px; font-size: 12px; line-height: 1.5; min-height: 32px; }
 
 .koowa .input-lg, .koowa .input-group-lg > .form-control, .koowa .input-group-lg > .input-group-addon, .koowa .input-group-lg > .input-group-btn > .btn { height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; border-radius: 6px; }
 
@@ -1950,7 +1910,7 @@ Styleguide 3.5
 
 .koowa .form-group-lg textarea.form-control, .koowa .form-group-lg select[multiple].form-control { height: auto; }
 
-.koowa .form-group-lg .form-control-static { height: 46px; min-height: 38px; padding: 11px 16px; font-size: 18px; line-height: 1.3333333; }
+.koowa .form-group-lg .form-control-static { height: 46px; padding: 10px 16px; font-size: 18px; line-height: 1.3333333; min-height: 38px; }
 
 .koowa .has-feedback { position: relative; }
 
@@ -1958,9 +1918,9 @@ Styleguide 3.5
 
 .koowa .form-control-feedback { position: absolute; top: 0; right: 0; z-index: 2; display: block; width: 32px; height: 32px; line-height: 32px; text-align: center; pointer-events: none; }
 
-.koowa .input-lg + .form-control-feedback, .koowa .input-group-lg > .form-control + .form-control-feedback, .koowa .input-group-lg > .input-group-addon + .form-control-feedback, .koowa .input-group-lg > .input-group-btn > .btn + .form-control-feedback, .koowa .input-group-lg + .form-control-feedback, .koowa .form-group-lg .form-control + .form-control-feedback { width: 46px; height: 46px; line-height: 46px; }
+.koowa .input-lg + .form-control-feedback, .koowa .input-group-lg > .form-control + .form-control-feedback, .koowa .input-group-lg > .input-group-addon + .form-control-feedback, .koowa .input-group-lg > .input-group-btn > .btn + .form-control-feedback { width: 46px; height: 46px; line-height: 46px; }
 
-.koowa .input-sm + .form-control-feedback, .koowa .input-group-sm > .form-control + .form-control-feedback, .koowa .input-group-sm > .input-group-addon + .form-control-feedback, .koowa .input-group-sm > .input-group-btn > .btn + .form-control-feedback, .koowa .input-group-sm + .form-control-feedback, .koowa .form-group-sm .form-control + .form-control-feedback { width: 30px; height: 30px; line-height: 30px; }
+.koowa .input-sm + .form-control-feedback, .koowa .input-group-sm > .form-control + .form-control-feedback, .koowa .input-group-sm > .input-group-addon + .form-control-feedback, .koowa .input-group-sm > .input-group-btn > .btn + .form-control-feedback { width: 30px; height: 30px; line-height: 30px; }
 
 .koowa .has-success .help-block, .koowa .has-success .control-label, .koowa .has-success .radio, .koowa .has-success .checkbox, .koowa .has-success .radio-inline, .koowa .has-success .checkbox-inline, .koowa .has-success.radio label, .koowa .has-success.checkbox label, .koowa .has-success.radio-inline label, .koowa .has-success.checkbox-inline label { color: #3c763d; }
 
@@ -2024,17 +1984,15 @@ Styleguide 3.5
 
 .koowa .form-horizontal .has-feedback .form-control-feedback { right: 15px; }
 
-@media (min-width: 768px) { .koowa .form-horizontal .form-group-lg .control-label { padding-top: 11px; font-size: 18px; } }
+@media (min-width: 768px) { .koowa .form-horizontal .form-group-lg .control-label { padding-top: 14.333333px; } }
 
-@media (min-width: 768px) { .koowa .form-horizontal .form-group-sm .control-label { padding-top: 6px; font-size: 12px; } }
+@media (min-width: 768px) { .koowa .form-horizontal .form-group-sm .control-label { padding-top: 6px; } }
 
 .koowa .input-group { position: relative; display: table; border-collapse: separate; }
 
 .koowa .input-group[class*="col-"] { float: none; padding-left: 0; padding-right: 0; }
 
 .koowa .input-group .form-control { position: relative; z-index: 2; float: left; width: 100%; margin-bottom: 0; }
-
-.koowa .input-group .form-control:focus { z-index: 3; }
 
 .koowa .input-group-addon, .koowa .input-group-btn, .koowa .input-group .form-control { display: table-cell; }
 
@@ -2068,7 +2026,7 @@ Styleguide 3.5
 
 .koowa .input-group-btn:first-child > .btn, .koowa .input-group-btn:first-child > .btn-group { margin-right: -1px; }
 
-.koowa .input-group-btn:last-child > .btn, .koowa .input-group-btn:last-child > .btn-group { z-index: 2; margin-left: -1px; }
+.koowa .input-group-btn:last-child > .btn, .koowa .input-group-btn:last-child > .btn-group { margin-left: -1px; }
 
 .koowa .pagination { display: inline-block; padding-left: 0; margin: 20px 0; border-radius: 4px; }
 
@@ -2080,25 +2038,25 @@ Styleguide 3.5
 
 .koowa .pagination > li:last-child > a, .koowa .pagination > li:last-child > span { border-bottom-right-radius: 4px; border-top-right-radius: 4px; }
 
-.koowa .pagination > li > a:hover, .koowa .pagination > li > a:focus, .koowa .pagination > li > span:hover, .koowa .pagination > li > span:focus { z-index: 2; color: #23527c; background-color: #eeeeee; border-color: #ddd; }
+.koowa .pagination > li > a:hover, .koowa .pagination > li > a:focus, .koowa .pagination > li > span:hover, .koowa .pagination > li > span:focus { color: #23527c; background-color: #eeeeee; border-color: #ddd; }
 
-.koowa .pagination > .active > a, .koowa .pagination > .active > a:hover, .koowa .pagination > .active > a:focus, .koowa .pagination > .active > span, .koowa .pagination > .active > span:hover, .koowa .pagination > .active > span:focus { z-index: 3; color: #fff; background-color: #3071a9; border-color: #285e8d; cursor: default; }
+.koowa .pagination > .active > a, .koowa .pagination > .active > a:hover, .koowa .pagination > .active > a:focus, .koowa .pagination > .active > span, .koowa .pagination > .active > span:hover, .koowa .pagination > .active > span:focus { z-index: 2; color: #fff; background-color: #3071a9; border-color: #285e8d; cursor: default; }
 
 .koowa .pagination > .disabled > span, .koowa .pagination > .disabled > span:hover, .koowa .pagination > .disabled > span:focus, .koowa .pagination > .disabled > a, .koowa .pagination > .disabled > a:hover, .koowa .pagination > .disabled > a:focus { color: #777777; background-color: #fff; border-color: #ddd; cursor: not-allowed; }
 
-.koowa .pagination-lg > li > a, .koowa .pagination-lg > li > span { padding: 10px 16px; font-size: 18px; line-height: 1.3333333; }
+.koowa .pagination-lg > li > a, .koowa .pagination-lg > li > span { padding: 10px 16px; font-size: 18px; }
 
 .koowa .pagination-lg > li:first-child > a, .koowa .pagination-lg > li:first-child > span { border-bottom-left-radius: 6px; border-top-left-radius: 6px; }
 
 .koowa .pagination-lg > li:last-child > a, .koowa .pagination-lg > li:last-child > span { border-bottom-right-radius: 6px; border-top-right-radius: 6px; }
 
-.koowa .pagination-sm > li > a, .koowa .pagination-sm > li > span { padding: 5px 10px; font-size: 12px; line-height: 1.5; }
+.koowa .pagination-sm > li > a, .koowa .pagination-sm > li > span { padding: 5px 10px; font-size: 12px; }
 
 .koowa .pagination-sm > li:first-child > a, .koowa .pagination-sm > li:first-child > span { border-bottom-left-radius: 3px; border-top-left-radius: 3px; }
 
 .koowa .pagination-sm > li:last-child > a, .koowa .pagination-sm > li:last-child > span { border-bottom-right-radius: 3px; border-top-right-radius: 3px; }
 
-.koowa .tooltip { position: absolute; z-index: 1070; display: block; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-style: normal; font-weight: normal; letter-spacing: normal; line-break: auto; line-height: 1.428571429; text-align: left; text-align: start; text-decoration: none; text-shadow: none; text-transform: none; white-space: normal; word-break: normal; word-spacing: normal; word-wrap: normal; font-size: 12px; opacity: 0; filter: alpha(opacity=0); }
+.koowa .tooltip { position: absolute; z-index: 1070; display: block; font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px; font-weight: normal; line-height: 1.4; opacity: 0; filter: alpha(opacity=0); }
 
 .koowa .tooltip.in { opacity: 0.9; filter: alpha(opacity=90); }
 
@@ -2110,7 +2068,7 @@ Styleguide 3.5
 
 .koowa .tooltip.left { margin-left: -3px; padding: 0 5px; }
 
-.koowa .tooltip-inner { max-width: 200px; padding: 3px 8px; color: #fff; text-align: center; background-color: #000; border-radius: 4px; }
+.koowa .tooltip-inner { max-width: 200px; padding: 3px 8px; color: #fff; text-align: center; text-decoration: none; background-color: #000; border-radius: 4px; }
 
 .koowa .tooltip-arrow { position: absolute; width: 0; height: 0; border-color: transparent; border-style: solid; }
 

@@ -33,7 +33,7 @@ Files.Paginator = new Class({
 			page_next: element.getElement('.next a'),
 			page_prev: element.getElement('.prev a'),
 			page_end: element.getElement('.end a'),
-			page_container: element.getElement('.page'),
+			page_container: element.getElement('.k-pagination__pages'),
 			pages: {},
 			limit_box: element.getElement('select')
 		};
@@ -66,12 +66,14 @@ Files.Paginator = new Class({
 		var offset = Math.min(((values.page_total-1)*values.limit),(values.page_current*values.limit));
 		this.setPageData(els.page_next, {offset: offset});
 
-		els.page_container.empty();
+		this.element.getElements('.k-js-page').dispose();
 		var i = 1;
 		while (i <= values.page_total) {
-            var el = null;
+            var el = null,
+				active = false;
 
 			if (i == values.page_current) {
+				active = true;
 				el = new Element('span', {text: i});
 			} else if (i < 3 || Math.abs(i-values.page_total) < 2 || Math.abs(i-(values.page_current)) < 2) {
                 // Add a page link for the first and last two pages or a page around the current one
@@ -87,15 +89,17 @@ Files.Paginator = new Class({
             }
 
             if (el) {
+            	var li = new Element('li', {
+            		'class': 'k-js-page ' + (active ? 'k-is-active': '')
+				});
+				el.inject(li);
                 els.pages[i] = el;
-                el.inject(els.page_container);
+                li.inject(els.page_container);
+				els.page_next.getParent().inject(els.page_container);
             }
 
 			i++;
 		}
-
-		els.page_current.set('text', values.page_current);
-		els.page_total.set('text', values.page_total);
 
 		els.limit_box.set('value', values.limit);
 
