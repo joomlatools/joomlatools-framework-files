@@ -28,8 +28,6 @@ window.addEvent('domready', function() {
 })
 </script>
 
-<? // @TODO: Ercan: Make these `<script>`s instead of `<textarea>`s please; ?>
-
 <textarea style="display: none" id="details_container">
     <table class="k-files-table footable">
         <thead>
@@ -116,8 +114,10 @@ window.addEvent('domready', function() {
                 </div>
             </div>
 		</td>
-        <td>
-            <a href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
+        <td class="k-table-data--center">
+            <a href="[%=download_link%]" target="_blank" download="[%=name%]">
+                <span class="k-icon-data-transfer-download"></span>
+            </a>
         </td>
 	</tr>
 </textarea>
@@ -156,8 +156,10 @@ window.addEvent('domready', function() {
                 </div>
             </div>
 		</td>
-        <td>
-            <a href="[%=download_link%]" target="_blank" download="[%=name%]"><i class="icon-download"></i></a>
+        <td class="k-table-data--center">
+            <a href="[%=download_link%]" target="_blank" download="[%=name%]">
+                <span class="k-icon-data-transfer-download"></span>
+            </a>
         </td>
 	</tr>
 </textarea>
