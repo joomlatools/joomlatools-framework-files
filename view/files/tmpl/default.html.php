@@ -94,46 +94,52 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 
 <div class="k-dynamic-content-holder">
+
     <?= import('templates_icons.html'); ?>
     <?= import('templates_details.html'); ?>
 
-    <div id="files-new-folder-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
-        <form class="files-modal well">
-            <div style="text-align: center;">
-                <h3 style=" float: none">
+    <div id="files-new-folder-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+        <div class="k-inline-modal">
+            <form>
+                <h3>
                     <?= translate('Create a new folder in {folder}', array(
                         'folder' => '<span class="upload-files-to"></span>'
                     )) ?>
                 </h3>
-            </div>
-            <div class="input-append">
-                <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= translate('Enter a folder name') ?>" />
-                <button id="files-new-folder-create" class="btn btn-primary" disabled><?= translate('Create'); ?></button>
-            </div>
-        </form>
+                <div class="k-input-group">
+                    <input class="k-form-control focus" type="text" id="files-new-folder-input" placeholder="<?= translate('Enter a folder name') ?>" />
+                    <div class="k-input-group__button">
+                        <button id="files-new-folder-create" class="k-button k-button--primary" disabled><?= translate('Create'); ?></button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div id="files-move-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
-        <form class="files-modal well">
-            <div>
+    <div id="files-move-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+        <div class="k-inline-modal">
+            <form>
                 <h3><?= translate('Move to') ?></h3>
-            </div>
-            <div class="tree-container"></div>
-            <div class="form-actions" style="padding-left: 0">
-                <button class="btn btn-primary" ><?= translate('Move'); ?></button>
-            </div>
-        </form>
+                <? // @TODO: Ercan: remove `tree-container` class; ?>
+                <div class="tree-container k-tree"></div>
+                <p>
+                    <button class="k-button k-button--primary" ><?= translate('Move'); ?></button>
+                </p>
+            </form>
+        </div>
     </div>
 
-    <div id="files-copy-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
-        <form class="files-modal well">
-            <div>
+    <div id="files-copy-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+        <div class="k-inline-modal">
+            <form>
                 <h3><?= translate('Copy to') ?></h3>
-            </div>
-            <div class="tree-container"></div>
-            <div class="form-actions" style="padding-left: 0">
-                <button class="btn btn-primary" ><?= translate('Copy'); ?></button>
-            </div>
-        </form>
+                <? // @TODO: Ercan: remove `tree-container` class; ?>
+                <div class="tree-container k-tree"></div>
+                <p>
+                    <button class="k-button k-button--primary" ><?= translate('Copy'); ?></button>
+                </p>
+            </form>
+        </div>
     </div>
+
 </div>

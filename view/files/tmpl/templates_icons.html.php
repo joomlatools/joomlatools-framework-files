@@ -71,12 +71,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="icons_folder">
     <div class="k-gallery__item k-gallery__item--folder files-node files-folder">
-        <div class="k-card js-navigate-folder">
+        <div class="k-card k-card--rounded js-navigate-folder">
             <div class="k-card__body">
-                <div class="k-card__title">
+                <label class="k-card__title">
                     <input type="checkbox" class="files-select" value="" />
                     <a href="javascript:void(0)" class="navigate">[%=name%]</a>
-                </div>
+                </label>
             </div>
         </div>
     </div>
@@ -84,7 +84,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="icons_file">
     <div class="k-gallery__item k-gallery__item--file files-node files-file">
-        <div class="k-card">
+        <div class="k-card k-card--4-to-3 k-card--rounded k-card--center">
             [%
             var icon = 'default',
             extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
@@ -96,48 +96,44 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             });
             %]
             <a href="javascript:void(0)"
-               class="k-card__body k-card__body--preview"
+               class="k-card__body"
                data-filetype="[%=filetype%]"
                data-extension="[%=metadata.extension%]">
-                <div class="k-card__preview-content-wrapper">
-                    <div class="k-card__preview-content">
-                        <div class="k-card__preview">
-                            <span class="k-icon-document-[%=icon%] k-icon--size-large k-icon--accent extension-label"></span>
-                        </div>
-                    </div>
+                <div class="k-card__section">
+                    <span class="k-icon-document-[%=icon%] k-icon--size-large k-icon--accent extension-label"></span>
                 </div>
             </a>
-            <div class="k-card__title js-select-node">
+            <label class="k-card__caption js-select-node">
                 <input type="checkbox" class="files-select" value="" />
                 [%=name%]
-            </div>
+            </label>
         </div>
     </div>
 </textarea>
 
 <textarea style="display: none" id="icons_image">
     <div class="k-gallery__item k-gallery__item--file files-node files-image">
-        <div class="k-card">
+        <div class="k-card k-card--4-to-3 k-card--rounded k-card--center">
             <a href="javascript:void(0)"
-               class="k-card__body k-card__body--preview [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"
+               class="k-card__body"
                title="[%=name%]"
                data-filetype="[%=filetype%]"
                data-extension="[%=metadata.extension%]">
                 [% if (typeof thumbnail === 'string') { %]
-                <div class="k-card__preview-content-wrapper">
-                    <div class="k-card__preview-content">
-                        <div class="k-card__preview">
-                            <div class="spinner"></div>
-                            <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
-                        </div>
-                    </div>
-                </div>
-                [% } %]
+                    [% var width = metadata.image.width %]
+                    [% var height = metadata.image.height %]
+                    <? // @TODO: Ercan: I guess we need the new spinner here ?>
+                    <!--<div class="spinner"></div>-->
+                <div class="k-card__image k-card__image--spaced" style="background-image:url([%= client_cache || Files.blank_image %]);width:[%=width%]px;height:[%=height%]px;"></div>
+<!--                    <img class="k-card__image k-card__image--spaced image-thumbnail [%= client_cache ? 'loaded' : '' %]" src="" alt="[%=name%]" border="0" />-->
+                [% } else { %]
+                    <span class="k-icon-document-image k-icon--size-large k-icon--accent"></span>
+                [% }%]
             </a>
-            <div class="k-card__title js-select-node">
+            <label class="k-card__caption js-select-node">
                 <input type="checkbox" class="files-select" value="" />
                 [%=name%]
-            </div>
+            </label>
         </div>
     </div>
 </textarea>
