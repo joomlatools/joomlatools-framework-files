@@ -18,10 +18,19 @@ if (metadata.image) {
 }
 %]
 <div class="k-details">
-    <div class="k-details-image-placeholder">
-        <div class="k-details-image-placeholder__content">
-            <img class="icon" src="" alt="[%=name%]" border="0"
-                width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+    <div class="k-card">
+        <div class="k-card__body">
+            <div class="k-card__section k-card__section--small-spacing">
+                <div class="k-ratio-block k-ratio-block--4-to-3">
+                    <div class="k-loader"></div>
+                    <div class="k-ratio-block__body">
+                        <div class="k-ratio-block__centered">
+                            <img class="icon" src="" alt="[%=name%]" border="0"
+                                width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <p>
