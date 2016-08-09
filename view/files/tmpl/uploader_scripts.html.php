@@ -71,7 +71,7 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
                 <button type="button" class="k-upload__button k-upload__button--upload js-start-upload">
                     <?= translate('Start') ?>
                 </button>
-                <button class="k-upload__button js-stop-upload disabled">
+                <button class="k-upload__button js-stop-upload k-is-disabled">
                     <?= translate('Stop') ?>
                 </button>
                 <span class="k-upload__divider">/</span>
