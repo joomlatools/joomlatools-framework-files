@@ -4863,7 +4863,7 @@ var CopyMoveDialog = Koowa.Class.extend({
 
         options = {
             view: $(options.view),
-            tree: $(options.view).find('.tree-container'),
+            tree: $(options.view).find('.k-js-tree-container'),
             button: $(options.button, options.view),
             open_button: $(options.open_button)
         };
@@ -4899,7 +4899,7 @@ var CopyMoveDialog = Koowa.Class.extend({
         }
 
         var data = Files.app.tree.tree('toJson'),
-            tree = new Koowa.Tree(options.view.find('.tree-container'), {
+            tree = new Koowa.Tree(options.view.find('.k-js-tree-container'), {
                 onCanSelectNode: function(node) {
                     return (node.path != Files.app.getPath());
                 }
@@ -4947,7 +4947,7 @@ Files.CopyDialog = CopyMoveDialog.extend({
         var self  = this,
             nodes = this.getSelectedNodes(),
             names = Object.values(nodes.map(function(node) { return node.name; })),
-            destination = this.options.view.find('.tree-container').tree('getSelectedNode').path,
+            destination = this.options.view.find('.k-js-tree-container').tree('getSelectedNode').path,
             url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath()});
 
         if (!names.length) {
@@ -4996,7 +4996,7 @@ Files.MoveDialog = CopyMoveDialog.extend({
         var self  = this,
             nodes = this.getSelectedNodes(),
             names = Object.values(nodes.map(function(node) { return node.name; })),
-            destination = this.options.view.find('.tree-container').tree('getSelectedNode').path,
+            destination = this.options.view.find('.k-js-tree-container').tree('getSelectedNode').path,
             url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath()});
 
         if (!names.length) {

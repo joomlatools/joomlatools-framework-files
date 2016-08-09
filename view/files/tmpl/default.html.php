@@ -120,8 +120,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <div class="k-inline-modal">
             <form>
                 <h3><?= translate('Move to') ?></h3>
-                <? // @TODO: Ercan: remove `tree-container` class; ?>
-                <div class="tree-container k-tree"></div>
+                <div class="k-js-tree-container k-tree"></div>
                 <p>
                     <button class="k-button k-button--primary" ><?= translate('Move'); ?></button>
                 </p>
@@ -133,8 +132,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <div class="k-inline-modal">
             <form>
                 <h3><?= translate('Copy to') ?></h3>
-                <? // @TODO: Ercan: remove `tree-container` class; ?>
-                <div class="tree-container k-tree"></div>
+                <div class="k-js-tree-container k-tree"></div>
                 <p>
                     <button class="k-button k-button--primary" ><?= translate('Copy'); ?></button>
                 </p>
