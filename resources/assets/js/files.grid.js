@@ -324,21 +324,21 @@ Files.Grid = new Class({
 		}
 
 		var old = checkbox.getProperty('checked');
-        !old ? node.addClass('selected') : node.removeClass('selected');
+        !old ? node.addClass('k-is-selected') : node.removeClass('k-is-selected');
 		row.checked = !old;
 		checkbox.setProperty('checked', !old);
 
         var tbody = node.getParent('tbody');
 
         if (tbody) {
-            var length = tbody.getElements('.selected').length;
+            var length = tbody.getElements('.k-is-selected').length;
 
             if (length === 1) {
-                tbody.addClass('selected-single').removeClass('selected-multiple');
+                tbody.addClass('k-is-selected-single').removeClass('k-is-selected-multiple');
             } else if (length > 1) {
-                tbody.addClass('selected-multiple').removeClass('selected-single');
+                tbody.addClass('k-is-selected-multiple').removeClass('k-is-selected-single');
             } else {
-                tbody.removeClass('selected-multiple').removeClass('selected-single');
+                tbody.removeClass('k-is-selected-multiple').removeClass('k-is-selected-single');
             }
         }
 
@@ -582,10 +582,9 @@ Files.Grid = new Class({
      * @private
      */
     _updateSwitchers: function(layout){
-
-        this.options.switchers.removeClass('active').filter(function(el) {
+        this.options.switchers.removeClass('k-is-active').filter(function(el) {
             return el.get('data-layout') == layout;
-        }).addClass('active');
+        }).addClass('k-is-active');
     }
 });
 
