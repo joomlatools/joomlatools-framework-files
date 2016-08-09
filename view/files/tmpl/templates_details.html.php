@@ -63,7 +63,7 @@ window.addEvent('domready', function() {
 			<input type="checkbox" class="files-select" value="" />
 		</td>
 		<td>
-            <span class="koowa_icon--folder"><i>[%=name%]</i></span>
+            <span class="k-icon-folder-closed"></span>
 		</td>
 		<td colspan="4">
             <div class="koowa_wrapped_content">
@@ -91,7 +91,7 @@ window.addEvent('domready', function() {
         });
         %]
         <td>
-            <span class="koowa_icon--[%=icon%]"><i>[%=icon%]</i></span>
+            <span class="k-icon-document-[%=icon%]"></span>
         </td>
 		<td>
             <div class="koowa_wrapped_content">
@@ -131,7 +131,7 @@ window.addEvent('domready', function() {
             [% if (typeof thumbnail === 'string') { %]
                 <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
             [% } else { %]
-                <span class="koowa_icon--image"><i>[%=name%]</i></span>
+                <span class="k-icon-document-image"></span>
             [% } %]
 		</td>
 		<td>
