@@ -51,7 +51,7 @@ if (metadata.image) {
 <textarea style="display: none" id="compact_details_file">
 <div class="details">
     <div style="text-align: center">
-        <span class="koowa_icon--document"><i>[%=name%]</i></span>
+        <span class="k-icon-document"></span>
     </div>
     <table class="table table-condensed parameters">
         <tbody>

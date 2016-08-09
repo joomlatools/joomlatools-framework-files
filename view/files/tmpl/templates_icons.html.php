@@ -13,7 +13,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="k-file-info">
         [% var view_path = Files.app.createRoute({view: 'file', format: 'html', name: name, folder: folder}); %]
         <p>
-            <span class="koowa_icon--document"></span><strong style="display: inline-block;vertical-align: top;margin-left: 10px;">[%=name%]</strong>
+            <span class="k-icon-document"></span><strong style="display: inline-block;vertical-align: top;margin-left: 10px;">[%=name%]</strong>
         </p>
         <p>
             [% if (typeof image !== 'undefined') { %]
