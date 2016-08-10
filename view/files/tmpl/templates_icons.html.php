@@ -71,7 +71,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             });
             %]
             <a href="javascript:void(0)"
-               class="k-card__body"
+               class="k-card__body navigate"
                data-filetype="[%=filetype%]"
                data-extension="[%=metadata.extension%]">
                 <div class="k-card__section k-card__section--small-spacing">
@@ -96,7 +96,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="k-gallery__item k-gallery__item--file files-node files-image">
         <div class="k-card k-card--rounded">
             <a href="javascript:void(0)"
-               class="k-card__body"
+               class="k-card__body navigate"
                title="[%=name%]"
                data-filetype="[%=filetype%]"
                data-extension="[%=metadata.extension%]">
