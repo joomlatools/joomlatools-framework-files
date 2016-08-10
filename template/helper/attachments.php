@@ -27,7 +27,6 @@ class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
 
         $config->append(array(
             'id'       => 'attachments-manage',
-            'attribs'  => '',
             'value'    => array(),
             'callback' => 'attachmentsCallback',
             'multiple' => true,
@@ -42,7 +41,7 @@ class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
         ));
 
         $html = '<span class="input-group-btn">';
-        $html .= sprintf('<a id="%s" class="koowa-modal btn mfp-iframe" %s href="%s">%s</a>', $config->id, $config->attribs, $config->link, $config->text);
+        $html .= sprintf('<a id="%s" class="btn mfp-iframe" %s href="%s">%s</a>', $config->id, $config->attribs, $config->link, $config->text);
         $html .= '</span>';
 
         $html .= $this->getTemplate()->createHelper('behavior')->modal();

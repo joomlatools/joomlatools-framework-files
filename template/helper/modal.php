@@ -46,7 +46,7 @@ class ComFilesTemplateHelperModal extends KTemplateHelperAbstract implements KTe
         $html = sprintf($input, $config->name, $config->id, $this->getTemplate()->escape($config->value), $config->visible ? 'type="text" readonly' : 'type="hidden"', $attribs);
 
         $html .= '<span class="input-group-btn">';
-        $html .= sprintf('<a class="koowa-modal btn mfp-iframe" %s href="%s">%s</a>', $button_attribs, $config->link, $config->link_text);
+        $html .= sprintf('<a data-koowa-modal class="btn mfp-iframe" %s href="%s">%s</a>', $button_attribs, $config->link, $config->link_text);
         $html .= '</span>';
 
         $html .= $this->getTemplate()->createHelper('behavior')->modal();
