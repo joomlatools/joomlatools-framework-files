@@ -70,7 +70,7 @@ window.addEvent('domready', function() {
             <span class="k-icon-folder-closed"></span>
 		</td>
 		<td class="k-table-data--ellipsis" colspan="4">
-            <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('Open folder') ?>">[%=name%]</a>
+            <a href="#" class="navigate" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('Open folder') ?>">[%=name%]</a>
 		</td>
 	</tr>
 </textarea>
@@ -94,7 +94,7 @@ window.addEvent('domready', function() {
             <span class="k-icon-document-[%=icon%]"></span>
         </td>
 		<td class="k-table-data--ellipsis">
-            <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View file info') ?>">[%=name%]</a>
+            <a href="#" class="navigate" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View file info') ?>">[%=name%]</a>
 		</td>
 		<td class="k-table-data--nowrap">
             [%=size.humanize()%]
@@ -123,7 +123,7 @@ window.addEvent('domready', function() {
             [% } %]
 		</td>
 		<td class="k-table-data--ellipsis">
-            <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View image') ?>">[%=name%]</a>
+            <a href="#" class="navigate" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View image') ?>">[%=name%]</a>
 		</td>
 		<td class="k-table-data--nowrap">
             [%=size.humanize()%][% if (metadata.image) { %]<br />
