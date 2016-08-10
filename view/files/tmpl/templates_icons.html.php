@@ -73,7 +73,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="k-gallery__item k-gallery__item--folder files-node files-folder">
         <div class="k-card k-card--rounded js-navigate-folder">
             <div class="k-card__body">
-                <label class="k-card__title">
+                <label class="k-card__header">
                     <input type="checkbox" class="files-select" value="" />
                     <a href="javascript:void(0)" class="navigate">[%=name%]</a>
                 </label>

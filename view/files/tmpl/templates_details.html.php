@@ -29,32 +29,36 @@ window.addEvent('domready', function() {
 </script>
 
 <textarea style="display: none" id="details_container">
-    <table class="k-files-table footable">
-        <thead>
-        <tr>
-            <th width="1%">
-                <input type="checkbox" class="-check-all" id="select-check-all" />
-            </th>
-            <th width="1%" data-toggle="true"></th>
-            <th class="files__sortable" data-name="name">
-                <?= translate('Name'); ?>
-                <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
-            </th>
-            <th width="1%" data-hide="phone">
-                <?= translate('Size'); ?>
-            </th>
-            <th class="files__sortable" width="1%" data-hide="phone,tablet,desktop" data-name="modified_on">
-                <?= translate('Last Modified'); ?>
-                <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
-            </th>
-            <th class="k-table-data--center" width="1%" data-hide="phone,tablet">
-                <span class="k-icon-data-transfer-download"></span>
-            </th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div class="k-table-container">
+        <div class="k-table">
+            <table class="k-js-fixed-table-header k-js-responsive-table">
+                <thead>
+                <tr>
+                    <th width="1%">
+                        <input type="checkbox" class="-check-all" id="select-check-all" />
+                    </th>
+                    <th width="1%" data-toggle="true"></th>
+                    <th class="files__sortable" data-name="name">
+                        <?= translate('Name'); ?>
+                        <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
+                    </th>
+                    <th width="1%" data-hide="phone">
+                        <?= translate('Size'); ?>
+                    </th>
+                    <th class="files__sortable" width="1%" data-hide="phone,tablet,desktop" data-name="modified_on">
+                        <?= translate('Last Modified'); ?>
+                        <span class="files__sortable--indicator koowa_icon--sort koowa_icon--12"></span>
+                    </th>
+                    <th class="k-table-data--center" width="1%" data-hide="phone,tablet">
+                        <span class="k-icon-data-transfer-download"></span>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </textarea>
 
 <textarea style="display: none" id="details_folder">
@@ -65,12 +69,8 @@ window.addEvent('domready', function() {
 		<td>
             <span class="k-icon-folder-closed"></span>
 		</td>
-		<td colspan="4">
-            <div class="koowa_wrapped_content">
-                <div class="whitespace_preserver">
-                    <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('Open folder') ?>">[%=name%]</a>
-                </div>
-            </div>
+		<td class="k-table-data--ellipsis" colspan="4">
+            <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('Open folder') ?>">[%=name%]</a>
 		</td>
 	</tr>
 </textarea>
@@ -93,26 +93,14 @@ window.addEvent('domready', function() {
         <td>
             <span class="k-icon-document-[%=icon%]"></span>
         </td>
-		<td>
-            <div class="koowa_wrapped_content">
-                <div class="whitespace_preserver">
-                    <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View file info') ?>">[%=name%]</a>
-                </div>
-            </div>
+		<td class="k-table-data--ellipsis">
+            <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View file info') ?>">[%=name%]</a>
 		</td>
 		<td class="k-table-data--nowrap">
-            <div class="koowa_wrapped_content">
-                <div class="whitespace_preserver">
-                    [%=size.humanize()%]
-                </div>
-            </div>
+            [%=size.humanize()%]
 		</td>
 		<td class="k-table-data--nowrap">
-            <div class="koowa_wrapped_content">
-                <div class="whitespace_preserver">
-                    [%=getModifiedDate(true)%]
-                </div>
-            </div>
+            [%=getModifiedDate(true)%]
 		</td>
         <td class="k-table-data--center">
             <a href="[%=download_link%]" target="_blank" download="[%=name%]">
@@ -134,27 +122,15 @@ window.addEvent('domready', function() {
                 <span class="k-icon-document-image"></span>
             [% } %]
 		</td>
-		<td>
-            <div class="koowa_wrapped_content">
-                <div class="whitespace_preserver">
-                    <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View image') ?>">[%=name%]</a>
-                </div>
-            </div>
+		<td class="k-table-data--ellipsis">
+            <a href="#" class="navigate koowa-tooltip" data-koowa-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View image') ?>">[%=name%]</a>
 		</td>
 		<td class="k-table-data--nowrap">
-            <div class="koowa_wrapped_content">
-                <div class="whitespace_preserver">
-                    [%=size.humanize()%][% if (metadata.image) { %]<br />
-                    <small>([%=metadata.image.width%] x [%=metadata.image.height%])[% } %]</small>
-                </div>
-            </div>
+            [%=size.humanize()%][% if (metadata.image) { %]<br />
+            <small>([%=metadata.image.width%] x [%=metadata.image.height%])[% } %]</small>
 		</td>
 		<td class="k-table-data--nowrap">
-            <div class="koowa_wrapped_content">
-                <div class="whitespace_preserver">
-                    [%=getModifiedDate(true)%]
-                </div>
-            </div>
+            [%=getModifiedDate(true)%]
 		</td>
         <td class="k-table-data--center">
             <a href="[%=download_link%]" target="_blank" download="[%=name%]">

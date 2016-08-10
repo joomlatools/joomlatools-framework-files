@@ -16,7 +16,7 @@ defined('KOOWA') or die;
             <?= translate('Selected file info'); ?>
         </div>
         <div class="k-sidebar-item__content">
-            <div id="files-preview">
+            <div class="k-content-block" id="files-preview">
                 <?= translate('Select a file from the list'); ?>
             </div>
             <div id="insert-button-container"></div>
