@@ -11,4 +11,4 @@ defined('KOOWA') or die;
 
 <?= import('com:files.files.templates_compact.html');?>
 
-<div class="k-items-list" id="files-grid"></div>
+<div class="k-table-container" id="files-grid"></div>
