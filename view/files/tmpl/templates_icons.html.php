@@ -132,9 +132,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                             [% if (typeof thumbnail === 'string') { %]
                                 [% var width = metadata.image.width %]
                                 [% var height = metadata.image.height %]
-                                <? // @TODO: Ercan: I guess we need the new spinner here ?>
-                                <!--<div class="spinner"></div>-->
-                                        <img class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" src="" alt="[%=name%]" border="0" />
+                                <img class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" src="" alt="[%=name%]" border="0" />
                             [% } else { %]
                                 <span class="k-icon-document-image k-icon--size-large k-icon--accent"></span>
                             [% }%]
