@@ -81,6 +81,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 
         <div class="k-flex-wrapper">
             <div id="files-grid-container">
+                <div class="k-loader-container">
+                    <span class="k-loader k-loader--large"><?= translate('Loading') ?></span>
+                </div>
                 <div id="files-grid"></div>
                 <div class="k-table-pagination" id="files-paginator-container">
                     <?= helper('paginator.pagination') ?>

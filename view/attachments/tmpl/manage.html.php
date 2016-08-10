@@ -211,7 +211,10 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                     <? endif ?>
 
                     <!-- Attachments list -->
-                    <div class="k-table-container" id="spinner_container">
+                    <div class="k-table-container">
+                        <div class="k-loader-container">
+                            <span class="k-loader k-loader--large"><?= translate('Loading') ?></span>
+                        </div>
 
                         <div class="k-table" id="attachments-container">
                         </div><!-- .k-table -->

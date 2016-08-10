@@ -26,7 +26,6 @@ Files.Attachments.App = new Class({
             }
         },
         grid: {
-            spinner_container: 'attachments-container',
             cookie: false,
             layout: 'attachments',
             element: 'attachments-container'

@@ -19,7 +19,7 @@ Files.Grid = new Class({
 		onSwitchLayout: function (){},
 		switchers: '.k-js-layout-switcher',
 		layout: false,
-		spinner_container: 'spinner_container',
+		spinner_container: '.k-loader-container',
 		batch_delete: false,
 		icon_size: 150,
 		types: null // null for all or array to filter for folder, file and image
@@ -28,7 +28,7 @@ Files.Grid = new Class({
 	initialize: function(container, options) {
 		this.setOptions(options);
 
-		this.spinner_container = options.spinner_container;
+		this.spinner_container = kQuery(this.options.spinner_container);
 
 		this.nodes = new Hash();
 		this.container = document.id(container);
@@ -545,34 +545,10 @@ Files.Grid = new Class({
     	this.fireEvent('afterSetIconSize', {size: size});
 	},
     spin: function(){
-        if (this.is_spinning) {
-            return;
-        }
-
-        var target = document.getElementById(this.spinner_container);
-        var opts = {
-            lines: 12, // The number of lines to draw
-            length: 7, // The length of each line
-            width: 4, // The line thickness
-            radius: 10, // The radius of the inner circle
-            color: '#666', // #rgb or #rrggbb
-            speed: 1, // Rounds per second
-            trail: 60 // Afterglow percentage,
-        };
-        this.spinner = new Koowa.Spinner(opts);
-
-        this.is_spinning = true;
-
-        var spinner = this.spinner.spin(target);
-        //spinner.el.style.top = '50px';
-
-        return spinner;
+		this.spinner_container.removeClass('k-is-hidden');
     },
     unspin: function(){
-        if(this.spinner) {
-            this.is_spinning = false;
-            this.spinner.stop();
-        }
+		this.spinner_container.addClass('k-is-hidden');
     },
     /**
      * Updates the active state on the switchers

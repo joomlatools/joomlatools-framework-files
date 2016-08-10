@@ -8,7 +8,6 @@ module.exports = function(grunt) {
 
     var jsFiles = [
         '<%= assetsPath %>/js/history/history.js',
-        '<%= assetsPath %>/js/spin.min.js',
         '<%= assetsPath %>/js/files.utilities.js',
         '<%= assetsPath %>/js/files.state.js',
         '<%= assetsPath %>/js/files.template.js',
