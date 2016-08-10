@@ -79,7 +79,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             <?= import('uploader.html');?>
         <? endif; ?>
 
-        <div class="k-flex-wrapper">
+        <div class="k-flex-wrapper k-position-relative">
             <div id="files-grid-container">
                 <div class="k-loader-container">
                     <span class="k-loader k-loader--large"><?= translate('Loading') ?></span>
