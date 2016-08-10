@@ -324,23 +324,21 @@ Files.Grid = new Class({
 		}
 
 		var old = checkbox.getProperty('checked');
-        !old ? node.addClass('k-is-selected') : node.removeClass('k-is-selected');
+
+		var card = node.getElement('.k-card');
+
+		if (old) {
+			node.removeClass('k-is-selected');
+
+			if (card) card.removeClass('k-is-selected');
+		} else {
+			node.addClass('k-is-selected');
+
+			if (card) card.addClass('k-is-selected');
+		}
+
 		row.checked = !old;
 		checkbox.setProperty('checked', !old);
-
-        var tbody = node.getParent('tbody');
-
-        if (tbody) {
-            var length = tbody.getElements('.k-is-selected').length;
-
-            if (length === 1) {
-                tbody.addClass('k-is-selected-single').removeClass('k-is-selected-multiple');
-            } else if (length > 1) {
-                tbody.addClass('k-is-selected-multiple').removeClass('k-is-selected-single');
-            } else {
-                tbody.removeClass('k-is-selected-multiple').removeClass('k-is-selected-single');
-            }
-        }
 
 		if (fire_events !== false) {
 			this.fireEvent('afterCheckNode', {row: row, checkbox: checkbox});
