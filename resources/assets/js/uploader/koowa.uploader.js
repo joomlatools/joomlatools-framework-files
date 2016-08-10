@@ -580,7 +580,7 @@ $.widget("koowa.uploader", {
 			self.start_button.click(function(e) {
 				e.preventDefault();
 
-				if (!self.start_button.hasClass('k-is-disabled')) {
+				if (!self.start_button.hasClass('disabled')) {
 					self.start();
 				}
 			});
@@ -967,9 +967,9 @@ $.widget("koowa.uploader", {
 
 	_setButtonStatus: function(button, status) {
 		if (status === 'enable') {
-			button.removeClass('k-is-disabled');
+			button.removeClass('disabled');
 		} else {
-			button.addClass('k-is-disabled');
+			button.addClass('disabled');
 		}
 
 		// re-position Moxie shim
