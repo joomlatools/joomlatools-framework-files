@@ -44,9 +44,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <div class="k-flex-wrapper" id="files-canvas">
 
         <!-- Title when sidebar is invisible -->
-        <div class="k-title-bar k-title-bar--mobile k-js-title-bar">
-            <ktml:toolbar type="actionbar" no-buttons>
-        </div>
+        <ktml:toolbar type="titlebar" mobile>
 
         <!-- Scopebar -->
         <div class="k-scopebar k-js-scopebar">
