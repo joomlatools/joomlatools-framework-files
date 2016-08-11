@@ -2458,14 +2458,14 @@ Files.Grid = new Class({
 			});
 		}
 
-		this.container.addEvent('click:relay(th.files__sortable)', function(event) {
+		this.container.addEvent('click:relay(.k-js-files-sortable)', function(event) {
 			var header = event.target.match('th') ? event.target : event.target.getParent('th'),
 				state  = {
 					sort: header.get('data-name'),
 					direction: 'asc'
 				};
 
-			if (header.hasClass('files__sortable--sorted')) {
+			if (header.hasClass('k-js-files-sorted')) {
 				state.direction = 'desc';
 			}
 
@@ -2525,17 +2525,22 @@ Files.Grid = new Class({
 			}
 		}
 
-		var headers = this.container.getElements('th.files__sortable'),
+		var headers = this.container.getElements('.k-js-files-sortable'),
 			header  = headers.filter('[data-name="'+state.sort+'"]')[0];
 
 		if (!header) {
 			return;
 		}
 
-		headers.removeClass('files__sortable--sorted')
-			.removeClass('files__sortable--sorted-desc');
+		headers.removeClass('k-js-files-sorted').removeClass('k-js-files-sorted-desc');
 
-		header.addClass('files__sortable--sorted'+(state.direction === 'asc' ? '' : '-desc'));
+		kQuery('.k-js-sort-icon').remove();
+
+		header.addClass('k-js-files-sorted'+(state.direction === 'asc' ? '' : '-desc'));
+
+		var icon = kQuery('<span class="k-js-sort-icon k-icon-sort-'+(state.direction === 'asc' ? 'ascending' : 'descending')+'" />');
+
+		kQuery('th[data-name="'+state.sort+'"]').find('a').append(icon);
 	},
 	/**
 	 * fire_events is used when switching layouts so that client events to

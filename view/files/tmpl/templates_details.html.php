@@ -38,14 +38,14 @@ window.addEvent('domready', function() {
                 </th>
                 <th width="1%" class="k-table-data--toggle" data-toggle="true"></th>
                 <th width="1%" class="k-table-data--icon"></th>
-                <th data-name="name">
-                    <?= translate('Name'); ?>
+                <th data-name="name" class="k-js-files-sortable">
+                    <a href="#"><?= translate('Name'); ?></a>
                 </th>
                 <th width="1%" data-hide="phone">
                     <?= translate('Size'); ?>
                 </th>
-                <th class="k-table-data--nowrap" data-hide="phone,tablet,desktop" data-name="modified_on">
-                    <?= translate('Last Modified'); ?>
+                <th class="k-js-files-sortable k-table-data--nowrap" data-hide="phone,tablet,desktop" data-name="modified_on">
+                    <a href="#"><?= translate('Last Modified'); ?></a>
                 </th>
                 <th class="k-table-data--icon" width="1%" data-hide="phone,tablet">
                     <span class="k-icon-data-transfer-download"></span>
