@@ -47,7 +47,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <ktml:toolbar type="titlebar" mobile>
 
         <!-- Scopebar -->
-        <div class="k-scopebar k-js-scopebar">
+        <div class="k-scopebar k-js-scopebar k-scopebar--breadcrumbs">
 
             <!-- Breadcrumb -->
             <div class="k-scopebar__item k-scopebar__item--breadcrumbs">
