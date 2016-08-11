@@ -180,19 +180,19 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 </div>
 
 <!-- Wrapper -->
-<div class="k-wrapper">
+<div class="k-wrapper k-js-wrapper">
 
     <!-- Overview -->
     <div class="k-content-wrapper">
 
         <!-- Content -->
-        <div class="k-content">
+        <div class="k-content k-js-content">
 
             <!-- Component -->
             <div class="k-component">
 
                 <!-- Form -->
-                <div class="k-list-layout">
+                <div class="k-flex-wrapper">
 
                     <!-- Uploader -->
                     <? if ($can_attach): ?>
@@ -212,13 +212,10 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
                     <!-- Attachments list -->
                     <div class="k-table-container">
+                        <div class="k-table" id="attachments-container"></div><!-- .k-table -->
                         <div class="k-loader-container">
                             <span class="k-loader k-loader--large"><?= translate('Loading') ?></span>
                         </div>
-
-                        <div class="k-table" id="attachments-container">
-                        </div><!-- .k-table -->
-
                     </div><!-- .k-table-container -->
 
                 </div><!-- .k-list-layout -->
@@ -228,11 +225,11 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
         </div><!-- k-content -->
 
         <!-- Sidebar -->
-        <div id="k-sidebar-right" class="k-sidebar-right">
+        <div class="k-sidebar-right k-js-sidebar-right">
 
-            <div class="k-sidebar__item">
+            <div class="k-sidebar-item">
 
-                <div class="k-sidebar__header">
+                <div class="k-sidebar-item__header">
                     <?= translate('Selected attachment info'); ?>
                 </div>
 
