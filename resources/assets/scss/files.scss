@@ -8,13 +8,7 @@
 $koowaPath: '../../../koowa/framework';
 
 // Import user interface
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/admin";
-
-// Import icons
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/molecules/icons";
-
-// Import Nooku
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/site/molecules/general";
+@import "../../../../joomlatools-ui/src/scss/joomlatools-ui";
 
 @import "koowa/general";
 

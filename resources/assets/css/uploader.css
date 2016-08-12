@@ -1,11 +1,7 @@
 /* ========================================================================== Uploader ========================================================================== */
 /** A single and multi file uploader */
 /* ========================================================================== Tools ========================================================================== */
-/* Variables, functions and mixins ========================================================================== */
-/** 1. Bourbon, needed for neat 2. Extending the neat library with own mixins 3. Neat: grid system */
-/* 1 */
-/* 2 */
-/* 3 */
+/* These file do not produce any CSS code on their own */
 @-webkit-keyframes progress-bar-stripes { from { background-position: 40px 0; }
   to { background-position: 0 0; } }
 

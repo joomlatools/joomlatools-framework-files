@@ -6,7 +6,7 @@
  * A single and multi file uploader
  */
 
-@import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/admin/core/tools";
+@import "../../../../kodekit-ui/src/scss/core/tools";
 @import "koowa/progressbar";
 
 /* Variables
@@ -57,7 +57,7 @@ $k-upload-list-button-desktop-size: 23px !default;
     line-height: $k-upload-height;
     transition: $k-upload-transition-slow;
 
-    @include rtl-outside-koowa {
+    @include rtl {
       text-align: right;
     }
   }
@@ -408,7 +408,7 @@ $k-upload-list-button-desktop-size: 23px !default;
   padding-left: 15px;
   text-align: right;
 
-  @include rtl-outside-koowa {
+  @include rtl {
     padding-left: 0;
     padding-right: 15px;
   }
@@ -417,7 +417,7 @@ $k-upload-list-button-desktop-size: 23px !default;
     padding-left: 0;
     padding-right: 15px;
 
-    @include rtl-outside-koowa {
+    @include rtl {
       padding-left: 15px;
       padding-right: 0;
     }
@@ -446,7 +446,7 @@ $k-upload-list-button-desktop-size: 23px !default;
   & + .k-upload__text-button {
     margin-left: 8px;
 
-    @include rtl-outside-koowa {
+    @include rtl {
       margin-left: auto;
       margin-right: 8px;
     }
@@ -647,7 +647,7 @@ $k-upload-list-button-desktop-size: 23px !default;
   white-space: nowrap; /* 4 */
   width: 1%; /* 4 */
 
-  @include rtl-outside-koowa {
+  @include rtl {
     padding: 6px 10px 6px 4px;
   }
 
@@ -747,7 +747,7 @@ $k-upload-list-button-desktop-size: 23px !default;
     white-space: nowrap;
     padding: 2px 5px;
 
-    @include rtl-outside-koowa {
+    @include rtl {
       text-align: right;
     }
   }
@@ -757,7 +757,7 @@ $k-upload-list-button-desktop-size: 23px !default;
     top: -20px; /* 4 */
     left: 0; /* 4 */
 
-    @include rtl-outside-koowa {
+    @include rtl {
       left: auto;
       right: 0;
     }
@@ -767,7 +767,7 @@ $k-upload-list-button-desktop-size: 23px !default;
       top: auto; /* 5 */
       left: auto; /* 5 */
 
-      @include rtl-outside-koowa {
+      @include rtl {
         right: auto;
       }
     }
@@ -831,7 +831,7 @@ $k-upload-list-button-desktop-size: 23px !default;
 th.k-upload__clear-queue {
   padding-left: 0;
 
-  @include rtl-outside-koowa {
+  @include rtl {
     padding-left: 5px;
     padding-right: 0;
   }
@@ -851,7 +851,7 @@ th.k-upload__clear-queue {
 td.k-upload__file-status-wrapper {
   padding-left: 0;
 
-  @include rtl-outside-koowa {
+  @include rtl {
     padding-left: 5px;
     padding-right: 0;
   }
