@@ -43,7 +43,7 @@ JHtml::_('behavior.framework', true);
         var mHide = Element.prototype.hide;
         Element.implement({
             hide: function() {
-                if ($(this).is('[data-koowa-tooltip]')) {
+                if ($(this).is('[data-k-tooltip]')) {
                     return this;
                 }
                 mHide.apply(this, arguments);
