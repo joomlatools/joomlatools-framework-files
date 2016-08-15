@@ -46,6 +46,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <!-- Title when sidebar is invisible -->
         <ktml:toolbar type="titlebar" mobile>
 
+        <!-- Toolbar -->
+        <ktml:toolbar type="actionbar">
+
         <!-- Scopebar -->
         <div class="k-scopebar k-js-scopebar k-scopebar--breadcrumbs">
 
