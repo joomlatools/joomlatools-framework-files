@@ -32,7 +32,7 @@ class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
             'multiple' => true,
             'text'     => $this->getObject('translator')->translate('Manage'),
             'attribs'  => array(
-                'data-koowa-modal' => htmlentities(json_encode(array('mainClass' => 'koowa_dialog_modal koowa_dialog_modal--halfheight'))),
+                'data-k-modal' => htmlentities(json_encode(array('mainClass' => 'koowa_dialog_modal koowa_dialog_modal--halfheight'))),
             )
         ))->append(array(
             'link' => $this->getTemplate()->route('view=attachments&layout=manage&tmpl=koowa&table=' .
