@@ -25,6 +25,24 @@ window.addEvent('domready', function() {
 		});
 
 	});
+
+    Files.app.tree.element.on('tree.select', function(event)
+    {
+        var el = document.id('select-check-all');
+
+        if (el.checked) {
+            el.checked = false;
+        }
+    });
+
+    Files.app.grid.addEvent('afterDeleteNode', function()
+    {
+        var el = document.id('select-check-all');
+
+        if (el.checked && !this.nodes.getLength()) {
+            el.checked = false;
+        }
+    }).bind(Files.app.grid);
 })
 </script>
 
