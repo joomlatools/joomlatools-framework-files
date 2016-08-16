@@ -53,7 +53,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 sourceMap: true,
-                preserveComments: 'some' // preserve @license tags
+                preserveComments: /(?:^!|@(?:license|preserve|cc_on))/ // preserve @license tags
             },
             build: {
                 files: {
@@ -73,14 +73,6 @@ module.exports = function(grunt) {
                 flatten: true,
                 src: '<%= assetsPath %>/css/*.css',
                 dest: '<%= assetsPath %>/css/'
-            }
-        },
-
-
-        // Shell commands
-        shell: {
-            updateCanIUse: {
-                command: 'npm update caniuse-db'
             }
         },
 
@@ -112,6 +104,6 @@ module.exports = function(grunt) {
     });
 
     // The dev task will be used during development
-    grunt.registerTask('default', ['shell', 'watch']);
+    grunt.registerTask('default', ['watch']);
 
 };
