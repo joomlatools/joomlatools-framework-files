@@ -35,14 +35,13 @@ window.addEvent('domready', function() {
         }
     });
 
-    Files.app.grid.addEvent('afterDeleteNode', function()
-    {
+    Files.app.grid.addEvent('afterDeleteNode', function() {
         var el = document.id('select-check-all');
 
         if (el.checked && !this.nodes.getLength()) {
             el.checked = false;
         }
-    }).bind(Files.app.grid);
+    }.bind(Files.app.grid));
 })
 </script>
 
