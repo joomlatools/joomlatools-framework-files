@@ -75,7 +75,7 @@
                     [% if (thumbnail) { %]
                         <img src="[%=thumbnail%]"/>
                     [% } else { %]
-                        <span class="koowa_icon--image koowa_icon--48"></span>
+                        <span class="k-icon-document-image k-icon--size-xlarge"></span>
                         <div class="attachments__caption">
                             [%=name%]
                         </div>
@@ -85,7 +85,7 @@
         [% } else { %]
          <div id="[%=Attachments.escape(name)%]" class="attachments__file">
              <a href="[%=url%]">
-                 <span class="koowa_icon--default koowa_icon--48 koowa_icon--[%=file.extension%]"></span>
+                 <span class="k-icon-document-default k-icon--size-xlarge"></span>
                  <div class="attachments__caption">
                      [%=name%]
                  </div>

@@ -17,9 +17,9 @@ Files.Grid = new Class({
 		onClickImage: function (){},
 		onDeleteNode: function (){},
 		onSwitchLayout: function (){},
-		switchers: '.files-layout-switcher',
+		switchers: '.k-js-layout-switcher',
 		layout: false,
-		spinner_container: 'spinner_container',
+		spinner_container: '.k-loader-container',
 		batch_delete: false,
 		icon_size: 150,
 		types: null // null for all or array to filter for folder, file and image
@@ -28,7 +28,7 @@ Files.Grid = new Class({
 	initialize: function(container, options) {
 		this.setOptions(options);
 
-		this.spinner_container = options.spinner_container;
+		this.spinner_container = kQuery(this.options.spinner_container);
 
 		this.nodes = new Hash();
 		this.container = document.id(container);
@@ -231,14 +231,14 @@ Files.Grid = new Class({
 			});
 		}
 
-		this.container.addEvent('click:relay(th.files__sortable)', function(event) {
+		this.container.addEvent('click:relay(.k-js-files-sortable)', function(event) {
 			var header = event.target.match('th') ? event.target : event.target.getParent('th'),
 				state  = {
 					sort: header.get('data-name'),
 					direction: 'asc'
 				};
 
-			if (header.hasClass('files__sortable--sorted')) {
+			if (header.hasClass('k-js-files-sorted')) {
 				state.direction = 'desc';
 			}
 
@@ -298,17 +298,22 @@ Files.Grid = new Class({
 			}
 		}
 
-		var headers = this.container.getElements('th.files__sortable'),
+		var headers = this.container.getElements('.k-js-files-sortable'),
 			header  = headers.filter('[data-name="'+state.sort+'"]')[0];
 
 		if (!header) {
 			return;
 		}
 
-		headers.removeClass('files__sortable--sorted')
-			.removeClass('files__sortable--sorted-desc');
+		headers.removeClass('k-js-files-sorted').removeClass('k-js-files-sorted-desc');
 
-		header.addClass('files__sortable--sorted'+(state.direction === 'asc' ? '' : '-desc'));
+		kQuery('.k-js-sort-icon').remove();
+
+		header.addClass('k-js-files-sorted'+(state.direction === 'asc' ? '' : '-desc'));
+
+		var icon = kQuery('<span class="k-js-sort-icon k-icon-sort-'+(state.direction === 'asc' ? 'ascending' : 'descending')+'" />');
+
+		kQuery('th[data-name="'+state.sort+'"]').find('a').append(icon);
 	},
 	/**
 	 * fire_events is used when switching layouts so that client events to
@@ -324,23 +329,21 @@ Files.Grid = new Class({
 		}
 
 		var old = checkbox.getProperty('checked');
-        !old ? node.addClass('selected') : node.removeClass('selected');
+
+		var card = node.getElement('.k-card');
+
+		if (old) {
+			node.removeClass('k-is-selected');
+
+			if (card) card.removeClass('k-is-selected');
+		} else {
+			node.addClass('k-is-selected');
+
+			if (card) card.addClass('k-is-selected');
+		}
+
 		row.checked = !old;
 		checkbox.setProperty('checked', !old);
-
-        var tbody = node.getParent('tbody');
-
-        if (tbody) {
-            var length = tbody.getElements('.selected').length;
-
-            if (length === 1) {
-                tbody.addClass('selected-single').removeClass('selected-multiple');
-            } else if (length > 1) {
-                tbody.addClass('selected-multiple').removeClass('selected-single');
-            } else {
-                tbody.removeClass('selected-multiple').removeClass('selected-single');
-            }
-        }
 
 		if (fire_events !== false) {
 			this.fireEvent('afterCheckNode', {row: row, checkbox: checkbox});
@@ -547,34 +550,10 @@ Files.Grid = new Class({
     	this.fireEvent('afterSetIconSize', {size: size});
 	},
     spin: function(){
-        if (this.is_spinning) {
-            return;
-        }
-
-        var target = document.getElementById(this.spinner_container);
-        var opts = {
-            lines: 12, // The number of lines to draw
-            length: 7, // The length of each line
-            width: 4, // The line thickness
-            radius: 10, // The radius of the inner circle
-            color: '#666', // #rgb or #rrggbb
-            speed: 1, // Rounds per second
-            trail: 60 // Afterglow percentage,
-        };
-        this.spinner = new Koowa.Spinner(opts);
-
-        this.is_spinning = true;
-
-        var spinner = this.spinner.spin(target);
-        //spinner.el.style.top = '50px';
-
-        return spinner;
+		this.spinner_container.removeClass('k-is-hidden');
     },
     unspin: function(){
-        if(this.spinner) {
-            this.is_spinning = false;
-            this.spinner.stop();
-        }
+		this.spinner_container.addClass('k-is-hidden');
     },
     /**
      * Updates the active state on the switchers
@@ -582,10 +561,9 @@ Files.Grid = new Class({
      * @private
      */
     _updateSwitchers: function(layout){
-
-        this.options.switchers.removeClass('active').filter(function(el) {
+        this.options.switchers.removeClass('k-is-active').filter(function(el) {
             return el.get('data-layout') == layout;
-        }).addClass('active');
+        }).addClass('k-is-active');
     }
 });
 

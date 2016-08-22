@@ -1,7 +1,7 @@
 /**
  * Nooku Framework - http://nooku.org/framework
  *
- * @codekit-prepend "spin.min.js", "files.utilities.js", "files.state.js", "files.template.js", "files.grid.js", files.tree.js", "files.row.js", "files.paginator.js", "files.pathway.js"
+ * @codekit-prepend "files.utilities.js", "files.state.js", "files.template.js", "files.grid.js", files.tree.js", "files.row.js", "files.paginator.js", "files.pathway.js"
  *
  * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
@@ -581,8 +581,8 @@ Files.App = new Class({
             'onAfterSetLayout': function(context) {
 
                 if (context.layout === 'icons' || context.layout === 'details') {
-                    var layout = context.layout === 'icons' ? 'grid' : 'table',
-                        remove = layout === 'grid' ? 'table' : 'grid';
+                    var layout = context.layout === 'icons' ? 'gallery' : 'table',
+                        remove = layout === 'gallery' ? 'table' : 'gallery';
 
                     this.container.removeClass('k-'+remove).addClass('k-'+layout);
                     kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
@@ -594,6 +594,7 @@ Files.App = new Class({
                         kQuery('.k-table-container').floatThead('reflow');
                     }*/
                 }
+
 
                 if (key) {
                     Cookie.write(key, context.layout, that.options.cookie);

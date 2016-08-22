@@ -27,13 +27,12 @@ class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
 
         $config->append(array(
             'id'       => 'attachments-manage',
-            'attribs'  => '',
             'value'    => array(),
             'callback' => 'attachmentsCallback',
             'multiple' => true,
             'text'     => $this->getObject('translator')->translate('Manage'),
             'attribs'  => array(
-                'data-koowa-modal' => htmlentities(json_encode(array('mainClass' => 'koowa_dialog_modal koowa_dialog_modal--halfheight'))),
+                'data-k-modal' => htmlentities(json_encode(array('mainClass' => 'koowa_dialog_modal koowa_dialog_modal--halfheight'))),
             )
         ))->append(array(
             'link' => $this->getTemplate()->route('view=attachments&layout=manage&tmpl=koowa&table=' .
@@ -42,7 +41,7 @@ class ComFilesTemplateHelperAttachments extends KTemplateHelperAbstract
         ));
 
         $html = '<span class="input-group-btn">';
-        $html .= sprintf('<a id="%s" class="koowa-modal btn mfp-iframe" %s href="%s">%s</a>', $config->id, $config->attribs, $config->link, $config->text);
+        $html .= sprintf('<a id="%s" class="btn mfp-iframe" %s href="%s">%s</a>', $config->id, $config->attribs, $config->link, $config->text);
         $html .= '</span>';
 
         $html .= $this->getTemplate()->createHelper('behavior')->modal();

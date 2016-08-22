@@ -8,13 +8,14 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
-<div class="k-dynamic-content-holder">
-    <?= import('com:files.files.uploader_scripts.html') ?>
-</div>
 
+<!-- Uploader -->
 <div id="files-upload-multi" class="k-upload--boxed-top"></div>
 
+
 <div class="k-dynamic-content-holder">
+    <?= import('com:files.files.uploader_scripts.html') ?>
+
     <script>
         window.addEvent('domready', function() {
             var timeout = null,

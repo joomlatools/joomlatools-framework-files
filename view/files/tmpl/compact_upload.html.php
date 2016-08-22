@@ -16,8 +16,6 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 <ktml:script src="assets://files/js/files.compact.js" />
 
 
-
-
 <? if ($can_upload): ?>
     <div id="koowa_dialog__file_dialog_upload">
         <?= import('com:files.files.uploader.html', array('multi_selection' => false)); ?>

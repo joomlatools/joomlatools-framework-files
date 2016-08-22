@@ -11,35 +11,36 @@ defined('KOOWA') or die;
 $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['can_upload'] : true;
 ?>
 
-<div id="k-sidebar" class="k-sidebar">
+<div class="k-sidebar-left k-js-sidebar-left">
 
-    <div class="k-sidebar__item k-sidebar__item--overflow">
-        <div class="k-sidebar__header">
+    <div class="k-sidebar-item k-js-sidebar-overflow-item">
+        <div class="k-sidebar-item__header">
             <?= translate('Select a folder'); ?>
         </div>
-        <div class="k-tree">
-            <div id="files-tree"></div>
+        <div class="k-tree" id="files-tree">
+            <div class="k-sidebar-item__content k-sidebar-item__content--horizontal">
+                <?= translate('Loading') ?>
+            </div>
         </div>
     </div>
 
     <? if ($can_upload): ?>
-        <div class="k-sidebar__item">
-            <div class="k-sidebar__header">
+        <div class="k-sidebar-item">
+            <div class="k-sidebar-item__header">
                 <?= translate('Create a new folder'); ?>
             </div>
-            <div class="k-sidebar__content">
-                <div class="margin-bottom--small" id="files-new-folder-modal">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="files-new-folder-input" />
-                        <span class="input-group-btn">
-                            <button id="files-new-folder-create" class="btn btn-default" disabled>
-                                <span class="k-icon-plus"></span>
-                            </button>
-                        </span>
+            <div class="k-sidebar-item__content">
+                <div class="k-input-group" id="files-new-folder-modal">
+                    <input type="text" class="k-form-control" id="files-new-folder-input" />
+                    <div class="k-input-group__button">
+                        <button id="files-new-folder-create" class="k-button k-button--default" disabled>
+                            <span class="k-icon-plus" aria-hidden="true"></span>
+                            <span class="k-visually-hidden"><?= translate('Add folder'); ?></span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     <? endif; ?>
 
-</div>
+</div><!-- .k-sidebar-left -->

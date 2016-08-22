@@ -36,4 +36,19 @@ JHtml::_('behavior.framework', true);
 <ktml:script src="assets://files/js/ejs/ejs.js" />
 <ktml:script src="assets://files/js/<?= !empty($debug) ? 'build' : 'min' ?>/files.js" />
 
+<script>
+    // Bootstrap tooltips emit a "hide" event on tooltip trigger element and MooTools runs hide() on it
+    // Make sure MooTools doesn't hide the tooltip trigger elements after hiding the tooltip box
+    if (typeof MooTools !== 'undefined') {
+        var mHide = Element.prototype.hide;
+        Element.implement({
+            hide: function() {
+                if ($(this).is('[data-k-tooltip]')) {
+                    return this;
+                }
+                mHide.apply(this, arguments);
+            }
+        });
+    }
+</script>
 <?= helper('icon.icon_map'); ?>

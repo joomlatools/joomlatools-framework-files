@@ -18,48 +18,47 @@ if (metadata.image) {
 }
 %]
 <div class="k-details">
-    <div class="k-details-image-placeholder">
-        <div class="k-details-image-placeholder__content">
-            <img class="icon" src="" alt="[%=name%]" border="0"
-                width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+    <div class="k-card">
+        <div class="k-card__body">
+            <div class="k-card__section k-card__section--small-spacing">
+                <div class="k-ratio-block k-ratio-block--4-to-3">
+                    <div class="k-loader"></div>
+                    <div class="k-ratio-block__body">
+                        <div class="k-ratio-block__centered">
+                            <img class="icon" src="" alt="[%=name%]" border="0"
+                                width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <p>
-        <strong class="labl"><?= translate('Name'); ?></strong>
-        [%=name%]
-    </p>
-    <p>
-        <strong class="labl"><?= translate('Dimensions'); ?></strong>
-        [%=width%] x [%=height%]
-    </p>
-    <p>
-        <strong class="labl"><?= translate('Size'); ?></strong>
-        [%=size.humanize()%]
-    </p>
+    <dl>
+        <dt><?= translate('Name'); ?></dt>
+        <dd>[%=name%]</dd>
+        <dt><?= translate('Dimensions'); ?></dt>
+        <dd>[%=width%] x [%=height%]</dd>
+        <dt><?= translate('Size'); ?></dt>
+        <dd>[%=size.humanize()%]</dd>
+    </dl>
 </div>
 </textarea>
 
 <textarea style="display: none" id="compact_details_file">
-<div class="details">
-    <div style="text-align: center">
-        <span class="koowa_icon--document"><i>[%=name%]</i></span>
+<div class="k-details">
+    <div class="k-card k-card--center">
+        <div class="k-card__body">
+            <div class="k-card__section">
+                <span class="k-icon-document-document k-icon--size-large k-icon--accent"></span>
+            </div>
+        </div>
     </div>
-    <table class="table table-condensed parameters">
-        <tbody>
-            <tr>
-                <td class="detail-label"><?= translate('Name'); ?></td>
-                <td>
-                    <div class="koowa_wrapped_content">
-                        <div class="whitespace_preserver">[%=name%]</div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="detail-label"><?= translate('Size'); ?></td>
-                <td>[%=size.humanize()%]</td>
-            </tr>
-        </tbody>
-    </table>
+    <dl>
+        <dt><?= translate('Name'); ?></dt>
+        <dd>[%=name%]</dd>
+        <dt><?= translate('Size'); ?></dt>
+        <dd>[%=size.humanize()%]</dd>
+    </dl>
 </div>
 </textarea>
 

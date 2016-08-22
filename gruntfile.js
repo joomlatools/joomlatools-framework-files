@@ -8,7 +8,6 @@ module.exports = function(grunt) {
 
     var jsFiles = [
         '<%= assetsPath %>/js/history/history.js',
-        '<%= assetsPath %>/js/spin.min.js',
         '<%= assetsPath %>/js/files.utilities.js',
         '<%= assetsPath %>/js/files.state.js',
         '<%= assetsPath %>/js/files.template.js',
@@ -54,7 +53,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 sourceMap: true,
-                preserveComments: 'some' // preserve @license tags
+                preserveComments: /(?:^!|@(?:license|preserve|cc_on))/ // preserve @license tags
             },
             build: {
                 files: {
@@ -74,14 +73,6 @@ module.exports = function(grunt) {
                 flatten: true,
                 src: '<%= assetsPath %>/css/*.css',
                 dest: '<%= assetsPath %>/css/'
-            }
-        },
-
-
-        // Shell commands
-        shell: {
-            updateCanIUse: {
-                command: 'npm update caniuse-db'
             }
         },
 
@@ -113,6 +104,6 @@ module.exports = function(grunt) {
     });
 
     // The dev task will be used during development
-    grunt.registerTask('default', ['shell', 'watch']);
+    grunt.registerTask('default', ['watch']);
 
 };

@@ -2038,7 +2038,6 @@
 
 })(window);
 
-(function(t,e){if(!t.Koowa)t.Koowa={};if(typeof exports=="object")module.exports=e();else if(typeof define=="function"&&define.amd)define(e);else t.Koowa.Spinner=e()})(this,function(){"use strict";var t=["webkit","Moz","ms","O"],e={},i;function o(t,e){var i=document.createElement(t||"div"),o;for(o in e)i[o]=e[o];return i}function n(t){for(var e=1,i=arguments.length;e<i;e++)t.appendChild(arguments[e]);return t}var r=function(){var t=o("style",{type:"text/css"});n(document.getElementsByTagName("head")[0],t);return t.sheet||t.styleSheet}();function s(t,o,n,s){var a=["opacity",o,~~(t*100),n,s].join("-"),f=.01+n/s*100,l=Math.max(1-(1-t)/o*(100-f),t),u=i.substring(0,i.indexOf("Animation")).toLowerCase(),d=u&&"-"+u+"-"||"";if(!e[a]){r.insertRule("@"+d+"keyframes "+a+"{"+"0%{opacity:"+l+"}"+f+"%{opacity:"+t+"}"+(f+.01)+"%{opacity:1}"+(f+o)%100+"%{opacity:"+t+"}"+"100%{opacity:"+l+"}"+"}",r.cssRules.length);e[a]=1}return a}function a(e,i){var o=e.style,n,r;i=i.charAt(0).toUpperCase()+i.slice(1);for(r=0;r<t.length;r++){n=t[r]+i;if(o[n]!==undefined)return n}if(o[i]!==undefined)return i}function f(t,e){for(var i in e)t.style[a(t,i)||i]=e[i];return t}function l(t){for(var e=1;e<arguments.length;e++){var i=arguments[e];for(var o in i)if(t[o]===undefined)t[o]=i[o]}return t}function u(t){var e={x:t.offsetLeft,y:t.offsetTop};while(t=t.offsetParent)e.x+=t.offsetLeft,e.y+=t.offsetTop;return e}function d(t,e){return typeof t=="string"?t:t[e%t.length]}var p={lines:12,length:7,width:5,radius:10,rotate:0,corners:1,color:"#000",direction:1,speed:1,trail:100,opacity:1/4,fps:20,zIndex:2e9,className:"spinner",top:"auto",left:"auto",position:"relative"};function c(t){if(typeof this=="undefined")return new c(t);this.opts=l(t||{},c.defaults,p)}c.defaults={};l(c.prototype,{spin:function(t){this.stop();var e=this,n=e.opts,r=e.el=f(o(0,{className:n.className}),{position:n.position,width:0,zIndex:n.zIndex}),s=n.radius+n.length+n.width,a,l;if(t){t.insertBefore(r,t.firstChild||null);l=u(t);a=u(r);f(r,{left:(n.left=="auto"?l.x-a.x+(t.offsetWidth>>1):parseInt(n.left,10)+s)+"px",top:(n.top=="auto"?l.y-a.y+(t.offsetHeight>>1):parseInt(n.top,10)+s)+"px"})}r.setAttribute("role","progressbar");e.lines(r,e.opts);if(!i){var d=0,p=(n.lines-1)*(1-n.direction)/2,c,h=n.fps,m=h/n.speed,y=(1-n.opacity)/(m*n.trail/100),g=m/n.lines;(function v(){d++;for(var t=0;t<n.lines;t++){c=Math.max(1-(d+(n.lines-t)*g)%m*y,n.opacity);e.opacity(r,t*n.direction+p,c,n)}e.timeout=e.el&&setTimeout(v,~~(1e3/h))})()}return e},stop:function(){var t=this.el;if(t){clearTimeout(this.timeout);if(t.parentNode)t.parentNode.removeChild(t);this.el=undefined}return this},lines:function(t,e){var r=0,a=(e.lines-1)*(1-e.direction)/2,l;function u(t,i){return f(o(),{position:"absolute",width:e.length+e.width+"px",height:e.width+"px",background:t,boxShadow:i,transformOrigin:"left",transform:"rotate("+~~(360/e.lines*r+e.rotate)+"deg) translate("+e.radius+"px"+",0)",borderRadius:(e.corners*e.width>>1)+"px"})}for(;r<e.lines;r++){l=f(o(),{position:"absolute",top:1+~(e.width/2)+"px",transform:e.hwaccel?"translate3d(0,0,0)":"",opacity:e.opacity,animation:i&&s(e.opacity,e.trail,a+r*e.direction,e.lines)+" "+1/e.speed+"s linear infinite"});if(e.shadow)n(l,f(u("#000","0 0 4px "+"#000"),{top:2+"px"}));n(t,n(l,u(d(e.color,r),"0 0 1px rgba(0,0,0,.1)")))}return t},opacity:function(t,e,i){if(e<t.childNodes.length)t.childNodes[e].style.opacity=i}});function h(){function t(t,e){return o("<"+t+' xmlns="urn:schemas-microsoft.com:vml" class="spin-vml">',e)}r.addRule(".spin-vml","behavior:url(#default#VML)");c.prototype.lines=function(e,i){var o=i.length+i.width,r=2*o;function s(){return f(t("group",{coordsize:r+" "+r,coordorigin:-o+" "+-o}),{width:r,height:r})}var a=-(i.width+i.length)*2+"px",l=f(s(),{position:"absolute",top:a,left:a}),u;function p(e,r,a){n(l,n(f(s(),{rotation:360/i.lines*e+"deg",left:~~r}),n(f(t("roundrect",{arcsize:i.corners}),{width:o,height:i.width,left:i.radius,top:-i.width>>1,filter:a}),t("fill",{color:d(i.color,e),opacity:i.opacity}),t("stroke",{opacity:0}))))}if(i.shadow)for(u=1;u<=i.lines;u++)p(u,-2,"progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)");for(u=1;u<=i.lines;u++)p(u);return n(e,l)};c.prototype.opacity=function(t,e,i,o){var n=t.firstChild;o=o.shadow&&o.lines||0;if(n&&e+o<n.childNodes.length){n=n.childNodes[e+o];n=n&&n.firstChild;n=n&&n.firstChild;if(n)n.opacity=i}}}var m=f(o("group"),{behavior:"url(#default#VML)"});if(!a(m,"transform")&&m.adj)h();else i=a(m,"animation");return c});
 /**
  * Nooku Framework - http://nooku.org/framework
  *
@@ -2245,9 +2244,9 @@ Files.Grid = new Class({
 		onClickImage: function (){},
 		onDeleteNode: function (){},
 		onSwitchLayout: function (){},
-		switchers: '.files-layout-switcher',
+		switchers: '.k-js-layout-switcher',
 		layout: false,
-		spinner_container: 'spinner_container',
+		spinner_container: '.k-loader-container',
 		batch_delete: false,
 		icon_size: 150,
 		types: null // null for all or array to filter for folder, file and image
@@ -2256,7 +2255,7 @@ Files.Grid = new Class({
 	initialize: function(container, options) {
 		this.setOptions(options);
 
-		this.spinner_container = options.spinner_container;
+		this.spinner_container = kQuery(this.options.spinner_container);
 
 		this.nodes = new Hash();
 		this.container = document.id(container);
@@ -2459,14 +2458,14 @@ Files.Grid = new Class({
 			});
 		}
 
-		this.container.addEvent('click:relay(th.files__sortable)', function(event) {
+		this.container.addEvent('click:relay(.k-js-files-sortable)', function(event) {
 			var header = event.target.match('th') ? event.target : event.target.getParent('th'),
 				state  = {
 					sort: header.get('data-name'),
 					direction: 'asc'
 				};
 
-			if (header.hasClass('files__sortable--sorted')) {
+			if (header.hasClass('k-js-files-sorted')) {
 				state.direction = 'desc';
 			}
 
@@ -2526,17 +2525,22 @@ Files.Grid = new Class({
 			}
 		}
 
-		var headers = this.container.getElements('th.files__sortable'),
+		var headers = this.container.getElements('.k-js-files-sortable'),
 			header  = headers.filter('[data-name="'+state.sort+'"]')[0];
 
 		if (!header) {
 			return;
 		}
 
-		headers.removeClass('files__sortable--sorted')
-			.removeClass('files__sortable--sorted-desc');
+		headers.removeClass('k-js-files-sorted').removeClass('k-js-files-sorted-desc');
 
-		header.addClass('files__sortable--sorted'+(state.direction === 'asc' ? '' : '-desc'));
+		kQuery('.k-js-sort-icon').remove();
+
+		header.addClass('k-js-files-sorted'+(state.direction === 'asc' ? '' : '-desc'));
+
+		var icon = kQuery('<span class="k-js-sort-icon k-icon-sort-'+(state.direction === 'asc' ? 'ascending' : 'descending')+'" />');
+
+		kQuery('th[data-name="'+state.sort+'"]').find('a').append(icon);
 	},
 	/**
 	 * fire_events is used when switching layouts so that client events to
@@ -2552,23 +2556,21 @@ Files.Grid = new Class({
 		}
 
 		var old = checkbox.getProperty('checked');
-        !old ? node.addClass('selected') : node.removeClass('selected');
+
+		var card = node.getElement('.k-card');
+
+		if (old) {
+			node.removeClass('k-is-selected');
+
+			if (card) card.removeClass('k-is-selected');
+		} else {
+			node.addClass('k-is-selected');
+
+			if (card) card.addClass('k-is-selected');
+		}
+
 		row.checked = !old;
 		checkbox.setProperty('checked', !old);
-
-        var tbody = node.getParent('tbody');
-
-        if (tbody) {
-            var length = tbody.getElements('.selected').length;
-
-            if (length === 1) {
-                tbody.addClass('selected-single').removeClass('selected-multiple');
-            } else if (length > 1) {
-                tbody.addClass('selected-multiple').removeClass('selected-single');
-            } else {
-                tbody.removeClass('selected-multiple').removeClass('selected-single');
-            }
-        }
 
 		if (fire_events !== false) {
 			this.fireEvent('afterCheckNode', {row: row, checkbox: checkbox});
@@ -2775,34 +2777,10 @@ Files.Grid = new Class({
     	this.fireEvent('afterSetIconSize', {size: size});
 	},
     spin: function(){
-        if (this.is_spinning) {
-            return;
-        }
-
-        var target = document.getElementById(this.spinner_container);
-        var opts = {
-            lines: 12, // The number of lines to draw
-            length: 7, // The length of each line
-            width: 4, // The line thickness
-            radius: 10, // The radius of the inner circle
-            color: '#666', // #rgb or #rrggbb
-            speed: 1, // Rounds per second
-            trail: 60 // Afterglow percentage,
-        };
-        this.spinner = new Koowa.Spinner(opts);
-
-        this.is_spinning = true;
-
-        var spinner = this.spinner.spin(target);
-        //spinner.el.style.top = '50px';
-
-        return spinner;
+		this.spinner_container.removeClass('k-is-hidden');
     },
     unspin: function(){
-        if(this.spinner) {
-            this.is_spinning = false;
-            this.spinner.stop();
-        }
+		this.spinner_container.addClass('k-is-hidden');
     },
     /**
      * Updates the active state on the switchers
@@ -2810,10 +2788,9 @@ Files.Grid = new Class({
      * @private
      */
     _updateSwitchers: function(layout){
-
-        this.options.switchers.removeClass('active').filter(function(el) {
+        this.options.switchers.removeClass('k-is-active').filter(function(el) {
             return el.get('data-layout') == layout;
-        }).addClass('active');
+        }).addClass('k-is-active');
     }
 });
 
@@ -3349,7 +3326,7 @@ Files.Paginator = new Class({
 			page_next: element.getElement('.next a'),
 			page_prev: element.getElement('.prev a'),
 			page_end: element.getElement('.end a'),
-			page_container: element.getElement('.page'),
+			page_container: element.getElement('.k-pagination__pages'),
 			pages: {},
 			limit_box: element.getElement('select')
 		};
@@ -3382,12 +3359,14 @@ Files.Paginator = new Class({
 		var offset = Math.min(((values.page_total-1)*values.limit),(values.page_current*values.limit));
 		this.setPageData(els.page_next, {offset: offset});
 
-		els.page_container.empty();
+		this.element.getElements('.k-js-page').dispose();
 		var i = 1;
 		while (i <= values.page_total) {
-            var el = null;
+            var el = null,
+				active = false;
 
 			if (i == values.page_current) {
+				active = true;
 				el = new Element('span', {text: i});
 			} else if (i < 3 || Math.abs(i-values.page_total) < 2 || Math.abs(i-(values.page_current)) < 2) {
                 // Add a page link for the first and last two pages or a page around the current one
@@ -3403,15 +3382,17 @@ Files.Paginator = new Class({
             }
 
             if (el) {
+            	var li = new Element('li', {
+            		'class': 'k-js-page ' + (active ? 'k-is-active': '')
+				});
+				el.inject(li);
                 els.pages[i] = el;
-                el.inject(els.page_container);
+                li.inject(els.page_container);
+				els.page_next.getParent().inject(els.page_container);
             }
 
 			i++;
 		}
-
-		els.page_current.set('text', values.page_current);
-		els.page_total.set('text', values.page_total);
 
 		els.limit_box.set('value', values.limit);
 
@@ -3525,16 +3506,8 @@ Files.Paginator = new Class({
                 this.element = document.id(this.options.element);
             }
 
-            this.element.getParent().setStyle('position', 'relative');
+            this.element.getParent();
             var pathway = this.element;
-            pathway.setStyles({
-                'overflow': 'auto',
-                'text-overflow': 'ellipsis',
-                'white-space': 'nowrap',
-                'bottom': 'auto',
-                'top': 'auto',
-                'position': 'static'
-            });
             pathway.empty();
             var list = new Element('ul'),
                 wrap = function(app, title, path, icon){
@@ -3549,7 +3522,7 @@ Files.Paginator = new Class({
                     });
 
                     link = new Element('a', {
-                        'class': 'k-breadcrumb__item',
+                        'class': 'k-breadcrumb__content',
                         html: title
                     });
 
@@ -3562,9 +3535,9 @@ Files.Paginator = new Class({
                 };
 
 
-            var root = wrap(app, '<span class="k-breadcrumb_root-text">'+app.container.title+'</span>', '', false)
+            var root = wrap(app, '<span class="k-icon-home" aria-hidden="true"></span><span class="k-visually-hidden">'+app.container.title+'</span>', '', false)
                         .addClass('k-breadcrumb__home')
-                        .getElement('a').addClass('k-icon-home').getParent();
+                        .getElement('a').getParent();
 
             list.adopt(root);
 
@@ -3638,7 +3611,7 @@ Files.Paginator = new Class({
 /**
  * Nooku Framework - http://nooku.org/framework
  *
- * @codekit-prepend "spin.min.js", "files.utilities.js", "files.state.js", "files.template.js", "files.grid.js", files.tree.js", "files.row.js", "files.paginator.js", "files.pathway.js"
+ * @codekit-prepend "files.utilities.js", "files.state.js", "files.template.js", "files.grid.js", files.tree.js", "files.row.js", "files.paginator.js", "files.pathway.js"
  *
  * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
@@ -4218,8 +4191,8 @@ Files.App = new Class({
             'onAfterSetLayout': function(context) {
 
                 if (context.layout === 'icons' || context.layout === 'details') {
-                    var layout = context.layout === 'icons' ? 'grid' : 'table',
-                        remove = layout === 'grid' ? 'table' : 'grid';
+                    var layout = context.layout === 'icons' ? 'gallery' : 'table',
+                        remove = layout === 'gallery' ? 'table' : 'gallery';
 
                     this.container.removeClass('k-'+remove).addClass('k-'+layout);
                     kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
@@ -4231,6 +4204,7 @@ Files.App = new Class({
                         kQuery('.k-table-container').floatThead('reflow');
                     }*/
                 }
+
 
                 if (key) {
                     Cookie.write(key, context.layout, that.options.cookie);
@@ -4581,7 +4555,6 @@ Files.Attachments.App = new Class({
             }
         },
         grid: {
-            spinner_container: 'attachments-container',
             cookie: false,
             layout: 'attachments',
             element: 'attachments-container'
@@ -4866,7 +4839,7 @@ var CopyMoveDialog = Koowa.Class.extend({
 
         options = {
             view: $(options.view),
-            tree: $(options.view).find('.tree-container'),
+            tree: $(options.view).find('.k-js-tree-container'),
             button: $(options.button, options.view),
             open_button: $(options.open_button)
         };
@@ -4902,7 +4875,7 @@ var CopyMoveDialog = Koowa.Class.extend({
         }
 
         var data = Files.app.tree.tree('toJson'),
-            tree = new Koowa.Tree(options.view.find('.tree-container'), {
+            tree = new Koowa.Tree(options.view.find('.k-js-tree-container'), {
                 onCanSelectNode: function(node) {
                     return (node.path != Files.app.getPath());
                 }
@@ -4950,7 +4923,7 @@ Files.CopyDialog = CopyMoveDialog.extend({
         var self  = this,
             nodes = this.getSelectedNodes(),
             names = Object.values(nodes.map(function(node) { return node.name; })),
-            destination = this.options.view.find('.tree-container').tree('getSelectedNode').path,
+            destination = this.options.view.find('.k-js-tree-container').tree('getSelectedNode').path,
             url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath()});
 
         if (!names.length) {
@@ -4999,7 +4972,7 @@ Files.MoveDialog = CopyMoveDialog.extend({
         var self  = this,
             nodes = this.getSelectedNodes(),
             names = Object.values(nodes.map(function(node) { return node.name; })),
-            destination = this.options.view.find('.tree-container').tree('getSelectedNode').path,
+            destination = this.options.view.find('.k-js-tree-container').tree('getSelectedNode').path,
             url = Files.app.createRoute({view: 'nodes', folder: Files.app.getPath()});
 
         if (!names.length) {

@@ -9,135 +9,117 @@
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="file_preview">
-<div class="well extension-[%=metadata.extension%]">
-    <div class="k-file-info">
+<div class="koowa k-small-inline-modal-holder mfp-hide extension-[%=metadata.extension%]">
+    <div class="k-inline-modal">
         [% var view_path = Files.app.createRoute({view: 'file', format: 'html', name: name, folder: folder}); %]
-        <p>
-            <span class="koowa_icon--document"></span><strong style="display: inline-block;vertical-align: top;margin-left: 10px;">[%=name%]</strong>
-        </p>
-        <p>
-            [% if (typeof image !== 'undefined') { %]
-            <a class="btn btn-mini" href="[%=view_path%]" target="_blank">
-                <i class="icon-eye-open"></i> <?= translate('View'); ?>
-            </a>
-            [% } else { %]
-            <a class="btn btn-mini" href="[%=view_path%]" target="_blank" download="[%=name%]">
-                <i class="icon-download"></i> <?= translate('Download'); ?>
-            </a>
-            [% } %]
-        </p>
-        <div class="k-mini-table">
-            <table>
-                <tbody>
-                <tr>
-                    <td class="detail-label"><?= translate('Name'); ?></td>
-                    <td>
-                        <div class="koowa_wrapped_content">
-                            <div class="whitespace_preserver">[%=name%]</div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="detail-label"><?= translate('Size'); ?></td>
-                    <td>[%=size.humanize()%]</td>
-                </tr>
-                <tr>
-                    <td class="detail-label"><?= translate('Modified'); ?></td>
-                    <td>[%=getModifiedDate(true)%]</td>
-                </tr>
-                </tbody>
-            </table>
+        <div class="k-content-block">
+            <p>
+                <span class="k-icon-document k-icon--size-xlarge"></span>
+            </p>
+            <p>
+                [% if (typeof image !== 'undefined') { %]
+                <a class="k-button k-button--default k-button--small" href="[%=view_path%]" target="_blank">
+                    <span class="k-icon-eye" aria-hidden="true"></span> <?= translate('View'); ?>
+                </a>
+                [% } else { %]
+                <a class="k-button k-button--default k-button--small" href="[%=view_path%]" target="_blank" download="[%=name%]">
+                    <span class="k-icon-data-transfer-download" aria-hidden="true"></span> <?= translate('Download'); ?>
+                </a>
+                [% } %]
+            </p>
         </div>
-        <? // @TODO: Robin: move this to scss files; ?>
-        <style type="text/css">
-            .k-mini-table table {
-                width: 100%;
-            }
-            .k-mini-table td {
-                padding: 5px 5px 5px 0;
-                border-bottom: 1px solid #ccc;
-            }
-            .k-mini-table tr:last-child td {
-                border-bottom: none;
-            }
-        </style>
+        <dl>
+            <dt><?= translate('Name'); ?></dt>
+            <dd>[%=name%]</dd>
+            <dt><?= translate('Size'); ?></dt>
+            <dd>[%=size.humanize()%]</dd>
+            <dt><?= translate('Modified'); ?></dt>
+            <dd>[%=getModifiedDate(true)%]</dd>
+        </dl>
     </div>
 </div>
 </textarea>
 
 <textarea style="display: none" id="icons_container">
-    <div class="k-grid__items">
-        <div class="k-grid__items__folders"></div>
-        <div class="k-grid__items__files"></div>
-    </div>
+    <div class="k-gallery__items"></div>
 </textarea>
 
 <textarea style="display: none" id="icons_folder">
-    <div class="k-grid__item k-grid__item--folder files-node files-folder">
-        <div class="k-grid__item__title js-navigate-folder">
-            <div class="controls" style="display: inline-block">
-                <input type="checkbox" class="files-select" value="" />
+    <div class="k-gallery__item k-gallery__item--folder files-node files-folder">
+        <div class="k-card k-card--rounded js-navigate-folder">
+            <div class="k-card__body">
+                <label class="k-card__section">
+                    <input type="checkbox" class="files-select" value="" />
+                    <a href="javascript:void(0)" class="navigate">[%=name%]</a>
+                </label>
             </div>
-            <a href="#" class="navigate">[%=name%]</a>
         </div>
     </div>
 </textarea>
 
 <textarea style="display: none" id="icons_file">
-    <div class="k-grid__item k-grid__item--file files-node files-file">
-        <div class="k-grid__item__content">
-            <div class="k-grid__file-wrapper">
-                [%
-                var icon = 'default',
-                extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
+    <div class="k-gallery__item k-gallery__item--file files-node files-file">
+        <div class="k-card k-card--rounded">
+            [%
+            var icon = 'default',
+            extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
 
-                kQuery.each(Files.icon_map, function(key, value) {
-                if (kQuery.inArray(extension, value) !== -1) {
-                icon = key;
-                }
-                });
-                %]
-                <a class="k-grid__file navigate" href="#"
-                   data-filetype="[%=filetype%]"
-                   data-extension="[%=metadata.extension%]">
-                    <div class="k-grid__item__cell">
-                        <span class="koowa_icon--[%=icon%] koowa_icon--48 extension-label"></span>
+            kQuery.each(Files.icon_map, function(key, value) {
+            if (kQuery.inArray(extension, value) !== -1) {
+            icon = key;
+            }
+            });
+            %]
+            <a href="javascript:void(0)"
+               class="k-card__body navigate"
+               data-filetype="[%=filetype%]"
+               data-extension="[%=metadata.extension%]">
+                <div class="k-card__section k-card__section--small-spacing">
+                    <div class="k-ratio-block k-ratio-block--4-to-3">
+                        <div class="k-ratio-block__body">
+                            <div class="k-ratio-block__centered">
+                                <span class="k-icon-document-[%=icon%] k-icon--size-large k-icon--accent extension-label"></span>
+                            </div>
+                        </div>
                     </div>
-                </a>
-
-            </div>
-        </div>
-        <div class="k-grid__item__title js-select-node">
-            <div class="controls" style="display: inline-block">
+                </div>
+            </a>
+            <label class="k-card__caption k-card__caption--overflow js-select-node">
                 <input type="checkbox" class="files-select" value="" />
-            </div>
-            [%=name%]
+                [%=name%]
+            </label>
         </div>
     </div>
 </textarea>
 
 <textarea style="display: none" id="icons_image">
-    <div class="k-grid__item k-grid__item--file  files-node files-image ">
-        <div class="k-grid__item__content">
-            <div class="k-grid__file-wrapper">
-                <a  class="k-grid__file navigate
-                    [%= typeof thumbnail === 'string' ? '' : 'koowa_icon--image koowa_icon--48' %]"  href="#" title="[%=name%]"
-                   data-filetype="[%=filetype%]"
-                   data-extension="[%=metadata.extension%]">
-                    [% if (typeof thumbnail === 'string') { %]
-                    <div class="k-grid__item__cell">
-                        <div class="spinner"></div>
-                        <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" />
+    <div class="k-gallery__item k-gallery__item--file files-node files-image">
+        <div class="k-card k-card--rounded">
+            <a href="javascript:void(0)"
+               class="k-card__body navigate"
+               title="[%=name%]"
+               data-filetype="[%=filetype%]"
+               data-extension="[%=metadata.extension%]">
+                <div class="k-card__section k-card__section--small-spacing">
+                    <div class="k-ratio-block k-ratio-block--4-to-3">
+                        <div class="k-ratio-block__body">
+                            <div class="k-ratio-block__centered">
+                            [% if (typeof thumbnail === 'string') { %]
+                                [% var width = metadata.image.width %]
+                                [% var height = metadata.image.height %]
+                                <img class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" src="" alt="[%=name%]" border="0" />
+                            [% } else { %]
+                                <span class="k-icon-document-image k-icon--size-large k-icon--accent"></span>
+                            [% }%]
+                            </div>
+                        </div>
                     </div>
-                    [% } %]
-                </a>
-            </div>
-        </div>
-        <div class="k-grid__item__title js-select-node">
-            <div class="controls" style="display: inline-block">
+                </div>
+            </a>
+            <label class="k-card__caption k-card__caption--overflow js-select-node">
                 <input type="checkbox" class="files-select" value="" />
-            </div>
-            [%=name%]
+                [%=name%]
+            </label>
         </div>
     </div>
 </textarea>

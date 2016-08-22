@@ -38,48 +38,35 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     });
 </script>
 
+<!-- Component -->
+<div class="k-component" id="files-app">
 
-<div id="files-app" class="k-list-layout">
+    <div class="k-flex-wrapper" id="files-canvas">
 
-    <div id="files-canvas" class="k-list-layout">
+        <!-- Title when sidebar is invisible -->
+        <ktml:toolbar type="titlebar" mobile>
 
-        <!-- Title when sidebar is inivisible -->
-        <div class="k-mobile-title">
-            <ktml:toolbar type="actionbar" no-buttons>
-        </div>
-
+        <!-- Toolbar -->
+        <ktml:toolbar type="actionbar">
 
         <!-- Scopebar -->
-        <div class="k-scopebar">
+        <div class="k-scopebar k-js-scopebar k-scopebar--breadcrumbs">
 
             <!-- Breadcrumb -->
-            <div class="k-scopebar__item k-scopebar__item--fluid">
-                <div id="files-pathway" class="k-breadcrumb" style="border-bottom:none;"></div>
+            <div class="k-scopebar__item k-scopebar__item--breadcrumbs">
+                <div id="files-pathway" class="k-breadcrumb"></div>
             </div>
 
-            <!-- Filters -->
-            <div class="k-scopebar__item">
-
-                <!-- Right floating group -->
-                <div class="k-scopebar__group--right">
-
-                    <!-- Layout style buttons -->
-                    <div class="k-scopebar__group--right__item files-layout-controls" data-toggle="buttons-radio">
-                        <button class="files-layout-switcher" data-layout="icons" title="<?= translate('Show files as icons'); ?>">
-                            <span class="k-icon-grid-three-up"></span>
-                        </button>
-                        <button class="files-layout-switcher" data-layout="details" title="<?= translate('Show files in a list'); ?>">
-                            <span class="k-icon-list"></span>
-                        </button>
-                    </div>
-
-                    <!-- Search toggle button -->
-                    <div class="k-scopebar__search-toggle-wrapper">
-                        <button type="button" class="k-scopebar-icon-button k-toggle-search js-toggle-search"><span class="k-icon-magnifying-glass"></span><span class="visually-hidden"><?= translate('Search'); ?></span></button>
-                    </div><!-- .k-scopebar__search-toggle-wrapper -->
-
-                </div><!-- .kscopebar__group-right -->
-
+            <!-- Buttons -->
+            <div class="k-scopebar__item k-scopebar__item--buttons">
+                <button class="k-scopebar__button k-js-layout-switcher" data-layout="icons" title="<?= translate('Show files as icons'); ?>">
+                    <span class="k-js-switcher-icon k-icon-grid-four-up" aria-hidden="true"></span>
+                    <span class="k-visually-hidden"><?= translate('Grid icon'); ?></span>
+                </button>
+                <button class="k-scopebar__button k-js-layout-switcher" data-layout="details" title="<?= translate('Show files in a list'); ?>">
+                    <span class="k-js-switcher-icon k-icon-list" aria-hidden="true"></span>
+                    <span class="k-visually-hidden"><?= translate('List icon'); ?></span>
+                </button>
             </div>
 
             <!-- Search -->
@@ -87,66 +74,74 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 <?= helper('grid.search', array('submit_on_clear' => false, 'placeholder' => @translate('Find by file or folder name&hellip;'))) ?>
             </div>
 
-        </div>
+        </div><!-- .k-scopebar -->
 
         <? if (!isset(parameters()->config->can_upload) || parameters()->config->can_upload): ?>
             <?= import('uploader.html');?>
         <? endif; ?>
 
-
-        <div class="k-grid-table-container">
+        <div class="k-flex-wrapper k-position-relative">
             <div id="files-grid-container">
                 <div id="files-grid"></div>
-                <div class="k-table-pagination">
+                <div class="k-table-pagination" id="files-paginator-container">
                     <?= helper('paginator.pagination') ?>
                 </div>
             </div>
+            <div class="k-loader-container">
+                <span class="k-loader k-loader--large"><?= translate('Loading') ?></span>
+            </div>
         </div>
 
-    </div>
-</div>
+    </div><!-- .k-flex-wrapper -->
+
+</div><!-- .k-component -->
+
 
 <div class="k-dynamic-content-holder">
+
     <?= import('templates_icons.html'); ?>
     <?= import('templates_details.html'); ?>
 
-    <div id="files-new-folder-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
-        <form class="files-modal well">
-            <div style="text-align: center;">
-                <h3 style=" float: none">
+    <div id="files-new-folder-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+        <div class="k-inline-modal">
+            <form>
+                <h3>
                     <?= translate('Create a new folder in {folder}', array(
                         'folder' => '<span class="upload-files-to"></span>'
                     )) ?>
                 </h3>
-            </div>
-            <div class="input-append">
-                <input class="span5 focus" type="text" id="files-new-folder-input" placeholder="<?= translate('Enter a folder name') ?>" />
-                <button id="files-new-folder-create" class="btn btn-primary" disabled><?= translate('Create'); ?></button>
-            </div>
-        </form>
+                <div class="k-input-group">
+                    <input class="k-form-control focus" type="text" id="files-new-folder-input" placeholder="<?= translate('Enter a folder name') ?>" />
+                    <div class="k-input-group__button">
+                        <button id="files-new-folder-create" class="k-button k-button--primary" disabled><?= translate('Create'); ?></button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div id="files-move-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
-        <form class="files-modal well">
-            <div>
+    <div id="files-move-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+        <div class="k-inline-modal">
+            <form>
                 <h3><?= translate('Move to') ?></h3>
-            </div>
-            <div class="tree-container"></div>
-            <div class="form-actions" style="padding-left: 0">
-                <button class="btn btn-primary" ><?= translate('Move'); ?></button>
-            </div>
-        </form>
+                <div class="k-js-tree-container k-tree"></div>
+                <p>
+                    <button class="k-button k-button--primary" ><?= translate('Move'); ?></button>
+                </p>
+            </form>
+        </div>
     </div>
 
-    <div id="files-copy-modal" class="koowa mfp-hide" style="max-width: 600px; position: relative; width: auto; margin: 20px auto;">
-        <form class="files-modal well">
-            <div>
+    <div id="files-copy-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+        <div class="k-inline-modal">
+            <form>
                 <h3><?= translate('Copy to') ?></h3>
-            </div>
-            <div class="tree-container"></div>
-            <div class="form-actions" style="padding-left: 0">
-                <button class="btn btn-primary" ><?= translate('Copy'); ?></button>
-            </div>
-        </form>
+                <div class="k-js-tree-container k-tree"></div>
+                <p>
+                    <button class="k-button k-button--primary" ><?= translate('Copy'); ?></button>
+                </p>
+            </form>
+        </div>
     </div>
+
 </div>

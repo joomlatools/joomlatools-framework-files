@@ -117,14 +117,11 @@ kQuery(function($) {
 
 
 <!-- Wrapper -->
-<div class="k-wrapper">
+<div class="k-wrapper k-js-wrapper">
 
     <!-- Titlebar -->
-    <div class="k-titlebar">
-
-        <!-- Title -->
-        <h2><?= translate('Insert / Upload file'); ?></h2>
-
+    <div class="k-title-bar k-js-title-bar">
+        <div class="k-title-bar__heading"><?= translate('Insert / Upload file'); ?></div>
     </div><!-- .k-titlebar -->
 
     <!-- Content wrapper -->
@@ -134,13 +131,12 @@ kQuery(function($) {
         <?= import('compact_sidebar.html'); ?>
 
         <!-- Content -->
-        <div class="k-content">
+        <div class="k-content k-js-content">
 
           <!-- Component -->
             <div class="k-component">
 
-                <!-- List layout -->
-                <div class="k-list-layout">
+                <div class="k-flex-wrapper">
 
                     <div class="k-breadcrumb" id="files-pathway"></div>
 
@@ -148,7 +144,7 @@ kQuery(function($) {
 
                     <?= import('compact_select.html'); ?>
 
-                </div><!-- .k-list-layout -->
+                </div><!-- .k-flex-wrapper -->
 
             </div><!-- .k-component -->
 
