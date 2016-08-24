@@ -30,7 +30,7 @@ window.addEvent('domready', function() {
     {
         var el = document.id('select-check-all');
 
-        if (el.checked) {
+        if (el && el.checked) {
             el.checked = false;
         }
     });
@@ -38,7 +38,7 @@ window.addEvent('domready', function() {
     Files.app.grid.addEvent('afterDeleteNode', function() {
         var el = document.id('select-check-all');
 
-        if (el.checked && !this.nodes.getLength()) {
+        if (el && el.checked && !this.nodes.getLength()) {
             el.checked = false;
         }
     }.bind(Files.app.grid));
@@ -61,7 +61,8 @@ window.addEvent('domready', function() {
                 <th width="1%" data-hide="phone">
                     <?= translate('Size'); ?>
                 </th>
-                <th class="k-js-files-sortable k-table-data--nowrap" data-hide="phone,tablet,desktop" data-name="modified_on">
+                <th class="k-js-files-sortable k-table-data--nowrap" data-hide="phone,tablet,desktop"
+                    data-name="<?= translate('Last Modified'); ?>">
                     <a href="#"><?= translate('Last Modified'); ?></a>
                 </th>
                 <th class="k-table-data--icon" width="1%" data-hide="phone,tablet">
