@@ -1026,7 +1026,7 @@ $.widget("koowa.uploader", {
 
 
 		if (file.error_message) {
-			$file.find('.is-failed').css('cursor', 'pointer').tooltip({
+			$file.find('.is-failed').css('cursor', 'pointer').ktooltip({
 				title: file.error_message,
 				placement: 'right'
 			});
