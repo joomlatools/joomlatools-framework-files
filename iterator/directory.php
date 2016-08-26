@@ -103,6 +103,11 @@ class ComFilesIteratorDirectory extends DirectoryIterator
 
         $results = array();
         $total   = 0;
+
+        if (!is_dir($config->path)) {
+            return false;
+        }
+
         foreach (new self($config->path) as $file)
         {
             if ($file->isDot() || substr($file->getFilename(), 0, 2) === '._' || in_array($file->getFilename(), $exclude)) {
