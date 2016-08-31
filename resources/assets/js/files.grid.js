@@ -263,6 +263,12 @@ Files.Grid = new Class({
 		input.blur(function() {
 			send();
 		})
+		.on('keypress', function(event) {
+			if (event.which === 13) { // enter key
+				send();
+				input.blur();
+			}
+		})
 		.on('input', function(event) {
 			var v = kQuery(this).val();
 
@@ -272,9 +278,6 @@ Files.Grid = new Class({
 				empty_button.removeClass("is-visible");
 			}
 
-			if (event.which === 13) { // enter key
-				send();
-			}
 		});
 
 		if (input.val()) {
