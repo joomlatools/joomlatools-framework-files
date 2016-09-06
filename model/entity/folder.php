@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelEntityFolder extends ComFilesModelEntityNode
+class ComFilesModelEntityFolder extends ComFilesModelEntityNode implements KCommandCallbackDelegate
 {
 	/**
 	 * Nodes object or identifier
@@ -51,6 +51,53 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 
         parent::_initialize($config);
     }
+
+	/**
+	 * Invoke a command handler
+	 *
+	 * @param string             $method    The name of the method to be executed
+	 * @param KCommandInterface  $command   The command
+	 * @return mixed Return the result of the handler.
+	 */
+	public function invokeCommandCallback($method, KCommandInterface $command)
+	{
+		return $this->$method($command);
+	}
+
+	/**
+	 * Stores the parent contents before creating a folder
+	 *
+	 * @param KDatabaseContextInterface $context
+	 */
+	protected function _beforeSave(KDatabaseContextInterface $context)
+	{
+		if (!$context->siblings) {
+			$context->siblings = array();
+		}
+
+		$context->siblings[] = scandir(dirname($context->getSubject()->fullpath));
+	}
+
+	/**
+	 * Sets the folder name as created by the OS (encoding) in the filesystem
+	 *
+	 * @param KDatabaseContextInterface $context
+	 */
+	protected function _afterSave(KDatabaseContextInterface $context)
+	{
+		if ($context->siblings && count($context->siblings))
+		{
+			$siblings = KObjectConfig::unbox($context->siblings);
+
+			$name = array_diff(scandir(dirname($context->getSubject()->fullpath)), array_pop($siblings));
+
+			if (count($name) == 1) {
+				$this->name = current($name);
+			}
+
+			$context->siblings = $siblings;
+		}
+	}
 
 	public function save()
 	{
