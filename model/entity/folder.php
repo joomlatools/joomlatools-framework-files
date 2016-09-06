@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelEntityFolder extends ComFilesModelEntityNode implements KCommandCallbackDelegate
+class ComFilesModelEntityFolder extends ComFilesModelEntityNode
 {
 	/**
 	 * Nodes object or identifier
@@ -51,18 +51,6 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode implements KComm
 
         parent::_initialize($config);
     }
-
-	/**
-	 * Invoke a command handler
-	 *
-	 * @param string             $method    The name of the method to be executed
-	 * @param KCommandInterface  $command   The command
-	 * @return mixed Return the result of the handler.
-	 */
-	public function invokeCommandCallback($method, KCommandInterface $command)
-	{
-		return $this->$method($command);
-	}
 
 	/**
 	 * Stores the parent contents before creating a folder
