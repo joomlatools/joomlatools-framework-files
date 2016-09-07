@@ -1250,23 +1250,23 @@ table th.file-count {
       cursor: pointer;
     }
 
-    table > thead > tr > th.files__sortable--sorted > span.files__sortable--indicator {
-      @extend .koowa_icon_font;
-      @extend .koowa_icon--12;
-
-      &:before {
-        content: '\e616';
-      }
-    }
-
-    table > thead > tr > th.files__sortable--sorted-desc > span.files__sortable--indicator {
-      @extend .koowa_icon_font;
-      @extend .koowa_icon--12;
-
-      &:before {
-        content: "\e617";
-      }
-    }
+    //table > thead > tr > th.files__sortable--sorted > span.files__sortable--indicator {
+    //  @extend .koowa_icon_font;
+    //  @extend .koowa_icon--12;
+    //
+    //  &:before {
+    //    content: '\e616';
+    //  }
+    //}
+    //
+    //table > thead > tr > th.files__sortable--sorted-desc > span.files__sortable--indicator {
+    //  @extend .koowa_icon_font;
+    //  @extend .koowa_icon--12;
+    //
+    //  &:before {
+    //    content: "\e617";
+    //  }
+    //}
 
   }
 
@@ -1328,9 +1328,7 @@ table th.file-count {
     tr, td {
       border: none;
       color: $textColor;
-
       white-space: normal !important;
-      @include wrap_words();
     }
 
     td.detail-label {

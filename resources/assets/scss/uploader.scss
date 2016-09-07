@@ -106,6 +106,59 @@ $k-upload-list-button-desktop-size: 23px !default;
 }
 
 
+/**
+ * Custom height uploader
+ *
+ * To use this you also need to set a height to the uploader like so:
+ * `<div class="k-upload k-upload--custom" style="height:300px"></div>`
+ *
+ * To have a flexible / fluid uploader use `.k-upload--flex` in combination with a flexing parent
+ *
+ * 1. Set background since uploader always looks open
+ * 2. Set the bottom border and radius since uploader always looks open
+ * 3. Position item absolute with 60px from the top to cover entire parent except uploader area
+ * 4. Remove the max-height from containers since we're fluid
+ * 5. Set overflow so overflowing content will be visible
+ */
+
+.k-upload--custom {
+  background: #f3f3f3; /* 1 */
+
+  .k-upload__content-wrapper {
+    border-radius: $k-upload-radius $k-upload-radius 0 0; /* 2 */
+    border-bottom-color: #ccc; /* 2 */
+  }
+
+  &.has-open-info .k-upload__body-info {
+    @include coverall($top: 60px); /* 3 */
+    max-height: none; /* 4 */
+    overflow: auto; /* 5 */
+  }
+
+  .k-upload__info__content {
+    max-height: none; /* 4 */
+  }
+}
+
+
+/**
+ * Flexing uploader
+ *
+ * Uploader that grows and shrinks with it's parent
+ *
+ * warning: you do need to have set up flexbox parents properly
+ */
+
+.k-upload--flex {
+  margin: 0;
+  min-height: 244px;
+
+  @include flexbox {
+    flex: 1 1 auto;
+  }
+}
+
+
 
 /* Uploader animations
    ========================================================================== */
