@@ -32,9 +32,6 @@ window.addEvent('domready', function() {
             container: <?= json_encode($container ? $container->toArray() : null); ?>,
             tree: {
                 dataFilter: function(response){
-                    if (response.entities.length === 0) {
-                        return [];
-                    }
 
                     kQuery('.koowa_dialog__file_dialog_categories').css('display', 'block');
                     kQuery('.koowa_dialog--file_dialog').removeClass('koowa_dialog--no_categories');
