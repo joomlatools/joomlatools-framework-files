@@ -35,7 +35,7 @@ if (metadata.image) {
     </div>
     <dl>
         <dt><?= translate('Name'); ?></dt>
-        <dd>[%=name%]</dd>
+        <dd class="k-ellipsis"><span class="k-ellipsis__item">[%=name%]</span></dd>
         <dt><?= translate('Dimensions'); ?></dt>
         <dd>[%=width%] x [%=height%]</dd>
         <dt><?= translate('Size'); ?></dt>
