@@ -55,7 +55,7 @@ window.addEvent('domready', function() {
                 </th>
                 <th width="1%" class="k-table-data--toggle" data-toggle="true"></th>
                 <th width="1%" class="k-table-data--icon"></th>
-                <th data-name="name" class="k-js-files-sortable">
+                <th width="80%" data-name="name" class="k-js-files-sortable">
                     <a href="#"><?= translate('Name'); ?></a>
                 </th>
                 <th width="1%" data-hide="phone">
@@ -140,7 +140,7 @@ window.addEvent('domready', function() {
                 <span class="k-icon-document-image"></span>
             [% } %]
 		</td>
-		<td class="k-table-data--ellipsis">
+        <td class="k-table-data--ellipsis">
             <a href="#" class="navigate" data-k-tooltip='{"container":".koowa-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View image') ?>">[%=name%]</a>
 		</td>
 		<td class="k-table-data--nowrap">

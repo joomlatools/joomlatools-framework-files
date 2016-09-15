@@ -233,12 +233,10 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                     <?= translate('Selected attachment info'); ?>
                 </div>
 
-                <div class="k-sidebar__content" id="properties">
+                <div class="k-sidebar-item__content" id="properties">
 
                     <div id="attachments-preview">
-
                         <div id="files-preview"></div>
-
                     </div>
 
                 </div><!-- .k-sidebar__content -->

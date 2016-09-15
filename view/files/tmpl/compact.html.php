@@ -97,19 +97,6 @@ window.addEvent('domready', function() {
     }
     <? endif; ?>
 });
-
-kQuery(function($) {
-    // Scroll to upload or insert area after click
-    if ( $('body').width() <= '699' ) { // 699 is when colums go from stacked to aligned
-
-        $('#files-grid').on('click', 'a.navigate', function() {
-            $('html, body').animate({
-                scrollTop: '5000' // Scroll to highest amount so it will at least scroll to the bottom where the insert button is
-            }, 1000);
-        });
-    }
-
-});
 </script>
 
 

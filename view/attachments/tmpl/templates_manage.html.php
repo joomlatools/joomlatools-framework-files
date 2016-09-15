@@ -12,7 +12,7 @@ defined('KOOWA') or die; ?>
     <table id="document_list">
         <thead>
         <tr>
-            <th class="koowa_dialog__title">
+            <th>
                 <?= translate('Attached files'); ?>
                 <span class="count"></span>
             </th>
@@ -28,7 +28,7 @@ defined('KOOWA') or die; ?>
             <tr class="files-node files-attachment">
                 <td>
                     <? if ($can_detach): ?>
-                        <span class="detach_button k-table-button k-link-ontop" tabindex="0">x</span>
+                        <span type="button" class="detach_button k-button k-button--default k-button--small k-link-ontop" tabindex="0">x</span>
                     <? endif ?>
                     <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                         [%= name %]
@@ -50,37 +50,43 @@ defined('KOOWA') or die; ?>
     }
     %]
     <div class="k-details">
-        [% if (is_image) { %]
-            [% if (thumbnail) { %]
-            <div class="k-details-image-placeholder">
-                <div class="k-details-image-placeholder__content">
-                    <img class="icon" src="" alt="[%=name%]" border="0"
-                         width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+        <div class="k-card k-card--center">
+            <div class="k-card__body">
+                [% if (is_image) { %]
+                [% if (thumbnail) { %]
+                <div class="k-card__section k-card__section--small-spacing">
+                    <div class="k-ratio-block k-ratio-block--4-to-3">
+                        <div class="k-loader"></div>
+                        <div class="k-ratio-block__body">
+                            <div class="k-ratio-block__centered">
+                                <img class="icon" src="?option=com_docman&amp;view=file&amp;routed=1&amp;name=antique.jpg&amp;container=docman-files" alt="[%=name%]" border="0" width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                [% } else { %]
+                <div class="k-card__section">
+                    <span class="k-icon-document-image k-icon--size-large k-icon--accent" aria-hidden="true"></span>
+                    <span class="k-visually-hidden">[%=name%]</span>
+                </div>
+                [% } %]
+                [% } else { %]
+                <div class="k-card__section">
+                    <span class="k-icon-document-default k-icon--size-large k-icon--accent" aria-hidden="true"></span>
+                    <span class="k-visually-hidden">[%=name%]</span>
+                </div>
+                [% } %]
             </div>
-            [% } else { %]
-            <div class="k-details-icon-holder">
-                <span class="k-icon-document-image k-icon--size-large"><i>[%=name%]</i></span>
-            </div>
-            [% } %]
-        [% } else { %]
-        <div class="k-details-icon-holder">
-            <span class="k-icon-document-default k-icon--size-large"><i>[%=name%]</i></span>
         </div>
-        [% } %]
-        [% if (is_image) { %]
-        <p>
-            <strong class="labl"><?= translate('Dimensions'); ?></strong>
-            [%=width%] x [%=height%]
-        </p>
-        [% } %]
-        <p>
-            <strong class="labl"><?= translate('Size'); ?></strong>
-            [%=size.humanize()%]
-        </p>
-        <p>
-            <strong class="labl"><?= translate('Attached by'); ?></strong>
-            [%=attached_by_name%] <small><?= translate('on') ?> [%=getAttachedDate(true)%]</small>
-        </p>
+        <dl>
+            [% if (is_image) { %]
+            <dt><?= translate('Dimensions'); ?></dt>
+            <dd>[%=width%] x [%=height%]</dd>
+            [% } %]
+            <dt><?= translate('Size'); ?></dt>
+            <dd>[%=size.humanize()%]</dd>
+            <dt><?= translate('Attached by'); ?></dt>
+            <dd>[%=attached_by_name%] <small><?= translate('on') ?> [%=getAttachedDate(true)%]</small></dd>
+        </dl>
     </div>
 </textarea>
