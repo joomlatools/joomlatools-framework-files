@@ -68,7 +68,7 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 		}
 		else
 		{
-			if ($this->destination_folder) {
+			if (!is_null($this->destination_folder)) {
 				$this->folder = $this->destination_folder;
 			}
 			if ($this->destination_name) {
@@ -97,7 +97,7 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 		}
 		else
 		{
-			if ($this->destination_folder) {
+			if (!is_null($this->destination_folder)) {
 				$this->folder = $this->destination_folder;
 			}
 
