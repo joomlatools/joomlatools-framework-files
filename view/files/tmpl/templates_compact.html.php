@@ -77,7 +77,7 @@ if (metadata.image) {
     <tr class="files-node files-folder">
         <td>
             <span>
-                <a class="navigate" href="#" title="[%= name %]">
+                <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                     [%= name %]
                 </a>
             </span>
@@ -89,7 +89,7 @@ if (metadata.image) {
     <tr class="files-node files-image">
         <td>
             <span>
-                <a class="navigate" href="#" title="[%= name %]">
+                <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                     [%= name %]
                 </a>
             </span>
@@ -102,7 +102,7 @@ if (metadata.image) {
     <tr class="files-node files-file">
         <td>
             <span >
-                <a class="navigate" href="#" title="[%= name %]">
+                <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                     [%= name %]
                 </a>
             </span>
