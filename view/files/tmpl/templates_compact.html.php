@@ -63,6 +63,7 @@ if (metadata.image) {
 </textarea>
 
 <textarea style="display: none" id="compact_container">
+    <? // @TODO: Ercan: We need a preloader here when you clicked an item in the left sidebar. Just like in doclink; ?>
     <div class="k-table-container">
         <div class="k-table">
             <table>

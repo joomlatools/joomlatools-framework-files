@@ -104,7 +104,7 @@ window.addEvent('domready', function() {
 <div class="k-wrapper k-js-wrapper">
 
     <!-- Titlebar -->
-    <div class="k-title-bar k-js-title-bar">
+    <div class="k-title-bar k-title-bar--mobile k-js-title-bar">
         <div class="k-title-bar__heading"><?= translate('Insert / Upload file'); ?></div>
     </div><!-- .k-titlebar -->
 

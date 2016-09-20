@@ -182,6 +182,11 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 <!-- Wrapper -->
 <div class="k-wrapper k-js-wrapper">
 
+    <!-- Titlebar -->
+    <div class="k-title-bar k-title-bar--mobile k-js-title-bar">
+        <div class="k-title-bar__heading"><?= translate('Attachments'); ?></div>
+    </div><!-- .k-titlebar -->
+
     <!-- Overview -->
     <div class="k-content-wrapper">
 

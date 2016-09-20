@@ -1080,9 +1080,9 @@ body.k-is-resizing { overflow: hidden; /* 3 */ }
 /** Use SVG Always use SVG on touch / mobile */
 @media screen and (-webkit-min-device-pixel-ratio: 0) { @font-face { font-family: "k-icons"; src: url("../fonts/k-icons/k-icons.svg#k-icons") format("svg"); } }
 
-.k-icon-account-login, .k-icon-account-logout, .k-icon-action-redo, .k-icon-action-undo, .k-icon-align-center, .k-icon-align-left, .k-icon-align-right, .k-icon-aperture, .k-icon-arrow-bottom, .k-icon-arrow-circle-bottom, .k-icon-arrow-circle-left, .k-icon-arrow-circle-right, .k-icon-arrow-circle-top, .k-icon-arrow-left, .k-icon-arrow-right, .k-icon-arrow-thick-bottom, .k-icon-arrow-thick-left, .k-icon-arrow-thick-right, .k-icon-arrow-thick-top, .k-icon-arrow-top, .k-icon-audio-spectrum, .k-icon-audio, .k-icon-badge, .k-icon-ban, .k-icon-bar-chart, .k-icon-basket, .k-icon-battery-empty, .k-icon-battery-full, .k-icon-beaker, .k-icon-bell, .k-icon-bluetooth, .k-icon-bold, .k-icon-bolt, .k-icon-book, .k-icon-bookmark, .k-icon-box, .k-icon-briefcase, .k-icon-british-pound, .k-icon-browser, .k-icon-brush, .k-icon-bug, .k-icon-bullhorn, .k-icon-calculator, .k-icon-calendar, .k-icon-camera-slr, .k-icon-caret-bottom, .k-icon-caret-left, .k-icon-caret-right, .k-icon-caret-top, .k-icon-cart, .k-icon-chat, .k-icon-check, .k-icon-chevron-bottom, .k-icon-chevron-left, .k-icon-chevron-right, .k-icon-chevron-top, .k-icon-circle-check, .k-icon-circle-x, .k-icon-clipboard, .k-icon-clock, .k-icon-cloud-download, .k-icon-cloud-upload, .k-icon-cloud, .k-icon-cloudy, .k-icon-code, .k-icon-cog, .k-icon-collapse-down, .k-icon-collapse-left, .k-icon-collapse-right, .k-icon-collapse-up, .k-icon-command, .k-icon-comment-square, .k-icon-compass, .k-icon-contrast, .k-icon-copywriting, .k-icon-credit-card, .k-icon-crop, .k-icon-dashboard, .k-icon-data-transfer-download, .k-icon-data-transfer-upload, .k-icon-delete, .k-icon-dial, .k-icon-document, .k-icon-dollar, .k-icon-double-quote-sans-left, .k-icon-double-quote-sans-right, .k-icon-double-quote-serif-left, .k-icon-double-quote-serif-right, .k-icon-droplet, .k-icon-eject, .k-icon-elevator, .k-icon-ellipses, .k-icon-envelope-closed, .k-icon-envelope-open, .k-icon-euro, .k-icon-excerpt, .k-icon-expand-down, .k-icon-expand-left, .k-icon-expand-right, .k-icon-expand-up, .k-icon-external-link, .k-icon-eye, .k-icon-eyedropper, .k-icon-file, .k-icon-fire, .k-icon-flag, .k-icon-flash, .k-icon-folder, .k-icon-fork, .k-icon-fullscreen-enter, .k-icon-fullscreen-exit, .k-icon-globe, .k-icon-graph, .k-icon-grid-four-up, .k-icon-grid-three-up, .k-icon-grid-two-up, .k-icon-hard-drive, .k-icon-header, .k-icon-headphones, .k-icon-heart, .k-icon-home, .k-icon-image, .k-icon-inbox, .k-icon-infinity, .k-icon-info, .k-icon-italic, .k-icon-justify-center, .k-icon-justify-left, .k-icon-justify-right, .k-icon-key, .k-icon-laptop, .k-icon-layers, .k-icon-lightbulb, .k-icon-link-broken, .k-icon-link-intact, .k-icon-list-rich, .k-icon-list, .k-icon-location, .k-icon-lock-locked, .k-icon-lock-unlocked, .k-icon-loop-circular, .k-icon-loop-square, .k-icon-loop, .k-icon-magnifying-glass, .k-icon-map-marker, .k-icon-map, .k-icon-media-pause, .k-icon-media-play, .k-icon-media-record, .k-icon-media-skip-backward, .k-icon-media-skip-forward, .k-icon-media-step-backward, .k-icon-media-step-forward, .k-icon-media-stop, .k-icon-medical-cross, .k-icon-menu, .k-icon-microphone, .k-icon-minus, .k-icon-monitor, .k-icon-moon, .k-icon-move, .k-icon-musical-note, .k-icon-paperclip, .k-icon-pencil, .k-icon-people, .k-icon-person, .k-icon-phone, .k-icon-pie-chart, .k-icon-pin, .k-icon-play-circle, .k-icon-plus, .k-icon-power-standby, .k-icon-print, .k-icon-project, .k-icon-pulse, .k-icon-puzzle-piece, .k-icon-question-mark, .k-icon-rain, .k-icon-random, .k-icon-reload, .k-icon-resize-both, .k-icon-resize-height, .k-icon-resize-width, .k-icon-rss-alt, .k-icon-rss, .k-icon-script, .k-icon-share-boxed, .k-icon-share, .k-icon-shield, .k-icon-signal, .k-icon-signpost, .k-icon-sort-ascending, .k-icon-sort-descending, .k-icon-spreadsheet, .k-icon-star, .k-icon-sun, .k-icon-tablet, .k-icon-tag, .k-icon-tags, .k-icon-target, .k-icon-task, .k-icon-terminal, .k-icon-text, .k-icon-thumb-down, .k-icon-thumb-up, .k-icon-timer, .k-icon-transfer, .k-icon-trash, .k-icon-underline, .k-icon-vertical-align-bottom, .k-icon-vertical-align-center, .k-icon-vertical-align-top, .k-icon-video, .k-icon-volume-high, .k-icon-volume-low, .k-icon-volume-off, .k-icon-warning, .k-icon-wifi, .k-icon-wrench, .k-icon-x, .k-icon-yen, .k-icon-zoom-in, .k-icon-zoom-out, .k-icon-close, .k-icon-disabled, .k-icon-document-archive, .k-icon-document-audio, .k-icon-document-default, .k-icon-document-document, .k-icon-document-folder, .k-icon-document-image, .k-icon-document-pdf, .k-icon-document-spreadsheet, .k-icon-document-video, .k-icon-enabled, .k-icon-filter, .k-icon-folder-closed, .k-icon-folder-opened, .k-icon-menu-closed, .k-icon-menu-opened, .k-icon-open, .k-appearance.k-checked .koowa input[type="checkbox"]:before, .koowa .k-sidebar-item--toggle .k-sidebar-item__toggle:after, .koowa .footable.breakpoint .footable-toggle:after { speak: none; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-smoothing: antialiased; text-transform: none; line-height: 1; font-style: normal; font-variant: normal; font-weight: normal; font-family: 'k-icons'; }
+.k-icon-account-login, .k-icon-account-logout, .k-icon-action-redo, .k-icon-action-undo, .k-icon-align-center, .k-icon-align-left, .k-icon-align-right, .k-icon-aperture, .k-icon-arrow-bottom, .k-icon-arrow-circle-bottom, .k-icon-arrow-circle-left, .k-icon-arrow-circle-right, .k-icon-arrow-circle-top, .k-icon-arrow-left, .k-icon-arrow-right, .k-icon-arrow-thick-bottom, .k-icon-arrow-thick-left, .k-icon-arrow-thick-right, .k-icon-arrow-thick-top, .k-icon-arrow-top, .k-icon-audio-spectrum, .k-icon-audio, .k-icon-badge, .k-icon-ban, .k-icon-bar-chart, .k-icon-basket, .k-icon-battery-empty, .k-icon-battery-full, .k-icon-beaker, .k-icon-bell, .k-icon-bluetooth, .k-icon-bold, .k-icon-bolt, .k-icon-book, .k-icon-bookmark, .k-icon-box, .k-icon-briefcase, .k-icon-british-pound, .k-icon-browser, .k-icon-brush, .k-icon-bug, .k-icon-bullhorn, .k-icon-calculator, .k-icon-calendar, .k-icon-camera-slr, .k-icon-caret-bottom, .k-icon-caret-left, .k-icon-caret-right, .k-icon-caret-top, .k-icon-cart, .k-icon-chat, .k-icon-check, .k-icon-chevron-bottom, .k-icon-chevron-left, .k-icon-chevron-right, .k-icon-chevron-top, .k-icon-circle-check, .k-icon-circle-x, .k-icon-clipboard, .k-icon-clock, .k-icon-cloud-download, .k-icon-cloud-upload, .k-icon-cloud, .k-icon-cloudy, .k-icon-code, .k-icon-cog, .k-icon-collapse-down, .k-icon-collapse-left, .k-icon-collapse-right, .k-icon-collapse-up, .k-icon-command, .k-icon-comment-square, .k-icon-compass, .k-icon-contrast, .k-icon-copywriting, .k-icon-credit-card, .k-icon-crop, .k-icon-dashboard, .k-icon-data-transfer-download, .k-icon-data-transfer-upload, .k-icon-delete, .k-icon-dial, .k-icon-document, .k-icon-dollar, .k-icon-double-quote-sans-left, .k-icon-double-quote-sans-right, .k-icon-double-quote-serif-left, .k-icon-double-quote-serif-right, .k-icon-droplet, .k-icon-eject, .k-icon-elevator, .k-icon-ellipses, .k-icon-envelope-closed, .k-icon-envelope-open, .k-icon-euro, .k-icon-excerpt, .k-icon-expand-down, .k-icon-expand-left, .k-icon-expand-right, .k-icon-expand-up, .k-icon-external-link, .k-icon-eye, .k-icon-eyedropper, .k-icon-file, .k-icon-fire, .k-icon-flag, .k-icon-flash, .k-icon-folder, .k-icon-fork, .k-icon-fullscreen-enter, .k-icon-fullscreen-exit, .k-icon-globe, .k-icon-graph, .k-icon-grid-four-up, .k-icon-grid-three-up, .k-icon-grid-two-up, .k-icon-hard-drive, .k-icon-header, .k-icon-headphones, .k-icon-heart, .k-icon-home, .k-icon-image, .k-icon-inbox, .k-icon-infinity, .k-icon-info, .k-icon-italic, .k-icon-justify-center, .k-icon-justify-left, .k-icon-justify-right, .k-icon-key, .k-icon-laptop, .k-icon-layers, .k-icon-lightbulb, .k-icon-link-broken, .k-icon-link-intact, .k-icon-list-rich, .k-icon-list, .k-icon-location, .k-icon-lock-locked, .k-icon-lock-unlocked, .k-icon-loop-circular, .k-icon-loop-square, .k-icon-loop, .k-icon-magnifying-glass, .k-icon-map-marker, .k-icon-map, .k-icon-media-pause, .k-icon-media-play, .k-icon-media-record, .k-icon-media-skip-backward, .k-icon-media-skip-forward, .k-icon-media-step-backward, .k-icon-media-step-forward, .k-icon-media-stop, .k-icon-medical-cross, .k-icon-menu, .k-icon-microphone, .k-icon-minus, .k-icon-monitor, .k-icon-moon, .k-icon-move, .k-icon-musical-note, .k-icon-paperclip, .k-icon-pencil, .k-icon-people, .k-icon-person, .k-icon-phone, .k-icon-pie-chart, .k-icon-pin, .k-icon-play-circle, .k-icon-plus, .k-icon-power-standby, .k-icon-print, .k-icon-project, .k-icon-pulse, .k-icon-puzzle-piece, .k-icon-question-mark, .k-icon-rain, .k-icon-random, .k-icon-reload, .k-icon-resize-both, .k-icon-resize-height, .k-icon-resize-width, .k-icon-rss-alt, .k-icon-rss, .k-icon-script, .k-icon-share-boxed, .k-icon-share, .k-icon-shield, .k-icon-signal, .k-icon-signpost, .k-icon-sort-ascending, .k-icon-sort-descending, .k-icon-spreadsheet, .k-icon-star, .k-icon-sun, .k-icon-tablet, .k-icon-tag, .k-icon-tags, .k-icon-target, .k-icon-task, .k-icon-terminal, .k-icon-text, .k-icon-thumb-down, .k-icon-thumb-up, .k-icon-timer, .k-icon-transfer, .k-icon-trash, .k-icon-underline, .k-icon-vertical-align-bottom, .k-icon-vertical-align-center, .k-icon-vertical-align-top, .k-icon-video, .k-icon-volume-high, .k-icon-volume-low, .k-icon-volume-off, .k-icon-warning, .k-icon-wifi, .k-icon-wrench, .k-icon-x, .k-icon-yen, .k-icon-zoom-in, .k-icon-zoom-out, .k-icon-close, .k-icon-disabled, .k-icon-document-archive, .k-icon-document-audio, .k-icon-document-default, .k-icon-document-document, .k-icon-document-folder, .k-icon-document-image, .k-icon-document-pdf, .k-icon-document-spreadsheet, .k-icon-document-video, .k-icon-documents, .k-icon-enabled, .k-icon-filter, .k-icon-folder-closed, .k-icon-folder-opened, .k-icon-menu-closed, .k-icon-menu-opened, .k-icon-open, .k-appearance.k-checked .koowa input[type="checkbox"]:before, .koowa .k-sidebar-item--toggle .k-sidebar-item__toggle:after, .koowa .footable.breakpoint .footable-toggle:after { speak: none; text-rendering: optimizeLegibility; -moz-osx-font-smoothing: grayscale; -webkit-font-smoothing: antialiased; font-smoothing: antialiased; text-transform: none; line-height: 1; font-style: normal; font-variant: normal; font-weight: normal; font-family: 'k-icons'; }
 
-.k-icon-account-login:before, .k-icon-account-logout:before, .k-icon-action-redo:before, .k-icon-action-undo:before, .k-icon-align-center:before, .k-icon-align-left:before, .k-icon-align-right:before, .k-icon-aperture:before, .k-icon-arrow-bottom:before, .k-icon-arrow-circle-bottom:before, .k-icon-arrow-circle-left:before, .k-icon-arrow-circle-right:before, .k-icon-arrow-circle-top:before, .k-icon-arrow-left:before, .k-icon-arrow-right:before, .k-icon-arrow-thick-bottom:before, .k-icon-arrow-thick-left:before, .k-icon-arrow-thick-right:before, .k-icon-arrow-thick-top:before, .k-icon-arrow-top:before, .k-icon-audio-spectrum:before, .k-icon-audio:before, .k-icon-badge:before, .k-icon-ban:before, .k-icon-bar-chart:before, .k-icon-basket:before, .k-icon-battery-empty:before, .k-icon-battery-full:before, .k-icon-beaker:before, .k-icon-bell:before, .k-icon-bluetooth:before, .k-icon-bold:before, .k-icon-bolt:before, .k-icon-book:before, .k-icon-bookmark:before, .k-icon-box:before, .k-icon-briefcase:before, .k-icon-british-pound:before, .k-icon-browser:before, .k-icon-brush:before, .k-icon-bug:before, .k-icon-bullhorn:before, .k-icon-calculator:before, .k-icon-calendar:before, .k-icon-camera-slr:before, .k-icon-caret-bottom:before, .k-icon-caret-left:before, .k-icon-caret-right:before, .k-icon-caret-top:before, .k-icon-cart:before, .k-icon-chat:before, .k-icon-check:before, .k-icon-chevron-bottom:before, .k-icon-chevron-left:before, .k-icon-chevron-right:before, .k-icon-chevron-top:before, .k-icon-circle-check:before, .k-icon-circle-x:before, .k-icon-clipboard:before, .k-icon-clock:before, .k-icon-cloud-download:before, .k-icon-cloud-upload:before, .k-icon-cloud:before, .k-icon-cloudy:before, .k-icon-code:before, .k-icon-cog:before, .k-icon-collapse-down:before, .k-icon-collapse-left:before, .k-icon-collapse-right:before, .k-icon-collapse-up:before, .k-icon-command:before, .k-icon-comment-square:before, .k-icon-compass:before, .k-icon-contrast:before, .k-icon-copywriting:before, .k-icon-credit-card:before, .k-icon-crop:before, .k-icon-dashboard:before, .k-icon-data-transfer-download:before, .k-icon-data-transfer-upload:before, .k-icon-delete:before, .k-icon-dial:before, .k-icon-document:before, .k-icon-dollar:before, .k-icon-double-quote-sans-left:before, .k-icon-double-quote-sans-right:before, .k-icon-double-quote-serif-left:before, .k-icon-double-quote-serif-right:before, .k-icon-droplet:before, .k-icon-eject:before, .k-icon-elevator:before, .k-icon-ellipses:before, .k-icon-envelope-closed:before, .k-icon-envelope-open:before, .k-icon-euro:before, .k-icon-excerpt:before, .k-icon-expand-down:before, .k-icon-expand-left:before, .k-icon-expand-right:before, .k-icon-expand-up:before, .k-icon-external-link:before, .k-icon-eye:before, .k-icon-eyedropper:before, .k-icon-file:before, .k-icon-fire:before, .k-icon-flag:before, .k-icon-flash:before, .k-icon-folder:before, .k-icon-fork:before, .k-icon-fullscreen-enter:before, .k-icon-fullscreen-exit:before, .k-icon-globe:before, .k-icon-graph:before, .k-icon-grid-four-up:before, .k-icon-grid-three-up:before, .k-icon-grid-two-up:before, .k-icon-hard-drive:before, .k-icon-header:before, .k-icon-headphones:before, .k-icon-heart:before, .k-icon-home:before, .k-icon-image:before, .k-icon-inbox:before, .k-icon-infinity:before, .k-icon-info:before, .k-icon-italic:before, .k-icon-justify-center:before, .k-icon-justify-left:before, .k-icon-justify-right:before, .k-icon-key:before, .k-icon-laptop:before, .k-icon-layers:before, .k-icon-lightbulb:before, .k-icon-link-broken:before, .k-icon-link-intact:before, .k-icon-list-rich:before, .k-icon-list:before, .k-icon-location:before, .k-icon-lock-locked:before, .k-icon-lock-unlocked:before, .k-icon-loop-circular:before, .k-icon-loop-square:before, .k-icon-loop:before, .k-icon-magnifying-glass:before, .k-icon-map-marker:before, .k-icon-map:before, .k-icon-media-pause:before, .k-icon-media-play:before, .k-icon-media-record:before, .k-icon-media-skip-backward:before, .k-icon-media-skip-forward:before, .k-icon-media-step-backward:before, .k-icon-media-step-forward:before, .k-icon-media-stop:before, .k-icon-medical-cross:before, .k-icon-menu:before, .k-icon-microphone:before, .k-icon-minus:before, .k-icon-monitor:before, .k-icon-moon:before, .k-icon-move:before, .k-icon-musical-note:before, .k-icon-paperclip:before, .k-icon-pencil:before, .k-icon-people:before, .k-icon-person:before, .k-icon-phone:before, .k-icon-pie-chart:before, .k-icon-pin:before, .k-icon-play-circle:before, .k-icon-plus:before, .k-icon-power-standby:before, .k-icon-print:before, .k-icon-project:before, .k-icon-pulse:before, .k-icon-puzzle-piece:before, .k-icon-question-mark:before, .k-icon-rain:before, .k-icon-random:before, .k-icon-reload:before, .k-icon-resize-both:before, .k-icon-resize-height:before, .k-icon-resize-width:before, .k-icon-rss-alt:before, .k-icon-rss:before, .k-icon-script:before, .k-icon-share-boxed:before, .k-icon-share:before, .k-icon-shield:before, .k-icon-signal:before, .k-icon-signpost:before, .k-icon-sort-ascending:before, .k-icon-sort-descending:before, .k-icon-spreadsheet:before, .k-icon-star:before, .k-icon-sun:before, .k-icon-tablet:before, .k-icon-tag:before, .k-icon-tags:before, .k-icon-target:before, .k-icon-task:before, .k-icon-terminal:before, .k-icon-text:before, .k-icon-thumb-down:before, .k-icon-thumb-up:before, .k-icon-timer:before, .k-icon-transfer:before, .k-icon-trash:before, .k-icon-underline:before, .k-icon-vertical-align-bottom:before, .k-icon-vertical-align-center:before, .k-icon-vertical-align-top:before, .k-icon-video:before, .k-icon-volume-high:before, .k-icon-volume-low:before, .k-icon-volume-off:before, .k-icon-warning:before, .k-icon-wifi:before, .k-icon-wrench:before, .k-icon-x:before, .k-icon-yen:before, .k-icon-zoom-in:before, .k-icon-zoom-out:before, .k-icon-close:before, .k-icon-disabled:before, .k-icon-document-archive:before, .k-icon-document-audio:before, .k-icon-document-default:before, .k-icon-document-document:before, .k-icon-document-folder:before, .k-icon-document-image:before, .k-icon-document-pdf:before, .k-icon-document-spreadsheet:before, .k-icon-document-video:before, .k-icon-enabled:before, .k-icon-filter:before, .k-icon-folder-closed:before, .k-icon-folder-opened:before, .k-icon-menu-closed:before, .k-icon-menu-opened:before, .k-icon-open:before, .k-appearance.k-checked .koowa input[type="checkbox"]:before { display: inline-block; margin: auto; width: 1em; height: 1em; line-height: 1; }
+.k-icon-account-login:before, .k-icon-account-logout:before, .k-icon-action-redo:before, .k-icon-action-undo:before, .k-icon-align-center:before, .k-icon-align-left:before, .k-icon-align-right:before, .k-icon-aperture:before, .k-icon-arrow-bottom:before, .k-icon-arrow-circle-bottom:before, .k-icon-arrow-circle-left:before, .k-icon-arrow-circle-right:before, .k-icon-arrow-circle-top:before, .k-icon-arrow-left:before, .k-icon-arrow-right:before, .k-icon-arrow-thick-bottom:before, .k-icon-arrow-thick-left:before, .k-icon-arrow-thick-right:before, .k-icon-arrow-thick-top:before, .k-icon-arrow-top:before, .k-icon-audio-spectrum:before, .k-icon-audio:before, .k-icon-badge:before, .k-icon-ban:before, .k-icon-bar-chart:before, .k-icon-basket:before, .k-icon-battery-empty:before, .k-icon-battery-full:before, .k-icon-beaker:before, .k-icon-bell:before, .k-icon-bluetooth:before, .k-icon-bold:before, .k-icon-bolt:before, .k-icon-book:before, .k-icon-bookmark:before, .k-icon-box:before, .k-icon-briefcase:before, .k-icon-british-pound:before, .k-icon-browser:before, .k-icon-brush:before, .k-icon-bug:before, .k-icon-bullhorn:before, .k-icon-calculator:before, .k-icon-calendar:before, .k-icon-camera-slr:before, .k-icon-caret-bottom:before, .k-icon-caret-left:before, .k-icon-caret-right:before, .k-icon-caret-top:before, .k-icon-cart:before, .k-icon-chat:before, .k-icon-check:before, .k-icon-chevron-bottom:before, .k-icon-chevron-left:before, .k-icon-chevron-right:before, .k-icon-chevron-top:before, .k-icon-circle-check:before, .k-icon-circle-x:before, .k-icon-clipboard:before, .k-icon-clock:before, .k-icon-cloud-download:before, .k-icon-cloud-upload:before, .k-icon-cloud:before, .k-icon-cloudy:before, .k-icon-code:before, .k-icon-cog:before, .k-icon-collapse-down:before, .k-icon-collapse-left:before, .k-icon-collapse-right:before, .k-icon-collapse-up:before, .k-icon-command:before, .k-icon-comment-square:before, .k-icon-compass:before, .k-icon-contrast:before, .k-icon-copywriting:before, .k-icon-credit-card:before, .k-icon-crop:before, .k-icon-dashboard:before, .k-icon-data-transfer-download:before, .k-icon-data-transfer-upload:before, .k-icon-delete:before, .k-icon-dial:before, .k-icon-document:before, .k-icon-dollar:before, .k-icon-double-quote-sans-left:before, .k-icon-double-quote-sans-right:before, .k-icon-double-quote-serif-left:before, .k-icon-double-quote-serif-right:before, .k-icon-droplet:before, .k-icon-eject:before, .k-icon-elevator:before, .k-icon-ellipses:before, .k-icon-envelope-closed:before, .k-icon-envelope-open:before, .k-icon-euro:before, .k-icon-excerpt:before, .k-icon-expand-down:before, .k-icon-expand-left:before, .k-icon-expand-right:before, .k-icon-expand-up:before, .k-icon-external-link:before, .k-icon-eye:before, .k-icon-eyedropper:before, .k-icon-file:before, .k-icon-fire:before, .k-icon-flag:before, .k-icon-flash:before, .k-icon-folder:before, .k-icon-fork:before, .k-icon-fullscreen-enter:before, .k-icon-fullscreen-exit:before, .k-icon-globe:before, .k-icon-graph:before, .k-icon-grid-four-up:before, .k-icon-grid-three-up:before, .k-icon-grid-two-up:before, .k-icon-hard-drive:before, .k-icon-header:before, .k-icon-headphones:before, .k-icon-heart:before, .k-icon-home:before, .k-icon-image:before, .k-icon-inbox:before, .k-icon-infinity:before, .k-icon-info:before, .k-icon-italic:before, .k-icon-justify-center:before, .k-icon-justify-left:before, .k-icon-justify-right:before, .k-icon-key:before, .k-icon-laptop:before, .k-icon-layers:before, .k-icon-lightbulb:before, .k-icon-link-broken:before, .k-icon-link-intact:before, .k-icon-list-rich:before, .k-icon-list:before, .k-icon-location:before, .k-icon-lock-locked:before, .k-icon-lock-unlocked:before, .k-icon-loop-circular:before, .k-icon-loop-square:before, .k-icon-loop:before, .k-icon-magnifying-glass:before, .k-icon-map-marker:before, .k-icon-map:before, .k-icon-media-pause:before, .k-icon-media-play:before, .k-icon-media-record:before, .k-icon-media-skip-backward:before, .k-icon-media-skip-forward:before, .k-icon-media-step-backward:before, .k-icon-media-step-forward:before, .k-icon-media-stop:before, .k-icon-medical-cross:before, .k-icon-menu:before, .k-icon-microphone:before, .k-icon-minus:before, .k-icon-monitor:before, .k-icon-moon:before, .k-icon-move:before, .k-icon-musical-note:before, .k-icon-paperclip:before, .k-icon-pencil:before, .k-icon-people:before, .k-icon-person:before, .k-icon-phone:before, .k-icon-pie-chart:before, .k-icon-pin:before, .k-icon-play-circle:before, .k-icon-plus:before, .k-icon-power-standby:before, .k-icon-print:before, .k-icon-project:before, .k-icon-pulse:before, .k-icon-puzzle-piece:before, .k-icon-question-mark:before, .k-icon-rain:before, .k-icon-random:before, .k-icon-reload:before, .k-icon-resize-both:before, .k-icon-resize-height:before, .k-icon-resize-width:before, .k-icon-rss-alt:before, .k-icon-rss:before, .k-icon-script:before, .k-icon-share-boxed:before, .k-icon-share:before, .k-icon-shield:before, .k-icon-signal:before, .k-icon-signpost:before, .k-icon-sort-ascending:before, .k-icon-sort-descending:before, .k-icon-spreadsheet:before, .k-icon-star:before, .k-icon-sun:before, .k-icon-tablet:before, .k-icon-tag:before, .k-icon-tags:before, .k-icon-target:before, .k-icon-task:before, .k-icon-terminal:before, .k-icon-text:before, .k-icon-thumb-down:before, .k-icon-thumb-up:before, .k-icon-timer:before, .k-icon-transfer:before, .k-icon-trash:before, .k-icon-underline:before, .k-icon-vertical-align-bottom:before, .k-icon-vertical-align-center:before, .k-icon-vertical-align-top:before, .k-icon-video:before, .k-icon-volume-high:before, .k-icon-volume-low:before, .k-icon-volume-off:before, .k-icon-warning:before, .k-icon-wifi:before, .k-icon-wrench:before, .k-icon-x:before, .k-icon-yen:before, .k-icon-zoom-in:before, .k-icon-zoom-out:before, .k-icon-close:before, .k-icon-disabled:before, .k-icon-document-archive:before, .k-icon-document-audio:before, .k-icon-document-default:before, .k-icon-document-document:before, .k-icon-document-folder:before, .k-icon-document-image:before, .k-icon-document-pdf:before, .k-icon-document-spreadsheet:before, .k-icon-document-video:before, .k-icon-documents:before, .k-icon-enabled:before, .k-icon-filter:before, .k-icon-folder-closed:before, .k-icon-folder-opened:before, .k-icon-menu-closed:before, .k-icon-menu-opened:before, .k-icon-open:before, .k-appearance.k-checked .koowa input[type="checkbox"]:before { display: inline-block; margin: auto; width: 1em; height: 1em; line-height: 1; }
 
 /** Icon classes Creating a class name for each individual icon to be used in markup like: <span class="k-icon-circle"></span> */
 .k-icon-account-login:before { content: ""; }
@@ -1553,19 +1553,21 @@ body.k-is-resizing { overflow: hidden; /* 3 */ }
 
 .k-icon-document-video:before { content: ""; }
 
-.k-icon-enabled:before { content: ""; }
+.k-icon-documents:before { content: ""; }
 
-.k-icon-filter:before { content: ""; }
+.k-icon-enabled:before { content: ""; }
 
-.k-icon-folder-closed:before { content: ""; }
+.k-icon-filter:before { content: ""; }
 
-.k-icon-folder-opened:before { content: ""; }
+.k-icon-folder-closed:before { content: ""; }
 
-.k-icon-menu-closed:before { content: ""; }
+.k-icon-folder-opened:before { content: ""; }
 
-.k-icon-menu-opened:before { content: ""; }
+.k-icon-menu-closed:before { content: ""; }
 
-.k-icon-open:before { content: ""; }
+.k-icon-menu-opened:before { content: ""; }
+
+.k-icon-open:before { content: ""; }
 
 /* ========================================================================== Koowa namespaced styling ========================================================================== */
 /** By namespacing we make sure our styles never interfere with other styles on the page For example when using Kodekit UI inside of another framework or CMS like Joomla! or WordPress */
@@ -2672,6 +2674,7 @@ Extra icons that we added on top of open iconic
 .k-icon-document-pdf - PDF
 .k-icon-document-spreadsheet - Spreadsheet
 .k-icon-document-video - Video
+.k-icon-documents - Documents
 .k-icon-enabled - Enabled
 .k-icon-filter - Filter
 .k-icon-folder-closed - Folder closed
@@ -3348,6 +3351,7 @@ Different available table cell settings
 .k-table-data--form - Cells that only contain a form element like a radio input or checkbox
 .k-table-data--toggle - Empty cell that will hold the responsive toggle button
 .k-table-data--ellipsis - Break content at the end of the cell and add text ellipsis
+.k-table-data--multiline - All items inside this cell are `display: inline` with `vertical-align: baseline`
 
 markup:
 <td class="{$modifiers}">Content</td>
@@ -3991,7 +3995,7 @@ sg-wrapper:
 
 Styleguide 6.9
 
-*/ /* Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /** Component animations Mainly used for tooltips right now We don't use the `.opacity()` mixin here since it causes a bug with text fields in IE7-8. Source: https://github.com/twbs/bootstrap/pull/3552. */ /* Hamburger ========================================================================== */ /** Animated hamburger button 1. Hide when JS is disabled, we don't need a toggle when there's no JS 2. Show when JS is enabled 3. Hide when the sidebar is visible */ /* Transform hamburger into a cross when the sidebar is opened */ }
+*/ /* Overflowing ========================================================================== */ /** Add overflowing shadow boxes to either top, right, bottom or left side of an element. This shows the user that there's more content to see when no scrollbars are visible. To properly use this you need to wrap the overflowing container inside another container named `overflowing`. JS will take care of this if you don't. 1. This wrapping container needs to have overflow: hidden set 2. It also needs have a relative position for positioning the shadows 3. And adding overflow-scrolling: touch for smooth scroll on iOs 4. Add display: flex so child (actual overflowing container) can flex */ /** Component animations Mainly used for tooltips right now We don't use the `.opacity()` mixin here since it causes a bug with text fields in IE7-8. Source: https://github.com/twbs/bootstrap/pull/3552. */ /* Hamburger ========================================================================== */ /** Animated hamburger button 1. Hide when JS is disabled, we don't need a toggle when there's no JS 2. Show when JS is enabled 3. Hide when the sidebar is visible */ /* Button styling */ /* Left button */ /* Transform hamburger into a cross when the sidebar is opened */ /* Right button */ /* Transform "i" into a cross when the sidebar is opened */ }
 
 .koowa, .koowa *, .koowa *:before, .koowa *:after { box-sizing: border-box; }
 
@@ -4081,9 +4085,7 @@ Styleguide 6.9
 
 .k-is-resizing .koowa .k-component { overflow: hidden; }
 
-.koowa .k-content { position: relative; /* 1 */ z-index: 2; /* 1 */ background: white; /* 2 */ -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* 3 */ /* Faking flexbox on older browsers by using table styling */ /** When flexbox is in use 1. Reset width needed for table 2. Set overflow for breadcrumbs to properly work */ }
-
-@media screen and (min-width: 768px) { .koowa .k-content { display: table-cell; width: 100%; } }
+.koowa .k-content { position: relative; /* 1 */ z-index: 2; /* 1 */ background: white; /* 2 */ -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* 3 */ /* Faking flexbox on older browsers by using table styling */ display: table-cell; width: 100%; /** When flexbox is in use 1. Reset width needed for table 2. Set overflow for breadcrumbs to properly work */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-content, .k-flexboxlegacy .koowa .k-content { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; width: auto; /* 1 */ overflow: hidden; /* 2 */ } }
 
@@ -4097,29 +4099,27 @@ Styleguide 6.9
 
 .koowa .k-show-right-menu .k-content { -webkit-transform: translate(-270px, 0); transform: translate(-270px, 0); /* 2 */ }
 
-@media screen and (min-width: 768px) { .koowa .k-show-right-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ } }
+@media screen and (min-width: 600px) { .koowa .k-show-right-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ } }
 
 [dir="rtl"] .koowa .k-show-right-menu .k-content { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); }
 
-@media screen and (min-width: 768px) { [dir="rtl"] .koowa .k-show-right-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
+@media screen and (min-width: 600px) { [dir="rtl"] .koowa .k-show-right-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
 
 .koowa .k-is-opened-left .k-content, .koowa .k-is-opened-right .k-content { overflow: hidden; }
 
 @media screen and (min-width: 768px) { .koowa .k-is-opened-left .k-content, .koowa .k-is-opened-right .k-content { overflow: auto; /* 3 */ } }
 
+@media screen and (min-width: 600px) { .koowa .k-is-opened-left .k-content, .koowa .k-is-opened-right .k-content { overflow: auto; /* 3 */ } }
+
 .k-is-resizing .koowa .k-is-opened-left .k-content, .k-is-resizing .koowa .k-is-opened-right .k-content { overflow: hidden; }
 
 .koowa .k-off-canvas-overlay { position: absolute; top: 0; right: 0; bottom: 0; left: 0; /* 1 */ z-index: -1; /* 2 */ display: block; opacity: 0; /* 3 */ content: " "; background: black; -webkit-transition: opacity 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: opacity 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
-
-@media screen and (min-width: 768px) { .koowa .k-off-canvas-overlay { display: none; /* 4 */ } }
 
 .koowa .k-show-left-menu .k-off-canvas-overlay, .koowa .k-show-right-menu .k-off-canvas-overlay { opacity: 0.75; /* 1 */ }
 
 .koowa .k-is-opened-left .k-off-canvas-overlay, .koowa .k-is-opened-right .k-off-canvas-overlay { z-index: 9; /* 2 */ }
 
-.koowa .k-content-wrapper { clear: both; /* 1 */ margin: 0; overflow: hidden; border-bottom: 1px solid #e0e0e0; /* Faking flexbox on older browsers by using table styling */ /* When flexbox is in use */ }
-
-@media screen and (min-width: 768px) { .koowa .k-content-wrapper { display: table; width: 100%; } }
+.koowa .k-content-wrapper { clear: both; /* 1 */ margin: 0; overflow: hidden; border-bottom: 1px solid #e0e0e0; /* Faking flexbox on older browsers by using table styling */ display: table; width: 100%; /* When flexbox is in use */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-content-wrapper, .k-flexboxlegacy .koowa .k-content-wrapper { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; border-bottom: none; } }
 
@@ -4171,21 +4171,41 @@ Styleguide 6.9
 
 [dir="rtl"] .koowa.koowa-container { direction: rtl; }
 
-.koowa .k-sidebar-left, .koowa .k-sidebar-right { position: relative; overflow: auto; -webkit-overflow-scrolling: touch; /* When resizing */ /* Faking flexbox on older browsers by using table styling */ /* Larger sidebar when space is available */ /* When JavaScript is enabled */ /* When flexbox is in use */ }
+.koowa .k-sidebar-left, .koowa .k-sidebar-right { position: relative; overflow: auto; -webkit-overflow-scrolling: touch; /* When resizing */ /* Faking flexbox on older browsers by using table styling */ display: table-cell; vertical-align: top; /* When JavaScript is enabled */ /* When flexbox is in use */ }
 
 .k-is-resizing .koowa .k-sidebar-left, .k-is-resizing .koowa .k-sidebar-right { overflow: hidden; }
 
-@media screen and (min-width: 768px) { .koowa .k-sidebar-left, .koowa .k-sidebar-right { min-width: 210px; width: 210px; max-width: 210px; display: table-cell; vertical-align: top; } }
+.k-js-enabled .koowa .k-sidebar-left, .k-js-enabled .koowa .k-sidebar-right { position: absolute; z-index: 1; top: 0; height: 100%; display: none; }
 
-@media screen and (min-width: 1024px) { .koowa .k-sidebar-left, .koowa .k-sidebar-right { min-width: 270px; width: 270px; max-width: 270px; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-sidebar-left, .k-flexboxlegacy .koowa .k-sidebar-left, .k-flexbox .koowa .k-sidebar-right, .k-flexboxlegacy .koowa .k-sidebar-right { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
-.k-js-enabled .koowa .k-sidebar-left, .k-js-enabled .koowa .k-sidebar-right { min-width: 270px; width: 270px; max-width: 270px; position: absolute; z-index: 1; top: 0; height: 100%; display: none; /* On 'desktop' we 'open' the sidebar by default */ /* And we make it even larger when there's enough space */ }
+.koowa .k-sidebar-left { /* Faking flexbox on older browsers by using table styling */ /* Larger sidebar when space is available */ /* When JavaScript is enabled */ /* Override js-enabled beta styling with flexbox */ }
 
-@media screen and (min-width: 768px) { .k-js-enabled .koowa .k-sidebar-left, .k-js-enabled .koowa .k-sidebar-right { min-width: 210px; width: 210px; max-width: 210px; position: relative; height: auto; display: table-cell; } }
+@media screen and (min-width: 768px) { .koowa .k-sidebar-left { min-width: 210px; width: 210px; max-width: 210px; } }
 
-@media screen and (min-width: 1024px) { .k-js-enabled .koowa .k-sidebar-left, .k-js-enabled .koowa .k-sidebar-right { min-width: 270px; width: 270px; max-width: 270px; } }
+@media screen and (min-width: 1024px) { .koowa .k-sidebar-left { min-width: 270px; width: 270px; max-width: 270px; } }
 
-@media (min-width: 768px) and (min-height: 391px) { .k-flexbox .koowa .k-sidebar-left, .k-flexboxlegacy .koowa .k-sidebar-left, .k-flexbox .koowa .k-sidebar-right, .k-flexboxlegacy .koowa .k-sidebar-right { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+.k-js-enabled .koowa .k-sidebar-left { min-width: 270px; width: 270px; max-width: 270px; /* On 'desktop' we 'open' the sidebar by default */ /* And we make it even larger when there's enough space */ }
+
+@media screen and (min-width: 768px) { .k-js-enabled .koowa .k-sidebar-left { position: relative; display: table-cell; height: auto; min-width: 210px; width: 210px; max-width: 210px; } }
+
+@media screen and (min-width: 1024px) { .k-js-enabled .koowa .k-sidebar-left { min-width: 270px; width: 270px; max-width: 270px; } }
+
+@media screen and (min-width: 300px) and (min-height: 391px) and (min-width: 768px) { .k-flexbox .koowa .k-sidebar-left, .k-flexboxlegacy .koowa .k-sidebar-left { display: -webkit-box; display: -ms-flexbox; display: flex; } }
+
+.koowa .k-sidebar-right { /* Faking flexbox on older browsers by using table styling */ /* Larger sidebar when space is available */ /* When JavaScript is enabled */ /* Override js-enabled beta styling with flexbox */ }
+
+@media screen and (min-width: 600px) { .koowa .k-sidebar-right { min-width: 210px; width: 210px; max-width: 210px; } }
+
+@media screen and (min-width: 600px) { .koowa .k-sidebar-right { min-width: 270px; width: 270px; max-width: 270px; } }
+
+.k-js-enabled .koowa .k-sidebar-right { min-width: 270px; width: 270px; max-width: 270px; /* On 'desktop' we 'open' the sidebar by default */ /* And we make it even larger when there's enough space */ }
+
+@media screen and (min-width: 600px) { .k-js-enabled .koowa .k-sidebar-right { position: relative; display: table-cell; height: auto; min-width: 210px; width: 210px; max-width: 210px; } }
+
+@media screen and (min-width: 1024px) { .k-js-enabled .koowa .k-sidebar-right { min-width: 270px; width: 270px; max-width: 270px; } }
+
+@media screen and (min-width: 300px) and (min-height: 391px) and (min-width: 768px) { .k-flexbox .koowa .k-sidebar-right, .k-flexboxlegacy .koowa .k-sidebar-right { display: -webkit-box; display: -ms-flexbox; display: flex; } }
 
 .koowa .k-sidebar-left { border-right: 1px solid #cfcfcf; background: #eeeeee; color: #222222; }
 
@@ -4215,6 +4235,8 @@ Styleguide 6.9
 
 @media screen and (min-width: 768px) { .koowa .k-is-opened-left, .koowa .k-is-opened-right { overflow: auto; /* 2 */ } }
 
+@media screen and (min-width: 600px) { .koowa .k-is-opened-left, .koowa .k-is-opened-right { overflow: auto; /* 2 */ } }
+
 .k-is-resizing .koowa .k-is-opened-left, .k-is-resizing .koowa .k-is-opened-right { overflow: hidden; /* 3 */ }
 
 .koowa a { color: #222222; }
@@ -4231,7 +4253,7 @@ Styleguide 6.9
 
 .koowa dt { margin: 0; padding: 0; list-style: none; border: none; background: transparent; font-weight: 700; float: left; clear: left; margin-right: 7px; }
 
-.koowa dd { margin: 0; padding: 0; list-style: none; border: none; background: transparent; display: block; margin-bottom: 7px; }
+.koowa dd { margin: 0; padding: 0; list-style: none; border: none; background: transparent; display: block; margin-bottom: 7px; max-width: 100%; }
 
 .koowa dd:last-child { margin-bottom: 0; }
 
@@ -4712,6 +4734,8 @@ Styleguide 6.9
 
 .koowa .k-input-group .k-form-control:focus { z-index: 3; /* 5 */ }
 
+.koowa .k-input-group .k-input-group__button .k-button, .koowa .k-input-group .k-input-group__button .btn { height: 32px; }
+
 .koowa .k-input-group--large > .k-form-control, .koowa .k-input-group--large > .select2-container--bootstrap .select2-selection--single, .koowa .k-input-group--large > .k-input-group__addon, .koowa .k-input-group--large > .k-input-group__button > .k-button, .koowa .k-input-group--large > .k-input-group__button > .btn { height: 39px; padding: 7px 14px; font-size: 18px; line-height: 23px; border-radius: 6px; }
 
 [dir="rtl"] .koowa .k-input-group--large > .k-form-control, .koowa .k-input-group--large > .select2-container--bootstrap .select2-selection--single, .koowa .k-input-group--large > .k-input-group__addon, .koowa .k-input-group--large > .k-input-group__button > .k-button, .koowa .k-input-group--large > .k-input-group__button > .btn { border-radius: 6px; }
@@ -4869,7 +4893,7 @@ Styleguide 6.9
 
 .koowa .k-file-input .k-file-input__files:empty { display: none; }
 
-.koowa .k-form-info { margin-top: 0.75em; margin-bottom: 1.5em; color: #444444; }
+.koowa .k-form-info { margin-top: 0.75em; margin-bottom: 1em; color: #444444; }
 
 .koowa .k-form-info:last-child { margin-bottom: 0; }
 
@@ -4956,6 +4980,8 @@ Styleguide 6.9
 .koowa .k-icon--size-xlarge { font-size: 48px; }
 
 .koowa .k-icon--size-huge { font-size: 64px; }
+
+.koowa .k-icon-text-item { display: inline-block; line-height: 20px; vertical-align: middle; font-size: inherit !important; margin-right: 5px; }
 
 .koowa .k-list { padding: 0; list-style: none; border: none; background: transparent; /* 1 */ margin: 7px 0; /* Items */ /** Links 1. Make item fully clickable 2. removing underlines */ /* Active link */ /* Icons */ }
 
@@ -5552,35 +5578,37 @@ Styleguide 6.9
 
 .koowa .k-table-container [class*="k-icon"] { display: inline-block; }
 
-.koowa .k-table-pagination { padding: 7px; background: #fbfbfb; border-top: 1px solid gainsboro; box-shadow: 0 1px 0 gainsboro; /* 1 */ /* Flexbox */ /** Pagination contents 1. Align vertically */ /** Pagination 1. Remove list-style and block-level defaults 2. Collapse white-space */ /* Limit */ }
+.koowa .k-table-pagination { padding: 7px; background: #fbfbfb; border-top: 1px solid gainsboro; box-shadow: 0 1px 0 gainsboro; /* 1 */ /* Flexbox */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-table-pagination, .k-flexboxlegacy .koowa .k-table-pagination { -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
-.koowa .k-table-pagination .k-pagination__limit, .koowa .k-table-pagination .k-pagination__pages { display: inline-block; /* 1 */ vertical-align: middle; /* 1 */ }
+.koowa .k-pagination { /** Pagination contents 1. Align vertically */ /** Pagination 1. Remove list-style and block-level defaults 2. Collapse white-space */ /* Limit */ }
 
-.koowa .k-table-pagination .k-pagination__pages { padding-left: 0; margin: 0; border-radius: 4px; }
+.koowa .k-pagination .k-pagination__limit, .koowa .k-pagination .k-pagination__pages { display: inline-block; /* 1 */ vertical-align: middle; /* 1 */ }
 
-.koowa .k-table-pagination .k-pagination__pages > li { display: inline; /* 1 */ }
+.koowa .k-pagination .k-pagination__pages { padding-left: 0; margin: 0; border-radius: 4px; }
 
-.koowa .k-table-pagination .k-pagination__pages > li > a, .koowa .k-table-pagination .k-pagination__pages > li > span { display: block; position: relative; float: left; /* 2 */ padding: 5px 10px; line-height: 20px; text-decoration: none; color: #3071a9; background-color: white; border: 1px solid gainsboro; margin-left: -1px; }
+.koowa .k-pagination .k-pagination__pages > li { display: inline; /* 1 */ }
 
-[dir="rtl"] .koowa .k-table-pagination .k-pagination__pages > li > a, [dir="rtl"] .koowa .k-table-pagination .k-pagination__pages > li > span { float: right; margin-left: 0; margin-right: -1px; }
+.koowa .k-pagination .k-pagination__pages > li > a, .koowa .k-pagination .k-pagination__pages > li > span { display: block; position: relative; float: left; /* 2 */ padding: 5px 10px; line-height: 20px; text-decoration: none; color: #3071a9; background-color: white; border: 1px solid gainsboro; margin-left: -1px; }
 
-.koowa .k-table-pagination .k-pagination__pages > li:first-child > a, .koowa .k-table-pagination .k-pagination__pages > li:first-child > span { margin-left: 0; border-bottom-left-radius: 4px; border-top-left-radius: 4px; }
+[dir="rtl"] .koowa .k-pagination .k-pagination__pages > li > a, [dir="rtl"] .koowa .k-pagination .k-pagination__pages > li > span { float: right; margin-left: 0; margin-right: -1px; }
 
-[dir="rtl"] .koowa .k-table-pagination .k-pagination__pages > li:first-child > a, [dir="rtl"] .koowa .k-table-pagination .k-pagination__pages > li:first-child > span { margin-right: 0; border-bottom-left-radius: 0; border-top-left-radius: 0; border-bottom-right-radius: 4px; border-top-right-radius: 4px; }
+.koowa .k-pagination .k-pagination__pages > li:first-child > a, .koowa .k-pagination .k-pagination__pages > li:first-child > span { margin-left: 0; border-bottom-left-radius: 4px; border-top-left-radius: 4px; }
 
-.koowa .k-table-pagination .k-pagination__pages > li:last-child > a, .koowa .k-table-pagination .k-pagination__pages > li:last-child > span { border-bottom-right-radius: 4px; border-top-right-radius: 4px; }
+[dir="rtl"] .koowa .k-pagination .k-pagination__pages > li:first-child > a, [dir="rtl"] .koowa .k-pagination .k-pagination__pages > li:first-child > span { margin-right: 0; border-bottom-left-radius: 0; border-top-left-radius: 0; border-bottom-right-radius: 4px; border-top-right-radius: 4px; }
 
-[dir="rtl"] .koowa .k-table-pagination .k-pagination__pages > li:last-child > a, .koowa .k-table-pagination .k-pagination__pages > li:last-child > span { border-bottom-right-radius: 0; border-top-right-radius: 0; border-bottom-left-radius: 4px; border-top-left-radius: 4px; }
+.koowa .k-pagination .k-pagination__pages > li:last-child > a, .koowa .k-pagination .k-pagination__pages > li:last-child > span { border-bottom-right-radius: 4px; border-top-right-radius: 4px; }
 
-.koowa .k-table-pagination .k-pagination__pages > li > a:hover, .koowa .k-table-pagination .k-pagination__pages > li > a:focus, .koowa .k-table-pagination .k-pagination__pages > li > span:hover, .koowa .k-table-pagination .k-pagination__pages > li > span:focus { z-index: 2; color: #285e8d; background-color: #eeeeee; border-color: gainsboro; }
+[dir="rtl"] .koowa .k-pagination .k-pagination__pages > li:last-child > a, .koowa .k-pagination .k-pagination__pages > li:last-child > span { border-bottom-right-radius: 0; border-top-right-radius: 0; border-bottom-left-radius: 4px; border-top-left-radius: 4px; }
 
-.koowa .k-table-pagination .k-pagination__pages > .k-is-active > a, .koowa .k-table-pagination .k-pagination__pages > .k-is-active > a:hover, .koowa .k-table-pagination .k-pagination__pages > .k-is-active > a:focus, .koowa .k-table-pagination .k-pagination__pages > .k-is-active > span, .koowa .k-table-pagination .k-pagination__pages > .k-is-active > span:hover, .koowa .k-table-pagination .k-pagination__pages > .k-is-active > span:focus { z-index: 3; color: white; background-color: #3071a9; border-color: #285e8d; cursor: default; }
+.koowa .k-pagination .k-pagination__pages > li > a:hover, .koowa .k-pagination .k-pagination__pages > li > a:focus, .koowa .k-pagination .k-pagination__pages > li > span:hover, .koowa .k-pagination .k-pagination__pages > li > span:focus { z-index: 2; color: #285e8d; background-color: #eeeeee; border-color: gainsboro; }
 
-.koowa .k-table-pagination select { height: 32px; width: auto; margin-right: 7px; }
+.koowa .k-pagination .k-pagination__pages > .k-is-active > a, .koowa .k-pagination .k-pagination__pages > .k-is-active > a:hover, .koowa .k-pagination .k-pagination__pages > .k-is-active > a:focus, .koowa .k-pagination .k-pagination__pages > .k-is-active > span, .koowa .k-pagination .k-pagination__pages > .k-is-active > span:hover, .koowa .k-pagination .k-pagination__pages > .k-is-active > span:focus { z-index: 3; color: white; background-color: #3071a9; border-color: #285e8d; cursor: default; }
 
-[dir="rtl"] .koowa .k-table-pagination select { margin-right: auto; margin-left: 7px; }
+.koowa .k-pagination select { height: 32px; width: auto; margin: 0; margin-right: 7px; }
+
+[dir="rtl"] .koowa .k-pagination select { margin-right: auto; margin-left: 7px; }
 
 .koowa .k-table-container a { display: inline-block; vertical-align: middle; text-decoration: none; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
@@ -5604,6 +5632,8 @@ Styleguide 6.9
 
 .koowa .k-table-container .k-table-data--toggle [class*="k-icon"], .koowa .k-table-container .k-table-data--form [class*="k-icon"], .koowa .k-table-container .k-table-data--icon [class*="k-icon"] { font-size: 16px; }
 
+.koowa .k-table-container .k-table-data--multiline a, .koowa .k-table-container .k-table-data--multiline span, .koowa .k-table-container .k-table-data--multiline input, .koowa .k-table-container .k-table-data--multiline svg, .koowa .k-table-container .k-table-data--multiline small, .koowa .k-table-container .k-table-data--multiline img { display: inline; vertical-align: baseline; }
+
 .koowa .k-table-container .k-table-data--toggle { padding: 0; font-size: 0; line-height: 0; overflow: hidden; width: 0; visibility: visible; }
 
 .koowa .k-table-container .k-table-data--toggle--hidden { padding: 0; }
@@ -5614,7 +5644,7 @@ Styleguide 6.9
 
 .koowa .k-table-container .k-table-data--form input { margin: 0 !important; }
 
-.koowa .k-table-container .k-table-data--icon img { min-width: 16px; }
+.koowa .k-table-container .k-table-data--icon img { min-width: 16px; width: 16px; max-width: 16px; }
 
 .koowa .k-table-container th.k-table-data--icon a { line-height: 25px; }
 
@@ -5794,9 +5824,25 @@ Styleguide 6.9
 
 .koowa .k-table-container tr.k-is-selected .k-positioner:after { color: white; text-shadow: none; }
 
-.koowa th .k-icon-sort-ascending, .koowa th .k-icon-sort-descending { margin-left: 0.5em; vertical-align: middle; }
+.koowa .k-sort-ascending, .koowa .k-sort-descending { position: relative; display: inline-block; width: 6px; height: 3px; background: transparent; }
 
-[dir="rtl"] .koowa th .k-icon-sort-ascending, [dir="rtl"] .koowa th .k-icon-sort-descending { margin-left: 0; margin-right: 0.5em; }
+.koowa .k-sort-ascending:before, .koowa .k-sort-ascending:after, .koowa .k-sort-descending:before, .koowa .k-sort-descending:after { display: block; content: " "; position: absolute; opacity: 0.33; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+
+.koowa .k-sort-ascending:before, .koowa .k-sort-descending:before { border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 4px solid; bottom: 100%; }
+
+.koowa .k-sort-ascending:after, .koowa .k-sort-descending:after { border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid; top: 100%; }
+
+.koowa .k-sort-ascending:before { opacity: 1; }
+
+.koowa .k-sort-descending:after { opacity: 1; }
+
+.koowa th .k-sort-ascending, .koowa th .k-sort-descending { margin-left: 0.66em; vertical-align: middle; }
+
+[dir="rtl"] .koowa th .k-sort-ascending, [dir="rtl"] .koowa th .k-sort-descending { margin-left: 0; margin-right: 0.66em; }
+
+.koowa th a:focus .k-sort-ascending:after, .koowa th a:hover .k-sort-ascending:after { opacity: 0.66; }
+
+.koowa th a:focus .k-sort-descending:before, .koowa th a:hover .k-sort-descending:before { opacity: 0.66; }
 
 .koowa .footable.breakpoint { /** Reset padding, and re-set them on individual divs */ /** 1. Just like table cells 2. Almost as tall as the main table rows 3. Same spacing as on table cells */ /* Hide toggle button for sub headings */ }
 
@@ -5871,7 +5917,7 @@ Styleguide 6.9
 
 [dir="rtl"] .koowa .k-show-right-menu > .k-title-bar { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); /* 2 */ }
 
-@media screen and (min-width: 768px) { .koowa .k-show-right-menu > .k-title-bar { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ }
+@media screen and (min-width: 600px) { .koowa .k-show-right-menu > .k-title-bar { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ }
   [dir="rtl"] .koowa .k-show-right-menu > .k-title-bar { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
 
 .koowa .k-show-left-menu .k-title-bar:before, .koowa .k-show-right-menu .k-title-bar:before { opacity: 0.75; /* 1 */ }
@@ -6005,6 +6051,8 @@ Styleguide 6.9
 
 .koowa .jqtree-whitespace, .koowa .jqtree-toggler, .koowa .jqtree-icon { width: 26px; text-align: center; }
 
+.koowa .jqtree-icon:before { line-height: 26px; }
+
 .koowa .jqtree-whitespace + .jqtree_common:not(.jqtree-toggler) { position: relative; }
 
 .koowa .jqtree-whitespace + .jqtree_common:not(.jqtree-toggler):after { display: block; position: absolute; content: " "; width: 6px; height: 6px; border-left: 1px solid #aaa; border-bottom: 1px solid #aaa; top: 50%; margin-top: -3px; left: -16px; }
@@ -6131,6 +6179,22 @@ Styleguide 6.9
 
 .koowa .k-position-relative { position: relative; }
 
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-dont-flex.k-dont-flex.k-dont-flex, .k-flexboxlegacy .koowa .k-dont-flex.k-dont-flex.k-dont-flex { -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
+
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-do-flex.k-do-flex.k-do-flex, .k-flexboxlegacy .koowa .k-do-flex.k-do-flex.k-do-flex { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
+
+.k-touchevents .koowa .k-touchevents-hidden { display: none !important; }
+
+.koowa .k-ellipsis { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.koowa .k-ellipsis a, .koowa .k-ellipsis span, .koowa .k-ellipsis input, .koowa .k-ellipsis svg, .koowa .k-ellipsis div, .koowa .k-ellipsis small { display: inline-block; vertical-align: middle; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.koowa .k-link-coverall:after { display: block; position: absolute; content: " "; position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+
+.koowa .k-link-ontop { position: relative; z-index: 1; }
+
+.koowa .k-this-or-that { display: inline-block; margin-right: 7px; vertical-align: middle; }
+
 .koowa .k-overflowing { overflow: hidden; /* 1 */ position: relative; /* 2 */ -webkit-overflow-scrolling: touch; /* 3 */ width: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; /* 4 */ /** When flexbox is in use 1. When the child has flexbox, the parent needs it as well 2. Don't grow item by default, only shrink if it doesn't fit */ /* Set default settings for all shadow boxes */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .koowa .k-overflowing--flex, .k-flexboxlegacy .koowa .k-overflowing--flex { display: -webkit-box; display: -ms-flexbox; display: flex; /* 1 */ -webkit-box-flex: 0; -ms-flex: 0 1 auto; flex: 0 1 auto; } }
@@ -6173,23 +6237,15 @@ Styleguide 6.9
 
 .koowa .collapsing { position: relative; height: 0; overflow: hidden; -webkit-transition: opacity 0.5s cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: opacity 0.5s cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
-.koowa .k-off-canvas-menu-toggle { position: relative; z-index: 10; float: left; display: none; /* 1 */ width: 33px; height: 33px; padding: 0; border: none; border-radius: 3px; margin: 10px; background: #3071a9; color: white; /** Styling the hamburger bars */ /* Set proper margins */ }
+.koowa .k-off-canvas-menu-toggle { position: relative; z-index: 10; float: left; display: none; /* 1 */ width: 33px; height: 33px; padding: 0; border: none; border-radius: 3px; margin: 10px; background: #3071a9; color: white; /* Set proper margins */ }
 
 [dir="rtl"] .koowa .k-off-canvas-menu-toggle { left: auto; float: right; }
 
 .k-js-enabled .koowa .k-off-canvas-menu-toggle { display: block; /* 2 */ }
 
-@media screen and (min-width: 768px) { .k-js-enabled .koowa .k-off-canvas-menu-toggle { display: none; /* 3 */ } }
+@media screen and (min-width: 768px) { .k-js-enabled .koowa .k-off-canvas-menu-toggle--left { display: none; /* 3 */ } }
 
-.koowa .k-off-canvas-menu-toggle .k-hamburger-bar1, .koowa .k-off-canvas-menu-toggle .k-hamburger-bar2, .koowa .k-off-canvas-menu-toggle .k-hamburger-bar3 { position: absolute; left: 9px; display: block; width: 15px; height: 3px; border-radius: 1px; background: white; vertical-align: middle; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
-
-[dir="rtl"] .koowa .k-off-canvas-menu-toggle .k-hamburger-bar1, [dir="rtl"] .koowa .k-off-canvas-menu-toggle .k-hamburger-bar2, [dir="rtl"] .koowa .k-off-canvas-menu-toggle .k-hamburger-bar3 { left: auto; right: 9px; }
-
-.koowa .k-off-canvas-menu-toggle .k-hamburger-bar1 { top: 9px; }
-
-.koowa .k-off-canvas-menu-toggle .k-hamburger-bar2 { top: 15px; }
-
-.koowa .k-off-canvas-menu-toggle .k-hamburger-bar3 { top: 21px; }
+@media screen and (min-width: 600px) { .k-js-enabled .koowa .k-off-canvas-menu-toggle--right { display: none; /* 3 */ } }
 
 .koowa .k-off-canvas-menu-toggle.k-off-canvas-menu-toggle--left { margin-right: 0; }
 
@@ -6199,21 +6255,37 @@ Styleguide 6.9
 
 [dir="rtl"] .koowa .k-off-canvas-menu-toggle.k-off-canvas-menu-toggle--right { margin-left: 10px; margin-right: 0; }
 
-.koowa .k-show-left-menu .k-off-canvas-menu-toggle--left .k-hamburger-bar1 { top: 15px; -webkit-transform: rotate(135deg); transform: rotate(135deg); }
+.koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar1, .koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar2, .koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar3, .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar1, .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar2, .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar3 { position: absolute; display: block; background: white; vertical-align: middle; border-radius: 3px; -webkit-transition: 0.3s 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: 0.3s 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
-.koowa .k-show-left-menu .k-off-canvas-menu-toggle--left .k-hamburger-bar2 { opacity: 0; -webkit-transform: translate(-100%, 0); transform: translate(-100%, 0); }
+.koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar1, .koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar2, .koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar3 { left: 9px; width: 15px; height: 3px; }
 
-[dir="rtl"] .koowa .k-show-left-menu .k-off-canvas-menu-toggle--left .k-hamburger-bar2 { -webkit-transform: translate(100%, 0); transform: translate(100%, 0); }
+[dir="rtl"] .koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar1, [dir="rtl"] .koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar2, [dir="rtl"] .koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar3 { left: auto; right: 9px; }
 
-.koowa .k-show-left-menu .k-off-canvas-menu-toggle--left .k-hamburger-bar3 { top: 15px; -webkit-transform: rotate(-135deg); transform: rotate(-135deg); }
+.koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar1 { top: 9px; }
 
-.koowa .k-show-right-menu .k-off-canvas-menu-toggle--right .k-hamburger-bar1 { top: 15px; -webkit-transform: rotate(135deg); transform: rotate(135deg); }
+.koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar2 { top: 15px; }
 
-.koowa .k-show-right-menu .k-off-canvas-menu-toggle--right .k-hamburger-bar2 { opacity: 0; -webkit-transform: translate(-100%, 0); transform: translate(-100%, 0); }
+.koowa .k-off-canvas-menu-toggle--left .k-toggle-button-bar3 { top: 21px; }
 
-[dir="rtl"] .koowa .k-show-right-menu .k-off-canvas-menu-toggle--right .k-hamburger-bar2 { -webkit-transform: translate(100%, 0); transform: translate(100%, 0); }
+.koowa .k-show-left-menu .k-off-canvas-menu-toggle--left .k-toggle-button-bar1 { top: 15px; -webkit-transform: rotate(135deg); transform: rotate(135deg); }
 
-.koowa .k-show-right-menu .k-off-canvas-menu-toggle--right .k-hamburger-bar3 { top: 15px; -webkit-transform: rotate(-135deg); transform: rotate(-135deg); }
+.koowa .k-show-left-menu .k-off-canvas-menu-toggle--left .k-toggle-button-bar2 { opacity: 0; -webkit-transform: scale(0); transform: scale(0); }
+
+.koowa .k-show-left-menu .k-off-canvas-menu-toggle--left .k-toggle-button-bar3 { top: 15px; -webkit-transform: rotate(-135deg); transform: rotate(-135deg); }
+
+.koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar1, .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar2, .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar3 { left: 14px; }
+
+[dir="rtl"] .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar1, [dir="rtl"] .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar2, [dir="rtl"] .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar3 { left: auto; right: 8px; }
+
+.koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar1 { width: 5px; height: 5px; top: 8px; }
+
+.koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar2, .koowa .k-off-canvas-menu-toggle--right .k-toggle-button-bar3 { width: 5px; height: 10px; top: 15px; }
+
+.koowa .k-show-right-menu .k-off-canvas-menu-toggle--right .k-toggle-button-bar1 { opacity: 0; -webkit-transform: scale(0); transform: scale(0); }
+
+.koowa .k-show-right-menu .k-off-canvas-menu-toggle--right .k-toggle-button-bar2 { top: 9px; left: 15px; height: 15px; -webkit-transform: rotate(135deg); transform: rotate(135deg); opacity: 1; width: 3px; }
+
+.koowa .k-show-right-menu .k-off-canvas-menu-toggle--right .k-toggle-button-bar3 { top: 9px; left: 15px; -webkit-transform: rotate(-135deg); transform: rotate(-135deg); height: 15px; width: 3px; }
 
 /* Joomla styling ========================================================================== */
 @font-face { font-family: 'IcoMoon'; src: url("../../../jui/fonts/IcoMoon.eot"); src: url("../../../jui/fonts/IcoMoon.eot?#iefix") format("embedded-opentype"), url("../../../jui/fonts/IcoMoon.woff") format("woff"), url("../../../jui/fonts/IcoMoon.ttf") format("truetype"), url("../../../jui/fonts/IcoMoon.svg#IcoMoon") format("svg"); font-weight: normal; font-style: normal; }
@@ -6667,9 +6739,7 @@ Styleguide 6.9
 .editor:after { clear: both; }
 
 /** Style the new Joomla modals =========================== By default we only get a very small modal window Overriding styles make sure we get the most space out of it (at least on our views) */
-.mce-window.mce-in { opacity: 1; width: 90% !important; height: auto !important; left: 5% !important; top: 50px !important; bottom: 5% !important; padding: 1px !important; }
-
-[dir="rtl"] .mce-window.mce-in { left: auto !important; right: 5% !important; }
+.mce-window.mce-in { opacity: 1; width: 1080px !important; max-width: 90% !important; height: 800px !important; max-height: 90% !important; left: 50% !important; top: 50% !important; bottom: auto !important; padding: 0 !important; -webkit-transform: translate(-50%, -50%) !important; transform: translate(-50%, -50%) !important; -webkit-transition: none !important; transition: none !important; }
 
 #mce-modal-block.mce-in.mce-in { opacity: .8; }
 
@@ -6683,13 +6753,15 @@ Styleguide 6.9
 
 .mce-reset .mce-window-head.mce-window-head .mce-close { right: 10px; top: -35px; }
 
-.mce-reset .mce-title { display: none; }
+.mce-reset .mce-title { padding: 13px !important; font-weight: 400 !important; background: #f0f0f0 !important; color: #222222 !important; font-size: 21px !important; border-bottom: 1px solid #d2d2d2 !important; }
 
 .mce-reset .mce-window-body.mce-window-body { display: table-row; padding-top: 0; padding-left: 0; }
 
 .mce-reset .mce-foot.mce-foot { display: none; }
 
 .mce-dragh { display: none !important; }
+
+.mce-reset .mce-window-head.mce-window-head .mce-close { top: -39px !important; right: -1px !important; }
 
 #files-sidebar { border-bottom: 1px solid #ddd; }
 
