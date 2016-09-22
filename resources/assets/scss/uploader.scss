@@ -498,8 +498,11 @@ $k-upload-list-button-desktop-size: 23px !default;
   & + .k-upload__button,
   & + .k-upload__text-button {
     margin-left: 8px;
+  }
 
-    @include rtl {
+  @include rtl {
+    & + .k-upload__button,
+    & + .k-upload__text-button {
       margin-left: auto;
       margin-right: 8px;
     }
@@ -581,6 +584,11 @@ $k-upload-list-button-desktop-size: 23px !default;
   padding-left: 15px;
   font-size: 20px;
   vertical-align: middle;
+
+  @include rtl {
+    padding-left: 0;
+    padding-right: 15px;
+  }
 }
 
 
@@ -799,8 +807,10 @@ $k-upload-list-button-desktop-size: 23px !default;
     text-align: left;
     white-space: nowrap;
     padding: 2px 5px;
+  }
 
-    @include rtl {
+  @include rtl {
+    th, td {
       text-align: right;
     }
   }

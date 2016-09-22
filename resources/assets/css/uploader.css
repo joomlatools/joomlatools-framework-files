@@ -148,7 +148,7 @@
 
 .k-upload__button + .k-upload__button, .k-upload__button + .k-upload__text-button, .k-upload__text-button + .k-upload__button, .k-upload__text-button + .k-upload__text-button { margin-left: 8px; }
 
-[dir="rtl"] .k-upload__button + .k-upload__button, .k-upload__button + .k-upload__text-button, .k-upload__text-button + .k-upload__button, .k-upload__text-button + .k-upload__text-button { margin-left: auto; margin-right: 8px; }
+[dir="rtl"] .k-upload__button + .k-upload__button, [dir="rtl"] .k-upload__button + .k-upload__text-button, .k-upload__text-button + .k-upload__button, .k-upload__text-button + .k-upload__text-button { margin-left: auto; margin-right: 8px; }
 
 .is-initialized .k-upload__button.disabled, .is-initialized .k-upload__text-button.disabled { display: none !important; }
 
@@ -174,6 +174,8 @@
 
 /* The '/' divider */
 .k-upload__divider { display: inline-block; padding-left: 15px; font-size: 20px; vertical-align: middle; }
+
+[dir="rtl"] .k-upload__divider { padding-left: 0; padding-right: 15px; }
 
 /* Progress bar ========================================================================== */
 /** 1. Double class to win over the plupload styling 2. Absolute positioning so it's not in the way of anything 3. Hide container visually */
@@ -232,7 +234,7 @@
 
 .k-upload__info__body th, .k-upload__info__body td { position: relative; text-align: left; white-space: nowrap; padding: 2px 5px; }
 
-[dir="rtl"] .k-upload__info__body th, .k-upload__info__body td { text-align: right; }
+[dir="rtl"] .k-upload__info__body th, [dir="rtl"] .k-upload__info__body td { text-align: right; }
 
 .k-upload__info__body .k-uploader__clear-queue { position: absolute; /* 4 */ top: -20px; /* 4 */ left: 0; /* 4 */ }
 
