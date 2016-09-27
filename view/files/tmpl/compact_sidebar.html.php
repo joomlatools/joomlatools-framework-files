@@ -17,6 +17,7 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
         <div class="k-sidebar-item__header">
             <?= translate('Select a folder'); ?>
         </div>
+        <? // @TODO: Ercan: The folder icon is not opening when using arrows to open menu items; ?>
         <div class="k-tree" id="files-tree">
             <div class="k-sidebar-item__content k-sidebar-item__content--horizontal">
                 <?= translate('Loading') ?>
