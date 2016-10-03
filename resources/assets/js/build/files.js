@@ -2475,7 +2475,7 @@ Files.Grid = new Class({
 		});
 
 		var input = kQuery('.k-search__field', '#files-canvas'),
-			empty_button = kQuery(".k-search__button-empty"),
+			empty_button = kQuery(".k-search__empty"),
 			send = function(value) {
 				var state = {search: typeof value === 'undefined' ? input.val() : value};
 
@@ -2483,7 +2483,7 @@ Files.Grid = new Class({
 				that.fireEvent('setState', state);
 
 				if (!state.search || state.search === '') {
-					empty_button.removeClass("is-visible");
+					empty_button.removeClass("k-is-visible");
 				}
 			};
 
@@ -2500,18 +2500,18 @@ Files.Grid = new Class({
 			var v = kQuery(this).val();
 
 			if (v) {
-				empty_button.addClass("is-visible");
+				empty_button.addClass("k-is-visible");
 			} else {
-				empty_button.removeClass("is-visible");
+				empty_button.removeClass("k-is-visible");
 			}
 
 		});
 
 		if (input.val()) {
-			empty_button.addClass("is-visible");
+			empty_button.addClass("k-is-visible");
 		}
 
-		kQuery('.k-search__button-empty', '#files-canvas').click(function() {
+		kQuery('.k-search__empty', '#files-canvas').click(function() {
 			event.preventDefault();
 
 			if (input.val()) {
