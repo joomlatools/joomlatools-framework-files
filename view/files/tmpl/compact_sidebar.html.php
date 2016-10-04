@@ -13,7 +13,7 @@ $can_upload = isset(parameters()->config['can_upload']) ? parameters()->config['
 
 <div class="k-sidebar-left k-js-sidebar-left">
 
-    <div class="k-sidebar-item k-js-sidebar-overflow-item">
+    <div class="k-sidebar-item k-sidebar-item--flex">
         <div class="k-sidebar-item__header">
             <?= translate('Select a folder'); ?>
         </div>
