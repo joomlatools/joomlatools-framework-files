@@ -179,11 +179,11 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
   public function readExifData()
 	{
-  		if ($this->_handle->isReadable()) {
+  		if ($this->_handle->isReadable() && function_exists('exif_read_data')) {
   		    return @exif_read_data($this->_path, null);
   		}
 
-  		return;
+  		return null;
 	}
 
 	public function exists()
