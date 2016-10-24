@@ -49,8 +49,25 @@ setTimeout(function() {
             }
         }
 
-        if (url.getData('callback')) {
-            var callback = window.parent[url.getData('callback')];
+        var  c = url.getData('callback'), callback;
+        if (c) {
+            if (c.indexOf('.') !== -1) { // build callback from a method like Foo.Bar.callback
+                callback = window.parent;
+                var parts = c.split('.');
+                kQuery.each(parts, function(i, part) {
+                    if (callback) {
+                        callback = callback[part];
+                    }
+
+                    if (typeof callback === 'undefined' || !callback) {
+                        callback = null;
+                        return false;
+                    }
+                });
+            } else {
+                callback = window.parent[c];
+            }
+
             if (typeof callback === 'function') {
                 kQuery('#insert-button').click(function(e) {
                     e.preventDefault();
