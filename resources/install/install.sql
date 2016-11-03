@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `#__files_mimetypes` (
 	`mimetype` VARCHAR(255) NOT NULL,
 	`extension` VARCHAR(64) NOT NULL,
 	PRIMARY KEY (`mimetype`, `extension`)
-) DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `#__files_containers` (
   `files_container_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
