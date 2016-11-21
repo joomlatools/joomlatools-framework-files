@@ -102,7 +102,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     <?= import('templates_icons.html'); ?>
     <?= import('templates_details.html'); ?>
 
-    <div id="files-new-folder-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+    <div id="files-new-folder-modal" class="k-ui-namespace k-small-inline-modal-holder mfp-hide">
         <div class="k-inline-modal">
             <form>
                 <h3>
@@ -120,7 +120,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         </div>
     </div>
 
-    <div id="files-move-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+    <div id="files-move-modal" class="k-ui-namespace k-small-inline-modal-holder mfp-hide">
         <div class="k-inline-modal">
             <form>
                 <h3><?= translate('Move to') ?></h3>
@@ -132,7 +132,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         </div>
     </div>
 
-    <div id="files-copy-modal" class="koowa k-small-inline-modal-holder mfp-hide">
+    <div id="files-copy-modal" class="k-ui-namespace k-small-inline-modal-holder mfp-hide">
         <div class="k-inline-modal">
             <form>
                 <h3><?= translate('Copy to') ?></h3>

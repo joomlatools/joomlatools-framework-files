@@ -1,5 +1,5 @@
 // Core variables and mixins
-// Core variables and mixins without output available outside .koowa scope
+// Core variables and mixins without output available outside .k-ui-namespace scope
 
 @import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/bootstrap/variables";
 @import "../../../../joomlatools-framework/code/libraries/joomlatools/library/resources/assets/scss/bootstrap/mixins";
@@ -12,6 +12,6 @@ $koowaPath: '../../../koowa/framework';
 
 @import "koowa/general";
 
-.koowa {
+.k-ui-namespace {
   @import "koowa/modal";
 }
