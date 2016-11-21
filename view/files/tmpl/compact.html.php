@@ -118,9 +118,9 @@ window.addEvent('domready', function() {
         <div class="k-content k-js-content">
 
           <!-- Component -->
-            <div class="k-component">
+            <div class="k-component-wrapper">
 
-                <div class="k-flex-wrapper">
+                <div class="k-component k-js-component">
 
                     <div class="k-breadcrumb" id="files-pathway"></div>
 
@@ -128,14 +128,14 @@ window.addEvent('domready', function() {
 
                     <?= import('compact_select.html'); ?>
 
-                </div><!-- .k-flex-wrapper -->
+                </div><!-- .k-component -->
 
-            </div><!-- .k-component -->
+                <!-- Sidebar -->
+                <?= import('compact_sidebar_right.html'); ?>
+
+            </div><!-- .k-component-wrapper -->
 
         </div><!-- k-content -->
-
-        <!-- Sidebar -->
-        <?= import('compact_sidebar_right.html'); ?>
 
     </div><!-- .k-content-wrapper -->
 
