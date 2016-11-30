@@ -39,9 +39,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
 </script>
 
 <!-- Component -->
-<div class="k-component" id="files-app">
+<div class="k-component-wrapper" id="files-app">
 
-    <div class="k-flex-wrapper" id="files-canvas">
+    <div class="k-component k-js-component" id="files-canvas">
 
         <!-- Title when sidebar is invisible -->
         <ktml:toolbar type="titlebar" mobile>
@@ -92,9 +92,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
             </div>
         </div>
 
-    </div><!-- .k-flex-wrapper -->
+    </div><!-- .k-component -->
 
-</div><!-- .k-component -->
+</div><!-- .k-component-wrapper -->
 
 
 <div class="k-dynamic-content-holder">

@@ -194,10 +194,10 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
         <div class="k-content k-js-content">
 
             <!-- Component -->
-            <div class="k-component">
+            <div class="k-component-wrapper">
 
                 <!-- Form -->
-                <div class="k-flex-wrapper">
+                <div class="k-component k-js-component">
 
                     <!-- Uploader -->
                     <? if ($can_attach): ?>
@@ -223,32 +223,32 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                         </div>
                     </div><!-- .k-table-container -->
 
-                </div><!-- .k-list-layout -->
+                </div><!-- .k-component -->
 
-            </div><!-- .k-component -->
+                <!-- Sidebar -->
+                <div class="k-sidebar-right k-js-sidebar-right">
+
+                    <div class="k-sidebar-item">
+
+                        <div class="k-sidebar-item__header">
+                            <?= translate('Selected attachment info'); ?>
+                        </div>
+
+                        <div class="k-sidebar-item__content" id="properties">
+
+                            <div id="attachments-preview">
+                                <div id="files-preview"></div>
+                            </div>
+
+                        </div><!-- .k-sidebar__content -->
+
+                    </div><!-- .k-sidebar__item -->
+
+                </div><!-- .k-sidebar-right -->
+
+            </div><!-- .k-component-wrapper -->
 
         </div><!-- k-content -->
-
-        <!-- Sidebar -->
-        <div class="k-sidebar-right k-js-sidebar-right">
-
-            <div class="k-sidebar-item">
-
-                <div class="k-sidebar-item__header">
-                    <?= translate('Selected attachment info'); ?>
-                </div>
-
-                <div class="k-sidebar-item__content" id="properties">
-
-                    <div id="attachments-preview">
-                        <div id="files-preview"></div>
-                    </div>
-
-                </div><!-- .k-sidebar__content -->
-
-            </div><!-- .k-sidebar__item -->
-
-        </div><!-- .k-sidebar-right -->
 
     </div><!-- .k-content-wrapper -->
 
