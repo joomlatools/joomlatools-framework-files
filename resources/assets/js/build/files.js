@@ -4214,7 +4214,7 @@ Files.App = new Class({
                 copy = copy.render();
 
                 var element = kQuery(copy);
-                element.addClass('mfp-hide koowa');
+                element.addClass('mfp-hide k-ui-namespace');
                 kQuery.magnificPopup.open({
                     items: {
                         src: element,

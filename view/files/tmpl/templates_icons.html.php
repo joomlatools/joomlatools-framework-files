@@ -9,7 +9,7 @@
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
 <textarea style="display: none" id="file_preview">
-<div class="koowa k-small-inline-modal-holder mfp-hide extension-[%=metadata.extension%]">
+<div class="k-ui-namespace k-small-inline-modal-holder mfp-hide extension-[%=metadata.extension%]">
     <div class="k-inline-modal">
         [% var view_path = Files.app.createRoute({view: 'file', format: 'html', name: name, folder: folder}); %]
         <div class="k-content-block">
