@@ -313,12 +313,21 @@ $.widget("koowa.uploader", {
 			var container = this.options.container;
 
 			if (typeof container.parameters === 'object') {
-				if (container.parameters.maximum_size) {
-					this.options.maximum_size = container.parameters.maximum_size;
+				var parameters = container.parameters;
+
+				if (parameters.maximum_size) {
+					this.options.maximum_size = parameters.maximum_size;
 				}
 
-				if (typeof container.parameters.allowed_extensions === 'object') {
-					this.options.filters.extensions = container.parameters.allowed_extensions;
+				if (typeof parameters.allowed_extensions === 'object') {
+					this.options.filters.extensions = parameters.allowed_extensions;
+				}
+
+				if (parameters.maximum_image_size) {
+					this.options.resize = {
+						'width': parameters.maximum_image_size,
+						'height': parameters.maximum_image_size
+					};
 				}
 			}
 

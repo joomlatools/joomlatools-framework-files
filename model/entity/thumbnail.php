@@ -38,7 +38,7 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
         parent::_initialize($config);
     }
 
-    public function generateThumbnail()
+    public function generateThumbnail($in_place = false)
     {
 		@ini_set('memory_limit', '256M');
 
@@ -63,10 +63,14 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
                     $size       = $image_size->scale(1/($larger/$scale));
                 }
 
-				$string = (string) $image->thumbnail($size, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
-				$string = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($string));
-				
-				return $string;
+                if ($in_place) {
+                    return $image->resize($size)->save();
+                } else {
+                    $string = (string) $image->thumbnail($size, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
+                    $string = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($string));
+
+                    return $string;
+                }
 			}
 			catch (Exception $e) {
 				return false;

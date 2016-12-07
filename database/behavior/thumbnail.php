@@ -24,8 +24,36 @@ class ComFilesDatabaseBehaviorThumbnail extends KDatabaseBehaviorAbstract
     {
         parent::__construct($config);
 
+        $this->addCommandCallback('after.save'  , 'resizeIfNeeded');
         $this->addCommandCallback('after.save'  , 'saveThumbnail');
         $this->addCommandCallback('after.delete', 'deleteThumbnail');
+    }
+
+    public function resizeIfNeeded()
+    {
+        $available_extensions = array('jpg', 'jpeg', 'gif', 'png');
+
+        if ($this->isImage()
+            && $this->getContainer()->getParameters()->maximum_image_size
+            && in_array(strtolower($this->extension), $available_extensions))
+        {
+            $parameters  = $this->getContainer()->getParameters();
+            $size        = $parameters['maximum_image_size'];
+
+            if (!empty($size))
+            {
+                $current_size = @getimagesize($this->fullpath);
+
+                if ($current_size && $current_size[0] > $size || $current_size[1] > $size)
+                {
+                    $thumb = $this->getObject('com:files.model.entity.thumbnail', [
+                        'size' => ['x' => $size, 'y' => 0]
+                    ]);
+                    $thumb->source = $this;
+                    $thumb->generateThumbnail(true);
+                }
+            }
+        }
     }
 
     public function saveThumbnail()
