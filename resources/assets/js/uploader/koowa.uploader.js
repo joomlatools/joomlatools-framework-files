@@ -681,10 +681,13 @@ $.widget("koowa.uploader", {
 		uploader.bind('FileUploaded', function(up, file, result) {
 			// strip off <pre>..</pre> tags that might be enclosing the response (happens in HTML4 runtime)
 			if (typeof result.response !== 'undefined') {
-				result.response = $.parseJSON(result.response.replace(/^\s*<pre[^>]*>/, '').replace(/<\/pre>\s*$/, ''));
+				try {
+					result.response = $.parseJSON(result.response.replace(/^\s*<pre[^>]*>/, '').replace(/<\/pre>\s*$/, ''));
+					_handleUploadErrors(up, file, result);
+				}
+				catch (e) {}
 			}
 
-			_handleUploadErrors(up, file, result);
 			self._handleFileStatus(file);
 			self._trigger('uploaded', null, { uploader: up, file: file, result: result } );
 		});
