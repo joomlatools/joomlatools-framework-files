@@ -15,7 +15,7 @@
  */
 class ComFilesVersion extends KObject
 {
-    const VERSION = '3.0.2';
+    const VERSION = '3.0.3';
 
     /**
      * Get the version
