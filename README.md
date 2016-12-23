@@ -4,9 +4,9 @@ This is a re-usable component that provides file management functionality for [J
 
 ## Requirements
 
-- Joomlatools Framework 2 or newer.
-- PHP 5.3 or newer.
-- MySQL 5.
+- Joomlatools Framework 3
+- PHP 5.4 or newer
+- MySQL 5
 
 ## Installation
 
@@ -14,7 +14,7 @@ Install by using [Composer](https://getcomposer.org/). Go to the root directory 
 command line and execute this command:
 
 ```
-composer require joomlatools/framework-files:2.*
+composer require joomlatools/framework-files:3.*
 ```
 
 The component will be installed in the `vendor` folder of the root directory of your Joomla site. The framework will 
