@@ -62,7 +62,7 @@ window.addEvent('domready', function() {
                     <?= translate('Size'); ?>
                 </th>
                 <th class="k-js-files-sortable k-table-data--nowrap" data-hide="phone,tablet,desktop"
-                    data-name="<?= translate('Last Modified'); ?>">
+                    data-name="modified_on">
                     <a href="#"><?= translate('Last Modified'); ?></a>
                 </th>
                 <th class="k-table-data--icon" width="1%" data-hide="phone,tablet">
