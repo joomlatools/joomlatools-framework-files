@@ -4729,13 +4729,15 @@ markup:
 
 .k-ui-namespace .k-table { overflow: auto; -webkit-backface-visibility: hidden; backface-visibility: hidden; will-change: overflow; }
 
-.k-ui-namespace .k-table-container { /** Cells 1. Position checkbox 2. Remove default margin */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ }
+.k-ui-namespace .k-table-container { /** Sticky header 1. Set top to 0 because there's no default yet 2. Set z-index to 1 to make sure it covers the tbody */ /** Cells 1. Position checkbox 2. Remove default margin */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ }
 
 .k-ui-namespace .k-table-container table { width: 100%; text-align: left; border-collapse: separate; border-spacing: 0; font-size: inherit; /* 1 */ min-width: 0 !important; }
 
 [dir="rtl"] .k-ui-namespace .k-table-container table { text-align: right; }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-table-container table, .k-flexboxlegacy .k-ui-namespace .k-table-container table { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
+
+.k-ui-namespace .k-table-container thead { position: -webkit-sticky; position: sticky; top: 0; z-index: 1; }
 
 .k-ui-namespace .k-table-container th, .k-ui-namespace .k-table-container td { border: none; position: relative; height: 39px; vertical-align: middle; text-align: left; line-height: 1; }
 
