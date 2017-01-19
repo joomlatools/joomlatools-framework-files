@@ -698,14 +698,28 @@ body.k-is-resizing { overflow: hidden; /* 3 */ }
 .k-ui-namespace { /** Box sizing Border box everything: http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */ /* normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */ /** 1. Prevent adjustments of font size after orientation changes in IE and iOS. */ /** Remove the margin in all browsers (opinionated). */ /* HTML5 display definitions ========================================================================== */ /** Add the correct display in IE 9-. 1. Add the correct display in Edge, IE, and Firefox. 2. Add the correct display in IE. */ /** Add the correct display in IE 9-. */ /** Add the correct display in iOS 4-7. */ /** Add the correct vertical alignment in Chrome, Firefox, and Opera. */ /** Add the correct display in IE 10-. 1. Add the correct display in IE. */ /* Links ========================================================================== */ /** 1. Remove the gray background on active links in IE 10. 2. Remove gaps in links underline in iOS 8+ and Safari 8+. */ /** Remove the outline on focused links when they are also active or hovered in all browsers (opinionated). */ /* Text-level semantics ========================================================================== */ /** 1. Remove the bottom border in Firefox 39-. 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari. */ /** Prevent the duplicate application of `bolder` by the next rule in Safari 6. */ /** Add the correct font weight in Chrome, Edge, and Safari. */ /** Add the correct font style in Android 4.3-. */ /** Correct the font size and margin on `h1` elements within `section` and `article` contexts in Chrome, Firefox, and Safari. */ /** Add the correct background and color in IE 9-. */ /** Add the correct font size in all browsers. */ /** Prevent `sub` and `sup` elements from affecting the line height in all browsers. */ /* Embedded content ========================================================================== */ /** Remove the border on images inside links in IE 10-. */ /** Hide the overflow in IE. */ /* Grouping content ========================================================================== */ /** 1. Correct the inheritance and scaling of font size in all browsers. 2. Correct the odd `em` font sizing in all browsers. */ /** Add the correct margin in IE 8. */ /** 1. Add the correct box sizing in Firefox. 2. Show the overflow in Edge and IE. */ /* Forms ========================================================================== */ /** 1. Change font properties to `inherit` in all browsers (opinionated). 2. Remove the margin in Firefox and Safari. */ /** Restore the font weight unset by the previous rule. */ /** Show the overflow in IE. 1. Show the overflow in Edge. */ /** Remove the inheritance of text transform in Edge, Firefox, and IE. 1. Remove the inheritance of text transform in Firefox. */ /** 1. Prevent a WebKit bug where (2) destroys native `audio` and `video` controls in Android 4. 2. Correct the inability to style clickable types in iOS and Safari. */ /** Remove the inner border and padding in Firefox. */ /** Restore the focus styles unset by the previous rule. */ /** Change the border, margin, and padding in all browsers (opinionated). */ /** 1. Correct the text wrapping in Edge and IE. 2. Correct the color inheritance from `fieldset` elements in IE. 3. Remove the padding so developers are not caught out when they zero out `fieldset` elements in all browsers. */ /** Remove the default vertical scrollbar in IE. */ /** 1. Add the correct box sizing in IE 10-. 2. Remove the padding in IE 10-. */ /** Correct the cursor style of increment and decrement buttons in Chrome. */ /** 1. Correct the odd appearance in Chrome and Safari. 2. Correct the outline style in Safari. */ /** Remove the inner padding and cancel buttons in Chrome and Safari on OS X. */ /** Correct the text style of placeholders in Chrome, Edge, and Safari. */ /** 1. Correct the inability to style clickable types in iOS and Safari. 2. Change font properties to `inherit` in Safari. */ /* Component ========================================================================== */ /*
 Component
 
-- Use as <b>child</b> of the `.k-content` container only
-- Can be preceded by a `.k-title-bar.k-title-bar--mobile` or a `.k-toolbar`
+- Use as <b>child</b> of the `.k-component-wrapper` container only
+- Can have a `.k-sidebar-right` as next sibling
 - {unsureText}
 
 markup:
 <div class="k-component">
     ...
 </div><!-- .k-component -->
+
+Styleguide 3.6
+
+*/ /** 1. Needed for the off-canvas-overlay 2. Reset for when item is a form 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the negative width of the sidebar so the sidebar will appear 2. Reset when screen is wide enough */ /** Overlay when toggled 1. Set z-index so it will become visible */ /* Component wrapper ========================================================================== */ /*
+Component wrapper
+
+- Use as <b>child</b> of the `.k-content` container only
+- Can be preceded by a `.k-title-bar.k-title-bar--mobile` or a `.k-toolbar`
+- {unsureText}
+
+markup:
+<div class="k-component-wrapper">
+    ...
+</div><!-- .k-component-wrapper -->
 
 Styleguide 3.6
 
@@ -722,7 +736,7 @@ markup:
 
 Styleguide 3.5
 
-*/ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /** Overlay when toggled 1. Set opacity 2. Set z-index to 1 so it will become visible */ /* Content wrapper ========================================================================== */ /*
+*/ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Reset when screen is wide enough */ /* Content wrapper ========================================================================== */ /*
 Content wrapper
 
 - Use as <b>child</b> of the `.k-wrapper` container only
@@ -735,7 +749,7 @@ markup:
 
 Styleguide 3.3
 
-*/ /** 1. Clearing toolbar floats when flexbox is not in use */ /* Grid ========================================================================== */ /*
+*/ /** 1. Needed to position sidebar properly when off-canvas 2. Clearing toolbar floats when flexbox is not in use */ /* Grid ========================================================================== */ /*
 Grid
 
 Fluid grid system
@@ -821,7 +835,7 @@ markup:
 
 Styleguide 3.2
 
-*/ /** Wrapper when toggled 1. Hide overflowing when menu is toggled 2. Set back to auto when screen is wide enough 3. Hide all overflow when resizing to avoid jumpy layout */ /* Anchor ========================================================================== */ /*
+*/ /** Wrapper when toggled 1. Hide overflowing when menu is toggled 2. Set back to auto when screen is wide enough 3. Hide all overflow when resizing to avoid jumpy layout */ /** The overlay 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /* Anchor ========================================================================== */ /*
 Anchor
 
 markup:
@@ -2286,7 +2300,7 @@ sg-wrapper:
 
 Styleguide 2.20.3
 
-*/ /* Table ========================================================================== */ /*
+*/ /* Table ========================================================================== */ /* WARNING: Do not use transition on any element since this will hit scroll performance big on certain browsers! */ /*
 Table
 
 A complete table
@@ -2295,7 +2309,7 @@ markup:
 <!-- Table -->
 <div class="k-table-container">
     <div class="k-table">
-        <table class="k-js-fixed-table-header k-js-responsive-table">
+        <table class="k-js-responsive-table">
         <thead>
             <tr>
                 <th width="1%" class="k-table-data--form"><input class="k-js-grid-checkall" type="checkbox" /></th>
@@ -2744,60 +2758,7 @@ markup:
 
 Styleguide 2.21.11
 
-*/ /*
-Floating thead
-
-A floating thead so the head will stay on top when scrolling the tables
-- Add the `.k-js-foxed-table` class to the `<table>`
-
-markup:
-<table class="k-js-fixed-table-header">
-    <thead>
-    <tr>
-        <th>Heading</th>
-        <th>Heading</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Content</td>
-        <td>Content</td>
-    </tr>
-    <tr>
-        <td>Content</td>
-        <td>Content</td>
-    </tr>
-    <tr>
-        <td>Content</td>
-        <td>Content</td>
-    </tr>
-    <tr>
-        <td>Content</td>
-        <td>Content</td>
-    </tr>
-    <tr>
-        <td>Content</td>
-        <td>Content</td>
-    </tr>
-    <tr>
-        <td>Content</td>
-        <td>Content</td>
-    </tr>
-    </tbody>
-</table>
-
-sg-wrapper:
-<div class="sg-flexbox" style="height: 175px;">
-    <div class="k-table-container">
-        <div class="k-table">
-            <sg-wrapper-content/>
-        </div>
-    </div>
-</div>
-
-Styleguide 2.21.12
-
-*/ /** This class is created by the floatThead plugin that's why it's not k-float-thead-wrapper 1. Overriding inline styling, we don't need a z-index of 1000+ */ /* Tabs ========================================================================== */ /*
+*/ /* Tabs ========================================================================== */ /*
 Tabs
 
 markup:
@@ -2842,12 +2803,12 @@ markup:
 
 Styleguide 2.23
 
-*/ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** Titlebar when toggled 1. Set left to the width of the menu so the menu will appear 2. Set right to the negative width of the menu so the menu will appear 3. Reset when screen is wide enough */ /** Fake Overlay when toggled 1. Set opacity 2. Set z-index so it will become visible */ /** Titlebar contents 1. Also cover the bottom border */ /*
+*/ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar */ /** Titlebar contents */ /*
 Mobile title
 
 Title just for mobile views since the navigation is hidden
 - Use <b>never</b> together with a `.k-title-bar`
-- Use <b>only</b> as <b>child</b> of `.k-content`
+- Use <b>only</b> as <b>child</b> of `.k-wrapper`
 - Only visible on smaller screens
 - {unsureText}
 
@@ -2904,7 +2865,7 @@ Markup:
 
 Styleguide 2.24
 
-*/ /** Toolbar contents */ /* Text on the toolbar buttons */ /* Tooltip ========================================================================== */ /*
+*/ /** 1. Buttons have margin-top and margin-left to separate them from each other Setting a bottom padding to separate buttons from bottom of toolbar 2. Set a right padding for the toggle button */ /** Toolbar contents */ /* Text on the toolbar buttons */ /* Tooltip ========================================================================== */ /*
 Tooltips
 
 markup:
@@ -3273,47 +3234,59 @@ markup:
 
 .k-ui-namespace ::-webkit-file-upload-button { -webkit-appearance: button; /* 1 */ font: inherit; /* 2 */ }
 
-.k-ui-namespace .k-component { background: #fbfbfb; }
+.k-ui-namespace .k-component { position: relative; /* 1 */ z-index: 2; /* 1 */ background: #fbfbfb; margin: 0; /* 2 */ padding: 0; /* 2 */ -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* 3 */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-component, .k-flexboxlegacy .k-ui-namespace .k-component { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
 
 .k-is-resizing .k-ui-namespace .k-component { overflow: hidden; }
 
+.k-ui-namespace .k-show-right-menu { /** Set opacity */ }
+
+.k-ui-namespace .k-show-right-menu .k-component { -webkit-transform: translate(-270px, 0); transform: translate(-270px, 0); /* 1 */ }
+
+@media screen and (min-width: 600px) { .k-ui-namespace .k-show-right-menu .k-component { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 2 */ } }
+
+[dir="rtl"] .k-ui-namespace .k-show-right-menu .k-component { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); }
+
+@media screen and (min-width: 600px) { [dir="rtl"] .k-ui-namespace .k-show-right-menu .k-component { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
+
+.k-ui-namespace .k-show-right-menu .k-component .k-off-canvas-overlay { opacity: 0.75; /* 1 */ }
+
+.k-ui-namespace .k-is-opened-right .k-component .k-off-canvas-overlay { z-index: 9; /* 1 */ }
+
+.k-ui-namespace .k-component-wrapper { position: relative; background: #fbfbfb; }
+
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-component-wrapper, .k-flexboxlegacy .k-ui-namespace .k-component-wrapper { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; overflow: auto; } }
+
+.k-is-resizing .k-ui-namespace .k-component-wrapper { overflow: hidden; }
+
 .k-ui-namespace .k-content { position: relative; /* 1 */ z-index: 2; /* 1 */ background: white; /* 2 */ -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* 3 */ /* Faking flexbox on older browsers by using table styling */ display: table-cell; width: 100%; /** When flexbox is in use 1. Reset width needed for table 2. Set overflow for breadcrumbs to properly work */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-content, .k-flexboxlegacy .k-ui-namespace .k-content { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; width: auto; /* 1 */ overflow: hidden; /* 2 */ } }
 
+.k-ui-namespace .k-show-left-menu { /* Set opacity */ }
+
 .k-ui-namespace .k-show-left-menu .k-content { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); /* 1 */ }
 
-@media screen and (min-width: 768px) { .k-ui-namespace .k-show-left-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ } }
+@media screen and (min-width: 768px) { .k-ui-namespace .k-show-left-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 2 */ } }
 
 [dir="rtl"] .k-ui-namespace .k-show-left-menu .k-content { -webkit-transform: translate(-270px, 0); transform: translate(-270px, 0); }
 
 @media screen and (min-width: 768px) { [dir="rtl"] .k-ui-namespace .k-show-left-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
 
-.k-ui-namespace .k-show-right-menu .k-content { -webkit-transform: translate(-270px, 0); transform: translate(-270px, 0); /* 2 */ }
+.k-ui-namespace .k-show-left-menu .k-content > .k-off-canvas-overlay { opacity: 0.75; }
 
-@media screen and (min-width: 600px) { .k-ui-namespace .k-show-right-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ } }
+.k-ui-namespace .k-is-opened-left .k-content { overflow: hidden; /* 2. Set z-index so it will become visible */ }
 
-[dir="rtl"] .k-ui-namespace .k-show-right-menu .k-content { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); }
+@media screen and (min-width: 768px) { .k-ui-namespace .k-is-opened-left .k-content { overflow: auto; } }
 
-@media screen and (min-width: 600px) { [dir="rtl"] .k-ui-namespace .k-show-right-menu .k-content { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
+@media screen and (min-width: 600px) { .k-ui-namespace .k-is-opened-left .k-content { overflow: auto; } }
 
-.k-ui-namespace .k-is-opened-left .k-content, .k-ui-namespace .k-is-opened-right .k-content { overflow: hidden; }
+.k-is-resizing .k-ui-namespace .k-is-opened-left .k-content { overflow: hidden; }
 
-@media screen and (min-width: 768px) { .k-ui-namespace .k-is-opened-left .k-content, .k-ui-namespace .k-is-opened-right .k-content { overflow: auto; /* 3 */ } }
+.k-ui-namespace .k-is-opened-left .k-content > .k-off-canvas-overlay { z-index: 9; }
 
-@media screen and (min-width: 600px) { .k-ui-namespace .k-is-opened-left .k-content, .k-ui-namespace .k-is-opened-right .k-content { overflow: auto; /* 3 */ } }
-
-.k-is-resizing .k-ui-namespace .k-is-opened-left .k-content, .k-is-resizing .k-ui-namespace .k-is-opened-right .k-content { overflow: hidden; }
-
-.k-ui-namespace .k-off-canvas-overlay { position: absolute; top: 0; right: 0; bottom: 0; left: 0; /* 1 */ z-index: -1; /* 2 */ display: block; opacity: 0; /* 3 */ content: " "; background: black; -webkit-transition: opacity 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: opacity 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
-
-.k-ui-namespace .k-show-left-menu .k-off-canvas-overlay, .k-ui-namespace .k-show-right-menu .k-off-canvas-overlay { opacity: 0.75; /* 1 */ }
-
-.k-ui-namespace .k-is-opened-left .k-off-canvas-overlay, .k-ui-namespace .k-is-opened-right .k-off-canvas-overlay { z-index: 9; /* 2 */ }
-
-.k-ui-namespace .k-content-wrapper { clear: both; /* 1 */ margin: 0; overflow: hidden; border-bottom: 1px solid #e0e0e0; /* Faking flexbox on older browsers by using table styling */ display: table; width: 100%; /* When flexbox is in use */ }
+.k-ui-namespace .k-content-wrapper { position: relative; /* 1 */ clear: both; /* 2 */ margin: 0; overflow: hidden; border-bottom: 1px solid #e0e0e0; /* Faking flexbox on older browsers by using table styling */ display: table; width: 100%; /* When flexbox is in use */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-content-wrapper, .k-flexboxlegacy .k-ui-namespace .k-content-wrapper { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-orient: horizontal; -webkit-box-direction: normal; -ms-flex-direction: row; flex-direction: row; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; border-bottom: none; } }
 
@@ -3436,6 +3409,8 @@ markup:
 @media screen and (min-width: 600px) { .k-ui-namespace .k-is-opened-left, .k-ui-namespace .k-is-opened-right { overflow: auto; /* 2 */ } }
 
 .k-is-resizing .k-ui-namespace .k-is-opened-left, .k-is-resizing .k-ui-namespace .k-is-opened-right { overflow: hidden; /* 3 */ }
+
+.k-ui-namespace .k-off-canvas-overlay { position: absolute; top: 0; right: 0; bottom: 0; left: 0; /* 1 */ z-index: -1; /* 2 */ display: block; opacity: 0; /* 3 */ content: " "; background: black; -webkit-transition: opacity 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: opacity 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
 .k-ui-namespace a { color: #222222; }
 
@@ -4748,15 +4723,13 @@ markup:
 
 .k-ui-namespace .k-table-container { background: white; }
 
-@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-table-container, .k-flexboxlegacy .k-ui-namespace .k-table-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; overflow: auto; } }
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-table-container, .k-flexboxlegacy .k-ui-namespace .k-table-container { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; -webkit-box-orient: vertical; -webkit-box-direction: normal; -ms-flex-direction: column; flex-direction: column; overflow: hidden; } }
 
 .k-is-resizing .k-ui-namespace .k-table-container { overflow: hidden; }
 
-.k-ui-namespace .k-table { overflow: auto; }
+.k-ui-namespace .k-table { overflow: auto; -webkit-backface-visibility: hidden; backface-visibility: hidden; will-change: overflow; }
 
-@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-table, .k-flexboxlegacy .k-ui-namespace .k-table { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; background: white; } }
-
-.k-ui-namespace .k-table-container { /** Cells 1. Position checkbox 2. Remove default margin */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ }
+.k-ui-namespace .k-table-container { /** Sticky header 1. Set top to 0 because there's no default yet 2. Set z-index to 1 to make sure it covers the tbody */ /** Cells 1. Position checkbox 2. Remove default margin */ /** Head 1. Don't set a vertical padding on table headers. Set padding on table heading children We do this so <a> elements are fully clickable for sorting 2. Don't use long header titles since they won't be wrapped 3. Whole <th> should be clickable 4. Set padding here */ /** Body 1. Small extra info below title display:block to display below title */ /* Hover background */ }
 
 .k-ui-namespace .k-table-container table { width: 100%; text-align: left; border-collapse: separate; border-spacing: 0; font-size: inherit; /* 1 */ min-width: 0 !important; }
 
@@ -4764,7 +4737,9 @@ markup:
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-table-container table, .k-flexboxlegacy .k-ui-namespace .k-table-container table { -webkit-box-flex: 1; -ms-flex: 1 1 auto; flex: 1 1 auto; } }
 
-.k-ui-namespace .k-table-container th, .k-ui-namespace .k-table-container td { border: none; position: relative; height: 39px; vertical-align: middle; text-align: left; line-height: 1; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-table-container thead { position: -webkit-sticky; position: sticky; top: 0; z-index: 1; }
+
+.k-ui-namespace .k-table-container th, .k-ui-namespace .k-table-container td { border: none; position: relative; height: 39px; vertical-align: middle; text-align: left; line-height: 1; }
 
 .k-ui-namespace .k-table-container th input, .k-ui-namespace .k-table-container td input { display: inline-block; /* 1 */ vertical-align: middle; /* 1 */ margin: 0; /* 2 */ }
 
@@ -4772,7 +4747,7 @@ markup:
 
 .k-ui-namespace .k-table-container th { border-bottom: 1px solid gainsboro; z-index: 1; padding: 0 7px; /* 1 */ white-space: nowrap; /* 2 */ background: #fbfbfb; font-weight: 400; /* Size icons accordingly */ }
 
-.k-ui-namespace .k-table-container th a { display: block; /* 3 */ padding: 7px 7px; /* 4 */ margin-left: -7px; margin-right: -7px; line-height: 25px; text-decoration: none; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-table-container th a { display: block; /* 3 */ padding: 7px 7px; /* 4 */ margin-left: -7px; margin-right: -7px; line-height: 25px; text-decoration: none; }
 
 .k-ui-namespace .k-table-container th a:focus, .k-ui-namespace .k-table-container th a:hover { background: #f3f3f3; }
 
@@ -4822,7 +4797,7 @@ markup:
 
 [dir="rtl"] .k-ui-namespace .k-pagination select { margin-right: auto; margin-left: 7px; }
 
-.k-ui-namespace .k-table-container a { display: inline-block; vertical-align: middle; text-decoration: none; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-table-container a { display: inline-block; vertical-align: middle; text-decoration: none; }
 
 .k-ui-namespace .k-table-container a:hover, .k-ui-namespace .k-table-container a:focus { text-decoration: underline; }
 
@@ -4864,7 +4839,7 @@ markup:
 
 .k-ui-namespace .k-table-container .k-table-data--ellipsis a, .k-ui-namespace .k-table-container .k-table-data--ellipsis span, .k-ui-namespace .k-table-container .k-table-data--ellipsis input, .k-ui-namespace .k-table-container .k-table-data--ellipsis svg, .k-ui-namespace .k-table-container .k-table-data--ellipsis div, .k-ui-namespace .k-table-container .k-table-data--ellipsis small { vertical-align: middle; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.k-ui-namespace .k-table-container .k-table__item--state { -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* pointers for clickable elements */ }
+.k-ui-namespace .k-table-container .k-table__item--state { /* pointers for clickable elements */ }
 
 .k-ui-namespace .k-table-container .k-table__item--state button.k-ui-namespace .k-table-container .k-table__item--state, .k-ui-namespace .k-table-container .k-table__item--state a.k-ui-namespace .k-table-container .k-table__item--state { cursor: pointer; }
 
@@ -5036,13 +5011,13 @@ markup:
 
 .k-ui-namespace .k-positioner:before { display: block; position: absolute; content: " "; width: 16px; height: 10px; border-top: 1px solid #cdcdcd; border-bottom: 1px solid #cdcdcd; top: -4px; }
 
-.k-ui-namespace .k-positioner:after { position: absolute; width: 32px; height: 32px; top: -15px; left: -8px; content: attr(data-position); text-indent: 3px; vertical-align: bottom; color: #333; text-shadow: 0 0 3px white; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-positioner:after { position: absolute; width: 32px; height: 32px; top: -15px; left: -8px; content: attr(data-position); text-indent: 3px; vertical-align: bottom; color: #333; text-shadow: 0 0 3px white; }
 
 .k-ui-namespace .k-table-container tr.k-is-selected .k-positioner:after { color: white; text-shadow: none; }
 
 .k-ui-namespace .k-sort-ascending, .k-ui-namespace .k-sort-descending { position: relative; display: inline-block; width: 6px; height: 3px; background: transparent; }
 
-.k-ui-namespace .k-sort-ascending:before, .k-ui-namespace .k-sort-ascending:after, .k-ui-namespace .k-sort-descending:before, .k-ui-namespace .k-sort-descending:after { display: block; content: " "; position: absolute; opacity: 0.33; -webkit-transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-sort-ascending:before, .k-ui-namespace .k-sort-ascending:after, .k-ui-namespace .k-sort-descending:before, .k-ui-namespace .k-sort-descending:after { display: block; content: " "; position: absolute; opacity: 0.33; }
 
 .k-ui-namespace .k-sort-ascending:before, .k-ui-namespace .k-sort-descending:before { border-left: 4px solid transparent; border-right: 4px solid transparent; border-bottom: 4px solid; bottom: 100%; }
 
@@ -5088,12 +5063,6 @@ markup:
 
 .k-ui-namespace .footable.breakpoint th .footable-toggle { display: none; }
 
-.k-ui-namespace .floatThead-wrapper { z-index: 1 !important; /* 1 */ }
-
-@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .floatThead-wrapper, .k-flexboxlegacy .k-ui-namespace .floatThead-wrapper { display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-flex: 0; -ms-flex: 0 1 auto; flex: 0 1 auto; overflow: auto; } }
-
-.k-is-resizing .k-ui-namespace .floatThead-wrapper { overflow: hidden; }
-
 .k-ui-namespace .k-tabs { margin-bottom: 0; padding-left: 0; list-style: none; border-bottom: 1px solid #eeeeee; /** 1. Make the list-items overlay the bottom border */ /** Open dropdowns */ }
 
 .k-ui-namespace .k-tabs:before, .k-ui-namespace .k-tabs:after { display: table; content: " "; }
@@ -5118,29 +5087,9 @@ markup:
 
 .k-ui-namespace .k-tabs-content > .k-is-active { display: block; }
 
-.k-ui-namespace .k-title-bar { border-bottom: 1px solid #d2d2d2; position: relative; /* 1 */ z-index: 10; /* 1 */ display: table; width: 100%; background: #f0f0f0; /* 2 */ color: #222222; font-size: 21px; -webkit-transition: -webkit-transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); transition: transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* 3 */ /* When flexbox is in use */ }
+.k-ui-namespace .k-title-bar { border-bottom: 1px solid #d2d2d2; position: relative; /* 1 */ z-index: 10; /* 1 */ display: table; width: 100%; background: #f0f0f0; /* 2 */ color: #222222; font-size: 21px; /* When flexbox is in use */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-title-bar, .k-flexboxlegacy .k-ui-namespace .k-title-bar { -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
-
-.k-ui-namespace .k-show-left-menu > .k-title-bar { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); /* 1 */ }
-
-[dir="rtl"] .k-ui-namespace .k-show-left-menu > .k-title-bar { -webkit-transform: translate(-270px, 0); transform: translate(-270px, 0); }
-
-@media screen and (min-width: 768px) { .k-ui-namespace .k-show-left-menu > .k-title-bar { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ }
-  [dir="rtl"] .k-ui-namespace .k-show-left-menu > .k-title-bar { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
-
-.k-ui-namespace .k-show-right-menu > .k-title-bar { -webkit-transform: translate(-270px, 0); transform: translate(-270px, 0); /* 2 */ }
-
-[dir="rtl"] .k-ui-namespace .k-show-right-menu > .k-title-bar { -webkit-transform: translate(270px, 0); transform: translate(270px, 0); /* 2 */ }
-
-@media screen and (min-width: 600px) { .k-ui-namespace .k-show-right-menu > .k-title-bar { -webkit-transform: translate(0, 0); transform: translate(0, 0); /* 3 */ }
-  [dir="rtl"] .k-ui-namespace .k-show-right-menu > .k-title-bar { -webkit-transform: translate(0, 0); transform: translate(0, 0); } }
-
-.k-ui-namespace .k-show-left-menu .k-title-bar:before, .k-ui-namespace .k-show-right-menu .k-title-bar:before { opacity: 0.75; /* 1 */ }
-
-.k-ui-namespace .k-is-opened-left .k-title-bar:before, .k-ui-namespace .k-is-opened-right .k-title-bar:before { z-index: 2; /* 2 */ }
-
-.k-ui-namespace .k-title-bar .k-off-canvas-overlay { bottom: -1px; /* 1 */ }
 
 .k-ui-namespace .k-title-bar .k-off-canvas-menu-toggle-holder, .k-ui-namespace .k-title-bar .k-title-bar__heading { display: table-cell; vertical-align: middle; }
 
@@ -5159,11 +5108,13 @@ markup:
 
 .k-ui-namespace .k-title-bar--inline .k-title-bar__heading { padding: 0; }
 
-.k-ui-namespace .k-toolbar { border-bottom: 1px solid #d2d2d2; background: #f0f0f0; min-height: 39px; padding-bottom: 10px; /* When flexbox is in use */ }
+.k-ui-namespace .k-toolbar { border-bottom: 1px solid #d2d2d2; background: #f0f0f0; min-height: 39px; padding-bottom: 10px; /* 1 */ padding-right: 10px; /* 2 */ /* When flexbox is in use */ }
+
+[dir="rtl"] .k-ui-namespace .k-toolbar { padding-right: 0; padding-left: 10px; /* 2 */ }
 
 @media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-ui-namespace .k-toolbar, .k-flexboxlegacy .k-ui-namespace .k-toolbar { -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; } }
 
-.k-ui-namespace .k-toolbar { /* Autosave indicator */ /** Position the icons Only position them if media queries are supported By default we just want them aligned normally */ }
+.k-ui-namespace .k-toolbar { /** Autosave indicator Position of the autosave indicator Use a k-loader for the indicator itself */ /** Position the icons Only position them if media queries are supported By default we just want them aligned normally */ }
 
 .k-ui-namespace .k-toolbar .k-button, .k-ui-namespace .k-toolbar .btn { margin: 10px 0 0 10px; /** Make buttons square Only make them square if media queries are supported By default we just want them as buttons */ }
 
@@ -5184,6 +5135,10 @@ markup:
 .k-ui-namespace .k-toolbar .k-off-canvas-menu-toggle-holder { display: inline-block; vertical-align: middle; }
 
 .k-ui-namespace .k-toolbar .k-off-canvas-menu-toggle-holder .k-off-canvas-menu-toggle { margin-bottom: 0; }
+
+.k-ui-namespace .k-toolbar .k-off-canvas-menu-toggle-holder--right { float: right; }
+
+[dir="rtl"] .k-ui-namespace .k-toolbar .k-off-canvas-menu-toggle-holder--right { float: left; }
 
 @media screen and (min-width: 0) and (max-width: 768px) { .k-ui-namespace .k-toolbar__text { position: relative; z-index: -1; visibility: hidden; } }
 
@@ -5406,6 +5361,14 @@ markup:
 .k-ui-namespace .k-content-block--small { margin-bottom: 1em; }
 
 .k-ui-namespace .k-content-block--small:last-child { margin-bottom: 0; }
+
+.k-ui-namespace .k-content-block-top { margin-top: 1.5em; }
+
+.k-ui-namespace .k-content-block-top:first-child { margin-top: 0; }
+
+.k-ui-namespace .k-content-block--small { margin-top: 1em; }
+
+.k-ui-namespace .k-content-block--small:first-child { margin-top: 0; }
 
 .k-ui-namespace .k-position-relative { position: relative; }
 
@@ -5698,12 +5661,14 @@ markup:
 .select2-container--classic.select2-container--open .select2-dropdown { border-color: #5897fb; }
 
 /* 1 */
-/*! Select2 Bootstrap Theme v0.1.0-beta.4 | MIT License | github.com/select2/select2-bootstrap-theme */
-.select2-container--bootstrap { display: block; /*------------------------------------*            #COMMON STYLES \*------------------------------------*/ /** Search field in the Select2 dropdown. */ /** No outline for all search fields - in the dropdown and inline in multi Select2s. */ /** Adjust Select2's choices hover and selected styles to match Bootstrap 3's default dropdown styles. @see http://getbootstrap.com/components/#dropdowns */ /** Clear the selection. */ /** Address disabled Select2 styles. @see https://select2.github.io/examples.html#disabled @see http://getbootstrap.com/css/#forms-control-disabled */ /*------------------------------------*            #DROPDOWN \*------------------------------------*/ /** Dropdown border color and box-shadow. */ /** Limit the dropdown height. */ /*------------------------------------*            #SINGLE SELECT2 \*------------------------------------*/ /*------------------------------------*        #MULTIPLE SELECT2 \*------------------------------------*/ /** Address Bootstrap control sizing classes 1. Reset Bootstrap defaults. 2. Adjust the dropdown arrow button icon position. @see http://getbootstrap.com/css/#forms-control-sizes */ /* 1 */ /*------------------------------------*        #RTL SUPPORT \*------------------------------------*/ }
+/*! Select2 Bootstrap Theme v0.1.0-beta.9 | MIT License | github.com/select2/select2-bootstrap-theme */
+.select2-container--bootstrap { display: block; /*------------------------------------*      #COMMON STYLES \*------------------------------------*/ /** Search field in the Select2 dropdown. */ /** No outline for all search fields - in the dropdown and inline in multi Select2s. */ /** Adjust Select2's choices hover and selected styles to match Bootstrap 3's default dropdown styles. @see http://getbootstrap.com/components/#dropdowns */ /** Clear the selection. */ /** Address disabled Select2 styles. @see https://select2.github.io/examples.html#disabled @see http://getbootstrap.com/css/#forms-control-disabled */ /*------------------------------------*      #DROPDOWN \*------------------------------------*/ /** Dropdown border color and box-shadow. */ /** Limit the dropdown height. */ /*------------------------------------*      #SINGLE SELECT2 \*------------------------------------*/ /*------------------------------------*    #MULTIPLE SELECT2 \*------------------------------------*/ /** Address Bootstrap control sizing classes 1. Reset Bootstrap defaults. 2. Adjust the dropdown arrow button icon position. @see http://getbootstrap.com/css/#forms-control-sizes */ /* 1 */ /*------------------------------------*    #RTL SUPPORT \*------------------------------------*/ }
 
-.select2-container--bootstrap .select2-selection { box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); background-color: white; border: 1px solid #cdcdcd; border-radius: 4px; color: #222222; font-family: inherit; font-size: 13px; outline: 0; }
+.select2-container--bootstrap .select2-selection { box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); background-color: white; border: 1px solid #cdcdcd; border-radius: 4px; color: #222222; font-size: 13px; outline: 0; }
 
-.select2-container--bootstrap .select2-search--dropdown .select2-search__field { box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); background-color: white; border: 1px solid #cdcdcd; border-radius: 4px; color: #222222; font-family: inherit; font-size: 13px; }
+.select2-container--bootstrap .select2-selection.form-control, .select2-container--bootstrap select.select2-selection { border-radius: 4px; }
+
+.select2-container--bootstrap .select2-search--dropdown .select2-search__field { box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); background-color: white; border: 1px solid #cdcdcd; border-radius: 4px; color: #222222; font-size: 13px; }
 
 .select2-container--bootstrap .select2-search__field { outline: 0; /* Firefox 18- */ /** Firefox 19+ @see http://stackoverflow.com/questions/24236240/color-for-styled-placeholder-text-is-muted-in-firefox */ }
 
@@ -5715,7 +5680,7 @@ markup:
 
 .select2-container--bootstrap .select2-search__field:-ms-input-placeholder { color: #9a9a9a; }
 
-.select2-container--bootstrap .select2-results__option { /** Disabled results. @see https://select2.github.io/examples.html#disabled-results */ /** Hover state. */ /** Selected state. */ }
+.select2-container--bootstrap .select2-results__option { padding: 5px 10px; /** Disabled results. @see https://select2.github.io/examples.html#disabled-results */ /** Hover state. */ /** Selected state. */ }
 
 .select2-container--bootstrap .select2-results__option[role=group] { padding: 0; }
 
@@ -5753,7 +5718,7 @@ markup:
 
 .select2-container--bootstrap .select2-selection__clear { color: #9a9a9a; cursor: pointer; float: right; font-weight: bold; margin-right: 10px; }
 
-.select2-container--bootstrap .select2-selection__clear:hover { color: #333; }
+.select2-container--bootstrap .select2-selection__clear:hover { color: #222222; }
 
 .select2-container--bootstrap.select2-container--disabled .select2-selection { border-color: #cdcdcd; box-shadow: none; }
 
@@ -5765,7 +5730,7 @@ markup:
 
 .select2-container--bootstrap .select2-dropdown { box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); border-color: #3498db; overflow-x: hidden; margin-top: -1px; }
 
-.select2-container--bootstrap .select2-dropdown--above { margin-top: 1px; }
+.select2-container--bootstrap .select2-dropdown--above { box-shadow: 0px -6px 12px rgba(0, 0, 0, 0.175); margin-top: 1px; }
 
 .select2-container--bootstrap .select2-results > .select2-results__options { max-height: 200px; overflow-y: auto; }
 
@@ -5779,7 +5744,7 @@ markup:
 
 .select2-container--bootstrap .select2-selection--single .select2-selection__placeholder { color: #9a9a9a; }
 
-.select2-container--bootstrap .select2-selection--multiple { min-height: 32px; /** Make Multi Select2's choices match Bootstrap 3's default button styles. */ /** Minus 2px borders. */ /** Clear the selection. */ }
+.select2-container--bootstrap .select2-selection--multiple { min-height: 32px; padding: 0; height: auto; /** Make Multi Select2's choices match Bootstrap 3's default button styles. */ /** Minus 2px borders. */ /** Clear the selection. */ }
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__rendered { box-sizing: border-box; display: block; line-height: 20px; list-style: none; margin: 0; overflow: hidden; padding: 0; width: 100%; text-overflow: ellipsis; white-space: nowrap; }
 
@@ -5789,47 +5754,45 @@ markup:
 
 .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { background: transparent; padding: 0 10px; height: 30px; line-height: 20px; margin-top: 0; min-width: 5em; }
 
-.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove { color: #999; cursor: pointer; display: inline-block; font-weight: bold; margin-right: 2.5px; }
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove { color: #9a9a9a; cursor: pointer; display: inline-block; font-weight: bold; margin-right: 2.5px; }
 
-.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove:hover { color: #333; }
+.select2-container--bootstrap .select2-selection--multiple .select2-selection__choice__remove:hover { color: #222222; }
 
 .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 5px; }
 
-.select2-container--bootstrap.input-sm, .select2-container--bootstrap.input-lg { border-radius: 0; font-size: 12px; height: auto; line-height: 1; padding: 0; }
+.select2-container--bootstrap .select2-selection--single.input-sm, .input-group-sm .select2-container--bootstrap .select2-selection--single, .form-group-sm .select2-container--bootstrap .select2-selection--single { border-radius: 3px; font-size: 11px; height: 27px; line-height: 17px; padding: 4px 21px 4px 9px; /* 2 */ }
 
-.select2-container--bootstrap.input-sm .select2-selection--single, .input-group-sm .select2-container--bootstrap .select2-selection--single, .form-group-sm .select2-container--bootstrap .select2-selection--single { border-radius: 3px; font-size: 11px; height: 27px; line-height: 17px; padding: 4px 21px 4px 9px; /* 2 */ }
+.select2-container--bootstrap .select2-selection--single.input-sm .select2-selection__arrow b, .input-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { margin-left: -4px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--single .select2-selection__arrow b, .input-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-sm .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { margin-left: -4px; }
+.select2-container--bootstrap .select2-selection--multiple.input-sm, .input-group-sm .select2-container--bootstrap .select2-selection--multiple, .form-group-sm .select2-container--bootstrap .select2-selection--multiple { min-height: 27px; border-radius: 3px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple, .input-group-sm .select2-container--bootstrap .select2-selection--multiple, .form-group-sm .select2-container--bootstrap .select2-selection--multiple { min-height: 27px; }
+.select2-container--bootstrap .select2-selection--multiple.input-sm .select2-selection__choice, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 11px; line-height: 17px; margin: 3px 0 0 4.5px; padding: 0 4px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__choice, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 11px; line-height: 17px; margin: 3px 0 0 4.5px; padding: 0 4px; }
+.select2-container--bootstrap .select2-selection--multiple.input-sm .select2-search--inline .select2-search__field, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 9px; font-size: 11px; height: 25px; line-height: 17px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 9px; font-size: 11px; height: 25px; line-height: 17px; }
+.select2-container--bootstrap .select2-selection--multiple.input-sm .select2-selection__clear, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 4px; }
 
-.select2-container--bootstrap.input-sm .select2-selection--multiple .select2-selection__clear, .input-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-sm .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 4px; }
+.select2-container--bootstrap .select2-selection--single.input-lg, .input-group-lg .select2-container--bootstrap .select2-selection--single, .form-group-lg .select2-container--bootstrap .select2-selection--single { border-radius: 6px; font-size: 18px; height: 39px; line-height: 23px; padding: 7px 29px 7px 14px; /* 1 */ }
 
-.select2-container--bootstrap.input-lg .select2-selection--single, .input-group-lg .select2-container--bootstrap .select2-selection--single, .form-group-lg .select2-container--bootstrap .select2-selection--single { border-radius: 6px; font-size: 18px; height: 39px; line-height: 23px; padding: 7px 29px 7px 14px; /* 1 */ }
+.select2-container--bootstrap .select2-selection--single.input-lg .select2-selection__arrow, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow { width: 5px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow { width: 5px; }
+.select2-container--bootstrap .select2-selection--single.input-lg .select2-selection__arrow b, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { border-width: 5px 5px 0 5px; margin-left: -5px; margin-left: -7px; margin-top: -2.5px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--single .select2-selection__arrow b, .input-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b, .form-group-lg .select2-container--bootstrap .select2-selection--single .select2-selection__arrow b { border-width: 5px 5px 0 5px; margin-left: -5px; margin-left: -7px; margin-top: -2.5px; }
+.select2-container--bootstrap .select2-selection--multiple.input-lg, .input-group-lg .select2-container--bootstrap .select2-selection--multiple, .form-group-lg .select2-container--bootstrap .select2-selection--multiple { min-height: 39px; border-radius: 6px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple, .input-group-lg .select2-container--bootstrap .select2-selection--multiple, .form-group-lg .select2-container--bootstrap .select2-selection--multiple { min-height: 39px; }
+.select2-container--bootstrap .select2-selection--multiple.input-lg .select2-selection__choice, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 18px; line-height: 23px; border-radius: 4px; margin: 6px 0 0 7px; padding: 0 7px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__choice, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__choice { font-size: 18px; line-height: 23px; border-radius: 4px; margin: 6px 0 0 7px; padding: 0 7px; }
+.select2-container--bootstrap .select2-selection--multiple.input-lg .select2-search--inline .select2-search__field, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 14px; font-size: 18px; height: 37px; line-height: 23px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-search--inline .select2-search__field, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-search--inline .select2-search__field { padding: 0 14px; font-size: 18px; height: 37px; line-height: 23px; }
+.select2-container--bootstrap .select2-selection--multiple.input-lg .select2-selection__clear, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 7px; }
 
-.select2-container--bootstrap.input-lg .select2-selection--multiple .select2-selection__clear, .input-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear, .form-group-lg .select2-container--bootstrap .select2-selection--multiple .select2-selection__clear { margin-top: 7px; }
+.select2-container--bootstrap .select2-selection.input-lg.select2-container--open .select2-selection--single { /** Make the dropdown arrow point up while the dropdown is visible. */ }
 
-.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single { /** Make the dropdown arrow point up while the dropdown is visible. */ }
+.select2-container--bootstrap .select2-selection.input-lg.select2-container--open .select2-selection--single .select2-selection__arrow b { border-color: transparent transparent #9a9a9a transparent; border-width: 0 5px 5px 5px; }
 
-.select2-container--bootstrap.input-lg.select2-container--open .select2-selection--single .select2-selection__arrow b { border-color: transparent transparent #9a9a9a transparent; border-width: 0 5px 5px 5px; }
+.input-group-lg .select2-container--bootstrap .select2-selection.select2-container--open .select2-selection--single { /** Make the dropdown arrow point up while the dropdown is visible. */ }
 
-.input-group-lg .select2-container--bootstrap.select2-container--open .select2-selection--single { /** Make the dropdown arrow point up while the dropdown is visible. */ }
-
-.input-group-lg .select2-container--bootstrap.select2-container--open .select2-selection--single .select2-selection__arrow b { border-color: transparent transparent #9a9a9a transparent; border-width: 0 5px 5px 5px; }
+.input-group-lg .select2-container--bootstrap .select2-selection.select2-container--open .select2-selection--single .select2-selection__arrow b { border-color: transparent transparent #9a9a9a transparent; border-width: 0 5px 5px 5px; }
 
 .select2-container--bootstrap[dir="rtl"] { /** Single Select2 1. Makes sure that .select2-selection__placeholder is positioned correctly. */ /** Multiple Select2 */ }
 
@@ -5849,7 +5812,7 @@ markup:
 
 .select2-container--bootstrap[dir="rtl"] .select2-selection--multiple .select2-selection__choice__remove { margin-left: 2px; margin-right: auto; }
 
-/*------------------------------------*    #ADDITIONAL GOODIES
+/*------------------------------------*  #ADDITIONAL GOODIES
 \*------------------------------------*/
 /** Address Bootstrap's validation states If a Select2 widget parent has one of Bootstrap's validation state modifier classes, adjust Select2's border colors and focus states accordingly. You may apply said classes to the Select2 dropdown (body > .select2-container) via JavaScript match Bootstraps' to make its styles match. @see http://getbootstrap.com/css/#forms-control-validation */
 .has-warning .select2-dropdown, .has-warning .select2-selection { border-color: #cd6d17; }
@@ -5878,7 +5841,9 @@ markup:
 
 /** Select2 widgets in Bootstrap Input Groups When Select2 widgets are combined with other elements using Bootstraps "Input Group" component, we don't want specific edges of the Select2 container to have a border-radius. Use .select2-bootstrap-prepend and .select2-bootstrap-append on a Bootstrap 3 .input-group to let the contained Select2 widget know which edges should not be rounded as they are directly followed by another element. @see http://getbootstrap.com/components/#input-groups */
 /** Mimick Bootstraps .input-group .form-control styles. @see https://github.com/twbs/bootstrap/blob/master/less/input-groups.less */
-.input-group .select2-container--bootstrap { display: table; table-layout: fixed; position: relative; z-index: 2; float: left; width: 100%; margin-bottom: 0; }
+.input-group .select2-container--bootstrap { display: table; table-layout: fixed; position: relative; z-index: 2; float: left; width: 100%; margin-bottom: 0; /** Adjust z-index like Bootstrap does to show the focus-box-shadow above appended buttons in .input-group and .form-group. */ }
+
+.input-group .select2-container--bootstrap.select2-container--open, .input-group .select2-container--bootstrap.select2-container--focus { z-index: 3; }
 
 .input-group.select2-bootstrap-prepend .select2-container--bootstrap .select2-selection { border-bottom-left-radius: 0; border-top-left-radius: 0; }
 

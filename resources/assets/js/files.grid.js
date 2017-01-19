@@ -384,8 +384,7 @@ Files.Grid = new Class({
 		this.renew();
 
 		// footable
-		var $fixedtable = kQuery('.k-js-fixed-table-header'),
-			$footable = kQuery('.k-js-responsive-table');
+		var $footable = kQuery('.k-js-responsive-table');
 
 		if (this.layout === 'details') {
 
@@ -396,26 +395,7 @@ Files.Grid = new Class({
 					tablet: 600,
 					desktop: 800
 				}
-			}).bind('footable_resizing', function() {
-				$fixedtable.floatThead('destroy');
-			}).bind('footable_resized', function() {
-				fixedTable();
-				$fixedtable.floatThead('reflow');
 			});
-
-			// Sticky table header and footer
-			function fixedTable() {
-				if ( $fixedtable.length ) {
-					$fixedtable.floatThead({
-						scrollContainer: function($table){
-							return $table.closest('.k-table');
-						},
-						enableAria: true
-					});
-				}
-			}
-		} else {
-			$fixedtable.floatThead('destroy');
 		}
 
 		this.fireEvent('afterRender');
