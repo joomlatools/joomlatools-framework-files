@@ -38,9 +38,10 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
     });
 </script>
 
-<!-- Component -->
+<!-- Component wrapper -->
 <div class="k-component-wrapper" id="files-app">
 
+    <!-- Component -->
     <div class="k-component k-js-component" id="files-canvas">
 
         <!-- Title when sidebar is invisible -->
