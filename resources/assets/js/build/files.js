@@ -4467,7 +4467,14 @@ Files.App = new Class({
                     img.addEvent('load', function(){
                         this.addClass('loaded');
                     });
-                    img.set('src', node.thumbnail ? node.thumbnail : Files.blank_image);
+
+                    var source = Files.blank_image;
+
+                    if (node.thumbnail) {
+                        source = Files.sitebase + '/' + node.thumbnail;
+                    }
+
+                    img.set('src', source);
 
                     (node.element.getElement('.files-node') || node.element).addClass('loaded').removeClass('loading');
 
