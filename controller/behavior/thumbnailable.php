@@ -140,21 +140,22 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
 	protected function _setThumbnails(KControllerContextInterface $context)
 	{
-        $container  = $this->_getContainer($context);
         $query      = $context->getRequest()->getQuery();
-        $parameters = $container->getParameters();
         $result     = $context->result;
 
-        if ($query->get('thumbnails', 'cmd') && $parameters->thumbnails === true)
+        if ($query->get('thumbnails', 'cmd') && $this->_canGenerateThumbnails())
         {
+            $version = $this->getConfig()->default;
+
             foreach ($result as $entity)
             {
                 $file = $this->_getFile($entity);
 
-                if ($entity->isImage())
+                if ($entity instanceof ComFilesModelEntityFile && $entity->isImage())
                 {
                     $controller = $this->getObject('com:files.controller.thumbnail')
-                                       ->container($this->_container)
+                                       ->container($this->_getContainer()->slug)
+                                       ->version($version)
                                        ->folder($file->folder)
                                        ->name($file->name);
 
@@ -167,11 +168,15 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
                     if ($thumbnail->isNew())
                     {
                         // Try to generate it.
-                        $thumbnail = $this->_generateThumbnails($entity, $this->getConfig()->default);
+                        $thumbnail = $this->_generateThumbnails($entity, $version);
 
                         if ($thumbnail->isNew()) {
                             $thumbnail = false;
                         }
+                    }
+
+                    if ($thumbnail) {
+                        $thumbnail = $thumbnail->relative_path;
                     }
                 }
                 else $thumbnail = false;
