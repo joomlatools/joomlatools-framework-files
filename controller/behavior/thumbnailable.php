@@ -48,7 +48,9 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
     protected function _generateThumbnails(KModelEntityInterface $entity, $version = null)
     {
-        $result = array();
+        $result = $this->getObject('com:files.model.entity.thumbnails');
+
+        $version = (array) $version;
 
         $file = $this->_getFile($entity);
 
@@ -61,22 +63,41 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
             $data = array('folder' => $folder, 'name' => $name, 'source' => $file);
 
-            $controller = $this->getObject('com:files.controller.thumbnail')->container($this->_getContainer()->slug);
+            $model = $this->getObject('com:files.model.thumbnails')->container($this->_getContainer()->slug);
 
-            if ($versions = $parameters->versions)
+            if ($versions = $parameters->versions->toArray())
             {
                 if ($version) {
-                    $versions = array_intersect($versions, (array) $version);
+                    $versions = array_intersect(array_keys($versions), $version);
                 }
 
-                foreach ($versions as $label => $config)
+                foreach ($versions as $version)
                 {
-                    $data['version'] = $label;
+                    $data['version'] = $version;
 
-                    $result[] = $controller->add($data);
+                    $thumbnail = $model->create($data);
+
+                    if (!$thumbnail->save()) {
+                        $thumbnail = $model->name($name)->folder($folder)->version($version)->fetch();
+                    }
+
+                    if (!$thumbnail->isNew()) {
+                        $result->insert($thumbnail);
+                    }
                 }
             }
-            else $result = $controller->add($data);
+            else
+            {
+                $thumbnail = $model->create($data);
+
+                if (!$thumbnail->save()) {
+                    $thumbnail = $model->name($name)->folder($folder)->fetch();
+                }
+
+                if (!$thumbnail->isNew()) {
+                    $result->insert($thumbnail);
+                }
+            }
         }
 
         return $result;
