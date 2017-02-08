@@ -100,6 +100,11 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 		return false;
     }
 
+    public function getPropertyRelativePath()
+    {
+        return $this->getContainer()->relative_path . '/' . $this->path;
+    }
+
     public function save()
     {
         $result = false;
