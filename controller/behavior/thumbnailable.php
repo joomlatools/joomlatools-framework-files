@@ -195,7 +195,11 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
                         }
                     }
 
-                    if ($thumbnail) {
+                    if ($thumbnail)
+                    {
+                        $thumbnail->source = $file;
+                        $thumbnail->regenerate(); // Re-generate if needed
+
                         $thumbnail = $thumbnail->relative_path;
                     }
                 }
