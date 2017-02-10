@@ -61,6 +61,23 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
         }
     }
 
+    public function regenerate()
+    {
+        $result = false;
+
+        if ($this->_adapter && $this->_adapter->exists())
+        {
+            $current_size = @getimagesize($this->fullpath);
+            $dimension    = $this->getDimension();
+
+            if ($current_size && ($current_size[0] != $dimension['width'] || $current_size[1] != $dimension['height'])) {
+                $result = $this->generate(true);
+            }
+        }
+
+        return $result;
+    }
+
     public function generate($in_place = false)
     {
 		@ini_set('memory_limit', '256M');
