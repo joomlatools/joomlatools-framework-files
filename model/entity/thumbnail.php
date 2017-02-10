@@ -104,7 +104,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
                 }
 
                 if ($in_place) {
-                    return $image->resize($size)->save();
+                    return $image->resize($size)->save($this->fullpath);
                 } else {
                     return (string) $image->thumbnail($size, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
                 }
