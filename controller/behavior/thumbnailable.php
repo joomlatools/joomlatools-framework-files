@@ -67,33 +67,32 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
             if ($versions = $parameters->versions->toArray())
             {
+                $versions = array_keys($versions);
+
                 if ($version) {
                     $versions = array_intersect(array_keys($versions), $version);
                 }
+
+                $thumbnails = array();
 
                 foreach ($versions as $version)
                 {
                     $data['version'] = $version;
 
                     $thumbnail = $model->create($data);
+                    $thumbnail->save();
 
-                    if (!$thumbnail->save()) {
-                        $thumbnail = $model->name($name)->folder($folder)->version($version)->fetch();
-                    }
-
-                    if (!$thumbnail->isNew()) {
-                        $result->insert($thumbnail);
-                    }
+                    $thumbnails[] = $thumbnail;
                 }
             }
             else
             {
-                $thumbnail = $model->create($data);
+                $thumbnails = $model->create($data);
+                $thumbnails->save();
+            }
 
-                if (!$thumbnail->save()) {
-                    $thumbnail = $model->name($name)->folder($folder)->fetch();
-                }
-
+            foreach ($thumbnails as $thumbnail)
+            {
                 if (!$thumbnail->isNew()) {
                     $result->insert($thumbnail);
                 }
