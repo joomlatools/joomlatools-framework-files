@@ -70,8 +70,21 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
             $current_size = @getimagesize($this->fullpath);
             $dimension    = $this->getDimension();
 
-            if ($current_size && ($current_size[0] != $dimension['width'] || $current_size[1] != $dimension['height'])) {
-                $result = $this->generate(true);
+            if ($this->crop)
+            {
+                // Compare dimensions
+                if ($current_size && ($current_size[0] != $dimension['width'] || $current_size[1] != $dimension['height'])) {
+                    $result = $this->generate(true);
+                }
+            }
+            elseif ($source = $this->source)
+            {
+                $source_size = @getimagesize($source->fullpath);
+
+                // Compare ratios
+                if ($source_size && ($current_size[0] / $current_size[1] != $source_size[0] / $source_size[1])) {
+                    $result = $this->generate(true);
+                }
             }
         }
 
@@ -98,15 +111,17 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
                 {
                     $image_size = $image->getSize();
                     $larger     = max($image_size->getWidth(), $image_size->getHeight());
-                    $scale      = max($dimension['width'], $dimension['hieght']);
+                    $scale      = max($dimension['width'], $dimension['height']);
 
                     $size       = $image_size->scale(1/($larger/$scale));
                 }
 
+                $mode = ($this->crop) ? \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND : \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
+
                 if ($in_place) {
-                    return $image->resize($size)->save($this->fullpath);
+                    return $image->thumbnail($size, $mode)->save($this->fullpath);
                 } else {
-                    return (string) $image->thumbnail($size, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
+                    return (string) $image->thumbnail($size, $mode);
                 }
 			}
 			catch (Exception $e) {
