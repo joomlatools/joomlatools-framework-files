@@ -51,44 +51,43 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         return parent::_actionCreate($context);
     }
 
-    protected function _actionFetch(KModelContext $context)
+    protected function _beforeCreateSet(KModelContextInterface $context)
     {
-        $result = parent::_actionFetch($context);
-
         $state      = $this->getState();
         $parameters = $this->getContainer()->getParameters();
 
-        foreach ($result as $entity)
+        if ($files = $context->files)
         {
-            if ($version = $state->version)
+            foreach ($files as $file)
             {
-                $versions = (array) $version;
-
-                foreach ($versions as $version)
+                if ($version = $state->version)
                 {
-                    if (strpos($entity->name, $version) === 0) {
-                        break;
+                    $versions = (array) $version;
+
+                    foreach ($versions as $version)
+                    {
+                        if (strpos($file->name, $version) === 0) {
+                            break;
+                        }
                     }
+
+                    $config = $parameters->versions->{$version};
+
+                    $file->dimension = $config->dimension;
+                    $file->crop = $config->crop;
                 }
+                else
+                {
+                    if ($dimension = $parameters->dimension) {
+                        $file->dimension = $dimension;
+                    }
 
-                $config = $parameters->versions->{$version};
-
-                $entity->dimension = $config->dimension;
-                $entity->crop = $config->crop;
-            }
-            else
-            {
-                if ($dimension = $parameters->dimension) {
-                    $entity->dimension = $dimension;
-                }
-
-                if (isset($parameters->crop)) {
-                    $entity->crop = $parameters->crop;
+                    if (isset($parameters->crop)) {
+                        $file->crop = $parameters->crop;
+                    }
                 }
             }
         }
-
-        return $result;
     }
 
     public function iteratorFilter($path)
