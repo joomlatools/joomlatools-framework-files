@@ -210,7 +210,14 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
     /**
      * Thumbnail dimension getter.
      *
-     * The dimension of a thumbnail consists on a width and height pair.
+     * The dimension of a thumbnail consists on a width and height pair. This method will return the resulting
+     * thumbnail dimension depending on: the provided width/height pair, the source image ratio and whether or not
+     * cropping is enabled.
+     *
+     * Ratio will always be preserved unless crop is enabled and both components are provided. Otherwise the resulting
+     * dimensions will consist on a box that's guaranteed to not exceed the dimension property components while
+     * preserving the source ratio. If one of the component is missing in the dimension property, the other will get
+     * calculated based on the ratio of the source.
      *
      * @throws RuntimeException If no source or its dimension cannot be determined.
      *
@@ -220,7 +227,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
     {
         $dimension = $this->dimension;
 
-        if ($dimension && (!isset($dimension['width']) || !isset($dimension['height'])))
+        if ($dimension && empty($dimension['width']) || empty($dimension['height']) || !$this->crop)
         {
             $source = $this->source;
 
@@ -228,11 +235,34 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
                 throw new RuntimeException('Unable to get source size');
             }
 
-            $ratio = $info[0] / $info [1];
+            $ratio = $info[0] / $info[1];
 
-            if (isset($dimension['width'])) {
+            if (!$this->crop && !empty($dimension['height']) && !empty($dimension['weight']))
+            {
+                $dimension_ratio = $dimension['height'] / $dimension['width'];
+
+                // Decide which dimension component to keep, the other will get re-calculated below to preserve ratio.
+                if ($ratio > $dimension_ratio) {
+                    unset($dimension['height']);
+                } elseif ($ratio < $dimension_ratio) {
+                    unset($dimension['width']);
+                }
+            }
+
+            if (!empty($dimension['width']))
+            {
+                if ($dimension['width'] > $info[0]) {
+                    $dimension['width'] = $info[0]; // Thumbnails cannot be bigger than source
+                }
+
                 $dimension['height'] = round($dimension['width'] / $ratio);
-            } else {
+            }
+            else
+            {
+                if ($dimension['height'] > $info[1]) {
+                    $dimension['height'] = $info[1]; // Thumbnails cannot be bigger than source
+                }
+
                 $dimension['width'] = round($dimension['height'] * $ratio);
             }
         }
