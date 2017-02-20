@@ -154,6 +154,12 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
     {
         $data = parent::toArray();
 
+        $data['relative_path'] = $this->relative_path;
+
+        if ($version = $this->version) {
+            $data['version'] = $version;
+        }
+
 		unset($data['_thumbnail_size']);
 		unset($data['source']);
 
