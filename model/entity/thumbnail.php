@@ -31,6 +31,9 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
             'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '').$this->name
         ));
 
+        // Check if we should
+        $this->_regenerate();
+
         unset($this->_data['fullpath']);
         unset($this->_data['metadata']);
 
