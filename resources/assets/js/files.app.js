@@ -841,9 +841,27 @@ Files.App = new Class({
                     });
 
                     var source = Files.blank_image;
+                    var thumbnail;
 
-                    if (node.thumbnail) {
-                        source = Files.sitebase + '/' + node.thumbnail;
+                    if (node.thumbnails)
+                    {
+                        Object.each(node.thumbnails, function(value, key)
+                        {
+                            if (that.options.thumbnails === true)
+                            {
+                                thumbnail = value;
+                                return false;
+                            }
+                            else
+                            {
+                                if (that.options.thumbnails == value.version) {
+                                    thumbnail = value;
+                                    return false;
+                                }
+                            }
+                        });
+
+                        source = Files.sitebase + '/' + thumbnail.relative_path;
                     }
 
                     img.set('src', source);
