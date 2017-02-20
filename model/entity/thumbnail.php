@@ -61,7 +61,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
         }
     }
 
-    public function regenerate()
+    protected function _regenerate()
     {
         $result = false;
 
