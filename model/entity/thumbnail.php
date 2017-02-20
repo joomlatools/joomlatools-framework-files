@@ -65,7 +65,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
     {
         $result = false;
 
-        if ($this->_adapter && $this->_adapter->exists())
+        if ($this->_adapter && $this->_adapter->exists() && $this->source)
         {
             $current_size = @getimagesize($this->fullpath);
 
