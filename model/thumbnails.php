@@ -15,26 +15,48 @@
  */
 class ComFilesModelThumbnails extends ComFilesModelFiles
 {
+    protected $_source;
+
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
-        $this->getState()->insert('version', 'cmd');
+        $state = $this->getState();
+
+        $state->insert('version', 'cmd')
+              ->insert('source', 'string');
+    }
+
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array('state' => 'com:files.model.state.thumbnails'));
+        parent::_initialize($config);
     }
 
     protected function _actionCreate(KModelContext $context)
     {
         $parameters = $this->getContainer()->getParameters();
+        $state      = $this->getState();
+        $entity     = $context->getEntity();
 
-        $entity = $context->getEntity();
+        $entity->name   = $state->name;
+        $entity->folder = $state->folder;
 
-        if ($version = $entity->version)
+        if ($source = $this->_getSource()) {
+            $entity->source = $source;
+        }
+
+        if ($versions = $parameters->versions)
         {
-            if ($config = $parameters->versions->{$version})
+            if ($version = $state->version)
             {
-                $entity->name      = $version . '-' . $entity->name;
-                $entity->dimension = $config->dimension->toArray();
-                $entity->crop      = $config->crop;
+                if ($config = $versions->{$version})
+                {
+                    $entity->version   = $version;
+                    $entity->name      = $version . '-' . $entity->name;
+                    $entity->dimension = $config->dimension->toArray();
+                    $entity->crop      = $config->crop;
+                }
             }
         }
         else
@@ -51,39 +73,83 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         return parent::_actionCreate($context);
     }
 
+    /**
+     * Reset the cached container object if container changes
+     *
+     * @param KModelContextInterface $context
+     */
+    protected function _afterReset(KModelContextInterface $context)
+    {
+        parent::_afterReset($context);
+
+        $modified = (array) KObjectConfig::unbox($context->modified);
+        if (in_array('source', $modified)) {
+            $this->_source = null;
+        }
+    }
+
+    protected function _getSource()
+    {
+        if (!$this->_source instanceof ComFilesModelEntityFile)
+        {
+            $state = $this->getState();
+
+            if ($state->source)
+            {
+                $file = $this->getObject('com:files.model.files')
+                             ->container($state->getSourceContainer()->slug)
+                             ->folder($state->folder)
+                             ->name($state->name)
+                             ->fetch();
+
+                if (!$file->isNew()) {
+                    $this->_source = $file;
+                }
+            }
+        }
+
+        return $this->_source;
+    }
+
     protected function _beforeCreateSet(KModelContextInterface $context)
     {
-        $state      = $this->getState();
         $parameters = $this->getContainer()->getParameters();
 
-        if ($files = $context->files)
+        if ($thumbnails = $context->files)
         {
-            foreach ($files as $file)
+            $source = $this->_getSource();
+
+            foreach ($thumbnails as $thumbnail)
             {
-                if ($version = $state->version)
+                if ($source) {
+                    $thumbnail->source = $source;
+                }
+
+                if ($versions = $parameters->versions)
                 {
-                    $versions = (array) $version;
+                    $versions = array_keys($versions->toArray());
 
                     foreach ($versions as $version)
                     {
-                        if (strpos($file->name, $version) === 0) {
+                        if (strpos($thumbnail->name, $version) === 0) {
                             break;
                         }
                     }
 
                     $config = $parameters->versions->{$version};
 
-                    $file->dimension = $config->dimension;
-                    $file->crop = $config->crop;
+                    $thumbnail->dimension = $config->dimension;
+                    $thumbnail->crop      = $config->crop;
+                    $thumbnail->version   = $version;
                 }
                 else
                 {
                     if ($dimension = $parameters->dimension) {
-                        $file->dimension = $dimension;
+                        $thumbnail->dimension = $dimension;
                     }
 
                     if (isset($parameters->crop)) {
-                        $file->crop = $parameters->crop;
+                        $thumbnail->crop = $parameters->crop;
                     }
                 }
             }
@@ -103,9 +169,15 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         {
             $names = array();
 
-            if ($version = $state->version)
+            $parameters = $this->getContainer()->getParameters();
+
+            if ($parameters->versions)
             {
-                $versions = (array) $version;
+                if ($version = $state->version) {
+                    $versions = (array) $version;
+                } else {
+                    $versions = array_keys($parameters->versions->toArray());
+                }
 
                 foreach ($versions as $version) {
                     $names[] = $version . '-' . $name;
