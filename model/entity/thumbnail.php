@@ -162,6 +162,10 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
     public function setPropertySource($value)
     {
+        if ($value instanceof ComFilesModelEntityFiles) {
+            $value = $value->top();
+        }
+
         if (!$value instanceof ComFilesModelEntityFile) {
             throw new RuntimeException('Wrong class type for source');
         }
