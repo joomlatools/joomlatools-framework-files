@@ -147,10 +147,21 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
 	protected function _setThumbnails(KControllerContextInterface $context)
 	{
-        $query = $context->getRequest()->getQuery();
+        $request = $context->getRequest();
+        $query   = $request->getQuery();
 
-        if ($query->get('thumbnails', 'cmd') && $this->_canGenerateThumbnails())
+        if (is_bool($query->get('thumbnails', 'raw'))) {
+            $thumbnails = $query->get('thumbnails', 'boolean') ? 'true' : 'false';
+        } else {
+            $thumbnails = $query->get('thumbnails', 'cmd');
+        }
+
+        if ($thumbnails && $this->_canGenerateThumbnails())
         {
+            if ($thumbnails != 'true') {
+                $version = $thumbnails;
+            }
+
             $parameters = $this->_getContainer()->getParameters();
             $result     = $context->result;
 
@@ -160,28 +171,37 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
                 if ($entity instanceof ComFilesModelEntityFile && $entity->isImage())
                 {
-                    $thumbnails = $this->getObject('com:files.controller.thumbnail')
+                    $controller = $this->getObject('com:files.controller.thumbnail')
                                        ->container($this->_getContainer()->slug)
-                                       ->source($file->uri)
-                                       ->browse();
+                                       ->source($file->uri);
 
-                    if ($versions = $parameters->versions)
+                    if (isset($version)) {
+                        $controller->version($version);
+                    }
+
+                    $thumbnails = $controller->browse();
+
+                    if (($versions = $parameters->versions) && !isset($version))
                     {
                          if ($thumbnails->count() !== count($versions)) {
                              $thumbnails = $this->_generateThumbnails($file); // Generate missing thumbnails
                          }
                     }
-                    elseif ($thumbnails->isNew()) $thumbnails = $this->_generateThumbnails($file);
+                    elseif ($thumbnails->isNew()) $thumbnails = $this->_generateThumbnails($file, isset($version) ? $version : null);
 
-                    if ($thumbnails->isNew()) {
-                        $thumbnails = false;
+                    if (!$thumbnails->isNew())
+                    {
+                        if ($request->getFormat() == 'json') {
+                            $thumbnails = $thumbnails->toArray();
+                        } elseif ($thumbnails->count() == 1) {
+                            $thumbnails = $thumbnails->top(); // Un-wrap entity
+                        }
                     }
-
-                    $thumbnails = $thumbnails->toArray();
+                    else $thumbnails = false;
                 }
                 else $thumbnails = false;
 
-                $entity->thumbnails = $thumbnails;
+                $entity->thumbnail = $thumbnails;
             }
         }
 	}
