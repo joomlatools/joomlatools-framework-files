@@ -15,4 +15,14 @@
  */
 class ComFilesModelEntityThumbnails extends ComFilesModelEntityFiles
 {
+    public function offsetSet($object, $value)
+    {
+        if ($version = $object->version) {
+            $this->_data[$version] = $object;
+        } else {
+            parent::offsetSet($object, $value);
+        }
+
+        return $this;
+    }
 }
