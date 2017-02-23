@@ -4471,23 +4471,13 @@ Files.App = new Class({
                     var source = Files.blank_image;
                     var thumbnail;
 
-                    if (node.thumbnails)
+                    if (node.thumbnail)
                     {
-                        Object.each(node.thumbnails, function(value, key)
-                        {
-                            if (that.options.thumbnails === true)
-                            {
-                                thumbnail = value;
-                                return false;
-                            }
-                            else
-                            {
-                                if (that.options.thumbnails == value.version) {
-                                    thumbnail = value;
-                                    return false;
-                                }
-                            }
-                        });
+                        if (that.options.thumbnails === true) {
+                            thumbnail = node.thumbnail;
+                        } else {
+                            thumbnail = node.thumbnail[that.options.thumbnails];
+                        }
 
                         source = Files.sitebase + '/' + thumbnail.relative_path;
                     }
