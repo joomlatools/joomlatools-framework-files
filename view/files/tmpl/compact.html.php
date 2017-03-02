@@ -117,9 +117,10 @@ window.addEvent('domready', function() {
         <!-- Content -->
         <div class="k-content k-js-content">
 
-          <!-- Component -->
+          <!-- Component wrapper -->
             <div class="k-component-wrapper">
 
+                <!-- Component -->
                 <div class="k-component k-js-component">
 
                     <div class="k-breadcrumb" id="files-pathway"></div>
