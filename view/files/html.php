@@ -64,11 +64,13 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
                     'routed' => '1'
                 )
             ),
-            'initial_response' => true
+            'initial_response' => false
         ))->append($this->getConfig()->config);
 
-        if ($root_path = $this->getRootPath()) {
+        if ($root_path = $this->getRootPath())
+        {
             $config->append(array('active' => $root_path, 'root_path' => $root_path));
+            $query['folder'] = $root_path; // Set folder to point to the new root
         }
 
         if ($config->initial_response === true)
