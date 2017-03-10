@@ -34,9 +34,14 @@ if(!Files) var Files = {};
             return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
         },
         filterData: function(response) {
+
+            var that = this;
+
             var data = response.entities,
-                parse = function(item, parent) {
-                    var path = (parent && parent.path) ? parent.path+'/' : '';
+                parse = function(item, parent)
+                {
+                    var path = (!parent && that.options.root_path) ? that.options.root_path + '/' : ''; // Prepend root folder if set
+                    path += (parent && parent.path) ? parent.path+'/' : '';
                     path += item.name;
 
                     //Parse attributes
