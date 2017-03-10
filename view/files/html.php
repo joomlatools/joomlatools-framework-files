@@ -15,12 +15,39 @@
  */
 class ComFilesViewFilesHtml extends ComKoowaViewHtml
 {
+    /**
+     * @var string The root path
+     */
+    protected $_root_path = '';
+
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->auto_fetch = false;
 
 		parent::_initialize($config);
 	}
+
+    /**
+     * Root path setter
+     *
+     * @param string $path The root path
+     *
+     * @return $this
+     */
+	public function setRootPath($path)
+    {
+        $this->_root_path = (string) $path;
+    }
+
+    /**
+     * Root path getter
+     *
+     * @return string The root path
+     */
+    public function getRootPath()
+    {
+        return $this->_root_path;
+    }
 
     protected function _fetchData(KViewContext $context)
 	{
@@ -40,8 +67,8 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
             'initial_response' => true
         ))->append($this->getConfig()->config);
 
-        if (isset($query['folder'])) {
-            $config->append(array('active' => $query['folder'], 'root_path' => $query['folder']));
+        if ($root_path = $this->getRootPath()) {
+            $config->append(array('active' => $root_path, 'root_path' => $root_path));
         }
 
         if ($config->initial_response === true)
