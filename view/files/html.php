@@ -24,8 +24,9 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 
     protected function _fetchData(KViewContext $context)
 	{
-	    $state     = $this->getModel()->getState();
+        $state     = $this->getModel()->getState();
         $container = $this->getModel()->getContainer();
+        $query     = $state->getValues();
 
         $config = new KObjectConfig($state->config);
 
@@ -39,10 +40,13 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
             'initial_response' => true
         ))->append($this->getConfig()->config);
 
+        if (isset($query['folder'])) {
+            $config->append(array('active' => $query['folder'], 'root_path' => $query['folder']));
+        }
+
         if ($config->initial_response === true)
         {
             $count = 0;
-            $query = $state->getValues();
             unset($query['config']);
             $query['thumbnails'] = $this->getModel()->getContainer()->getParameters()->thumbnails;
 
