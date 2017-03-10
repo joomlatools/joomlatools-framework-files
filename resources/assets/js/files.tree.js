@@ -73,11 +73,19 @@ if(!Files) var Files = {};
          * @returns data
          */
         parseData: function(list){
-            return [{
+            var tree = {
                 label: this.options.root.text,
                 url: '#',
                 children: list
-            }];
+            };
+
+            if (this.options.root_path)
+            {
+                tree.id = this.options.root_path;
+                tree.url = '#' + tree.id;
+            }
+
+            return [tree];
         },
         fromUrl: function(url) {
 
