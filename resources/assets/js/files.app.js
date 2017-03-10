@@ -20,6 +20,7 @@ Files.App = new Class({
     title: '',
     cookie: null,
     options: {
+        root_path: '',
         root_text: 'Root folder',
         cookie: {
             path: '/'
@@ -614,7 +615,7 @@ Files.App = new Class({
         this.fireEvent('beforeSetTree');
 
         if (this.options.tree.enabled) {
-            var opts = this.options.tree,
+            var opts = Object.merge({root_path: this.options.root_path}, this.options.tree);
                 that = this;
 
             opts = kQuery.extend(true, {}, {
@@ -632,7 +633,9 @@ Files.App = new Class({
                 initial_response: !!this.options.initial_response
             }, opts);
             this.tree = new Files.Tree(kQuery(opts.element), opts);
-            this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
+            var config = {view: 'folders', 'tree': '1', 'limit': '2000'};
+            if (this.options.root_path) config.folder = this.options.root_path;
+            this.tree.fromUrl(this.createRoute(config));
 
             this.addEvent('afterNavigate', function(path, type) {
                 if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
