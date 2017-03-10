@@ -312,6 +312,7 @@ Files.App = new Class({
                 if (revalidate_cache) {
                     url['revalidate_cache'] = 1;
                 }
+                url['_'] = Date.now(); // Ignore client cache
                 return this.createRoute(url);
             }.bind(this),
             handleResponse = function(response) {
