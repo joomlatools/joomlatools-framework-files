@@ -19,10 +19,13 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
     {
         if (! self::$_DECLARED) {
 
-            $document = JFactory::getDocument();
-            $document->addScript('media/koowa/com_files/js/plyr/plyr.js');
-            $document->addScriptDeclaration('jQuery(function($){plyr.setup()});');
-            $document->addStylesheet('media/koowa/com_files/css/plyr.css');
+            $template = $this->getObject('com:files.view.plyr.html')
+                            ->getTemplate()
+                            ->addFilter('style')
+                            ->addFilter('script')
+                            ->loadFile('com:files.player.default.html');
+
+            print $template->render();
 
             self::$_DECLARED = true;
         }
