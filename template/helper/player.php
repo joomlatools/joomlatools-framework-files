@@ -13,23 +13,26 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
         'video' => array('mp4', 'webm', 'ogg')
     );
 
-    protected static $_DECLARED = false;
-
     protected function _initialize(KObjectConfig $config)
     {
-        if (! self::$_DECLARED) {
-
-            $template = $this->getObject('com:files.view.plyr.html')
-                            ->getTemplate()
-                            ->addFilter('style')
-                            ->addFilter('script')
-                            ->loadFile('com:files.player.default.html');
-
-            print $template->render();
-
-            self::$_DECLARED = true;
-        }
-
         parent::_initialize($config);
+        $this->import();
+    }
+
+    protected function import()
+    {
+        static $imported = false;
+
+        if (! $imported) {
+
+            $this->getObject('com:files.view.plyr.html')
+                ->getTemplate()
+                ->addFilter('style')
+                ->addFilter('script')
+                ->loadFile('com:files.player.default.html')
+                ->render();
+
+            $imported = true;
+        }
     }
 }

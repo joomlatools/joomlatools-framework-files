@@ -9,10 +9,12 @@
 defined('KOOWA') or die;
 ?>
 
+<?= helper('behavior.koowa'); ?>
+
 <ktml:style src="assets://files/css/plyr.css" />
 <ktml:script src="assets://files/js/plyr/plyr.js" />
 <script>
-    jQuery(function($){
+    kQuery(function($){
         plyr.setup();
     });
 </script>
