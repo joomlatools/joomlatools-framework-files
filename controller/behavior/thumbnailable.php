@@ -171,12 +171,23 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
                 if ($entity instanceof ComFilesModelEntityFile && $entity->isImage())
                 {
+                    $container = $this->_getContainer();
+
                     $controller = $this->getObject('com:files.controller.thumbnail')
-                                       ->container($this->_getContainer()->slug)
+                                       ->container($container->slug)
                                        ->source($file->uri);
 
                     if (isset($version)) {
                         $controller->version($version);
+                    }
+
+                    $folder = $container->getAdapter('folder', array(
+                        'path' => $container->fullpath . '/' . dirname($file->path)
+                    ));
+
+                    // Avoid 'Invalid Folder' error on thumbs model (create folder if it doesn't exists)
+                    if (!$folder->exists()) {
+                        $folder->create();
                     }
 
                     $thumbnails = $controller->browse();
