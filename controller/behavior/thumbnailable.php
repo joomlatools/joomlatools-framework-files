@@ -22,6 +22,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         parent::__construct($config);
 
         $this->addCommandCallback('after.browse', '_setThumbnails');
+        $this->addCommandCallback('after.read', '_setThumbnails');
 
         $this->_container = $config->container;
     }
