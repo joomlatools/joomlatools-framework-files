@@ -148,7 +148,6 @@ Files.App = new Class({
         }
     },
     initialize: function(options) {
-
         if (Files.Config) {
             Object.merge(options, Files.Config);
         }
@@ -825,6 +824,7 @@ Files.App = new Class({
     },
     setThumbnails: function() {
         this.setDimensions(true);
+
         var nodes = this.grid.nodes,
             that = this;
         if (nodes.getLength()) {
@@ -839,7 +839,22 @@ Files.App = new Class({
                     img.addEvent('load', function(){
                         this.addClass('loaded');
                     });
-                    img.set('src', node.thumbnail ? node.thumbnail : Files.blank_image);
+
+                    var source = Files.blank_image;
+                    var thumbnail;
+
+                    if (node.thumbnail)
+                    {
+                        if (that.options.thumbnails === true) {
+                            thumbnail = node.thumbnail;
+                        } else {
+                            thumbnail = node.thumbnail[that.options.thumbnails];
+                        }
+
+                        source = Files.sitebase + '/' + thumbnail.relative_path;
+                    }
+
+                    img.set('src', source);
 
                     (node.element.getElement('.files-node') || node.element).addClass('loaded').removeClass('loading');
 

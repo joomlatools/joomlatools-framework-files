@@ -104,7 +104,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                     <div class="k-ratio-block k-ratio-block--4-to-3">
                         <div class="k-ratio-block__body">
                             <div class="k-ratio-block__centered">
-                            [% if (typeof thumbnail === 'string') { %]
+                            [% if (typeof thumbnail === 'object') { %]
                                 [% var width = metadata.image.width %]
                                 [% var height = metadata.image.height %]
                                 <img class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" src="" alt="[%=name%]" border="0" />

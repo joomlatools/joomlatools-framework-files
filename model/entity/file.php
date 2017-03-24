@@ -17,13 +17,6 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
 {
 	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp');
 
-	public function __construct(KObjectConfig $config)
-	{
-		parent::__construct($config);
-
-        $this->addBehavior('com:files.database.behavior.thumbnail');
-	}
-
 	public function save()
 	{
 		$context = $this->getContext();

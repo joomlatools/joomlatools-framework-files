@@ -153,6 +153,16 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
         return $this->getContainer()->fullpath . '/' . $this->destination_path;
     }
 
+    public function getPropertyUri()
+    {
+        return $this->getContainer()->slug . '://' . $this->path;
+    }
+
+    public function getPropertyRelativePath()
+    {
+        return $this->getContainer()->relative_path . '/' . $this->path;
+    }
+
     public function getPropertyAdapter()
     {
         return $this->_adapter;
@@ -227,9 +237,10 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
         unset($data['format']);
         unset($data['view']);
 
-		$data['container'] = $this->getContainer()->slug;
-		$data['type']      = $this->getIdentifier()->name;
-		$data['path']      = $this->path;
+        $data['container'] = $this->getContainer()->slug;
+        $data['type']      = $this->getIdentifier()->name;
+        $data['path']      = $this->path;
+        $data['uri']       = $this->uri;
 
         return $data;
     }

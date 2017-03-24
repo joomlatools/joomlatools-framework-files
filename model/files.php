@@ -36,16 +36,38 @@ class ComFilesModelFiles extends ComFilesModelNodes
             $files = array_reverse($files);
         }
 
-        $files = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_count);
+        $results = array_slice($files, $state->offset, $state->limit ? $state->limit : $this->_count);
+        $files   = array();
+
+        foreach ($results as $result) {
+            $files[] = array('name' => $result);
+        }
+
+        $context->files = $files;
+
+        if ($this->invokeCommand('before.createset', $context) !== false)
+        {
+            $context->set = $this->_actionCreateSet($context);
+            $this->invokeCommand('after.createset', $context);
+        }
+
+        return $context->set;
+    }
+
+    protected function _actionCreateSet(KModelContextInterface $context)
+    {
+        $state = $context->getState();
 
         $data = array();
-        foreach ($files as $file)
+
+        foreach ($context->files as $file)
         {
-            $data[] = array(
+            $file->append(array(
                 'container' => $state->container,
-                'folder'    => $state->folder,
-                'name'      => $file
-            );
+                'folder'    => $state->folder
+            ));
+
+            $data[] = $file->toArray();
         }
 
         $identifier         = $this->getIdentifier()->toArray();

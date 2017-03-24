@@ -134,7 +134,7 @@ window.addEvent('domready', function() {
 		</td>
         <td class="k-table-data--toggle"></td>
         <td class="k-table-data--icon">
-            [% if (typeof thumbnail === 'string') { %]
+            [% if (typeof thumbnail === 'object') { %]
                 <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
             [% } else { %]
                 <span class="k-icon-document-image"></span>

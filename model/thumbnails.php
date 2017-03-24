@@ -13,31 +13,65 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelThumbnails extends KModelDatabase
+class ComFilesModelThumbnails extends ComFilesModelFiles
 {
+    protected $_source;
+
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
-        $this->getState()
-            ->insert('container', 'com:files.filter.container', null)
-            ->insert('folder', 'com:files.filter.path')
-            ->insert('filename', 'com:files.filter.path', null, true, array('container'))
-            ->insert('paths', 'com:files.filter.path', null)
+        $state = $this->getState();
 
-            ->insert('types', 'cmd', '')
-            ->insert('config'   , 'json', '')
-        ;
-
-        $this->addCommandCallback('after.reset', '_afterReset');
+        $state->insert('version', 'cmd')
+              ->insert('source', 'string');
     }
 
-    /**
-     * A container object
-     *
-     * @var ComFilesModelEntityContainer
-     */
-    protected $_container;
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array('state' => 'com:files.model.state.thumbnails'));
+        parent::_initialize($config);
+    }
+
+    protected function _actionCreate(KModelContext $context)
+    {
+        $parameters = $this->getContainer()->getParameters();
+        $state      = $this->getState();
+        $entity     = $context->getEntity();
+
+        $entity->name   = $state->name;
+        $entity->folder = $state->folder;
+
+        if ($source = $this->_getSource()) {
+            $entity->source = $source;
+        }
+
+        if ($versions = $parameters->versions)
+        {
+            if ($version = $state->version)
+            {
+                if ($config = $versions->{$version})
+                {
+                    $entity->version   = $version;
+                    $entity->name      = $version . '-' . $entity->name;
+                    $entity->dimension = $config->dimension->toArray();
+                    $entity->crop      = $config->crop;
+                }
+            }
+        }
+        else
+        {
+            if ($dimension = $parameters->dimension) {
+                $entity->dimension = $dimension;
+            }
+
+            if (isset($parameters->crop)) {
+                $entity->crop = $parameters->crop;
+            }
+        }
+
+        return parent::_actionCreate($context);
+    }
 
     /**
      * Reset the cached container object if container changes
@@ -46,105 +80,118 @@ class ComFilesModelThumbnails extends KModelDatabase
      */
     protected function _afterReset(KModelContextInterface $context)
     {
+        parent::_afterReset($context);
+
         $modified = (array) KObjectConfig::unbox($context->modified);
-        if (in_array('container', $modified)) {
-            unset($this->_container);
+        if (in_array('source', $modified)) {
+            $this->_source = null;
         }
     }
 
-    /**
-     * Returns the current container row
-     *
-     * @return ComFilesModelEntityContainer
-     * @throws UnexpectedValueException
-     */
-    public function getContainer()
+    protected function _getSource()
     {
-        if(!isset($this->_container))
+        if (!$this->_source instanceof ComFilesModelEntityFile)
         {
-            //Set the container
-            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->fetch();
+            $state = $this->getState();
 
-            if (!is_object($container) || !count($container) || $container->isNew()) {
-                throw new UnexpectedValueException('Invalid container');
-            }
-
-            $this->_container = $container->top();
-        }
-
-        return $this->_container;
-    }
-
-	protected function _initialize(KObjectConfig $config)
-	{
-		$config->append(array(
-			'state' => 'com:files.model.state'
-		));
-
-		parent::_initialize($config);
-	}
-
-	protected function _buildQueryColumns(KDatabaseQueryInterface $query)
-    {
-    	parent::_buildQueryColumns($query);
-
-    	if ($this->getState()->container) {
-    		$query->columns(array('container' => 'c.slug'));
-    	}
-    }
-
-	protected function _buildQueryJoins(KDatabaseQueryInterface $query)
-    {
-    	parent::_buildQueryJoins($query);
-
-    	if ($this->getState()->container) {
-    		$query->join(array('c' => 'files_containers'), 'c.files_container_id = tbl.files_container_id');
-    	}
-    }
-
-	protected function _buildQueryWhere(KDatabaseQueryInterface $query)
-    {
-        $state = $this->getState();
-
-        if ($state->container) {
-            $query->where('tbl.files_container_id = :container_id')->bind(array('container_id' => $this->getContainer()->id));
-        }
-
-        if ($state->folder !== false) {
-            $query->where('tbl.folder = :folder')->bind(array('folder' => ltrim($state->folder, '/')));
-        }
-
-        if ($state->paths)
-        {
-            $i = 0;
-            foreach ((array)$state->paths as $path)
+            if ($state->source)
             {
-                $file = ltrim(basename(' '.strtr($path, array('/' => '/ '))));
-                $folder = dirname($path);
-                if ($folder === '.') {
-                    $folder = '';
+                $file = $this->getObject('com:files.model.files')
+                             ->container($state->getSourceContainer()->slug)
+                             ->folder($state->folder)
+                             ->name($state->name)
+                             ->fetch();
+
+                if (!$file->isNew()) {
+                    $this->_source = $file;
+                }
+            }
+        }
+
+        return $this->_source;
+    }
+
+    protected function _beforeCreateSet(KModelContextInterface $context)
+    {
+        $parameters = $this->getContainer()->getParameters();
+
+        if ($thumbnails = $context->files)
+        {
+            $source = $this->_getSource();
+
+            foreach ($thumbnails as $thumbnail)
+            {
+                if ($source) {
+                    $thumbnail->source = $source;
                 }
 
-                $query->where("(tbl.filename = :filename$i AND tbl.folder = :folder$i)", 'OR')
-                    ->bind(array('filename'.$i => $file, 'folder'.$i => $folder));
+                if ($versions = $parameters->versions)
+                {
+                    $versions = array_keys($versions->toArray());
 
-                $i++;
+                    foreach ($versions as $version)
+                    {
+                        if (strpos($thumbnail->name, $version) === 0) {
+                            break;
+                        }
+                    }
+
+                    $config = $parameters->versions->{$version};
+
+                    $thumbnail->dimension = $config->dimension;
+                    $thumbnail->crop      = $config->crop;
+                    $thumbnail->version   = $version;
+                }
+                else
+                {
+                    if ($dimension = $parameters->dimension) {
+                        $thumbnail->dimension = $dimension;
+                    }
+
+                    if (isset($parameters->crop)) {
+                        $thumbnail->crop = $parameters->crop;
+                    }
+                }
             }
         }
-		
-	}
-	
-	protected function _buildQueryOrder(KDatabaseQueryInterface $query)
-	{
-		$sort       = $this->getState()->sort;
-		$direction  = strtoupper($this->getState()->direction);
-	
-		if($sort) 
-		{
-			$column = $this->getTable()->mapColumns($sort);
-			if(array_key_exists($column, $this->getTable()->getColumns())) {
-				$query->order($column, $direction);
-			}
-		}	
-	}
+    }
+
+    public function iteratorFilter($path)
+    {
+        $state     = $this->getState();
+        $filename  = ltrim(basename(' '.strtr($path, array('/' => '/ '))));
+
+        if ($filename && $filename[0] === '.') {
+            return false;
+        }
+
+        if ($name = $state->name)
+        {
+            $names = array();
+
+            $parameters = $this->getContainer()->getParameters();
+
+            if ($parameters->versions)
+            {
+                if ($version = $state->version) {
+                    $versions = (array) $version;
+                } else {
+                    $versions = array_keys($parameters->versions->toArray());
+                }
+
+                foreach ($versions as $version) {
+                    $names[] = $version . '-' . $name;
+                }
+            }
+            else $names[] = $name;
+
+            if (!in_array($filename, $names)) {
+                return false;
+            }
+        }
+
+        if ($state->search && stripos($filename, $state->search) === false) {
+            return false;
+        }
+    }
 }
