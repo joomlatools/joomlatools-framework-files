@@ -2874,9 +2874,14 @@ if(!Files) var Files = {};
             return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
         },
         filterData: function(response) {
+
+            var that = this;
+
             var data = response.entities,
-                parse = function(item, parent) {
-                    var path = (parent && parent.path) ? parent.path+'/' : '';
+                parse = function(item, parent)
+                {
+                    var path = (!parent && that.options.root_path) ? that.options.root_path + '/' : ''; // Prepend root folder if set
+                    path += (parent && parent.path) ? parent.path+'/' : '';
                     path += item.name;
 
                     //Parse attributes
@@ -2913,11 +2918,19 @@ if(!Files) var Files = {};
          * @returns data
          */
         parseData: function(list){
-            return [{
+            var tree = {
                 label: this.options.root.text,
                 url: '#',
                 children: list
-            }];
+            };
+
+            if (this.options.root_path)
+            {
+                tree.id = this.options.root_path;
+                tree.url = '#' + tree.id;
+            }
+
+            return [tree];
         },
         fromUrl: function(url) {
 
@@ -3552,14 +3565,26 @@ Files.Paginator = new Class({
                     return result;
                 };
 
+            var path = '', root_path = '';
 
-            var root = wrap(app, '<span class="k-icon-home" aria-hidden="true"></span><span class="k-visually-hidden">'+app.container.title+'</span>', '', false)
+            // Check if we are rendering sub-trees
+            if (app.options.root_path) {
+                path = root_path = app.options.root_path;
+            }
+
+            var root = wrap(app, '<span class="k-icon-home" aria-hidden="true"></span><span class="k-visually-hidden">'+app.container.title+'</span>', path, false)
                         .addClass('k-breadcrumb__home')
                         .getElement('a').getParent();
 
             list.adopt(root);
 
-            var folders = app.getPath().split('/'), path = '';
+            var base_path = app.getPath();
+
+            if (root_path) {
+                base_path = base_path.replace(root_path, '');
+            }
+
+            var folders = base_path.split('/'), path = root_path;
 
             folders.each(function(title){
                 if(title.trim()) {
@@ -3648,6 +3673,7 @@ Files.App = new Class({
     title: '',
     cookie: null,
     options: {
+        root_path: '',
         root_text: 'Root folder',
         cookie: {
             path: '/'
@@ -3939,6 +3965,7 @@ Files.App = new Class({
                 if (revalidate_cache) {
                     url['revalidate_cache'] = 1;
                 }
+                url['_'] = Date.now(); // Ignore client cache
                 return this.createRoute(url);
             }.bind(this),
             handleResponse = function(response) {
@@ -4240,7 +4267,7 @@ Files.App = new Class({
         this.fireEvent('beforeSetTree');
 
         if (this.options.tree.enabled) {
-            var opts = this.options.tree,
+            var opts = Object.merge({root_path: this.options.root_path}, this.options.tree);
                 that = this;
 
             opts = kQuery.extend(true, {}, {
@@ -4258,7 +4285,9 @@ Files.App = new Class({
                 initial_response: !!this.options.initial_response
             }, opts);
             this.tree = new Files.Tree(kQuery(opts.element), opts);
-            this.tree.fromUrl(this.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
+            var config = {view: 'folders', 'tree': '1', 'limit': '2000'};
+            if (this.options.root_path) config.folder = this.options.root_path;
+            this.tree.fromUrl(this.createRoute(config));
 
             this.addEvent('afterNavigate', function(path, type) {
                 if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
