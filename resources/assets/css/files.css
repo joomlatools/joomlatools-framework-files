@@ -4019,7 +4019,9 @@ markup:
 
 .k-ui-namespace .k-inline-form-group .k-input-group, .k-ui-namespace .k-inline-form-group .k-button-group { display: block; }
 
-.k-ui-namespace .k-form-row-group { background: white; border-radius: 5px; border: 1px solid #cdcdcd; margin-bottom: 20px; }
+.k-ui-namespace .k-form-row-group { display: table; /* To make sure we don't get empty pixels on the right */ width: 100%; /* To make sure we don't get empty pixels on the right */ background: white; border-radius: 5px; border: 1px solid #cdcdcd; margin-bottom: 20px; }
+
+.k-ui-namespace .k-form-row-group:last-child { margin-bottom: 0; }
 
 .k-ui-namespace .k-form-row { margin: 0; border-bottom: 1px solid #cdcdcd; padding-bottom: 10px; }
 
@@ -4028,6 +4030,8 @@ markup:
 @media screen and (min-width: 600px) { .k-ui-namespace .k-form-row { display: table; width: 100%; padding-bottom: 0; }
   [dir="rtl"] .k-ui-namespace .k-form-row { direction: rtl; }
   .k-ui-namespace .k-form-row:last-child { border-bottom: none; } }
+
+.k-ui-namespace .k-form-row .k-form-row__header { width: 100%; background: #f3f3f3; padding: 10px; }
 
 .k-ui-namespace .k-form-row .k-form-row__item { padding: 10px 10px 0 10px; }
 
@@ -4054,7 +4058,11 @@ markup:
 
 .k-ui-namespace .k-form-row:first-child .k-form-row__message a { border-radius: 5px 5px 0 0; }
 
+.k-ui-namespace .k-form-row:first-child .k-form-row__header { border-radius: 5px 5px 0 0; }
+
 .k-ui-namespace .k-form-row:last-child .k-form-row__message a { border-radius: 0 0 5px 5px; }
+
+.k-ui-namespace .k-form-row:last-child .k-form-row__header { border-radius: 0 0 5px 5px; }
 
 .k-ui-namespace .k-file-input { position: relative; display: inline-block; /* The original file input select */ /* The button */ /* Selected files container */ }
 
@@ -4210,7 +4218,7 @@ markup:
 
 [dir="rtl"] .k-ui-namespace .mfp-container { left: auto; right: 0; }
 
-.k-ui-namespace .mfp-container.mfp-inline-holder { padding-top: 40px; padding-bottom: 40px; }
+.k-ui-namespace .mfp-container.mfp-inline-holder { padding-top: 40px; padding-bottom: 40px; white-space: nowrap; }
 
 .k-ui-namespace .mfp-container .mfp-inline { display: block; width: auto; height: auto; padding: 15px; }
 
@@ -4220,11 +4228,11 @@ markup:
 
 .k-ui-namespace .mfp-align-top .mfp-container:before { display: none; }
 
-.k-ui-namespace .mfp-content { position: relative; display: inline-block; vertical-align: middle; margin: 0 auto; text-align: left; z-index: 1045; min-width: 240px; max-width: 1080px !important; max-height: 800px !important; }
+.k-ui-namespace .mfp-content { position: relative; display: inline-block; vertical-align: middle; margin: 0 auto; text-align: left; z-index: 1045; min-width: 280px; max-width: 100% !important; max-height: 100% !important; }
 
 [dir="rtl"] .k-ui-namespace .mfp-content { text-align: right; }
 
-.k-ui-namespace .mfp-inline-holder .mfp-content, .k-ui-namespace .mfp-ajax-holder .mfp-content { cursor: auto; max-width: 1200px; width: 100%; max-height: 100%; margin: 0 auto; }
+.k-ui-namespace .mfp-inline-holder .mfp-content, .k-ui-namespace .mfp-ajax-holder .mfp-content { cursor: auto; max-width: 100% !important; width: auto; height: auto; max-height: 100%; margin: 0 auto; }
 
 .k-ui-namespace .mfp-ajax-cur { cursor: progress; }
 
@@ -4308,7 +4316,9 @@ markup:
 
 .k-ui-namespace .mfp-iframe-holder .mfp-content { line-height: 0; width: 100%; height: 100%; max-width: 1080px !important; max-height: 800px !important; }
 
-.k-ui-namespace .mfp-iframe-scaler { width: 100%; height: 0; overflow: hidden; padding-top: 56.25%; }
+.k-ui-namespace .mfp-iframe-scaler:before, .k-ui-namespace .mfp-iframe-scaler:after { display: table; content: " "; }
+
+.k-ui-namespace .mfp-iframe-scaler:after { clear: both; }
 
 .k-ui-namespace .mfp-iframe-scaler iframe { position: absolute; display: block; top: 0; left: 0; width: 100%; height: 100%; box-shadow: 0 0 8px rgba(0, 0, 0, 0.6); background: black; }
 
@@ -4372,7 +4382,11 @@ markup:
 
 .k-ui-namespace .k-small-inline-modal-holder { position: relative; max-width: 480px !important; width: 100%; margin: auto; }
 
-.k-ui-namespace .k-inline-modal { padding: 20px; background: white; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); width: 100%; box-sizing: border-box; max-width: 1080px !important; max-height: 800px !important; overflow: auto; }
+.k-ui-namespace .k-huge-inline-modal-holder { position: relative; max-width: 100% !important; max-height: 100% !important; width: 100%; margin: auto; }
+
+.k-ui-namespace .k-huge-inline-modal-holder .k-inline-modal { max-width: 100% !important; max-height: 100% !important; }
+
+.k-ui-namespace .k-inline-modal { padding: 20px; background: white; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); width: 100%; box-sizing: border-box; max-width: 1080px !important; max-height: 800px !important; white-space: normal; }
 
 .k-ui-namespace .k-inline-modal form { margin: 0; }
 
@@ -5348,9 +5362,9 @@ markup:
 
 .k-ui-namespace .k-ratio-block .k-ratio-block__body { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 2; width: 100%; height: 100%; display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-pack: center; -ms-flex-pack: center; justify-content: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; }
 
-.k-ui-namespace .k-ratio-block .k-ratio-block__centered { display: block; -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; overflow: auto; max-width: 100%; max-height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.k-ui-namespace .k-ratio-block .k-ratio-block__centered { display: block; -webkit-box-flex: 0; -ms-flex: 0 0 auto; flex: 0 0 auto; overflow: hidden; max-width: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 
-.k-ui-namespace .k-ratio-block .k-ratio-block__centered img { max-width: 100%; max-height: 100%; }
+.k-ui-namespace .k-ratio-block .k-ratio-block__centered img { max-width: 100%; }
 
 .k-ui-namespace .k-color-error { color: #c0392b; }
 
@@ -6184,7 +6198,7 @@ Styleguide 2.15.4
 
 [dir="rtl"] .mfp-container { left: auto; right: 0; }
 
-.mfp-container.mfp-inline-holder { padding-top: 40px; padding-bottom: 40px; }
+.mfp-container.mfp-inline-holder { padding-top: 40px; padding-bottom: 40px; white-space: nowrap; }
 
 .mfp-container .mfp-inline { display: block; width: auto; height: auto; padding: 15px; }
 
@@ -6194,11 +6208,11 @@ Styleguide 2.15.4
 
 .mfp-align-top .mfp-container:before { display: none; }
 
-.mfp-content { position: relative; display: inline-block; vertical-align: middle; margin: 0 auto; text-align: left; z-index: 1045; min-width: 240px; max-width: 1080px !important; max-height: 800px !important; }
+.mfp-content { position: relative; display: inline-block; vertical-align: middle; margin: 0 auto; text-align: left; z-index: 1045; min-width: 280px; max-width: 100% !important; max-height: 100% !important; }
 
 [dir="rtl"] .mfp-content { text-align: right; }
 
-.mfp-inline-holder .mfp-content, .mfp-ajax-holder .mfp-content { cursor: auto; max-width: 1200px; width: 100%; max-height: 100%; margin: 0 auto; }
+.mfp-inline-holder .mfp-content, .mfp-ajax-holder .mfp-content { cursor: auto; max-width: 100% !important; width: auto; height: auto; max-height: 100%; margin: 0 auto; }
 
 .mfp-ajax-cur { cursor: progress; }
 
@@ -6282,7 +6296,9 @@ button::-moz-focus-inner { padding: 0; border: 0; }
 
 .mfp-iframe-holder .mfp-content { line-height: 0; width: 100%; height: 100%; max-width: 1080px !important; max-height: 800px !important; }
 
-.mfp-iframe-scaler { width: 100%; height: 0; overflow: hidden; padding-top: 56.25%; }
+.mfp-iframe-scaler:before, .mfp-iframe-scaler:after { display: table; content: " "; }
+
+.mfp-iframe-scaler:after { clear: both; }
 
 .mfp-iframe-scaler iframe { position: absolute; display: block; top: 0; left: 0; width: 100%; height: 100%; box-shadow: 0 0 8px rgba(0, 0, 0, 0.6); background: black; }
 
@@ -6350,7 +6366,11 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 /** Custom styling for inline modals */
 .k-small-inline-modal-holder { position: relative; max-width: 480px !important; width: 100%; margin: auto; }
 
-.k-inline-modal { padding: 20px; background: white; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); width: 100%; box-sizing: border-box; max-width: 1080px !important; max-height: 800px !important; overflow: auto; }
+.k-huge-inline-modal-holder { position: relative; max-width: 100% !important; max-height: 100% !important; width: 100%; margin: auto; }
+
+.k-huge-inline-modal-holder .k-inline-modal { max-width: 100% !important; max-height: 100% !important; }
+
+.k-inline-modal { padding: 20px; background: white; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); width: 100%; box-sizing: border-box; max-width: 1080px !important; max-height: 800px !important; white-space: normal; }
 
 .k-inline-modal form { margin: 0; }
 
@@ -6974,33 +6994,25 @@ Styleguide 2.5
 .editor:after { clear: both; }
 
 /** Style the new Joomla modals =========================== By default we only get a very small modal window Overriding styles make sure we get the most space out of it (at least on our views) */
-.mce-window.mce-in { opacity: 1; width: 1080px !important; max-width: 90% !important; height: 800px !important; max-height: 90% !important; left: 50% !important; top: 50% !important; bottom: auto !important; padding: 0 !important; -webkit-transform: translate(-50%, -50%) !important; transform: translate(-50%, -50%) !important; -webkit-transition: none !important; transition: none !important; }
+.mce-window[aria-label="Document"], .mce-window[aria-label="File"], .mce-window[aria-label^="Attachments"] { opacity: 1; width: 1080px !important; max-width: 90% !important; height: 800px !important; max-height: 90% !important; left: 50% !important; top: 50% !important; bottom: auto !important; padding: 0 !important; -webkit-transform: translate(-50%, -50%) !important; transform: translate(-50%, -50%) !important; -webkit-transition: none !important; transition: none !important; }
 
-#mce-modal-block.mce-in.mce-in { opacity: .8; }
+.mce-window[aria-label="Document"] + #mce-modal-block.mce-in.mce-in, .mce-window[aria-label="File"] + #mce-modal-block.mce-in.mce-in, .mce-window[aria-label^="Attachments"] + #mce-modal-block.mce-in.mce-in { opacity: .8; }
 
-.mce-reset, .mce-window-body.mce-window-body { width: 100% !important; height: 100% !important; }
+.mce-window[aria-label="Document"] .mce-reset, .mce-window[aria-label="Document"] .mce-window-body.mce-window-body, .mce-window[aria-label="File"] .mce-reset, .mce-window[aria-label="File"] .mce-window-body.mce-window-body, .mce-window[aria-label^="Attachments"] .mce-reset, .mce-window[aria-label^="Attachments"] .mce-window-body.mce-window-body { width: 100% !important; height: 100% !important; }
 
-.mce-reset { display: table; width: 100%; height: 100%; }
+.mce-window[aria-label="Document"] .mce-reset, .mce-window[aria-label="File"] .mce-reset, .mce-window[aria-label^="Attachments"] .mce-reset { display: table; width: 100%; height: 100%; }
 
-[dir="rtl"] .mce-reset { direction: rtl; }
+.mce-window[aria-label="Document"] .mce-reset .mce-window-head.mce-window-head, .mce-window[aria-label="File"] .mce-reset .mce-window-head.mce-window-head, .mce-window[aria-label^="Attachments"] .mce-reset .mce-window-head.mce-window-head { display: table-row; padding: 0; white-space: nowrap; height: 0; overflow: hidden; text-overflow: ellipsis; }
 
-.mce-reset .mce-window-head.mce-window-head { display: table-row; padding: 0; white-space: nowrap; height: 0; overflow: hidden; text-overflow: ellipsis; }
+.mce-window[aria-label="Document"] .mce-reset .mce-window-head.mce-window-head .mce-close, .mce-window[aria-label="File"] .mce-reset .mce-window-head.mce-window-head .mce-close, .mce-window[aria-label^="Attachments"] .mce-reset .mce-window-head.mce-window-head .mce-close { width: 46px; height: 46px; }
 
-.mce-reset .mce-window-head.mce-window-head .mce-close { right: 10px; top: -35px; }
+.mce-window[aria-label="Document"] .mce-reset .mce-title, .mce-window[aria-label="File"] .mce-reset .mce-title, .mce-window[aria-label^="Attachments"] .mce-reset .mce-title { padding: 13px !important; font-weight: 400 !important; background: #f0f0f0 !important; color: #222222 !important; font-size: 21px !important; border-bottom: 1px solid #d2d2d2 !important; }
 
-.mce-reset .mce-title { padding: 13px !important; font-weight: 400 !important; background: #f0f0f0 !important; color: #222222 !important; font-size: 21px !important; border-bottom: 1px solid #d2d2d2 !important; }
+.mce-window[aria-label="Document"] .mce-reset .mce-window-body.mce-window-body, .mce-window[aria-label="File"] .mce-reset .mce-window-body.mce-window-body, .mce-window[aria-label^="Attachments"] .mce-reset .mce-window-body.mce-window-body { display: table-row; padding-top: 0; padding-left: 0; }
 
-[dir="rtl"] .mce-reset .mce-title { text-align: right; }
+.mce-window[aria-label="Document"] .mce-reset .mce-foot.mce-foot, .mce-window[aria-label="File"] .mce-reset .mce-foot.mce-foot, .mce-window[aria-label^="Attachments"] .mce-reset .mce-foot.mce-foot { display: none; }
 
-.mce-reset .mce-window-body.mce-window-body { display: table-row; padding-top: 0; padding-left: 0; }
-
-.mce-reset .mce-foot.mce-foot { display: none; }
-
-.mce-dragh { display: none !important; }
-
-.mce-reset .mce-window-head.mce-window-head .mce-close { top: -39px !important; right: -1px !important; }
-
-[dir="rtl"] .mce-reset .mce-window-head.mce-window-head .mce-close { right: auto; left: -1px; }
+.mce-window[aria-label="Document"] .mce-dragh, .mce-window[aria-label="File"] .mce-dragh, .mce-window[aria-label^="Attachments"] .mce-dragh { display: none !important; }
 
 #files-sidebar { border-bottom: 1px solid #ddd; }
 
