@@ -49,6 +49,14 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
                 $imagine = new \Imagine\Gd\Imagine();
                 $image   = $imagine->open($source->fullpath);
 
+                if (\Imagine\Image\Metadata\ExifMetadataReader::isSupported())
+                {
+                    $imagine->setMetadataReader(new \Imagine\Image\Metadata\ExifMetadataReader());
+
+                    $filter = new \Imagine\Filter\Basic\Autorotate();
+                    $filter->apply($image);
+                }
+
                 $size = $this->getSize();
 
                 if ($size['x'] && $size['y']) {
