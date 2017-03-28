@@ -13,13 +13,7 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
         'video' => array('mp4', 'webm', 'ogg')
     );
 
-    protected function _initialize(KObjectConfig $config)
-    {
-        parent::_initialize($config);
-        $this->import();
-    }
-
-    protected function import()
+    public function load()
     {
         static $imported = false;
 
