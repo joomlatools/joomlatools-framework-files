@@ -254,10 +254,12 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
                     if (!$thumbnails->isNew())
                     {
+                        if ($thumbnails->count() == 1) {
+                           $thumbnails = $thumbnails->top(); // Un-wrap entity
+                        }
+
                         if ($request->getFormat() == 'json') {
                             $thumbnails = $thumbnails->toArray();
-                        } elseif ($thumbnails->count() == 1) {
-                            $thumbnails = $thumbnails->top(); // Un-wrap entity
                         }
                     }
                     else $thumbnails = false;
