@@ -27,12 +27,6 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         $this->_container = $config->container;
     }
 
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(array('container' => 'fileman-images'));
-        parent::_initialize($config);
-    }
-
     protected function _afterAdd(KControllerContextInterface $context)
     {
         if ($this->_canGenerateThumbnails()) {
@@ -104,6 +98,8 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
     {
         if (!$this->_container instanceof ComFilesModelEntityContainer)
         {
+            $this->_container = $this->_getFilesContainer()->getParameters()->thumbnails_container;
+
             $container = $this->getObject('com:files.model.containers')->slug($this->_container)->fetch();
 
             if (!$container->isNew()) {
