@@ -46,6 +46,61 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         return $this->getModel()->getContainer();
     }
 
+    protected function _beforeMove(KControllerContextInterface $context)
+    {
+        $entities = $this->getModel()->fetch();
+
+        $source_folders = array();
+
+        foreach ($entities as $entity) {
+            $source_folders[$entity->name] = $entity->folder;
+        }
+
+        if (!empty($source_folders)) {
+            $context->source_folders = $source_folders;
+        }
+    }
+
+    protected function _afterMove(KControllerContextInterface $context)
+    {
+        $entities = $context->result;
+
+        if ($source_folders = $context->source_folders)
+        {
+            foreach ($entities as $entity)
+            {
+                $file = $this->_getFile($entity);
+
+                if ($source_folders[$file->name])
+                {
+                    $file->folder = $source_folders[$file->name];
+
+                    $thumbnails = $this->getObject('com:files.model.thumbnails')
+                                       ->source($file->uri)
+                                       ->container($this->_getContainer()->slug)->fetch();
+
+                    foreach ($thumbnails as $thumbnail)
+                    {
+                        $thumbnail->destination_folder = $entity->destination_folder;
+                        $thumbnail->destination_name   = $thumbnail->name;
+
+                        $thumbnails->{$context->getAction()}();
+                    }
+                }
+            }
+        }
+    }
+
+    protected function _beforeCopy(KControllerContextInterface $context)
+    {
+        $this->_beforeMove($context);
+    }
+
+    protected function _afterCopy(KControllerContextInterface $context)
+    {
+        $this->_afterMove($context);
+    }
+
     protected function _generateThumbnails(KModelEntityInterface $entity, $size = null)
     {
         $thumbnails = $this->getObject('com:files.model.entity.thumbnails');
