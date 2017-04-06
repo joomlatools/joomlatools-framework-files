@@ -13,11 +13,18 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelEntityFile extends ComFilesModelEntityNode
+class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KCommandCallbackDelegate
 {
 	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp');
 
-	public function save()
+	public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->addCommandCallback('after.save', '_downsizeImage');
+    }
+
+    public function save()
 	{
 		$context = $this->getContext();
 		$context->result = false;
@@ -38,6 +45,46 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
 
 		return $context->result;
 	}
+
+	protected function _downsizeImage(KDatabaseContext $context)
+    {
+        $parameters = $this->getContainer()->getParameters();
+
+        if ($size = $parameters['maximum_image_size']) {
+            $this->resize($size);
+        }
+    }
+
+    public function resize($width)
+    {
+        $valid_extensions = array('jpg', 'jpeg', 'gif', 'png');
+
+        if ($this->isImage()
+            && $this->getContainer()->getParameters()->maximum_image_size
+            && in_array(strtolower($this->extension), $valid_extensions))
+        {
+            if (!empty($width))
+            {
+                $current_size = @getimagesize($this->fullpath);
+
+                if ($current_size && $current_size[0] > $width || $current_size[1] > $width)
+                {
+                    $thumbnail = $this->getObject('com:files.model.entity.thumbnail',
+                        array(
+                            'data' => array(
+                                'dimension' => array('width' => $width, 'height' => 0),
+                                'name'      => $this->name,
+                                'folder'    => $this->folder,
+                                'container' => $this->getContainer()->slug,
+                                'source'    => $this
+                            )
+                        ));
+
+                    $thumbnail->generate(true);
+                }
+            }
+        }
+    }
 
 
     public function getPropertyFilename()
@@ -157,4 +204,16 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode
 	{
 		return in_array(strtolower($this->extension), self::$image_extensions);
 	}
+
+    /**
+     * Invoke a command handler
+     *
+     * @param string             $method    The name of the method to be executed
+     * @param KCommandInterface  $command   The command
+     * @return mixed Return the result of the handler.
+     */
+    public function invokeCommandCallback($method, KCommandInterface $command)
+    {
+        return $this->$method($command);
+    }
 }
