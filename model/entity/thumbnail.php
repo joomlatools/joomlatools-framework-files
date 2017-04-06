@@ -40,30 +40,6 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
         return $this;
     }
 
-    public function resize($width)
-    {
-        $available_extensions = array('jpg', 'jpeg', 'gif', 'png');
-
-        if ($this->isImage()
-            && $this->getContainer()->getParameters()->maximum_image_size
-            && in_array(strtolower($this->extension), $available_extensions))
-        {
-            $parameters  = $this->getContainer()->getParameters();
-            $size        = $parameters['maximum_image_size'];
-
-            $current_size = @getimagesize($this->fullpath);
-
-            if ($current_size && $current_size[0] > $width || $current_size[1] > $width)
-            {
-                $thumb = $this->getObject('com:files.model.entity.thumbnail');
-
-                $thumb->dimension = array('width' => $width);
-                $thumb->source    = $this;
-                $thumb->generate(true);
-            }
-        }
-    }
-
     protected function _regenerate()
     {
         $result = false;
