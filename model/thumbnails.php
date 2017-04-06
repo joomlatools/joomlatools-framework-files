@@ -15,7 +15,7 @@
  */
 class ComFilesModelThumbnails extends ComFilesModelFiles
 {
-    protected $_source;
+    protected $_source_file;
 
     public function __construct(KObjectConfig $config)
     {
@@ -42,8 +42,8 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         $entity->name   = $state->name;
         $entity->folder = $state->folder;
 
-        if ($source = $this->_getSource()) {
-            $entity->source = $source;
+        if ($file = $this->_getSourceFile()) {
+            $entity->source = $file;
         }
 
         if ($versions = $parameters->versions)
@@ -83,32 +83,24 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         parent::_afterReset($context);
 
         $modified = (array) KObjectConfig::unbox($context->modified);
+
         if (in_array('source', $modified)) {
-            $this->_source = null;
+            $this->_source_file = null;
         }
     }
 
-    protected function _getSource()
+    protected function _getSourceFile()
     {
-        if (!$this->_source instanceof ComFilesModelEntityFile)
+        if (!$this->_source_file instanceof ComFilesModelEntityFile)
         {
             $state = $this->getState();
 
-            if ($state->source)
-            {
-                $file = $this->getObject('com:files.model.files')
-                             ->container($state->getSourceContainer()->slug)
-                             ->folder($state->folder)
-                             ->name(basename($state->name, '.jpg'))
-                             ->fetch();
-
-                if (!$file->isNew()) {
-                    $this->_source = $file;
-                }
+            if ($state->source) {
+                $this->_source_file = $state->getSourceFile();
             }
         }
 
-        return $this->_source;
+        return $this->_source_file;
     }
 
     protected function _beforeCreateSet(KModelContextInterface $context)
@@ -117,12 +109,12 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
 
         if ($thumbnails = $context->files)
         {
-            $source = $this->_getSource();
+            $file = $this->_getSourceFile();
 
             foreach ($thumbnails as $thumbnail)
             {
-                if ($source) {
-                    $thumbnail->source = $source;
+                if ($file) {
+                    $thumbnail->source = $file;
                 }
 
                 if ($versions = $parameters->versions)
