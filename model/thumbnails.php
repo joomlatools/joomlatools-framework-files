@@ -99,7 +99,7 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
                 $file = $this->getObject('com:files.model.files')
                              ->container($state->getSourceContainer()->slug)
                              ->folder($state->folder)
-                             ->name($state->name)
+                             ->name(basename($state->name, '.jpg'))
                              ->fetch();
 
                 if (!$file->isNew()) {
