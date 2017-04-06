@@ -15,15 +15,13 @@
  */
 class ComFilesModelStateThumbnails extends KModelState
 {
-    protected $_source_container;
+    protected $_source_file;
 
     public function set($name, $value = null)
     {
         if ($name == 'source')
         {
             $parts = explode('://', $value);
-
-            $this->_source_container = $parts[0];
 
             $this->set('name', basename($parts[1]) . '.jpg');
             $this->set('folder', dirname($parts[1]));
@@ -35,7 +33,7 @@ class ComFilesModelStateThumbnails extends KModelState
     public function remove($name)
     {
         if ($name == 'source') {
-            $this->_source_container = null;
+            $this->_source_file = null;
         }
 
         return parent::remove($name);
@@ -43,22 +41,28 @@ class ComFilesModelStateThumbnails extends KModelState
 
     public function reset($default = true)
     {
-        $this->_source_container = null;
+        $this->_source_file = null;
 
         return parent::reset($default);
     }
 
-    public function getSourceContainer()
+    public function getSourceFile()
     {
-        if ($this->_source_container && !$this->_source_container instanceof ComFilesModelEntityContainer)
+        if ($this->has('source') && !$this->_source_file)
         {
-            $container = $this->getObject('com:files.model.containers')->slug($this->_source_container)->fetch();
+            $parts = explode('://', $this->get('source'));
 
-            if (!$container->isNew()) {
-                $this->_source_container = $container->top();
+            $file = $this->getObject('com:files.model.files')
+                         ->container($parts[0])
+                         ->folder(dirname($parts[1]))
+                         ->name(basename($parts[1]))
+                         ->fetch();
+
+            if (!$file->isNew()) {
+                $this->_source_file = $file;
             }
         }
 
-        return $this->_source_container;
+        return $this->_source_file;
     }
 }
