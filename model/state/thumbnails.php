@@ -25,7 +25,7 @@ class ComFilesModelStateThumbnails extends KModelState
 
             $this->_source_container = $parts[0];
 
-            $this->set('name', basename($parts[1]));
+            $this->set('name', basename($parts[1]) . '.jpg');
             $this->set('folder', dirname($parts[1]));
         }
 
