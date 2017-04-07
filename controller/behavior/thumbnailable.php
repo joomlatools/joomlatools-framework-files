@@ -180,8 +180,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
             $controller = $this->getObject('com:files.controller.thumbnail')
                                ->container($this->_getContainer()->slug)
-                               ->folder($file->folder)
-                               ->name($file->name);
+                               ->source($file->uri);
 
             $parameters = $this->_getContainer()->getParameters();
 
