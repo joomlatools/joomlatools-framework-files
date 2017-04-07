@@ -124,7 +124,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
                 $versions = array_keys($versions->toArray());
 
                 if ($size) {
-                    $versions = array_intersect(array_keys($versions), (array) $size);
+                    $versions = array_intersect($versions, (array) $size);
                 }
 
                 foreach ($versions as $version)
