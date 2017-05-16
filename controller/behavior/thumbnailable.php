@@ -10,40 +10,14 @@
 /**
  * Thumbnailable Controller Behavior
  *
- * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @author  Arunas Mazeika <https://github.com/amazeika>
  * @package Koowa\Component\Files
  */
 class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstract
 {
-    protected $_container;
-
-    public function __construct(KObjectConfig $config)
+    protected function _getContainer()
     {
-        parent::__construct($config);
-
-        $this->addCommandCallback('after.browse', '_setThumbnails');
-        $this->addCommandCallback('after.read', '_setThumbnails');
-
-        $this->_container = $config->container;
-    }
-
-    protected function _afterAdd(KControllerContextInterface $context)
-    {
-        if ($this->_canGenerateThumbnails()) {
-            $this->_generateThumbnails($context->result);
-        }
-    }
-
-    protected function _canGenerateThumbnails()
-    {
-        $parameters = $this->_getFilesContainer()->getParameters();
-
-        return (bool) $parameters->thumbnails;
-    }
-
-    protected function _getFilesContainer()
-    {
-        return $this->getModel()->getContainer();
+        return $this->getModel()->getThumbnailsContainer();
     }
 
     protected function _beforeMove(KControllerContextInterface $context)
@@ -101,70 +75,6 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         $this->_afterMove($context);
     }
 
-    protected function _generateThumbnails(KModelEntityInterface $entity, $size = null)
-    {
-        $thumbnails = $this->getObject('com:files.model.entity.thumbnails');
-
-        if ($entity instanceof ComFilesModelEntityFile) {
-            $file = $entity;
-        } else {
-            $file = $this->_getFile($entity);
-        }
-
-        if ($file->isImage())
-        {
-            $parameters = $this->_getContainer()->getParameters();
-
-            $model = $this->getObject('com:files.model.thumbnails')
-                          ->container($this->_getContainer()->slug)
-                          ->source($file->uri);
-
-            if ($versions = $parameters->versions)
-            {
-                $versions = array_keys($versions->toArray());
-
-                if ($size) {
-                    $versions = array_intersect($versions, (array) $size);
-                }
-
-                foreach ($versions as $version)
-                {
-                    $thumbnail = $model->version($version)->create();
-
-                    if ($thumbnail->save()) {
-                        $thumbnails->insert($thumbnail);
-                    }
-                }
-            }
-            else
-            {
-                $thumbnail = $model->create();
-
-                if ($thumbnail->save()) {
-                    $thumbnails->insert($thumbnail);
-                }
-            }
-        }
-
-        return $thumbnails;
-    }
-
-    protected function _getContainer()
-    {
-        if (!$this->_container instanceof ComFilesModelEntityContainer)
-        {
-            $this->_container = $this->_getFilesContainer()->getParameters()->thumbnails_container;
-
-            $container = $this->getObject('com:files.model.containers')->slug($this->_container)->fetch();
-
-            if (!$container->isNew()) {
-                $this->_container = $container->top();
-            }
-        }
-
-        return $this->_container;
-    }
-
     protected function _getFile(KModelEntityInterface $entity)
     {
         return $entity;
@@ -195,78 +105,4 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
             }
         }
     }
-
-	protected function _setThumbnails(KControllerContextInterface $context)
-	{
-        $request = $context->getRequest();
-        $query   = $request->getQuery();
-
-        if (is_bool($query->get('thumbnails', 'raw'))) {
-            $thumbnails = $query->get('thumbnails', 'boolean') ? 'true' : 'false';
-        } else {
-            $thumbnails = $query->get('thumbnails', 'cmd');
-        }
-
-        if ($thumbnails && $this->_canGenerateThumbnails())
-        {
-            if ($thumbnails != 'true') {
-                $version = $thumbnails;
-            }
-
-            $parameters = $this->_getContainer()->getParameters();
-            $result     = $context->result;
-
-            foreach ($result as $entity)
-            {
-                $file = $this->_getFile($entity);
-
-                if ($entity instanceof ComFilesModelEntityFile && $entity->isImage())
-                {
-                    $container = $this->_getContainer();
-
-                    $controller = $this->getObject('com:files.controller.thumbnail')
-                                       ->container($container->slug)
-                                       ->source($file->uri);
-
-                    if (isset($version)) {
-                        $controller->version($version);
-                    }
-
-                    $folder = $container->getAdapter('folder', array(
-                        'path' => $container->fullpath . '/' . dirname($file->path)
-                    ));
-
-                    // Avoid 'Invalid Folder' error on thumbs model (create folder if it doesn't exists)
-                    if (!$folder->exists()) {
-                        $folder->create();
-                    }
-
-                    $thumbnails = $controller->browse();
-
-                    if (($versions = $parameters->versions) && !isset($version))
-                    {
-                         if ($thumbnails->count() !== count($versions)) {
-                             $thumbnails = $this->_generateThumbnails($file); // Generate missing thumbnails
-                         }
-                    }
-                    elseif ($thumbnails->isNew()) $thumbnails = $this->_generateThumbnails($file, isset($version) ? $version : null);
-
-                    if (!$thumbnails->isNew())
-                    {
-                        if ($thumbnails->count() == 1) {
-                           $thumbnails = $thumbnails->top(); // Un-wrap entity
-                        }
-
-                        if ($request->getFormat() == 'json') {
-                            $thumbnails = $thumbnails->toArray();
-                        }
-                    }
-                    else $thumbnails = false;
-                }
-                else $thumbnails = false;
-
-                $entity->thumbnail = $thumbnails;
-            }
-        }
-	}
 }
