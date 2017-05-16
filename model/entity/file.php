@@ -21,6 +21,7 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
     {
         parent::__construct($config);
 
+        $this->addBehavior('com:files.database.behavior.thumbnailable');
         $this->addCommandCallback('after.save', '_downsizeImage');
     }
 
