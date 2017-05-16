@@ -27,11 +27,12 @@ class ComFilesModelNodes extends KModelAbstract
         parent::__construct($config);
 
         $this->getState()
-            ->insert('limit'    , 'int')
-            ->insert('offset'   , 'int')
-            ->insert('sort'     , 'cmd')
-            ->insert('direction', 'word', 'asc')
-            ->insert('search'   , 'string')
+            ->insert('limit'     , 'int')
+            ->insert('offset'    , 'int')
+            ->insert('sort'      , 'cmd')
+            ->insert('direction' , 'word', 'asc')
+            ->insert('search'    , 'string')
+            ->insert('thumbnails', 'cmd') // Needed so that it gets forwarded to files model (see ::_actionFetch)
 
             ->insert('container', 'com:files.filter.container', null)
             ->insert('folder'	, 'com:files.filter.path', '')
