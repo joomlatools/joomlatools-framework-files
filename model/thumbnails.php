@@ -186,4 +186,86 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
             return false;
         }
     }
+
+    protected function _beforeFetch()
+    {
+        $file = $this->_getSourceFile();
+
+        if ($file)
+        {
+            $container = $this->getContainer();
+
+
+            $folder = $container->getAdapter('folder', array(
+                'path' => $container->fullpath . '/' . dirname($file->path)
+            ));
+
+            // Avoid 'Invalid Folder' error on thumbs model (create folder if it doesn't exists)
+            if (!$folder->exists()) {
+                $folder->create();
+            }
+        }
+    }
+
+    protected function _generateThumbnails(ComFilesModelEntityNodes $files, $version = null)
+    {
+        $thumbnails = $this->getObject('com:files.model.entity.thumbnails');
+
+        foreach ($files as $file)
+        {
+            if ($file->isImage())
+            {
+                $container = $this->getContainer();
+
+                $model = $this->getObject('com:files.model.thumbnails')->container($container->slug)->source($file->uri);
+
+                if ($versions = $container->getParameters()->versions)
+                {
+                    $versions = array_keys($versions->toArray());
+
+                    if ($version) {
+                        $versions = array_intersect($versions, (array) $version);
+                    }
+
+                    foreach ($versions as $version)
+                    {
+                        $thumbnail = $model->version($version)->create();
+
+                        if ($thumbnail->save()) {
+                            $thumbnails->insert($thumbnail);
+                        }
+                    }
+                }
+                else
+                {
+                    $thumbnail = $model->create();
+
+                    if ($thumbnail->save()) {
+                        $thumbnails->insert($thumbnail);
+                    }
+                }
+            }
+        }
+
+        return $thumbnails;
+    }
+
+    protected function _afterFetch(KModelContextInterface $context)
+    {
+        $thumbnails = $context->entity;
+
+        $parameters = $this->getContainer()->getParameters();
+        $state      = $this->getState();
+        $file       = $this->_getSourceFile();
+
+        if (($versions = $parameters->versions) && !$state->version)
+        {
+            if ($thumbnails->count() !== count($versions)) {
+                $thumbnails = $this->_generateThumbnails($file); // Generate missing thumbnails
+            }
+        }
+        elseif ($thumbnails->isNew()) $thumbnails = $this->_generateThumbnails($file, $state->version ? $state->version : null);
+
+        $context->entity = $thumbnails;
+    }
 }
