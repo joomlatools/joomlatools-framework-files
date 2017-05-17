@@ -32,7 +32,6 @@ class ComFilesModelNodes extends KModelAbstract
             ->insert('sort'      , 'cmd')
             ->insert('direction' , 'word', 'asc')
             ->insert('search'    , 'string')
-            ->insert('thumbnails', 'cmd') // Needed so that it gets forwarded to files model (see ::_actionFetch)
 
             ->insert('container', 'com:files.filter.container', null)
             ->insert('folder'	, 'com:files.filter.path', '')
