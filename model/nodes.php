@@ -50,7 +50,7 @@ class ComFilesModelNodes extends KModelAbstract
     {
         $config->append(array(
             'identity_key' => 'name',
-            'behaviors' => array('paginatable'),
+            'behaviors' => array('paginatable', 'com:files.model.behavior.nodes.thumbnailable'),
         ));
 
         parent::_initialize($config);
