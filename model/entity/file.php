@@ -194,13 +194,8 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
 
 		$data['metadata'] = $this->metadata;
 
-		if ($this->isImage())
-		{
+		if ($this->isImage()) {
 			$data['type'] = 'image';
-
-		    if (isset($data['thumbnail'])) {
-                $data['thumbnail'] = $data['thumbnail']->toArray();
-            }
 		}
 
         return $data;
