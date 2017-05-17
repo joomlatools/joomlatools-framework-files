@@ -231,6 +231,13 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
     {
         $data = parent::toArray();
 
+        foreach ($data as $key => $value)
+        {
+            if ($value instanceof KModelEntityAbstract || $value instanceof KModelEntityComposite) {
+                $data[$key] = $value->toArray();
+            }
+        }
+
         unset($data['csrf_token']);
         unset($data['action']);
         unset($data['option']);
