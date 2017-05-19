@@ -189,15 +189,15 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
 
     protected function _beforeFetch()
     {
-        $file = $this->_getSourceFile();
+        $state = $this->getState();
 
-        if ($file)
+        if ($folder = $state->folder)
         {
             $container = $this->getContainer();
 
 
             $folder = $container->getAdapter('folder', array(
-                'path' => $container->fullpath . '/' . dirname($file->path)
+                'path' => $container->fullpath . '/' . $folder
             ));
 
             // Avoid 'Invalid Folder' error on thumbs model (create folder if it doesn't exists)
