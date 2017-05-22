@@ -7,9 +7,10 @@
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
 defined('KOOWA') or die( 'Restricted access' );
-
-JHtml::_('behavior.framework', true);
 ?>
+
+<ktml:script src="media://system/js/mootools-core.js" />
+<ktml:script src="media://system/js/mootools-more.js" />
 
 <?= helper('behavior.koowa'); ?>
 <?= helper('behavior.local_dates'); ?>
