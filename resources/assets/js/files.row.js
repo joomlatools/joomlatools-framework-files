@@ -1,7 +1,7 @@
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -128,11 +128,6 @@ Files.Image = new Class({
 		this.image = this.baseurl+'/'+this.encodePath(this.filepath, this.realpath);
 
 		this.client_cache = false;
-		if(window.sessionStorage) {
-		    if(sessionStorage[this.image.toString()]) {
-		        this.client_cache = sessionStorage[this.image.toString()];
-		    }
-		}
 	},
 	getThumbnail: function(success, failure) {
 		var that = this,

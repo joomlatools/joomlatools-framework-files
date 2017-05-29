@@ -2039,9 +2039,9 @@
 })(window);
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -2095,9 +2095,9 @@ Files.getFileType = function(extension) {
 };
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -2148,9 +2148,9 @@ Files.State = new Class({
 });
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -2226,9 +2226,9 @@ Files.Template.Compact = new Class({
 })();
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -2839,9 +2839,9 @@ Files.Grid.Root = new Class({
 });
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -3075,9 +3075,9 @@ if(!Files) var Files = {};
 
 }(window.kQuery));
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -3204,11 +3204,6 @@ Files.Image = new Class({
 		this.image = this.baseurl+'/'+this.encodePath(this.filepath, this.realpath);
 
 		this.client_cache = false;
-		if(window.sessionStorage) {
-		    if(sessionStorage[this.image.toString()]) {
-		        this.client_cache = sessionStorage[this.image.toString()];
-		    }
-		}
 	},
 	getThumbnail: function(success, failure) {
 		var that = this,
@@ -3323,9 +3318,9 @@ Files.Folder = new Class({
 	}
 });
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -3490,9 +3485,9 @@ Files.Paginator = new Class({
 });
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -3652,11 +3647,11 @@ Files.Paginator = new Class({
 })();
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
  * @codekit-prepend "files.utilities.js", "files.state.js", "files.template.js", "files.grid.js", files.tree.js", "files.row.js", "files.paginator.js", "files.pathway.js"
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -4514,10 +4509,6 @@ Files.App = new Class({
                     img.set('src', source);
 
                     (node.element.getElement('.files-node') || node.element).addClass('loaded').removeClass('loading');
-
-                    if(window.sessionStorage) {
-                        sessionStorage[node.image.toString()] = img.get('src');
-                    }
                 }
             });
         }
@@ -4577,9 +4568,9 @@ Files.App = new Class({
 });
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -4779,9 +4770,9 @@ Files.Attachment = new Class({
     }
 });
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright    Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright    Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license        GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link        http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -4871,9 +4862,9 @@ if (!Files) var Files = {};
 
 
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
