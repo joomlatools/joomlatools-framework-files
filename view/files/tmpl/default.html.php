@@ -20,6 +20,9 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 cookie: {
                     path: '<?=object('request')->getSiteUrl()?>'
                 },
+                tree: {
+                    enabled: <?= json_encode(parameters()->tree) ?>
+                },
                 state: {
                     defaults: {
                         limit: <?= (int) parameters()->limit; ?>,
