@@ -31,6 +31,7 @@ window.addEvent('domready', function() {
             types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
             container: <?= json_encode($container ? $container->toArray() : null); ?>,
             tree: {
+                enabled: <?= json_encode(parameters()->tree) ?>,
                 dataFilter: function(response){
 
                     kQuery('.koowa_dialog__file_dialog_categories').css('display', 'block');
