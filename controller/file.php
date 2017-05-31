@@ -87,6 +87,10 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                 $query     = $this->getRequest()->query;
                 $container = $this->getModel()->getContainer();
 
+                if (isset($query->tree) && !!$query->tree === false) {
+                    $this->getView()->enableTree(false);
+                }
+
                 // Note: PHP converts dots to underscores in cookie names
                 $cookie = json_decode($this->getObject('request')->cookies['com_files_container_'.$container->slug.'_state'], true);
 
