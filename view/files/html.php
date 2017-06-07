@@ -20,11 +20,6 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
      */
     protected $_root_path = '';
 
-    /**
-     * @var bool Tells if folder trees are supported
-     */
-    protected $_tree = true;
-
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->auto_fetch = false;
@@ -52,12 +47,6 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
     public function getRootPath()
     {
         return $this->_root_path;
-    }
-
-    public function enableTree($status = true)
-    {
-        $this->_tree = (bool) $status;
-        return $this;
     }
 
     protected function _fetchData(KViewContext $context)
@@ -117,6 +106,5 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 
         $context->parameters = $state->getValues();
         $context->parameters->config = $config;
-        $context->parameters->tree = $this->_tree;
     }
 }
