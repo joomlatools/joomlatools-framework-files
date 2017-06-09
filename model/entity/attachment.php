@@ -56,17 +56,8 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
 
         $file = $this->file;
 
-        if (!$file->isNew())
-        {
-            $data['file'] = $file->toArray();
-
-            if ($file->isThumbnail())
-            {
-                $thumbnail = $file->getThumbnail();
-                $data['thumbnail'] = !$thumbnail->isNew() ? $thumbnail->thumbnail : false;
-            }
-
-            $data['file'] = $file->toArray();
+        if (!$file->isNew()) {
+            $data['file']      = $file->toArray();
         }
 
         $data['created_on_timestamp']  = strtotime($this->created_on);
