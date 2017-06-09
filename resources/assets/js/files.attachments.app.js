@@ -102,8 +102,8 @@ Files.Attachments.App = new Class({
 
                 copy.render('attachments').inject(that.preview);
 
-                if (copy.thumbnail) {
-                    that.preview.getElement('img').set('src', copy.thumbnail).show();
+                if (copy.file.thumbnail) {
+                    that.preview.getElement('img').set('src', Files.sitebase + '/' + copy.file.thumbnail.relative_path).show();
                 }
 
                 that.grid.selected = row.name;
