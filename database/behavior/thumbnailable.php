@@ -19,7 +19,7 @@ class ComFilesDatabaseBehaviorThumbnailable extends KDatabaseBehaviorAbstract
     {
         $thumbnail = false;
 
-        if ($container = $this->thumbnails_container_slug)
+        if (!$this->isNew() && $container = $this->thumbnails_container_slug)
         {
             $model = $this->getObject('com:files.model.thumbnails')->container($container)->source($this->uri);
 
