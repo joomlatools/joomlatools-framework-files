@@ -55,6 +55,13 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
         return $this->_container;
     }
 
+    protected function _afterCreate(KModelContextInterface $context)
+    {
+        if ($container = $this->getThumbnailsContainer()) {
+            $context->entity->thumbnails_container_slug = $container->slug;
+        }
+    }
+
     protected function _afterFetch(KModelContextInterface $context)
     {
         $thumbnails = $this->getState()->thumbnails;
