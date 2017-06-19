@@ -64,12 +64,16 @@ Files.Attachments.App = new Class({
 
         if (this.url)
         {
+            var url = this.url;
+
+            url += '&_' + Date.now();
+
             that.grid.reset(); // Flush current content.
 
             this.grid.spin();
 
             new Request.JSON({
-                url: this.url,
+                url: url,
                 method: 'get',
                 onSuccess: function(response)
                 {
