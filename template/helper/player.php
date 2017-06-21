@@ -24,9 +24,11 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
     {
         static $imported = false;
 
-        if (! $imported) {
+        $html = '';
 
-            $this->getObject('com:files.view.plyr.html')
+        if (!$imported)
+        {
+            $html = $this->getObject('com:files.view.plyr.html')
                 ->getTemplate()
                 ->addFilter('style')
                 ->addFilter('script')
@@ -35,5 +37,7 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
 
             $imported = true;
         }
+
+        return $html;
     }
 }
