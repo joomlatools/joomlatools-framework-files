@@ -31,7 +31,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         return $result;
     }
 
-    protected function _canHanle()
+    protected function _canHandle()
     {
         return !!$this->_getContainer();
     }
