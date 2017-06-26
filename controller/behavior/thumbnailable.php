@@ -17,6 +17,21 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 {
     protected $_container;
 
+    /**
+     * Cannot use isSupported as model is not set on mixer at that time.
+     */
+    public function execute(KCommandInterface $command, KCommandChainInterface $chain)
+    {
+        $result = true;
+
+        // Check if we should forward the command to this handler.
+        if ($this->_getContainer()) {
+            $result = $this->execute($command, $chain);
+        }
+
+        return $result;
+    }
+
     protected function _getContainer()
     {
         if (!isset($this->_container))
