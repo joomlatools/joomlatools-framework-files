@@ -15,6 +15,8 @@
  */
 class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstract
 {
+    protected $_container;
+
     protected function _getContainer()
     {
         if (!isset($this->_container))
