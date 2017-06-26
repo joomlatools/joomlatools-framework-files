@@ -17,7 +17,21 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 {
     protected function _getContainer()
     {
-        return $this->getModel()->getThumbnailsContainer();
+        if (!isset($this->_container))
+        {
+            $container = false;
+
+            $model = $this->getModel();
+
+            // $model->isThumbnailable() would be more elegant but it's not supported at the moment.
+            if ($model->getContainer()->getParameters()->thumbnails_container) {
+                $container = $model->getThumbnailsContainer();
+            }
+
+            $this->_container = $container;
+        }
+
+        return $this->_container;
     }
 
     protected function _beforeMove(KControllerContextInterface $context)
