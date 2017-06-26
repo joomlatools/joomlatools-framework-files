@@ -24,12 +24,16 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
     {
         $result = true;
 
-        // Check if we should forward the command to this handler.
-        if ($this->_getContainer()) {
+        if ($this->_canHandle()) {
             $result = $this->execute($command, $chain);
         }
 
         return $result;
+    }
+
+    protected function _canHanle()
+    {
+        return !!$this->_getContainer();
     }
 
     protected function _getContainer()
