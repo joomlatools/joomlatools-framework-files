@@ -25,7 +25,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         $result = true;
 
         if ($this->_canHandle()) {
-            $result = $this->execute($command, $chain);
+            $result = parent::execute($command, $chain);
         }
 
         return $result;
