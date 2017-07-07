@@ -92,7 +92,7 @@ if(!Files) var Files = {};
 
             return [tree];
         },
-        fromUrl: function(url) {
+        fromUrl: function(url, callback) {
 
             var self = this;
             this.tree('loadDataFromUrl', url, null, function(response){
@@ -100,6 +100,10 @@ if(!Files) var Files = {};
                  * @TODO refactor chaining support to this.selectPath so it works even when the tree isn't loaded yet
                  */
                 if(Files.app && Files.app.hasOwnProperty('active')) self.selectPath(Files.app.active);
+
+                if (callback) {
+                    callback(response);
+                }
             });
 
         },
