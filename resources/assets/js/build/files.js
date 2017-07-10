@@ -2932,7 +2932,7 @@ if(!Files) var Files = {};
 
             return [tree];
         },
-        fromUrl: function(url) {
+        fromUrl: function(url, callback) {
 
             var self = this;
             this.tree('loadDataFromUrl', url, null, function(response){
@@ -2940,6 +2940,10 @@ if(!Files) var Files = {};
                  * @TODO refactor chaining support to this.selectPath so it works even when the tree isn't loaded yet
                  */
                 if(Files.app && Files.app.hasOwnProperty('active')) self.selectPath(Files.app.active);
+
+                if (callback) {
+                    callback(response);
+                }
             });
 
         },
@@ -4891,6 +4895,53 @@ var CopyMoveDialog = Koowa.Class.extend({
         this.setOptions(options);
         this.attachEvents();
     },
+    setTree: function(tree)
+    {
+        var app = Files.app;
+
+        if (!app.tree)
+        {
+            if (!Files.app.tree)
+            {
+                var opts = {
+                    root_path: app.options.root_path,
+                    root: {
+                        text: app.options.root_text
+                    },
+                    element: $('<div></div>'),
+                    initial_response: !!this.options.initial_response
+                };
+
+                app.tree = new Files.Tree(opts.element, opts);
+
+                var config = {view: 'folders', 'tree': '1', 'limit': '2000'};
+
+                if (app.options.root_path) config.folder = app.options.root_path;
+
+                app.tree.fromUrl(app.createRoute(config), function () {
+                    tree.tree('loadData', $.parseJSON(app.tree.tree('toJson')));
+                });
+
+                app.addEvent('afterNavigate', function(path, type) {
+                    if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
+                        app.tree.selectPath(path);
+                    }
+                });
+
+                if (app.grid) {
+                    app.grid.addEvent('afterDeleteNode', function(context) {
+                        var node = context.node;
+                        if (node.type == 'folder') {
+                            app.tree.removeNode(node.path);
+                        }
+                    });
+                }
+            }
+        }
+        else tree.tree('loadData', $.parseJSON(app.tree.tree('toJson')));
+
+        return app.tree;
+    },
     attachEvents: function() {
         var self = this;
 
@@ -4918,14 +4969,13 @@ var CopyMoveDialog = Koowa.Class.extend({
             return;
         }
 
-        var data = Files.app.tree.tree('toJson'),
-            tree = new Koowa.Tree(options.view.find('.k-js-tree-container'), {
-                onCanSelectNode: function(node) {
-                    return (node.path != Files.app.getPath());
-                }
-            });
+        var tree = new Koowa.Tree(this.options.tree, {
+            onCanSelectNode: function (node) {
+                return (node.path != Files.app.getPath());
+            }
+        });
 
-        tree.tree('loadData', $.parseJSON(data));
+        this.setTree(tree);
 
         this.getSelectedNodes().each(function(node) {
             var tree_node = tree.tree('getNodeById', node.path);
@@ -5000,7 +5050,7 @@ Files.CopyDialog = CopyMoveDialog.extend({
             Files.app.grid.fireEvent('afterCopyNodes', {nodes: nodes});
 
             if (refresh_tree) {
-                Files.app.tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
+                tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
             }
 
             self.hide();
@@ -5055,7 +5105,7 @@ Files.MoveDialog = CopyMoveDialog.extend({
             Files.app.grid.fireEvent('afterMoveNodes', {nodes: nodes});
 
             if (refresh_tree) {
-                Files.app.tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
+               tree.fromUrl(Files.app.createRoute({view: 'folders', 'tree': '1', 'limit': '2000'}));
             }
 
             self.hide();
