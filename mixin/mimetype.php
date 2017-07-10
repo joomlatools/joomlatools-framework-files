@@ -73,6 +73,11 @@ class ComFilesMixinMimetype extends KObject
 		if ($mimetype == 'application/x-empty' || $mimetype === 'inode/x-empty') {
 			$mimetype = 'text/plain';
 		}
+
+        // special case: Microsoft BMP mimetype
+        if ($mimetype == 'image/x-ms-bmp') {
+            $mimetype = 'image/bmp';
+        }
 		
 		return $mimetype;
 	}
