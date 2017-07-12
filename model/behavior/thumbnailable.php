@@ -28,7 +28,7 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
     {
         $result = false;
 
-        if ( $this->getMixer() instanceof ComFilesModelNodes) { // To protect against ::getContainer calls
+        if ($this->getMixer() instanceof ComFilesModelNodes) { // To protect against ::getContainer calls
             $result = true;
         }
 
@@ -65,23 +65,24 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
     protected function _afterFetch(KModelContextInterface $context)
     {
         $thumbnails = $this->getState()->thumbnails;
+        $container  = $this->getThumbnailsContainer();
 
-        foreach ($context->entity as $entity)
+        if ($thumbnails && $container)
         {
-            $container = $this->getThumbnailsContainer();
+            $model = $this->getObject('com:files.model.thumbnails')->container($container->slug);
 
-            if ($container)
+            if (!in_array($thumbnails, array('1', 'true'))) {
+                $model->version($thumbnails);
+            }
+
+            foreach ($context->entity as $entity)
             {
+                $model->source($entity->uri);
+
                 $entity->thumbnails_container_slug = $container->slug;
 
                 if ($this->getContainer()->getParameters()->thumbnails && $thumbnails)
                 {
-                    $model = $this->getObject('com:files.model.thumbnails')->container($container->slug)->source($entity->uri);
-
-                    if (!in_array($thumbnails, array('1', 'true'))) {
-                        $model->version = $thumbnails;
-                    }
-
                     $thumbnails = $model->fetch();
 
                     if (!$thumbnails->isNew())
