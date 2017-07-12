@@ -427,11 +427,10 @@ Files.App = new Class({
                 }
             }
 
-            if (this.container.parameters.thumbnails !== true) {
-                this.options.thumbnails = false;
-            } else {
-                this.state.set('thumbnails', true);
+            if (this.container.parameters.thumbnails === true) {
+                this.state.set('thumbnails', this.options.thumbnails);
             }
+            else this.options.thumbnails = false;
 
             if (this.options.types !== null) {
                 this.options.grid.types = this.options.types;
