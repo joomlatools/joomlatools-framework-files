@@ -67,7 +67,7 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
         $thumbnails = $this->getState()->thumbnails;
         $container  = $this->getThumbnailsContainer();
 
-        if ($thumbnails && $container)
+        if ($thumbnails && $container && $this->getContainer()->getParameters()->thumbnails)
         {
             $model = $this->getObject('com:files.model.thumbnails')->container($container->slug);
 
@@ -81,20 +81,17 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
 
                 $entity->thumbnails_container_slug = $container->slug;
 
-                if ($this->getContainer()->getParameters()->thumbnails && $thumbnails)
+                $thumbnails = $model->fetch();
+
+                if (!$thumbnails->isNew())
                 {
-                    $thumbnails = $model->fetch();
-
-                    if (!$thumbnails->isNew())
-                    {
-                        if ($thumbnails->count() == 1) {
-                            $thumbnails = $thumbnails->top(); // Un-wrap entity
-                        }
+                    if ($thumbnails->count() == 1) {
+                        $thumbnails = $thumbnails->top(); // Un-wrap entity
                     }
-                    else $thumbnails = false;
-
-                    $entity->thumbnail = $thumbnails;
                 }
+                else $thumbnails = false;
+
+                $entity->thumbnail = $thumbnails;
             }
         }
     }
