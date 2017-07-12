@@ -844,17 +844,9 @@ Files.App = new Class({
                     });
 
                     var source = Files.blank_image;
-                    var thumbnail;
 
-                    if (node.thumbnail)
-                    {
-                        if (that.options.thumbnails === true) {
-                            thumbnail = node.thumbnail;
-                        } else {
-                            thumbnail = node.thumbnail[that.options.thumbnails];
-                        }
-
-                        source = Files.sitebase + '/' + thumbnail.relative_path;
+                    if (node.thumbnail) {
+                        source = Files.sitebase + '/' + node.thumbnail.relative_path;
                     }
 
                     img.set('src', source);
