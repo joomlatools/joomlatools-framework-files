@@ -21,6 +21,10 @@ class ComFilesModelStateThumbnails extends KModelState
     {
         if ($name == 'source')
         {
+            if ($this->get($name) != $value) {
+                $this->_source_file = null; // Reset source file if source gets changed
+            }
+
             $parts = explode('://', $value);
 
             $this->set('name', basename($parts[1]) . '.jpg');
