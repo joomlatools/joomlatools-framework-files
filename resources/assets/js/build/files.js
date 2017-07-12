@@ -4079,11 +4079,10 @@ Files.App = new Class({
                 }
             }
 
-            if (this.container.parameters.thumbnails !== true) {
-                this.options.thumbnails = false;
-            } else {
-                this.state.set('thumbnails', true);
+            if (this.container.parameters.thumbnails === true) {
+                this.state.set('thumbnails', this.options.thumbnails);
             }
+            else this.options.thumbnails = false;
 
             if (this.options.types !== null) {
                 this.options.grid.types = this.options.types;
@@ -4497,17 +4496,9 @@ Files.App = new Class({
                     });
 
                     var source = Files.blank_image;
-                    var thumbnail;
 
-                    if (node.thumbnail)
-                    {
-                        if (that.options.thumbnails === true) {
-                            thumbnail = node.thumbnail;
-                        } else {
-                            thumbnail = node.thumbnail[that.options.thumbnails];
-                        }
-
-                        source = Files.sitebase + '/' + thumbnail.relative_path;
+                    if (node.thumbnail) {
+                        source = Files.sitebase + '/' + node.thumbnail.relative_path;
                     }
 
                     img.set('src', source);
@@ -4901,41 +4892,38 @@ var CopyMoveDialog = Koowa.Class.extend({
 
         if (!app.tree)
         {
-            if (!Files.app.tree)
-            {
-                var opts = {
-                    root_path: app.options.root_path,
-                    root: {
-                        text: app.options.root_text
-                    },
-                    element: $('<div></div>'),
-                    initial_response: !!this.options.initial_response
-                };
+            var opts = {
+                root_path: app.options.root_path,
+                root: {
+                    text: app.options.root_text
+                },
+                element: $('<div></div>'),
+                initial_response: !!this.options.initial_response
+            };
 
-                app.tree = new Files.Tree(opts.element, opts);
+            app.tree = new Files.Tree(opts.element, opts);
 
-                var config = {view: 'folders', 'tree': '1', 'limit': '2000'};
+            var config = {view: 'folders', 'tree': '1', 'limit': '2000'};
 
-                if (app.options.root_path) config.folder = app.options.root_path;
+            if (app.options.root_path) config.folder = app.options.root_path;
 
-                app.tree.fromUrl(app.createRoute(config), function () {
-                    tree.tree('loadData', $.parseJSON(app.tree.tree('toJson')));
-                });
+            app.tree.fromUrl(app.createRoute(config), function () {
+                tree.tree('loadData', $.parseJSON(app.tree.tree('toJson')));
+            });
 
-                app.addEvent('afterNavigate', function(path, type) {
-                    if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
-                        app.tree.selectPath(path);
+            app.addEvent('afterNavigate', function(path, type) {
+                if(path !== undefined && (!type || (type != 'initial' && type != 'stateless'))) {
+                    app.tree.selectPath(path);
+                }
+            });
+
+            if (app.grid) {
+                app.grid.addEvent('afterDeleteNode', function(context) {
+                    var node = context.node;
+                    if (node.type == 'folder') {
+                        app.tree.removeNode(node.path);
                     }
                 });
-
-                if (app.grid) {
-                    app.grid.addEvent('afterDeleteNode', function(context) {
-                        var node = context.node;
-                        if (node.type == 'folder') {
-                            app.tree.removeNode(node.path);
-                        }
-                    });
-                }
             }
         }
         else tree.tree('loadData', $.parseJSON(app.tree.tree('toJson')));
