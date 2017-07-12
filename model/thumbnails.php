@@ -263,12 +263,10 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
             if (($versions = $parameters->versions) && !$state->version)
             {
                 if ($thumbnails->count() !== count($versions)) {
-                    $thumbnails = $this->_generateThumbnails($file); // Generate missing thumbnails
+                    $context->entity = $this->_generateThumbnails($file); // Generate missing thumbnails
                 }
             }
-            elseif ($thumbnails->isNew()) $thumbnails = $this->_generateThumbnails($file, $state->version ? $state->version : null);
-
-            $context->entity = $thumbnails;
+            elseif ($thumbnails->isNew()) $context->entity = $this->_generateThumbnails($file, $state->version ? $state->version : null);
         }
     }
 }
