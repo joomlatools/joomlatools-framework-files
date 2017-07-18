@@ -48,7 +48,7 @@ if (!Files) var Files = {};
                         }
                     }
 
-                    if (row.type == 'image' && Files.app.grid.layout == 'icons') {
+                    if (row.type == 'image') {
                         var image = row.element.getElement('img');
                         if (image) {
                             row.getThumbnail(function (response) {
