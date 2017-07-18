@@ -252,14 +252,14 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
 
     protected function _afterFetch(KModelContextInterface $context)
     {
-        $thumbnails = $context->entity;
-
-        $parameters = $this->getContainer()->getParameters();
-        $state      = $this->getState();
-        $file       = $this->_getSourceFile();
+        $file = $this->_getSourceFile();
 
         if ($file)
         {
+            $parameters = $this->getContainer()->getParameters();
+            $state      = $this->getState();
+            $thumbnails = $context->entity;
+
             if (($versions = $parameters->versions) && !$state->version)
             {
                 if ($thumbnails->count() !== count($versions)) {
