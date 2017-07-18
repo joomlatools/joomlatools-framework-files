@@ -595,7 +595,7 @@ Files.App = new Class({
             onAfterRender: function() {
                 this.setState(that.state.data);
 
-                if (that.grid && that.grid.layout === 'icons') {
+                if (that.grid) {
                     that.setThumbnails();
                 }
             },
