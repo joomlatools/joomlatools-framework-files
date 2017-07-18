@@ -17,7 +17,8 @@ if (!Files) var Files = {};
             multi_selection: true,
             url: Files.app.createRoute({
                 view: 'file',
-                plupload: 1
+                plupload: 1,
+                thumbnails: Files.app.options.thumbnails
             }),
             multipart_params: {
                 _action: 'add',
