@@ -25,4 +25,15 @@ class ComFilesModelEntityThumbnails extends ComFilesModelEntityFiles
 
         return $this;
     }
+
+    public function toArray()
+    {
+        $data = parent::toArray();
+
+        if ($this->count() == 1) {
+            $data = current($data); // Un-wrap the thumbnail;
+        }
+
+        return $data;
+    }
 }
