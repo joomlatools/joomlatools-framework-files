@@ -83,13 +83,9 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
 
                 $thumbnails = $model->fetch();
 
-                if (!$thumbnails->isNew())
-                {
-                    if ($thumbnails->count() == 1) {
-                        $thumbnails = $thumbnails->top(); // Un-wrap entity
-                    }
+                if ($thumbnails->isNew()) {
+                    $thumbnails = false;
                 }
-                else $thumbnails = false;
 
                 $entity->thumbnail = $thumbnails;
             }
