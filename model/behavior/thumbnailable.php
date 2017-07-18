@@ -21,7 +21,7 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
     {
         parent::__construct($config);
 
-        $this->getState()->insert('thumbnails', 'cmd');
+        $this->getState()->insert('thumbnails', 'raw');
     }
 
     public function isSupported()
@@ -33,6 +33,23 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
         }
 
         return $result;
+    }
+
+    /*
+     * Cast thumbnails state values representing booleans to booleans values
+     */
+    protected function _beforeReset(KModelContextInterface $context)
+    {
+        if (in_array('thumbnails', $context->modified->toArray()))
+        {
+            $state = $this->getState();
+
+            $value = $state->thumbnails;
+
+            if (in_array($value, array('false', 'true', '0', '1')) || is_numeric($value)) {
+                $state->offsetSet('thumbnails', (bool) $value);
+            }
+        }
     }
 
     public function getThumbnailsContainer()
@@ -71,7 +88,7 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
         {
             $model = $this->getObject('com:files.model.thumbnails')->container($container->slug);
 
-            if (!in_array($thumbnails, array('1', 'true'))) {
+            if ($thumbnails !== true) {
                 $model->version($thumbnails);
             }
 
