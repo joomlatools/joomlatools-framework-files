@@ -25,6 +25,17 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
         parent::_initialize($config);
     }
 
+    public function getHandle()
+    {
+        if ($version = $this->version) {
+            $handle = $version;
+        } else {
+            $handle = parent::getHandle();
+        }
+
+        return $handle;
+    }
+
     public function setAdapter()
     {
         $this->_adapter = $this->getContainer()->getAdapter('file', array(
