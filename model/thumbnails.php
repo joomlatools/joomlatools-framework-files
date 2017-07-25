@@ -207,42 +207,49 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         }
     }
 
-    protected function _generateThumbnails(ComFilesModelEntityNodes $files, $version = null)
+    protected function _generateThumbnails(KModelContextInterface $context)
     {
-        $thumbnails = $this->getObject('com:files.model.entity.thumbnails');
+        if ($context->entity && $context->entity instanceof ComFilesModelEntityThumbnails) {
+            $thumbnails = $context->entity;
+        } else {
+            $thumbnails = $this->getObject('com:files.model.entity.thumbnails');
+        }
 
-        foreach ($files as $file)
+        $file = $this->_getSourceFile();
+
+        if ($file && $file->isImage())
         {
-            if ($file->isImage())
+            $state     = $this->getState();
+            $container = $this->getContainer();
+
+            $model = $this->getObject('com:files.model.thumbnails')->container($container->slug)->source($file->uri);
+
+            if ($versions = $container->getParameters()->versions)
             {
-                $container = $this->getContainer();
+                $versions = array_keys($versions->toArray());
 
-                $model = $this->getObject('com:files.model.thumbnails')->container($container->slug)->source($file->uri);
+                if ($version = $state->version) {
+                    $versions = array_intersect($versions, (array) $version);
+                }
 
-                if ($versions = $container->getParameters()->versions)
+                foreach ($versions as $version)
                 {
-                    $versions = array_keys($versions->toArray());
+                    $thumbnail = $model->version($version)->create();
 
-                    if ($version) {
-                        $versions = array_intersect($versions, (array) $version);
-                    }
-
-                    foreach ($versions as $version)
+                    if (!$thumbnails->offsetExists($thumbnail))
                     {
-                        $thumbnail = $model->version($version)->create();
-
                         if ($thumbnail->save()) {
                             $thumbnails->insert($thumbnail);
                         }
                     }
                 }
-                else
-                {
-                    $thumbnail = $model->create();
+            }
+            else
+            {
+                $thumbnail = $model->create();
 
-                    if ($thumbnail->save()) {
-                        $thumbnails->insert($thumbnail);
-                    }
+                if ($thumbnail->save()) {
+                    $thumbnails->insert($thumbnail);
                 }
             }
         }
@@ -257,16 +264,16 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         if ($file)
         {
             $parameters = $this->getContainer()->getParameters();
-            $state      = $this->getState();
+            $state      = $context->getState();
             $thumbnails = $context->entity;
 
             if (($versions = $parameters->versions) && !$state->version)
             {
                 if ($thumbnails->count() !== count($versions)) {
-                    $context->entity = $this->_generateThumbnails($file); // Generate missing thumbnails
+                    $this->_generateThumbnails($context); // Generate missing thumbnails
                 }
             }
-            elseif ($thumbnails->isNew()) $context->entity = $this->_generateThumbnails($file, $state->version ? $state->version : null);
+            elseif ($thumbnails->isNew()) $this->_generateThumbnails($context);
         }
     }
 }
