@@ -22,7 +22,7 @@ defined('KOOWA') or die;
 
             // If they've played over 3 seconds, then consider it played
             // This is the same timing convention used by Facebook, Instagram, and Twitter
-            if (plyr.getCurrentTime() > 3.0) {
+            if (plyr !== 'undefined' && plyr.getCurrentTime() > 3.0) {
 
                 var media = $(plyr.getMedia());
 
@@ -31,7 +31,7 @@ defined('KOOWA') or die;
 
                 var title = media.data('title') || '';
                 var id = parseInt(media.data('media-id'), 10) || -1;
-                var label = id + ". " + title;
+                var label = "#" + id + " - " + title;
                 var time = Math.ceil(plyr.getCurrentTime() * 10) / 10;
 
                 //console.log(category, action, label, time);
