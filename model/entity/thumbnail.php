@@ -63,7 +63,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
             // Compare dimensions
             if ($current_size && ($current_size[0] != $dimension['width'] || $current_size[1] != $dimension['height'])) {
-                $result = $this->generate(true);
+                $result = $this->save();
             }
         }
 
