@@ -53,13 +53,13 @@ defined('KOOWA') or die; ?>
         <div class="k-card k-card--center">
             <div class="k-card__body">
                 [% if (is_image) { %]
-                [% if (thumbnail) { %]
+                [% if (file.thumbnail) { %]
                 <div class="k-card__section k-card__section--small-spacing">
                     <div class="k-ratio-block k-ratio-block--4-to-3">
                         <div class="k-loader"></div>
                         <div class="k-ratio-block__body">
                             <div class="k-ratio-block__centered">
-                                <img class="icon" src="?option=com_docman&amp;view=file&amp;routed=1&amp;name=antique.jpg&amp;container=docman-files" alt="[%=name%]" border="0" width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+                                <img class="icon" src="" alt="[%=name%]" border="0" width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
                             </div>
                         </div>
                     </div>

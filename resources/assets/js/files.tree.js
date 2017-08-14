@@ -34,9 +34,14 @@ if(!Files) var Files = {};
             return $.extend(true, {}, this.supr(), defaults); // get the defaults from the parent and merge them
         },
         filterData: function(response) {
+
+            var that = this;
+
             var data = response.entities,
-                parse = function(item, parent) {
-                    var path = (parent && parent.path) ? parent.path+'/' : '';
+                parse = function(item, parent)
+                {
+                    var path = (!parent && that.options.root_path) ? that.options.root_path + '/' : ''; // Prepend root folder if set
+                    path += (parent && parent.path) ? parent.path+'/' : '';
                     path += item.name;
 
                     //Parse attributes
@@ -73,13 +78,21 @@ if(!Files) var Files = {};
          * @returns data
          */
         parseData: function(list){
-            return [{
+            var tree = {
                 label: this.options.root.text,
                 url: '#',
                 children: list
-            }];
+            };
+
+            if (this.options.root_path)
+            {
+                tree.id = this.options.root_path;
+                tree.url = '#' + tree.id;
+            }
+
+            return [tree];
         },
-        fromUrl: function(url) {
+        fromUrl: function(url, callback) {
 
             var self = this;
             this.tree('loadDataFromUrl', url, null, function(response){
@@ -87,6 +100,10 @@ if(!Files) var Files = {};
                  * @TODO refactor chaining support to this.selectPath so it works even when the tree isn't loaded yet
                  */
                 if(Files.app && Files.app.hasOwnProperty('active')) self.selectPath(Files.app.active);
+
+                if (callback) {
+                    callback(response);
+                }
             });
 
         },

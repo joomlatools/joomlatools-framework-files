@@ -166,11 +166,17 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 
         $model->getState()->reset();
 
-        if (!$model->{$context->identity_column}($context->attachment->id)->count())
+        $attachment = $context->attachment;
+
+        if (!$model->{$context->identity_column}($attachment->id)->count())
         {
-            if (!$context->attachment->delete()) {
+            $file = $attachment->file;
+
+            if (!$attachment->delete()) {
                 throw new RuntimeException(('Attachment could not be deleted'));
             }
+
+            $this->getObject('com:files.controller.file')->container($file->container)->name($file->name)->folder($file->folder)->delete();
         }
 
         $this->_afterAttach($context);

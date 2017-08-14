@@ -74,14 +74,26 @@
                     return result;
                 };
 
+            var path = '', root_path = '';
 
-            var root = wrap(app, '<span class="k-icon-home" aria-hidden="true"></span><span class="k-visually-hidden">'+app.container.title+'</span>', '', false)
+            // Check if we are rendering sub-trees
+            if (app.options.root_path) {
+                path = root_path = app.options.root_path;
+            }
+
+            var root = wrap(app, '<span class="k-icon-home" aria-hidden="true"></span><span class="k-visually-hidden">'+app.container.title+'</span>', path, false)
                         .addClass('k-breadcrumb__home')
                         .getElement('a').getParent();
 
             list.adopt(root);
 
-            var folders = app.getPath().split('/'), path = '';
+            var base_path = app.getPath();
+
+            if (root_path) {
+                base_path = base_path.replace(root_path, '');
+            }
+
+            var folders = base_path.split('/'), path = root_path;
 
             folders.each(function(title){
                 if(title.trim()) {

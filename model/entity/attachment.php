@@ -25,28 +25,10 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
         return $this->getObject('com:files.model.files')
                     ->container($this->container_slug)
                     ->name($this->name)
+                    ->thumbnails(true)
                     ->fetch()
                     ->getIterator()
                     ->current();
-    }
-
-    /**
-     * Overridden for deleting the attached file.
-     */
-    public function delete()
-    {
-        $result = parent::delete();
-
-        if ($result)
-        {
-            $file = $this->file;
-
-            if (!$file->isNew()) {
-                $file->delete();
-            }
-        }
-
-        return $result;
     }
 
     public function toArray()
@@ -55,17 +37,8 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
 
         $file = $this->file;
 
-        if (!$file->isNew())
-        {
-            $data['file'] = $file->toArray();
-
-            if ($file->isThumbnail())
-            {
-                $thumbnail = $file->getThumbnail();
-                $data['thumbnail'] = !$thumbnail->isNew() ? $thumbnail->thumbnail : false;
-            }
-
-            $data['file'] = $file->toArray();
+        if (!$file->isNew()) {
+            $data['file']      = $file->toArray();
         }
 
         $data['created_on_timestamp']  = strtotime($this->created_on);

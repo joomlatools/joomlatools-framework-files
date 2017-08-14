@@ -8,22 +8,11 @@
  */
 
 /**
- * Version
+ * Thumbnail Local Adapter
  *
- * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @author  Arunas Mazeika <https://github.com/amazeika>
  * @package Koowa\Component\Files
  */
-class ComFilesVersion extends KObject
+class ComFilesAdapterThumbnail extends ComFilesAdapterFile
 {
-    const VERSION = '3.1.0';
-
-    /**
-     * Get the version
-     *
-     * @return string
-     */
-    public function getVersion()
-    {
-        return self::VERSION;
-    }
 }

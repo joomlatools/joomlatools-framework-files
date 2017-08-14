@@ -113,6 +113,10 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
                     $model->getState()->setValues($query->toArray());
                 }
 
+                if (!empty($query['root'])) {
+                    $this->getView()->setRootPath($query['root']);
+                }
+
                 $result = parent::_actionRender($context);
             }
         }

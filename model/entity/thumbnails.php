@@ -8,22 +8,21 @@
  */
 
 /**
- * Version
+ * Thumbnails Entity
  *
- * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
+ * @author  Arunas Mazeika <https://github.com/amazeika>
  * @package Koowa\Component\Files
  */
-class ComFilesVersion extends KObject
+class ComFilesModelEntityThumbnails extends ComFilesModelEntityFiles
 {
-    const VERSION = '3.1.0';
-
-    /**
-     * Get the version
-     *
-     * @return string
-     */
-    public function getVersion()
+    public function toArray()
     {
-        return self::VERSION;
+        $data = parent::toArray();
+
+        if ($this->count() == 1) {
+            $data = current($data); // Un-wrap the thumbnail;
+        }
+
+        return $data;
     }
 }

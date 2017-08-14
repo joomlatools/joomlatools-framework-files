@@ -64,12 +64,16 @@ Files.Attachments.App = new Class({
 
         if (this.url)
         {
+            var url = this.url;
+
+            url += '&_' + Date.now();
+
             that.grid.reset(); // Flush current content.
 
             this.grid.spin();
 
             new Request.JSON({
-                url: this.url,
+                url: url,
                 method: 'get',
                 onSuccess: function(response)
                 {
@@ -102,8 +106,8 @@ Files.Attachments.App = new Class({
 
                 copy.render('attachments').inject(that.preview);
 
-                if (copy.thumbnail) {
-                    that.preview.getElement('img').set('src', copy.thumbnail).show();
+                if (copy.file.thumbnail) {
+                    that.preview.getElement('img').set('src', Files.sitebase + '/' + copy.file.thumbnail.relative_path).show();
                 }
 
                 that.grid.selected = row.name;

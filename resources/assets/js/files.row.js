@@ -132,7 +132,7 @@ Files.Image = new Class({
 	getThumbnail: function(success, failure) {
 		var that = this,
 			request = new Request.JSON({
-				url: Files.app.createRoute({view: 'thumbnail', filename: that.name, folder: that.folder}),
+				url: Files.app.createRoute({view: 'file', name: that.name, folder: that.folder, thumbnails: Files.app.options.thumbnails}),
 				method: 'get',
 				onSuccess: function(response, responseText) {
 					if (typeof success == 'function') {

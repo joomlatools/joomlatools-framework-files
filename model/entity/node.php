@@ -153,6 +153,16 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
         return $this->getContainer()->fullpath . '/' . $this->destination_path;
     }
 
+    public function getPropertyUri()
+    {
+        return $this->getContainer()->slug . '://' . $this->path;
+    }
+
+    public function getPropertyRelativePath()
+    {
+        return $this->getContainer()->relative_path . '/' . $this->path;
+    }
+
     public function getPropertyAdapter()
     {
         return $this->_adapter;
@@ -221,15 +231,23 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
     {
         $data = parent::toArray();
 
+        foreach ($data as $key => $value)
+        {
+            if ($value instanceof KModelEntityAbstract || $value instanceof KModelEntityComposite) {
+                $data[$key] = $value->toArray();
+            }
+        }
+
         unset($data['csrf_token']);
         unset($data['action']);
         unset($data['option']);
         unset($data['format']);
         unset($data['view']);
 
-		$data['container'] = $this->getContainer()->slug;
-		$data['type']      = $this->getIdentifier()->name;
-		$data['path']      = $this->path;
+        $data['container'] = $this->getContainer()->slug;
+        $data['type']      = $this->getIdentifier()->name;
+        $data['path']      = $this->path;
+        $data['uri']       = $this->uri;
 
         return $data;
     }
