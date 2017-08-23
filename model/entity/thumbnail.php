@@ -15,6 +15,27 @@
  */
 class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 {
+    /**
+     * First calls the parent to finish object constructing before setting data.
+     *
+     * This is because setProperties calls setAdapter which might call save to generate a thumbnail.
+     * However in the normal construction flow command mixin is not mixed in yet.
+     * So invokeCommand method does not exist.
+     *
+     * @param KObjectConfig $config
+     */
+    public function __construct(KObjectConfig $config)
+    {
+        $data = $config->data;
+        unset($config->data);
+
+        parent::__construct($config);
+
+        if (isset($data)) {
+            $this->setProperties($data->toArray(), $this->isNew());
+        }
+    }
+
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
