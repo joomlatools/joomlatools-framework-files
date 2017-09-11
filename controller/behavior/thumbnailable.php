@@ -137,6 +137,10 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
                     $thumbnail = $entity->getThumbnail();
                 }
 
+                if ($thumbnail->isNew()) {
+                    $thumbnail = false;
+                }
+
                 $entity->thumbnail = $thumbnail;
             }
         }
