@@ -36,8 +36,10 @@ if (metadata.image) {
     <dl>
         <dt><?= translate('Name'); ?></dt>
         <dd class="k-ellipsis"><span class="k-ellipsis__item">[%=name%]</span></dd>
+        [% if (width && height) { %]
         <dt><?= translate('Dimensions'); ?></dt>
         <dd>[%=width%] x [%=height%]</dd>
+        [% } %]
         <dt><?= translate('Size'); ?></dt>
         <dd>[%=size.humanize()%]</dd>
     </dl>
