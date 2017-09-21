@@ -125,7 +125,17 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
 
         if ($entity instanceof ComFilesModelEntityFile && $entity->isThumbnailable() && $state->thumbnails)
         {
-            $parameters = $this->_getContainer()->getParameters();
+            $container = $this->_getContainer();
+
+            // Make sure to cleanup previous thumbnails for new files (specially if overridding)
+            $thumbnails = $this->getObject('com:files.model.thumbnails', array('auto_generate' => false))
+                               ->container($container->slug)->source($entity->uri)->fetch();
+
+            if (!$thumbnails->isNew()) {
+                $thumbnails->delete();
+            }
+
+            $parameters = $container->getParameters();
 
             if ($versions = $parameters->versions)
             {
