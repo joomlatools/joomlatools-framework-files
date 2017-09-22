@@ -115,15 +115,11 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         return $entity;
     }
 
-    /*
-     * Makes sure that thumbnails are pushed (if needed) after creating a new entity.
-     */
-    protected function _beforeRender(KControllerContextInterface $context)
+    protected function _afterAdd(KControllerContextInterface $context)
     {
-        $state  = $this->getModel()->getState();
         $entity = $context->result;
 
-        if ($entity instanceof ComFilesModelEntityFile && $entity->isThumbnailable() && $state->thumbnails)
+        if ($entity instanceof ComFilesModelEntityFile)
         {
             $container = $this->_getContainer();
 
@@ -134,8 +130,20 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
             if (!$thumbnails->isNew()) {
                 $thumbnails->delete();
             }
+        }
+    }
 
-            $parameters = $container->getParameters();
+    /*
+     * Makes sure that thumbnails are pushed (if needed) after creating a new entity.
+     */
+    protected function _beforeRender(KControllerContextInterface $context)
+    {
+        $state  = $this->getModel()->getState();
+        $entity = $context->result;
+
+        if ($entity instanceof ComFilesModelEntityFile && $entity->isThumbnailable() && $state->thumbnails)
+        {
+            $parameters = $this->_getContainer()->getParameters();
 
             if ($versions = $parameters->versions)
             {
