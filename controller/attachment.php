@@ -126,6 +126,8 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         if (!$relation->save()) {
             throw new RuntimeException('Could not attach');
         }
+
+        $context->relation = $relation;
     }
 
     protected function _afterAttach(KControllerContextInterface $context)
