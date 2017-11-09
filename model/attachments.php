@@ -63,6 +63,7 @@ class ComFilesModelAttachments extends KModelDatabase
     {
         $context->entity->append(array(
             'container' => $context->state->container,
+            'path'      => '.'
         ));
 
         return parent::_actionCreate($context);
