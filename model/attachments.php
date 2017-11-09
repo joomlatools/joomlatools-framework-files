@@ -15,6 +15,16 @@
  */
 class ComFilesModelAttachments extends KModelDatabase
 {
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->getState()
+             ->insert('name', 'string', null, true, array('container', 'path'))
+             ->insert('container', 'int', null, true, array('name', 'path'))
+             ->insert('path', 'string', null, true, array('name', 'container'));
+    }
+
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array('behaviors' => array('attachable')));
@@ -33,27 +43,6 @@ class ComFilesModelAttachments extends KModelDatabase
         parent::_buildQueryJoins($query);
 
         $query->join('files_containers AS containers', 'containers.files_container_id = tbl.files_container_id', 'INNER');
-    }
-
-    protected function _buildQueryWhere(KDatabaseQueryInterface $query)
-    {
-        parent::_buildQueryWhere($query);
-
-        $state = $this->getState();
-
-        if (!$state->isUnique())
-        {
-            if ($container = $state->container) {
-                $query->where('tbl.files_container_id = :container');
-            }
-
-            if ($name = $state->name)
-            {
-                $query->where('tbl.name = :name');
-            }
-
-            $query->bind(array('container' => $container, 'name' => $name));
-        }
     }
 
     /**
