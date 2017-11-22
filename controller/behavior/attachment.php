@@ -65,9 +65,10 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
                 $controller->getRequest()->getQuery()->set('container', $container->id);
                 $controller->getModel()->container($container->id);
 
-                $context->attachment = $controller->add(array('name' => $entity->name, 'path' => $folder));
+                $attachment = $controller->add(array('name' => $entity->name, 'path' => $folder));
             }
-            else $context->attachment = $attachment;
+
+            $context->attachment = $attachment;
         }
     }
 
