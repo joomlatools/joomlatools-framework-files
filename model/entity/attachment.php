@@ -22,21 +22,36 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
      */
     public function getPropertyFile()
     {
-        return $this->getObject('com:files.model.files')
-                    ->container($this->container_slug)
-                    ->name($this->name)
-                    ->thumbnails(true)
-                    ->fetch()
-                    ->getIterator()
-                    ->current();
+        $file = null;
+
+        if (!$this->isNew())
+        {
+            if (!$this->container_slug)
+            {
+                $container = $this->getObject('com:files.model.containers')->id($this->container)->fetch();
+
+                if ($container->isNew()) throw new RuntimeException('Container does not exists');
+
+                $this->container_slug = $container->slug;
+            }
+
+            $file = $this->getObject('com:files.model.files')
+                         ->container($this->container_slug)
+                         ->name($this->name)
+                         ->thumbnails(true)
+                         ->fetch()
+                         ->getIterator()
+                         ->current();
+        }
+
+        return $file;
     }
 
     public function delete()
     {
-        if ($result = parent::delete())
-        {
-            $file = $this->file;
+        $file = $this->file;
 
+        if ($result = parent::delete()) {
             if (!$file->isNew()) $file->delete();
         }
 
@@ -49,7 +64,7 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
 
         $file = $this->file;
 
-        if (!$file->isNew()) {
+        if ($file && !$file->isNew()) {
             $data['file']      = $file->toArray();
         }
 
