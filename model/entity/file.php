@@ -198,6 +198,10 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
 			$data['type'] = 'image';
 		}
 
+		if (isset($data['attachment'])) {
+            $data['attachment'] = $data['attachment']->toArray();
+        }
+
         return $data;
     }
 
