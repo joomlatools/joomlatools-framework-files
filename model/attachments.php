@@ -15,34 +15,115 @@
  */
 class ComFilesModelAttachments extends KModelDatabase
 {
+    protected $_files_model;
+
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
-        $this->getState()
-             ->insert('name', 'string', null, true, array('container', 'path'))
-             ->insert('container', 'int', null, true, array('name', 'path'))
-             ->insert('path', 'string', null, true, array('name', 'container'));
+        $this->getState()->insert('file', 'int');
+
+        $this->_files_model = $config->files_model;
     }
 
     protected function _initialize(KObjectConfig $config)
     {
-        $config->append(array('behaviors' => array('attachable')));
+        $config->append(array('files_model' => 'attachments_files'));
+
         parent::_initialize($config);
+    }
+
+    protected function _buildQueryWhere(KDatabaseQueryInterface $query)
+    {
+        parent::_buildQueryWhere($query);
+
+        $state = $this->getState();
+
+        if (!$state->isUnique())
+        {
+            if ($table = $state->table) {
+                $query->where('table = :table');
+            }
+
+            if ($row = $state->row) {
+                $query->where('row = :row');
+            }
+
+            $column = $this->getConfig()->relation_column;
+
+            if ($id = $state->{$column}) {
+                $query->where("{$column} = :id");
+            }
+
+            $query->bind(array('table' => $table, 'row' => $row, 'id' => $id));
+        }
     }
 
     protected function _buildQueryColumns(KDatabaseQueryInterface $query)
     {
-        parent::_buildQueryColumns($query);
+        $query->columns(array(
+            'files.*',
+            'attached_by'      => 'tbl.created_by',
+            'attached_on'      => 'tbl.created_on',
+            'attached_by_name' => 'users.name'
+        ));
 
-        $query->columns(array('tbl.*', 'container_slug' => 'containers.slug'));
+        parent::_buildQueryColumns($query);
     }
 
     protected function _buildQueryJoins(KDatabaseQueryInterface $query)
     {
-        parent::_buildQueryJoins($query);
+        $table = $this->getFilesModel()->getTable();
 
-        $query->join('files_containers AS containers', 'containers.files_container_id = tbl.files_container_id', 'INNER');
+        // Join files table
+        $query->join(sprintf('%s AS files', $table->getName()), sprintf('tbl.%1$s = files.%1$s', $table->getIdentityColumn()), 'INNER');
+
+        // Join users table
+        $query->join('users AS users', 'tbl.created_by = users.id', 'LEFT');
+
+        parent::_buildQueryJoins($query);
+    }
+
+    public function getFilesModel()
+    {
+        $model = $this->_files_model;
+
+        if (!$model instanceof KModelDatabase)
+        {
+            if(is_string($model) && strpos($model, '.') === false )
+            {
+                $identifier         = $this->getIdentifier()->toArray();
+                $identifier['path'] = array('model');
+                $identifier['name'] = KStringInflector::pluralize(KStringInflector::underscore($model));
+
+                $model = $this->getIdentifier($identifier);
+            }
+
+            $model = $this->getObject($model);
+
+            if (!$model instanceof KModelDatabase) {
+                throw new UnexpectedValueException('Identifier: ' . $model . ' is not a database model identifier');
+            }
+
+            $state = $this->getState();
+
+            if ($file = $state->file) {
+                $model->id($file);
+            }
+
+            $this->_files_model = $model;
+        }
+
+        return $model;
+    }
+
+    protected function _afterFetch(KModelContext $context)
+    {
+        $identifier = $this->getFilesModel()->getIdentifier();
+
+        foreach ($context->entity as $entity) {
+            $entity->files_model = $identifier;
+        }
     }
 
     /**
@@ -51,8 +132,7 @@ class ComFilesModelAttachments extends KModelDatabase
     protected function _actionCreate(KModelContext $context)
     {
         $context->entity->append(array(
-            'container' => $context->state->container,
-            'path'      => '.'
+            'files_model' => $this->getFilesModel()->getIdentifier(),
         ));
 
         return parent::_actionCreate($context);
