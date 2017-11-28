@@ -24,38 +24,16 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
     {
         $file = null;
 
-        if (!$this->isNew())
+        if (!$this->isNew() && ($model = $this->files_model))
         {
-            if (!$this->container_slug)
-            {
-                $container = $this->getObject('com:files.model.containers')->id($this->container)->fetch();
+            $model = $this->getObject($this->files_model);
 
-                if ($container->isNew()) throw new RuntimeException('Container does not exists');
+            $key = $model->getTable()->getIdentityColumn();
 
-                $this->container_slug = $container->slug;
-            }
-
-            $file = $this->getObject('com:files.model.files')
-                         ->container($this->container_slug)
-                         ->name($this->name)
-                         ->thumbnails(true)
-                         ->fetch()
-                         ->getIterator()
-                         ->current();
+            $file = $model->id($this->{$key})->fetch()->getIterator()->current();
         }
 
         return $file;
-    }
-
-    public function delete()
-    {
-        $file = $this->file;
-
-        if ($result = parent::delete()) {
-            if (!$file->isNew()) $file->delete();
-        }
-
-        return $result;
     }
 
     public function toArray()
@@ -65,7 +43,7 @@ class ComFilesModelEntityAttachment extends KModelEntityRow
         $file = $this->file;
 
         if ($file && !$file->isNew()) {
-            $data['file']      = $file->toArray();
+            $data['file'] = $file->toArray();
         }
 
         $data['created_on_timestamp']  = strtotime($this->created_on);
