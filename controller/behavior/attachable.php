@@ -26,7 +26,7 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
     {
         parent::__construct($config);
 
-        $this->_controller  = $config->controller;
+        $this->_controller = $config->controller;
     }
 
     /**
@@ -56,7 +56,7 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
      */
     protected function _actionAttach(KControllerContextInterface $context)
     {
-        $this->_getController()->attach($this->_getData($context));
+        $this->_getController()->add($this->_getData($context));
     }
 
     protected function _afterAttach(KControllerContextInterface $context)
@@ -78,7 +78,7 @@ class ComFilesControllerBehaviorAttachable extends KControllerBehaviorAbstract
      */
     protected function _actionDetach(KControllerContextInterface $context)
     {
-        $this->_getController()->detach($this->_getData($context));
+        $this->_getController()->delete($this->_getData($context));
     }
 
     protected function _afterDetach(KControllerContextInterface $context)

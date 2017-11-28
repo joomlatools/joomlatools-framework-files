@@ -16,7 +16,7 @@
 class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
 {
     /**
-     * Attachments Controller.
+     * Attachment Controller.
      *
      * @var KControllerInterface|null
      */
@@ -39,7 +39,7 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
     /**
      * After Add command handler.
      *
-     * Creates an attachment entity.
+     * Creates an attachments file entity.
      *
      * @param KControllerContextInterface $context The context object.
      */
@@ -49,26 +49,24 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
 
         if ($entity instanceof ComFilesModelEntityNode && $entity->getStatus() !== KModelEntityInterface::STATUS_FAILED)
         {
-            $controller = $this->_getController();
-            $container  = $entity->getContainer();
+            $model     = $this->_getController()->getModel()->getFilesModel();
+            $container = $entity->getContainer();
 
             $folder = $entity->folder ?: '.';
 
-            $attachment = $controller->getModel()
-                                     ->name($entity->name)
-                                     ->path($folder)
-                                     ->container($container->id)
-                                     ->fetch();
+            $file = $model
+                ->name($entity->name)
+                ->path($folder)
+                ->container($container->id)
+                ->fetch();
 
-            if ($attachment->isNew())
+            if ($file->isNew())
             {
-                $controller->getRequest()->getQuery()->set('container', $container->id);
-                $controller->getModel()->container($container->id);
-
-                $attachment = $controller->add(array('name' => $entity->name, 'path' => $folder));
+                $file = $model->create(array('name' => $entity->name, 'path' => $folder));
+                $file->save();
             }
 
-            $context->attachment = $attachment;
+            $context->file = $file;
         }
     }
 

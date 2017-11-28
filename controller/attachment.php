@@ -20,17 +20,13 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         if ($this->getIdentifier()->package != 'files')
         {
             $aliases = array(
-                'com:files.model.attachments'                => array(
+                'com:files.model.attachments'       => array(
                     'path' => array('model'),
                     'name' => 'attachments'
                 ),
-                'com:files.model.behavior.attachable'        => array(
-                    'path' => array('model', 'behavior'),
-                    'name' => 'attachable'
-                ),
-                'com:files.controller.permission.attachment' => array(
-                    'path' => array('controller', 'permission'),
-                    'name' => 'attachment'
+                'com:files.model.attachments_files' => array(
+                    'path' => array('model'),
+                    'name' => 'attachments_files'
                 )
             );
 
@@ -62,72 +58,61 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 
         $view->getConfig()->append(array(
             'config' => array(
-                'can_attach' => $this->canAttach(),
-                'can_detach' => $this->canDetach()
+                'can_attach' => $this->canAdd(),
+                'can_detach' => $this->canDelete()
             )
         ));
     }
 
     /**
-     * Before Attach command handler.
+     * Before add command handler.
      *
      * Makes sure that there's an attachment and that this attachment exists.
      *
      * @param KControllerContextInterface $context The context object.
      */
-    protected function _beforeAttach(KControllerContextInterface $context)
+    protected function _beforeAdd(KControllerContextInterface $context)
     {
-        $model = $this->getModel();
+        $model       = $this->getModel();
+        $files_model = $model->getFilesModel();
 
-        $column = $model->getTable()->getIdentityColumn();
-
-        $context->identity_column = $column;
-
-        if (!$context->attachment) {
-            $context->attachment = $this->getModel()->fetch();
+        if (!$context->file) {
+            $context->file = $files_model->fetch();
         }
 
-        if ($context->attachment->isNew())
+        if ($context->file instanceof ComFilesModelEntityFile)
         {
-            $state = $model->getState();
+            $file = $context->file;
 
-            $container = $this->getObject('com:files.model.containers')->id($state->container)->fetch();
-
-            $file = $this->getObject('com:files.model.files')->container($container->slug)->name($state->name)->fetch();
-
-            // Check if a file in the given container exists.
+            // Check if an attachment file in the given container exists
             if (!$file->isNew())
             {
-                // Create the attachment entry.
-                $controller = $this->getObject($this->getIdentifier());
-                $controller->getRequest()->getQuery()->container = $this->getRequest()->getQuery()->container;
-                $context->attachment = $controller->add(array('name' => $model->getState()->name));
+                // Create the attachment file entry
+                $context->file = $files_model->create(array(
+                    'container' => $file->container->id,
+                    'name'      => $file->name,
+                    'path'      => $file->folder
+                ));
+
+                $context->file->save();
             }
-            else throw new RuntimeException('Attachment does not exists');
+            else throw new RuntimeException('Attachment file does not exists');
         }
     }
 
     /**
      * Attach action.
      *
-     * Creates a relationship between a resource and an existing attachment.
+     * Creates a relationship between a resource and an existing attachment file.
      *
      * @param KControllerContextInterface $context The context object.
      */
-    protected function _actionAttach(KControllerContextInterface $context)
+    protected function _actionAdd(KControllerContextInterface $context)
     {
-        $model = $this->getModel()->getRelationsModel();
-        $data  = $context->getRequest()->getData();
+        // Set the file id within the attachemnt entry
+        $context->getRequest()->getData()->{$context->file->getTable()->getIdentityColumn()} = $context->file->id;
 
-        $data[$context->identity_column] = $context->attachment->id;
-
-        $relation = $model->create($data->toArray());
-
-        if (!$relation->save()) {
-            throw new RuntimeException('Could not attach');
-        }
-
-        $context->relation = $relation;
+        return parent::_actionAdd($context);
     }
 
     protected function _afterAttach(KControllerContextInterface $context)
@@ -135,45 +120,23 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         $context->getResponse()->setStatus(KHttpResponse::NO_CONTENT);
     }
 
-    protected function _beforeDetach(KControllerContextInterface $context)
+    protected function _beforeDelete(KControllerContextInterface $context)
     {
-        $this->_beforeAttach($context);
+        $context->file = $this->getModel()->fetch()->file;
     }
 
-    /**
-     * Detach action.
-     *
-     * Removes a relationship between a resource and an existing attachment.
-     *
-     * @param KControllerContextInterface $context The context object.
-     */
-    protected function _actionDetach(KControllerContextInterface $context)
+    protected function _afterDelete(KControllerContextInterface $context)
     {
-        $model = $this->getModel()->getRelationsModel();
-
-        $relation = $model->{$context->identity_column}($context->attachment->id)
-                          ->setState($this->getRequest()->getData()->toArray())->fetch();
-
-        if (!$relation->isNew())
-        {
-            if (!$relation->delete()) {
-                throw new RuntimeException('Could not detach');
-            }
-        }
-    }
-
-    protected function _afterDetach(KControllerContextInterface $context)
-    {
-        $model = $this->getModel()->getRelationsModel();
+        $model = $this->getModel();
 
         $model->getState()->reset();
 
-        $attachment = $context->attachment;
+        $file = $context->file;
 
-        if (!$model->{$context->identity_column}($attachment->id)->count())
+        if (!$model->{$file->getTable()->getPrimaryKey()}($file->id)->count())
         {
-            if (!$attachment->delete()) {
-                throw new RuntimeException(('Attachment could not be deleted'));
+            if (!$file->delete()) {
+                throw new RuntimeException(('Attachment file could not be deleted'));
             }
         }
 
