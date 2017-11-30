@@ -81,8 +81,10 @@ class ComFilesModelEntityAttachments_file extends KModelEntityRow
     {
         $data = parent::toArray();
 
-        if ($storage = $this->storage) {
-            $data['storage'] = $storage->toArray();
+        if ($storage = $this->storage)
+        {
+            $data['storage']                  = $storage->toArray();
+            $data['storage']['relative_path'] = $storage->relative_path;
         }
 
         return $data;
