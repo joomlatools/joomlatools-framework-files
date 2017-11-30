@@ -51,7 +51,7 @@ $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
 <ktml:script src="assets://files/js/uploader/plupload.dev.js" />-->
 <ktml:script src="assets://files/js/uploader/plupload.full.min.js" />
 <ktml:script src="assets://files/js/uploader/jquery-ui.js" />
-<ktml:script src="assets://files/js/uploader/dot.js" />
+<ktml:script src="assets://files/js/dot.js" />
 <ktml:script src="assets://files/js/uploader/koowa.uploader.js" />
 <ktml:script src="assets://files/js/uploader/koowa.uploader.overwritable.js" />
 
