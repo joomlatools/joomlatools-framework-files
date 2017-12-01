@@ -15,8 +15,6 @@
  */
 class ComFilesAdapterFile extends ComFilesAdapterAbstract
 {
-    public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'xbm', 'bmp');
-
     protected $_metadata;
 
 	public function getMetadata()
@@ -37,7 +35,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                         'modified_date' => $this->_handle->getMTime()
                     );
 
-                    if (in_array($this->_metadata['extension'], self::$image_extensions))
+                    if (in_array($this->_metadata['extension'], ComFilesModelEntityFile::$image_extensions))
                     {
                         // getimagesize is not safe to call with large files
                         if ($this->_metadata['size'] < 1048576*10 && $image_size = $this->getImageSize()) {
