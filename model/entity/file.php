@@ -214,6 +214,16 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
 		return in_array(strtolower($this->extension), self::$image_extensions);
 	}
 
+	public function isVideo()
+    {
+        return in_array(strtolower($this->extension), self::$video_extensions);
+    }
+
+    public function isAudio()
+    {
+        return in_array(strtolower($this->extension), self::$audio_extensions);
+    }
+
     /**
      * Invoke a command handler
      *
