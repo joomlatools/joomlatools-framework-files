@@ -10,10 +10,8 @@ defined('KOOWA') or die; ?>
 
 <div class="files_player" style="clear: both">
     <video
-        data-media-id="0"
-        data-title="<?= $name ?>"
-        data-category="<?= $category ?>"
-        controls>
-        <source src="<?= $url ?>" type="video/<?= $extension ?>" />
+        <?= implode(', ', $attributes) ?>
+            controls>
+        <source src="<?= $url ?>" type="video/<?= escape($file->extension) ?>" />
     </video>
 </div>
