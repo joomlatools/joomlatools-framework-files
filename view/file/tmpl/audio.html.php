@@ -12,6 +12,6 @@ defined('KOOWA') or die; ?>
     <audio
         <?= implode(', ', $attributes) ?>
         controls>
-        <source src="<?= $url ?>" type="audio/<?= escape($file->getExtension()) ?>" />
+        <source src="<?= $url ?>" type="audio/<?= escape($file->extension) ?>" />
     </audio>
 </div>
