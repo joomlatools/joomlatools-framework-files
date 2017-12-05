@@ -21,7 +21,9 @@ class ComFilesModelAttachments extends KModelDatabase
     {
         parent::__construct($config);
 
-        $this->getState()->insert('file', 'int');
+        $this->getState()->insert('file', 'int')
+             ->insert('path', 'string')
+             ->insert('name', 'string');
 
         $this->_files_model = $config->files_model;
     }
@@ -42,20 +44,24 @@ class ComFilesModelAttachments extends KModelDatabase
         if (!$state->isUnique())
         {
             if ($table = $state->table) {
-                $query->where('table = :table');
+                $query->where('tbl.table = :table')->bind(array('table' => $table));
             }
 
             if ($row = $state->row) {
-                $query->where('row = :row');
+                $query->where('tbl.row = :row')->bind(array('row' => $row));
             }
 
-            $column = $this->getConfig()->relation_column;
-
-            if ($id = $state->{$column}) {
-                $query->where("{$column} = :id");
+            if ($type = $state->type) {
+                $query->where('tbl.type = :type')->bind(array('type' => $type));
             }
 
-            $query->bind(array('table' => $table, 'row' => $row, 'id' => $id));
+            if ($path = $state->path) {
+                $query->where('files.path = :path')->bind(array('path' => $path));
+            }
+
+            if ($name = $state->name) {
+                $query->where('files.name = :name')->bind(array('name' => $name));
+            }
         }
     }
 
