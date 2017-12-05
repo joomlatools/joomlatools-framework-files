@@ -13,7 +13,7 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesViewFilesHtml extends ComKoowaViewHtml
+class ComFilesViewFilesHtml extends ComFilesViewHtml
 {
     /**
      * @var string The root path
