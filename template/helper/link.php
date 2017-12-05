@@ -90,6 +90,7 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
 
         $config->append(array(
             'layout'     => 'com:files.file.image.html',
+            'thumbnails' => false,
             'url'        => sprintf('files://%s/%s', $file->container, $file->path),
             'attributes' => array()
         ));
@@ -98,9 +99,9 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
 
         if ($file->isImage())
         {
-            $thumbnails = $file->thumbnail;
+            $attributes = array();
 
-            if ($thumbnails)
+            if ($config->thumbnails && ($thumbnails = $file->getThumbnail()))
             {
                 $srcset = array();
 
@@ -112,9 +113,9 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
                     {
                         if ($thumbnail = $thumbnails->find($label))
                         {
-                            $src = $thumbnail->url ? $thumbnail->url : $thumbnail->path;
+                            $src = $thumbnail->url ? $thumbnail->url : sprintf('files://%s/%s', $thumbnail->container, $thumbnail->path);
 
-                            $srcset[$config->dimension->width] = sprintf('%s %sw', $src, $settings->dimension->width);
+                            $srcset[$settings->dimension->width] = sprintf('%s %sw', $src, $settings->dimension->width);
                         }
                     }
 
@@ -173,6 +174,27 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
         }
 
         return $result;
+    }
+
+    public function token($config = array())
+    {
+        $config = new KObjectConfig($config);
+
+        $config->append(array('name' => 'exp_token', 'expire' => '+24 hours', 'secret' => ''));
+
+        if (!$config->url) throw new InvalidArgumentException('URL missing in configuration object');
+
+        $token = $this->getObject('lib:http.token');
+
+        $date = $this->getObject('date');
+
+        $token->setExpireTime($date->modify($config->expire));
+
+        $url = $this->getObject('lib:http.url', array('url' => $config->url));
+
+        $url->setQuery(array($config->name, $token->sign($config->secret)));
+
+        return $url->toString();
     }
 
     protected function _render($layout, $config = array())
