@@ -2075,6 +2075,10 @@ Files.FileTypes.map = {
 	'archive': ['7z','gz','rar','tar','zip']
 };
 
+Files.getExtension = function(filename) {
+    return filename.split('.').pop();
+}
+
 Files.getFileType = function(extension) {
 	var type = 'document',
         map = Files.FileTypes.map;
