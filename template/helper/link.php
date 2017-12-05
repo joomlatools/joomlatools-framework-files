@@ -64,7 +64,7 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
             'url'        => sprintf('files://%s/%s', $file->container, $file->path),
             'attributes' => array(
                 'data-category' => $this->getIdentifier()->getPackage(),
-                'data-title'    => $file->getName(),
+                'data-title'    => $file->name,
                 'data-media-id' => 0
             )
         ));
