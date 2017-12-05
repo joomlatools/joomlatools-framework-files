@@ -15,14 +15,6 @@
  */
 class ComFilesModelEntityContainer extends KModelEntityRow
 {
-    public function getPropertyRelativePath()
-    {
-        $path = $this->fullpath;
-        $root = str_replace('\\', '/', Koowa::getInstance()->getRootPath());
-
-        return str_replace($root.'/', '', $path);
-    }
-
     public function getPropertyFullpath()
     {
         $result = $this->getProperty('path');
