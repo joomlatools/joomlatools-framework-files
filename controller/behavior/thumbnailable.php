@@ -145,6 +145,7 @@ class ComFilesControllerBehaviorThumbnailable extends KControllerBehaviorAbstrac
         {
             $parameters = $this->_getContainer()->getParameters();
 
+            // TODO I'm bypassing non versioned thumbnails containers here!!! FIX IT!
             if ($versions = $parameters->versions)
             {
                 $versions = array_keys($versions->toArray());
