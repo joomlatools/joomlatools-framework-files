@@ -73,30 +73,13 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
      */
     protected function _beforeAdd(KControllerContextInterface $context)
     {
-        $model       = $this->getModel();
-        $files_model = $model->getFilesModel();
-
         if (!$context->file) {
-            $context->file = $files_model->fetch();
+            $context->file = $this->getModel()->getFilesModel()->fetch()->getIterator()->current();
         }
 
-        if ($context->file instanceof ComFilesModelEntityFile)
-        {
-            $file = $context->file;
 
-            // Check if an attachment file in the given container exists
-            if (!$file->isNew())
-            {
-                // Create the attachment file entry
-                $context->file = $files_model->create(array(
-                    'container' => $file->container->id,
-                    'name'      => $file->name,
-                    'path'      => $file->folder
-                ));
-
-                $context->file->save();
-            }
-            else throw new RuntimeException('Attachment file does not exists');
+        if (!$context->file instanceof ComFilesModelEntityAttachments_file) {
+            throw new RuntimeException('Attachment file missing');
         }
     }
 
@@ -109,7 +92,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
      */
     protected function _actionAdd(KControllerContextInterface $context)
     {
-        // Set the file id within the attachemnt entry
+        // Set the file id within the attachment entry
         $context->getRequest()->getData()->{$context->file->getTable()->getIdentityColumn()} = $context->file->id;
 
         return parent::_actionAdd($context);
