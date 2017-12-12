@@ -21,7 +21,7 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
     {
         parent::__construct($config);
 
-        $this->getState()->insert('thumbnails', 'raw');
+        $this->getState()->insert('thumbnails', 'raw', null, false, array(), true);
     }
 
     public function isSupported()
