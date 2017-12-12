@@ -134,7 +134,7 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
 
         $file = $context->file;
 
-        if (!$model->{$file->getTable()->getPrimaryKey()}($file->id)->count())
+        if (!$model->file($file->id)->count())
         {
             if (!$file->delete()) {
                 throw new RuntimeException(('Attachment file could not be deleted'));
