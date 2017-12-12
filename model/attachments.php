@@ -62,6 +62,11 @@ class ComFilesModelAttachments extends KModelDatabase
             if ($name = $state->name) {
                 $query->where('files.name = :name')->bind(array('name' => $name));
             }
+
+            if ($file = $state->file) {
+                $query->where(sprintf('tbl.%s = :file', $this->getFilesModel()->getTable()->getIdentityColumn()))
+                      ->bind(array('file' => $file));
+            }
         }
     }
 
