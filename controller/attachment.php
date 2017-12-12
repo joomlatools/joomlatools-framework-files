@@ -87,7 +87,6 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
             // Check if an attachment file in the given container exists
             if (!$file->isNew())
             {
-                // TODO: we need to check if the file entry already exists, it might for failed attach actions
                 // Create the attachment file entry
                 $context->file = $files_model->create(array(
                     'container' => $file->container->id,
