@@ -1,0 +1,101 @@
+.k-ui-namespace .koowa_media--gallery .koowa_media_wrapper { overflow: visible; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents { padding: 0; border: none; background: transparent; display: block; margin-left: -8px; margin-right: -8px; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents, .k-ui-namespace .koowa_media--gallery .koowa_media_contents * { box-sizing: border-box; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-2, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-3, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-4, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-5, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-6, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-7, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-8, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-9, .k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-10 { max-width: none; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-2 .koowa_media__item { width: 50%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-3 .koowa_media__item { width: 33.3333333333%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-4 .koowa_media__item { width: 25%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-5 .koowa_media__item { width: 20%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-6 .koowa_media__item { width: 16.6666666667%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-7 .koowa_media__item { width: 14.28%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-8 .koowa_media__item { width: 12.5%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-9 .koowa_media__item { width: 11.1111111111%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-10 .koowa_media__item { width: 10%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-11 .koowa_media__item { width: 9.0909090909%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-12 .koowa_media__item { width: 8.3333333333%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-13 .koowa_media__item { width: 7.6923076923%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-14 .koowa_media__item { width: 7.1428571429%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-15 .koowa_media__item { width: 6.6666666667%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-16 .koowa_media__item { width: 6.25%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-17 .koowa_media__item { width: 5.8823529412%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-18 .koowa_media__item { width: 5.5555555556%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-19 .koowa_media__item { width: 5.2631578947%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media_contents.columns-20 .koowa_media__item { width: 5%; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item { margin: 0; display: inline-block; vertical-align: middle; width: 220px; max-width: 100%; padding: 0 8px 16px; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item__content { display: block; max-width: 100%; border-radius: 4px; background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.01) 0%, rgba(0, 0, 0, 0.05) 100%); border: 1px solid rgba(0, 0, 0, 0.1); }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item__content.selected { background-color: rgba(0, 0, 0, 0.05); border-color: #08c; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item__content .add-on { height: auto; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item__link { display: inline-block; vertical-align: middle; width: 100%; padding: 8px; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_header { margin: 0; padding: 0; white-space: normal; word-wrap: break-word; overflow-wrap: break-word; -webkit-hyphens: none; -moz-hyphens: none; -ms-hyphens: none; hyphens: none; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item__thumbnail { min-width: 100%; text-align: center; white-space: nowrap; font-size: 0; padding: 0; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item__thumbnail:before { content: " "; display: inline-block; height: 100%; vertical-align: middle; width: 0; }
+
+.k-ui-namespace .koowa_media--gallery .koowa_media__item__thumbnail img { display: inline-block; vertical-align: middle; max-width: 100%; border-radius: 4px; }
+
+.k-ui-namespace .koowa_media--gallery .overflow_container { overflow: hidden; text-overflow: ellipsis; display: block; white-space: normal; }
+
+.k-ui-namespace .koowa_media__item__icon { padding-top: 10px; padding-bottom: 10px; }
+
+.k-ui-namespace .koowa_media_wrapper--documents .koowa_media__item { text-align: center; }
+
+.k-ui-namespace .koowa_media_wrapper--documents .koowa_media__item__label { margin-top: 8px; }
+
+.k-ui-namespace .koowa_media__item__options { position: relative; background: rgba(0, 0, 0, 0.05); border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 8px; margin: 0; border-radius: 0 0 3px 3px; }
+
+.k-ui-namespace .koowa_media__item__options:before, .k-ui-namespace .koowa_media__item__options:after { display: table; content: " "; }
+
+.k-ui-namespace .koowa_media__item__options:after { clear: both; }
+
+.k-ui-namespace .koowa_media__item__options__select { display: block; float: left; text-align: left; }
+
+.k-ui-rtl.k-ui-namespace .koowa_media__item__options__select { float: right; text-align: right; }
+
+.k-ui-namespace .koowa_media__item__options__select input[type="checkbox"] { margin: 0; }
+
+.k-ui-namespace .koowa_media__item__options__select label { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 1; margin: 0; }
+
+.k-ui-namespace .koowa_media__item__options__delete { position: relative; z-index: 2; display: block; float: right; text-align: right; }
+
+.k-ui-rtl.k-ui-namespace .koowa_media__item__options__delete { float: left; text-align: left; }
+
+.k-ui-namespace .koowa_media__item__content-holder { display: inline-block; max-width: 100%; vertical-align: middle; }
+
+.k-ui-namespace .koowa_header__item--select.koowa_header__item--select { width: 20px; }
+
+.k-ui-namespace .koowa_header__item--select.koowa_header__item--select input { margin: 0; }
+
+.k-ui-namespace a.disabled:hover { color: #fff; background-color: #bd362f; }
+
+.k-ui-namespace .koowa_media_wrapper--documents, .k-ui-namespace .koowa_media_wrapper--categories { visibility: hidden; }
+
+.k-ui-namespace .koowa_media_wrapper--documents.gallery-initialized, .k-ui-namespace .koowa_media_wrapper--categories.gallery-initialized { visibility: visible; }
