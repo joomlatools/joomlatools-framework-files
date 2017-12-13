@@ -1,0 +1,57 @@
+<?php
+/**
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
+ *
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
+ * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
+ */
+?>
+
+<?= helper('ui.load', array('domain' => 'site')) ?>
+
+<ktml:script src="assets://files/js/files.gallery.js"/>
+
+<?= helper('behavior.modal') ?>
+
+<script>
+    kQuery(function($) {
+        $('.attachments').simpleGallery();
+    });
+</script>
+
+<? if (count($attachments)): ?>
+    <div style="clear: both">
+        <h3><?= translate('Attachments') ?></h3>
+        <div class="koowa_media--gallery">
+            <div class="attachments koowa_media_wrapper koowa_media_wrapper--documents">
+                <div class="koowa_media_contents">
+                    <?php // this comment below must stay ?>
+                    <div class="koowa_media"><!--
+                    <? foreach ($attachments as $attachment): ?>
+                        <? if ($attachment->file): ?>
+                     --><div class="koowa_media__item">
+                            <div class="koowa_media__item__content file">
+                                <?= import("com:files.attachment.gallery.html", array('attachment' => $attachment)) ?>
+                            </div>
+                        </div><!--
+                        <? endif ?>
+                    <? endforeach ?>
+             --></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        kQuery(function($) {
+            $('.koowa_media__item__image').closest('a').magnificPopup({
+                type: 'image',
+                gallery:{
+                    enabled:true
+                }
+            });
+        });
+    </script>
+<? endif ?>
+
+
