@@ -65,6 +65,7 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
                 $file = $model->create(array('name' => $entity->name, 'path' => $folder));
                 $file->save();
             }
+            else $file = $file->getIterator()->current();
 
             $context->file = $file;
         }
