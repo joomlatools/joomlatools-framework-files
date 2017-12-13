@@ -1,0 +1,25 @@
+.koowa-attachments {
+  clear: both;
+}
+
+.attachments-list {
+  margin: 0 0 1em;
+  padding: 0;
+  list-style: none;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  li {
+    margin: 0 0 1em;
+    padding: 0;
+    list-style: none;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+}
