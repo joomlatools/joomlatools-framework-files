@@ -36,7 +36,8 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     '<%= assetsPath %>/css/files.css': '<%= assetsPath %>/scss/files.scss',
-                    '<%= assetsPath %>/css/uploader.css': '<%= assetsPath %>/scss/uploader.scss'
+                    '<%= assetsPath %>/css/uploader.css': '<%= assetsPath %>/scss/uploader.scss',
+                    '<%= assetsPath %>/css/gallery.css': '<%= assetsPath %>/scss/gallery.scss'
                 }
             }
         },
