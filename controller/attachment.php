@@ -98,11 +98,6 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         return parent::_actionAdd($context);
     }
 
-    protected function _afterAttach(KControllerContextInterface $context)
-    {
-        $context->getResponse()->setStatus(KHttpResponse::NO_CONTENT);
-    }
-
     protected function _beforeDelete(KControllerContextInterface $context)
     {
         $context->file = $this->getModel()->fetch()->file;
