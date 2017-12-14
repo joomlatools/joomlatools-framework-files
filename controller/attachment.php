@@ -15,6 +15,13 @@
  */
 class ComFilesControllerAttachment extends ComKoowaControllerModel
 {
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->addCommandCallback('before.read' , '_serveFile');
+    }
+
     protected function _initialize(KObjectConfig $config)
     {
         if ($this->getIdentifier()->package != 'files')
@@ -143,5 +150,31 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
         }
 
         return $view;
+    }
+
+    protected function _serveFile(KControllerContextInterface $context)
+    {
+        $request = $context->getRequest();
+
+        if ($request->getFormat() == 'html')
+        {
+            $attachment = $this->getModel()->fetch();
+
+            if (!$attachment->isNew())
+            {
+                $file = $attachment->file;
+
+                $response = $this->getResponse();
+
+                $this->getObject('com:files.controller.file')
+                     ->name($file->name)
+                     ->folder($file->path)
+                     ->container($file->storage->container)
+                     ->setResponse($response)
+                     ->render();
+
+                $response->send();
+            }
+        }
     }
 }
