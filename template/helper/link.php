@@ -33,7 +33,7 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
             case 'embedded':
                 if ($config->file->isVideo()) {
                     $html = $this->video($config);
-                } elseif ($config->isAudio()) {
+                } elseif ($config->file->isAudio()) {
                     $html = $this->audio($config);
                 }
                 break;
