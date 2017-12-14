@@ -1,6 +1,5 @@
-
-CREATE TABLE IF NOT EXISTS `#__files_attachments` (
-  `files_attachment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+CREATE TABLE `attachments_files` (
+  `attachments_file_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `files_container_id` bigint(20) NOT NULL,
   `uuid` char(36) NOT NULL DEFAULT '',
   `path` varchar(2000) NOT NULL,
@@ -12,17 +11,19 @@ CREATE TABLE IF NOT EXISTS `#__files_attachments` (
   `modified_on` datetime NOT NULL,
   `locked_by` bigint(20) NOT NULL,
   `locked_on` datetime NOT NULL,
-  PRIMARY KEY (`files_attachment_id`),
+  PRIMARY KEY (`attachments_file_id`),
   UNIQUE KEY `uuid` (`uuid`),
-  UNIQUE KEY `files_container_id` (`files_container_id`,`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE IF NOT EXISTS `#__files_attachments_relations` (
-  `files_attachment_id` bigint(20) unsigned NOT NULL,
+CREATE TABLE `attachments` (
+  `attachment_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `attachments_file_id` bigint(20) unsigned NOT NULL,
   `table` varchar(255) NOT NULL DEFAULT '',
-  `row` bigint(20) unsigned NOT NULL,
+  `row` bigint(20) NOT NULL,
   `created_by` bigint(20) NOT NULL,
   `created_on` datetime NOT NULL,
-  PRIMARY KEY (`files_attachment_id`,`table`,`row`),
-  CONSTRAINT `#__files_attachments_relations_ibfk_1` FOREIGN KEY (`files_attachment_id`) REFERENCES `#__files_attachments` (`files_attachment_id`) ON DELETE CASCADE
+  `type` enum('attachment','link','embedded') NOT NULL,
+  PRIMARY KEY (`attachment_id`),
+  UNIQUE KEY `attachments_file_id` (`attachments_file_id`,`table`,`row`,`type`),
+  CONSTRAINT `attachments_file_id` FOREIGN KEY (`attachments_file_id`) REFERENCES `attachments_files` (`attachments_file_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
