@@ -124,8 +124,6 @@ class ComFilesControllerAttachment extends ComKoowaControllerModel
                 throw new RuntimeException(('Attachment file could not be deleted'));
             }
         }
-
-        $this->_afterAttach($context);
     }
 
     /**
