@@ -51,10 +51,6 @@ class ComFilesModelAttachments extends KModelDatabase
                 $query->where('tbl.row = :row')->bind(array('row' => $row));
             }
 
-            if ($type = $state->type) {
-                $query->where('tbl.type = :type')->bind(array('type' => $type));
-            }
-
             if ($path = $state->path) {
                 $query->where('files.path = :path')->bind(array('path' => $path));
             }

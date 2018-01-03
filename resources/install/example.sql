@@ -22,8 +22,7 @@ CREATE TABLE `attachments` (
   `row` bigint(20) NOT NULL,
   `created_by` bigint(20) NOT NULL,
   `created_on` datetime NOT NULL,
-  `type` enum('attachment','link','embedded') NOT NULL,
   PRIMARY KEY (`attachment_id`),
-  UNIQUE KEY `attachments_file_id` (`attachments_file_id`,`table`,`row`,`type`),
+  UNIQUE KEY `attachments_file_id` (`attachments_file_id`,`table`,`row`),
   CONSTRAINT `attachments_file_id` FOREIGN KEY (`attachments_file_id`) REFERENCES `attachments_files` (`attachments_file_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

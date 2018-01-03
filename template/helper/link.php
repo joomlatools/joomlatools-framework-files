@@ -19,9 +19,9 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
     {
         $config = new KObjectConfig($config);
 
-        $config->append(array('file' => $config->attachment->file->storage));
+        $config->append(array('file' => $config->attachment->file->storage, 'type' => 'link'));
 
-        switch($config->attachment->type)
+        switch($config->type)
         {
             case 'link':
                 if ($config->file->isImage()) {
