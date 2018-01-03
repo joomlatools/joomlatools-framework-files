@@ -12,7 +12,9 @@
 
 <? if (count($attachments)): ?>
     <div class="koowa-attachments">
-        <h3><?= translate('Attachments') ?></h3>
+        <? if ($show_header): ?>
+            <h3><?= translate('Attachments') ?></h3>
+        <? endif ?>
         <ul class="attachments-list">
             <? foreach ($attachments as $attachment): ?>
                 <? if ($attachment->file): ?>

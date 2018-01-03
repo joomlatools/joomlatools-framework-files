@@ -22,7 +22,9 @@
 
 <? if (count($attachments)): ?>
     <div style="clear: both">
-        <h3><?= translate('Attachments') ?></h3>
+        <? if ($show_header): ?>
+            <h3><?= translate('Attachments') ?></h3>
+        <? endif ?>
         <div class="koowa_media--gallery">
             <div class="attachments koowa_media_wrapper koowa_media_wrapper--documents">
                 <div class="koowa_media_contents">
