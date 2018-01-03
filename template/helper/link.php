@@ -19,26 +19,18 @@ class ComFilesTemplateHelperLink extends KTemplateHelperAbstract
     {
         $config = new KObjectConfig($config);
 
-        $config->append(array('file' => $config->attachment->file->storage, 'type' => 'link'));
+        $config->append(array('file' => $config->attachment->file->storage));
 
-        switch($config->type)
-        {
-            case 'link':
-                if ($config->file->isImage()) {
-                    $html = $this->image($config);
-                } else {
-                    $html = $this->link($config);
-                }
-                break;
-            case 'embedded':
-                if ($config->file->isVideo()) {
-                    $html = $this->video($config);
-                } elseif ($config->file->isAudio()) {
-                    $html = $this->audio($config);
-                }
-                break;
-            default:
-                break;
+        $file = $config->file;
+
+        if ($file->isVideo()) {
+            $html = $this->video($config);
+        } elseif ($file->isAudio()) {
+            $html = $this->audio($config);
+        } elseif ($file->isImage()) {
+            $html = $this->image($config);
+        } else {
+            $html = $this->link($config);
         }
 
         return $html;
