@@ -1,3 +1,11 @@
+.koowa-attachments { clear: both; }
+
+.attachments-list { margin: 0 0 1em; padding: 0; list-style: none; border: none; background: transparent; box-shadow: none; }
+
+.attachments-list:last-child { margin-bottom: 0; }
+
+.attachments-list li { margin: 0 0 1em; padding: 0; list-style: none; border: none; background: transparent; box-shadow: none; }
+
 .k-ui-namespace .koowa_media--gallery .koowa_media_wrapper { overflow: visible; }
 
 .k-ui-namespace .koowa_media--gallery .koowa_media_contents { padding: 0; border: none; background: transparent; display: block; margin-left: -8px; margin-right: -8px; }
