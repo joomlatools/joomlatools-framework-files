@@ -403,7 +403,25 @@ $.widget("koowa.uploader", {
 			queue_lock = false;
 		});
 	},
+    _handleUploadErrors: function(uploader, file, result) {
+        var response = result.response;
 
+        if (response.status === false)
+        {
+            var error = response.error ? response.error : Koowa.translate('Unknown error');
+            self.notify('error', error);
+
+            self.progressbar.removeClass('bar-success').addClass('bar-danger');
+
+            file.error_message = error;
+            file.status = plupload.FAILED;
+
+            uploader.total.uploaded -= 1;
+            uploader.total.failed += 1;
+
+            uploader.stop();
+        }
+    },
 	_initUploader: function() {
 		var self = this
 		, id = this.id
@@ -671,27 +689,7 @@ $.widget("koowa.uploader", {
 			}
 		});
 
-		var _handleUploadErrors = function(uploader, file, result) {
-			var response = result.response;
-
-			if (response.status === false)
-			{
-				var error = response.error ? response.error : Koowa.translate('Unknown error');
-				self.notify('error', error);
-
-				self.progressbar.removeClass('bar-success').addClass('bar-danger');
-
-				file.error_message = error;
-				file.status = plupload.FAILED;
-
-				uploader.total.uploaded -= 1;
-				uploader.total.failed += 1;
-
-				uploader.stop();
-			}
-		};
-
-		uploader.bind('ChunkUploaded', _handleUploadErrors);
+		uploader.bind('ChunkUploaded', this._handleUploadErrors);
 
 		uploader.bind('UploadFile', function(up, file) {
 			self._handleFileStatus(file);
@@ -702,7 +700,7 @@ $.widget("koowa.uploader", {
 			if (typeof result.response !== 'undefined') {
 				try {
 					result.response = $.parseJSON(result.response.replace(/^\s*<pre[^>]*>/, '').replace(/<\/pre>\s*$/, ''));
-					_handleUploadErrors(up, file, result);
+					self._handleUploadErrors(up, file, result);
 				}
 				catch (e) {}
 			}
