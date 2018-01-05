@@ -37,7 +37,8 @@ module.exports = function(grunt) {
                 files: {
                     '<%= assetsPath %>/css/files.css': '<%= assetsPath %>/scss/files.scss',
                     '<%= assetsPath %>/css/uploader.css': '<%= assetsPath %>/scss/uploader.scss',
-                    '<%= assetsPath %>/css/gallery.css': '<%= assetsPath %>/scss/gallery.scss'
+                    '<%= assetsPath %>/css/gallery.css': '<%= assetsPath %>/scss/gallery.scss',
+                    '<%= assetsPath %>/css/dragdrop.css': '<%= assetsPath %>/scss/dragdrop.scss'
                 }
             }
         },
