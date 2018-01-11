@@ -403,18 +403,20 @@ $.widget("koowa.uploader", {
 			queue_lock = false;
 		});
 	},
-    _handleUploadErrors: function(uploader, file, result) {
+    _handleUploadErrors: function(widget, file, result) {
         var response = result.response;
 
         if (response.status === false)
         {
             var error = response.error ? response.error : Koowa.translate('Unknown error');
-            self.notify('error', error);
+            widget.notify('error', error);
 
-            self.progressbar.removeClass('bar-success').addClass('bar-danger');
+            widget.progressbar.removeClass('bar-success').addClass('bar-danger');
 
             file.error_message = error;
             file.status = plupload.FAILED;
+
+            var uploader = widget.uploader;
 
             uploader.total.uploaded -= 1;
             uploader.total.failed += 1;
@@ -689,7 +691,7 @@ $.widget("koowa.uploader", {
 			}
 		});
 
-		uploader.bind('ChunkUploaded', this._handleUploadErrors);
+		uploader.bind('ChunkUploaded', function(uploader, file, result) {self._handleUploadErrors(self, file, result)});
 
 		uploader.bind('UploadFile', function(up, file) {
 			self._handleFileStatus(file);
@@ -700,7 +702,7 @@ $.widget("koowa.uploader", {
 			if (typeof result.response !== 'undefined') {
 				try {
 					result.response = $.parseJSON(result.response.replace(/^\s*<pre[^>]*>/, '').replace(/<\/pre>\s*$/, ''));
-					self._handleUploadErrors(up, file, result);
+					self._handleUploadErrors(self, file, result);
 				}
 				catch (e) {}
 			}
