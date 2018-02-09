@@ -2799,6 +2799,7 @@ Files.Grid = new Class({
     },
     unspin: function(){
 		this.spinner_container.addClass('k-is-hidden');
+		kodekitUI.gallery();
     },
     /**
      * Updates the active state on the switchers
@@ -4238,6 +4239,7 @@ Files.App = new Class({
 
                     this.container.removeClass('k-'+remove).addClass('k-'+layout);
                     kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
+                    kQuery('#files-paginator-container').removeClass('k-'+remove+'-pagination').addClass('k-'+layout+'-pagination');
                 }
 
                 if (key) {
