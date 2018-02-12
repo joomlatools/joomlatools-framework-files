@@ -8,6 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
+
 <textarea style="display: none" id="compact_details_image">
 [%
 var width = 0, height = 0;

@@ -8,6 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
+
 <textarea style="display: none" id="file_preview">
 <div class="k-ui-namespace k-small-inline-modal-holder mfp-hide extension-[%=metadata.extension%]">
     <div class="k-inline-modal">
