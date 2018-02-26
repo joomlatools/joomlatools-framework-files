@@ -81,7 +81,7 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
                             )
                         ));
 
-                    $thumbnail->generate(true);
+                    $thumbnail->save();
                 }
             }
         }
