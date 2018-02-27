@@ -73,7 +73,8 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
                     $thumbnail = $this->getObject('com:files.model.entity.thumbnail',
                         array(
                             'data' => array(
-                                'dimension' => array('width' => $width, 'height' => 0),
+                                'overwrite' => true,
+                                'dimension' => array('width' => $width, 'height' => $width),
                                 'name'      => $this->name,
                                 'folder'    => $this->folder,
                                 'container' => $this->getContainer()->slug,
