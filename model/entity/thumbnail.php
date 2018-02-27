@@ -95,10 +95,12 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
     {
 		@ini_set('memory_limit', '256M');
 
-    	if (($source = $this->source) && $this->_canGenerate())
+    	if ($this->source instanceof ComFilesModelEntityFile && $this->_canGenerate())
 		{
             try
             {
+                $source = $this->source;
+
                 $imagine = new \Imagine\Gd\Imagine();
                 $image   = $imagine->open($source->fullpath);
 
