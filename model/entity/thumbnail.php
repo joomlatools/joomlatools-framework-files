@@ -145,7 +145,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
         {
             if ($source = $this->source)
             {
-                if ($str = $source->thumbnail_string ? $source->thumbnail_string : $this->generate())
+                if ($str = is_string($source) ? $source : $this->generate())
                 {
                     $folder = $this->getContainer()->getAdapter('folder', array(
                         'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '')
@@ -193,11 +193,11 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
             $value = $value->top();
         }
 
-        if (!$value instanceof ComFilesModelEntityFile) {
-            throw new RuntimeException('Wrong class type for source');
+        if (!is_string($value) && !$value instanceof ComFilesModelEntityFile) {
+            throw new RuntimeException('Wrong type for source');
         }
 
-        if ($value->isNew()) throw new RuntimeException('Source cannot be a new entity');
+        if ($value instanceof ComFilesModelEntityFile && $value->isNew()) throw new RuntimeException('Source cannot be a new entity');
 
         return $value;
     }
