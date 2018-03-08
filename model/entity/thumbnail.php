@@ -95,7 +95,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
     {
 		@ini_set('memory_limit', '256M');
 
-    	if ($this->source instanceof ComFilesModelEntityFile && $this->_canGenerate())
+    	if ($this->_canGenerate())
 		{
             try
             {
@@ -145,7 +145,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
         {
             if ($source = $this->source)
             {
-                if ($str = is_string($source) ? $source : $this->generate())
+                if ($str = $this->generate())
                 {
                     $folder = $this->getContainer()->getAdapter('folder', array(
                         'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '')
@@ -193,11 +193,13 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
             $value = $value->top();
         }
 
-        if (!is_string($value) && !$value instanceof ComFilesModelEntityFile) {
+        if (!$value instanceof ComFilesModelEntityFile) {
             throw new RuntimeException('Wrong type for source');
         }
 
-        if ($value instanceof ComFilesModelEntityFile && $value->isNew()) throw new RuntimeException('Source cannot be a new entity');
+        if ($value->isNew()) {
+            throw new RuntimeException('Source cannot be a new entity');
+        }
 
         return $value;
     }
