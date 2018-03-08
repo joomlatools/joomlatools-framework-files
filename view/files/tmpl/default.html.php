@@ -30,7 +30,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                 root_text: <?= json_encode(translate('Root folder')) ?>,
                 types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,
                 container: <?= json_encode($container ? $container->toArray() : null); ?>,
-                thumbnails: <?= json_encode($container ? $container->getParameters()->thumbnails : true); ?>
+                thumbnails: <?= json_encode($thumbnails ?: ($container->getParameters()->thumbnails ?: true)) ?>
             };
         options = Object.append(options, config);
 
