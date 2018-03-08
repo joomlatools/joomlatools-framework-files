@@ -47,7 +47,7 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
             $value = $state->thumbnails;
 
             if (in_array($value, array('false', 'true', '0', '1')) || is_numeric($value)) {
-                $state->offsetSet('thumbnails', (bool) $value);
+                $state->offsetSet('thumbnails', filter_var($value, FILTER_VALIDATE_BOOLEAN));
             }
         }
     }
