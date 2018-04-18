@@ -56,15 +56,23 @@ class ComFilesModelStateThumbnails extends KModelState
         {
             $parts = explode('://', $this->get('source'));
 
-            $file = $this->getObject('com:files.model.files')
-                         ->container($parts[0])
-                         ->folder(dirname($parts[1]))
-                         ->name(basename($parts[1]))
-                         ->fetch();
+            if (!in_array($parts[0], stream_get_wrappers()))
+            {
+                // Assume container instead of stream wrapper
 
-            if (!$file->isNew()) {
-                $this->_source_file = $file;
-            }
+                // INTENTIONAL: not using current folder and name state values to allow overriding the thumbnail
+                // location by modyfing folder and name after setting source
+                $file = $this->getObject('com:files.model.files')
+                             ->container($parts[0])
+                             ->folder(dirname($parts[1]))
+                             ->name(basename($parts[1]))
+                             ->fetch();
+
+                if (!$file->isNew()) {
+                    $this->_source_file = $file;
+                }
+            } else $this->_source_file = $this->getObject('com:files.model.files')
+                                              ->create(array('path' => $this->get('source'))); // Use wrapper as source
         }
 
         return $this->_source_file;
