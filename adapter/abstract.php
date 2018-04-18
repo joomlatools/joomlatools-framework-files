@@ -25,11 +25,18 @@ abstract class ComFilesAdapterAbstract extends KObject
 	 */
 	protected $_handle = null;
 
+    /**
+     * @var bool Tells if the adapter points to a local resource
+     */
+	protected $_local;
+
 	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
-		$this->setPath($config->path);
+        $this->_local = true;
+
+        $this->setPath($config->path);
 	}
 
 	protected function _initialize(KObjectConfig $config)
@@ -41,6 +48,11 @@ abstract class ComFilesAdapterAbstract extends KObject
 		parent::_initialize($config);
 	}
 
+	public function isLocal()
+    {
+        return (bool) $this->_local;
+    }
+
 	public function setPath($path)
 	{
 		$path = $this->normalize($path);
@@ -49,6 +61,17 @@ abstract class ComFilesAdapterAbstract extends KObject
 		$this->_handle = new SplFileInfo($path);
 
 		$this->_metadata = null;
+
+        $parts = explode('://', $this->_path);
+
+        if (count($parts) == 2)
+        {
+            if (in_array($parts[0], stream_get_wrappers())) {
+                $this->_local = ($parts[0] === 'file') ? true : false;
+            } else {
+                throw new RuntimeException(sprintf('Unsupported stream wrapper for: %', $path));
+            }
+        }
 
 		return $this;
 	}
