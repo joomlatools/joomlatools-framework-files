@@ -155,7 +155,19 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
     public function getPropertyUri()
     {
-        return $this->getContainer()->slug . '://' . $this->path;
+        $uri = null;
+
+        $scheme = $this->scheme;
+
+        if ($this->hasContainer()) {
+            $scheme = $this->getContainer()->slug;
+        }
+
+        if ($scheme) {
+            $uri = sprintf('%s://%s', $scheme, $this->path);
+        }
+
+        return $uri;
     }
 
     public function getPropertyRelativePath()
@@ -172,14 +184,43 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		parent::setProperty($column, $value, $modified = true);
 
-        if ($column === 'container' || (in_array($column, array('folder', 'name')) && $this->container)) {
+		if ($column === 'uri')
+		{
+            $parts = explode('://', $value);
+
+            if (count($parts) == 2)
+            {
+                if ($this->hasContainer())
+                {
+                    unset($this->_container);
+                    unset($this->container);
+                }
+
+                $this->scheme = $parts[0];
+
+                $this->folder = dirname($parts[1]);
+                $this->name   = basename($parts[1]);
+
+                $this->setAdapter();
+            }
+        }
+
+        if (($column === 'container' && !is_null($value)) || ((in_array($column, array('folder', 'name')) && $this->container)))
+        {
+            unset($this->scheme);
+
 			$this->setAdapter();
 		}
 	}
 
+	public function hasContainer()
+    {
+        return !empty($this->container);
+    }
+
     public function getContainer()
     {
-        if(!isset($this->_container))
+        if(!isset($this->_container) && $this->hasContainer())
         {
             //Set the container
             $container = $this->container;
@@ -206,9 +247,20 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	public function setAdapter()
 	{
 		$type = $this->getIdentifier()->name;
-		$this->_adapter = $this->getContainer()->getAdapter($type, array(
-			'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '').$this->name
-		));
+
+        if ($this->hasContainer()) {
+            $adapter = $this->getContainer()->getAdapter($type, array(
+                'path' => $this->getContainer()->fullpath . '/' . ($this->folder ? $this->folder . '/' : '') .
+                          $this->name
+            ));
+        } else {
+            $adapter = $this->getObject('com:files.adapter.' . $type, array(
+                'path' =>
+                    $this->uri
+            ));
+        }
+
+        $this->_adapter = $adapter;
 
 		unset($this->_data['fullpath']);
 		unset($this->_data['metadata']);
