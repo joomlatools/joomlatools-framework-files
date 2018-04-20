@@ -154,13 +154,15 @@ class ComFilesModelNodes extends KModelAbstract
      */
     public function getContainer()
     {
-        if(!isset($this->_container))
+        $state = $this->getState();
+
+        if(!isset($this->_container) && $state->container)
         {
             //Set the container
-            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->fetch();
+            $container = $this->getObject('com:files.model.containers')->slug($state->container)->fetch();
 
             if (!is_object($container) || !count($container) || $container->isNew()) {
-                throw new UnexpectedValueException('Invalid container: '.$this->getState()->container);
+                throw new UnexpectedValueException('Invalid container: ' . $state->container);
             }
 
             $this->_container = $container->top();
@@ -173,7 +175,11 @@ class ComFilesModelNodes extends KModelAbstract
     {
         $state = $this->getState();
 
-        $path = $this->getContainer()->fullpath;
+        $path = '';
+
+        if ($container = $this->getContainer()) {
+            $path = $container->fullpath;
+        }
 
         if (!empty($state->folder) && $state->folder != '/') {
             $path .= '/'.ltrim($state->folder, '/');
