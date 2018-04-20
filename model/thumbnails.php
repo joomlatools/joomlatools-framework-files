@@ -196,7 +196,7 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
             $container = $this->getContainer();
 
 
-            $folder = $container->getAdapter('folder', array(
+            $folder = $this->getObject('com:files.adapter.folder', array(
                 'path' => $container->fullpath . '/' . $folder
             ));
 
