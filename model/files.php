@@ -25,7 +25,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
     protected function _actionFetch(KModelContext $context)
     {
         $state = $this->getState();
-        $files = $this->getContainer()->getAdapter('iterator')->getFiles(array(
+        $files = $this->getObject('com:files.adapter.iterator')->getFiles(array(
             'path'    => $this->getPath(),
             'exclude' => array('.svn', '.htaccess', 'web.config', '.git', 'CVS', 'index.html', '.DS_Store', 'Thumbs.db', 'Desktop.ini'),
             'filter'  => array($this, 'iteratorFilter'),
