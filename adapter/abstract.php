@@ -62,15 +62,22 @@ abstract class ComFilesAdapterAbstract extends KObject
 
 		$this->_metadata = null;
 
-        $parts = explode('://', $this->_path);
+        $parts = parse_url($this->_path);
 
-        if (count($parts) == 2)
+        if (isset($parts['scheme']))
         {
-            if (in_array($parts[0], stream_get_wrappers())) {
-                $this->_local = ($parts[0] === 'file') ? true : false;
-            } else {
-                throw new RuntimeException(sprintf('Unsupported stream wrapper for: %', $path));
+            $scheme = $parts['scheme'];
+
+            if (in_array($scheme, stream_get_wrappers()))
+            {
+                $this->_local = ($scheme === 'file') ? true : false;
             }
+            elseif ($scheme == 'file')
+            {
+                $this->_path = str_replace('file://', '', $this->_path);
+                $this->_local = true;
+            }
+            else throw new RuntimeException(sprintf('Unsupported stream wrapper for: %', $this->_path));
         }
 
 		return $this;
