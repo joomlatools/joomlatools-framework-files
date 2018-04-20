@@ -49,8 +49,9 @@ class ComFilesModelNodes extends KModelAbstract
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
+            'state'        => 'com:files.model.state.nodes',
             'identity_key' => 'name',
-            'behaviors' => array('paginatable', 'com:files.model.behavior.nodes.thumbnailable'),
+            'behaviors'    => array('paginatable', 'com:files.model.behavior.nodes.thumbnailable'),
         ));
 
         parent::_initialize($config);
