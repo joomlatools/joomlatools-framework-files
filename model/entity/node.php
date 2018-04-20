@@ -162,7 +162,13 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
     public function getPropertyDestinationFullpath()
     {
-        return $this->getContainer()->fullpath . '/' . $this->destination_path;
+        $path = $this->destination_path;
+
+        if ($container = $this->getContainer()) {
+            $path = $container->fullpath . '/' . $path;
+        }
+
+        return $path;
     }
 
     public function getPropertyUri()
@@ -184,7 +190,15 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
     public function getPropertyRelativePath()
     {
-        return $this->getContainer()->relative_path . '/' . $this->path;
+        $path = $this->path;
+
+        if ($container = $this->getContainer()) {
+            $path = $container->relative_path . '/' . $path;
+        } else {
+            $path = str_replace(Koowa::getInstance()->getRootPath() . '/', '', $path);
+        }
+
+        return $path;
     }
 
     public function getPropertyAdapter()
