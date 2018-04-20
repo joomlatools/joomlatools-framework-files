@@ -21,11 +21,6 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
     {
         parent::__construct($config);
 
-        $state = $this->getState();
-
-        $state->insert('version', 'cmd')
-              ->insert('source', 'string');
-
         if ($config->auto_generate) {
             $this->addCommandCallback('after.fetch', '_checkThumbnails');
         }

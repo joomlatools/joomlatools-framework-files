@@ -17,6 +17,14 @@ class ComFilesModelStateThumbnails extends KModelState
 {
     protected $_source_file;
 
+    public function __construct(KObjectConfig $config)
+    {
+        parent::__construct($config);
+
+        $this->insert('version', 'cmd')
+             ->insert('source', 'url');
+    }
+
     public function set($name, $value = null)
     {
         if ($name == 'source')
@@ -25,10 +33,13 @@ class ComFilesModelStateThumbnails extends KModelState
                 $this->_source_file = null; // Reset source file if source gets changed
             }
 
-            $parts = explode('://', $value);
+            $parts = parse_url($value);
 
-            $this->set('name', basename($parts[1]) . '.jpg');
-            $this->set('folder', dirname($parts[1]));
+            $path = isset($parts['host']) ? $parts['host'] : '';
+            $path .= isset($path['path']) ? $parts['path'] : '';
+
+            $this->set('name', basename($path) . '.jpg');
+            $this->set('folder', dirname($path));
         }
 
         return parent::set($name, $value);
