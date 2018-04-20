@@ -271,7 +271,10 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
         unset($data['format']);
         unset($data['view']);
 
-        $data['container'] = $this->getContainer()->slug;
+        if ($container = $this->getContainer()) {
+            $data['container'] = $container->slug;
+        }
+
         $data['type']      = $this->getIdentifier()->name;
         $data['path']      = $this->path;
         $data['uri']       = $this->uri;
