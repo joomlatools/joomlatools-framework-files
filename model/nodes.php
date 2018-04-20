@@ -59,11 +59,20 @@ class ComFilesModelNodes extends KModelAbstract
 
     protected function _actionCreate(KModelContext $context)
     {
-        $context->entity->append(array(
-            'container' => $context->state->container,
-            'folder'    => $context->state->folder,
-            'name'      => $context->state->name
+        $state = $context->getState();
+
+        $entity = $context->getEntity();
+
+        $entity->append(array(
+            'folder'    => $state->folder,
+            'name'      => $state->name
         ));
+
+        if ($container = $state->container) {
+            $entity->append(array('container' => $container));
+        } elseif ($uri = $state->uri) {
+            $entity->append(array('scheme' => parse_url($uri)['scheme']));
+        }
 
         return parent::_actionCreate($context);
     }
