@@ -137,7 +137,13 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
     public function getPropertyPath()
     {
-        return trim(($this->folder ? $this->folder . '/' : '') . $this->name, '/\\');
+        $path = ($this->folder ? $this->folder . '/' : '') . $this->name;
+
+        if ($this->getContainer()) {
+            $path = trim($path, '/\\'); // Make path relative to container
+        }
+
+        return $path;
     }
 
     public function getPropertyDestinationPath()
