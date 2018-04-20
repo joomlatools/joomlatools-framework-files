@@ -222,7 +222,12 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
             $state     = $this->getState();
             $container = $this->getContainer();
 
-            $model = $this->getObject('com:files.model.thumbnails')->container($container->slug)->source($file->uri);
+            // Name and folder are set again to allow name and folder overrides for the target file
+            $model = $this->getObject('com:files.model.thumbnails')
+                          ->container($container->slug)
+                          ->source($state->source)
+                          ->name($state->name)
+                          ->folder($state->folder);
 
             if ($versions = $container->getParameters()->versions)
             {
