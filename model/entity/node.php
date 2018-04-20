@@ -196,47 +196,16 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		parent::setProperty($column, $value, $modified = true);
 
-		if ($column === 'uri')
-		{
-            $parts = explode('://', $value);
-
-            if (count($parts) == 2)
-            {
-                if ($this->hasContainer())
-                {
-                    unset($this->_container);
-                    unset($this->container);
-                }
-
-                $this->scheme = $parts[0];
-
-                $this->folder = dirname($parts[1]);
-                $this->name   = basename($parts[1]);
-
-                $this->setAdapter();
-            }
-        }
-
-        if (($column === 'container' && !is_null($value)) || ((in_array($column, array('folder', 'name')) && $this->container)))
-        {
-            unset($this->scheme);
-
+        if ($column === 'container' || $column === 'scheme' || in_array($column, array('folder', 'name'))) {
 			$this->setAdapter();
 		}
 	}
 
-	public function hasContainer()
-    {
-        return !empty($this->container);
-    }
-
     public function getContainer()
     {
-        if(!isset($this->_container) && $this->hasContainer())
+        if(!$this->_container instanceof ComFilesModelEntityContainer && ($container = $this->container))
         {
-            //Set the container
-            $container = $this->container;
-
+            // TODO Is this check really needed here?
             if (is_string($container))
             {
                 if (!isset(self::$_container_cache[$container])) {
@@ -260,19 +229,13 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		$type = $this->getIdentifier()->name;
 
-        if ($this->hasContainer()) {
-            $adapter = $this->getContainer()->getAdapter($type, array(
-                'path' => $this->getContainer()->fullpath . '/' . ($this->folder ? $this->folder . '/' : '') .
-                          $this->name
-            ));
+        if ($container = $this->getContainer()) {
+            $path = $container->fullpath . '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
         } else {
-            $adapter = $this->getObject('com:files.adapter.' . $type, array(
-                'path' =>
-                    $this->uri
-            ));
+            $path = $this->uri;
         }
 
-        $this->_adapter = $adapter;
+        $this->_adapter = $this->getObject(sprintf('com:files.adapter.%s', $type), array('path' => $path));
 
 		unset($this->_data['fullpath']);
 		unset($this->_data['metadata']);
