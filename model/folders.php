@@ -89,7 +89,10 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	public function iteratorMap($path)
 	{
 		$path = str_replace('\\', '/', $path);
-		$path = str_replace($this->getContainer()->fullpath.'/', '', $path);
+
+		if ($container = $this->getContainer()) {
+            $path = str_replace($container->fullpath.'/', '', $path);
+        }
 
 		return $path;
 	}
