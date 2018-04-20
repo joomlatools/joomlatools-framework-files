@@ -18,6 +18,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array('behaviors' => array('thumbnailable')));
+
         parent::_initialize($config);
     }
 
