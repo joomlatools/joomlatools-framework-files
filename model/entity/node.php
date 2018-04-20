@@ -169,10 +169,10 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
     {
         $uri = null;
 
-        $scheme = $this->scheme;
+        $scheme = $this->scheme ?: 'file';
 
-        if ($this->hasContainer()) {
-            $scheme = $this->getContainer()->slug;
+        if ($container = $this->getContainer()) {
+            $scheme = $container->slug;
         }
 
         if ($scheme) {
