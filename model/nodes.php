@@ -63,15 +63,14 @@ class ComFilesModelNodes extends KModelAbstract
 
         $entity = $context->getEntity();
 
-        $entity->append(array(
-            'folder'    => $state->folder,
-            'name'      => $state->name
-        ));
-
-        if ($container = $state->container) {
-            $entity->append(array('container' => $container));
-        } elseif ($uri = $state->uri) {
-            $entity->append(array('scheme' => parse_url($uri)['scheme']));
+        if ($uri = $state->uri) {
+            $entity->append(array('uri' => $state->uri));
+        } else {
+            $entity->append(array(
+                'folder'    => $state->folder,
+                'name'      => $state->name,
+                'container' => $state->container
+            ));
         }
 
         return parent::_actionCreate($context);
