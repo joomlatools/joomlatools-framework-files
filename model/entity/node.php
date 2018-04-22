@@ -21,6 +21,8 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
     protected static $_container_cache = array();
 
+    protected $_uri = null;
+
 	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
@@ -171,23 +173,6 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
         return $path;
     }
 
-    public function getPropertyUri()
-    {
-        $uri = null;
-
-        $scheme = $this->scheme ?: 'file';
-
-        if ($container = $this->getContainer()) {
-            $scheme = $container->slug;
-        }
-
-        if ($scheme) {
-            $uri = sprintf('%s://%s', $scheme, $this->path);
-        }
-
-        return $uri;
-    }
-
     public function getPropertyRelativePath()
     {
         $path = $this->path;
@@ -210,10 +195,45 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		parent::setProperty($column, $value, $modified = true);
 
-        if ($column === 'container' || $column === 'scheme' || in_array($column, array('folder', 'name'))) {
+		if ($column == 'uri')
+        {
+            $this->_uri = $value; // Keep URI value on object property
+
+            $parts = parse_url($value);
+
+            if (!isset($parts['scheme']) || $parts['scheme'] == 'file')
+            {
+                $this->name = basename($parts['path']);
+                $this->folder = dirname($parts['path']);
+
+                if (isset($parts['host'])) {
+                    $this->container = basename($parts['host']);
+                }
+            }
+        }
+
+        if (in_array($column, array('folder', 'name', 'container'))) $this->_uri = null; // Reset URI property
+
+        if ($column === 'container' || $column === 'uri' || in_array($column, array('folder', 'name'))) {
 			$this->setAdapter();
 		}
 	}
+
+	public function getPropertyUri()
+    {
+        if (!$this->_uri)
+        {
+            $path = '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+
+            if ($container = $this->getContainer()) {
+                $path = $container->slug . $path;
+            }
+
+            $this->_uri = sprintf('file://%s', $path);
+        }
+
+        return $this->_uri;
+    }
 
     public function getContainer()
     {
@@ -243,10 +263,12 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		$type = $this->getIdentifier()->name;
 
+		$path = '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+
         if ($container = $this->getContainer()) {
-            $path = $container->fullpath . '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+            $path = $container->fullpath . $path;
         } else {
-            $path = $this->uri;
+            $path = $this->uri ?: $path;
         }
 
         $this->_adapter = $this->getObject(sprintf('com:files.adapter.%s', $type), array('path' => $path));
@@ -289,9 +311,9 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
             $data['container'] = $container->slug;
         }
 
-        $data['type']      = $this->getIdentifier()->name;
-        $data['path']      = $this->path;
-        $data['uri']       = $this->uri;
+        $data['type'] = $this->getIdentifier()->name;
+        $data['path'] = $this->path;
+        $data['uri']  = $this->uri;
 
         return $data;
     }
