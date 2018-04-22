@@ -28,16 +28,14 @@ class ComFilesModelStateNodes extends KModelState
         {
             $parts = parse_url($value);
 
-            $path = isset($parts['host']) ? $parts['host'] : '';
-            $path .= isset($parts['path']) ? $parts['path'] : '';
+            if (!isset($parts['scheme']) || $parts['scheme'] == 'file')
+            {
+                $this->set('name', basename($parts['path']));
+                $this->set('folder', dirname($parts['path']));
 
-            $this->set('name', basename($path));
-            $this->set('folder', dirname($path));
-
-            $wrappers = array_merge(stream_get_wrappers(), array('file'));
-
-            if (!in_array($parts['scheme'], $wrappers)) {
-                $this->set('container', basename($parts['scheme']));
+                if (isset($parts['host'])) {
+                    $this->set('container', basename($parts['host']));
+                }
             }
         }
 
