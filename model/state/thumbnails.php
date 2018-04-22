@@ -35,11 +35,8 @@ class ComFilesModelStateThumbnails extends KModelState
 
             $parts = parse_url($value);
 
-            $path = isset($parts['host']) ? $parts['host'] : '';
-            $path .= isset($parts['path']) ? $parts['path'] : '';
-
-            $this->set('name', basename($path) . '.jpg');
-            $this->set('folder', dirname($path));
+            $this->set('name', basename($parts['path']) . '.jpg');
+            $this->set('folder', dirname($parts['path']));
         }
 
         return parent::set($name, $value);
