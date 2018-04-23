@@ -153,9 +153,13 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
             {
                 if ($str = $this->generate())
                 {
-                    $folder = $this->getObject('com:files.adapter.folder', array(
-                        'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '')
-                    ));
+                    $path = '/' . ($this->folder ? $this->folder . '/' : '');
+
+                    if ($container = $this->getContainer()) {
+                        $path = $container->fullpath . $path;
+                    }
+
+                    $folder = $this->getObject('com:files.adapter.folder', array('path' => $path));
 
                     if (!$folder->exists()) {
                         $folder->create();
