@@ -59,10 +59,12 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
     public function setAdapter()
     {
+        $path = '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+
         if ($container = $this->getContainer()) {
-            $path = $container->fullpath . '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+            $path = $container->fullpath . $path;
         } else {
-            $path = $this->uri;
+            $path = $this->uri ?: $path;
         }
 
         $this->_adapter = $this->getObject('com:files.adapter.file', array('path' => $path));
