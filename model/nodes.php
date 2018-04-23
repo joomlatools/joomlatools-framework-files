@@ -135,9 +135,9 @@ class ComFilesModelNodes extends KModelAbstract
     /**
      * Reset the cached container object if container changes
      *
-     * @param KModelContextInterface $context
+     * @param KModelContext $context
      */
-    protected function _afterReset(KModelContextInterface $context)
+    protected function _afterReset(KModelContext $context)
     {
         $modified = (array) KObjectConfig::unbox($context->modified);
         if (in_array('container', $modified)) {
