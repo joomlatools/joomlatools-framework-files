@@ -205,6 +205,8 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
                 $folder->create();
             }
         }
+
+        parent::_beforeFetch($context);
     }
 
     protected function _generateThumbnails(KModelContextInterface $context)
