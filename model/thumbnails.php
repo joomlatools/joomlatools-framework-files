@@ -76,9 +76,9 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
     /**
      * Reset the cached container object if container changes
      *
-     * @param KModelContextInterface $context
+     * @param KModelContext $context
      */
-    protected function _afterReset(KModelContextInterface $context)
+    protected function _afterReset(KModelContext $context)
     {
         parent::_afterReset($context);
 
@@ -103,7 +103,7 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         return $this->_source_file;
     }
 
-    protected function _beforeCreateSet(KModelContextInterface $context)
+    protected function _beforeCreateSet(KModelContext $context)
     {
         $parameters = $this->getContainer()->getParameters();
 
@@ -187,7 +187,7 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         }
     }
 
-    protected function _beforeFetch()
+    protected function _beforeFetch(KModelContext $context)
     {
         $state = $this->getState();
 
@@ -209,7 +209,7 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         parent::_beforeFetch($context);
     }
 
-    protected function _generateThumbnails(KModelContextInterface $context)
+    protected function _generateThumbnails(KModelContext $context)
     {
         if ($context->entity && $context->entity instanceof ComFilesModelEntityThumbnails) {
             $thumbnails = $context->entity;
@@ -264,7 +264,7 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
         return $thumbnails;
     }
 
-    protected function _checkThumbnails(KModelContextInterface $context)
+    protected function _checkThumbnails(KModelContext $context)
     {
         $file = $this->_getSourceFile();
 
