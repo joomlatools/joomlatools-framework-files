@@ -201,6 +201,11 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
 	public function exists()
 	{
-		return is_file($this->_path);
+	    if ($this->isLocal()) {
+            $result = is_file($this->_path);
+        } else {
+            $result = (fopen($this->_path, 'r') !== false);
+        }
+		return $result;
 	}
 }
