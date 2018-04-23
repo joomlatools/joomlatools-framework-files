@@ -51,7 +51,7 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
 	public function isNew()
 	{
-		return empty($this->name) || !$this->_adapter->exists();
+		return (empty($this->name) && !$this->_uri) || !$this->_adapter->exists();
 	}
 
 	public function copy()
@@ -223,13 +223,15 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
     {
         if (!$this->_uri)
         {
-            $path = '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+            $path = ($this->folder ? $this->folder . '/' : '') . $this->name;
 
             if ($container = $this->getContainer()) {
-                $path = $container->slug . $path;
+                $path = $container->slug . '/' . $path;
             }
 
-            $this->_uri = sprintf('file://%s', $path);
+            if ($path) {
+                $this->_uri = sprintf('file://%s', $path);
+            }
         }
 
         return $this->_uri;
@@ -257,6 +259,11 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
         }
 
         return $this->_container;
+    }
+
+    public function isLocal()
+    {
+        return $this->_adapter && $this->_adapter->isLocal();
     }
 
 	public function setAdapter()
