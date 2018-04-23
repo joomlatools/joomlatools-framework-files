@@ -62,9 +62,7 @@ class ComFilesModelStateThumbnails extends KModelState
     {
         if (!$this->_source_file && ($source = $this->get('source')))
         {
-            $file = $this->getObject('com:files.model.files')
-                         ->uri($source)
-                         ->fetch();
+            $file = $this->getObject('com:files.model.files')->uri($source)->fetch();
 
             if (!$file->isNew()) {
                 $this->_source_file = $file;
