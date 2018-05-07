@@ -112,8 +112,12 @@ window.addEvent('domready', function() {
         %]
         <td class="k-table-data--toggle"></td>
         <td class="k-table-data--icon">
-            <span class="k-icon-document-[%=icon%]"></span>
-        </td>
+            [% if (typeof thumbnail === 'object') { %]
+                <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
+            [% } else { %]
+                <span class="k-icon-document-[%=icon%]"></span>
+            [% } %]
+		</td>
 		<td class="k-table-data--ellipsis">
             <a href="#" class="navigate" data-k-tooltip='{"container":".k-ui-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View file info') ?>">[%=name%]</a>
 		</td>
