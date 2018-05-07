@@ -222,7 +222,7 @@ class ComFilesModelThumbnails extends ComFilesModelFiles
 
         $file = $this->_getSourceFile();
 
-        if ($file && $file->containsImage())
+        if ($file && $file->canHaveThumbnail())
         {
             $state     = $this->getState();
             $container = $this->getContainer();

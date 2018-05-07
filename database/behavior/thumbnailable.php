@@ -35,13 +35,11 @@ class ComFilesDatabaseBehaviorThumbnailable extends KDatabaseBehaviorAbstract
     }
 
     /**
-     * Tells if a file contains an image
+     * Tells if a thumbnail may be generated for the file
      *
-     * Files containing images are thumbnailable, meaning that a thumbnail may be generated for them
-     *
-     * @return bool true if it contains an image, false otherwise
+     * @return bool true if it can, false otherwise
      */
-    public function containsImage()
+    public function canHaveThumbnail()
     {
         $result = false;
         $mixer  = $this->getMixer();
