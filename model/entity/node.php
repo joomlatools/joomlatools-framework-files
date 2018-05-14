@@ -201,14 +201,11 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
             $parts = parse_url($value);
 
-            if (!isset($parts['scheme']) || $parts['scheme'] == 'file')
-            {
-                $this->name = basename($parts['path']);
-                $this->folder = dirname($parts['path']);
+            $this->offsetSet('name', basename($parts['path']));
+            $this->offsetSet('folder', dirname($parts['path']));
 
-                if (isset($parts['host'])) {
-                    $this->container = basename($parts['host']);
-                }
+            if (isset($parts['scheme']) && $parts['scheme'] == 'file' && isset($parts['host'])) {
+                $this->offsetSet('container', basename($parts['host']));
             }
         }
 
