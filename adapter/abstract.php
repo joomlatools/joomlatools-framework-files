@@ -34,17 +34,12 @@ abstract class ComFilesAdapterAbstract extends KObject
 	{
 		parent::__construct($config);
 
-        $this->_local = $config->local;
-
         $this->setPath($config->path);
 	}
 
 	protected function _initialize(KObjectConfig $config)
 	{
-        $config->append(array(
-            'local' => true,
-            'path'  => ''
-        ));
+        $config->append(array('path' => ''));
 
 		parent::_initialize($config);
 	}
@@ -65,20 +60,17 @@ abstract class ComFilesAdapterAbstract extends KObject
 
         $parts = parse_url($this->_path);
 
+        $this->_local = true;
+
         if (isset($parts['scheme']))
         {
             $scheme = $parts['scheme'];
 
-            if (in_array($scheme, stream_get_wrappers()))
-            {
-                $this->_local = ($scheme === 'file') ? true : false;
-            }
-            elseif ($scheme == 'file')
-            {
+            if ($scheme === 'file') {
                 $this->_path = str_replace('file://', '', $this->_path);
-                $this->_local = true;
+            } else {
+                $this->_local = false;
             }
-            else throw new RuntimeException(sprintf('Unsupported stream wrapper for: %', $this->_path));
         }
 
 		return $this;
