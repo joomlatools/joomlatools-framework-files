@@ -34,16 +34,17 @@ abstract class ComFilesAdapterAbstract extends KObject
 	{
 		parent::__construct($config);
 
-        $this->_local = true;
+        $this->_local = $config->local;
 
         $this->setPath($config->path);
 	}
 
 	protected function _initialize(KObjectConfig $config)
 	{
-		$config->append(array(
-			'path' => ''
-		));
+        $config->append(array(
+            'local' => true,
+            'path'  => ''
+        ));
 
 		parent::_initialize($config);
 	}
