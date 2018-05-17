@@ -31,7 +31,7 @@ class ComFilesModelStateNodes extends KModelState
             if (!isset($parts['scheme']) || $parts['scheme'] == 'file')
             {
                 $this->set('name', basename($parts['path']));
-                $this->set('folder', dirname($parts['path']));
+                $this->set('folder', trim(dirname($parts['path']), '/'));
 
                 if (isset($parts['host'])) {
                     $this->set('container', basename($parts['host']));
