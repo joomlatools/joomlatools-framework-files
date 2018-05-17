@@ -830,15 +830,14 @@ Files.App = new Class({
 
         var nodes = this.grid.nodes,
             that = this;
-        if (nodes.getLength()) {
-            nodes.each(function(node) {
-                if (node.filetype !== 'image') {
-                    return;
-                }
-                var name = node.name;
-
+        if (nodes.getLength())
+        {
+            nodes.each(function(node)
+            {
                 var img = node.element.getElement('img.image-thumbnail');
-                if (img) {
+
+                if (img)
+                {
                     img.addEvent('load', function(){
                         this.addClass('loaded');
                     });

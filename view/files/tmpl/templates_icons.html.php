@@ -78,7 +78,11 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                     <div class="k-ratio-block k-ratio-block--4-to-3">
                         <div class="k-ratio-block__body">
                             <div class="k-ratio-block__centered">
+                            [% if (typeof thumbnail === 'object') { %]
+                                <img class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" src="" alt="[%=name%]" border="0" />
+                            [% } else { %]
                                 <span class="k-icon-document-[%=icon%] k-icon--size-large k-icon--accent extension-label"></span>
+                            [% }%]
                             </div>
                         </div>
                     </div>

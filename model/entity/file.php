@@ -15,7 +15,7 @@
  */
 class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KCommandCallbackDelegate
 {
-	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'tiff', 'tif', 'bmp');
+	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
 
 	public function __construct(KObjectConfig $config)
     {
