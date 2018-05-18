@@ -44,8 +44,6 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                             $this->_metadata['image'] = array('width' => $image_size[0], 'height' => $image_size[1]);
                         }
                     }
-
-
                 }
 			}
             catch (RunTimeException $e) {}
@@ -136,13 +134,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
 	public function read()
 	{
-		$result = null;
-
-		if ($this->_handle->isReadable()) {
-			$result = file_get_contents($this->_path);
-		}
-
-		return $result;
+		return @file_get_contents($this->_path);
 	}
 
 	public function write($data)
@@ -185,15 +177,22 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
   public function readExifData()
 	{
-  		if ($this->_handle->isReadable() && function_exists('exif_read_data')) {
-  		    return @exif_read_data($this->_path, null);
-  		}
+	    $result = null;
 
-  		return null;
+	    if (function_exists('exif_read_data')) {
+            $result = @exif_read_data($this->_path, null);
+        }
+
+  		return $result;
 	}
 
 	public function exists()
 	{
-		return is_file($this->_path);
+	    if ($this->isLocal()) {
+            $result = is_file($this->_path);
+        } else {
+            $result = (fopen($this->_path, 'r') !== false);
+        }
+		return $result;
 	}
 }

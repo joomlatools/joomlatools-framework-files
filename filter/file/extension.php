@@ -17,18 +17,21 @@ class ComFilesFilterFileExtension extends KFilterAbstract
 {
     public function validate($entity)
 	{
-	    $allowed = KObjectConfig::unbox($entity->getContainer()->getParameters()->allowed_extensions);
-
-        if (is_array($allowed))
+	    if ($container = $entity->getContainer())
         {
-            $allowed = array_map(function ($value) {
-                return strtolower($value);
-            }, $allowed);
+            $allowed = KObjectConfig::unbox($entity->getContainer()->getParameters()->allowed_extensions);
 
-            $value = strtolower($entity->extension);
+            if (is_array($allowed))
+            {
+                $allowed = array_map(function ($value) {
+                    return strtolower($value);
+                }, $allowed);
 
-            if (!in_array($value, $allowed)) {
-                return $this->_error($this->getObject('translator')->translate('Invalid file extension'));
+                $value = strtolower($entity->extension);
+
+                if (!in_array($value, $allowed)) {
+                    return $this->_error($this->getObject('translator')->translate('Invalid file extension'));
+                }
             }
         }
 	}

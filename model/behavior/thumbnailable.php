@@ -54,19 +54,20 @@ class ComFilesModelBehaviorThumbnailable extends KModelBehaviorAbstract
 
     public function getThumbnailsContainer()
     {
-        $container = $this->getContainer()->getParameters()->thumbnails_container;
-
-        if ($container && (!$this->_container instanceof ComFilesModelEntityContainer))
+        if (!$this->_container  instanceof ComFilesModelEntityContainer && ($container = $this->getContainer()))
         {
-            $container = $this->getObject('com:files.model.containers')
-                              ->slug($container)
-                              ->fetch();
+            if ($slug = $container->getParameters()->thumbnails_container)
+            {
+                $container = $this->getObject('com:files.model.containers')
+                                  ->slug($slug)
+                                  ->fetch();
 
-            if ($container->isNew()) {
-                throw new RuntimeException('Could not fetch thumbnails container');
+                if ($container->isNew()) {
+                    throw new RuntimeException('Could not fetch thumbnails container');
+                }
+
+                $this->_container = $container->top();
             }
-
-            $this->_container = $container->top();
         }
 
         return $this->_container;

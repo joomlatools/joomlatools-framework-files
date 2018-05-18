@@ -49,10 +49,13 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
 
 	protected function _downsizeImage(KDatabaseContext $context)
     {
-        $parameters = $this->getContainer()->getParameters();
+        if ($container = $this->getContainer())
+        {
+            $parameters = $container->getParameters();
 
-        if ($size = $parameters['maximum_image_size']) {
-            $this->resize($size);
+            if ($size = $parameters['maximum_image_size']) {
+                $this->resize($size);
+            }
         }
     }
 

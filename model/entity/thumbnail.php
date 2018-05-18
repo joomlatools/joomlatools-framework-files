@@ -59,9 +59,15 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
     public function setAdapter()
     {
-        $this->_adapter = $this->getContainer()->getAdapter('file', array(
-            'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '').$this->name
-        ));
+        $path = '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+
+        if ($container = $this->getContainer()) {
+            $path = $container->fullpath . $path;
+        } else {
+            $path = $this->uri ?: $path;
+        }
+
+        $this->_adapter = $this->getObject('com:files.adapter.file', array('path' => $path));
 
         // Check if we should
         $this->_regenerate();
@@ -149,9 +155,13 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
             {
                 if ($str = $this->generate())
                 {
-                    $folder = $this->getContainer()->getAdapter('folder', array(
-                        'path' => $this->getContainer()->fullpath.'/'.($this->folder ? $this->folder.'/' : '')
-                    ));
+                    $path = '/' . ($this->folder ? $this->folder . '/' : '');
+
+                    if ($container = $this->getContainer()) {
+                        $path = $container->fullpath . $path;
+                    }
+
+                    $folder = $this->getObject('com:files.adapter.folder', array('path' => $path));
 
                     if (!$folder->exists()) {
                         $folder->create();
