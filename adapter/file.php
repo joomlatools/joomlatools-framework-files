@@ -134,15 +134,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
 	public function read()
 	{
-		$result = null;
-
-		if (!$this->isLocal()) {
-		    $result = file_get_contents($this->_path);
-        } elseif ($this->_handle->isReadable()) {
-			$result = file_get_contents($this->_path);
-		}
-
-		return $result;
+		return @file_get_contents($this->_path);
 	}
 
 	public function write($data)
@@ -187,13 +179,8 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 	{
 	    $result = null;
 
-	    if (function_exists('exif_read_data'))
-        {
-            if (!$this->isLocal()) {
-                $result = @exif_read_data($this->_path, null);
-            } elseif ($this->_handle->isReadable()) {
-                $result = @exif_read_data($this->_path, null);
-            }
+	    if (function_exists('exif_read_data')) {
+            $result = @exif_read_data($this->_path, null);
         }
 
   		return $result;
