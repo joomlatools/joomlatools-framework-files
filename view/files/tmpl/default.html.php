@@ -8,6 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
+
 <?= import('scripts.html');?>
 
 <script>
@@ -37,6 +38,7 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         Files.app = new Files.App(options);
     });
 </script>
+
 
 <!-- Component wrapper -->
 <div class="k-component-wrapper" id="files-app">
@@ -84,6 +86,12 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
         <div class="k-flex-wrapper k-position-relative">
             <div id="files-grid-container">
                 <div id="files-grid"></div>
+                <div class="k-empty-state k-is-hidden" id="empty-state">
+                    <p>
+                        <?= translate('No files found.'); ?><br />
+                        <small><?= translate('Try selecting another folder or start uploading.'); ?></small>
+                    </p>
+                </div>
                 <div class="k-table-pagination" id="files-paginator-container">
                     <?= helper('paginator.pagination') ?>
                 </div>

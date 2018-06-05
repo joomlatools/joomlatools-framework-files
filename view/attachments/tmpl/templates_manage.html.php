@@ -8,6 +8,7 @@
  */
 defined('KOOWA') or die; ?>
 
+
 <textarea style="display: none" id="attachments_container">
     <table id="document_list">
         <thead>

@@ -27,6 +27,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 <ktml:script src="media://koowa/com_files/js/files.attachments.js"/>
 <ktml:style src="media://koowa/com_files/css/files.css"/>
 
+
 <div class="k-dynamic-content-holder">
     <script>
         Files.sitebase = '<?= $sitebase; ?>';
@@ -179,6 +180,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
     <?= import('com:files.files.templates_compact.html');?>
     <?= import('com:files.attachments.templates_manage.html', array('can_detach' => $can_detach));?>
 </div>
+
 
 <!-- Wrapper -->
 <div class="k-wrapper k-js-wrapper">

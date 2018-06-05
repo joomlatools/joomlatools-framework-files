@@ -8,6 +8,7 @@
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
+
 <script>
 window.addEvent('domready', function() {
 	document.id('files-canvas').addEvent('click:relay(input.-check-all)', function(e) {
