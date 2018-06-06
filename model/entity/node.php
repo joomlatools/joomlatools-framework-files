@@ -267,10 +267,10 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 	{
 		$type = $this->getIdentifier()->name;
 
-		$path = '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+		$path = ($this->folder ? $this->folder . '/' : '') . $this->name;
 
         if ($container = $this->getContainer()) {
-            $path = $container->fullpath . $path;
+            $path = $container->fullpath . '/' . $path;
         } else {
             $path = $this->uri ?: $path;
         }
