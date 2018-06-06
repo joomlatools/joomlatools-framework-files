@@ -36,12 +36,9 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                         'size'          => $this->_handle->getSize(),
                         'modified_date' => $this->_handle->getMTime()
                     );
-                }
 
-                if (in_array($this->_metadata['extension'], self::$image_extensions))
-                {
-                    if ($image_size = $this->getImageSize()) {
-                        $this->_metadata['image'] = array('width' => $image_size[0], 'height' => $image_size[1]);
+                    if (in_array($this->_metadata['extension'], self::$image_extensions) && $image_size = $this->getImageSize()) {
+                        $this->_metadata['image'] = $image_size;
                     }
                 }
 			}
@@ -53,18 +50,19 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
 	public function getImageSize()
 	{
-	    if ($this->isLocal())
-	    {
+	    if ($this->isLocal()) {
             $result = @getimagesize($this->_path);
-
-            if (!$result) {
-                $result = $this->_getimagesize(); // If GD fails, attempt to get size our way
-            }
+        } else {
+	        $result = $this->_getimagesize();
         }
-        else $result = $this->_getimagesize();
 
-		if ($result && count($result) > 2) {
-			$result = array_slice($result, 0, 2);
+		if ($result)
+		{
+            if (count($result) > 2) {
+                $result = array_slice($result, 0, 2);
+            }
+
+            $result = array('width' => $result[0], 'height' => $result[1]);
 		}
 
 		return $result;
