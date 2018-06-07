@@ -227,9 +227,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                     }
                     else break;
                 }
-
-                //file_put_contents(JPATH_ROOT . '/toto-'.time().'.txt', unpack('H*', $block));
-
+                
                 if ($pos !== false)
                 {
                     $block_size = unpack("H*", $block[$pos - 2] . $block[$pos - 1]);
