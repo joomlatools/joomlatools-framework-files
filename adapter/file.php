@@ -81,21 +81,27 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
      */
 	protected function _getimagesize()
     {
-        $extension = strtolower(pathinfo($this->_handle->getFilename(), PATHINFO_EXTENSION));
+        $result = false;
 
-        switch($extension)
+        if ($extension = strtolower(pathinfo($this->_handle->getFilename(), PATHINFO_EXTENSION)))
         {
-            case 'png':
-                $result = $this->_getPngSize();
-                break;
-            case 'jpeg':
-            case 'jpg':
-                $result = $this->_getJpegSize();
-                break;
-            case 'gif':
-                $result = $this->_getGifSize();
-                break;
+            switch($extension)
+            {
+                case 'png':
+                    $result = $this->_getPngSize();
+                    break;
+                case 'jpeg':
+                case 'jpg':
+                    $result = $this->_getJpegSize();
+                    break;
+                case 'gif':
+                    $result = $this->_getGifSize();
+                    break;
+                default:
+                    break;
+            }
         }
+
 
         return $result;
     }
