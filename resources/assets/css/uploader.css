@@ -1,5 +1,7 @@
 /* ========================================================================== Uploader ========================================================================== */
 /** A single and multi file uploader */
+/* ========================================================================== Tools ========================================================================== */
+/* These file do not produce any CSS code on their own */
 @-webkit-keyframes progress-bar-stripes { from { background-position: 40px 0; }
   to { background-position: 0 0; } }
 
@@ -44,11 +46,13 @@
 /* Variables ========================================================================== */
 /* The parent container ========================================================================== */
 /** 1. Content-box so we don't get weird 1pixel jump error on IE (IE10 as well) 2. Hide overflowing content like messages and info */
-.k-upload { box-sizing: content-box; /* 1 */ overflow: hidden; /* 2 */ background: white; color: #555; border: 1px solid #ccc; border-radius: 3px; margin-bottom: 20px; min-height: 60px; transition: all 0.2s ease-in-out; max-width: 100%; flex: 0 0 auto; /* Loading message on top */ /* Hide loading message on initializing */ /** Inline styling - modals 1. Reset border-radius to fit in parent view 2. High z-index to set upload on top of the rest */ /* Border box size everything inside */ }
+.k-upload { box-sizing: content-box; /* 1 */ overflow: hidden; /* 2 */ background: white; color: #555; border: 1px solid #ccc; border-radius: 3px; margin-bottom: 20px; min-height: 60px; transition: all 0.2s ease-in-out; max-width: 100%; /* Loading message on top */ /* Hide loading message on initializing */ /** Inline styling - modals 1. Reset border-radius to fit in parent view 2. High z-index to set upload on top of the rest */ /* Border box size everything inside */ }
 
 .k-upload:after { position: absolute; top: 0; right: 0; bottom: 0; left: 0; display: block; content: "Loading..."; background: white; z-index: 9; text-align: left; padding: 0 15px; line-height: 60px; transition: all 0.4s ease-in-out; }
 
 [dir="rtl"] .k-upload:after { text-align: right; }
+
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-upload, .k-flexboxlegacy .k-upload { flex: 0 0 auto; } }
 
 .k-upload.is-initialized:after { z-index: -2; opacity: 0; }
 
@@ -68,7 +72,9 @@
 .k-upload--custom .k-upload__info__content { max-height: none; /* 4 */ }
 
 /** Flexing uploader Uploader that grows and shrinks with it's parent warning: you do need to have set up flexbox parents properly */
-.k-upload--flex { margin: 0; min-height: 244px; flex: 1 1 auto; }
+.k-upload--flex { margin: 0; min-height: 244px; }
+
+@media (min-width: 300px) and (min-height: 391px) { .k-flexbox .k-upload--flex, .k-flexboxlegacy .k-upload--flex { flex: 1 1 auto; } }
 
 /* Uploader animations ========================================================================== */
 /** 1. Position relative for `top` to work properly 2. By default hide overflowing content 3. Smooth transitions */

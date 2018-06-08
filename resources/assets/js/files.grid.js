@@ -572,8 +572,6 @@ Files.Grid = new Class({
     },
     unspin: function(){
 		this.spinner_container.addClass('k-is-hidden');
-		kodekitUI.gallery();
-		kodekitUI.sidebarToggle();
     },
     /**
      * Updates the active state on the switchers

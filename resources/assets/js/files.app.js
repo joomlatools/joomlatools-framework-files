@@ -304,9 +304,6 @@ Files.App = new Class({
         this.grid.reset();
         this.grid.spin();
 
-        document.getElementById('empty-state').addClass('k-is-hidden');
-        document.getElementById('files-grid').removeClass('k-is-hidden');
-
         var parts = this.active.split('/'),
             name = parts[parts.length ? parts.length-1 : 0],
             folder = parts.slice(0, parts.length-1).join('/'),
@@ -589,7 +586,6 @@ Files.App = new Class({
 
                     this.container.removeClass('k-'+remove).addClass('k-'+layout);
                     kQuery('#files-grid-container').removeClass('k-'+remove+'-container').addClass('k-'+layout+'-container');
-                    kQuery('#files-paginator-container').removeClass('k-'+remove+'-pagination').addClass('k-'+layout+'-pagination');
                 }
 
                 if (key) {
@@ -601,7 +597,6 @@ Files.App = new Class({
 
                 if (that.grid) {
                     that.setThumbnails();
-                    kodekitUI.gallery();
                 }
             },
             onSetState: function(state) {
@@ -858,9 +853,6 @@ Files.App = new Class({
                     (node.element.getElement('.files-node') || node.element).addClass('loaded').removeClass('loading');
                 }
             });
-        } else {
-            document.getElementById('empty-state').removeClass('k-is-hidden');
-            document.getElementById('files-grid').addClass('k-is-hidden');
         }
 
     },

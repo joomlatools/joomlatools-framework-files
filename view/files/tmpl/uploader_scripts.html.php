@@ -11,7 +11,6 @@ defined('KOOWA') or die;
 $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
 ?>
 
-
 <?= helper('translator.script', array('strings' => array(
     // file size
     "tb", "mb", "kb", "gb", "b", "N/A",
@@ -59,7 +58,6 @@ $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
 <script>
 kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
 </script>
-
 
 <div class="k-dynamic-content-holder">
 
@@ -246,5 +244,4 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
             <span><?= translate('Drop files here') ?></span>
         </div>
     </script>
-
 </div>

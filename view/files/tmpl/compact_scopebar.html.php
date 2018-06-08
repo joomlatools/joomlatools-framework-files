@@ -9,7 +9,6 @@
 defined('KOOWA') or die;
 ?>
 
-
 <!-- Scopebar -->
 <div class="k-scopebar k-js-scopebar">
 
@@ -22,3 +21,4 @@ defined('KOOWA') or die;
     </div>
 
 </div><!-- .k-scopebar -->
+
