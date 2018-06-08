@@ -152,7 +152,7 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
             $size = $this->_adapter->getImageSize();
 
             if ($size !== false) {
-                return $size[0];
+                return $size['width'];
             }
         }
 
@@ -166,7 +166,7 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
             $size = $this->_adapter->getImageSize();
 
             if ($size !== false) {
-                return $size[1];
+                return $size['height'];
             }
         }
 
