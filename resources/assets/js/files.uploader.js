@@ -81,6 +81,12 @@ if (!Files) var Files = {};
                     }
                     Files.app.fireEvent('uploadFile', [row]);
                 }
+
+                if ( document.getElementById('files-grid').hasClass('k-is-hidden') ) {
+                    document.getElementById('empty-state').addClass('k-is-hidden');
+                    document.getElementById('files-grid').removeClass('k-is-hidden');
+                }
+
             }
 
         }, options);
