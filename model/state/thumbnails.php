@@ -22,7 +22,7 @@ class ComFilesModelStateThumbnails extends KModelState
         parent::__construct($config);
 
         $this->insert('version', 'cmd')
-             ->insert('source', 'url');
+             ->insert('source', 'string');
     }
 
     public function set($name, $value = null)

@@ -19,7 +19,7 @@ class ComFilesModelStateNodes extends KModelState
     {
         parent::__construct($config);
 
-        $this->insert('uri', 'url');
+        $this->insert('uri', 'string');
     }
 
     public function set($name, $value = null)
