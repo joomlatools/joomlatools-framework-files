@@ -3960,9 +3960,6 @@ Files.App = new Class({
         this.grid.reset();
         this.grid.spin();
 
-        document.getElementById('empty-state').addClass('k-is-hidden');
-        document.getElementById('files-grid').removeClass('k-is-hidden');
-
         var parts = this.active.split('/'),
             name = parts[parts.length ? parts.length-1 : 0],
             folder = parts.slice(0, parts.length-1).join('/'),
