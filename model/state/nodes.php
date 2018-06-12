@@ -26,17 +26,17 @@ class ComFilesModelStateNodes extends KModelState
     {
         if ($name == 'uri')
         {
-            $parts = parse_url($value);
+            $parts = $this->getObject('com:files.model.state.parser.url')->parse($value);
 
-            if (!isset($parts['scheme']) || $parts['scheme'] == 'file')
+            if (!$parts->scheme || $parts->scheme == 'file')
             {
-                $this->set('name', basename($parts['path']));
+                $this->set('name', basename($parts->path));
 
-                $folder = dirname($parts['path']);
+                $folder = dirname($parts->path);
 
-                if (isset($parts['host']))
+                if ($container = $parts->container)
                 {
-                    $this->set('container', basename($parts['host']));
+                    $this->set('container', $container);
 
                     // Folder is relative to container
                     $folder = trim($folder, '/');

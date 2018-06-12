@@ -199,13 +199,13 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
         {
             $this->_uri = $value; // Keep URI value on object property
 
-            $parts = parse_url($value);
+            $parts = $this->getObject('com:files.model.state.parser.url')->parse($value);
 
-            KObjectArray::offsetSet('name', basename($parts['path']));
-            KObjectArray::offsetSet('folder', dirname($parts['path']));
+            KObjectArray::offsetSet('name', basename($parts->path));
+            KObjectArray::offsetSet('folder', dirname($parts->path));
 
-            if (isset($parts['scheme']) && $parts['scheme'] == 'file' && isset($parts['host'])) {
-                KObjectArray::offsetSet('container', basename($parts['host']));
+            if ($container = $parts->container) {
+                KObjectArray::offsetSet('container', basename($container));
             }
         }
 

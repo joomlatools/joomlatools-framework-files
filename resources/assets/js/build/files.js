@@ -4503,7 +4503,7 @@ Files.App = new Class({
                     var source = Files.blank_image;
 
                     if (node.thumbnail) {
-                        source = Files.sitebase + '/' + node.thumbnail.relative_path;
+                        source = Files.sitebase + '/' + that.encodePath(node.thumbnail.relative_path);
                     }
 
                     img.set('src', source);
@@ -4567,6 +4567,19 @@ Files.App = new Class({
         }).toQueryString();
 
         return this.options.base_url ? this.options.base_url+route : route;
+    },
+    encodePath: function(path) {
+
+        path = encodeURI(path);
+
+        var replacements = {'\\?': '%3F', '#': '%23'}
+
+        for(var key in replacements)
+        {   var regexp = new RegExp(key, 'g');
+            path = path.replace(regexp, replacements[key]);
+        }
+
+        return path;
     }
 });
 
@@ -4679,7 +4692,7 @@ Files.Attachments.App = new Class({
                 copy.render('attachments').inject(that.preview);
 
                 if (copy.file.thumbnail) {
-                    that.preview.getElement('img').set('src', Files.sitebase + '/' + copy.file.thumbnail.relative_path).show();
+                    that.preview.getElement('img').set('src', Files.sitebase + '/' + this.encodePath(copy.file.thumbnail.relative_path)).show();
                 }
 
                 that.grid.selected = row.name;
@@ -4833,7 +4846,7 @@ if (!Files) var Files = {};
 
                             var setThumbnail = function(thumbnail)
                             {
-                                image.set('src', Files.sitebase + '/' + thumbnail.relative_path).addClass('loaded').removeClass('loading');
+                                image.set('src', Files.sitebase + '/' + Files.app.encodePath(thumbnail.relative_path)).addClass('loaded').removeClass('loading');
 
                                 /* @TODO We probably do not need this anymore? Layouts have changed and these elements/classes no longer exist */
                                 var element = row.element.getElement('.files-node');

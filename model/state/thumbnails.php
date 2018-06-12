@@ -33,10 +33,10 @@ class ComFilesModelStateThumbnails extends KModelState
                 $this->_source_file = null; // Reset source file if source gets changed
             }
 
-            $parts = parse_url($value);
+            $parts = $this->getObject('com:files.model.state.parser.url')->parse($value);
 
-            $this->set('name', basename($parts['path']) . '.jpg');
-            $this->set('folder', trim(dirname($parts['path']), '/'));
+            $this->set('name', basename($parts->path) . '.jpg');
+            $this->set('folder', trim(dirname($parts->path), '/'));
         }
 
         return parent::set($name, $value);
