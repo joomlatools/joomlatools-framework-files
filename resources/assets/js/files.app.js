@@ -847,7 +847,7 @@ Files.App = new Class({
                     var source = Files.blank_image;
 
                     if (node.thumbnail) {
-                        source = Files.sitebase + '/' + node.thumbnail.relative_path.replace('\?', '%3F');
+                        source = Files.sitebase + '/' + that.encodePath(node.thumbnail.relative_path);
                     }
 
                     img.set('src', source);
