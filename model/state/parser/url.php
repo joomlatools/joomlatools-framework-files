@@ -21,19 +21,19 @@ class ComFilesModelStateParserUrl extends KObject implements KObjectMultiton
 
         $result = new stdClass();
 
-        $parts = parse_url($value);
+        $parts = explode('://', $value);
 
         $result->container = null;
 
-        if (isset($parts['scheme']))
+        if (count($parts) > 1)
         {
-            $result->scheme = $parts['scheme'];
+            $result->scheme = $parts[0];
 
-            if ($result->scheme == 'file' && isset($parts['host'])) {
-                $result->container = $parts['host'];
+            if ($result->scheme == 'file' && strpos($parts[1], '/') !== 0) {
+                $result->container = substr($parts[1],0, strpos($parts[1], '/'));
             }
 
-            list($scheme, $path) = explode('://', $value);
+            $path = $parts[1];
 
             if ($container = $result->container) {
                 $path = str_replace($container, '', $path);
