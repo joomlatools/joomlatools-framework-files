@@ -15,35 +15,39 @@
  */
 class ComFilesModelStateNodes extends KModelState
 {
+    protected $_parser;
+
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
-        $this->insert('uri', 'string');
+        $this->_parser = $this->getObject($config->parser);
+
+        $this->insert('uri', 'url');
+    }
+
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array('parser' => 'com:files.model.state.parser.url'));
+
+        parent::_initialize($config);
     }
 
     public function set($name, $value = null)
     {
         if ($name == 'uri')
         {
-            $parts = parse_url($value);
+            $parts = $this->_parser->parse($value);
 
-            if (!isset($parts['scheme']) || $parts['scheme'] == 'file')
+            if (!$parts->scheme || $parts->scheme == 'file')
             {
-                $path = $parts['path'];
+                $this->set('name', basename($parts->path));
 
-                // Handle folders containing question marks
-                if (isset($parts['query'])) {
-                    $path .= sprintf('?%s', $parts['query']);
-                }
+                $folder = dirname($parts->path);
 
-                $this->set('name', basename($path));
-
-                $folder = dirname($path);
-
-                if (isset($parts['host']))
+                if ($container = $parts->container)
                 {
-                    $this->set('container', basename($parts['host']));
+                    $this->set('container', $container);
 
                     // Folder is relative to container
                     $folder = trim($folder, '/');

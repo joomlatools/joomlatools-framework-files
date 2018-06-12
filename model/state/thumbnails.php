@@ -17,12 +17,23 @@ class ComFilesModelStateThumbnails extends KModelState
 {
     protected $_source_file;
 
+    protected $_parser;
+
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
+        $this->_parser = $this->getObject('com:files.model.state.parser.url');
+
         $this->insert('version', 'cmd')
-             ->insert('source', 'string');
+             ->insert('source', 'url');
+    }
+
+    protected function _initialize(KObjectConfig $config)
+    {
+        $config->append(array('parser' => 'com:files.model.state.parser.url'));
+
+        parent::_initialize($config);
     }
 
     public function set($name, $value = null)
@@ -33,17 +44,10 @@ class ComFilesModelStateThumbnails extends KModelState
                 $this->_source_file = null; // Reset source file if source gets changed
             }
 
-            $parts = parse_url($value);
+            $parts = $this->_parser->parse($value);
 
-            $path = $parts['path'];
-
-            // Handle folders containing question marks
-            if (!isset($parts['scheme']) || $parts['scheme'] == 'file' && isset($parts['query'])) {
-                $path .= sprintf('?%s', $path);
-            }
-
-            $this->set('name', basename($path) . '.jpg');
-            $this->set('folder', trim(dirname($path), '/'));
+            $this->set('name', basename($parts->path) . '.jpg');
+            $this->set('folder', trim(dirname($parts->path), '/'));
         }
 
         return parent::set($name, $value);
