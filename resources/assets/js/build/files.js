@@ -4503,7 +4503,7 @@ Files.App = new Class({
                     var source = Files.blank_image;
 
                     if (node.thumbnail) {
-                        source = Files.sitebase + '/' + node.thumbnail.relative_path;
+                        source = Files.sitebase + '/' + node.thumbnail.relative_path.replace('\?', '%3F');
                     }
 
                     img.set('src', source);
@@ -4679,7 +4679,7 @@ Files.Attachments.App = new Class({
                 copy.render('attachments').inject(that.preview);
 
                 if (copy.file.thumbnail) {
-                    that.preview.getElement('img').set('src', Files.sitebase + '/' + copy.file.thumbnail.relative_path).show();
+                    that.preview.getElement('img').set('src', Files.sitebase + '/' + copy.file.thumbnail.relative_path.replace('\?', '%3F')).show();
                 }
 
                 that.grid.selected = row.name;
@@ -4833,7 +4833,7 @@ if (!Files) var Files = {};
 
                             var setThumbnail = function(thumbnail)
                             {
-                                image.set('src', Files.sitebase + '/' + thumbnail.relative_path).addClass('loaded').removeClass('loading');
+                                image.set('src', Files.sitebase + '/' + thumbnail.relative_path.replace('\?', '%3F')).addClass('loaded').removeClass('loading');
 
                                 /* @TODO We probably do not need this anymore? Layouts have changed and these elements/classes no longer exist */
                                 var element = row.element.getElement('.files-node');
