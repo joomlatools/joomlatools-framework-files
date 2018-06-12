@@ -15,29 +15,18 @@
  */
 class ComFilesModelStateNodes extends KModelState
 {
-    protected $_parser;
-
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
-        $this->_parser = $this->getObject($config->parser);
-
         $this->insert('uri', 'url');
-    }
-
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(array('parser' => 'com:files.model.state.parser.url'));
-
-        parent::_initialize($config);
     }
 
     public function set($name, $value = null)
     {
         if ($name == 'uri')
         {
-            $parts = $this->_parser->parse($value);
+            $parts = $this->getObject('com:files.model.state.parser.url')->parse($value);
 
             if (!$parts->scheme || $parts->scheme == 'file')
             {

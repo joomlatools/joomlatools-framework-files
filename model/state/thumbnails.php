@@ -17,23 +17,12 @@ class ComFilesModelStateThumbnails extends KModelState
 {
     protected $_source_file;
 
-    protected $_parser;
-
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
-        $this->_parser = $this->getObject('com:files.model.state.parser.url');
-
         $this->insert('version', 'cmd')
              ->insert('source', 'url');
-    }
-
-    protected function _initialize(KObjectConfig $config)
-    {
-        $config->append(array('parser' => 'com:files.model.state.parser.url'));
-
-        parent::_initialize($config);
     }
 
     public function set($name, $value = null)
@@ -44,7 +33,7 @@ class ComFilesModelStateThumbnails extends KModelState
                 $this->_source_file = null; // Reset source file if source gets changed
             }
 
-            $parts = $this->_parser->parse($value);
+            $parts = $this->getObject('com:files.model.state.parser.url')->parse($value);
 
             $this->set('name', basename($parts->path) . '.jpg');
             $this->set('folder', trim(dirname($parts->path), '/'));
