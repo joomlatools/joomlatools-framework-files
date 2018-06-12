@@ -201,8 +201,15 @@ class ComFilesModelEntityNode extends KModelEntityAbstract
 
             $parts = parse_url($value);
 
-            KObjectArray::offsetSet('name', basename($parts['path']));
-            KObjectArray::offsetSet('folder', dirname($parts['path']));
+            $path = $parts['path'];
+
+            // Handle folders containing question marks
+            if (!isset($parts['scheme']) || $parts['scheme'] == 'file' && isset($parts['query'])) {
+                $path .= sprintf('?%s', $path);
+            }
+
+            KObjectArray::offsetSet('name', basename($path));
+            KObjectArray::offsetSet('folder', dirname($path));
 
             if (isset($parts['scheme']) && $parts['scheme'] == 'file' && isset($parts['host'])) {
                 KObjectArray::offsetSet('container', basename($parts['host']));
