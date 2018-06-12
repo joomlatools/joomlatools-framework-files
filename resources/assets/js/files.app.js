@@ -911,5 +911,18 @@ Files.App = new Class({
         }).toQueryString();
 
         return this.options.base_url ? this.options.base_url+route : route;
+    },
+    encodePath: function(path) {
+
+        path = encodeURI(path);
+
+        var replacements = {'\\?': '%3F', '#': '%23'}
+
+        for(var key in replacements)
+        {   var regexp = new RegExp(key, 'g');
+            path = path.replace(regexp, replacements[key]);
+        }
+
+        return path;
     }
 });
