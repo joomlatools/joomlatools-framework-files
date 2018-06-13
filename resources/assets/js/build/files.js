@@ -4511,9 +4511,6 @@ Files.App = new Class({
                     (node.element.getElement('.files-node') || node.element).addClass('loaded').removeClass('loading');
                 }
             });
-        } else {
-            document.getElementById('empty-state').removeClass('k-is-hidden');
-            document.getElementById('files-grid').addClass('k-is-hidden');
         }
 
     },
