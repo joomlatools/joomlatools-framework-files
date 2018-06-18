@@ -69,7 +69,6 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
         $this->_adapter = $this->getObject('com:files.adapter.file', array('path' => $path));
 
-        // Check if we should
         $this->_regenerate();
 
         unset($this->_data['fullpath']);
