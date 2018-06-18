@@ -269,7 +269,7 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
             $ratio = $info[0] / $info[1];
 
-            if (!$this->crop && !empty($dimension['height']) && !empty($dimension['weight']))
+            if (!$this->crop && !empty($dimension['height']) && !empty($dimension['width']))
             {
                 $dimension_ratio = $dimension['height'] / $dimension['width'];
 
