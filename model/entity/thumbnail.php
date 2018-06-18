@@ -83,7 +83,8 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
         $source = $this->source;
 
-        if ($this->_adapter && $this->_adapter->exists() && $source && $source->isImage())
+        // Only regenerate local sources ...we don't want to calculate dimensions on external sources.
+        if ($this->_adapter && $this->_adapter->exists() && $source && $source->isImage() && $source->isLocal())
         {
             $current_size = @getimagesize($this->fullpath);
 
