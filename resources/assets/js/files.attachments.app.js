@@ -108,6 +108,8 @@ Files.Attachments.App = new Class({
 
                 if (copy.file.thumbnail) {
                     that.preview.getElement('img').set('src', Files.sitebase + '/' + that.encodePath(copy.file.thumbnail.relative_path)).show();
+                } else if (copy.file.type == 'image') {
+                    that.preview.getElement('img').set('src', that.createRoute({view: 'file', format: 'html', name: encodeURIComponent(copy.file.name), routed: 1}));
                 }
 
                 that.grid.selected = row.name;
