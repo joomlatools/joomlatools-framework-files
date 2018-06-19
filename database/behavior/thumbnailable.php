@@ -55,8 +55,6 @@ class ComFilesDatabaseBehaviorThumbnailable extends KDatabaseBehaviorAbstract
             // Check source size against thumbnail size (local sources only)
             if ($mixer->isLocal() && ($size = $mixer->adapter->getImageSize()))
             {
-                $dimension = $this->dimension;
-
                 if (isset($dimension['width']) && isset($dimension['height']))
                 {
                     if ($size['width'] <= $dimension['width'] && $size['height'] <= $dimension['height']) $result = false;
