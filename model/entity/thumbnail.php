@@ -306,9 +306,6 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
      * Checks if a thumbnail for the current source and provided dimension can be generated given the
      * amount of memory that's available.
      *
-     * A thumbnail will not get generated if the source is smaller than the thumbnail. This check is only performed
-     * on local sources to avoid fetching remote sources to calculate their size.
-     *
      * @return bool True if the thumbnail can be "safely" processed, false otherwise.
      */
     protected function _canGenerate()
@@ -318,53 +315,30 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
         // Multiplier to take into account memory consumed by the Image Processing Library.
         $tweak_factor  = 6;
 
-        if ($source = $this->source)
+        if (($source = $this->source) && ($info = @getimagesize($source->fullpath)))
         {
-            // Check source size against thumbnail size (local sources only)
-            if ($source->isLocal() && ($size = $source->adapter->getImageSize()))
+            $channels      = isset($info['channels']) ? $info['channels'] : 4;
+            $bits          = isset($info['bits']) ? $info['bits'] : 8;
+            $source_memory = ceil($info[0] * $info[1] * $bits * $channels / 8 * $tweak_factor);
+
+            $dimension = $this->getDimension();
+
+            // We assume the same amount of bits and channels as source.
+            $thumb_memory = ceil($dimension['width'] * $dimension ['height'] * $bits * $channels / 8 * $tweak_factor);
+
+            $limit = ini_get('memory_limit');
+
+            // Check if memory is limited (-1 => Unlimited)
+            if ($limit != '-1')
             {
-                $dimension = $this->dimension;
+                $limit = self::convertToBytes($limit);
+                $available_memory = $limit - memory_get_usage();
 
-                if (isset($dimension['width']) && isset($dimension['height']))
-                {
-                    if ($size['width'] <= $dimension['width'] && $size['height'] <= $dimension['height']) $result = false;
-                }
-                elseif (isset($dimension['width']))
-                {
-                    if ($size['width'] <= $dimension['width']) $result = false;
-                }
-                elseif (isset($dimension['height']))
-                {
-                    if ($size['height'] <= $dimension['height']) $result = false;
-                }
-            }
+                // Leave 16 megs for the rest of the request
+                $available_memory -= 16777216;
 
-            // Memory checks
-            if ($result && ($info = @getimagesize($source->fullpath)))
-            {
-                $channels      = isset($info['channels']) ? $info['channels'] : 4;
-                $bits          = isset($info['bits']) ? $info['bits'] : 8;
-                $source_memory = ceil($info[0] * $info[1] * $bits * $channels / 8 * $tweak_factor);
-
-                $dimension = $this->getDimension();
-
-                // We assume the same amount of bits and channels as source.
-                $thumb_memory = ceil($dimension['width'] * $dimension ['height'] * $bits * $channels / 8 * $tweak_factor);
-
-                $limit = ini_get('memory_limit');
-
-                // Check if memory is limited (-1 => Unlimited)
-                if ($limit != '-1')
-                {
-                    $limit = self::convertToBytes($limit);
-                    $available_memory = $limit - memory_get_usage();
-
-                    // Leave 16 megs for the rest of the request
-                    $available_memory -= 16777216;
-
-                    if ($source_memory + $thumb_memory > $available_memory) {
-                        $result = false;
-                    }
+                if ($source_memory + $thumb_memory > $available_memory) {
+                    $result = false;
                 }
             }
         }
