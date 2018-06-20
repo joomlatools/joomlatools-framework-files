@@ -140,7 +140,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
             var setContext = function (context) {
                 context.url += (context.url.search(/\?/) ? '&' : '?');
-                context.url += 'name=' + Attachments.escape(context.attachment);
+                context.url += 'name=' + encodeURIComponent(context.attachment);
 
                 context.data.table = <?= json_encode($table) ?>;
                 context.data.row = <?= json_encode($row) ?>;
