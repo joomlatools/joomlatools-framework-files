@@ -55,7 +55,7 @@ if (!Files) var Files = {};
 
                             var setThumbnail = function(thumbnail)
                             {
-                                image.set('src', Files.sitebase + '/' + Files.app.encodePath(thumbnail.relative_path)).addClass('loaded').removeClass('loading');
+                                image.set('src', Files.sitebase + '/' + row.encodePath(thumbnail.relative_path, Files.urlEncoder)).addClass('loaded').removeClass('loading');
 
                                 /* @TODO We probably do not need this anymore? Layouts have changed and these elements/classes no longer exist */
                                 var element = row.element.getElement('.files-node');

@@ -847,7 +847,9 @@ Files.App = new Class({
                     var source = Files.blank_image;
 
                     if (node.thumbnail) {
-                        source = Files.sitebase + '/' + that.encodePath(node.thumbnail.relative_path);
+                        source = Files.sitebase + '/' + node.encodePath(node.thumbnail.relative_path, Files.urlEncoder);
+                    } else if (node.download_link) {
+                        source = node.download_link;
                     }
 
                     img.set('src', source);
