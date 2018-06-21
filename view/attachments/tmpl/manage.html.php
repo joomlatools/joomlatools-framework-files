@@ -118,7 +118,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                 var url = "<?= route('component=' . urlencode($component) . '&view=attachments&container=' . urlencode($container->slug) . '&format=json&name={name}&table={table}&row={row}', true, false) ?>";
 
                 url = Attachments.replace(url, {
-                    name: context.attachment,
+                    name: encodeURIComponent(context.attachment),
                     table: <?= json_encode($table) ?>,
                     row: <?= json_encode($row) ?>
                 });
