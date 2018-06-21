@@ -4692,7 +4692,7 @@ Files.Attachments.App = new Class({
                 copy.render('attachments').inject(that.preview);
 
                 if (copy.file.thumbnail) {
-                    that.preview.getElement('img').set('src', Files.sitebase + '/' + node.encodePath(copy.file.thumbnail.relative_path, Files.urlEncoder)).show();
+                    that.preview.getElement('img').set('src', Files.sitebase + '/' + row.encodePath(copy.file.thumbnail.relative_path, Files.urlEncoder)).show();
                 } else if (copy.file.type == 'image') {
                     that.preview.getElement('img').set('src', that.createRoute({view: 'file', format: 'html', name: copy.file.name, routed: 1}));
                 }
