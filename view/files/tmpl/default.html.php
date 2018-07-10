@@ -26,7 +26,8 @@ defined('KOOWA') or die( 'Restricted access' ); ?>
                         limit: <?= (int) parameters()->limit; ?>,
                         offset: <?= (int) parameters()->offset; ?>,
                         types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>
-                    }
+                    },
+                    current: {types: <?= json_encode(KObjectConfig::unbox(parameters()->types)) ?> }
                 },
                 root_text: <?= json_encode(translate('Root folder')) ?>,
                 types: <?= json_encode(KObjectConfig::unbox(parameters()->types)); ?>,

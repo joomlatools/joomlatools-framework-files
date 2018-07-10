@@ -3704,7 +3704,8 @@ Files.App = new Class({
             element: 'files-pathway'
         },
         state: {
-            defaults: {}
+            defaults: {},
+            current: {}
         },
         tree: {
             enabled: true,
@@ -3890,7 +3891,7 @@ Files.App = new Class({
 
                 delete obj.folder;
 
-                this.options.state.defaults = Object.merge({}, this.options.state.defaults, obj);
+                this.options.state.defaults = Object.merge({}, this.options.state.defaults, obj, this.options.state.current);
 
             }
 
