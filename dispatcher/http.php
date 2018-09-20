@@ -54,8 +54,9 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
 
             $this->getResponse()
                 ->setStatus($status_code)
-                ->setContent(json_encode($response), 'application/json')
-                ->send();
+                ->setContent(json_encode($response), 'application/json');
+
+            $this->send();
 
             return false;
     	}
