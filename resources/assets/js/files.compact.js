@@ -25,7 +25,6 @@ Files.Compact.App = new Class({
             }
         },
 		grid: {
-			cookie: false,
 			layout: 'compact',
 			batch_delete: false
 		},
