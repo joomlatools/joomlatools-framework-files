@@ -23,6 +23,7 @@ Files.App = new Class({
         root_path: '',
         root_text: 'Root folder',
         cookie: {
+            name: null,
             path: '/'
         },
         persistent: true,
