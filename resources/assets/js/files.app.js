@@ -210,7 +210,7 @@ Files.App = new Class({
     setState: function() {
         this.fireEvent('beforeSetState');
 
-        if (this.cookie) {
+        if (this.cookie && this.options.persistent) {
             var state = Cookie.read(this.cookie+'.state'),
                 obj   = JSON.decode(state, true);
 
