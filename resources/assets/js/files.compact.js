@@ -12,7 +12,7 @@ Files.Compact = {};
 Files.Compact.App = new Class({
 	Extends: Files.App,
 	Implements: [Events, Options],
-    cookie: false,
+    cookie: null,
 	options: {
         persistent: false,
 		types: ['file', 'image'],
