@@ -158,7 +158,11 @@ Files.App = new Class({
 
         this.fireEvent('onInitialize', this);
 
-        if (this.options.persistent && this.options.container) {
+        if (this.options.cookie.name) {
+            this.cookie = this.options.cookie.name;
+        }
+
+        if (this.cookie === null && this.options.persistent && this.options.container) {
             var container = typeof this.options.container === 'string' ? this.options.container : this.options.container.slug;
             this.cookie = 'com.files.container.'+container;
         }
