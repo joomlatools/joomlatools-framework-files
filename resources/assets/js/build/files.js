@@ -2629,22 +2629,28 @@ Files.Grid = new Class({
 
 		this.renew();
 
-		// footable
-		var $footable = kQuery('.k-js-responsive-table');
-
-		if (this.layout === 'details') {
-
-			$footable.footable({
-				toggleSelector: '.footable-toggle',
-				breakpoints: {
-					phone: 400,
-					tablet: 600,
-					desktop: 800
-				}
-			});
-		}
+		this.setFootable();
 
 		this.fireEvent('afterRender');
+	},
+	setFootable: function() {
+        var $footable = kQuery('.k-js-responsive-table');
+
+        if ($footable.length && this.layout === 'details')
+        {
+			if (!$footable.hasClass('footable'))
+			{
+				$footable.footable({
+					toggleSelector: '.footable-toggle',
+					breakpoints: {
+						phone: 400,
+						tablet: 600,
+						desktop: 800
+					}
+				});
+			}
+			else $footable.trigger('footable_redraw');
+        }
 	},
 	renderObject: function(object, position) {
 		position = position || 'alphabetical';
@@ -4285,7 +4291,10 @@ Files.App = new Class({
                 this.state.set(state);
 
                 this.navigate();
-            }.bind(this)
+            }.bind(this),
+            onAfterInsertRows: function() {
+                this.setFootable();
+            }
         });
         this.grid = new Files.Grid(this.options.grid.element, opts);
 
