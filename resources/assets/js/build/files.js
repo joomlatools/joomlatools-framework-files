@@ -2329,6 +2329,7 @@ Files.Grid = new Class({
             }
 
             var target = event.target;
+
             if (target.get('tag') === 'a' || target.get('tag') === 'input') {
                 return;
             }
@@ -2336,6 +2337,10 @@ Files.Grid = new Class({
             if (target.get('tag') === 'i' && target.hasClass('icon-download')) {
                 return;
             }
+
+            if (target.get('tag') === 'span' && target.getParent().get('tag') === 'a') {
+            	return;
+			}
 
             var node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
 
