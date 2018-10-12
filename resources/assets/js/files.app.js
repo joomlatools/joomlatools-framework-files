@@ -610,7 +610,10 @@ Files.App = new Class({
                 this.state.set(state);
 
                 this.navigate();
-            }.bind(this)
+            }.bind(this),
+            onAfterInsertRows: function() {
+                this.setFootable();
+            }
         });
         this.grid = new Files.Grid(this.options.grid.element, opts);
 
