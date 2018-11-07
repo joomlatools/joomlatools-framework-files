@@ -680,7 +680,7 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-icon-open:before { content: ""; }
 
-.k-ui-namespace { /* Box sizing ========================================================================== */ /** Border box everything: http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */ /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */ /* Document ========================================================================== */ /** 1. Correct the line height in all browsers. 2. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS. */ /* Sections ========================================================================== */ /** Remove the margin in all browsers (opinionated). */ /** Add the correct display in IE 9-. */ /** Correct the font size and margin on `h1` elements within `section` and `article` contexts in Chrome, Firefox, and Safari. */ /* Grouping content ========================================================================== */ /** Add the correct display in IE 9-. 1. Add the correct display in IE. */ /** Add the correct margin in IE 8. */ /** 1. Add the correct box sizing in Firefox. 2. Show the overflow in Edge and IE. */ /** 1. Correct the inheritance and scaling of font size in all browsers. 2. Correct the odd `em` font sizing in all browsers. */ /* Text-level semantics ========================================================================== */ /** 1. Remove the gray background on active links in IE 10. 2. Remove gaps in links underline in iOS 8+ and Safari 8+. */ /** 1. Remove the bottom border in Chrome 57- and Firefox 39-. 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari. */ /** Prevent the duplicate application of `bolder` by the next rule in Safari 6. */ /** Add the correct font weight in Chrome, Edge, and Safari. */ /** 1. Correct the inheritance and scaling of font size in all browsers. 2. Correct the odd `em` font sizing in all browsers. */ /** Add the correct font style in Android 4.3-. */ /** Add the correct background and color in IE 9-. */ /** Add the correct font size in all browsers. */ /** Prevent `sub` and `sup` elements from affecting the line height in all browsers. */ /* Embedded content ========================================================================== */ /** Add the correct display in IE 9-. */ /** Add the correct display in iOS 4-7. */ /** Remove the border on images inside links in IE 10-. */ /** Hide the overflow in IE. */ /* Forms ========================================================================== */ /** 1. Change the font styles in all browsers (opinionated). 2. Remove the margin in Firefox and Safari. */ /** Show the overflow in IE. 1. Show the overflow in Edge. */ /** Remove the inheritance of text transform in Edge, Firefox, and IE. 1. Remove the inheritance of text transform in Firefox. */ /** 1. Prevent a WebKit bug where (2) destroys native `audio` and `video` controls in Android 4. 2. Correct the inability to style clickable types in iOS and Safari. */ /** Remove the inner border and padding in Firefox. */ /** Restore the focus styles unset by the previous rule. */ /** Correct the padding in Firefox. */ /** 1. Correct the text wrapping in Edge and IE. 2. Correct the color inheritance from `fieldset` elements in IE. 3. Remove the padding so developers are not caught out when they zero out `fieldset` elements in all browsers. */ /** 1. Add the correct display in IE 9-. 2. Add the correct vertical alignment in Chrome, Firefox, and Opera. */ /** Remove the default vertical scrollbar in IE. */ /** 1. Add the correct box sizing in IE 10-. 2. Remove the padding in IE 10-. */ /** Correct the cursor style of increment and decrement buttons in Chrome. */ /** 1. Correct the odd appearance in Chrome and Safari. 2. Correct the outline style in Safari. */ /** Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */ /** 1. Correct the inability to style clickable types in iOS and Safari. 2. Change font properties to `inherit` in Safari. */ /* Interactive ========================================================================== */ /* Add the correct display in IE 9-. 1. Add the correct display in Edge, IE, and Firefox. */ /* Add the correct display in all browsers. */ /* Scripting ========================================================================== */ /** Add the correct display in IE 9-. */ /** Add the correct display in IE. */ /* Hidden ========================================================================== */ /** Add the correct display in IE 10-. */ /* Component ========================================================================== */ /** 1. Needed for the off-canvas-overlay 2. Reset for when item is a form 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the negative width of the sidebar so the sidebar will appear 2. Reset when screen is wide enough */ /** Overlay when toggled 1. Set z-index so it will become visible */ /* Component wrapper ========================================================================== */ /* Content ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** When content is inside a content-area */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Reset when screen is wide enough */ /** Set overflow and z-index */ /* Content area ========================================================================== */ /** Toggling the subcontent area */ /** Content area children 1. for breadcrumbs to work properly */ /* Content wrapper ========================================================================== */ /** 1. Needed to position sidebar properly when off-canvas 2. Clearing toolbar floats when flexbox is not in use */ /* Flex wrapper ========================================================================== */ /* Container ========================================================================== */ /** 1. For transparent tabs */ /* Container children ========================================================================== */ /** Main container 1. For transparent tabs */ /** Sub container 1. For transparent tabs */ /** Full container */ /** Full container -- spaced top For when using tables inside form and you want table to be attached to the sides */ /* Koowa UI container ========================================================================== */ /** 1. By using a max-width we essentially set a min-width when the contents are to large for the k-ui-container container. The reason we don't use min-width is because if the content is only 300px we don't need horizontal scrollbars 2. Reset the max-width when viewport is as large as minwidth 3. Default styling */ /* ========================================================================== Login container ========================================================================== */ /** Login container Container holding the login window 1. Setting up for centering the login window */ /* Sidebar ========================================================================== */ /** The left and right sidebar */ /** Left sidebar specific */ /** When left sidebar is toggled */ /** Right sidebar specific */ /** When right sidebar is toggled */ /* Subcontent ========================================================================== */ /** Subcontent children */ /** Subcontent toggle button */ /* Wrapper ========================================================================== */ /** Wrapper when toggled 1. Hide overflowing when menu is toggled 2. Set back to auto when screen is wide enough 3. Hide all overflow when resizing to avoid jumpy layout */ /** The overlays 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /* Anchor ========================================================================== */ /* Backface visibility ========================================================================== */ /** Set to hidden to avoid blurry text after transitioning and transforming elements */ /* Body ========================================================================== */ /** 1. By using 100% we can work with full-height auto overflowing flexbox pages 2. Remove all spacing 3. Setting up flexbox 4. Hide overflowing content on resizing to make sure we never get any weird jumping scrollbar issues */ /* Definition list ========================================================================== */ /* Fieldset ========================================================================== */ /** 1. Chrome and Firefox set a `min-width: min-content;` on fieldsets, so we reset that to ensure it behaves more like a standard block element. See https://github.com/twbs/bootstrap/issues/12359. */ /* Paragraph ========================================================================== */ /** 1. Remove default top-margin */ /* HTML ========================================================================== */ /** 1. By using 100% we can work with full-height auto overflowing flexbox pages 2. Remove all spacing 3. Set basic font here. Other systems could set font on `<body>` element to override this. We're just making sure there's alwas a default font available */ /* Image ========================================================================== */ /** 1. Responsive images 2. Eliminating line-height bug when used alone in container 3. No hidden borders on parents */ /* Normalize form controls ========================================================================== */ /** 1. Override content-box in Normalize (* isn't specific enough) 2. Position radios and checkboxes better 3. Make range inputs behave like textual form controls 4. Focus for file, radio, and checkbox 5. Better sized because of box-sizing 6. Set font-size to 16px on touch supported devices so browser won't automatically zoom 7. Make multiple select elements height not fixed */ /* Label ========================================================================== */ /** 1. Force IE8 to wrap long content */ /* Legend ========================================================================== */ /** 1. No margin bottom for the last legend 2. No padding top for the first legend */ /* Paragraph ========================================================================== */ /** 1. Remove default top-margin */ /* Lists ========================================================================== */ /* Alerts ========================================================================== */ /** Overflowing alert with 33% max-height */ /** Fixed alert */ /** Alternate styles */ /** Close button */ /* Breadcrumbs ========================================================================== */ /** 1. Scroll when items don't fit parent anymore 2. Hide scroll when resizing to avoid weird jumps on OSX 3. Don't flex in the layout structure */ /** Single breadcrumb items */ /* Buttons ========================================================================== */ /** Alternate buttons */ /** Link buttons */ /** Block button */ /** Button sizes */ /** Align single icon buttons */ /** Vertically space out multiple block buttons */ /** Specificity overrides */ /** Button groups */ /* Card ========================================================================== */ /** Card body */ /** Card image 1. For when background image is used 2. Cover complete card minus border 3. Cover complete card minus border and 1pixel spacing */ /** Card title */ /** Card section 1. Use margin instead of padding to keep border-radius on rounded cards */ /** Card footer */ /** Card caption */ /** Selected card */ /** Flexing card */ /* CK Editor ========================================================================== */ /** Hide the resizer since element is flexing */ /* Dropdowns ========================================================================== */ /** Dropdown arrow/caret */ /** The dropdown wrapper (div) */ /** The dropdown toggle */ /** The dropdown menu (ul) 1. Hide by default, but block on "open" of the menu 2. Ensures proper alignment if parent has it changed (e.g., modal footer) */ /** Dividers (basically an hr) within the dropdown */ /** Hover / Focus state */ /** Active state */ /** Disabled state Gray out text and ensure the hover/focus state remains gray */ /** Open state for the dropdown */ /** Backdrop to catch body clicks on mobile, etc. */ /** Dropup Allow for dropdowns to go bottom up (aka, dropup-menu) */ /** Dropdown grid */ /* Empty state ========================================================================== */ /* Forms ========================================================================== */ /** 1. Set width and max-width to 100% to override custom template styling 1. Make inputs at least the height of their button counterpart (base line-height + padding + border) 2. Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214 3. Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS. 4. Customize the `:focus` state to imitate native WebKit styles. 5. Unstyle the caret on `<select>`s in IE10+. 6. iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655 */ /** Reset height for `textarea`s */ /** Search inputs in iOS This overrides the extra rounded corners on search inputs in iOS so that our `.k-form-control` class can properly style them. Note that this cannot simply be added to `.k-form-control` as it's not specific enough. For details, see https://github.com/twbs/bootstrap/issues/11586. */ /** Special styles for iOS temporal inputs In Mobile Safari, setting `display: block` on temporal inputs causes the text within the input to become vertically misaligned. As a workaround, we set a pixel line-height that matches the given height of the input, but only for Safari. See https://bugs.webkit.org/show_bug.cgi?id=139848 Note that as of 8.3, iOS doesn't support `datetime` or `week`. */ /** Checkbox & Radio inputs */ /** Shared styling between radio boxes and checkboxes */ /** Right to left */ /** Checkbox 1. Remove rounded corners by default 2. Display a check icon in the pseudo before element 3. Height of the box minus the border size 4. Height of the pseudo element minus a 1px padding/margin to move icon away from the side of the box 5. Set the color of the check icon */ /** Radio 1. Making the radio box round 2. Adding content to display the pseudo element 3. Small inner circle, scaling with the box itself 4. positioning the inner circle 5. Making inner circle actually round */ /** Feedback states */ /** Static form control text Apply class to a `p` element to make any string of text align with labels in a horizontal form layout. 1. Size it appropriately next to real form controls 2. Remove default margin from `p` */ /* Input group 1. For dropdowns 2. Prevent input groups from inheriting border styles from table cells when placed within a table 3. Ensure that the input is always above the *appended* addon button for proper border colors. 4. IE9 fubars the placeholder attribute in text inputs and the arrows on select elements in input groups. To fix it, we float the input. 5. Put focused element on top of the rest */ /** Sizes */ /** Input group parts */ /** Addon and addon wrapper for buttons 1. Match the inputs */ /** Text addon */ /** Reset rounded corners */ /** Button input groups 1. Jankily prevent input button groups from wrapping with `white-space` and `font-size` in combination with `inline-block` on buttons. 2. Negative margin for spacing, position for bringing hovered/focused/actived element above the siblings. 3. Bring the "active" button to the front 4. Negative margin to only have a 1px border between the two */ /** Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */ /** Form control sizing Build on `.k-form-control` with modifier classes to decrease or increase the height and font-size of form controls. The `.k-form-group-* k-form-control` variations are sadly duplicated to avoid the issue documented in https://github.com/twbs/bootstrap/issues/15074. */ /** Inline form group */ /** Form row group 1. To make sure we don't get empty pixels on the right */ /** Form row */ /** Form field info */ /* Form block ========================================================================== */ /** The header */ /** The content */ /* Gallery ========================================================================== */ /** Set widths */ /** Gallery sizes */ /** Pagination */ /* Hamburger ========================================================================== */ /** Animated hamburger button 1. Hide when JS is disabled, we don't need a toggle when there's no JS 2. Show when JS is enabled 3. Hide when the sidebar is visible */ /** Button */ /** Button styling */ /** Left button We don't need RTLstyling here since we're calculating the icons to be in the middle */ /** Transform hamburger into a cross when the sidebar is opened */ /** Right button We don't need RTLstyling here since we're calculating the icons to be in the middle */ /** Transform "i" into a cross when the sidebar is opened */ /* Heading ========================================================================== */ /* Icons ========================================================================== */ /** Icon colors */ /** Icon sizes */ /** Custom background image icons Make sure that custom icons get background-size cover so they fit their container nicely */ /* List ========================================================================== */ /** 1. Reset default <ul> styling */ /* ========================================================================== Login screen ========================================================================== */ /** Login window 1. Horizontal and vertical centering */ /** Brand */ /** Form */ /* Navigation ========================================================================== */ /** 1. Reset default <ul> styling */ /* Option list ========================================================================== */ /** Check if :checked is supported using modernizr */ /** Check if :checked is supported using modernizr */ /* Pagination */ /* Scopebar ========================================================================== */ /** 1. Faking a border for when items are not stretching */ /** Scopebar items 1. For wrapping text in combination with flexbox */ /** Static scopebar items */ /** Toggle buttons 1. Clearing for floating buttons 2. Move first button away from edge */ /** Scopebar Filters */ /** 1. Clearfix so we can float individual filters 2. For positioning dropdowns on smaller screens */ /** Individual filter */ /** Filter title and icon */ /** Scopebar label showing how many active filters you have below a filter button */ /** Scopebar breadcrumbs */ /** Scopebar buttons */ /** Scopebar search 1. For placement of the icons 2. When only child, stick to the right (left for RTL) */ /* Sidebar item ========================================================================== */ /** Toggle item 1. Same as width but minus 2px border width */ /** Sidebar item header */ /** Sidebar item content */ /* Styled file input */ /* Tabs ========================================================================== */ /** Tabs container (not mandatory) */ /** Tabs wrapper */ /** Tabs scroller */ /** Tabs wrapper 1. For proper offset calculation in JS */ /** Transparent tabs */ /** Tabbable tabs Hide tabbable panes to start, show them when `.k-is-active` */ /** Left and right buttons for scrollable tabs */ /* Table ========================================================================== */ /* WARNING: Do not use transition on any element since this will hit scroll performance big on certain browsers! */ /** Table 1. Should be as tall as possible for dropdown overflows. Pushes the pagination to the bottom */ /** Default table settings 1. override browser default */ /** Table elements */ /** Table cell settings */ /** Table item states */ /** Table sub header */ /** Table levels */ /** Selected When rows are selected they are highlighted */ /** Active rows When rows are active they are highlighted */ /** Positioner */ /** Table heading sorting */ /* Table pagination 1. Faking a bottom border, this shadow will disappear when pagination is positioned to bottom */ /* Title bar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar */ /** Titlebar contents */ /** Mobile title */ /* Toolbar ========================================================================== */ /** 1. Buttons have margin-top and margin-left to separate them from each other Setting a bottom padding to separate buttons from bottom of toolbar 2. Set a right padding for the toggle button */ /** Toolbar contents */ /* Tooltip ========================================================================== */ /** 1. Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element. So reset our font and text properties to avoid inheriting weird values. */ /** Wrapper for the tooltip content */ /** Arrows */ /* Top container ========================================================================== */ /** Top logo */ /** Top navigation */ /** Mobile settings */ /** Toggler */ /* Well ========================================================================== */ /** Well content */ /** Well tabs */ /* Align ========================================================================== */ /** Align left */ /** Align center */ /** Align right */ /* Background ========================================================================== */ /* Color ========================================================================== */ /** Component animations Used for Bootstrap tooltips */ /* Content block ========================================================================== */ /** Element with a bottom margin except when item itself is a last-child */ /** Top margin except for first-child */ /* Cover all ========================================================================== */ /** "Cover all" link Use a pseudo element inside the `<a>` to vover the entire parent. - This way we don't have to make a the parent element a link. - Downside: You can't select the text anymore, but this could also be used to your advantage */ /** "On-top" links Use inside the same parent as the above "coverall" link to place this link on top of the pseudo element */ /* Dynamic content holder ========================================================================== */ /** Add `<script>` and other hidden content (like modals) inside this div so the elements won't be in the way for flexbox */ /* Ellipsis ========================================================================== */ /** Text overflow */ /* Flag object ========================================================================== */ /** Aside */ /** Body */ /* Flexing ========================================================================== */ /** DO or don't flexing children. USeful inside flexing containers on elemtns that have no pre-defined styling for flexbox */ /** Start at different breakpoints */ /* Hidden ========================================================================== */ /** Hide content in a non-accessible way. Content is hidden for everybody including screenreaders */ /* Loader ========================================================================== */ /** Cover it's entire parent (the parent with an `absolute` or `relative` position) - Add `k-hidden` class to the element when items are done loading */ /** Loader CSS only loading animation. Falls back to `Loading...` on non capable browsers Add `k-hidden` class to the element when items are done loading */ /* No margin ========================================================================== */ /* No padding ========================================================================== */ /* No transition ========================================================================== */ /* No wrap ========================================================================== */ /* Overflow ========================================================================== */ /* Position ========================================================================== */ /** Static positioned element */ /** Relative positioned element */ /** Absolute positioned element */ /** Fixed positioned element */ /** Sticky positioned element Has top: 0; to ensure sticky works */ /* Ratio content ========================================================================== */ /* This or that ========================================================================== */ /** Line items up next to each other */ /* Touch events ========================================================================== */ /** Hide elements for touch enabled devices */ /* Unavailable ========================================================================== */ /* Unresponsive ========================================================================== */ /** Make sure nothing can get selected */ /* Visually hidden ========================================================================== */ /** Hide the content in an accessible way. Content is hidden for viewers but not for screenreaders */ /* Visually shown ========================================================================== */ /** Show content that have the visually-hidden class Use as @extend for items that are already extending `.k-visually-hidden` Try not to use `.k-visually-hidden` and `.k-visually-shown` classes together if possible. */ }
+.k-ui-namespace { /* Box sizing ========================================================================== */ /** Border box everything: http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */ /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */ /* Document ========================================================================== */ /** 1. Correct the line height in all browsers. 2. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS. */ /* Sections ========================================================================== */ /** Remove the margin in all browsers (opinionated). */ /** Add the correct display in IE 9-. */ /** Correct the font size and margin on `h1` elements within `section` and `article` contexts in Chrome, Firefox, and Safari. */ /* Grouping content ========================================================================== */ /** Add the correct display in IE 9-. 1. Add the correct display in IE. */ /** Add the correct margin in IE 8. */ /** 1. Add the correct box sizing in Firefox. 2. Show the overflow in Edge and IE. */ /** 1. Correct the inheritance and scaling of font size in all browsers. 2. Correct the odd `em` font sizing in all browsers. */ /* Text-level semantics ========================================================================== */ /** 1. Remove the gray background on active links in IE 10. 2. Remove gaps in links underline in iOS 8+ and Safari 8+. */ /** 1. Remove the bottom border in Chrome 57- and Firefox 39-. 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari. */ /** Prevent the duplicate application of `bolder` by the next rule in Safari 6. */ /** Add the correct font weight in Chrome, Edge, and Safari. */ /** 1. Correct the inheritance and scaling of font size in all browsers. 2. Correct the odd `em` font sizing in all browsers. */ /** Add the correct font style in Android 4.3-. */ /** Add the correct background and color in IE 9-. */ /** Add the correct font size in all browsers. */ /** Prevent `sub` and `sup` elements from affecting the line height in all browsers. */ /* Embedded content ========================================================================== */ /** Add the correct display in IE 9-. */ /** Add the correct display in iOS 4-7. */ /** Remove the border on images inside links in IE 10-. */ /** Hide the overflow in IE. */ /* Forms ========================================================================== */ /** 1. Change the font styles in all browsers (opinionated). 2. Remove the margin in Firefox and Safari. */ /** Show the overflow in IE. 1. Show the overflow in Edge. */ /** Remove the inheritance of text transform in Edge, Firefox, and IE. 1. Remove the inheritance of text transform in Firefox. */ /** 1. Prevent a WebKit bug where (2) destroys native `audio` and `video` controls in Android 4. 2. Correct the inability to style clickable types in iOS and Safari. */ /** Remove the inner border and padding in Firefox. */ /** Restore the focus styles unset by the previous rule. */ /** Correct the padding in Firefox. */ /** 1. Correct the text wrapping in Edge and IE. 2. Correct the color inheritance from `fieldset` elements in IE. 3. Remove the padding so developers are not caught out when they zero out `fieldset` elements in all browsers. */ /** 1. Add the correct display in IE 9-. 2. Add the correct vertical alignment in Chrome, Firefox, and Opera. */ /** Remove the default vertical scrollbar in IE. */ /** 1. Add the correct box sizing in IE 10-. 2. Remove the padding in IE 10-. */ /** Correct the cursor style of increment and decrement buttons in Chrome. */ /** 1. Correct the odd appearance in Chrome and Safari. 2. Correct the outline style in Safari. */ /** Remove the inner padding and cancel buttons in Chrome and Safari on macOS. */ /** 1. Correct the inability to style clickable types in iOS and Safari. 2. Change font properties to `inherit` in Safari. */ /* Interactive ========================================================================== */ /* Add the correct display in IE 9-. 1. Add the correct display in Edge, IE, and Firefox. */ /* Add the correct display in all browsers. */ /* Scripting ========================================================================== */ /** Add the correct display in IE 9-. */ /** Add the correct display in IE. */ /* Hidden ========================================================================== */ /** Add the correct display in IE 10-. */ /* Component ========================================================================== */ /** 1. Needed for the off-canvas-overlay 2. Reset for when item is a form 3. Set transition for off canvas sidebar */ /** Container when toggled 1. Set left to the negative width of the sidebar so the sidebar will appear 2. Reset when screen is wide enough */ /** Overlay when toggled 1. Set z-index so it will become visible */ /* Component wrapper ========================================================================== */ /* Content ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar 3. Set transition for off canvas sidebar */ /** When content is inside a content-area */ /** Container when toggled 1. Set left to the width of the menu so the menu will appear 2. Reset when screen is wide enough */ /** Set overflow and z-index */ /* Content area ========================================================================== */ /** Toggling the subcontent area */ /** Content area children 1. for breadcrumbs to work properly */ /* Content wrapper ========================================================================== */ /** 1. Needed to position sidebar properly when off-canvas 2. Clearing toolbar floats when flexbox is not in use */ /* Flex wrapper ========================================================================== */ /* Container ========================================================================== */ /** 1. For transparent tabs */ /* Container children ========================================================================== */ /** Main container 1. For transparent tabs */ /** Sub container 1. For transparent tabs */ /** Full container */ /** Full container -- spaced top For when using tables inside form and you want table to be attached to the sides */ /* Koowa UI container ========================================================================== */ /** 1. By using a max-width we essentially set a min-width when the contents are to large for the k-ui-container container. The reason we don't use min-width is because if the content is only 300px we don't need horizontal scrollbars 2. Reset the max-width when viewport is as large as minwidth 3. Default styling */ /* ========================================================================== Login container ========================================================================== */ /** Login container Container holding the login window 1. Setting up for centering the login window */ /* Sidebar ========================================================================== */ /** The left and right sidebar */ /** Left sidebar specific */ /** When left sidebar is toggled */ /** Right sidebar specific */ /** When right sidebar is toggled */ /* Subcontent ========================================================================== */ /** Subcontent children */ /** Subcontent toggle button */ /* Wrapper ========================================================================== */ /** Wrapper when toggled 1. Hide overflowing when menu is toggled 2. Set back to auto when screen is wide enough 3. Hide all overflow when resizing to avoid jumpy layout */ /** The overlays 1. Cover the entire container 2. Hide by setting z-index to -1 because item can't transition if display is set from none to block 3. Set opacity to 0 by default 4. Hide overlay when screen is wide enough */ /* Anchor ========================================================================== */ /* Backface visibility ========================================================================== */ /** Set to hidden to avoid blurry text after transitioning and transforming elements */ /* Body ========================================================================== */ /** 1. By using 100% we can work with full-height auto overflowing flexbox pages 2. Remove all spacing 3. Setting up flexbox 4. Hide overflowing content on resizing to make sure we never get any weird jumping scrollbar issues */ /* Definition list ========================================================================== */ /* Fieldset ========================================================================== */ /** 1. Chrome and Firefox set a `min-width: min-content;` on fieldsets, so we reset that to ensure it behaves more like a standard block element. See https://github.com/twbs/bootstrap/issues/12359. */ /* Paragraph ========================================================================== */ /** 1. Remove default top-margin */ /* HTML ========================================================================== */ /** 1. By using 100% we can work with full-height auto overflowing flexbox pages 2. Remove all spacing 3. Set basic font here. Other systems could set font on `<body>` element to override this. We're just making sure there's alwas a default font available */ /* Image ========================================================================== */ /** 1. Responsive images 2. Eliminating line-height bug when used alone in container 3. No hidden borders on parents */ /* Normalize form controls ========================================================================== */ /** 1. Override content-box in Normalize (* isn't specific enough) 2. Position radios and checkboxes better 3. Make range inputs behave like textual form controls 4. Focus for file, radio, and checkbox 5. Better sized because of box-sizing 6. Set font-size to 16px on touch supported devices so browser won't automatically zoom 7. Make multiple select elements height not fixed */ /* Label ========================================================================== */ /** 1. Force IE8 to wrap long content */ /* Legend ========================================================================== */ /** 1. No margin bottom for the last legend 2. No padding top for the first legend */ /* Paragraph ========================================================================== */ /** 1. Remove default top-margin */ /* Lists ========================================================================== */ /* Alerts ========================================================================== */ /** Overflowing alert with 33% max-height */ /** Fixed alert */ /** Alternate styles */ /** Close button */ /* Breadcrumbs ========================================================================== */ /** 1. Scroll when items don't fit parent anymore 2. Hide scroll when resizing to avoid weird jumps on OSX 3. Don't flex in the layout structure */ /** Single breadcrumb items */ /* Buttons ========================================================================== */ /** Alternate buttons */ /** Link buttons */ /** Block button */ /** Button sizes */ /** Align single icon buttons */ /** Vertically space out multiple block buttons */ /** Specificity overrides */ /** Button groups */ /* Card ========================================================================== */ /** Card body */ /** Card image 1. For when background image is used 2. Cover complete card minus border 3. Cover complete card minus border and 1pixel spacing */ /** Card title */ /** Card section 1. Use margin instead of padding to keep border-radius on rounded cards */ /** Card footer */ /** Card caption */ /** Selected card */ /** Flexing card */ /* CK Editor ========================================================================== */ /** Hide the resizer since element is flexing */ /* Dropdowns ========================================================================== */ /** Dropdown arrow/caret */ /** The dropdown wrapper (div) */ /** The dropdown toggle */ /** The dropdown menu (ul) 1. Hide by default, but block on "open" of the menu 2. Ensures proper alignment if parent has it changed (e.g., modal footer) */ /** Dividers (basically an hr) within the dropdown */ /** Hover / Focus state */ /** Active state */ /** Disabled state Gray out text and ensure the hover/focus state remains gray */ /** Open state for the dropdown */ /** Backdrop to catch body clicks on mobile, etc. */ /** Dropup Allow for dropdowns to go bottom up (aka, dropup-menu) */ /** Dropdown grid */ /* Empty state ========================================================================== */ /* Forms ========================================================================== */ /** 1. Set width and max-width to 100% to override custom template styling 1. Make inputs at least the height of their button counterpart (base line-height + padding + border) 2. Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214 3. Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS. 4. Customize the `:focus` state to imitate native WebKit styles. 5. Unstyle the caret on `<select>`s in IE10+. 6. iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655 */ /** Reset height for `textarea`s */ /** Search inputs in iOS This overrides the extra rounded corners on search inputs in iOS so that our `.k-form-control` class can properly style them. Note that this cannot simply be added to `.k-form-control` as it's not specific enough. For details, see https://github.com/twbs/bootstrap/issues/11586. */ /** Special styles for iOS temporal inputs In Mobile Safari, setting `display: block` on temporal inputs causes the text within the input to become vertically misaligned. As a workaround, we set a pixel line-height that matches the given height of the input, but only for Safari. See https://bugs.webkit.org/show_bug.cgi?id=139848 Note that as of 8.3, iOS doesn't support `datetime` or `week`. */ /** Checkbox & Radio inputs */ /** Shared styling between radio boxes and checkboxes */ /** Right to left */ /** Checkbox 1. Remove rounded corners by default 2. Display a check icon in the pseudo before element 3. Height of the box minus the border size 4. Height of the pseudo element minus a 1px padding/margin to move icon away from the side of the box 5. Set the color of the check icon */ /** Radio 1. Making the radio box round 2. Adding content to display the pseudo element 3. Small inner circle, scaling with the box itself 4. positioning the inner circle 5. Making inner circle actually round */ /** Feedback states */ /** Static form control text Apply class to a `p` element to make any string of text align with labels in a horizontal form layout. 1. Size it appropriately next to real form controls 2. Remove default margin from `p` */ /* Input group 1. For dropdowns 2. Prevent input groups from inheriting border styles from table cells when placed within a table 3. Ensure that the input is always above the *appended* addon button for proper border colors. 4. IE9 fubars the placeholder attribute in text inputs and the arrows on select elements in input groups. To fix it, we float the input. 5. Put focused element on top of the rest */ /** Sizes */ /** Input group parts */ /** Addon and addon wrapper for buttons 1. Match the inputs */ /** Text addon */ /** Reset rounded corners */ /** Button input groups 1. Jankily prevent input button groups from wrapping with `white-space` and `font-size` in combination with `inline-block` on buttons. 2. Negative margin for spacing, position for bringing hovered/focused/actived element above the siblings. 3. Bring the "active" button to the front 4. Negative margin to only have a 1px border between the two */ /** Form groups Designed to help with the organization and spacing of vertical forms. For horizontal forms, use the predefined grid classes. */ /** Form control sizing Build on `.k-form-control` with modifier classes to decrease or increase the height and font-size of form controls. The `.k-form-group-* k-form-control` variations are sadly duplicated to avoid the issue documented in https://github.com/twbs/bootstrap/issues/15074. */ /** Inline form group */ /** Form row group 1. To make sure we don't get empty pixels on the right */ /** Form row */ /** Form field info */ /* Form block ========================================================================== */ /** The header */ /** The content */ /* Gallery ========================================================================== */ /** Set widths */ /** Gallery sizes */ /** Pagination */ /* Hamburger ========================================================================== */ /** Animated hamburger button 1. Hide when JS is disabled, we don't need a toggle when there's no JS 2. Show when JS is enabled 3. Hide when the sidebar is visible */ /** Button */ /** Button styling */ /** Left button We don't need RTLstyling here since we're calculating the icons to be in the middle */ /** Transform hamburger into a cross when the sidebar is opened */ /** Right button We don't need RTLstyling here since we're calculating the icons to be in the middle */ /** Transform "i" into a cross when the sidebar is opened */ /* Heading ========================================================================== */ /* Icons ========================================================================== */ /** Icon colors */ /** Icon sizes */ /** Custom background image icons Make sure that custom icons get background-size cover so they fit their container nicely */ /* Label ========================================================================== */ /* Base */ /* Accent */ /* Success */ /* Neutral */ /* Warning */ /* Error */ /* Float */ /* Navigation styling */ /* List ========================================================================== */ /** 1. Reset default <ul> styling */ /* Loader ========================================================================== */ /** Cover it's entire parent (the parent with an `absolute` or `relative` position) - Add `k-hidden` class to the element when items are done loading */ /** Loader CSS only loading animation. Falls back to `Loading...` on non capable browsers Add `k-hidden` class to the element when items are done loading */ /** Container styling for buttons and tabs 1. Inherit for pseudo element (and for loader) 2. "Hide" element itself by giving scaling down to 0.001 3. Cover parent by scaling up to 1000 4. Top to reset elements own height and margin */ /* ========================================================================== Login screen ========================================================================== */ /** Login window 1. Horizontal and vertical centering */ /** Brand */ /** Form */ /* Navigation ========================================================================== */ /** 1. Reset default <ul> styling */ /* Option list ========================================================================== */ /** Check if :checked is supported using modernizr */ /** Check if :checked is supported using modernizr */ /* Pagination */ /* Scopebar ========================================================================== */ /** 1. Faking a border for when items are not stretching */ /** Scopebar items 1. For wrapping text in combination with flexbox */ /** Static scopebar items */ /** Toggle buttons 1. Clearing for floating buttons 2. Move first button away from edge */ /** Scopebar Filters */ /** 1. Clearfix so we can float individual filters 2. For positioning dropdowns on smaller screens */ /** Individual filter */ /** Filter title and icon */ /** Scopebar label showing how many active filters you have below a filter button */ /** Scopebar breadcrumbs */ /** Scopebar buttons */ /** Scopebar search 1. For placement of the icons 2. When only child, stick to the right (left for RTL) */ /* Sidebar item ========================================================================== */ /** Toggle item 1. Same as width but minus 2px border width */ /** Sidebar item header */ /** Sidebar item content */ /* Styled file input */ /* Tabs ========================================================================== */ /** Tabs container (not mandatory) */ /** Tabs wrapper */ /** Tabs scroller */ /** Tabs wrapper 1. For proper offset calculation in JS */ /** Transparent tabs */ /** Tabbable tabs Hide tabbable panes to start, show them when `.k-is-active` */ /** Left and right buttons for scrollable tabs */ /* Table ========================================================================== */ /* WARNING: Do not use transition on any element since this will hit scroll performance big on certain browsers! */ /** Table 1. Should be as tall as possible for dropdown overflows. Pushes the pagination to the bottom */ /** Default table settings 1. override browser default */ /** Table elements */ /** Table cell settings */ /** Table item states */ /** Table sub header */ /** Table levels */ /** Selected When rows are selected they are highlighted */ /** Active rows When rows are active they are highlighted */ /** Positioner */ /** Table heading sorting */ /* Table pagination 1. Faking a bottom border, this shadow will disappear when pagination is positioned to bottom */ /* Title bar ========================================================================== */ /** 1. Set the z-index higher than the menus 2. Setting a background so container will fall nicely over the sidebar */ /** Titlebar contents */ /** Mobile title */ /* Toolbar ========================================================================== */ /** 1. Buttons have margin-top and margin-left to separate them from each other Setting a bottom padding to separate buttons from bottom of toolbar 2. Set a right padding for the toggle button */ /** Toolbar contents */ /* Tooltip ========================================================================== */ /** 1. Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element. So reset our font and text properties to avoid inheriting weird values. */ /** Wrapper for the tooltip content */ /** Arrows */ /* Top container ========================================================================== */ /** Top logo */ /** Top navigation */ /** Mobile settings */ /** Toggler */ /* Well ========================================================================== */ /** Well content */ /** Well tabs */ /* Align ========================================================================== */ /** Align left */ /** Align center */ /** Align right */ /* Background ========================================================================== */ /* Color ========================================================================== */ /** Component animations Used for Bootstrap tooltips */ /* Content block ========================================================================== */ /** Element with a bottom margin except when item itself is a last-child */ /** Top margin except for first-child */ /* Cover all ========================================================================== */ /** "Cover all" link Use a pseudo element inside the `<a>` to vover the entire parent. - This way we don't have to make a the parent element a link. - Downside: You can't select the text anymore, but this could also be used to your advantage */ /** "On-top" links Use inside the same parent as the above "coverall" link to place this link on top of the pseudo element */ /* Dynamic content holder ========================================================================== */ /** Add `<script>` and other hidden content (like modals) inside this div so the elements won't be in the way for flexbox */ /* Ellipsis ========================================================================== */ /** Text overflow */ /* Flag object ========================================================================== */ /** Aside */ /** Body */ /* Flexing ========================================================================== */ /** DO or don't flexing children. USeful inside flexing containers on elemtns that have no pre-defined styling for flexbox */ /** Start at different breakpoints */ /* Hidden ========================================================================== */ /** Hide content in a non-accessible way. Content is hidden for everybody including screenreaders */ /* No margin ========================================================================== */ /* No padding ========================================================================== */ /* No transition ========================================================================== */ /* No wrap ========================================================================== */ /* Overflow ========================================================================== */ /* Position ========================================================================== */ /** Static positioned element */ /** Relative positioned element */ /** Absolute positioned element */ /** Fixed positioned element */ /** Sticky positioned element Has top: 0; to ensure sticky works */ /* Ratio content ========================================================================== */ /* This or that ========================================================================== */ /** Line items up next to each other */ /* Touch events ========================================================================== */ /** Hide elements for touch enabled devices */ /* Unavailable ========================================================================== */ /* Unresponsive ========================================================================== */ /** Make sure nothing can get selected */ /* Visually hidden ========================================================================== */ /** Hide the content in an accessible way. Content is hidden for viewers but not for screenreaders */ /* Visually shown ========================================================================== */ /** Show content that have the visually-hidden class Use as @extend for items that are already extending `.k-visually-hidden` Try not to use `.k-visually-hidden` and `.k-visually-shown` classes together if possible. */ }
 
 .k-ui-namespace, .k-ui-namespace *, .k-ui-namespace *:before, .k-ui-namespace *:after { box-sizing: border-box; }
 
@@ -770,7 +770,7 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace [hidden] { display: none; }
 
-.k-ui-namespace .k-component { position: relative; /* 1 */ background: #fbfbfb; margin: 0; /* 2 */ padding: 0; /* 2 */ display: flex; flex-direction: column; flex: 1 1 auto; overflow: auto; backface-visibility: hidden; transition: transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* 3 */ }
+.k-ui-namespace .k-component { position: relative; /* 1 */ background: #fbfafa; margin: 0; /* 2 */ padding: 0; /* 2 */ display: flex; flex-direction: column; flex: 1 1 auto; overflow: auto; backface-visibility: hidden; transition: transform 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; /* 3 */ }
 
 .k-is-resizing .k-ui-namespace .k-component { overflow: hidden; }
 
@@ -794,7 +794,7 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 @media screen and (min-width: 600px) { .k-ui-namespace .k-is-opened-right .k-component .k-off-canvas-overlay-right { z-index: -1; } }
 
-.k-ui-namespace .k-component-wrapper { position: relative; background: #fbfbfb; display: flex; flex-direction: row; flex: 1 1 auto; overflow: auto; min-height: 0; /** Hide overflow when resizing the window */ }
+.k-ui-namespace .k-component-wrapper { position: relative; background: #fbfafa; display: flex; flex-direction: row; flex: 1 1 auto; overflow: auto; min-height: 0; /** Hide overflow when resizing the window */ }
 
 .k-is-resizing .k-ui-namespace .k-component-wrapper { overflow: hidden; }
 
@@ -1124,19 +1124,19 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace .k-alert--success { background-color: #27ae60; color: white; }
 
-.k-ui-namespace .k-alert--success .alert-link { color: #e6e6e6; }
+.k-ui-namespace .k-alert--success .alert-link { color: #e6e5e5; }
 
 .k-ui-namespace .k-alert--info { background-color: #3498db; color: white; }
 
-.k-ui-namespace .k-alert--info .alert-link { color: #e6e6e6; }
+.k-ui-namespace .k-alert--info .alert-link { color: #e6e5e5; }
 
 .k-ui-namespace .k-alert--warning { background-color: #e67e22; color: white; }
 
-.k-ui-namespace .k-alert--warning .alert-link { color: #e6e6e6; }
+.k-ui-namespace .k-alert--warning .alert-link { color: #e6e5e5; }
 
 .k-ui-namespace .k-alert--danger { background-color: #c0392b; color: white; }
 
-.k-ui-namespace .k-alert--danger .alert-link { color: #e6e6e6; }
+.k-ui-namespace .k-alert--danger .alert-link { color: #e6e5e5; }
 
 .k-ui-namespace .k-alert__close { margin: 0; padding: 0; list-style: none; border: none; background: transparent; position: absolute; top: 2px; right: 2px; overflow: hidden; width: 40px; height: 0; padding-top: 40px; color: inherit; font-size: 16px; }
 
@@ -1186,7 +1186,7 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace .k-breadcrumb__content { position: relative; z-index: 2; display: block; padding: 10px; min-width: 40px; min-height: 39px; overflow: hidden; text-align: center; line-height: 19px; text-decoration: none; white-space: nowrap; text-overflow: ellipsis; }
 
-.k-ui-namespace .k-button { display: inline-block; margin-bottom: 0; /* 1 */ font-weight: 400; text-align: center; vertical-align: middle; touch-action: manipulation; cursor: pointer; background-image: none; /* 2 */ border: 1px solid transparent; white-space: nowrap; box-shadow: none; text-shadow: none; user-select: none; border-radius: 4px; margin-right: 4px; font-size: 13px; line-height: 18px; padding: 6px 12px; /* Align checkbox properly inside button */ /* Align single icon buttons */ /* Properly align dropdown button in button */ }
+.k-ui-namespace .k-button { display: inline-block; margin-bottom: 0; /* 1 */ font-weight: 400; text-align: center; vertical-align: middle; touch-action: manipulation; cursor: pointer; background-image: none; /* 2 */ border: 1px solid transparent; white-space: nowrap; box-shadow: none; text-shadow: none; user-select: none; border-radius: 4px; margin-right: 4px; font-size: 13px; line-height: 18px; padding: 6px 12px; /* Align checkbox properly inside button */ /* Aligning icons */ /* Align single icon buttons */ /* Properly align dropdown button in button */ }
 
 .k-ui-namespace .k-button:last-child { margin-right: 0; }
 
@@ -1206,6 +1206,16 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace .k-button.k-button input[type="checkbox"] { margin: 0 -1px; vertical-align: top; }
 
+.k-ui-namespace .k-button [class^="k-icon"] { display: inline-block; }
+
+.k-ui-namespace .k-button [class^="k-icon"]:first-child { margin: 0 0.25em 0 0.1em; }
+
+[dir="rtl"] .k-ui-namespace .k-button [class^="k-icon"]:first-child { margin: 0 0.1em 0 0.25em; }
+
+.k-ui-namespace .k-button [class^="k-icon"]:last-child { margin: 0 0.1em 0 0.25em; }
+
+[dir="rtl"] .k-ui-namespace .k-button [class^="k-icon"]:last-child { margin: 0 0.25em 0 0.1em; }
+
 .k-ui-namespace .k-button [class*="icon-"]:only-child, .k-ui-namespace .k-button .k-visually-hidden + [class*="icon-"] { display: inline-block; margin: -4px; width: 14px; }
 
 .k-ui-namespace .k-button .k-dropdown { /* Pullback so whole button becomes clickable */ /* Pull back to toggle button */ }
@@ -1216,11 +1226,11 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace .k-button--default { color: #222222; background-color: white; border-color: #cdcdcd; }
 
-.k-ui-namespace .k-button--default:focus, .k-ui-namespace .k-button--default.k-has-focus { color: #222222; background-color: #e6e6e6; border-color: #8d8d8d; }
+.k-ui-namespace .k-button--default:focus, .k-ui-namespace .k-button--default.k-has-focus { color: #222222; background-color: #e6e5e5; border-color: #8d8d8d; }
 
-.k-ui-namespace .k-button--default:hover { color: #222222; background-color: #e6e6e6; border-color: #aeaeae; }
+.k-ui-namespace .k-button--default:hover { color: #222222; background-color: #e6e5e5; border-color: #aeaeae; }
 
-.k-ui-namespace .k-button--default:active, .k-ui-namespace .k-button--default.k-is-active, .k-is-open > .k-ui-namespace .k-button--default.dropdown-toggle { color: #222222; background-color: #e6e6e6; border-color: #aeaeae; box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.125); }
+.k-ui-namespace .k-button--default:active, .k-ui-namespace .k-button--default.k-is-active, .k-is-open > .k-ui-namespace .k-button--default.dropdown-toggle { color: #222222; background-color: #e6e5e5; border-color: #aeaeae; box-shadow: inset 1px 2px 4px rgba(0, 0, 0, 0.125); }
 
 .k-ui-namespace .k-button--default:active:hover, .k-ui-namespace .k-button--default:active:focus, .k-ui-namespace .k-button--default:active.k-has-focus, .k-ui-namespace .k-button--default.k-is-active:hover, .k-ui-namespace .k-button--default.k-is-active:focus, .k-ui-namespace .k-button--default.k-is-active.k-has-focus, .k-is-open > .k-ui-namespace .k-button--default.dropdown-toggle:hover, .k-is-open > .k-ui-namespace .k-button--default.dropdown-toggle:focus, .k-is-open > .k-ui-namespace .k-button--default.dropdown-toggle.k-has-focus { color: #222222; background-color: #d4d4d4; border-color: #8d8d8d; }
 
@@ -1398,7 +1408,7 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace .k-card__image--spaced-background { position: absolute; top: 2px; right: 2px; bottom: 2px; left: 2px; /* 3 */ }
 
-.k-ui-namespace .k-card__header { position: relative; z-index: 1; display: block; padding: 8px; font-weight: 700; background: #fbfbfb; border-bottom: 1px solid gainsboro; padding-bottom: 7px; color: #222222; text-decoration: none; transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-card__header { position: relative; z-index: 1; display: block; padding: 8px; font-weight: 700; background: #fbfafa; border-bottom: 1px solid gainsboro; padding-bottom: 7px; color: #222222; text-decoration: none; transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
 .k-ui-namespace .k-card__header:last-child { border-bottom: none; }
 
@@ -1408,7 +1418,7 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace .k-card__section--small-spacing { padding: 0; margin: 1px; /* 1 */ }
 
-.k-ui-namespace .k-card__footer { position: relative; z-index: 1; display: block; padding: 8px; background: #fbfbfb; border-top: 1px solid gainsboro; padding-top: 7px; color: #222222; text-decoration: none; transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-card__footer { position: relative; z-index: 1; display: block; padding: 8px; background: #fbfafa; border-top: 1px solid gainsboro; padding-top: 7px; color: #222222; text-decoration: none; transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
 .k-ui-namespace .k-card__footer:first-child { border-top: none; }
 
@@ -1432,9 +1442,9 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 .k-ui-namespace .k-card--flex .k-card__flex-item { flex: 1 1 auto; }
 
-.k-ui-namespace .cke_chrome.cke_chrome, .k-ui-namespace .cke_inner.cke_inner, .k-ui-namespace .cke_contents.cke_contents { display: flex; flex-direction: column; flex: 1 1 auto; height: auto !important; }
+.k-ui-namespace .cke_chrome.cke_chrome, .k-ui-namespace .cke_inner.cke_inner, .k-ui-namespace .cke_contents.cke_contents, .k-ui-namespace .cke_source.cke_source { display: flex !important; flex-direction: column; flex: 1 1 auto; height: auto !important; }
 
-.k-ui-namespace .cke_chrome.cke_chrome iframe, .k-ui-namespace .cke_inner.cke_inner iframe, .k-ui-namespace .cke_contents.cke_contents iframe { flex: 1 1 auto; }
+.k-ui-namespace .cke_chrome.cke_chrome iframe, .k-ui-namespace .cke_inner.cke_inner iframe, .k-ui-namespace .cke_contents.cke_contents iframe, .k-ui-namespace .cke_source.cke_source iframe { flex: 1 1 auto; }
 
 .k-ui-namespace .cke_resizer.cke_resizer { display: none; }
 
@@ -1502,7 +1512,7 @@ body.k-is-resizing { overflow: hidden; /* 4 */ }
 
 [dir="rtl"] .k-ui-namespace .k-dropdown__menu--grid .k-dropdown__block-item a { text-align: right; }
 
-.k-ui-namespace .k-empty-state { margin: 0; font-size: 17px; line-height: 24px; text-align: center; background: white; color: #222222; padding: 16px; display: flex; flex: 1 1 auto; flex-direction: column; justify-content: center; }
+.k-ui-namespace .k-empty-state { margin: 0; font-size: 17px; line-height: 24px; text-align: center; background: transparent; color: inherit; padding: 16px; display: flex; flex: 1 1 auto; flex-direction: column; justify-content: center; }
 
 .k-ui-namespace .k-empty-state p { margin-bottom: 16px; }
 
@@ -1991,7 +2001,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 @supports (display: grid) { .k-ui-namespace .k-gallery--xxl .k-gallery__item { width: 100%; flex-basis: auto; } }
 
-.k-ui-namespace .k-gallery-pagination { padding: 8px 8px 7px; background: #fbfbfb; flex: 0 0 auto; border-top: 1px solid gainsboro; box-shadow: 0 1px 0 gainsboro; /* 1 */ }
+.k-ui-namespace .k-gallery-pagination { padding: 8px 8px 7px; background: #fbfafa; flex: 0 0 auto; border-top: 1px solid gainsboro; box-shadow: 0 1px 0 gainsboro; /* 1 */ }
 
 .k-ui-namespace .k-off-canvas-toggle-holder { display: none; /* 1 */ }
 
@@ -2069,6 +2079,54 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace [class^="k-icon-document-"]:before, .k-ui-namespace [class*=" k-icon-document-"]:before { background-size: cover; }
 
+.k-ui-namespace .k-label { display: inline-block; padding: 0.33em 0.4em; font-size: 80%; font-weight: 700; line-height: 1; text-align: center; white-space: no-wrap; vertical-align: baseline; border-radius: 0.33em; background: rgba(0, 0, 0, 0.4); color: white; border: none; }
+
+.k-ui-namespace .k-label[href], .k-ui-namespace .k-label[href]:hover, .k-ui-namespace .k-label[href]:focus { text-decoration: none; }
+
+.k-ui-namespace .k-label--base { background: #2c3e50; color: white; }
+
+.k-ui-namespace a.k-label--base:hover, .k-ui-namespace a.k-label--base:focus, .k-ui-namespace button.k-label--base:hover, .k-ui-namespace button.k-label--base:focus { background: #1f2c39; color: white; }
+
+.k-ui-namespace .k-label--accent { background: #3071a9; color: white; }
+
+.k-ui-namespace a.k-label--accent:hover, .k-ui-namespace a.k-label--accent:focus, .k-ui-namespace button.k-label--accent:hover, .k-ui-namespace button.k-label--accent:focus { background: #285e8d; color: white; }
+
+.k-ui-namespace .k-label--success { background: #27ae60; color: white; }
+
+.k-ui-namespace a.k-label--success:hover, .k-ui-namespace a.k-label--success:focus, .k-ui-namespace button.k-label--success:hover, .k-ui-namespace button.k-label--success:focus { background: #209150; color: white; }
+
+.k-ui-namespace .k-label--neutral { background: #3498db; color: white; }
+
+.k-ui-namespace a.k-label--neutral:hover, .k-ui-namespace a.k-label--neutral:focus, .k-ui-namespace button.k-label--neutral:hover, .k-ui-namespace button.k-label--neutral:focus { background: #2386c8; color: white; }
+
+.k-ui-namespace .k-label--warning { background: #e67e22; color: white; }
+
+.k-ui-namespace a.k-label--warning:hover, .k-ui-namespace a.k-label--warning:focus, .k-ui-namespace button.k-label--warning:hover, .k-ui-namespace button.k-label--warning:focus { background: #cd6d17; color: white; }
+
+.k-ui-namespace .k-label--error { background: #c0392b; color: white; }
+
+.k-ui-namespace a.k-label--error:hover, .k-ui-namespace a.k-label--error:focus, .k-ui-namespace button.k-label--error:hover, .k-ui-namespace button.k-label--error:focus { background: #a33024; color: white; }
+
+.k-ui-namespace .k-label--float-end { float: right; }
+
+[dir="rtl"] .k-ui-namespace .k-label--float-end { float: left; }
+
+.k-ui-namespace .k-navigation .k-label { position: relative; top: -1px; left: 2px; margin: -2px 0; padding: 0 0.25em; font-size: 13px; line-height: 16px; vertical-align: middle; max-height: 16px; box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.4); }
+
+.k-ui-namespace .k-navigation .k-label--base { box-shadow: 0 0 0 2px #2c3e50; }
+
+.k-ui-namespace .k-navigation .k-label--accent { box-shadow: 0 0 0 2px #3071a9; }
+
+.k-ui-namespace .k-navigation .k-label--success { box-shadow: 0 0 0 2px #27ae60; }
+
+.k-ui-namespace .k-navigation .k-label--neutral { box-shadow: 0 0 0 2px #3498db; }
+
+.k-ui-namespace .k-navigation .k-label--warning { box-shadow: 0 0 0 2px #e67e22; }
+
+.k-ui-namespace .k-navigation .k-label--error { box-shadow: 0 0 0 2px #c0392b; }
+
+.k-ui-namespace .k-navigation .k-label--float-end { position: static; margin: 0; }
+
 .k-ui-namespace .k-list { padding: 0; list-style: none; border: none; background: transparent; /* 1 */ margin: 4px 0; /** Items */ /** Links 1. Make item fully clickable 2. removing underlines */ /** Active link */ /** Icons */ }
 
 [dir="rtl"] .k-ui-namespace .k-list { /* Override for rtl ul-ol-li styling */ margin: 4px 0; padding: 0; }
@@ -2087,6 +2145,45 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 [dir="rtl"] .k-ui-namespace .k-list [class^="k-icon"] { margin-right: auto; margin-left: 8px; }
 
+.k-ui-namespace .k-loader-container { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 5; background: rgba(255, 255, 255, 0.8); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader-container .k-loader { color: #3071a9; left: 0; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader { display: inline-block; font-size: 5px; margin: 0 1.5em 2em; position: relative; text-indent: -9999em; vertical-align: middle; /** Sizes */ }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader, .k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:before, .k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:after { border-radius: 50%; width: 1em; height: 1em; animation-fill-mode: both; animation: k-loader 1.61s infinite ease-in-out; backface-visibility: visible; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:before { left: -1.25em; animation-delay: -0.20125s; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:after { left: 1.25em; animation-delay: 0.20125s; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:before, .k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:after { content: ''; position: absolute; top: 0; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader.k-loader--small { font-size: 5px; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader.k-loader--medium { font-size: 10px; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader.k-loader--large { font-size: 20px; }
+
+@keyframes k-loader { 0%, 80%, 100% { box-shadow: 0 1em 0 -0.5em; }
+  40% { box-shadow: 0 1em 0 0; } }
+
+[dir="rtl"] .k-ui-namespace .k-loader { transform: scaleX(-1); }
+
+.k-ui-namespace .k-button .k-loader-container, .k-ui-namespace .k-tabs .k-loader-container { background: inherit; /* 1 */ color: inherit; /* 1 */ border-radius: inherit; /* 1 */ display: block; text-align: center; transform: scale(0.001); /* 2 */ transform-origin: 50% 50%; }
+
+.k-ui-namespace .k-button .k-loader-container:before, .k-ui-namespace .k-tabs .k-loader-container:before { position: absolute; content: " "; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: inherit; /* 1 */ opacity: 0.75; transform: scale(1000); /* 3 */ transform-origin: 50% 50%; border-radius: inherit; }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-button .k-loader-container .k-loader, .k-cssanimations.k-boxshadow .k-ui-namespace .k-tabs .k-loader-container .k-loader { color: inherit; transform: scale(1000); transform-origin: 50% 50%; top: -1000em; /* 4 */ }
+
+.k-cssanimations.k-boxshadow .k-ui-namespace .k-button .k-loader-container .k-loader:nth-child(n), .k-cssanimations.k-boxshadow .k-ui-namespace .k-tabs .k-loader-container .k-loader:nth-child(n) { margin-left: 1.5em; margin-right: 1.5em; }
+
+.k-ui-namespace .k-button .k-loader:first-child, .k-ui-namespace .k-tabs .k-loader:first-child { margin-right: 3em; }
+
+.k-ui-namespace .k-button .k-loader:not(first-child), .k-ui-namespace .k-tabs .k-loader:not(first-child) { margin-left: 3em; }
+
+.k-ui-namespace .k-button .k-loader:last-child, .k-ui-namespace .k-tabs .k-loader:last-child { margin-right: 1.5em; margin-left: 3em; }
+
 .k-ui-namespace .k-login { width: 100%; max-width: 360px; height: auto; margin: auto; display: inline-block; /* 1 */ vertical-align: middle; /* 1 */ flex: 0 0 auto; }
 
 .k-ui-namespace .k-login__brand { display: block; height: auto; width: auto; max-width: 100%; text-align: center; margin-left: auto; margin-right: auto; margin-bottom: 16px; font-size: 17px; }
@@ -2097,7 +2194,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 [dir="rtl"] .k-ui-namespace .k-login__content { text-align: right; }
 
-.k-ui-namespace .k-navigation { margin: 0; list-style: none; border: none; /* 1 */ border-bottom: 1px solid #c8c8c8; padding: 16px 0 15px; background: #e6e6e6; /** Override for rtl ul-ol-li styling */ /** Items */ /** Links 1. Make item fully clickable 2. removing underlines */ /** Active link */ }
+.k-ui-namespace .k-navigation { margin: 0; list-style: none; border: none; /* 1 */ border-bottom: 1px solid #c8c7c7; padding: 16px 0 15px; background: #e6e6e6; /** Override for rtl ul-ol-li styling */ /** Items */ /** Links 1. Make item fully clickable 2. removing underlines */ /** Active link */ }
 
 [dir="rtl"] .k-ui-namespace .k-navigation { padding: 16px 0 15px; }
 
@@ -2312,7 +2409,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-scopebar-dropdown__body__content { padding: 5px; }
 
-.k-ui-namespace .k-scopebar-dropdown__body__buttons { line-height: 14px; border-top: 1px solid #e0e0e0; background: #fbfbfb; color: #222222; padding: 8px 5px; text-align: center; border-radius: 0 0 5px 5px; }
+.k-ui-namespace .k-scopebar-dropdown__body__buttons { line-height: 14px; border-top: 1px solid #e0e0e0; background: #fbfafa; color: #222222; padding: 8px 5px; text-align: center; border-radius: 0 0 5px 5px; }
 
 .k-ui-namespace .k-scopebar-dropdown__body__buttons .btn { padding: 4px 30px; line-height: 16px; }
 
@@ -2485,7 +2582,9 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 @media screen and (min-width: 768px) { .k-ui-namespace .k-tabs-scroller > .k-tabs { padding-left: 16px; padding-right: 16px; } }
 
-.k-ui-namespace .k-tabs-scroller > .k-tabs li.k-is-active a { background: #fbfbfb; color: #222222; }
+.k-ui-namespace .k-tabs-scroller > .k-tabs li.k-is-active a { background: #fbfafa; color: #222222; }
+
+.k-ui-namespace .k-tabs-scroller > .k-tabs li.k-is-active a:focus { border-color: #cacaca; border-bottom-color: transparent; }
 
 .k-ui-namespace .k-tabs { position: relative; /* 1 */ margin: 0; padding: 0; list-style: none; border-bottom: 1px solid gainsboro; font-size: 0; /** 1. Make the list-items overlay the bottom border */ /** Disabled state sets text to gray and nukes hover/tab effects */ /** Active state, and its :hover to override normal :hover */ /** Links */ }
 
@@ -2503,9 +2602,11 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-tabs .k-is-active a, .k-ui-namespace .k-tabs .k-is-active a:hover, .k-ui-namespace .k-tabs .k-is-active a:focus { color: #222222; background-color: white; border: 1px solid gainsboro; border-bottom-color: transparent; cursor: default; }
 
+.k-ui-namespace .k-tabs .k-is-active a:focus { box-shadow: inset 0 1px 0 0 #cacaca; }
+
 .k-ui-namespace .k-tabs a { position: relative; display: block; padding: 8px 16px 6px; line-height: 20px; border: 1px solid transparent; border-radius: 4px 4px 0 0; text-decoration: none; font-size: 13px; cursor: pointer; }
 
-.k-ui-namespace .k-tabs a:hover, .k-ui-namespace .k-tabs a:focus { text-decoration: none; background-color: #eeeeee; border-color: gainsboro; }
+.k-ui-namespace .k-tabs a:hover, .k-ui-namespace .k-tabs a:focus { text-decoration: none; background-color: #eeeeee; border-color: gainsboro; outline: none; }
 
 .k-ui-namespace .k-tabs--transparent { background-color: inherit; }
 
@@ -2519,7 +2620,9 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-tabs-content > .k-is-active { display: flex; }
 
-.k-ui-namespace .k-tabs-scroller-prev, .k-ui-namespace .k-tabs-scroller-next { margin: 0; padding: 0; position: absolute; top: 0; bottom: 0; width: 32px; overflow: hidden; opacity: 0; background: white; border: 1px solid gainsboro; border-radius: 0; transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.k-ui-namespace .k-tabs-scroller-prev, .k-ui-namespace .k-tabs-scroller-next { margin: 0; padding: 0; position: absolute; top: 0; bottom: 0; width: 32px; overflow: hidden; display: none; opacity: 0; background: white; border: 1px solid gainsboro; border-radius: 0; transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+
+.k-ui-namespace .k-tabs-scroller-prev:focus, .k-ui-namespace .k-tabs-scroller-prev:hover, .k-ui-namespace .k-tabs-scroller-next:focus, .k-ui-namespace .k-tabs-scroller-next:hover { background-color: #eeeeee; }
 
 .k-ui-namespace .k-tabs-scroller-prev span, .k-ui-namespace .k-tabs-scroller-next span { transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
@@ -2531,7 +2634,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-has-tabs-overflow { padding-left: 32px; padding-right: 32px; }
 
-.k-ui-namespace .k-has-tabs-overflow .k-tabs-scroller-prev, .k-ui-namespace .k-has-tabs-overflow .k-tabs-scroller-next { transform: translateX(0); cursor: no-drop; opacity: 1; }
+.k-ui-namespace .k-has-tabs-overflow .k-tabs-scroller-prev, .k-ui-namespace .k-has-tabs-overflow .k-tabs-scroller-next { transform: translateX(0); cursor: no-drop; opacity: 1; display: block; }
 
 .k-ui-namespace .k-has-tabs-overflow .k-tabs-scroller-prev span, .k-ui-namespace .k-has-tabs-overflow .k-tabs-scroller-next span { opacity: 0.33; }
 
@@ -2563,7 +2666,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-table-container th { position: sticky; top: 0; z-index: 1; }
 
-.k-ui-namespace .k-table-container th { border-bottom: 1px solid gainsboro; z-index: 1; padding: 0 8px; /* 1 */ white-space: nowrap; /* 2 */ background: #fbfbfb; font-weight: 400; /** Size icons accordingly */ }
+.k-ui-namespace .k-table-container th { border-bottom: 1px solid gainsboro; z-index: 1; padding: 0 8px; /* 1 */ white-space: nowrap; /* 2 */ background: #fbfafa; font-weight: 400; /** Size icons accordingly */ }
 
 .k-ui-namespace .k-table-container th a { display: block; /* 3 */ padding: 6px 8px; /* 4 */ margin-left: -8px; margin-right: -8px; line-height: 27px; text-decoration: none; }
 
@@ -2577,7 +2680,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-table-container tr:nth-child(odd) td { background: white; }
 
-.k-ui-namespace .k-table-container tr:focus td, .k-ui-namespace .k-table-container tr:hover td, .k-ui-namespace .k-table-container tr:nth-child(n):focus td, .k-ui-namespace .k-table-container tr:nth-child(n):hover td { background: #fbfbfb; }
+.k-ui-namespace .k-table-container tr:focus td, .k-ui-namespace .k-table-container tr:hover td, .k-ui-namespace .k-table-container tr:nth-child(n):focus td, .k-ui-namespace .k-table-container tr:nth-child(n):hover td { background: #fbfafa; }
 
 .k-ui-namespace .k-table-container [class*="k-icon"] { display: inline-block; }
 
@@ -2647,7 +2750,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-table-container { /** Only set top when a thead is found */ }
 
-.k-ui-namespace .k-table-container .k-table__sub-header th { padding: 0.7em 8px 0.5em; height: auto; font-size: 11px; line-height: 16px; font-weight: 700; vertical-align: middle; text-transform: uppercase; white-space: nowrap; background: #fbfbfb; border-bottom-color: #ededed; }
+.k-ui-namespace .k-table-container .k-table__sub-header th { padding: 0.7em 8px 0.5em; height: auto; font-size: 11px; line-height: 16px; font-weight: 700; vertical-align: middle; text-transform: uppercase; white-space: nowrap; background: #fbfafa; border-bottom-color: #ededed; }
 
 @supports (position: sticky) { .k-ui-namespace .k-table-container thead ~ tbody .k-table__sub-header th { top: 40px; } }
 
@@ -2805,11 +2908,11 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-table-container .k-is-active > td { font-weight: bold; }
 
-.k-ui-namespace .k-table-container .k-is-active:not(.k-is-selected) > td:nth-child(n) { background: #fbfbfb; }
+.k-ui-namespace .k-table-container .k-is-active:not(.k-is-selected) > td:nth-child(n) { background: #fbfafa; }
 
 .k-ui-namespace .k-positioner { display: inline-block; vertical-align: middle; width: 16px; height: 4px; margin-top: 6px; margin-bottom: 6px; border-top: 1px solid #cdcdcd; border-bottom: 1px solid #cdcdcd; cursor: no-drop; position: relative; }
 
-.k-ui-namespace .k-positioner.k-is-selected { cursor: move; }
+.k-ui-namespace .k-positioner.k-is-active { cursor: move; }
 
 .k-ui-namespace .k-positioner:before { display: block; position: absolute; content: " "; width: 16px; height: 10px; border-top: 1px solid #cdcdcd; border-bottom: 1px solid #cdcdcd; top: -4px; }
 
@@ -2837,7 +2940,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace th a:focus .k-sort-descending:before, .k-ui-namespace th a:hover .k-sort-descending:before { opacity: 0.66; }
 
-.k-ui-namespace .k-table-pagination { padding: 8px 8px 7px; background: #fbfbfb; flex: 0 0 auto; border-top: 1px solid gainsboro; box-shadow: 0 1px 0 gainsboro; /* 1 */ }
+.k-ui-namespace .k-table-pagination { padding: 8px 8px 7px; background: #fbfafa; flex: 0 0 auto; border-top: 1px solid gainsboro; box-shadow: 0 1px 0 gainsboro; /* 1 */ }
 
 .k-ui-namespace .k-title-bar { border-bottom: 1px solid #d2d2d2; position: relative; /* 1 */ z-index: 10; /* 1 */ display: flex; justify-content: space-between; align-items: center; width: 100%; background: #f0f0f0; /* 2 */ color: #222222; font-size: 21px; flex: 0 0 auto; }
 
@@ -2864,7 +2967,7 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 [dir="rtl"] .k-ui-namespace .k-toolbar { padding-right: 0; padding-left: 8px; /* 2 */ }
 
-.k-ui-namespace .k-toolbar { /** Autosave indicator Position of the autosave indicator Use a k-loader for the indicator itself */ /** Position the icons Only position them if media queries are supported By default we just want them aligned normally */ }
+.k-ui-namespace .k-toolbar { /** Autosave indicator Position of the autosave indicator Use a k-loader for the indicator itself */ /** Position the icons */ }
 
 .k-ui-namespace .k-toolbar .k-button { margin: 7px 0 0 8px; padding: 7px; min-width: 32px; line-height: 16px; /** Make buttons square Only make them square if media queries are supported By default we just want them as buttons */ /** Properly align dropdown button in button */ }
 
@@ -2889,12 +2992,6 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 .k-ui-namespace .k-toolbar .k-autosave-indicator { margin: 8px 0 0 8px; display: inline-block; vertical-align: middle; padding: 4px; }
 
 [dir="rtl"] .k-ui-namespace .k-toolbar .k-autosave-indicator { margin: 8px 8px 0 0; }
-
-.k-ui-namespace .k-toolbar [class^="k-icon"] { display: inline-block; }
-
-.k-ui-namespace .k-toolbar [class^="k-icon"]:first-child { margin: 0 0.25em 0 0.1em; }
-
-[dir="rtl"] .k-ui-namespace .k-toolbar [class^="k-icon"] { margin: 0 0.1em 0 0.25em; }
 
 .k-ui-namespace .k-toolbar .k-off-canvas-toggle-holder { display: inline-block; vertical-align: middle; margin: 7px 0 0 8px; }
 
@@ -3084,6 +3181,10 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-background-error { background: #c0392b; color: white; }
 
+.k-ui-namespace .k-background-transparent { background: transparent; color: inherit; }
+
+.k-ui-namespace .k-background-inherit { background: inherit; color: inherit; }
+
 .k-ui-namespace .k-color-type { color: #222222; }
 
 .k-ui-namespace .k-color-base { color: #2c3e50; }
@@ -3097,6 +3198,10 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 .k-ui-namespace .k-color-warning { color: #e67e22; }
 
 .k-ui-namespace .k-color-error { color: #c0392b; }
+
+.k-ui-namespace .k-color-inherit { color: inherit; }
+
+.k-ui-namespace .k-color-white { color: white; }
 
 .k-ui-namespace .fade { opacity: 0; transition: opacity 0.5s cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
@@ -3162,33 +3267,6 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-hidden.k-hidden.k-hidden, .k-ui-namespace .k-is-hidden.k-is-hidden.k-is-hidden { display: none; }
 
-.k-ui-namespace .k-loader-container { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 5; background: rgba(255, 255, 255, 0.8); display: flex; align-items: center; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader-container .k-loader { left: 0; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader { display: inline-block; color: #3071a9; font-size: 5px; margin: 0 auto 2em; position: relative; text-indent: -9999em; vertical-align: middle; /** Sizes */ }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader, .k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:before, .k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:after { border-radius: 50%; width: 1em; height: 1em; animation-fill-mode: both; animation: k-loader 1.61s infinite ease-in-out; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader { left: 1.25em; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:before { left: -1.25em; animation-delay: -0.20125s; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:after { left: 1.25em; animation-delay: 0.20125s; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:before, .k-cssanimations.k-boxshadow .k-ui-namespace .k-loader:after { content: ''; position: absolute; top: 0; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader.k-loader--small { font-size: 5px; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader.k-loader--medium { font-size: 10px; }
-
-.k-cssanimations.k-boxshadow .k-ui-namespace .k-loader.k-loader--large { font-size: 20px; }
-
-@keyframes k-loader { 0%, 80%, 100% { box-shadow: 0 1em 0 -0.5em; }
-  40% { box-shadow: 0 1em 0 0; } }
-
-[dir="rtl"] .k-ui-namespace .k-loader { transform: scaleX(-1); }
-
 .k-ui-namespace .k-no-margin.k-no-margin.k-no-margin { margin: 0; }
 
 .k-ui-namespace .k-no-margin-horizontal.k-no-margin-horizontal.k-no-margin-horizontal { margin-right: 0; margin-left: 0; }
@@ -3199,11 +3277,11 @@ html:not([dir="rtl"]) .k-input-group .k-form-control:last-child, html:not([dir="
 
 .k-ui-namespace .k-no-margin-bottom.k-no-margin-bottom.k-no-margin-bottom { margin-bottom: 0; }
 
-html:not([dir=rtl]) .k-no-margin-right.k-no-margin-right.k-no-margin-right { margin-right: 0; }
+html:not([dir="rtl"]) .k-no-margin-right.k-no-margin-right.k-no-margin-right { margin-right: 0; }
 
 [dir="rtl"] .k-ui-namespace .k-no-margin-right.k-no-margin-right.k-no-margin-right { margin-left: 0; }
 
-html:not([dir=rtl]) .k-no-margin-left.k-no-margin-left.k-no-margin-left { margin-left: 0; }
+html:not([dir="rtl"]) .k-no-margin-left.k-no-margin-left.k-no-margin-left { margin-left: 0; }
 
 [dir="rtl"] .k-ui-namespace .k-no-margin-left.k-no-margin-left.k-no-margin-left { margin-right: 0; }
 
@@ -3217,11 +3295,11 @@ html:not([dir=rtl]) .k-no-margin-left.k-no-margin-left.k-no-margin-left { margin
 
 .k-ui-namespace .k-no-padding-bottom.k-no-padding-bottom.k-no-padding-bottom { padding-bottom: 0; }
 
-html:not([dir=rtl]) .k-no-padding-right.k-no-padding-right.k-no-padding-right { padding-right: 0; }
+html:not([dir="rtl"]) .k-no-padding-right.k-no-padding-right.k-no-padding-right { padding-right: 0; }
 
 [dir="rtl"] .k-ui-namespace .k-no-padding-right.k-no-padding-right.k-no-padding-right { padding-left: 0; }
 
-html:not([dir=rtl]) .k-no-padding-left.k-no-padding-left.k-no-padding-left { padding-left: 0; }
+html:not([dir="rtl"]) .k-no-padding-left.k-no-padding-left.k-no-padding-left { padding-left: 0; }
 
 [dir="rtl"] .k-ui-namespace .k-no-padding-left.k-no-padding-left.k-no-padding-left { padding-right: 0; }
 
@@ -3306,9 +3384,9 @@ html:not([dir=rtl]) .k-no-padding-left.k-no-padding-left.k-no-padding-left { pad
 /* Responsive table ========================================================================== */
 .footable.breakpoint { /** Reset padding, and re-set them on individual divs */ /** 1. Just like table cells 2. Almost as tall as the main table rows 3. Same spacing as on table cells */ /* Hide toggle button for sub headings */ }
 
-.footable.breakpoint .footable-toggle { content: " "; display: inline-block; width: 20px; height: 20px; line-height: 18px; border: 1px solid #a2a2a2; border-radius: 50%; text-align: center; vertical-align: middle; }
+.footable.breakpoint .footable-toggle { content: " "; display: inline-block; width: 20px; height: 20px; line-height: 18px; border: 1px solid #a2a1a1; border-radius: 50%; text-align: center; vertical-align: middle; }
 
-.footable.breakpoint .footable-toggle:after { content: ""; display: inline-block; width: 10px; height: 10px; margin: 4px; color: #a2a2a2; font-size: 10px; line-height: 1.3em; transform: rotate(-90deg); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+.footable.breakpoint .footable-toggle:after { content: ""; display: inline-block; width: 10px; height: 10px; margin: 4px; color: #a2a1a1; font-size: 10px; line-height: 1.3em; transform: rotate(-90deg); transition: all 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
 [dir="rtl"] .footable.breakpoint .footable-toggle:after { transform: rotate(90deg); }
 
@@ -3486,7 +3564,7 @@ button::-moz-focus-inner { padding: 0; border: 0; }
 
 [dir="rtl"] .mfp-counter { right: auto; left: 0; }
 
-.mfp-arrow { position: absolute; opacity: 0.65; margin: 0; top: 50%; margin-top: -55px; padding: 0; width: 90px; height: 110px; -webkit-tap-highlight-color: transparent; }
+.mfp-arrow { position: absolute; opacity: 0.65; margin: 0; top: 50%; margin-top: -55px; padding: 0; width: 90px; height: 110px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 .mfp-arrow:active { margin-top: -54px; }
 
@@ -3718,8 +3796,7 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 
 .input-daterange .add-on { display: inline-block; width: auto; min-width: 16px; height: 20px; padding: 4px 5px; font-weight: normal; line-height: 20px; text-align: center; text-shadow: 0 1px 0 white; vertical-align: middle; background-color: #eeeeee; border: 1px solid #ccc; margin-left: -5px; margin-right: -5px; }
 
-html { /*! Select2 Bootstrap Theme v0.1.0-beta.9 | MIT License | github.com/select2/select2-bootstrap-theme */ /*------------------------------------*  #ADDITIONAL GOODIES
-\*------------------------------------*/ /** Address Bootstrap's validation states If a Select2 widget parent has one of Bootstrap's validation state modifier classes, adjust Select2's border colors and focus states accordingly. You may apply said classes to the Select2 dropdown (body > .select2-container) via JavaScript match Bootstraps' to make its styles match. @see http://getbootstrap.com/css/#forms-control-validation */ /** Select2 widgets in Bootstrap Input Groups When Select2 widgets are combined with other elements using Bootstraps "Input Group" component, we don't want specific edges of the Select2 container to have a border-radius. Use .select2-bootstrap-prepend and .select2-bootstrap-append on a Bootstrap 3 .input-group to let the contained Select2 widget know which edges should not be rounded as they are directly followed by another element. @see http://getbootstrap.com/components/#input-groups */ /** Mimick Bootstraps .input-group .form-control styles. @see https://github.com/twbs/bootstrap/blob/master/less/input-groups.less */ /** Adjust alignment of Bootstrap buttons in Bootstrap Input Groups to address Multi Select2's height which - depending on how many elements have been selected - may grow taller than its initial size. @see http://getbootstrap.com/components/#input-groups */ /** Temporary fix for https://github.com/select2/select2-bootstrap-theme/issues/9 Provides `!important` for certain properties of the class applied to the original `<select>` element to hide it. @see https://github.com/select2/select2/pull/3301 @see https://github.com/fk/select2/commit/31830c7b32cb3d8e1b12d5b434dee40a6e753ada */ /** Display override for inline forms */ }
+html { /*! Select2 Bootstrap Theme v0.1.0-beta.9 | MIT License | github.com/select2/select2-bootstrap-theme */ /*------------------------------------*\ #ADDITIONAL GOODIES \*------------------------------------*/ /** Address Bootstrap's validation states If a Select2 widget parent has one of Bootstrap's validation state modifier classes, adjust Select2's border colors and focus states accordingly. You may apply said classes to the Select2 dropdown (body > .select2-container) via JavaScript match Bootstraps' to make its styles match. @see http://getbootstrap.com/css/#forms-control-validation */ /** Select2 widgets in Bootstrap Input Groups When Select2 widgets are combined with other elements using Bootstraps "Input Group" component, we don't want specific edges of the Select2 container to have a border-radius. Use .select2-bootstrap-prepend and .select2-bootstrap-append on a Bootstrap 3 .input-group to let the contained Select2 widget know which edges should not be rounded as they are directly followed by another element. @see http://getbootstrap.com/components/#input-groups */ /** Mimick Bootstraps .input-group .form-control styles. @see https://github.com/twbs/bootstrap/blob/master/less/input-groups.less */ /** Adjust alignment of Bootstrap buttons in Bootstrap Input Groups to address Multi Select2's height which - depending on how many elements have been selected - may grow taller than its initial size. @see http://getbootstrap.com/components/#input-groups */ /** Temporary fix for https://github.com/select2/select2-bootstrap-theme/issues/9 Provides `!important` for certain properties of the class applied to the original `<select>` element to hide it. @see https://github.com/select2/select2/pull/3301 @see https://github.com/fk/select2/commit/31830c7b32cb3d8e1b12d5b434dee40a6e753ada */ /** Display override for inline forms */ }
 
 html .select2-container { box-sizing: border-box; display: inline-block; margin: 0; position: relative; vertical-align: middle; }
 
@@ -3929,7 +4006,7 @@ html .select2-container--classic .select2-results__group { cursor: default; disp
 
 html .select2-container--classic.select2-container--open .select2-dropdown { border-color: #5897fb; }
 
-html .select2-container--bootstrap { display: block; /*------------------------------------*      #COMMON STYLES \*------------------------------------*/ /** Search field in the Select2 dropdown. */ /** No outline for all search fields - in the dropdown and inline in multi Select2s. */ /** Adjust Select2's choices hover and selected styles to match Bootstrap 3's default dropdown styles. @see http://getbootstrap.com/components/#dropdowns */ /** Clear the selection. */ /** Address disabled Select2 styles. @see https://select2.github.io/examples.html#disabled @see http://getbootstrap.com/css/#forms-control-disabled */ /*------------------------------------*      #DROPDOWN \*------------------------------------*/ /** Dropdown border color and box-shadow. */ /** Limit the dropdown height. */ /*------------------------------------*      #SINGLE SELECT2 \*------------------------------------*/ /*------------------------------------*    #MULTIPLE SELECT2 \*------------------------------------*/ /** Address Bootstrap control sizing classes 1. Reset Bootstrap defaults. 2. Adjust the dropdown arrow button icon position. @see http://getbootstrap.com/css/#forms-control-sizes */ /* 1 */ /*------------------------------------*    #RTL SUPPORT \*------------------------------------*/ }
+html .select2-container--bootstrap { display: block; /*------------------------------------*\ #COMMON STYLES \*------------------------------------*/ /** Search field in the Select2 dropdown. */ /** No outline for all search fields - in the dropdown and inline in multi Select2s. */ /** Adjust Select2's choices hover and selected styles to match Bootstrap 3's default dropdown styles. @see http://getbootstrap.com/components/#dropdowns */ /** Clear the selection. */ /** Address disabled Select2 styles. @see https://select2.github.io/examples.html#disabled @see http://getbootstrap.com/css/#forms-control-disabled */ /*------------------------------------*\ #DROPDOWN \*------------------------------------*/ /** Dropdown border color and box-shadow. */ /** Limit the dropdown height. */ /*------------------------------------*\ #SINGLE SELECT2 \*------------------------------------*/ /*------------------------------------*\ #MULTIPLE SELECT2 \*------------------------------------*/ /** Address Bootstrap control sizing classes 1. Reset Bootstrap defaults. 2. Adjust the dropdown arrow button icon position. @see http://getbootstrap.com/css/#forms-control-sizes */ /* 1 */ /*------------------------------------*\ #RTL SUPPORT \*------------------------------------*/ }
 
 html .select2-container--bootstrap .select2-selection { box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); background-color: white; border: 1px solid #cdcdcd; border-radius: 4px; color: #222222; font-size: 13px; outline: 0; }
 
@@ -4117,6 +4194,627 @@ html .form-control.select2-hidden-accessible { position: absolute !important; wi
 
 html .form-inline .select2-container--bootstrap { display: inline-block; }
 
+.k-bs-container-fluid, .k-bs-container { width: 100%; padding-right: 15px; padding-left: 15px; margin-right: auto; margin-left: auto; }
+
+@media (min-width: 400px) { .k-bs-maxwidth-container { max-width: 370px; } }
+
+@media (min-width: 600px) { .k-bs-maxwidth-container { max-width: 570px; } }
+
+@media (min-width: 768px) { .k-bs-maxwidth-container { max-width: 738px; } }
+
+@media (min-width: 1024px) { .k-bs-maxwidth-container { max-width: 994px; } }
+
+@media (min-width: 1200px) { .k-bs-maxwidth-container { max-width: 1170px; } }
+
+.k-bs-row { display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px; }
+
+.k-bs-no-gutters { margin-right: 0; margin-left: 0; }
+
+.k-bs-no-gutters > .k-bs-col, .k-bs-no-gutters > [class*="k-bs-col-"] { padding-right: 0; padding-left: 0; }
+
+.k-bs-col-1, .k-bs-col-2, .k-bs-col-3, .k-bs-col-4, .k-bs-col-5, .k-bs-col-6, .k-bs-col-7, .k-bs-col-8, .k-bs-col-9, .k-bs-col-10, .k-bs-col-11, .k-bs-col-12, .k-bs-col, .k-bs-col-auto, .k-bs-col-s-1, .k-bs-col-s-2, .k-bs-col-s-3, .k-bs-col-s-4, .k-bs-col-s-5, .k-bs-col-s-6, .k-bs-col-s-7, .k-bs-col-s-8, .k-bs-col-s-9, .k-bs-col-s-10, .k-bs-col-s-11, .k-bs-col-s-12, .k-bs-col-s, .k-bs-col-s-auto, .k-bs-col-sm-1, .k-bs-col-sm-2, .k-bs-col-sm-3, .k-bs-col-sm-4, .k-bs-col-sm-5, .k-bs-col-sm-6, .k-bs-col-sm-7, .k-bs-col-sm-8, .k-bs-col-sm-9, .k-bs-col-sm-10, .k-bs-col-sm-11, .k-bs-col-sm-12, .k-bs-col-sm, .k-bs-col-sm-auto, .k-bs-col-md-1, .k-bs-col-md-2, .k-bs-col-md-3, .k-bs-col-md-4, .k-bs-col-md-5, .k-bs-col-md-6, .k-bs-col-md-7, .k-bs-col-md-8, .k-bs-col-md-9, .k-bs-col-md-10, .k-bs-col-md-11, .k-bs-col-md-12, .k-bs-col-md, .k-bs-col-md-auto, .k-bs-col-lg-1, .k-bs-col-lg-2, .k-bs-col-lg-3, .k-bs-col-lg-4, .k-bs-col-lg-5, .k-bs-col-lg-6, .k-bs-col-lg-7, .k-bs-col-lg-8, .k-bs-col-lg-9, .k-bs-col-lg-10, .k-bs-col-lg-11, .k-bs-col-lg-12, .k-bs-col-lg, .k-bs-col-lg-auto, .k-bs-col-xl-1, .k-bs-col-xl-2, .k-bs-col-xl-3, .k-bs-col-xl-4, .k-bs-col-xl-5, .k-bs-col-xl-6, .k-bs-col-xl-7, .k-bs-col-xl-8, .k-bs-col-xl-9, .k-bs-col-xl-10, .k-bs-col-xl-11, .k-bs-col-xl-12, .k-bs-col-xl, .k-bs-col-xl-auto { position: relative; width: 100%; min-height: 1px; padding-right: 15px; padding-left: 15px; }
+
+.k-bs-col { flex-basis: 0; flex-grow: 1; max-width: 100%; }
+
+.k-bs-col-auto { flex: 0 0 auto; width: auto; max-width: none; }
+
+.k-bs-col-1 { flex: 0 0 8.3333333333%; max-width: 8.3333333333%; }
+
+.k-bs-col-2 { flex: 0 0 16.6666666667%; max-width: 16.6666666667%; }
+
+.k-bs-col-3 { flex: 0 0 25%; max-width: 25%; }
+
+.k-bs-col-4 { flex: 0 0 33.3333333333%; max-width: 33.3333333333%; }
+
+.k-bs-col-5 { flex: 0 0 41.6666666667%; max-width: 41.6666666667%; }
+
+.k-bs-col-6 { flex: 0 0 50%; max-width: 50%; }
+
+.k-bs-col-7 { flex: 0 0 58.3333333333%; max-width: 58.3333333333%; }
+
+.k-bs-col-8 { flex: 0 0 66.6666666667%; max-width: 66.6666666667%; }
+
+.k-bs-col-9 { flex: 0 0 75%; max-width: 75%; }
+
+.k-bs-col-10 { flex: 0 0 83.3333333333%; max-width: 83.3333333333%; }
+
+.k-bs-col-11 { flex: 0 0 91.6666666667%; max-width: 91.6666666667%; }
+
+.k-bs-col-12 { flex: 0 0 100%; max-width: 100%; }
+
+.k-bs-order-first { order: -1; }
+
+.k-bs-order-last { order: 13; }
+
+.k-bs-order-0 { order: 0; }
+
+.k-bs-order-1 { order: 1; }
+
+.k-bs-order-2 { order: 2; }
+
+.k-bs-order-3 { order: 3; }
+
+.k-bs-order-4 { order: 4; }
+
+.k-bs-order-5 { order: 5; }
+
+.k-bs-order-6 { order: 6; }
+
+.k-bs-order-7 { order: 7; }
+
+.k-bs-order-8 { order: 8; }
+
+.k-bs-order-9 { order: 9; }
+
+.k-bs-order-10 { order: 10; }
+
+.k-bs-order-11 { order: 11; }
+
+.k-bs-order-12 { order: 12; }
+
+.k-bs-offset-1 { margin-left: 8.3333333333%; }
+
+.k-bs-offset-2 { margin-left: 16.6666666667%; }
+
+.k-bs-offset-3 { margin-left: 25%; }
+
+.k-bs-offset-4 { margin-left: 33.3333333333%; }
+
+.k-bs-offset-5 { margin-left: 41.6666666667%; }
+
+.k-bs-offset-6 { margin-left: 50%; }
+
+.k-bs-offset-7 { margin-left: 58.3333333333%; }
+
+.k-bs-offset-8 { margin-left: 66.6666666667%; }
+
+.k-bs-offset-9 { margin-left: 75%; }
+
+.k-bs-offset-10 { margin-left: 83.3333333333%; }
+
+.k-bs-offset-11 { margin-left: 91.6666666667%; }
+
+@media (min-width: 400px) { .k-bs-col-s { flex-basis: 0; flex-grow: 1; max-width: 100%; }
+  .k-bs-col-s-auto { flex: 0 0 auto; width: auto; max-width: none; }
+  .k-bs-col-s-1 { flex: 0 0 8.3333333333%; max-width: 8.3333333333%; }
+  .k-bs-col-s-2 { flex: 0 0 16.6666666667%; max-width: 16.6666666667%; }
+  .k-bs-col-s-3 { flex: 0 0 25%; max-width: 25%; }
+  .k-bs-col-s-4 { flex: 0 0 33.3333333333%; max-width: 33.3333333333%; }
+  .k-bs-col-s-5 { flex: 0 0 41.6666666667%; max-width: 41.6666666667%; }
+  .k-bs-col-s-6 { flex: 0 0 50%; max-width: 50%; }
+  .k-bs-col-s-7 { flex: 0 0 58.3333333333%; max-width: 58.3333333333%; }
+  .k-bs-col-s-8 { flex: 0 0 66.6666666667%; max-width: 66.6666666667%; }
+  .k-bs-col-s-9 { flex: 0 0 75%; max-width: 75%; }
+  .k-bs-col-s-10 { flex: 0 0 83.3333333333%; max-width: 83.3333333333%; }
+  .k-bs-col-s-11 { flex: 0 0 91.6666666667%; max-width: 91.6666666667%; }
+  .k-bs-col-s-12 { flex: 0 0 100%; max-width: 100%; }
+  .k-bs-order-s-first { order: -1; }
+  .k-bs-order-s-last { order: 13; }
+  .k-bs-order-s-0 { order: 0; }
+  .k-bs-order-s-1 { order: 1; }
+  .k-bs-order-s-2 { order: 2; }
+  .k-bs-order-s-3 { order: 3; }
+  .k-bs-order-s-4 { order: 4; }
+  .k-bs-order-s-5 { order: 5; }
+  .k-bs-order-s-6 { order: 6; }
+  .k-bs-order-s-7 { order: 7; }
+  .k-bs-order-s-8 { order: 8; }
+  .k-bs-order-s-9 { order: 9; }
+  .k-bs-order-s-10 { order: 10; }
+  .k-bs-order-s-11 { order: 11; }
+  .k-bs-order-s-12 { order: 12; }
+  .k-bs-offset-s-0 { margin-left: 0; }
+  .k-bs-offset-s-1 { margin-left: 8.3333333333%; }
+  .k-bs-offset-s-2 { margin-left: 16.6666666667%; }
+  .k-bs-offset-s-3 { margin-left: 25%; }
+  .k-bs-offset-s-4 { margin-left: 33.3333333333%; }
+  .k-bs-offset-s-5 { margin-left: 41.6666666667%; }
+  .k-bs-offset-s-6 { margin-left: 50%; }
+  .k-bs-offset-s-7 { margin-left: 58.3333333333%; }
+  .k-bs-offset-s-8 { margin-left: 66.6666666667%; }
+  .k-bs-offset-s-9 { margin-left: 75%; }
+  .k-bs-offset-s-10 { margin-left: 83.3333333333%; }
+  .k-bs-offset-s-11 { margin-left: 91.6666666667%; } }
+
+@media (min-width: 600px) { .k-bs-col-sm { flex-basis: 0; flex-grow: 1; max-width: 100%; }
+  .k-bs-col-sm-auto { flex: 0 0 auto; width: auto; max-width: none; }
+  .k-bs-col-sm-1 { flex: 0 0 8.3333333333%; max-width: 8.3333333333%; }
+  .k-bs-col-sm-2 { flex: 0 0 16.6666666667%; max-width: 16.6666666667%; }
+  .k-bs-col-sm-3 { flex: 0 0 25%; max-width: 25%; }
+  .k-bs-col-sm-4 { flex: 0 0 33.3333333333%; max-width: 33.3333333333%; }
+  .k-bs-col-sm-5 { flex: 0 0 41.6666666667%; max-width: 41.6666666667%; }
+  .k-bs-col-sm-6 { flex: 0 0 50%; max-width: 50%; }
+  .k-bs-col-sm-7 { flex: 0 0 58.3333333333%; max-width: 58.3333333333%; }
+  .k-bs-col-sm-8 { flex: 0 0 66.6666666667%; max-width: 66.6666666667%; }
+  .k-bs-col-sm-9 { flex: 0 0 75%; max-width: 75%; }
+  .k-bs-col-sm-10 { flex: 0 0 83.3333333333%; max-width: 83.3333333333%; }
+  .k-bs-col-sm-11 { flex: 0 0 91.6666666667%; max-width: 91.6666666667%; }
+  .k-bs-col-sm-12 { flex: 0 0 100%; max-width: 100%; }
+  .k-bs-order-sm-first { order: -1; }
+  .k-bs-order-sm-last { order: 13; }
+  .k-bs-order-sm-0 { order: 0; }
+  .k-bs-order-sm-1 { order: 1; }
+  .k-bs-order-sm-2 { order: 2; }
+  .k-bs-order-sm-3 { order: 3; }
+  .k-bs-order-sm-4 { order: 4; }
+  .k-bs-order-sm-5 { order: 5; }
+  .k-bs-order-sm-6 { order: 6; }
+  .k-bs-order-sm-7 { order: 7; }
+  .k-bs-order-sm-8 { order: 8; }
+  .k-bs-order-sm-9 { order: 9; }
+  .k-bs-order-sm-10 { order: 10; }
+  .k-bs-order-sm-11 { order: 11; }
+  .k-bs-order-sm-12 { order: 12; }
+  .k-bs-offset-sm-0 { margin-left: 0; }
+  .k-bs-offset-sm-1 { margin-left: 8.3333333333%; }
+  .k-bs-offset-sm-2 { margin-left: 16.6666666667%; }
+  .k-bs-offset-sm-3 { margin-left: 25%; }
+  .k-bs-offset-sm-4 { margin-left: 33.3333333333%; }
+  .k-bs-offset-sm-5 { margin-left: 41.6666666667%; }
+  .k-bs-offset-sm-6 { margin-left: 50%; }
+  .k-bs-offset-sm-7 { margin-left: 58.3333333333%; }
+  .k-bs-offset-sm-8 { margin-left: 66.6666666667%; }
+  .k-bs-offset-sm-9 { margin-left: 75%; }
+  .k-bs-offset-sm-10 { margin-left: 83.3333333333%; }
+  .k-bs-offset-sm-11 { margin-left: 91.6666666667%; } }
+
+@media (min-width: 768px) { .k-bs-col-md { flex-basis: 0; flex-grow: 1; max-width: 100%; }
+  .k-bs-col-md-auto { flex: 0 0 auto; width: auto; max-width: none; }
+  .k-bs-col-md-1 { flex: 0 0 8.3333333333%; max-width: 8.3333333333%; }
+  .k-bs-col-md-2 { flex: 0 0 16.6666666667%; max-width: 16.6666666667%; }
+  .k-bs-col-md-3 { flex: 0 0 25%; max-width: 25%; }
+  .k-bs-col-md-4 { flex: 0 0 33.3333333333%; max-width: 33.3333333333%; }
+  .k-bs-col-md-5 { flex: 0 0 41.6666666667%; max-width: 41.6666666667%; }
+  .k-bs-col-md-6 { flex: 0 0 50%; max-width: 50%; }
+  .k-bs-col-md-7 { flex: 0 0 58.3333333333%; max-width: 58.3333333333%; }
+  .k-bs-col-md-8 { flex: 0 0 66.6666666667%; max-width: 66.6666666667%; }
+  .k-bs-col-md-9 { flex: 0 0 75%; max-width: 75%; }
+  .k-bs-col-md-10 { flex: 0 0 83.3333333333%; max-width: 83.3333333333%; }
+  .k-bs-col-md-11 { flex: 0 0 91.6666666667%; max-width: 91.6666666667%; }
+  .k-bs-col-md-12 { flex: 0 0 100%; max-width: 100%; }
+  .k-bs-order-md-first { order: -1; }
+  .k-bs-order-md-last { order: 13; }
+  .k-bs-order-md-0 { order: 0; }
+  .k-bs-order-md-1 { order: 1; }
+  .k-bs-order-md-2 { order: 2; }
+  .k-bs-order-md-3 { order: 3; }
+  .k-bs-order-md-4 { order: 4; }
+  .k-bs-order-md-5 { order: 5; }
+  .k-bs-order-md-6 { order: 6; }
+  .k-bs-order-md-7 { order: 7; }
+  .k-bs-order-md-8 { order: 8; }
+  .k-bs-order-md-9 { order: 9; }
+  .k-bs-order-md-10 { order: 10; }
+  .k-bs-order-md-11 { order: 11; }
+  .k-bs-order-md-12 { order: 12; }
+  .k-bs-offset-md-0 { margin-left: 0; }
+  .k-bs-offset-md-1 { margin-left: 8.3333333333%; }
+  .k-bs-offset-md-2 { margin-left: 16.6666666667%; }
+  .k-bs-offset-md-3 { margin-left: 25%; }
+  .k-bs-offset-md-4 { margin-left: 33.3333333333%; }
+  .k-bs-offset-md-5 { margin-left: 41.6666666667%; }
+  .k-bs-offset-md-6 { margin-left: 50%; }
+  .k-bs-offset-md-7 { margin-left: 58.3333333333%; }
+  .k-bs-offset-md-8 { margin-left: 66.6666666667%; }
+  .k-bs-offset-md-9 { margin-left: 75%; }
+  .k-bs-offset-md-10 { margin-left: 83.3333333333%; }
+  .k-bs-offset-md-11 { margin-left: 91.6666666667%; } }
+
+@media (min-width: 1024px) { .k-bs-col-lg { flex-basis: 0; flex-grow: 1; max-width: 100%; }
+  .k-bs-col-lg-auto { flex: 0 0 auto; width: auto; max-width: none; }
+  .k-bs-col-lg-1 { flex: 0 0 8.3333333333%; max-width: 8.3333333333%; }
+  .k-bs-col-lg-2 { flex: 0 0 16.6666666667%; max-width: 16.6666666667%; }
+  .k-bs-col-lg-3 { flex: 0 0 25%; max-width: 25%; }
+  .k-bs-col-lg-4 { flex: 0 0 33.3333333333%; max-width: 33.3333333333%; }
+  .k-bs-col-lg-5 { flex: 0 0 41.6666666667%; max-width: 41.6666666667%; }
+  .k-bs-col-lg-6 { flex: 0 0 50%; max-width: 50%; }
+  .k-bs-col-lg-7 { flex: 0 0 58.3333333333%; max-width: 58.3333333333%; }
+  .k-bs-col-lg-8 { flex: 0 0 66.6666666667%; max-width: 66.6666666667%; }
+  .k-bs-col-lg-9 { flex: 0 0 75%; max-width: 75%; }
+  .k-bs-col-lg-10 { flex: 0 0 83.3333333333%; max-width: 83.3333333333%; }
+  .k-bs-col-lg-11 { flex: 0 0 91.6666666667%; max-width: 91.6666666667%; }
+  .k-bs-col-lg-12 { flex: 0 0 100%; max-width: 100%; }
+  .k-bs-order-lg-first { order: -1; }
+  .k-bs-order-lg-last { order: 13; }
+  .k-bs-order-lg-0 { order: 0; }
+  .k-bs-order-lg-1 { order: 1; }
+  .k-bs-order-lg-2 { order: 2; }
+  .k-bs-order-lg-3 { order: 3; }
+  .k-bs-order-lg-4 { order: 4; }
+  .k-bs-order-lg-5 { order: 5; }
+  .k-bs-order-lg-6 { order: 6; }
+  .k-bs-order-lg-7 { order: 7; }
+  .k-bs-order-lg-8 { order: 8; }
+  .k-bs-order-lg-9 { order: 9; }
+  .k-bs-order-lg-10 { order: 10; }
+  .k-bs-order-lg-11 { order: 11; }
+  .k-bs-order-lg-12 { order: 12; }
+  .k-bs-offset-lg-0 { margin-left: 0; }
+  .k-bs-offset-lg-1 { margin-left: 8.3333333333%; }
+  .k-bs-offset-lg-2 { margin-left: 16.6666666667%; }
+  .k-bs-offset-lg-3 { margin-left: 25%; }
+  .k-bs-offset-lg-4 { margin-left: 33.3333333333%; }
+  .k-bs-offset-lg-5 { margin-left: 41.6666666667%; }
+  .k-bs-offset-lg-6 { margin-left: 50%; }
+  .k-bs-offset-lg-7 { margin-left: 58.3333333333%; }
+  .k-bs-offset-lg-8 { margin-left: 66.6666666667%; }
+  .k-bs-offset-lg-9 { margin-left: 75%; }
+  .k-bs-offset-lg-10 { margin-left: 83.3333333333%; }
+  .k-bs-offset-lg-11 { margin-left: 91.6666666667%; } }
+
+@media (min-width: 1200px) { .k-bs-col-xl { flex-basis: 0; flex-grow: 1; max-width: 100%; }
+  .k-bs-col-xl-auto { flex: 0 0 auto; width: auto; max-width: none; }
+  .k-bs-col-xl-1 { flex: 0 0 8.3333333333%; max-width: 8.3333333333%; }
+  .k-bs-col-xl-2 { flex: 0 0 16.6666666667%; max-width: 16.6666666667%; }
+  .k-bs-col-xl-3 { flex: 0 0 25%; max-width: 25%; }
+  .k-bs-col-xl-4 { flex: 0 0 33.3333333333%; max-width: 33.3333333333%; }
+  .k-bs-col-xl-5 { flex: 0 0 41.6666666667%; max-width: 41.6666666667%; }
+  .k-bs-col-xl-6 { flex: 0 0 50%; max-width: 50%; }
+  .k-bs-col-xl-7 { flex: 0 0 58.3333333333%; max-width: 58.3333333333%; }
+  .k-bs-col-xl-8 { flex: 0 0 66.6666666667%; max-width: 66.6666666667%; }
+  .k-bs-col-xl-9 { flex: 0 0 75%; max-width: 75%; }
+  .k-bs-col-xl-10 { flex: 0 0 83.3333333333%; max-width: 83.3333333333%; }
+  .k-bs-col-xl-11 { flex: 0 0 91.6666666667%; max-width: 91.6666666667%; }
+  .k-bs-col-xl-12 { flex: 0 0 100%; max-width: 100%; }
+  .k-bs-order-xl-first { order: -1; }
+  .k-bs-order-xl-last { order: 13; }
+  .k-bs-order-xl-0 { order: 0; }
+  .k-bs-order-xl-1 { order: 1; }
+  .k-bs-order-xl-2 { order: 2; }
+  .k-bs-order-xl-3 { order: 3; }
+  .k-bs-order-xl-4 { order: 4; }
+  .k-bs-order-xl-5 { order: 5; }
+  .k-bs-order-xl-6 { order: 6; }
+  .k-bs-order-xl-7 { order: 7; }
+  .k-bs-order-xl-8 { order: 8; }
+  .k-bs-order-xl-9 { order: 9; }
+  .k-bs-order-xl-10 { order: 10; }
+  .k-bs-order-xl-11 { order: 11; }
+  .k-bs-order-xl-12 { order: 12; }
+  .k-bs-offset-xl-0 { margin-left: 0; }
+  .k-bs-offset-xl-1 { margin-left: 8.3333333333%; }
+  .k-bs-offset-xl-2 { margin-left: 16.6666666667%; }
+  .k-bs-offset-xl-3 { margin-left: 25%; }
+  .k-bs-offset-xl-4 { margin-left: 33.3333333333%; }
+  .k-bs-offset-xl-5 { margin-left: 41.6666666667%; }
+  .k-bs-offset-xl-6 { margin-left: 50%; }
+  .k-bs-offset-xl-7 { margin-left: 58.3333333333%; }
+  .k-bs-offset-xl-8 { margin-left: 66.6666666667%; }
+  .k-bs-offset-xl-9 { margin-left: 75%; }
+  .k-bs-offset-xl-10 { margin-left: 83.3333333333%; }
+  .k-bs-offset-xl-11 { margin-left: 91.6666666667%; } }
+
+.k-bs-d-none { display: none !important; }
+
+.k-bs-d-inline { display: inline !important; }
+
+.k-bs-d-inline-block { display: inline-block !important; }
+
+.k-bs-d-block { display: block !important; }
+
+.k-bs-d-table { display: table !important; }
+
+.k-bs-d-table-row { display: table-row !important; }
+
+.k-bs-d-table-cell { display: table-cell !important; }
+
+.k-bs-d-flex { display: flex !important; }
+
+.k-bs-d-inline-flex { display: inline-flex !important; }
+
+@media (min-width: 400px) { .k-bs-d-s-none { display: none !important; }
+  .k-bs-d-s-inline { display: inline !important; }
+  .k-bs-d-s-inline-block { display: inline-block !important; }
+  .k-bs-d-s-block { display: block !important; }
+  .k-bs-d-s-table { display: table !important; }
+  .k-bs-d-s-table-row { display: table-row !important; }
+  .k-bs-d-s-table-cell { display: table-cell !important; }
+  .k-bs-d-s-flex { display: flex !important; }
+  .k-bs-d-s-inline-flex { display: inline-flex !important; } }
+
+@media (min-width: 600px) { .k-bs-d-sm-none { display: none !important; }
+  .k-bs-d-sm-inline { display: inline !important; }
+  .k-bs-d-sm-inline-block { display: inline-block !important; }
+  .k-bs-d-sm-block { display: block !important; }
+  .k-bs-d-sm-table { display: table !important; }
+  .k-bs-d-sm-table-row { display: table-row !important; }
+  .k-bs-d-sm-table-cell { display: table-cell !important; }
+  .k-bs-d-sm-flex { display: flex !important; }
+  .k-bs-d-sm-inline-flex { display: inline-flex !important; } }
+
+@media (min-width: 768px) { .k-bs-d-md-none { display: none !important; }
+  .k-bs-d-md-inline { display: inline !important; }
+  .k-bs-d-md-inline-block { display: inline-block !important; }
+  .k-bs-d-md-block { display: block !important; }
+  .k-bs-d-md-table { display: table !important; }
+  .k-bs-d-md-table-row { display: table-row !important; }
+  .k-bs-d-md-table-cell { display: table-cell !important; }
+  .k-bs-d-md-flex { display: flex !important; }
+  .k-bs-d-md-inline-flex { display: inline-flex !important; } }
+
+@media (min-width: 1024px) { .k-bs-d-lg-none { display: none !important; }
+  .k-bs-d-lg-inline { display: inline !important; }
+  .k-bs-d-lg-inline-block { display: inline-block !important; }
+  .k-bs-d-lg-block { display: block !important; }
+  .k-bs-d-lg-table { display: table !important; }
+  .k-bs-d-lg-table-row { display: table-row !important; }
+  .k-bs-d-lg-table-cell { display: table-cell !important; }
+  .k-bs-d-lg-flex { display: flex !important; }
+  .k-bs-d-lg-inline-flex { display: inline-flex !important; } }
+
+@media (min-width: 1200px) { .k-bs-d-xl-none { display: none !important; }
+  .k-bs-d-xl-inline { display: inline !important; }
+  .k-bs-d-xl-inline-block { display: inline-block !important; }
+  .k-bs-d-xl-block { display: block !important; }
+  .k-bs-d-xl-table { display: table !important; }
+  .k-bs-d-xl-table-row { display: table-row !important; }
+  .k-bs-d-xl-table-cell { display: table-cell !important; }
+  .k-bs-d-xl-flex { display: flex !important; }
+  .k-bs-d-xl-inline-flex { display: inline-flex !important; } }
+
+.k-bs-flex-row { flex-direction: row !important; }
+
+.k-bs-flex-column { flex-direction: column !important; }
+
+.k-bs-flex-row-reverse { flex-direction: row-reverse !important; }
+
+.k-bs-flex-column-reverse { flex-direction: column-reverse !important; }
+
+.k-bs-flex-wrap { flex-wrap: wrap !important; }
+
+.k-bs-flex-nowrap { flex-wrap: nowrap !important; }
+
+.k-bs-flex-wrap-reverse { flex-wrap: wrap-reverse !important; }
+
+.k-bs-flex-fill { flex: 1 1 auto !important; }
+
+.k-bs-flex-grow-0 { flex-grow: 0 !important; }
+
+.k-bs-flex-grow-1 { flex-grow: 1 !important; }
+
+.k-bs-flex-shrink-0 { flex-shrink: 0 !important; }
+
+.k-bs-flex-shrink-1 { flex-shrink: 1 !important; }
+
+.k-bs-justify-content-start { justify-content: flex-start !important; }
+
+.k-bs-justify-content-end { justify-content: flex-end !important; }
+
+.k-bs-justify-content-center { justify-content: center !important; }
+
+.k-bs-justify-content-between { justify-content: space-between !important; }
+
+.k-bs-justify-content-around { justify-content: space-around !important; }
+
+.k-bs-align-items-start { align-items: flex-start !important; }
+
+.k-bs-align-items-end { align-items: flex-end !important; }
+
+.k-bs-align-items-center { align-items: center !important; }
+
+.k-bs-align-items-baseline { align-items: baseline !important; }
+
+.k-bs-align-items-stretch { align-items: stretch !important; }
+
+.k-bs-align-content-start { align-content: flex-start !important; }
+
+.k-bs-align-content-end { align-content: flex-end !important; }
+
+.k-bs-align-content-center { align-content: center !important; }
+
+.k-bs-align-content-between { align-content: space-between !important; }
+
+.k-bs-align-content-around { align-content: space-around !important; }
+
+.k-bs-align-content-stretch { align-content: stretch !important; }
+
+.k-bs-align-self-auto { align-self: auto !important; }
+
+.k-bs-align-self-start { align-self: flex-start !important; }
+
+.k-bs-align-self-end { align-self: flex-end !important; }
+
+.k-bs-align-self-center { align-self: center !important; }
+
+.k-bs-align-self-baseline { align-self: baseline !important; }
+
+.k-bs-align-self-stretch { align-self: stretch !important; }
+
+@media (min-width: 400px) { .k-bs-flex-s-row { flex-direction: row !important; }
+  .k-bs-flex-s-column { flex-direction: column !important; }
+  .k-bs-flex-s-row-reverse { flex-direction: row-reverse !important; }
+  .k-bs-flex-s-column-reverse { flex-direction: column-reverse !important; }
+  .k-bs-flex-s-wrap { flex-wrap: wrap !important; }
+  .k-bs-flex-s-nowrap { flex-wrap: nowrap !important; }
+  .k-bs-flex-s-wrap-reverse { flex-wrap: wrap-reverse !important; }
+  .k-bs-flex-s-fill { flex: 1 1 auto !important; }
+  .k-bs-flex-s-grow-0 { flex-grow: 0 !important; }
+  .k-bs-flex-s-grow-1 { flex-grow: 1 !important; }
+  .k-bs-flex-s-shrink-0 { flex-shrink: 0 !important; }
+  .k-bs-flex-s-shrink-1 { flex-shrink: 1 !important; }
+  .k-bs-justify-content-s-start { justify-content: flex-start !important; }
+  .k-bs-justify-content-s-end { justify-content: flex-end !important; }
+  .k-bs-justify-content-s-center { justify-content: center !important; }
+  .k-bs-justify-content-s-between { justify-content: space-between !important; }
+  .k-bs-justify-content-s-around { justify-content: space-around !important; }
+  .k-bs-align-items-s-start { align-items: flex-start !important; }
+  .k-bs-align-items-s-end { align-items: flex-end !important; }
+  .k-bs-align-items-s-center { align-items: center !important; }
+  .k-bs-align-items-s-baseline { align-items: baseline !important; }
+  .k-bs-align-items-s-stretch { align-items: stretch !important; }
+  .k-bs-align-content-s-start { align-content: flex-start !important; }
+  .k-bs-align-content-s-end { align-content: flex-end !important; }
+  .k-bs-align-content-s-center { align-content: center !important; }
+  .k-bs-align-content-s-between { align-content: space-between !important; }
+  .k-bs-align-content-s-around { align-content: space-around !important; }
+  .k-bs-align-content-s-stretch { align-content: stretch !important; }
+  .k-bs-align-self-s-auto { align-self: auto !important; }
+  .k-bs-align-self-s-start { align-self: flex-start !important; }
+  .k-bs-align-self-s-end { align-self: flex-end !important; }
+  .k-bs-align-self-s-center { align-self: center !important; }
+  .k-bs-align-self-s-baseline { align-self: baseline !important; }
+  .k-bs-align-self-s-stretch { align-self: stretch !important; } }
+
+@media (min-width: 600px) { .k-bs-flex-sm-row { flex-direction: row !important; }
+  .k-bs-flex-sm-column { flex-direction: column !important; }
+  .k-bs-flex-sm-row-reverse { flex-direction: row-reverse !important; }
+  .k-bs-flex-sm-column-reverse { flex-direction: column-reverse !important; }
+  .k-bs-flex-sm-wrap { flex-wrap: wrap !important; }
+  .k-bs-flex-sm-nowrap { flex-wrap: nowrap !important; }
+  .k-bs-flex-sm-wrap-reverse { flex-wrap: wrap-reverse !important; }
+  .k-bs-flex-sm-fill { flex: 1 1 auto !important; }
+  .k-bs-flex-sm-grow-0 { flex-grow: 0 !important; }
+  .k-bs-flex-sm-grow-1 { flex-grow: 1 !important; }
+  .k-bs-flex-sm-shrink-0 { flex-shrink: 0 !important; }
+  .k-bs-flex-sm-shrink-1 { flex-shrink: 1 !important; }
+  .k-bs-justify-content-sm-start { justify-content: flex-start !important; }
+  .k-bs-justify-content-sm-end { justify-content: flex-end !important; }
+  .k-bs-justify-content-sm-center { justify-content: center !important; }
+  .k-bs-justify-content-sm-between { justify-content: space-between !important; }
+  .k-bs-justify-content-sm-around { justify-content: space-around !important; }
+  .k-bs-align-items-sm-start { align-items: flex-start !important; }
+  .k-bs-align-items-sm-end { align-items: flex-end !important; }
+  .k-bs-align-items-sm-center { align-items: center !important; }
+  .k-bs-align-items-sm-baseline { align-items: baseline !important; }
+  .k-bs-align-items-sm-stretch { align-items: stretch !important; }
+  .k-bs-align-content-sm-start { align-content: flex-start !important; }
+  .k-bs-align-content-sm-end { align-content: flex-end !important; }
+  .k-bs-align-content-sm-center { align-content: center !important; }
+  .k-bs-align-content-sm-between { align-content: space-between !important; }
+  .k-bs-align-content-sm-around { align-content: space-around !important; }
+  .k-bs-align-content-sm-stretch { align-content: stretch !important; }
+  .k-bs-align-self-sm-auto { align-self: auto !important; }
+  .k-bs-align-self-sm-start { align-self: flex-start !important; }
+  .k-bs-align-self-sm-end { align-self: flex-end !important; }
+  .k-bs-align-self-sm-center { align-self: center !important; }
+  .k-bs-align-self-sm-baseline { align-self: baseline !important; }
+  .k-bs-align-self-sm-stretch { align-self: stretch !important; } }
+
+@media (min-width: 768px) { .k-bs-flex-md-row { flex-direction: row !important; }
+  .k-bs-flex-md-column { flex-direction: column !important; }
+  .k-bs-flex-md-row-reverse { flex-direction: row-reverse !important; }
+  .k-bs-flex-md-column-reverse { flex-direction: column-reverse !important; }
+  .k-bs-flex-md-wrap { flex-wrap: wrap !important; }
+  .k-bs-flex-md-nowrap { flex-wrap: nowrap !important; }
+  .k-bs-flex-md-wrap-reverse { flex-wrap: wrap-reverse !important; }
+  .k-bs-flex-md-fill { flex: 1 1 auto !important; }
+  .k-bs-flex-md-grow-0 { flex-grow: 0 !important; }
+  .k-bs-flex-md-grow-1 { flex-grow: 1 !important; }
+  .k-bs-flex-md-shrink-0 { flex-shrink: 0 !important; }
+  .k-bs-flex-md-shrink-1 { flex-shrink: 1 !important; }
+  .k-bs-justify-content-md-start { justify-content: flex-start !important; }
+  .k-bs-justify-content-md-end { justify-content: flex-end !important; }
+  .k-bs-justify-content-md-center { justify-content: center !important; }
+  .k-bs-justify-content-md-between { justify-content: space-between !important; }
+  .k-bs-justify-content-md-around { justify-content: space-around !important; }
+  .k-bs-align-items-md-start { align-items: flex-start !important; }
+  .k-bs-align-items-md-end { align-items: flex-end !important; }
+  .k-bs-align-items-md-center { align-items: center !important; }
+  .k-bs-align-items-md-baseline { align-items: baseline !important; }
+  .k-bs-align-items-md-stretch { align-items: stretch !important; }
+  .k-bs-align-content-md-start { align-content: flex-start !important; }
+  .k-bs-align-content-md-end { align-content: flex-end !important; }
+  .k-bs-align-content-md-center { align-content: center !important; }
+  .k-bs-align-content-md-between { align-content: space-between !important; }
+  .k-bs-align-content-md-around { align-content: space-around !important; }
+  .k-bs-align-content-md-stretch { align-content: stretch !important; }
+  .k-bs-align-self-md-auto { align-self: auto !important; }
+  .k-bs-align-self-md-start { align-self: flex-start !important; }
+  .k-bs-align-self-md-end { align-self: flex-end !important; }
+  .k-bs-align-self-md-center { align-self: center !important; }
+  .k-bs-align-self-md-baseline { align-self: baseline !important; }
+  .k-bs-align-self-md-stretch { align-self: stretch !important; } }
+
+@media (min-width: 1024px) { .k-bs-flex-lg-row { flex-direction: row !important; }
+  .k-bs-flex-lg-column { flex-direction: column !important; }
+  .k-bs-flex-lg-row-reverse { flex-direction: row-reverse !important; }
+  .k-bs-flex-lg-column-reverse { flex-direction: column-reverse !important; }
+  .k-bs-flex-lg-wrap { flex-wrap: wrap !important; }
+  .k-bs-flex-lg-nowrap { flex-wrap: nowrap !important; }
+  .k-bs-flex-lg-wrap-reverse { flex-wrap: wrap-reverse !important; }
+  .k-bs-flex-lg-fill { flex: 1 1 auto !important; }
+  .k-bs-flex-lg-grow-0 { flex-grow: 0 !important; }
+  .k-bs-flex-lg-grow-1 { flex-grow: 1 !important; }
+  .k-bs-flex-lg-shrink-0 { flex-shrink: 0 !important; }
+  .k-bs-flex-lg-shrink-1 { flex-shrink: 1 !important; }
+  .k-bs-justify-content-lg-start { justify-content: flex-start !important; }
+  .k-bs-justify-content-lg-end { justify-content: flex-end !important; }
+  .k-bs-justify-content-lg-center { justify-content: center !important; }
+  .k-bs-justify-content-lg-between { justify-content: space-between !important; }
+  .k-bs-justify-content-lg-around { justify-content: space-around !important; }
+  .k-bs-align-items-lg-start { align-items: flex-start !important; }
+  .k-bs-align-items-lg-end { align-items: flex-end !important; }
+  .k-bs-align-items-lg-center { align-items: center !important; }
+  .k-bs-align-items-lg-baseline { align-items: baseline !important; }
+  .k-bs-align-items-lg-stretch { align-items: stretch !important; }
+  .k-bs-align-content-lg-start { align-content: flex-start !important; }
+  .k-bs-align-content-lg-end { align-content: flex-end !important; }
+  .k-bs-align-content-lg-center { align-content: center !important; }
+  .k-bs-align-content-lg-between { align-content: space-between !important; }
+  .k-bs-align-content-lg-around { align-content: space-around !important; }
+  .k-bs-align-content-lg-stretch { align-content: stretch !important; }
+  .k-bs-align-self-lg-auto { align-self: auto !important; }
+  .k-bs-align-self-lg-start { align-self: flex-start !important; }
+  .k-bs-align-self-lg-end { align-self: flex-end !important; }
+  .k-bs-align-self-lg-center { align-self: center !important; }
+  .k-bs-align-self-lg-baseline { align-self: baseline !important; }
+  .k-bs-align-self-lg-stretch { align-self: stretch !important; } }
+
+@media (min-width: 1200px) { .k-bs-flex-xl-row { flex-direction: row !important; }
+  .k-bs-flex-xl-column { flex-direction: column !important; }
+  .k-bs-flex-xl-row-reverse { flex-direction: row-reverse !important; }
+  .k-bs-flex-xl-column-reverse { flex-direction: column-reverse !important; }
+  .k-bs-flex-xl-wrap { flex-wrap: wrap !important; }
+  .k-bs-flex-xl-nowrap { flex-wrap: nowrap !important; }
+  .k-bs-flex-xl-wrap-reverse { flex-wrap: wrap-reverse !important; }
+  .k-bs-flex-xl-fill { flex: 1 1 auto !important; }
+  .k-bs-flex-xl-grow-0 { flex-grow: 0 !important; }
+  .k-bs-flex-xl-grow-1 { flex-grow: 1 !important; }
+  .k-bs-flex-xl-shrink-0 { flex-shrink: 0 !important; }
+  .k-bs-flex-xl-shrink-1 { flex-shrink: 1 !important; }
+  .k-bs-justify-content-xl-start { justify-content: flex-start !important; }
+  .k-bs-justify-content-xl-end { justify-content: flex-end !important; }
+  .k-bs-justify-content-xl-center { justify-content: center !important; }
+  .k-bs-justify-content-xl-between { justify-content: space-between !important; }
+  .k-bs-justify-content-xl-around { justify-content: space-around !important; }
+  .k-bs-align-items-xl-start { align-items: flex-start !important; }
+  .k-bs-align-items-xl-end { align-items: flex-end !important; }
+  .k-bs-align-items-xl-center { align-items: center !important; }
+  .k-bs-align-items-xl-baseline { align-items: baseline !important; }
+  .k-bs-align-items-xl-stretch { align-items: stretch !important; }
+  .k-bs-align-content-xl-start { align-content: flex-start !important; }
+  .k-bs-align-content-xl-end { align-content: flex-end !important; }
+  .k-bs-align-content-xl-center { align-content: center !important; }
+  .k-bs-align-content-xl-between { align-content: space-between !important; }
+  .k-bs-align-content-xl-around { align-content: space-around !important; }
+  .k-bs-align-content-xl-stretch { align-content: stretch !important; }
+  .k-bs-align-self-xl-auto { align-self: auto !important; }
+  .k-bs-align-self-xl-start { align-self: flex-start !important; }
+  .k-bs-align-self-xl-end { align-self: flex-end !important; }
+  .k-bs-align-self-xl-center { align-self: center !important; }
+  .k-bs-align-self-xl-baseline { align-self: baseline !important; }
+  .k-bs-align-self-xl-stretch { align-self: stretch !important; } }
+
 #files-sidebar { border-bottom: 1px solid #ddd; }
 
 #files-sidebar .sidebar-inner { border-right: 1px solid #ddd; }
@@ -4129,9 +4827,9 @@ html .form-inline .select2-container--bootstrap { display: inline-block; }
 
 #files-app #files-grid thead th:first-child { padding: 0; }
 
-#files-app #files-grid thead th:first-child .btn.dropdown-toggle { color: #fff; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #ededed; background-image: -moz-linear-gradient(top, #f2f2f2, #e6e6e6); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#e6e6e6)); background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e6e6); background-image: -o-linear-gradient(top, #f2f2f2, #e6e6e6); background-image: linear-gradient(to bottom, #f2f2f2, #e6e6e6); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF2F2F2', endColorstr='#FFE6E6E6', GradientType=0); border-color: #e6e6e6 #e6e6e6 #bfbfbf; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); *background-color: #e6e6e6; /* Darken IE7 buttons by default so they stand out more given they won't have borders */ filter: progid:DXImageTransform.Microsoft.gradient(enabled=false); }
+#files-app #files-grid thead th:first-child .btn.dropdown-toggle { color: #fff; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); background-color: #ededed; background-image: -moz-linear-gradient(top, #f2f2f2, #e6e5e5); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f2f2f2), to(#e6e5e5)); background-image: -webkit-linear-gradient(top, #f2f2f2, #e6e5e5); background-image: -o-linear-gradient(top, #f2f2f2, #e6e5e5); background-image: linear-gradient(to bottom, #f2f2f2, #e6e5e5); background-repeat: repeat-x; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF2F2F2', endColorstr='#FFE6E5E5', GradientType=0); border-color: #e6e5e5 #e6e5e5 #bfbfbf; border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25); *background-color: #e6e5e5; /* Darken IE7 buttons by default so they stand out more given they won't have borders */ filter: progid:DXImageTransform.Microsoft.gradient(enabled=false); }
 
-#files-app #files-grid thead th:first-child .btn.dropdown-toggle:hover, #files-app #files-grid thead th:first-child .btn.dropdown-toggle:focus, #files-app #files-grid thead th:first-child .btn.dropdown-toggle:active, #files-app #files-grid thead th:first-child .btn.dropdown-toggle.active, #files-app #files-grid thead th:first-child .btn.dropdown-toggle.disabled, #files-app #files-grid thead th:first-child .btn.dropdown-toggle[disabled] { color: #fff; background-color: #e6e6e6; *background-color: #d9d9d9; }
+#files-app #files-grid thead th:first-child .btn.dropdown-toggle:hover, #files-app #files-grid thead th:first-child .btn.dropdown-toggle:focus, #files-app #files-grid thead th:first-child .btn.dropdown-toggle:active, #files-app #files-grid thead th:first-child .btn.dropdown-toggle.active, #files-app #files-grid thead th:first-child .btn.dropdown-toggle.disabled, #files-app #files-grid thead th:first-child .btn.dropdown-toggle[disabled] { color: #fff; background-color: #e6e5e5; *background-color: #d9d9d9; }
 
 #files-app #files-grid thead th:first-child .btn.dropdown-toggle:active, #files-app #files-grid thead th:first-child .btn.dropdown-toggle.active { background-color: #cccccc \9; }
 
@@ -4276,7 +4974,7 @@ li.plupload_droptext { background: transparent; text-align: center; vertical-ali
 
 .upload-form { margin-bottom: 10px; position: relative; }
 
-.uploader-files-queued #files-upload-multi, #files-uploader-web form, .dropzone { padding: 0; background-color: #fcfcfc; border-radius: 5px; margin: 0 10px; border: 1px solid #e6e6e6; z-index: 0; }
+.uploader-files-queued #files-upload-multi, #files-uploader-web form, .dropzone { padding: 0; background-color: #fcfcfc; border-radius: 5px; margin: 0 10px; border: 1px solid #e6e5e5; z-index: 0; }
 
 .uploader-files-queued .dropzone, .uploader-files-queued .nodropzone { display: none !important; }
 
@@ -4305,9 +5003,9 @@ li.plupload_droptext { background: transparent; text-align: center; vertical-ali
 
 #files-upload-multi .plupload_filelist_header, #files-upload-multi .plupload_filelist_footer { background: none; }
 
-#files-upload-multi .plupload_filelist_header { -moz-border-radius-topleft: 4px; -moz-border-radius-topright: 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-top: none; box-shadow: #f7f7f7 0 -1px 0 inset; border-bottom: 1px solid #e6e6e6; background-image: -moz-linear-gradient(top, white, whitesmoke); background-image: -ms-linear-gradient(top, white, whitesmoke); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(whitesmoke)); background-image: -webkit-linear-gradient(top, white, whitesmoke); background-image: -o-linear-gradient(top, white, whitesmoke); background-image: linear-gradient(top, white, whitesmoke); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFF5F5F5'); }
+#files-upload-multi .plupload_filelist_header { -moz-border-radius-topleft: 4px; -moz-border-radius-topright: 4px; border-top-left-radius: 4px; border-top-right-radius: 4px; border-top: none; box-shadow: #f7f7f7 0 -1px 0 inset; border-bottom: 1px solid #e6e5e5; background-image: -moz-linear-gradient(top, white, whitesmoke); background-image: -ms-linear-gradient(top, white, whitesmoke); background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(whitesmoke)); background-image: -webkit-linear-gradient(top, white, whitesmoke); background-image: -o-linear-gradient(top, white, whitesmoke); background-image: linear-gradient(top, white, whitesmoke); filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFF5F5F5'); }
 
-#files-upload-multi .plupload_filelist_footer { -moz-border-radius-bottomleft: 4px; -moz-border-radius-bottomright: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; border-top: none; box-shadow: 0 -1px 0 #e6e6e6; }
+#files-upload-multi .plupload_filelist_footer { -moz-border-radius-bottomleft: 4px; -moz-border-radius-bottomright: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; border-bottom: none; border-top: none; box-shadow: 0 -1px 0 #e6e5e5; }
 
 .uploader-files-empty #files-upload-multi .plupload_filelist_footer { border: 0 hidden transparent; box-shadow: none; }
 
@@ -4357,13 +5055,13 @@ div#upload-queue-wrapper { background-color: #CCC; border-radius: 5px; }
 
 #files-upload.uploader-files-queued .plupload_filelist_footer { height: auto; padding-bottom: 54px; position: relative; }
 
-#files-upload.uploader-files-queued .plupload_filelist_footer .plupload_buttons { position: absolute; box-shadow: 0 -1px 0 #e6e6e6; bottom: 0px; left: 0px; right: 0px; padding: 10px; }
+#files-upload.uploader-files-queued .plupload_filelist_footer .plupload_buttons { position: absolute; box-shadow: 0 -1px 0 #e6e5e5; bottom: 0px; left: 0px; right: 0px; padding: 10px; }
 
 #files-upload.uploader-files-queued .plupload_start, #files-upload.uploader-files-queued .plupload_clear { float: right; clear: none; }
 
 #files-upload.uploader-files-queued .plupload_clear { margin-right: 10px; }
 
-#files-upload.uploader-files-queued .plupload_start.plupload_disabled { cursor: default; background-color: #e6e6e6; background-image: none; opacity: 0.65; filter: alpha(opacity=65); box-shadow: none; background-color: #0044cc; *background-color: #003cb3; }
+#files-upload.uploader-files-queued .plupload_start.plupload_disabled { cursor: default; background-color: #e6e5e5; background-image: none; opacity: 0.65; filter: alpha(opacity=65); box-shadow: none; background-color: #0044cc; *background-color: #003cb3; }
 
 #files-upload.uploader-files-empty { /* No files state, this is the initial state */ }
 
@@ -4375,7 +5073,7 @@ div#upload-queue-wrapper { background-color: #CCC; border-radius: 5px; }
 
 #remote-name { width: 25%; border-left-color: #e6e6e6; border-left-width: 1px; border-left-style: solid; border-left-color: inherit; }
 
-.remote-wrap { border-top-left-radius: 2px; border-bottom-left-radius: 2px; border: 1px solid #e6e6e6; border-right-width: 0; }
+.remote-wrap { border-top-left-radius: 2px; border-bottom-left-radius: 2px; border: 1px solid #e6e5e5; border-right-width: 0; }
 
 .remote-wrap::after { content: '.'; clear: both; display: block; height: 0; visibility: hidden; }
 
@@ -4483,7 +5181,7 @@ table th.file-count { text-align: right; padding-right: 20px; }
 
 #files-app .files-node-shadow { float: left; text-align: center; }
 
-#files-app div.imgOutline { cursor: pointer; display: inline-block; border: 1px; padding: 11px; margin: 5px; border: 1px solid #e6e6e6; border-radius: 3px; transition: opacity 150ms ease-out 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
+#files-app div.imgOutline { cursor: pointer; display: inline-block; border: 1px; padding: 11px; margin: 5px; border: 1px solid #e6e5e5; border-radius: 3px; transition: opacity 150ms ease-out 180ms cubic-bezier(0.2, 0.57, 0.44, 0.83); -webkit-backface-visibility: hidden; }
 
 #files-app #files-grid .loading { opacity: 0.6; }
 
@@ -4571,7 +5269,7 @@ table th.file-count { text-align: right; padding-right: 20px; }
 
 .modal-inspector .parameters td.detail-label, .modal-inspector .documents td.detail-label { font-weight: bold; }
 
-.modal-inspector .parameters .detail-label, .modal-inspector .documents .detail-label { text-align: right; color: gray; white-space: nowrap !important; }
+.modal-inspector .parameters .detail-label, .modal-inspector .documents .detail-label { text-align: right; color: #807f7f; white-space: nowrap !important; }
 
 .modal-inspector .documents thead, .modal-inspector .documents thead tr, .modal-inspector .documents thead tr td { background: none; }
 
@@ -4599,7 +5297,7 @@ table th.file-count { text-align: right; padding-right: 20px; }
 
 .com_files .breadcrumb-resizable li:last-child span { padding-right: 0px; }
 
-.com_files #files-app { background-color: #FFF; border: 1px solid #dbdbdb; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
+.com_files #files-app { background-color: #FFF; border: 1px solid #dbdada; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; }
 
 .com_files #files-app:before, .com_files #files-app:after { display: table; content: " "; }
 
