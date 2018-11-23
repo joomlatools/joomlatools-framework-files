@@ -88,7 +88,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
             Attachments = Attachments.getInstance(
                 {
-                    url: "<?= route('component=' . urlencode($component) . '&view=attachment&container=' . urlencode($container->slug), true, false) ?>",
+                    url: "<?= route('component=' . urlencode($component) . '&view=attachment&format=json&container=' . urlencode($container->slug), true, false) ?>",
                     selector: '#attachments-container',
                     csrf_token: <?= json_encode(object('user')->getSession()->getToken()) ?>
                 }
