@@ -390,7 +390,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
                     $this->setPath($source);
 
-                    $result = $this->move($target);
+                    $result = $this->copy($target);
                 }
                 else
                 {
