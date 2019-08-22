@@ -119,13 +119,13 @@ class ComFilesModelFiles extends ComFilesModelNodes
 
 	public function iteratorMap($path)
 	{
-		return substr(basename(' '.strtr($path, array('/' => '/ '))), 1);
+		return \Koowa\basename($path);
 	}
 
 	public function iteratorFilter($path)
 	{
         $state     = $this->getState();
-		$filename  = substr(basename(' '.strtr($path, array('/' => '/ '))), 1);
+		$filename  = \Koowa\basename($path);
 		$extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
         if ($filename && $filename[0] === '.') {

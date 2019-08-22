@@ -61,7 +61,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
                 }
             }
 
-            $base = ltrim(basename(' '.strtr($folder, array('/' => '/ '))));
+            $base = substr(basename(' '.strtr($folder, array('/' => '/ '))), 1);
             $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : $base;
 
             $properties = array(
@@ -100,7 +100,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	public function iteratorFilter($path)
 	{
         $state    = $this->getState();
-		$filename = substr(basename(' '.strtr($path, array('/' => '/ '))), 1);
+		$filename = \Koowa\basename($path);
 
         if ($filename && $filename[0] === '.') {
             return false;
