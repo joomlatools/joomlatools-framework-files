@@ -61,7 +61,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
                 }
             }
 
-            $base = substr(basename(' '.strtr($folder, array('/' => '/ '))), 1);
+            $base = \Koowa\basename($folder);
             $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : $base;
 
             $properties = array(
