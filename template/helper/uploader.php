@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -53,6 +53,35 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
         return $html;
     }
 
+    public function scripts($config = array())
+    {
+        $html = '';
+
+        if(!isset(static::$_loaded['uploader']))
+        {
+            $template = $this->getTemplate();
+            $filter   = null;
+            $wrapper  = null;
+
+            if ($template->hasFilter('wrapper'))
+            {
+                $filter = $template->getFilter('wrapper');
+                $wrapper = $filter->getWrapper();
+                $filter->setWrapper(null);
+            }
+
+            $html .= $template->loadFile('com:files.files.uploader_scripts.html')->render();
+
+            if ($template->hasFilter('wrapper')) {
+                $filter->setWrapper($wrapper);
+            }
+
+            static::$_loaded['uploader'] = true;
+        }
+
+        return $html;
+    }
+
     public function uploader($config = array())
     {
         $config = new KObjectConfigJson($config);
@@ -73,27 +102,7 @@ class ComFilesTemplateHelperUploader extends KTemplateHelperAbstract
             'selector' => $config->element
         ));
 
-        $html = '';
-
-        if(!isset(static::$_loaded['uploader']))
-        {
-            $template = $this->getTemplate();
-
-            if ($template->hasFilter('wrapper'))
-            {
-                $filter = $template->getFilter('wrapper');
-                $wrapper = $filter->getWrapper();
-                $filter->setWrapper(null);
-            }
-
-            $html .= $template->loadFile('com:files.files.uploader_scripts.html')->render();
-
-            if ($template->hasFilter('wrapper')) {
-                $filter->setWrapper($wrapper);
-            }
-
-            self::$_loaded['uploader'] = true;
-        }
+        $html = $this->scripts($config);
 
         if (is_object($config->options->url)) {
             $config->options->url = (string) $config->options->url;

@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -20,18 +20,18 @@ class ComFilesModelNodes extends KModelAbstract
      *
      * @var ComFilesModelEntityContainer
      */
-    protected static $_container;
+    protected $_container;
 
     public function __construct(KObjectConfig $config)
     {
         parent::__construct($config);
 
         $this->getState()
-            ->insert('limit'    , 'int')
-            ->insert('offset'   , 'int')
-            ->insert('sort'     , 'cmd')
-            ->insert('direction', 'word', 'asc')
-            ->insert('search'   , 'string')
+            ->insert('limit'     , 'int')
+            ->insert('offset'    , 'int')
+            ->insert('sort'      , 'cmd')
+            ->insert('direction' , 'word', 'asc')
+            ->insert('search'    , 'string')
 
             ->insert('container', 'com:files.filter.container', null)
             ->insert('folder'	, 'com:files.filter.path', '')
@@ -49,8 +49,9 @@ class ComFilesModelNodes extends KModelAbstract
     protected function _initialize(KObjectConfig $config)
     {
         $config->append(array(
+            'state'        => 'com:files.model.state.nodes',
             'identity_key' => 'name',
-            'behaviors' => array('paginatable'),
+            'behaviors'    => array('paginatable', 'com:files.model.behavior.nodes.thumbnailable'),
         ));
 
         parent::_initialize($config);
@@ -58,11 +59,19 @@ class ComFilesModelNodes extends KModelAbstract
 
     protected function _actionCreate(KModelContext $context)
     {
-        $context->entity->append(array(
-            'container' => $context->state->container,
-            'folder'    => $context->state->folder,
-            'name'      => $context->state->name
-        ));
+        $state = $context->getState();
+
+        $entity = $context->getEntity();
+
+        if ($uri = $state->uri) {
+            $entity->append(array('uri' => $state->uri));
+        } else {
+            $entity->append(array(
+                'folder'    => $state->folder,
+                'name'      => $state->name,
+                'container' => $state->container
+            ));
+        }
 
         return parent::_actionCreate($context);
     }
@@ -126,13 +135,13 @@ class ComFilesModelNodes extends KModelAbstract
     /**
      * Reset the cached container object if container changes
      *
-     * @param KModelContextInterface $context
+     * @param KModelContext $context
      */
-    protected function _afterReset(KModelContextInterface $context)
+    protected function _afterReset(KModelContext $context)
     {
         $modified = (array) KObjectConfig::unbox($context->modified);
         if (in_array('container', $modified)) {
-            self::$_container = null;
+            $this->_container = null;
         }
     }
 
@@ -144,26 +153,32 @@ class ComFilesModelNodes extends KModelAbstract
      */
     public function getContainer()
     {
-        if(!isset(self::$_container))
+        $state = $this->getState();
+
+        if(!isset($this->_container) && $state->container)
         {
             //Set the container
-            $container = $this->getObject('com:files.model.containers')->slug($this->getState()->container)->fetch();
+            $container = $this->getObject('com:files.model.containers')->slug($state->container)->fetch();
 
             if (!is_object($container) || !count($container) || $container->isNew()) {
-                throw new UnexpectedValueException('Invalid container: '.$this->getState()->container);
+                throw new UnexpectedValueException('Invalid container: ' . $state->container);
             }
 
-            self::$_container = $container->top();
+            $this->_container = $container->top();
         }
 
-        return self::$_container;
+        return $this->_container;
     }
 
     public function getPath()
     {
         $state = $this->getState();
 
-        $path = $this->getContainer()->fullpath;
+        $path = '';
+
+        if ($container = $this->getContainer()) {
+            $path = $container->fullpath;
+        }
 
         if (!empty($state->folder) && $state->folder != '/') {
             $path .= '/'.ltrim($state->folder, '/');

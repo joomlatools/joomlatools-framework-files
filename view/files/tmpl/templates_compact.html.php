@@ -1,32 +1,31 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
 
+
 <textarea style="display: none" id="compact_details_image">
 [%
-var width = 0, height = 0, ratio = 0;
+var width = 0, height = 0;
 if (metadata.image) {
     width  = metadata.image.width;
     height = metadata.image.height;
-    ratio  = 250 / (width > height ? width : height);
 }
 %]
 <div class="k-details">
     <div class="k-card">
         <div class="k-card__body">
             <div class="k-card__section k-card__section--small-spacing">
-                <div class="k-ratio-block k-ratio-block--4-to-3">
+                <div class="k-ratio-block k-ratio-block--4-to-3 k-overflow-hidden">
                     <div class="k-loader"></div>
                     <div class="k-ratio-block__body">
                         <div class="k-ratio-block__centered">
-                            <img class="icon" src="" alt="[%=name%]" border="0"
-                                width="[%=Math.min(ratio*width, width)%]" height="[%=Math.min(ratio*height, height)%]" />
+                            <img class="icon" src="" alt="[%=name%]" border="0" />
                         </div>
                     </div>
                 </div>
@@ -36,8 +35,10 @@ if (metadata.image) {
     <dl>
         <dt><?= translate('Name'); ?></dt>
         <dd class="k-ellipsis"><span class="k-ellipsis__item">[%=name%]</span></dd>
+        [% if (width && height) { %]
         <dt><?= translate('Dimensions'); ?></dt>
         <dd>[%=width%] x [%=height%]</dd>
+        [% } %]
         <dt><?= translate('Size'); ?></dt>
         <dd>[%=size.humanize()%]</dd>
     </dl>
@@ -75,7 +76,7 @@ if (metadata.image) {
 
 <textarea style="display: none"  id="compact_folder">
     <tr class="files-node files-folder">
-        <td>
+        <td class="k-table-data--ellipsis">
             <span>
                 <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                     [%= name %]
@@ -87,7 +88,7 @@ if (metadata.image) {
 
 <textarea style="display: none"  id="compact_image">
     <tr class="files-node files-image">
-        <td>
+        <td class="k-table-data--ellipsis">
             <span>
                 <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                     [%= name %]
@@ -100,7 +101,7 @@ if (metadata.image) {
 
 <textarea style="display: none"  id="compact_file">
     <tr class="files-node files-file">
-        <td>
+        <td class="k-table-data--ellipsis">
             <span >
                 <a class="navigate k-link-coverall" href="#" title="[%= name %]">
                     [%= name %]

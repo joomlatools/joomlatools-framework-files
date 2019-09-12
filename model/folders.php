@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -26,7 +26,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
     {
         $state = $this->getState();
 
-        $folders = $this->getContainer()->getAdapter('iterator')->getFolders(array(
+        $folders = $this->getObject('com:files.adapter.iterator')->getFolders(array(
             'path'    => $this->getPath(),
             'recurse' => !!$state->tree,
             'filter'  => array($this, 'iteratorFilter'),
@@ -61,7 +61,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
                 }
             }
 
-            $base = ltrim(basename(' '.strtr($folder, array('/' => '/ '))));
+            $base = \Koowa\basename($folder);
             $name = strpos($folder, '/') !== false ? substr($folder, strrpos($folder, '/')+1) : $base;
 
             $properties = array(
@@ -89,7 +89,10 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	public function iteratorMap($path)
 	{
 		$path = str_replace('\\', '/', $path);
-		$path = str_replace($this->getContainer()->fullpath.'/', '', $path);
+
+		if ($container = $this->getContainer()) {
+            $path = str_replace($container->fullpath.'/', '', $path);
+        }
 
 		return $path;
 	}
@@ -97,7 +100,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 	public function iteratorFilter($path)
 	{
         $state    = $this->getState();
-		$filename = ltrim(basename(' '.strtr($path, array('/' => '/ '))));
+		$filename = \Koowa\basename($path);
 
         if ($filename && $filename[0] === '.') {
             return false;

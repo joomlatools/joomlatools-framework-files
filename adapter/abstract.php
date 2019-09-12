@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -25,21 +25,29 @@ abstract class ComFilesAdapterAbstract extends KObject
 	 */
 	protected $_handle = null;
 
+    /**
+     * @var bool Tells if the adapter points to a local resource
+     */
+	protected $_local;
+
 	public function __construct(KObjectConfig $config)
 	{
 		parent::__construct($config);
 
-		$this->setPath($config->path);
+        $this->setPath($config->path);
 	}
 
 	protected function _initialize(KObjectConfig $config)
 	{
-		$config->append(array(
-			'path' => ''
-		));
+        $config->append(array('path' => ''));
 
 		parent::_initialize($config);
 	}
+
+	public function isLocal()
+    {
+        return (bool) $this->_local;
+    }
 
 	public function setPath($path)
 	{
@@ -50,6 +58,21 @@ abstract class ComFilesAdapterAbstract extends KObject
 
 		$this->_metadata = null;
 
+        $parts = parse_url($this->_path);
+
+        $this->_local = true;
+
+        if (isset($parts['scheme']))
+        {
+            $scheme = $parts['scheme'];
+
+            if ($scheme === 'file') {
+                $this->_path = str_replace('file://', '', $this->_path);
+            } else {
+                $this->_local = false;
+            }
+        }
+
 		return $this;
 	}
 
@@ -57,7 +80,7 @@ abstract class ComFilesAdapterAbstract extends KObject
 	{
         $path = $this->_handle->getBasename();
 
-		return $this->normalize(ltrim(basename(' '.strtr($path, array('/' => '/ ')))));
+		return $this->normalize(\Koowa\basename($path));
 	}
 
 	public function getPath()

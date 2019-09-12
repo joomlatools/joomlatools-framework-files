@@ -539,50 +539,69 @@ $.widget("koowa.uploader", {
 				self._enableRenaming();
 			}
 
-			if (self.options.dragdrop && up.features.dragdrop && o.Env.os !== 'iOS') {
-
+			if (self.options.dragdrop && up.features.dragdrop && o.Env.os !== 'iOS')
+			{
 				self.element.addClass('has-dragdrop-support');
 
-				var addHoverClass, removeHoverClass, drop_element;
+				var drop_element = $(self.options.drop_element);
 
-				drop_element = $(self.options.drop_element);
+                var getDropHandlers = function (element, modifier) {
+                    return {
+                        enter: function (event) {
+                            event.preventDefault();
+                            event.stopPropagation();
 
-				if (drop_element.is('body')) {
+                            element.addClass(modifier);
+                        },
+                        leave: function (event) {
+                            event.stopPropagation();
+
+                            var e = event.originalEvent,
+								target = $(e.target);
+
+							// Firefox
+                            if (target.is('.k-uploader-drop-visual > span') || target.is('.k-uploader-drop-visual')
+							|| target.is(document.body) || e.target === window.document) {
+                                element.removeClass(modifier);
+                            }
+
+							// Chrome
+							if (e.offsetX < 0 || e.offsetY < 0) {
+								if (!e.relatedTarget) {
+                                    element.removeClass(modifier);
+								}
+							}
+
+							// The rest
+							if ((e.offsetX === 0 && e.offsetY === 0) || event.type === 'drop') {
+                                element.removeClass(modifier);
+							}
+                        }
+                    }
+                };
+
+				if (drop_element.is('body'))
+				{
 					var selection = self.options.multi_selection ? 'multiple' : 'single',
 						element   = $($.trim(self.renderTemplate('drop-message-'+selection)));
 
 					drop_element.append(element);
 
-					addHoverClass = function() {
-						element.addClass('is-active');
-					};
+					var handlers = getDropHandlers(element, 'is-active');
 
-					removeHoverClass = function() {
-						element.removeClass('is-active');
-					};
+                    drop_element.on('drop', handlers.leave);
+                    drop_element.on('dragleave', handlers.leave);
 
-					drop_element.on('drop', removeHoverClass);
-					drop_element.on('dragend', removeHoverClass);
-					drop_element.on('dragleave', removeHoverClass);
-
-					drop_element.on('dragenter', addHoverClass);
-					drop_element.on('dragover', addHoverClass);
+                    drop_element.on('dragenter', handlers.enter);
 				}
-				else {
-					addHoverClass = function() {
-						drop_element.addClass("has-drag-hover");
-					};
+				else
+				{
+					var handlers = getDropHandlers(drop_element, 'has-drag-hover');
 
-					removeHoverClass = function() {
-						drop_element.removeClass("has-drag-hover");
-					};
+					drop_element.on('drop', handlers.leave);
+					drop_element.on('dragleave', handlers.leave);
 
-					drop_element.on('drop', removeHoverClass);
-					drop_element.on('dragend', removeHoverClass);
-					drop_element.on('dragleave', removeHoverClass);
-
-					drop_element.on('dragenter', addHoverClass);
-					drop_element.on('dragover', addHoverClass);
+					drop_element.on('dragenter', handlers.enter);
 				}
 			}
 
@@ -938,9 +957,7 @@ $.widget("koowa.uploader", {
 			}
 		}
 		else if (plupload.STOPPED === up.state) {
-			setTimeout(function() {
-				self.progressbar.parent().removeClass('active is-uploading');
-			}, 500);
+			self.progressbar.parent().removeClass('active is-uploading');
 
 			this._setButtonStatus(this.stop_button, 'disable');
 

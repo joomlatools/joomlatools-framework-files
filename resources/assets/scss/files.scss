@@ -8,10 +8,13 @@
 $koowaPath: '../../../koowa/framework';
 
 // Import user interface
-@import "../../../../joomlatools-ui/src/scss/joomlatools-ui";
+@import "../../../../kodekit-ui/src/scss/admin-ui";
 
 @import "koowa/general";
 
 .k-ui-namespace {
   @import "koowa/modal";
 }
+
+@import "attachments";
+

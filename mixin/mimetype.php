@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -39,7 +39,7 @@ class ComFilesMixinMimetype extends KObject
 	protected function _initialize(KObjectConfig $config)
 	{
 		if (empty($config->adapters)) {
-			$config->adapters = array('image');
+			$config->adapters = array('image', 'extension');
 		}
 
 		parent::_initialize($config);
@@ -73,6 +73,11 @@ class ComFilesMixinMimetype extends KObject
 		if ($mimetype == 'application/x-empty' || $mimetype === 'inode/x-empty') {
 			$mimetype = 'text/plain';
 		}
+
+        // special case: Microsoft BMP mimetype
+        if ($mimetype == 'image/x-ms-bmp') {
+            $mimetype = 'image/bmp';
+        }
 		
 		return $mimetype;
 	}
@@ -87,6 +92,22 @@ class ComFilesMixinMimetype extends KObject
 
 		return ComFilesMixinMimetype::NOT_AVAILABLE;
 	}
+
+	protected function _detectExtension($path)
+    {
+        $mimetype = ComFilesMixinMimetype::NOT_AVAILABLE;
+
+        if ($extension = pathinfo($path, PATHINFO_EXTENSION))
+        {
+            $entity = $this->getObject('com:files.model.mimetypes')->extension($extension)->fetch();
+
+            if (!$entity->isNew()) {
+                $mimetype = $entity->mimetype;
+            }
+        }
+
+        return $mimetype;
+    }
 
 	protected function _detectFinfo($path)
 	{

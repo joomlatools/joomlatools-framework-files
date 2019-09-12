@@ -1,12 +1,13 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
 defined('KOOWA') or die( 'Restricted access' ); ?>
+
 
 <script>
 window.addEvent('domready', function() {
@@ -26,14 +27,18 @@ window.addEvent('domready', function() {
 
 	});
 
-    Files.app.tree.element.on('tree.select', function(event)
+	if (Files.app.tree)
     {
-        var el = document.id('select-check-all');
+        Files.app.tree.element.on('tree.select', function(event)
+        {
+            var el = document.id('select-check-all');
 
-        if (el && el.checked) {
-            el.checked = false;
-        }
-    });
+            if (el && el.checked) {
+                el.checked = false;
+            }
+        });
+
+    }
 
     Files.app.grid.addEvent('afterDeleteNode', function() {
         var el = document.id('select-check-all');
@@ -101,15 +106,19 @@ window.addEvent('domready', function() {
         extension = name.substr(name.lastIndexOf('.')+1).toLowerCase();
 
         kQuery.each(Files.icon_map, function(key, value) {
-        if (kQuery.inArray(extension, value) !== -1) {
-        icon = key;
-        }
+                if (kQuery.inArray(extension, value) !== -1) {
+                icon = key;
+            }
         });
         %]
         <td class="k-table-data--toggle"></td>
         <td class="k-table-data--icon">
-            <span class="k-icon-document-[%=icon%]"></span>
-        </td>
+            [% if (type == 'image') { %]
+                <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
+            [% } else { %]
+                <span class="k-icon-document-[%=icon%]"></span>
+            [% } %]
+		</td>
 		<td class="k-table-data--ellipsis">
             <a href="#" class="navigate" data-k-tooltip='{"container":".k-ui-container","delay":{"show":500,"hide":50}}' data-original-title="<?= translate('View file info') ?>">[%=name%]</a>
 		</td>
@@ -134,7 +143,7 @@ window.addEvent('domready', function() {
 		</td>
         <td class="k-table-data--toggle"></td>
         <td class="k-table-data--icon">
-            [% if (typeof thumbnail === 'string') { %]
+            [% if (type == 'image') { %]
                 <img src="[%= client_cache || Files.blank_image %]" alt="[%=name%]" border="0" class="image-thumbnail [%= client_cache ? 'loaded' : '' %]" height="24px" />
             [% } else { %]
                 <span class="k-icon-document-image"></span>

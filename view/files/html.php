@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -15,17 +15,49 @@
  */
 class ComFilesViewFilesHtml extends ComKoowaViewHtml
 {
+    /**
+     * @var string The root path
+     */
+    protected $_root_path = '';
+
 	protected function _initialize(KObjectConfig $config)
 	{
 		$config->auto_fetch = false;
 
+        $config->append([
+            'decorator'  => $config->layout === 'select' ? 'koowa' : 'joomla'
+        ]);
+
 		parent::_initialize($config);
 	}
 
+    /**
+     * Root path setter
+     *
+     * @param string $path The root path
+     *
+     * @return $this
+     */
+	public function setRootPath($path)
+    {
+        $this->_root_path = (string) $path;
+    }
+
+    /**
+     * Root path getter
+     *
+     * @return string The root path
+     */
+    public function getRootPath()
+    {
+        return $this->_root_path;
+    }
+
     protected function _fetchData(KViewContext $context)
 	{
-	    $state     = $this->getModel()->getState();
+        $state     = $this->getModel()->getState();
         $container = $this->getModel()->getContainer();
+        $query     = $state->getValues();
 
         $config = new KObjectConfig($state->config);
 
@@ -36,13 +68,18 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
                     'routed' => '1'
                 )
             ),
-            'initial_response' => true
+            'initial_response' => false
         ))->append($this->getConfig()->config);
+
+        if ($root_path = $this->getRootPath())
+        {
+            $config->append(array('active' => $root_path, 'root_path' => $root_path));
+            $query['folder'] = $root_path; // Set folder to point to the new root
+        }
 
         if ($config->initial_response === true)
         {
             $count = 0;
-            $query = $state->getValues();
             unset($query['config']);
             $query['thumbnails'] = $this->getModel()->getContainer()->getParameters()->thumbnails;
 
@@ -64,10 +101,14 @@ class ComFilesViewFilesHtml extends ComKoowaViewHtml
 
         $state->config = $config->toArray();
 
-		$context->data->sitebase  = trim(JURI::root(), '/');
+        $context->data->sitebase  = trim(JURI::root(), '/');
         $context->data->token     = $this->getObject('user')->getSession()->getToken();
-		$context->data->container = $container;
+        $context->data->container = $container;
         $context->data->debug     = KClassLoader::getInstance()->isDebug();
+
+        $query = $this->getUrl()->getQuery(true);
+
+        $context->data->thumbnails = isset($query['thumbnails']) ? $query['thumbnails'] : null;
 
 		parent::_fetchData($context);
 

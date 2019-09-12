@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -10,6 +10,7 @@ defined('KOOWA') or die;
 
 $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
 ?>
+
 
 <?= helper('translator.script', array('strings' => array(
     // file size
@@ -58,6 +59,7 @@ $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
 <script>
 kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
 </script>
+
 
 <div class="k-dynamic-content-holder">
 
@@ -244,4 +246,5 @@ kQuery.koowa.uploader.server_limit = <?= json_encode($server_limit) ?>;
             <span><?= translate('Drop files here') ?></span>
         </div>
     </script>
+
 </div>

@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -75,7 +75,11 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode implements KComm
 			$context->siblings = array();
 		}
 
-		$context->siblings[] = scandir(dirname($context->getSubject()->fullpath));
+		$parent = dirname($context->getSubject()->fullpath);
+
+		if (file_exists($parent)) {
+            $context->siblings[] = scandir(dirname($context->getSubject()->fullpath));
+        }
 	}
 
 	/**
@@ -146,7 +150,7 @@ class ComFilesModelEntityFolder extends ComFilesModelEntityNode implements KComm
 
 	public function hasChildren()
 	{
-		return (boolean) count($this->_children);
+		return is_null($this->_children) ? false : (boolean) count($this->_children);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -63,6 +63,8 @@ Files.File = new Class({
 		
 		this.size = new Files.Filesize(this.metadata.size);
 		this.filetype = Files.getFileType(this.metadata.extension);
+
+		this.client_cache = false;
 	},
 	getModifiedDate: function(formatted) {
         if (this.metadata.modified_date) {
@@ -85,7 +87,7 @@ Files.File = new Class({
 				url: Files.app.createRoute({view: 'file', folder: that.folder, name: that.name}),
 				method: 'post',
 				data: {
-					'_action': 'delete',
+					'_method': 'delete',
 					'csrf_token': Files.token
 				},
 				onSuccess: function(response) {
@@ -128,16 +130,11 @@ Files.Image = new Class({
 		this.image = this.baseurl+'/'+this.encodePath(this.filepath, this.realpath);
 
 		this.client_cache = false;
-		if(window.sessionStorage) {
-		    if(sessionStorage[this.image.toString()]) {
-		        this.client_cache = sessionStorage[this.image.toString()];
-		    }
-		}
 	},
 	getThumbnail: function(success, failure) {
 		var that = this,
 			request = new Request.JSON({
-				url: Files.app.createRoute({view: 'thumbnail', filename: that.name, folder: that.folder}),
+				url: Files.app.createRoute({view: 'file', name: that.name, folder: that.folder, thumbnails: Files.app.options.thumbnails}),
 				method: 'get',
 				onSuccess: function(response, responseText) {
 					if (typeof success == 'function') {
@@ -214,7 +211,7 @@ Files.Folder = new Class({
 				url: Files.app.createRoute({view: 'folder', folder: Files.app.getPath(), name: that.name}),
 				method: 'post',
 				data: {
-					'_action': 'delete',
+					'_method': 'delete',
 					'csrf_token': Files.token
 				},
 				onSuccess: function(response) {

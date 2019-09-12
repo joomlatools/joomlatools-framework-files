@@ -2,13 +2,13 @@
 /**
  * Nooku Platform - http://www.nooku.org/platform
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		https://github.com/nooku/nooku-platform for the canonical source repository
  */
 ?>
 
-    <!-- Only existing entities are attachable -->
+<!-- Only existing entities are attachable -->
 <? if (!$entity->isNew()): ?>
     <ktml:script src="media://koowa/com_files/js/ejs/ejs.js"/>
     <ktml:script src="media://koowa/com_files/js/files.attachments.js"/>
@@ -133,5 +133,7 @@
         <div class="attachments__select">
             <?= helper('com:files.attachments.manage', array('entity' => $entity)) ?>
         </div>
+
     <? endif ?>
+
 <? endif ?>

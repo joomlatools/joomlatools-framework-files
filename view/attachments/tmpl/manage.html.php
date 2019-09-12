@@ -1,15 +1,16 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
 defined('KOOWA') or die;
 
-$can_attach = isset(parameters()->config['can_attach']) ? parameters()->config['can_attach'] : true;
-$can_detach = isset(parameters()->config['can_detach']) ? parameters()->config['can_detach'] : true;
+$can_attach       = isset(parameters()->config['can_attach']) ? parameters()->config['can_attach'] : true;
+$can_detach       = isset(parameters()->config['can_detach']) ? parameters()->config['can_detach'] : true;
+$check_duplicates = $container->getParameters()->check_duplicates ? $container->getParameters()->check_duplicates : 'unique';
 
 $query = url()->getQuery(true);
 
@@ -25,6 +26,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
 <ktml:script src="media://koowa/com_files/js/files.attachments.js"/>
 <ktml:style src="media://koowa/com_files/css/files.css"/>
+
 
 <div class="k-dynamic-content-holder">
     <script>
@@ -86,8 +88,8 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
             Attachments = Attachments.getInstance(
                 {
-                    url: "<?= route('component=' . urlencode($component) . '&view=attachment&container=' . urlencode($container->slug), true, false) ?>",
-                    selector: '#document_list',
+                    url: "<?= route('component=' . urlencode($component) . '&view=attachment&format=json&container=' . urlencode($container->slug), true, false) ?>",
+                    selector: '#attachments-container',
                     csrf_token: <?= json_encode(object('user')->getSession()->getToken()) ?>
                 }
             );
@@ -116,7 +118,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                 var url = "<?= route('component=' . urlencode($component) . '&view=attachments&container=' . urlencode($container->slug) . '&format=json&name={name}&table={table}&row={row}', true, false) ?>";
 
                 url = Attachments.replace(url, {
-                    name: context.attachment,
+                    name: encodeURIComponent(context.attachment),
                     table: <?= json_encode($table) ?>,
                     row: <?= json_encode($row) ?>
                 });
@@ -138,7 +140,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
             var setContext = function (context) {
                 context.url += (context.url.search(/\?/) ? '&' : '?');
-                context.url += 'name=' + Attachments.escape(context.attachment);
+                context.url += 'name=' + encodeURIComponent(context.attachment);
 
                 context.data.table = <?= json_encode($table) ?>;
                 context.data.row = <?= json_encode($row) ?>;
@@ -172,12 +174,95 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
                 this.fireEvent('afterDetachAttachment', {node: node});
             }.bind(app.grid));
+
+            $('.attachments-uploader').on('uploader:checkduplicates', function(e, config)
+            {
+                e.preventDefault();
+
+                var response = config.response, uploader = config.uploader, subject = e.subject;
+
+                if (typeof response.entities === 'object' && response.entities.length)
+                {
+                    uploader.settings.multipart_params.overwrite = 0;
+
+                    var existing = subject.getNamesFromArray(response.entities),
+                        that = this,
+                        promises = [];
+
+                    function getConfirmationMessage(files) {
+                        var message = '';
+
+                        if (files.length === 1) {
+                            message = Koowa.translate('An attachment with the same name already exists. Would you like to re-use it?');
+                        } else if (files.length > 1) {
+                            message = Koowa.translate('The following attachments already exist. Would you like to re-use them? {names}', {
+                                names: "\n" + files.join("\n")
+                            });
+                        }
+
+                        return message;
+                    };
+
+                    if (!confirm(getConfirmationMessage(existing)))
+                    {
+                        // Overwrite
+
+                        $.each(uploader.files, function (i, file) {
+
+                            if ($.inArray(file.name, existing) !== -1) {
+                                var url = uploader.settings.url,
+                                    promise;
+
+                                url = subject.updateUrlParameter(url, 'view', 'files');
+                                url = subject.updateUrlParameter(url, 'format', 'json');
+                                url = subject.updateUrlParameter(url, 'limit', '100');
+                                url = subject.updateUrlParameter(url, 'folder', uploader.settings.multipart_params.folder);
+                                url = subject.updateUrlParameter(url, 'search', file.name.substr(0, file.name.lastIndexOf('.')) + ' (');
+
+                                promise = $.ajax({
+                                    type: 'GET',
+                                    url: url
+                                }).done(function (response) {
+                                    return subject.makeUnique(file, response, uploader)
+                                });
+
+                                promises.push(promise);
+                            }
+                        });
+
+                        if (promises) {
+                            $.when.apply(kQuery, promises).then(function () {
+                                uploader.start();
+                            });
+                        }
+                    }
+                    else
+                    {
+                        // Re-use
+
+                        $.each(uploader.files, function (i, file) {
+
+                            if ($.inArray(file.name, existing) !== -1)
+                            {
+                                uploader.removeFile(file);
+
+                                app.grid.attach(file.name);
+                            }
+                            else uploader.start();
+                        });
+                    }
+                }
+                else {
+                    uploader.start();
+                }
+            });
         });
     </script>
 
     <?= import('com:files.files.templates_compact.html');?>
     <?= import('com:files.attachments.templates_manage.html', array('can_detach' => $can_detach));?>
 </div>
+
 
 <!-- Wrapper -->
 <div class="k-wrapper k-js-wrapper">
@@ -207,7 +292,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                                 'element' => '.attachments-uploader',
                                 'options'   => array(
                                     'multi_selection' => true,
-                                    'duplicate_mode' => 'unique',
+                                    'duplicate_mode' => $check_duplicates,
                                     'url' => route('component=' . urlencode($component) . '&view=file&plupload=1&routed=1&format=json&container=' .
                                                    (isset($container) ? $container->slug : ''), false, false)
                                 )

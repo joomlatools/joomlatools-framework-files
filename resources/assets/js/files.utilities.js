@@ -1,7 +1,7 @@
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -24,6 +24,20 @@ Files.Filesize.prototype.humanize = function() {
     }
 
     return (i === 0 || size % 1 === 0 ? size : size.toFixed(2)) + ' ' + Koowa.translate(this.units[i]);
+};
+
+Files.urlEncoder = function(value)
+{
+    value = encodeURI(value);
+
+    var replacements = {'\\?': '%3F', '#': '%23'}
+
+    for(var key in replacements)
+    {   var regexp = new RegExp(key, 'g');
+        value = value.replace(regexp, replacements[key]);
+    }
+
+    return value;
 };
 
 Files.FileTypes = {};

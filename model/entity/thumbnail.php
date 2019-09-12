@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2014 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -13,71 +13,125 @@
  * @author  Ercan Ozkaya <https://github.com/ercanozkaya>
  * @package Koowa\Component\Files
  */
-class ComFilesModelEntityThumbnail extends KModelEntityRow
+class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 {
     /**
-     * @var array Associative array containing the thumbnail size (x, y);
+     * First calls the parent to finish object constructing before setting data.
+     *
+     * This is because setProperties calls setAdapter which might call save to generate a thumbnail.
+     * However in the normal construction flow command mixin is not mixed in yet.
+     * So invokeCommand method does not exist.
+     *
+     * @param KObjectConfig $config
      */
-    protected $_size;
+    public function __construct(KObjectConfig $config)
+    {
+        $data = $config->data;
+        unset($config->data);
 
-	public function __construct(KObjectConfig $config)
-	{
-		parent::__construct($config);
+        parent::__construct($config);
 
-        $this->setSize(KObjectConfig::unbox($config->size));
-	}
+        if (isset($data)) {
+            $this->setProperties($data->toArray(), $this->isNew());
+        }
+    }
 
     protected function _initialize(KObjectConfig $config)
     {
-        $size = KObjectConfig::unbox($config->size);
-
-        if (empty($size)) {
-            $config->size = array('x' => 200, 'y' => 150);
-        }
+        $config->append(array(
+            'validator' => 'com:files.database.validator.file',
+            'data'      => array('crop' => false, 'dimension' => array('width' => 200, 'height' => 150))
+        ));
 
         parent::_initialize($config);
     }
 
-    public function generateThumbnail($in_place = false)
+    public function getHandle()
+    {
+        if ($version = $this->version) {
+            $handle = $version;
+        } else {
+            $handle = parent::getHandle();
+        }
+
+        return $handle;
+    }
+
+    public function setAdapter()
+    {
+        $path = '/' . ($this->folder ? $this->folder . '/' : '') . $this->name;
+
+        if ($container = $this->getContainer()) {
+            $path = $container->fullpath . $path;
+        } else {
+            $path = $this->uri ?: $path;
+        }
+
+        $this->_adapter = $this->getObject('com:files.adapter.file', array('path' => $path));
+
+        $this->_regenerate();
+
+        unset($this->_data['fullpath']);
+        unset($this->_data['metadata']);
+
+        return $this;
+    }
+
+    protected function _regenerate()
+    {
+        $result = false;
+
+        $source = $this->source;
+
+        // Only regenerate local sources ...we don't want to calculate dimensions on external sources.
+        if ($this->_adapter && $this->_adapter->exists() && $source && $source->isImage() && $source->isLocal())
+        {
+            $current_size = @getimagesize($this->fullpath);
+
+            $dimension = $this->getDimension();
+
+            // Compare dimensions
+            if ($current_size && ($current_size[0] != $dimension['width'] || $current_size[1] != $dimension['height'])) {
+                $result = $this->save();
+            }
+        }
+
+        return $result;
+    }
+
+    public function generate($in_place = false)
     {
 		@ini_set('memory_limit', '256M');
 
-    	if (($source = $this->getSource()) && $this->_canGenerate())
+    	if ($this->_canGenerate())
 		{
             try
             {
+                $source = $this->source;
+
                 $imagine = new \Imagine\Gd\Imagine();
                 $image   = $imagine->open($source->fullpath);
 
-                if (\Imagine\Image\Metadata\ExifMetadataReader::isSupported())
-                {
-                    $imagine->setMetadataReader(new \Imagine\Image\Metadata\ExifMetadataReader());
+                $dimension = $this->getDimension();
 
-                    $filter = new \Imagine\Filter\Basic\Autorotate();
-                    $filter->apply($image);
-                }
-
-                $size = $this->getSize();
-
-                if ($size['x'] && $size['y']) {
-                    $size = new \Imagine\Image\Box($size['x'], $size['y']);
+                if ($dimension['width'] && $dimension['height']) {
+                    $size = new \Imagine\Image\Box($dimension['width'], $dimension['height']);
                 }
                 else
                 {
                     $image_size = $image->getSize();
                     $larger     = max($image_size->getWidth(), $image_size->getHeight());
-                    $scale      = max($size['x'], $size['y']);
+                    $scale      = max($dimension['width'], $dimension['height']);
 
                     $size       = $image_size->scale(1/($larger/$scale));
                 }
 
-                if ($in_place) {
-                    return $image->resize($size)->save();
-                } else {
-                    $string = (string) $image->thumbnail($size, \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND);
-                    $string = sprintf('data:%s;base64,%s', $source->mimetype, base64_encode($string));
+                $mode = ($this->crop) ? \Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND : \Imagine\Image\ImageInterface::THUMBNAIL_INSET;
 
-                    return $string;
+                if ($in_place) {
+                    return $image->thumbnail($size, $mode)->save($this->fullpath);
+                } else {
+                    return (string) $image->thumbnail($size, $mode);
                 }
 			}
 			catch (Exception $e) {
@@ -90,31 +144,54 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
 
     public function save()
     {
-        $result = false;
+        $context = $this->getContext();
+        $context->result = false;
 
-        if ($source = $this->getSource())
+        $is_new = $this->isNew();
+
+        if ($this->invokeCommand('before.save', $context) !== false)
         {
-            $str = $source->thumbnail_string ? $source->thumbnail_string : $this->generateThumbnail();
-
-            if ($str)
+            if ($source = $this->source)
             {
-                $this->setProperties(array(
-                    'files_container_id' => $source->getContainer()->id,
-                    'folder'             => $source->folder,
-                    'filename'           => $source->name,
-                    'thumbnail'          => $str
-                ));
+                if ($str = $this->generate())
+                {
+                    $path = '/' . ($this->folder ? $this->folder . '/' : '');
 
-                $result = parent::save();
+                    if ($container = $this->getContainer()) {
+                        $path = $container->fullpath . $path;
+                    }
+
+                    $folder = $this->getObject('com:files.adapter.folder', array('path' => $path));
+
+                    if (!$folder->exists()) {
+                        $folder->create();
+                    }
+
+                    $context->result = $this->_adapter->write($str);
+
+                    $this->invokeCommand('after.save', $context);
+                }
             }
         }
 
-        return $result;
+        if ($context->result === false) {
+            $this->setStatus(KDatabase::STATUS_FAILED);
+        } else {
+            $this->setStatus($is_new ? KDatabase::STATUS_CREATED : KDatabase::STATUS_UPDATED);
+        }
+
+        return $context->result;
     }
 
     public function toArray()
     {
         $data = parent::toArray();
+
+        $data['relative_path'] = $this->relative_path;
+
+        if ($version = $this->version) {
+            $data['version'] = $version;
+        }
 
 		unset($data['_thumbnail_size']);
 		unset($data['source']);
@@ -122,99 +199,149 @@ class ComFilesModelEntityThumbnail extends KModelEntityRow
         return $data;
     }
 
-    public function getSource()
+    public function setPropertySource($value)
     {
-        return ($this->source && !$this->source->isNew()) ? $this->source : null;
+        if ($value instanceof ComFilesModelEntityFiles) {
+            $value = $value->top();
+        }
+
+        if (!$value instanceof ComFilesModelEntityFile) {
+            throw new RuntimeException('Wrong type for source');
+        }
+
+        if ($value->isNew()) {
+            throw new RuntimeException('Source cannot be a new entity');
+        }
+
+        return $value;
+    }
+
+    public function setPropertyCrop($value)
+    {
+        return (bool) $value;
     }
 
     /**
-     * Thumbnail size setter.
+     * Thumbnail dimension setter.
      *
-     * @param  array $size
+     * The dimension of a thumbnail consists on a width and height pair.
+     *
+     * @param  string|array $dimension
      * @throws BadMethodCallException
      * @return $this
      */
-    public function setSize(array $size)
+    public function setPropertyDimension($value)
     {
-        if (!(isset($size['x']) || isset($size['y']))) {
-            throw new BadMethodCallException('The provided size is invalid');
+        if (!(isset($value['width']) || isset($value['height']))) {
+            throw new BadMethodCallException('The provided dimension is invalid');
         }
 
-        $this->_size = $size;
-
-        return $this;
+        return $value;
     }
 
     /**
-     * Thumbnail size getter.
+     * Thumbnail dimension getter.
      *
-     * @throws RuntimeException If no source or its size cannot be determined.
+     * The dimension of a thumbnail consists on a width and height pair. This method will return the resulting
+     * thumbnail dimension depending on: the provided width/height pair, the source image ratio and whether or not
+     * cropping is enabled.
+     *
+     * Ratio will always be preserved unless crop is enabled and both components are provided. Otherwise the resulting
+     * dimensions will consist on a box that's guaranteed to not exceed the dimension property components while
+     * preserving the source ratio. If one of the component is missing in the dimension property, the other will get
+     * calculated based on the ratio of the source.
+     *
+     * @throws RuntimeException If no source or its dimension cannot be determined.
      *
      * @return array Associative array containing the thumbnail width and height.
      */
-    public function getSize()
+    public function getDimension()
     {
-        $size = $this->_size;
+        $dimension = $this->dimension;
 
-        if ($size && (!isset($size['x']) || !isset($size['y'])))
+        if ($dimension && empty($dimension['width']) || empty($dimension['height']) || !$this->crop)
         {
-            $source = $this->getSource();
+            $source = $this->source;
 
-            if (!($source && ($image = @getimagesize($source->fullpath)))) {
+            if (!($source && ($info = @getimagesize($source->fullpath)))) {
                 throw new RuntimeException('Unable to get source size');
             }
 
-            $ratio = $image[0] / $image [1];
+            $ratio = $info[0] / $info[1];
 
-            if (isset($size['x'])) {
-                $size['y'] = round($size['x'] / $ratio);
-            } else {
-                $size['x'] = round($size['y'] * $ratio);
+            if (!$this->crop && !empty($dimension['height']) && !empty($dimension['width']))
+            {
+                $dimension_ratio = $dimension['height'] / $dimension['width'];
+
+                // Decide which dimension component to keep, the other will get re-calculated below to preserve ratio.
+                if ($ratio > $dimension_ratio) {
+                    unset($dimension['height']);
+                } elseif ($ratio < $dimension_ratio) {
+                    unset($dimension['width']);
+                }
+            }
+
+            if (!empty($dimension['width']))
+            {
+                if ($dimension['width'] > $info[0]) {
+                    $dimension['width'] = $info[0]; // Thumbnails cannot be bigger than source
+                }
+
+                $dimension['height'] = round($dimension['width'] / $ratio);
+            }
+            else
+            {
+                if ($dimension['height'] > $info[1]) {
+                    $dimension['height'] = $info[1]; // Thumbnails cannot be bigger than source
+                }
+
+                $dimension['width'] = round($dimension['height'] * $ratio);
             }
         }
 
-        return $size;
+        return $dimension;
     }
 
     /**
-     * Checks if a thumbnail for the current source and provided size can be generated given the
+     * Checks if a thumbnail for the current source and provided dimension can be generated given the
      * amount of memory that's available.
      *
      * @return bool True if the thumbnail can be "safely" processed, false otherwise.
      */
     protected function _canGenerate()
     {
-        $result = false;
+        $result = true;
 
         // Multiplier to take into account memory consumed by the Image Processing Library.
         $tweak_factor  = 6;
 
-        $source = @getimagesize($this->getSource()->fullpath);
-
-        $channels      = isset($source['channels']) ? $source['channels'] : 4;
-        $bits          = isset($source['bits']) ? $source['bits'] : 8;
-        $source_memory = ceil($source[0] * $source[1] * $bits * $channels / 8 * $tweak_factor);
-
-        $thumb = $this->getSize();
-
-        // We assume the same amount of bits and channels as source.
-        $thumb_memory = ceil($thumb['x'] * $thumb['y'] * $bits * $channels / 8 * $tweak_factor);
-
-        //If memory is limited
-        $limit = ini_get('memory_limit');
-        if ($limit != '-1')
+        if (($source = $this->source) && ($info = @getimagesize($source->fullpath)))
         {
-            $limit = self::convertToBytes($limit);
-            $available_memory = $limit - memory_get_usage();
+            $channels      = isset($info['channels']) ? $info['channels'] : 4;
+            $bits          = isset($info['bits']) ? $info['bits'] : 8;
+            $source_memory = ceil($info[0] * $info[1] * $bits * $channels / 8 * $tweak_factor);
 
-            // Leave 16 megs for the rest of the request
-            $available_memory -= 16777216;
+            $dimension = $this->getDimension();
 
-            if ($source_memory + $thumb_memory < $available_memory) {
-                $result = true;
+            // We assume the same amount of bits and channels as source.
+            $thumb_memory = ceil($dimension['width'] * $dimension ['height'] * $bits * $channels / 8 * $tweak_factor);
+
+            $limit = ini_get('memory_limit');
+
+            // Check if memory is limited (-1 => Unlimited)
+            if ($limit != '-1')
+            {
+                $limit = self::convertToBytes($limit);
+                $available_memory = $limit - memory_get_usage();
+
+                // Leave 16 megs for the rest of the request
+                $available_memory -= 16777216;
+
+                if ($source_memory + $thumb_memory > $available_memory) {
+                    $result = false;
+                }
             }
         }
-        else $result = true;
 
         return $result;
     }

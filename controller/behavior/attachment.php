@@ -1,8 +1,8 @@
 <?php
 /**
- * Nooku Framework - http://nooku.org/framework
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
- * @copyright	Copyright (C) 2011 - 2015 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
  * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
  * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
  */
@@ -52,15 +52,16 @@ class ComFilesControllerBehaviorAttachment extends KControllerBehaviorAbstract
             $controller = $this->_getController();
             $container  = $entity->getContainer();
 
-            $model = $controller->getModel();
+            $attachment = $controller->getModel()->name($entity->name)->container($container->id)->fetch();
 
-            if (!$model->name($entity->name)->container($container->id)->count())
+            if ($attachment->isNew())
             {
                 $controller->getRequest()->getQuery()->set('container', $container->id);
                 $controller->getModel()->container($container->id);
 
-                $controller->add(array('name' => $entity->name));
+                $context->attachment = $controller->add(array('name' => $entity->name));
             }
+            else $context->attachment = $attachment;
         }
     }
 
