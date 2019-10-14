@@ -192,7 +192,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
     {
         $size = false;
 
-        $handle = fopen($this->_path, "rb") or die("Invalid file stream.");
+        $handle = fopen($this->_path, 'rb', false, $this->_getFileStreamOptions());
 
         $block = NULL;
 
@@ -441,8 +441,33 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 	    if ($this->isLocal()) {
             $result = is_file($this->_path);
         } else {
-            $result = (fopen($this->_path, 'r') !== false);
+            $result = fopen($this->_path, 'r', false, $this->_getFileStreamOptions());
         }
 		return $result;
-	}
+    }
+    
+    /**
+     * Get file stream options
+     * Turn off ssl verification in dev machines
+     * 
+     * @return resource
+     */
+    protected function _getFileStreamOptions()
+    {
+        $result = stream_context_create([]);
+
+        if (in_array($_SERVER['REMOTE_ADDR'], ['33.33.33.1', '127.0.0.1']))
+        {
+            $options = array(
+                "ssl" => array(
+                    "verify_peer" => false,
+                    "verify_peer_name" => false
+                )
+            );
+    
+            $result = stream_context_create($options);
+        }
+
+        return $result;
+    }
 }
