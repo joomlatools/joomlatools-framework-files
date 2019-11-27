@@ -115,9 +115,9 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
     {
         $size = false;
 
-        $handle = fopen($this->_path, "rb") or die("Invalid file stream.");
+        $handle = fopen($this->_path, "rb", false, $this->_getFileStreamOptions());
 
-        if (!feof($handle))
+        if ($handle && !feof($handle))
         {
             $block = fread($handle, 24);
 
@@ -155,9 +155,9 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
     {
         $size = false;
 
-        $handle = fopen($this->_path, "rb") or die("Invalid file stream.");
+        $handle = fopen($this->_path, "rb", false, $this->_getFileStreamOptions());
 
-        if (!feof($handle))
+        if ($handle && !feof($handle))
         {
             $block = fread($handle, 10);
 
@@ -198,7 +198,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
 
         $length = 8192;
 
-        if (!feof($handle))
+        if ($handle && !feof($handle))
         {
             $block = fread($handle, $length);
 
