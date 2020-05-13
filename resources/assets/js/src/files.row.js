@@ -71,7 +71,7 @@ Files.File = new Class({
             var date = new Date();
             date.setTime(this.metadata.modified_date*1000);
             if (formatted) {
-                return date.getDate()+' '+Koowa.Date.getMonthName(date.getMonth()+1, true)+' '+date.getFullYear();
+				return date.toLocaleString('default', { year: 'numeric', month: 'short', day: 'numeric' });
             } else {
                 return date;
             }
