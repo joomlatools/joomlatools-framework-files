@@ -1,3 +1,4 @@
+//history.js
 /**
  * History.js Core
  * @author Benjamin Arthur Lupton <contact@balupton.com>
@@ -2038,6 +2039,845 @@
 
 })(window);
 
+
+
+//ejs.js
+(function () {
+    var rsplit = function (string, regex) {
+        var result = regex.exec(string), retArr = new Array(), first_idx, last_idx, first_bit;
+        while (result != null) {
+            first_idx = result.index;
+            last_idx = regex.lastIndex;
+            if ((first_idx) != 0) {
+                first_bit = string.substring(0, first_idx);
+                retArr.push(string.substring(0, first_idx));
+                string = string.slice(first_idx)
+            }
+            retArr.push(result[0]);
+            string = string.slice(result[0].length);
+            result = regex.exec(string)
+        }
+        if (!string == "") {
+            retArr.push(string)
+        }
+        return retArr
+    }, chop = function (string) {
+        return string.substr(0, string.length - 1)
+    }, extend = function (d, s) {
+        for (var n in s) {
+            if (s.hasOwnProperty(n)) {
+                d[n] = s[n]
+            }
+        }
+    };
+    EJS = function (options) {
+        options = typeof options == "string" ? {view: options} : options;
+        this.set_options(options);
+        if (options.precompiled) {
+            this.template = {};
+            this.template.process = options.precompiled;
+            EJS.update(this.name, this);
+            return
+        }
+        if (options.element) {
+            if (typeof options.element == "string") {
+                var name = options.element;
+                options.element = document.getElementById(options.element);
+                if (options.element == null) {
+                    throw name + "does not exist!"
+                }
+            }
+            if (options.element.value) {
+                this.text = options.element.value
+            } else {
+                this.text = options.element.innerHTML
+            }
+            this.name = options.element.id;
+            this.type = "["
+        } else {
+            if (options.url) {
+                options.url = EJS.endExt(options.url, this.extMatch);
+                this.name = this.name ? this.name : options.url;
+                var url = options.url;
+                var template = EJS.get(this.name, this.cache);
+                if (template) {
+                    return template
+                }
+                if (template == EJS.INVALID_PATH) {
+                    return null
+                }
+                try {
+                    this.text = EJS.request(url + (this.cache ? "" : "?" + Math.random()))
+                } catch (e) {
+                }
+                if (this.text == null) {
+                    throw ({type: "EJS", message: "There is no template at " + url})
+                }
+            }
+        }
+        var template = new EJS.Compiler(this.text, this.type);
+        template.compile(options, this.name);
+        EJS.update(this.name, this);
+        this.template = template
+    };
+    EJS.prototype = {
+        render: function (object, extra_helpers) {
+            object = object || {};
+            this._extra_helpers = extra_helpers;
+            var v = new EJS.Helpers(object, extra_helpers || {});
+            return this.template.process.call(object, object, v)
+        }, update: function (element, options) {
+            if (typeof element == "string") {
+                element = document.getElementById(element)
+            }
+            if (options == null) {
+                _template = this;
+                return function (object) {
+                    EJS.prototype.update.call(_template, element, object)
+                }
+            }
+            if (typeof options == "string") {
+                params = {};
+                params.url = options;
+                _template = this;
+                params.onComplete = function (request) {
+                    var object = eval(request.responseText);
+                    EJS.prototype.update.call(_template, element, object)
+                };
+                EJS.ajax_request(params)
+            } else {
+                element.innerHTML = this.render(options)
+            }
+        }, out: function () {
+            return this.template.out
+        }, set_options: function (options) {
+            this.type = options.type || EJS.type;
+            this.cache = options.cache != null ? options.cache : EJS.cache;
+            this.text = options.text || null;
+            this.name = options.name || null;
+            this.ext = options.ext || EJS.ext;
+            this.extMatch = new RegExp(this.ext.replace(/\./, "."))
+        }
+    };
+    EJS.endExt = function (path, match) {
+        if (!path) {
+            return null
+        }
+        match.lastIndex = 0;
+        return path + (match.test(path) ? "" : this.ext)
+    };
+    EJS.Scanner = function (source, left, right) {
+        extend(this, {
+            left_delimiter: left + "%",
+            right_delimiter: "%" + right,
+            double_left: left + "%%",
+            double_right: "%%" + right,
+            left_equal: left + "%=",
+            left_comment: left + "%#"
+        });
+        this.SplitRegexp = left == "[" ? /(\[%%)|(%%\])|(\[%=)|(\[%#)|(\[%)|(%\]\n)|(%\])|(\n)/ : new RegExp("(" + this.double_left + ")|(%%" + this.double_right + ")|(" + this.left_equal + ")|(" + this.left_comment + ")|(" + this.left_delimiter + ")|(" + this.right_delimiter + "\n)|(" + this.right_delimiter + ")|(\n)");
+        this.source = source;
+        this.stag = null;
+        this.lines = 0
+    };
+    EJS.Scanner.to_text = function (input) {
+        if (input == null || input === undefined) {
+            return ""
+        }
+        if (input instanceof Date) {
+            return input.toDateString()
+        }
+        if (input.toString) {
+            return input.toString()
+        }
+        return ""
+    };
+    EJS.Scanner.prototype = {
+        scan: function (block) {
+            scanline = this.scanline;
+            regex = this.SplitRegexp;
+            if (!this.source == "") {
+                var source_split = rsplit(this.source, /\n/);
+                for (var i = 0; i < source_split.length; i++) {
+                    var item = source_split[i];
+                    this.scanline(item, regex, block)
+                }
+            }
+        }, scanline: function (line, regex, block) {
+            this.lines++;
+            var line_split = rsplit(line, regex);
+            for (var i = 0; i < line_split.length; i++) {
+                var token = line_split[i];
+                if (token != null) {
+                    try {
+                        block(token, this)
+                    } catch (e) {
+                        throw {type: "EJS.Scanner", line: this.lines}
+                    }
+                }
+            }
+        }
+    };
+    EJS.Buffer = function (pre_cmd, post_cmd) {
+        this.line = new Array();
+        this.script = "";
+        this.pre_cmd = pre_cmd;
+        this.post_cmd = post_cmd;
+        for (var i = 0; i < this.pre_cmd.length; i++) {
+            this.push(pre_cmd[i])
+        }
+    };
+    EJS.Buffer.prototype = {
+        push: function (cmd) {
+            this.line.push(cmd)
+        }, cr: function () {
+            this.script = this.script + this.line.join("; ");
+            this.line = new Array();
+            this.script = this.script + "\n"
+        }, close: function () {
+            if (this.line.length > 0) {
+                for (var i = 0; i < this.post_cmd.length; i++) {
+                    this.push(pre_cmd[i])
+                }
+                this.script = this.script + this.line.join("; ");
+                line = null
+            }
+        }
+    };
+    EJS.Compiler = function (source, left) {
+        this.pre_cmd = ["var ___ViewO = [];"];
+        this.post_cmd = new Array();
+        this.source = " ";
+        if (source != null) {
+            if (typeof source == "string") {
+                source = source.replace(/\r\n/g, "\n");
+                source = source.replace(/\r/g, "\n");
+                this.source = source
+            } else {
+                if (source.innerHTML) {
+                    this.source = source.innerHTML
+                }
+            }
+            if (typeof this.source != "string") {
+                this.source = ""
+            }
+        }
+        left = left || "<";
+        var right = ">";
+        switch (left) {
+            case"[":
+                right = "]";
+                break;
+            case"<":
+                break;
+            default:
+                throw left + " is not a supported deliminator";
+                break
+        }
+        this.scanner = new EJS.Scanner(this.source, left, right);
+        this.out = ""
+    };
+    EJS.Compiler.prototype = {
+        compile: function (options, name) {
+            options = options || {};
+            this.out = "";
+            var put_cmd = "___ViewO.push(";
+            var insert_cmd = put_cmd;
+            var buff = new EJS.Buffer(this.pre_cmd, this.post_cmd);
+            var content = "";
+            var clean = function (content) {
+                content = content.replace(/\\/g, "\\\\");
+                content = content.replace(/\n/g, "\\n");
+                content = content.replace(/"/g, '\\"');
+                return content
+            };
+            this.scanner.scan(function (token, scanner) {
+                if (scanner.stag == null) {
+                    switch (token) {
+                        case"\n":
+                            content = content + "\n";
+                            buff.push(put_cmd + '"' + clean(content) + '");');
+                            buff.cr();
+                            content = "";
+                            break;
+                        case scanner.left_delimiter:
+                        case scanner.left_equal:
+                        case scanner.left_comment:
+                            scanner.stag = token;
+                            if (content.length > 0) {
+                                buff.push(put_cmd + '"' + clean(content) + '")')
+                            }
+                            content = "";
+                            break;
+                        case scanner.double_left:
+                            content = content + scanner.left_delimiter;
+                            break;
+                        default:
+                            content = content + token;
+                            break
+                    }
+                } else {
+                    switch (token) {
+                        case scanner.right_delimiter:
+                            switch (scanner.stag) {
+                                case scanner.left_delimiter:
+                                    if (content[content.length - 1] == "\n") {
+                                        content = chop(content);
+                                        buff.push(content);
+                                        buff.cr()
+                                    } else {
+                                        buff.push(content)
+                                    }
+                                    break;
+                                case scanner.left_equal:
+                                    buff.push(insert_cmd + "(EJS.Scanner.to_text(" + content + ")))");
+                                    break
+                            }
+                            scanner.stag = null;
+                            content = "";
+                            break;
+                        case scanner.double_right:
+                            content = content + scanner.right_delimiter;
+                            break;
+                        default:
+                            content = content + token;
+                            break
+                    }
+                }
+            });
+            if (content.length > 0) {
+                buff.push(put_cmd + '"' + clean(content) + '")')
+            }
+            buff.close();
+            this.out = buff.script + ";";
+            var to_be_evaled = "/*" + name + "*/this.process = function(_CONTEXT,_VIEW) { try { with(_VIEW) { with (_CONTEXT) {" + this.out + " return ___ViewO.join('');}}}catch(e){e.lineNumber=null;throw e;}};";
+            try {
+                eval(to_be_evaled)
+            } catch (e) {
+                if (typeof JSLINT != "undefined") {
+                    JSLINT(this.out);
+                    for (var i = 0; i < JSLINT.errors.length; i++) {
+                        var error = JSLINT.errors[i];
+                        if (error.reason != "Unnecessary semicolon.") {
+                            error.line++;
+                            var e = new Error();
+                            e.lineNumber = error.line;
+                            e.message = error.reason;
+                            if (options.view) {
+                                e.fileName = options.view
+                            }
+                            throw e
+                        }
+                    }
+                } else {
+                    throw e
+                }
+            }
+        }
+    };
+    EJS.config = function (options) {
+        EJS.cache = options.cache != null ? options.cache : EJS.cache;
+        EJS.type = options.type != null ? options.type : EJS.type;
+        EJS.ext = options.ext != null ? options.ext : EJS.ext;
+        var templates_directory = EJS.templates_directory || {};
+        EJS.templates_directory = templates_directory;
+        EJS.get = function (path, cache) {
+            if (cache == false) {
+                return null
+            }
+            if (templates_directory[path]) {
+                return templates_directory[path]
+            }
+            return null
+        };
+        EJS.update = function (path, template) {
+            if (path == null) {
+                return
+            }
+            templates_directory[path] = template
+        };
+        EJS.INVALID_PATH = -1
+    };
+    EJS.config({cache: true, type: "<", ext: ".ejs"});
+    EJS.Helpers = function (data, extras) {
+        this._data = data;
+        this._extras = extras;
+        extend(this, extras)
+    };
+    EJS.Helpers.prototype = {
+        view: function (options, data, helpers) {
+            if (!helpers) {
+                helpers = this._extras
+            }
+            if (!data) {
+                data = this._data
+            }
+            return new EJS(options).render(data, helpers)
+        }, to_text: function (input, null_text) {
+            if (input == null || input === undefined) {
+                return null_text || ""
+            }
+            if (input instanceof Date) {
+                return input.toDateString()
+            }
+            if (input.toString) {
+                return input.toString().replace(/\n/g, "<br />").replace(/''/g, "'")
+            }
+            return ""
+        }
+    };
+    EJS.newRequest = function () {
+        var factories = [function () {
+            return new ActiveXObject("Msxml2.XMLHTTP")
+        }, function () {
+            return new XMLHttpRequest()
+        }, function () {
+            return new ActiveXObject("Microsoft.XMLHTTP")
+        }];
+        for (var i = 0; i < factories.length; i++) {
+            try {
+                var request = factories[i]();
+                if (request != null) {
+                    return request
+                }
+            } catch (e) {
+                continue
+            }
+        }
+    };
+    EJS.request = function (path) {
+        var request = new EJS.newRequest();
+        request.open("GET", path, false);
+        try {
+            request.send(null)
+        } catch (e) {
+            return null
+        }
+        if (request.status == 404 || request.status == 2 || (request.status == 0 && request.responseText == "")) {
+            return null
+        }
+        return request.responseText
+    };
+    EJS.ajax_request = function (params) {
+        params.method = (params.method ? params.method : "GET");
+        var request = new EJS.newRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4) {
+                if (request.status == 200) {
+                    params.onComplete(request)
+                } else {
+                    params.onComplete(request)
+                }
+            }
+        };
+        request.open(params.method, params.url);
+        request.send(null)
+    };
+    EJS.Helpers.prototype.date_tag = function (C, O, A) {
+        if (!(O instanceof Date)) {
+            O = new Date()
+        }
+        var B = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var G = [], D = [], P = [];
+        var J = O.getFullYear();
+        var H = O.getMonth();
+        var N = O.getDate();
+        for (var M = J - 15; M < J + 15; M++) {
+            G.push({value: M, text: M})
+        }
+        for (var E = 0; E < 12; E++) {
+            D.push({value: (E), text: B[E]})
+        }
+        for (var I = 0; I < 31; I++) {
+            P.push({value: (I + 1), text: (I + 1)})
+        }
+        var L = this.select_tag(C + "[year]", J, G, {id: C + "[year]"});
+        var F = this.select_tag(C + "[month]", H, D, {id: C + "[month]"});
+        var K = this.select_tag(C + "[day]", N, P, {id: C + "[day]"});
+        return L + F + K
+    };
+    EJS.Helpers.prototype.form_tag = function (B, A) {
+        A = A || {};
+        A.action = B;
+        if (A.multipart == true) {
+            A.method = "post";
+            A.enctype = "multipart/form-data"
+        }
+        return this.start_tag_for("form", A)
+    };
+    EJS.Helpers.prototype.form_tag_end = function () {
+        return this.tag_end("form")
+    };
+    EJS.Helpers.prototype.hidden_field_tag = function (A, C, B) {
+        return this.input_field_tag(A, C, "hidden", B)
+    };
+    EJS.Helpers.prototype.input_field_tag = function (A, D, C, B) {
+        B = B || {};
+        B.id = B.id || A;
+        B.value = D || "";
+        B.type = C || "text";
+        B.name = A;
+        return this.single_tag_for("input", B)
+    };
+    EJS.Helpers.prototype.is_current_page = function (A) {
+        return (window.location.href == A || window.location.pathname == A ? true : false)
+    };
+    EJS.Helpers.prototype.link_to = function (B, A, C) {
+        if (!B) {
+            var B = "null"
+        }
+        if (!C) {
+            var C = {}
+        }
+        if (C.confirm) {
+            C.onclick = ' var ret_confirm = confirm("' + C.confirm + '"); if(!ret_confirm){ return false;} ';
+            C.confirm = null
+        }
+        C.href = A;
+        return this.start_tag_for("a", C) + B + this.tag_end("a")
+    };
+    EJS.Helpers.prototype.submit_link_to = function (B, A, C) {
+        if (!B) {
+            var B = "null"
+        }
+        if (!C) {
+            var C = {}
+        }
+        C.onclick = C.onclick || "";
+        if (C.confirm) {
+            C.onclick = ' var ret_confirm = confirm("' + C.confirm + '"); if(!ret_confirm){ return false;} ';
+            C.confirm = null
+        }
+        C.value = B;
+        C.type = "submit";
+        C.onclick = C.onclick + (A ? this.url_for(A) : "") + "return false;";
+        return this.start_tag_for("input", C)
+    };
+    EJS.Helpers.prototype.link_to_if = function (F, B, A, D, C, E) {
+        return this.link_to_unless((F == false), B, A, D, C, E)
+    };
+    EJS.Helpers.prototype.link_to_unless = function (E, B, A, C, D) {
+        C = C || {};
+        if (E) {
+            if (D && typeof D == "function") {
+                return D(B, A, C, D)
+            } else {
+                return B
+            }
+        } else {
+            return this.link_to(B, A, C)
+        }
+    };
+    EJS.Helpers.prototype.link_to_unless_current = function (B, A, C, D) {
+        C = C || {};
+        return this.link_to_unless(this.is_current_page(A), B, A, C, D)
+    };
+    EJS.Helpers.prototype.password_field_tag = function (A, C, B) {
+        return this.input_field_tag(A, C, "password", B)
+    };
+    EJS.Helpers.prototype.select_tag = function (D, G, H, F) {
+        F = F || {};
+        F.id = F.id || D;
+        F.value = G;
+        F.name = D;
+        var B = "";
+        B += this.start_tag_for("select", F);
+        for (var E = 0; E < H.length; E++) {
+            var C = H[E];
+            var A = {value: C.value};
+            if (C.value == G) {
+                A.selected = "selected"
+            }
+            B += this.start_tag_for("option", A) + C.text + this.tag_end("option")
+        }
+        B += this.tag_end("select");
+        return B
+    };
+    EJS.Helpers.prototype.single_tag_for = function (A, B) {
+        return this.tag(A, B, "/>")
+    };
+    EJS.Helpers.prototype.start_tag_for = function (A, B) {
+        return this.tag(A, B)
+    };
+    EJS.Helpers.prototype.submit_tag = function (A, B) {
+        B = B || {};
+        B.type = B.type || "submit";
+        B.value = A || "Submit";
+        return this.single_tag_for("input", B)
+    };
+    EJS.Helpers.prototype.tag = function (C, E, D) {
+        if (!D) {
+            var D = ">"
+        }
+        var B = " ";
+        for (var A in E) {
+            if (E[A] != null) {
+                var F = E[A].toString()
+            } else {
+                var F = ""
+            }
+            if (A == "Class") {
+                A = "class"
+            }
+            if (F.indexOf("'") != -1) {
+                B += A + '="' + F + '" '
+            } else {
+                B += A + "='" + F + "' "
+            }
+        }
+        return "<" + C + B + D
+    };
+    EJS.Helpers.prototype.tag_end = function (A) {
+        return "</" + A + ">"
+    };
+    EJS.Helpers.prototype.text_area_tag = function (A, C, B) {
+        B = B || {};
+        B.id = B.id || A;
+        B.name = B.name || A;
+        C = C || "";
+        if (B.size) {
+            B.cols = B.size.split("x")[0];
+            B.rows = B.size.split("x")[1];
+            delete B.size
+        }
+        B.cols = B.cols || 50;
+        B.rows = B.rows || 4;
+        return this.start_tag_for("textarea", B) + C + this.tag_end("textarea")
+    };
+    EJS.Helpers.prototype.text_tag = EJS.Helpers.prototype.text_area_tag;
+    EJS.Helpers.prototype.text_field_tag = function (A, C, B) {
+        return this.input_field_tag(A, C, "text", B)
+    };
+    EJS.Helpers.prototype.url_for = function (A) {
+        return 'window.location="' + A + '";'
+    };
+    EJS.Helpers.prototype.img_tag = function (B, C, A) {
+        A = A || {};
+        A.src = B;
+        A.alt = C;
+        return this.single_tag_for("img", A)
+    }
+
+})();
+
+
+//spin.min.js
+(function (t, e) {
+    if (!t.Koowa) t.Koowa = {};
+    if (typeof exports == "object") module.exports = e(); else if (typeof define == "function" && define.amd) define(e); else t.Koowa.Spinner = e()
+})(this, function () {
+    "use strict";
+    var t = ["webkit", "Moz", "ms", "O"], e = {}, i;
+
+    function o(t, e) {
+        var i = document.createElement(t || "div"), o;
+        for (o in e) i[o] = e[o];
+        return i
+    }
+
+    function n(t) {
+        for (var e = 1, i = arguments.length; e < i; e++) t.appendChild(arguments[e]);
+        return t
+    }
+
+    var r = function () {
+        var t = o("style", {type: "text/css"});
+        n(document.getElementsByTagName("head")[0], t);
+        return t.sheet || t.styleSheet
+    }();
+
+    function s(t, o, n, s) {
+        var a = ["opacity", o, ~~(t * 100), n, s].join("-"), f = .01 + n / s * 100,
+            l = Math.max(1 - (1 - t) / o * (100 - f), t), u = i.substring(0, i.indexOf("Animation")).toLowerCase(),
+            d = u && "-" + u + "-" || "";
+        if (!e[a]) {
+            r.insertRule("@" + d + "keyframes " + a + "{" + "0%{opacity:" + l + "}" + f + "%{opacity:" + t + "}" + (f + .01) + "%{opacity:1}" + (f + o) % 100 + "%{opacity:" + t + "}" + "100%{opacity:" + l + "}" + "}", r.cssRules.length);
+            e[a] = 1
+        }
+        return a
+    }
+
+    function a(e, i) {
+        var o = e.style, n, r;
+        i = i.charAt(0).toUpperCase() + i.slice(1);
+        for (r = 0; r < t.length; r++) {
+            n = t[r] + i;
+            if (o[n] !== undefined) return n
+        }
+        if (o[i] !== undefined) return i
+    }
+
+    function f(t, e) {
+        for (var i in e) t.style[a(t, i) || i] = e[i];
+        return t
+    }
+
+    function l(t) {
+        for (var e = 1; e < arguments.length; e++) {
+            var i = arguments[e];
+            for (var o in i) if (t[o] === undefined) t[o] = i[o]
+        }
+        return t
+    }
+
+    function u(t) {
+        var e = {x: t.offsetLeft, y: t.offsetTop};
+        while (t = t.offsetParent) e.x += t.offsetLeft, e.y += t.offsetTop;
+        return e
+    }
+
+    function d(t, e) {
+        return typeof t == "string" ? t : t[e % t.length]
+    }
+
+    var p = {
+        lines: 12,
+        length: 7,
+        width: 5,
+        radius: 10,
+        rotate: 0,
+        corners: 1,
+        color: "#000",
+        direction: 1,
+        speed: 1,
+        trail: 100,
+        opacity: 1 / 4,
+        fps: 20,
+        zIndex: 2e9,
+        className: "spinner",
+        top: "auto",
+        left: "auto",
+        position: "relative"
+    };
+
+    function c(t) {
+        if (typeof this == "undefined") return new c(t);
+        this.opts = l(t || {}, c.defaults, p)
+    }
+
+    c.defaults = {};
+    l(c.prototype, {
+        spin: function (t) {
+            this.stop();
+            var e = this, n = e.opts,
+                r = e.el = f(o(0, {className: n.className}), {position: n.position, width: 0, zIndex: n.zIndex}),
+                s = n.radius + n.length + n.width, a, l;
+            if (t) {
+                t.insertBefore(r, t.firstChild || null);
+                l = u(t);
+                a = u(r);
+                f(r, {
+                    left: (n.left == "auto" ? l.x - a.x + (t.offsetWidth >> 1) : parseInt(n.left, 10) + s) + "px",
+                    top: (n.top == "auto" ? l.y - a.y + (t.offsetHeight >> 1) : parseInt(n.top, 10) + s) + "px"
+                })
+            }
+            r.setAttribute("role", "progressbar");
+            e.lines(r, e.opts);
+            if (!i) {
+                var d = 0, p = (n.lines - 1) * (1 - n.direction) / 2, c, h = n.fps, m = h / n.speed,
+                    y = (1 - n.opacity) / (m * n.trail / 100), g = m / n.lines;
+                (function v() {
+                    d++;
+                    for (var t = 0; t < n.lines; t++) {
+                        c = Math.max(1 - (d + (n.lines - t) * g) % m * y, n.opacity);
+                        e.opacity(r, t * n.direction + p, c, n)
+                    }
+                    e.timeout = e.el && setTimeout(v, ~~(1e3 / h))
+                })()
+            }
+            return e
+        }, stop: function () {
+            var t = this.el;
+            if (t) {
+                clearTimeout(this.timeout);
+                if (t.parentNode) t.parentNode.removeChild(t);
+                this.el = undefined
+            }
+            return this
+        }, lines: function (t, e) {
+            var r = 0, a = (e.lines - 1) * (1 - e.direction) / 2, l;
+
+            function u(t, i) {
+                return f(o(), {
+                    position: "absolute",
+                    width: e.length + e.width + "px",
+                    height: e.width + "px",
+                    background: t,
+                    boxShadow: i,
+                    transformOrigin: "left",
+                    transform: "rotate(" + ~~(360 / e.lines * r + e.rotate) + "deg) translate(" + e.radius + "px" + ",0)",
+                    borderRadius: (e.corners * e.width >> 1) + "px"
+                })
+            }
+
+            for (; r < e.lines; r++) {
+                l = f(o(), {
+                    position: "absolute",
+                    top: 1 + ~(e.width / 2) + "px",
+                    transform: e.hwaccel ? "translate3d(0,0,0)" : "",
+                    opacity: e.opacity,
+                    animation: i && s(e.opacity, e.trail, a + r * e.direction, e.lines) + " " + 1 / e.speed + "s linear infinite"
+                });
+                if (e.shadow) n(l, f(u("#000", "0 0 4px " + "#000"), {top: 2 + "px"}));
+                n(t, n(l, u(d(e.color, r), "0 0 1px rgba(0,0,0,.1)")))
+            }
+            return t
+        }, opacity: function (t, e, i) {
+            if (e < t.childNodes.length) t.childNodes[e].style.opacity = i
+        }
+    });
+
+    function h() {
+        function t(t, e) {
+            return o("<" + t + ' xmlns="urn:schemas-microsoft.com:vml" class="spin-vml">', e)
+        }
+
+        r.addRule(".spin-vml", "behavior:url(#default#VML)");
+        c.prototype.lines = function (e, i) {
+            var o = i.length + i.width, r = 2 * o;
+
+            function s() {
+                return f(t("group", {coordsize: r + " " + r, coordorigin: -o + " " + -o}), {width: r, height: r})
+            }
+
+            var a = -(i.width + i.length) * 2 + "px", l = f(s(), {position: "absolute", top: a, left: a}), u;
+
+            function p(e, r, a) {
+                n(l, n(f(s(), {
+                    rotation: 360 / i.lines * e + "deg",
+                    left: ~~r
+                }), n(f(t("roundrect", {arcsize: i.corners}), {
+                    width: o,
+                    height: i.width,
+                    left: i.radius,
+                    top: -i.width >> 1,
+                    filter: a
+                }), t("fill", {color: d(i.color, e), opacity: i.opacity}), t("stroke", {opacity: 0}))))
+            }
+
+            if (i.shadow) for (u = 1; u <= i.lines; u++) p(u, -2, "progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)");
+            for (u = 1; u <= i.lines; u++) p(u);
+            return n(e, l)
+        };
+        c.prototype.opacity = function (t, e, i, o) {
+            var n = t.firstChild;
+            o = o.shadow && o.lines || 0;
+            if (n && e + o < n.childNodes.length) {
+                n = n.childNodes[e + o];
+                n = n && n.firstChild;
+                n = n && n.firstChild;
+                if (n) n.opacity = i
+            }
+        }
+    }
+
+    var m = f(o("group"), {behavior: "url(#default#VML)"});
+    if (!a(m, "transform") && m.adj) h(); else i = a(m, "animation");
+    return c
+});
+
+
+//files.utilities.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -2108,6 +2948,9 @@ Files.getFileType = function(extension) {
 	return type;
 };
 
+
+
+//files.state.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -2161,6 +3004,9 @@ Files.State = new Class({
 	}
 });
 
+
+
+//files.template.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -2239,6 +3085,9 @@ Files.Template.Compact = new Class({
 
 })();
 
+
+
+//files.grid.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -2865,6 +3714,9 @@ Files.Grid.Root = new Class({
 	}
 });
 
+
+
+//files.tree.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -3105,6 +3957,9 @@ if(!Files) var Files = {};
     });
 
 }(window.kQuery));
+
+
+//files.row.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -3178,7 +4033,7 @@ Files.File = new Class({
             var date = new Date();
             date.setTime(this.metadata.modified_date*1000);
             if (formatted) {
-                return date.getDate()+' '+Koowa.Date.getMonthName(date.getMonth()+1, true)+' '+date.getFullYear();
+				return date.toLocaleString('default', { year: 'numeric', month: 'short', day: 'numeric' });
             } else {
                 return date;
             }
@@ -3350,6 +4205,9 @@ Files.Folder = new Class({
 		request.send();
 	}
 });
+
+
+//files.paginator.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -3517,6 +4375,9 @@ Files.Paginator = new Class({
 	}
 });
 
+
+
+//files.pathway.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -3679,6 +4540,9 @@ Files.Paginator = new Class({
 
 })();
 
+
+
+//files.app.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -4602,6 +5466,107 @@ Files.App = new Class({
     }
 });
 
+
+
+//files.compact.js
+/**
+ * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
+ *
+ * @copyright	Copyright (C) 2011 Johan Janssens and Timble CVBA. (http://www.timble.net)
+ * @license		GNU GPLv3 <http://www.gnu.org/licenses/gpl.html>
+ * @link		http://github.com/joomlatools/joomlatools-framework-files for the canonical source repository
+ */
+
+if (!Files) Files = {};
+Files.Compact = {};
+
+Files.Compact.App = new Class({
+	Extends: Files.App,
+	Implements: [Events, Options],
+    cookie: null,
+	options: {
+        persistent: false,
+		types: ['file', 'image'],
+		editor: null,
+		preview: 'files-preview',
+        state: {
+            defaults: {
+                limit: 0,
+                offset: 0
+            }
+        },
+		grid: {
+			layout: 'compact',
+			batch_delete: false
+		},
+		history: {
+			enabled: false
+		},
+        uploader_dialog: false,
+        folder_dialog: false,
+        copy_dialog: false,
+        move_dialog: false
+	},
+
+	initialize: function(options) {
+		this.parent(options);
+
+		this.editor = this.options.editor;
+		this.preview = document.id(this.options.preview);
+
+	},
+	setPaginator: function() {
+	},
+	setGrid: function() {
+		var opts = this.options.grid;
+		var that = this;
+        Object.append(opts, {
+			'onClickImage': function(e) {
+				var target = document.id(e.target),
+				    node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
+
+				node.getParent().getChildren().removeClass('active');
+				node.addClass('active');
+				var row = node.retrieve('row');
+				var copy = Object.append({}, row);
+				copy.template = 'details_image';
+
+				that.preview.empty();
+
+				copy.render('compact').inject(that.preview);
+
+				that.preview.getElement('img').set('src', copy.image).show();
+			},
+			'onClickFile': function(e) {
+				var target = document.id(e.target),
+			   		node = target.getParent('.files-node-shadow') || target.getParent('.files-node');
+
+				node.getParent().getChildren().removeClass('active');
+				node.addClass('active');
+				var row = node.retrieve('row');
+				var copy = Object.append({}, row);
+				copy.template = 'details_file';
+
+				that.preview.empty();
+
+				copy.render('compact').inject(that.preview);
+			},
+			onAfterRender: function() {
+				this.setState(that.state.data);
+			},
+			onSetState: function(state) {
+				this.state.set(state);
+
+				this.navigate();
+			}.bind(this)
+		});
+		this.grid = new Files.Grid(this.options.grid.element, opts);
+	}
+});
+
+
+
+//files.attachments.app.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -4775,6 +5740,7 @@ Files.Template.Attachments = new Class({
             el = el.getElement('.template-item').getFirst();
         }
 
+
         return el;
     }
 });
@@ -4801,7 +5767,7 @@ Files.Attachment = new Class({
             var date = new Date();
             date.setTime(this.attached_on_timestamp*1000);
             if (formatted) {
-                return date.getDate()+' '+Koowa.Date.getMonthName(date.getMonth()+1, true)+' '+date.getFullYear();
+                return date.toLocaleString('default', { year: 'numeric', month: 'short', day: 'numeric' });
             } else {
                 return date;
             }
@@ -4810,6 +5776,9 @@ Files.Attachment = new Class({
         return null;
     }
 });
+
+
+//files.uploader.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -4921,6 +5890,9 @@ if (!Files) var Files = {};
 })(kQuery);
 
 
+
+
+//files.copymove.js
 /**
  * Joomlatools Framework - https://www.joomlatools.com/developer/framework/
  *
@@ -5166,3 +6138,4 @@ Files.MoveDialog = CopyMoveDialog.extend({
 });
 
 })(window.kQuery);
+
