@@ -13,7 +13,7 @@ defined('KOOWA') or die;
 <?= helper('behavior.koowa'); ?>
 
 <ktml:style src="assets://files/css/plyr.css" />
-<ktml:script src="assets://files/js/plyr/plyr.js" />
+<ktml:script src="assets://files/js/plyr.js" />
 <script>
     kQuery(function($){
         var recorded_plays = [];
