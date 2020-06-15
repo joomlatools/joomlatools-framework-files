@@ -20,20 +20,40 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
         'video' => array('mp4', 'webm', 'ogg')
     );
 
-    public function load()
+    public function load($config = array())
     {
+        $config = new KObjectConfigJson($config);
+        $config->append(array(
+            'download' => false
+        ))->append(array(
+            'options' => [
+                'play-large',   // The large play button in the center
+                'play',         // Play/pause playback
+                'progress',     // The progress bar and scrubber for playback and buffering
+                'current-time', // The current time of playback
+                'mute',         // Toggle mute
+                'volume',       // Volume control
+                'fullscreen'    // Toggle fullscreen
+            ]
+            ));
+
+        if ($config->download) {
+            $config->options->append(['download']); // Show a download button with a link to either the current source or a custom URL you specify in your options
+        }
+
         static $imported = false;
 
         $html = '';
 
         if (!$imported)
         {
+            $data = array('controls' => KObjectConfig::unbox($config->options));
             $html = $this->getObject('com:files.view.plyr.html')
                 ->getTemplate()
                 ->addFilter('style')
                 ->addFilter('script')
                 ->loadFile('com:files.player.default.html')
-                ->render();
+                ->render($data);
 
             $imported = true;
         }

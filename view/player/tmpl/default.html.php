@@ -18,7 +18,9 @@ defined('KOOWA') or die;
     kQuery(function($){
         var recorded_plays = [];
 
-        plyr.setup();
+        const controls = <?= json_encode($controls) ?>;
+
+        Plyr.setup({ controls });
 
         $(document).on('playing', function(event) {
             if (typeof event.detail !== 'undefined' && typeof event.detail.plyr !== 'undefined') {
@@ -27,8 +29,8 @@ defined('KOOWA') or die;
                 // If they've played over 3 seconds, then consider it played
                 // This is the same timing convention used by Facebook, Instagram, and Twitter
                 setTimeout(function() {
-                    if (!plyr.isPaused()) {
-                        var media = $(plyr.getMedia());
+                    if (!plyr.paused) {
+                        var media = $(plyr.media);
 
                         var category = media.data('category');
                         var action = 'Play ' + plyr.getType();
