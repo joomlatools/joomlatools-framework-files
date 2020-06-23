@@ -14,14 +14,15 @@ defined('KOOWA') or die;
 
 <ktml:style src="assets://files/css/plyr.css" />
 <ktml:script src="assets://files/js/plyr.js" />
+<ktml:script src="assets://files/js/files.plyr.js" />
 <script>
     kQuery(function($){
-        var recorded_plays = [];
-
+        
         const controls = <?= json_encode($controls) ?>;
+        new Files.Plyr({ controls });
 
-        Plyr.setup({ controls });
-
+        var recorded_plays = [];
+        
         $(document).on('playing', function(event) {
             if (typeof event.detail !== 'undefined' && typeof event.detail.plyr !== 'undefined') {
                 var plyr = event.detail.plyr;

@@ -8067,7 +8067,7 @@ typeof navigator === "object" && (function (global, factory) {
         this.touch = support.touch; // Set the media element
   
         this.media = target; // String selector passed
-        
+  
         if (is$1.string(this.media)) {
           this.media = document.querySelectorAll(this.media);
         } // jQuery, NodeList or Array passed, use first element
@@ -8077,7 +8077,7 @@ typeof navigator === "object" && (function (global, factory) {
           // eslint-disable-next-line
           this.media = this.media[0];
         } // Set config
-
+  
   
         this.config = extend({}, defaults$1, Plyr.defaults, options || {}, function () {
           try {
@@ -9292,6 +9292,8 @@ typeof navigator === "object" && (function (global, factory) {
       }, {
         key: "setup",
         value: function setup(selector) {
+            console.log(selector);
+            
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
           var targets = null;
   
@@ -9301,32 +9303,12 @@ typeof navigator === "object" && (function (global, factory) {
             targets = Array.from(selector);
           } else if (is$1.array(selector)) {
             targets = selector.filter(is$1.element);
-          } else if (is$1.object(selector)) {
-            targets = selector;
-
-            defaults.selectors = {
-              html5: 'video, audio',
-              embed: '[data-type]'
-            }
-
-            // No selector passed, possibly options as first argument
-            // If options are the first argument
-            if (is$1.empty(options) && is$1.object(targets)) {
-              options = targets
-            }
-
-            // Use default selector
-            targets = document.querySelectorAll([defaults.selectors.html5, defaults.selectors.embed].join(','));
-
-            if (is$1.nodeList(targets)) {
-              targets = Array.from(targets);
-            }
           }
-
+  
           if (is$1.empty(targets)) {
             return null;
           }
-
+  
           return targets.map(function (t) {
             return new Plyr(t, options);
           });
