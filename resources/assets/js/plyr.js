@@ -9292,8 +9292,6 @@ typeof navigator === "object" && (function (global, factory) {
       }, {
         key: "setup",
         value: function setup(selector) {
-            console.log(selector);
-            
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
           var targets = null;
   

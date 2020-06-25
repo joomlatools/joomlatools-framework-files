@@ -15,6 +15,35 @@
  */
 class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
 {
+    /**
+     * Array which holds a list of loaded Javascript libraries
+     *
+     * @type array
+     */
+    protected static $_loaded = array();
+
+    /**
+     * Marks the resource as loaded
+     *
+     * @param      $key
+     * @param bool $value
+     */
+    public static function setLoaded($key, $value = true)
+    {
+        static::$_loaded[$key] = $value;
+    }
+
+    /**
+     * Checks if the resource is loaded
+     *
+     * @param $key
+     * @return bool
+     */
+    public static function isLoaded($key)
+    {
+        return !empty(static::$_loaded[$key]);
+    }
+
     protected static $_SUPPORTED_FORMATS = array(
         'audio' => array('aac', 'mp3', 'ogg', 'flac','x-flac', 'wave', 'wav', 'x-wav', 'x-pn-wav'),
         'video' => array('mp4', 'webm', 'ogg')
@@ -41,21 +70,28 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
             $config->options->append(['download']); // Show a download button with a link to either the current source or a custom URL you specify in your options
         }
 
-        static $imported = false;
-
         $html = '';
 
-        if (!$imported)
+        if (!static::isLoaded('plyr'))
         {
-            $data = array('controls' => KObjectConfig::unbox($config->options));
-            $html = $this->getObject('com:files.view.plyr.html')
-                ->getTemplate()
-                ->addFilter('style')
-                ->addFilter('script')
-                ->loadFile('com:files.player.default.html')
-                ->render($data);
+            $html = $this->getObject('template.default')
+                ->addFilter('lib:template.filter.style')
+                ->addFilter('lib:template.filter.script')
+                ->addFilter('com:koowa.template.filter.asset')
+                ->loadString('
+                    <ktml:style src="assets://files/css/plyr.css" />
+                    <ktml:script src="assets://files/js/plyr.js" />
+                    <ktml:script src="assets://files/js/files.plyr.js" />
+                    <script>
+                    kQuery(function($){
+                        var controls = ' . json_encode(KObjectConfig::unbox($config->options)) . ';
+                        new Files.Plyr({ controls });
+                    });
+                    </script>
+                ', 'php')
+                ->render();
 
-            $imported = true;
+                static::setLoaded('plyr');
         }
 
         return $html;

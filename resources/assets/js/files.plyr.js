@@ -45,8 +45,6 @@ Files.Plyr = Koowa.Class.extend({
             // If options are the first argument
             options = selector ? selector : options;
 
-            console.log(options);
-
             // Default selector
             var targets = document.querySelectorAll([this.defaults.selectors.html5, this.defaults.selectors.embed].join(','));
 
@@ -62,6 +60,44 @@ Files.Plyr = Koowa.Class.extend({
         }
 
         return player;
+    }
+});
+
+var recorded_plays = [];
+
+$(document).on('playing', function(event) {
+    if (typeof event.detail !== 'undefined' && typeof event.detail.plyr !== 'undefined') {
+        var plyr = event.detail.plyr;
+
+        // If they've played over 3 seconds, then consider it played
+        // This is the same timing convention used by Facebook, Instagram, and Twitter
+        setTimeout(function() {
+            if (!plyr.paused) {
+                var media = $(plyr.media);
+
+                var category = media.data('category');
+                var action = 'Play ' + plyr.type;
+
+                var title = media.data('title') || '';
+                var id = parseInt(media.data('media-id'), 10) || 0;
+
+                if (recorded_plays.indexOf(title) === -1) {
+                    recorded_plays.push(title);
+
+                    if (typeof window.GoogleAnalyticsObject !== 'undefined' && typeof window[window.GoogleAnalyticsObject] !== 'undefined') {
+                        window[window.GoogleAnalyticsObject]('send', 'event', category, action, title, id);
+                    }
+                    else if (typeof _gaq !== 'undefined' && typeof _gat !== 'undefined') {
+                        if (_gat._getTrackers().length) {
+                            _gaq.push(function () {
+                                var tracker = _gat._getTrackers()[0];
+                                tracker._trackEvent(category, action, title, id);
+                            });
+                        }
+                    }
+                }
+            }
+        }, 3000);
     }
 });
 
