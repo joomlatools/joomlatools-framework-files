@@ -46,6 +46,10 @@ async function js() {
             `${filesPath}/js/src/ejs.js`,
             `${filesPath}/js/src/files.attachments.js`,
         ],
+        [`${filesPath}/js/plyr.js`]: [
+            `${filesPath}/js/src/plyr.js`,
+            `${filesPath}/js/src/files.plyr.js`,
+        ],
     }
 
     for (let [target, sourcesFiles] of Object.entries(jsMap)) {

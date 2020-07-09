@@ -16,50 +16,38 @@ var Files = Files || {};
  * @extends Koowa.Class
  */
 Files.Plyr = Koowa.Class.extend({
-
-    defaults: {
-        selectors: {
-            html5: 'video, audio',
-            embed: '[data-type]'
-        }
+    options: {
+        selector: 'video, audio',
+        controls: [
+            'play-large',   // The large play button in the center
+            'play',         // Play/pause playback
+            'progress',     // The progress bar and scrubber for playback and buffering
+            'current-time', // The current time of playback
+            'mute',         // Toggle mute
+            'volume',       // Volume control
+            'fullscreen'    // Toggle fullscreen
+        ],
+        download: false
     },
 
-    options: {controls: [
-        "play-large",
-        "play",
-        "progress",
-        "current-time",
-        "mute",
-        "volume",
-        "fullscreen"
-    ]},
+    initialize: function(options){
+        this.setOptions(options);
 
-    initialize: function(selector){
-        var selector = typeof selector !== 'undefined' ? selector : false;
-        var options  = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.options;
-        
-        player = Plyr.setup(selector, options);
+        var remoteControls = Array.from(this.options.controls);
 
-        if (!player) {
-            // No selector passed, possibly options as first argument
-            // If options are the first argument
-            options = selector ? selector : options;
-
-            // Default selector
-            var targets = document.querySelectorAll([this.defaults.selectors.html5, this.defaults.selectors.embed].join(','));
-
-            targets = Array.from(targets);
-
-            if (null == targets) {
-                return null;
-            }
-
-            return targets.map(function (t) {
-                return new Plyr(t, options);
-            });
+        if (this.options.download) {
+            this.options.controls.push('download');
         }
 
-        return player;
+        var selector = this.options.selector;
+
+        delete this.options.selector;
+        delete this.options.download;
+
+        Plyr.setup(selector, this.options);
+
+        // Do not use download button for remote videos
+        Plyr.setup('[data-plyr-provider]', {...options, controls: remoteControls})
     }
 });
 
