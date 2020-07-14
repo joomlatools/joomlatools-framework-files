@@ -66,7 +66,7 @@ class ComFilesModelFolders extends ComFilesModelNodes
 
             // Number of files for each folder
             $file_count = $this->getObject('com:files.model.files')
-                ->container('fileman-files')
+                ->container($state->container)
                 ->folder($folder)
                 ->count();
 
