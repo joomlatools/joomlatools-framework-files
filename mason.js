@@ -50,6 +50,10 @@ async function js() {
             `${filesPath}/js/src/plyr.js`,
             `${filesPath}/js/src/files.plyr.js`,
         ],
+        [`${filesPath}/js/mootools.js`]: [
+            `${filesPath}/js/src/mootools-core.js`,
+            `${filesPath}/js/src/mootools-more.js`,
+        ],
     }
 
     for (let [target, sourcesFiles] of Object.entries(jsMap)) {
