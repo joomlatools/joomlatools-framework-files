@@ -9,9 +9,7 @@
 defined('KOOWA') or die( 'Restricted access' );
 ?>
 
-
-<ktml:script src="media://system/js/mootools-core.js" />
-<ktml:script src="media://system/js/mootools-more.js" />
+<ktml:script src="assets://files/js/mootools<?= !empty($debug) ? '' : '.min' ?>.js" />
 
 <?= helper('behavior.koowa'); ?>
 <?= helper('behavior.local_dates'); ?>
