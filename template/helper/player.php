@@ -72,7 +72,6 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
                 ->loadString('
                     <ktml:style src="assets://files/css/plyr.css" />
                     <ktml:script src="assets://files/js/plyr.js" />
-                    <ktml:script src="assets://files/js/plyr.js" />
                     <script>
                     kQuery(function(){
                         new Files.Plyr('.$options.');
