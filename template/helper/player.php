@@ -71,6 +71,7 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
                 ->addFilter('com:koowa.template.filter.asset')
                 ->loadString('
                     <ktml:style src="assets://files/css/plyr.css" />
+                    <ktml:script src="media://koowa/framework/js/koowa.kquery.min.js" />
                     <ktml:script src="media://koowa/framework/js/koowa.min.js" />
                     <ktml:script src="assets://files/js/plyr.js" />
                     <script>
