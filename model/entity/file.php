@@ -15,7 +15,14 @@
  */
 class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KCommandCallbackDelegate
 {
-	public static $image_extensions = array('jpg', 'jpeg', 'gif', 'png', 'bmp');
+    public static $extension_type_map = array(
+        'archive'     => array('7z','gz','rar','tar','zip'),
+        'audio'       => array('mp3', '3gp', 'act', 'aiff', 'aac', 'amr', 'au', 'awb', 'dct', 'dss', 'dvf', 'flac', 'gsm', 'm4a', 'm4p', 'ogg', 'oga', 'ra', 'rm', 'raw', 'tta', 'vox', 'wav', 'wma', 'wv', 'webm'),
+        'document'    => array('pdf', 'csv', 'doc','docx','odc','odg','odp','ods', 'odt', 'otc','otg', 'otp','ott', 'rtf','txt','ppt','pptx','pps','tsv', 'tab','xls', 'xlsx','xml'),
+        'image'       => array('ai','bmp','cr2','crw','eps','erf','gif','jpg','jpeg','nef','orf','png','pbm','pgm', 'ppm','psd','svg','tif','tiff','x3f','xbm'),
+        'video'       => array('webm','mkv','flv','vob','ogv','ogg','avi','rm','rmvb','mp4','m4p','m4v','asf','mpg','mpeg','mpv','mpe','3gp','3g2','roq','nsv'),
+        'executable'  => array('cmd', 'exe','bat','bin','apk','msi', 'dmg')
+    );
 
 	public function __construct(KObjectConfig $config)
     {
@@ -234,10 +241,15 @@ class ComFilesModelEntityFile extends ComFilesModelEntityNode implements KComman
         return $data;
     }
 
-	public function isImage()
-	{
-		return in_array(strtolower($this->extension), self::$image_extensions);
-	}
+    public function isImage()
+    {
+        return in_array(strtolower($this->extension), static::$extension_type_map['image']);
+    }
+    
+    public function isVideo()
+    {
+        return in_array(strtolower($this->extension), static::$extension_type_map['video']);
+    }
 
     /**
      * Invoke a command handler
