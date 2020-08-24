@@ -65,22 +65,16 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
         if (!static::isLoaded('plyr'))
         {
             $options = (string) $config->options;
-            $html = $this->getObject('template.default')
-                ->addFilter('lib:template.filter.style')
-                ->addFilter('lib:template.filter.script')
-                ->addFilter('com:koowa.template.filter.asset')
-                ->loadString('
-                    <ktml:style src="assets://files/css/plyr.css" />
+            $html = '<ktml:style src="assets://files/css/plyr.css" />
                     <ktml:script src="assets://files/js/plyr.js" />
                     <script>
-                    kQuery(function(){
-                        new Files.Plyr('.$options.');
-                    });
+                        kQuery(function(){
+                            new Files.Plyr('.$options.');
+                        });
                     </script>
-                ', 'php')
-                ->render();
+                ';
 
-                static::setLoaded('plyr');
+            static::setLoaded('plyr');
         }
 
         return $html;
