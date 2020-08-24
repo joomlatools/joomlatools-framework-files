@@ -84,7 +84,7 @@ class ComFilesMixinMimetype extends KObject
 
 	protected function _detectImage($path)
 	{
-		if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), ComFilesModelEntityFile::$image_extensions)
+		if (in_array(strtolower(pathinfo($path, PATHINFO_EXTENSION)), ComFilesModelEntityFile::$extension_type_map['image'])
 			&& ($info = @getimagesize($path))
         ) {
 			return $info['mime'];

@@ -29,7 +29,7 @@ class ComFilesDatabaseBehaviorThumbnailable extends KDatabaseBehaviorAbstract
 
     protected function _initialize(KObjectConfig $config)
     {
-        $config->append(array('thumbnailable_extensions' => ComFilesModelEntityFile::$image_extensions));
+        $config->append(array('thumbnailable_extensions' => ComFilesModelEntityFile::$extension_type_map['image']));
 
         parent::_initialize($config);
     }

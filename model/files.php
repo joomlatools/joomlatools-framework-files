@@ -141,8 +141,8 @@ class ComFilesModelFiles extends ComFilesModelNodes
 
 		if ($state->types)
         {
-			if ((in_array($extension, ComFilesModelEntityFile::$image_extensions) && !in_array('image', (array) $state->types))
-			|| (!in_array($extension, ComFilesModelEntityFile::$image_extensions) && !in_array('file', (array) $state->types))
+			if ((in_array($extension, ComFilesModelEntityFile::$extension_type_map['image']) && !in_array('image', (array) $state->types))
+			|| (!in_array($extension, ComFilesModelEntityFile::$extension_type_map['image']) && !in_array('file', (array) $state->types))
 			) {
 				return false;
 			}
