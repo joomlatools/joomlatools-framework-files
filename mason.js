@@ -35,6 +35,10 @@ async function js() {
         [`${filesPath}/js/files.select.js`]: [
             `${filesPath}/js/src/files.select.js`,
         ],
+        [`${filesPath}/js/ejs_utilities.js`]: [
+            `${filesPath}/js/src/ejs.js`,
+            `${filesPath}/js/src/files.utilities.js`,
+        ],
         [`${filesPath}/js/uploader.js`]: [
             `${filesPath}/js/src/uploader/plupload.full.min.js`,
             `${filesPath}/js/src/uploader/jquery-ui.js`,
