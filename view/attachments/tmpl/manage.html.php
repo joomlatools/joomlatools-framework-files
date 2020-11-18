@@ -35,6 +35,13 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
         kQuery(function($)
         {
+            var encodeUrlComponent = function (str)
+            {
+                return encodeURIComponent(str).replace(/[!'()*]/g, function(c) {
+                    return '%' + c.charCodeAt(0).toString(16);
+                });
+            }
+
             var config = <?= json_encode(KObjectConfig::unbox(parameters()->config)); ?>,
                 options = {
                     cookie: {path: '<?=object('request')->getSiteUrl()?>'},
@@ -118,7 +125,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                 var url = "<?= route('component=' . urlencode($component) . '&view=attachments&container=' . urlencode($container->slug) . '&format=json&name={name}&table={table}&row={row}', true, false) ?>";
 
                 url = Attachments.replace(url, {
-                    name: encodeURIComponent(context.attachment),
+                    name: encodeUrlComponent(context.attachment),
                     table: <?= json_encode($table) ?>,
                     row: <?= json_encode($row) ?>
                 });
@@ -140,7 +147,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
             var setContext = function (context) {
                 context.url += (context.url.search(/\?/) ? '&' : '?');
-                context.url += 'name=' + encodeURIComponent(context.attachment);
+                context.url += 'name=' + encodeUrlComponent(context.attachment);
 
                 context.data.table = <?= json_encode($table) ?>;
                 context.data.row = <?= json_encode($row) ?>;
