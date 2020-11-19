@@ -101,7 +101,11 @@ class ComFilesModelEntityThumbnail extends ComFilesModelEntityFile
 
     public function generate($in_place = false)
     {
-		@ini_set('memory_limit', '256M');
+        $memory_limit = ini_get('memory_limit');
+
+        if ($memory_limit < '256M') {
+            @ini_set('memory_limit', '256M');
+        }
 
     	if ($this->_canGenerate())
 		{
