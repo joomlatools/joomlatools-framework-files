@@ -53,7 +53,7 @@ class ComFilesModelFiles extends ComFilesModelNodes
             ));
 
             if ($files === false) {
-                throw new UnexpectedValueException('Invalid folder');
+                throw new UnexpectedValueException('Invalid folder: ' . $this->getPath());
             }
         }
         else $files = array($state->uri);
