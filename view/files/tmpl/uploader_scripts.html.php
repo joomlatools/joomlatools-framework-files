@@ -20,7 +20,7 @@ $server_limit = ComFilesModelEntityContainer::getServerUploadLimit();
     'done', 'failed', 'delete', 'uploading',
 
     // koowa.uploader.overwritable.js
-    'A file with the same name already exists. Would you like to overwrite it?',
+    'A file with the same name already exists. Click OK to overwrite and Cancel to create a new version.',
     'Following files already exist. Would you like to overwrite them? {names}',
 
     // errors

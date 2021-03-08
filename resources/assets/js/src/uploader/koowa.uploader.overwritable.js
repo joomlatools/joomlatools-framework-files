@@ -106,7 +106,7 @@
             var message = '';
 
             if (files.length === 1) {
-                message = Koowa.translate('A file with the same name already exists. Would you like to overwrite it?');
+                message = Koowa.translate('A file with the same name already exists. Click OK to overwrite and Cancel to create a new version.');
             } else if (files.length > 1) {
                 message = Koowa.translate('Following files already exist. Would you like to overwrite them? {names}', {
                     names: "\n" + files.join("\n")
