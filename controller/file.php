@@ -40,6 +40,9 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
 			if (empty($context->request->data->name)) {
 				$context->request->data->name = $context->request->files->file['name'];
 			}
+
+			// Trim leading and/or trailing space in the filename
+            $context->request->data->name = trim($context->request->data->name);
 		}
 	}
 
