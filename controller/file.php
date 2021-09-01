@@ -68,7 +68,8 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
         $model  = $this->getModel();
         $result = null;
 
-        if ($this->getRequest()->getFormat() === 'html')
+        // Rationale: Other file formats like PDF returns `html` instead as a default, see https://github.com/joomlatools/joomlatools-framework/blob/c5713f13b4a16b64000cc85f7a8f88fa6869fdde/code/libraries/joomlatools/library/http/request/request.php#L127
+        if (in_array($this->getRequest()->getFormat(), ['html','csv']))
         {
             // Serve file
             if ($model->getState()->isUnique())
