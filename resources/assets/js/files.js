@@ -5535,7 +5535,7 @@ Files.Compact.App = new Class({
 
 				copy.render('compact').inject(that.preview);
 
-				that.preview.getElement('img').set('src', copy.image).show();
+				that.preview.getElement('img').set('src', copy.image).setStyle('display', 'block');
 			},
 			'onClickFile': function(e) {
 				var target = document.id(e.target),
@@ -5678,7 +5678,7 @@ Files.Attachments.App = new Class({
                 if (copy.file.type == 'image')
                 {
                     if (copy.file.thumbnail) {
-                        that.preview.getElement('img').set('src', Files.sitebase + '/' + row.encodePath(copy.file.thumbnail.relative_path, Files.urlEncoder)).show();
+                        that.preview.getElement('img').set('src', Files.sitebase + '/' + row.encodePath(copy.file.thumbnail.relative_path, Files.urlEncoder)).setStyle('display', 'block');
                     } else {
                         that.preview.getElement('img').set('src', that.createRoute({view: 'file', format: 'html', name: copy.file.name, routed: 1}));
                     }
