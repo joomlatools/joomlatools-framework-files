@@ -247,7 +247,7 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
                     {
                         // Re-use
 
-                        $.each(uploader.files, function (i, file) {
+                        $.each([...uploader.files], function (i, file) {
 
                             if ($.inArray(file.name, existing) !== -1)
                             {
@@ -255,8 +255,9 @@ $callback  = isset($query['callback']) ? $query['callback'] : null;
 
                                 app.grid.attach(file.name);
                             }
-                            else uploader.start();
                         });
+
+                        uploader.start();
                     }
                 }
                 else {
