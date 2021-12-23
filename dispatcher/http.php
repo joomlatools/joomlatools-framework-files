@@ -37,14 +37,15 @@ class ComFilesDispatcherHttp extends ComKoowaDispatcherHttp
     /**
      * Plupload do not pass the error to our application if the status code is not 200
      *
-     * @param Exception $exception
+     * @param mixed $event
      * @return bool
      * @throws Exception
      */
-    public function renderError($exception)
+    public function renderError($event)
     {
     	if ($this->getRequest()->getFormat() == 'json')
         {
+            $exception = $event instanceof KEvent ? $event->exception : $event;
     		$response = new stdClass;
     		$response->status = false;
     		$response->error  = $exception->getMessage();
