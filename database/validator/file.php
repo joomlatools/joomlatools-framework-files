@@ -19,7 +19,7 @@ class ComFilesDatabaseValidatorFile extends ComFilesDatabaseValidatorNode
 	{
 		$entity = $context->subject;
 
-		if (is_string($entity->file) && !is_uploaded_file($entity->file))
+		if (is_string($entity->file) && !is_uploaded_file(str_replace(chr(0), '', $entity->file)))
 		{
 			// remote file
             $file = $this->getObject('com:files.model.entity.url');

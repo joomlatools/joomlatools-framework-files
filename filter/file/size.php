@@ -24,7 +24,7 @@ class ComFilesFilterFileSize extends KFilterAbstract
             if ($max)
             {
                 $size = $entity->contents ? strlen($entity->contents) : false;
-                if (!$size && is_uploaded_file($entity->file)) {
+                if (!$size && is_uploaded_file(str_replace(chr(0), '', $entity->file))) {
                     $size = filesize($entity->file);
                 } elseif ($entity->file instanceof SplFileInfo && $entity->file->isFile()) {
                     $size = $entity->file->getSize();

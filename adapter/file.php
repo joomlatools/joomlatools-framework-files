@@ -406,7 +406,7 @@ class ComFilesAdapterFile extends ComFilesAdapterAbstract
                     }
                 }
 			}
-			elseif (is_uploaded_file($data))
+			elseif (is_uploaded_file(str_replace(chr(0), '', $data)))
             {
                 $result = move_uploaded_file($data, $this->_path);
             }

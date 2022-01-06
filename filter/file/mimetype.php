@@ -27,7 +27,7 @@ class ComFilesFilterFileMimetype extends KFilterAbstract
 
                 if (empty($mimetype))
                 {
-                    if (is_uploaded_file($entity->file)) {
+                    if (is_uploaded_file(str_replace(chr(0), '', $entity->file))) {
                         $mimetype = $this->getObject('com:files.mixin.mimetype')->getMimetype($entity->file);
                     }
                     elseif ($entity->file instanceof SplFileInfo) {
