@@ -60,7 +60,7 @@ class ComFilesTemplateHelperPlayer extends KTemplateHelperAbstract
             ]
         ]);
 
-        $html = $this->createHelper('behavior')->koowa();
+        $html = $this->getTemplate()->createHelper('behavior')->koowa();
 
         if (!static::isLoaded('plyr'))
         {
