@@ -76,6 +76,10 @@ class ComFilesControllerFile extends ComFilesControllerAbstract
             {
                 $file = $this->getModel()->fetch();
 
+                if ($file->isNew()) {
+                    throw new KControllerExceptionResourceNotFound('File not found');
+                }
+
                 try
                 {
                     $this->getResponse()
