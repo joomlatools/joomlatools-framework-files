@@ -15,6 +15,8 @@
  */
 class ComFilesModelContainers extends KModelDatabase
 {
+    public static $containers = array();
+
 	protected function _buildQueryWhere(KDatabaseQueryInterface $query)
 	{
 		parent::_buildQueryWhere($query);
@@ -25,4 +27,21 @@ class ComFilesModelContainers extends KModelDatabase
             $query->where('tbl.title LIKE :search')->bind(array('search' =>  '%'.$state->search.'%'));
         }
 	}
+
+    public static function getContainer($slug)
+    {
+        if (!isset(self::$containers[$slug]))
+        {
+            $query = KObjectManager::getInstance()->getObject('database.query.select')
+                ->columns('tbl.*')
+                ->table(array('tbl' => 'files_containers'))
+                ->where('tbl.slug = :slug')
+                ->bind(['slug' => $slug])
+            ;
+    
+            self::$containers[$slug] = KObjectManager::getInstance()->getObject('database.adapter.mysqli')->select($query, KDatabase::FETCH_OBJECT);
+        }
+
+        return self::$containers[$slug];
+    }
 }
