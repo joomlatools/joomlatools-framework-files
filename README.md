@@ -4,8 +4,8 @@ This is a re-usable component that provides file management functionality for [J
 
 ## Requirements
 
-- Joomlatools Framework 3
-- PHP 5.4 or newer
+- Joomlatools Framework 3 or newer
+- PHP 7.3 or newer
 - MySQL 5
 
 ## Installation
@@ -43,4 +43,4 @@ Keep track of development and community news.
 * Read the [Joomlatools Developer Blog](https://www.joomlatools.com/developer/blog/)
 * Subscribe to the [Joomlatools Developer Newsletter](https://www.joomlatools.com/developer/newsletter/)
 
-[Joomlatools Framework]: http://www.joomlatools.com/developer/framework/
+[Joomlatools Framework]: https://www.joomlatools.com/developer/framework/
