@@ -1,1 +1,4 @@
 node_modules
+
+# Built extension packages (mason build/bundle output)
+*.zip
