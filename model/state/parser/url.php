@@ -21,7 +21,7 @@ class ComFilesModelStateParserUrl extends KObject implements KObjectMultiton
 
         $result = new stdClass();
 
-        $parts = explode('://', $value);
+        $parts = explode('://', $value, 2);
 
         $result->container = null;
 
